@@ -8,15 +8,19 @@ using System;
 public class Character : MonoBehaviour
 {
     public string Name;
+    #region Stats
     public int Reputation;
     public int Stamina;
     public int Knowledge;
     public int Fitness;
     public int Charisma;
     public int Currency;
+    #endregion
+    #region Items
     public List<Clothing> Wearables;
     public List<Item> Items;
     public List<string> Clothing;
+    #endregion
     public List<string> CurrentCases;
     public List<string> CompletedCases;
     public int AvailableHints;
@@ -35,7 +39,7 @@ public class Character : MonoBehaviour
     private void SetupJsonData()
     {
         // Location of player json file.
-        string path = Application.streamingAssetsPath + "/player.json";
+        string path = Application.streamingAssetsPath + "/Player.json";
 
         if (File.Exists(path))
         {
