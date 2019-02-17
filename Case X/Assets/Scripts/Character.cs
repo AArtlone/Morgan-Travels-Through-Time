@@ -50,7 +50,6 @@ public class Character : MonoBehaviour
         SetupWearables();
 
         //MoveCaseStageStatus(AvailableCases[0], AvailableCases, CurrentCases);
-        //RefreshAllCases();
     }
 
     // We use this function to read the existing data from the
@@ -91,7 +90,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        Debug.Log("Loaded character json data!");
+        //Debug.Log("Loaded character json data!");
     }
 
     private void SetupCases()
@@ -123,7 +122,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        Debug.Log("Loaded items json data!");
+        //Debug.Log("Loaded items json data!");
     }
 
     private void RefreshItems()
@@ -147,7 +146,7 @@ public class Character : MonoBehaviour
         newItemsData += "]}";
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
 
-        Debug.Log("Refreshed items json data!");
+        //Debug.Log("Refreshed items json data!");
     }
 
     private void SetupWearables()
@@ -166,7 +165,7 @@ public class Character : MonoBehaviour
             }
         }
 
-        Debug.Log("Loaded wearables json data!");
+        //Debug.Log("Loaded wearables json data!");
     }
 
     private void RefreshWearables()
@@ -184,7 +183,7 @@ public class Character : MonoBehaviour
         newItemsData += "]}";
         File.WriteAllText(_wearablesJsonFilePath, newItemsData);
 
-        Debug.Log("Refreshed wearables json data!");
+        //Debug.Log("Refreshed wearables json data!");
     }
 
     /// <summary>
@@ -276,7 +275,7 @@ public class Character : MonoBehaviour
             IsCoffeeAvailable = false;
             RefreshJsonData();
 
-            Debug.Log("Drank coffee at " + DateOfLastCoffee + "!");
+            //Debug.Log("Drank coffee at " + DateOfLastCoffee + "!");
         }
         else
         {
@@ -308,7 +307,8 @@ public class Character : MonoBehaviour
         }
         returnOutput += "!";
 
-        Debug.Log(returnOutput);
+        RefreshAllCases();
+        //Debug.Log(returnOutput);
     }
 
     private void RefreshCase(string caseToRefresh, List<Case> cases)
@@ -380,7 +380,7 @@ public class Character : MonoBehaviour
         _newCasesData += "}";
         File.WriteAllText(_casesJsonFilePath, _newCasesData);
 
-        Debug.Log("Refreshed all cases json data!");
+        //Debug.Log("Refreshed all cases json data!");
     }
 
     private void RefreshJsonData()
@@ -390,7 +390,7 @@ public class Character : MonoBehaviour
         string newPlayerData = JsonUtility.ToJson(this);
         File.WriteAllText(_playerStatsFilePath, newPlayerData.ToString());
 
-        Debug.Log("Refreshed player json data!");
+        //Debug.Log("Refreshed player json data!");
     }
 
     private void LoadCases(string cases, List<Case> casesContainer)
@@ -436,6 +436,6 @@ public class Character : MonoBehaviour
             }
         }
 
-        Debug.Log("Loaded " + cases + " json data!");
+        //Debug.Log("Loaded " + cases + " json data!");
     }
 }
