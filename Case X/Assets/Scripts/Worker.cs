@@ -51,6 +51,8 @@ public class Worker : MonoBehaviour
     {
         string newWorkerData = JsonUtility.ToJson(this);
         File.WriteAllText(jsonFilePath, newWorkerData.ToString());
+
+        Debug.Log("Refreshed worker json data!");
     }
 
     public void UpdateRelationship(string newRelationshipStatus)
@@ -58,6 +60,6 @@ public class Worker : MonoBehaviour
         RelationshipStatus = newRelationshipStatus;
         RefreshJsonData();
 
-        Debug.Log("Updated relationship status to " + RelationshipStatus);
+        Debug.Log("Updated relationship status to " + RelationshipStatus + "!");
     }
 }
