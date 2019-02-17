@@ -18,8 +18,9 @@ public class Worker : MonoBehaviour
     // are using a string intentionally.
     public string RelationshipStatus;
     string jsonFilePath;
+    private Character _playerCharacterScript;
 
-    public Worker(string Name, string Description, int Stamina, int Knowledge, int Fitness, int Charisma)
+    public Worker(string Name, string Description, int Stamina, int Knowledge, int Fitness, int Charisma, string RelationshipStatus)
     {
         this.Name = Name;
         this.Description = Description;
@@ -27,12 +28,14 @@ public class Worker : MonoBehaviour
         this.Knowledge = Knowledge;
         this.Fitness = Fitness;
         this.Charisma = Charisma;
-        RelationshipStatus = "Neutral";
+        this.RelationshipStatus = RelationshipStatus;
 
+        /*
         // Because workers dont exist at the start of the game, we have to
         // initiate their json files after instantiation and update them later on.
         jsonFilePath = Application.streamingAssetsPath + "/" + Name + ".json";
         InitiateJsonData();
+        */
     }
 
     private void InitiateJsonData()
@@ -49,8 +52,15 @@ public class Worker : MonoBehaviour
     // is updated as well.
     private void RefreshJsonData()
     {
-        string newWorkerData = JsonUtility.ToJson(this);
-        File.WriteAllText(jsonFilePath, newWorkerData.ToString());
+        if (_playerCharacterScript == null)
+        {
+            _playerCharacterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+
+            _playerCharacterScript.RefreshWorkersJson();
+        } else
+        {
+            _playerCharacterScript.RefreshWorkersJson();
+        }
 
         Debug.Log("Refreshed worker json data!");
     }

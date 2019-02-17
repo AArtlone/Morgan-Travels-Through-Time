@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     public List<Case> AvailableCases = new List<Case>();
     public List<Case> CurrentCases = new List<Case>();
     public List<Case> CompletedCases = new List<Case>();
+    public List<Worker> Workers = new List<Worker>();
     public int AvailableHints;
     public string DateOfLastCoffee;
     public bool IsCoffeeAvailable;
@@ -37,6 +38,7 @@ public class Character : MonoBehaviour
     private string _itemsJsonFilePath;
     private string _wearablesJsonFilePath;
     private string _newCasesData;
+    private string _workersDataJsonFilePath;
 
     private void Start()
     {
@@ -44,12 +46,12 @@ public class Character : MonoBehaviour
         _casesJsonFilePath = Application.streamingAssetsPath + "/Cases.json";
         _itemsJsonFilePath = Application.streamingAssetsPath + "/Items.json";
         _wearablesJsonFilePath = Application.streamingAssetsPath + "/Wearables.json";
+        _workersDataJsonFilePath = Application.streamingAssetsPath + "/Workers.json";
         SetupJsonData();
         SetupCases();
         SetupItems();
         SetupWearables();
-
-        //MoveCaseStageStatus(AvailableCases[0], AvailableCases, CurrentCases);
+        SetupWorkers();
     }
 
     // We use this function to read the existing data from the
@@ -147,6 +149,53 @@ public class Character : MonoBehaviour
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
 
         //Debug.Log("Refreshed items json data!");
+    }
+
+    private void SetupWorkers()
+    {
+        if (File.Exists(_workersDataJsonFilePath))
+        {
+            string dataToJson = File.ReadAllText(_workersDataJsonFilePath);
+            JsonData workersData = JsonMapper.ToObject(dataToJson);
+
+            Workers.Clear();
+            for (int i = 0; i < workersData["OwnedWorkers"].Count; i++)
+            {
+                Workers.Add(new Worker(
+                    workersData["OwnedWorkers"][i]["Name"].ToString(),
+                    workersData["OwnedWorkers"][i]["Description"].ToString(),
+                    int.Parse(workersData["OwnedWorkers"][i]["Stamina"].ToString()),
+                    int.Parse(workersData["OwnedWorkers"][i]["Knowledge"].ToString()),
+                    int.Parse(workersData["OwnedWorkers"][i]["Fitness"].ToString()),
+                    int.Parse(workersData["OwnedWorkers"][i]["Charisma"].ToString()),
+                    workersData["OwnedWorkers"][i]["RelationshipStatus"].ToString()));
+            }
+
+        }
+    }
+
+    public void RefreshWorkersJson()
+    {
+        File.WriteAllText(_workersDataJsonFilePath, "");
+        string newWorkersData = "{\"OwnedWorkers\":[";
+
+        for (int i = 0; i < Workers.Count; i++)
+        {
+            newWorkersData += "{";
+            newWorkersData += "\"Name\":\"" + Workers[i].Name + "\",";
+            newWorkersData += "\"Description\":\"" + Workers[i].Description + "\",";
+            newWorkersData += "\"Stamina\":" + Workers[i].Stamina + ",";
+            newWorkersData += "\"Knowledge\":" + Workers[i].Knowledge + ",";
+            newWorkersData += "\"Fitness\":" + Workers[i].Fitness + ",";
+            newWorkersData += "\"Charisma\":" + Workers[i].Charisma + ",";
+            newWorkersData += "\"RelationshipStatus\":\"" + Workers[i].RelationshipStatus + "\"";
+            newWorkersData += "},";
+        }
+
+        newWorkersData = newWorkersData.Substring(0, newWorkersData.Length - 1);
+        newWorkersData += "]}";
+
+        File.WriteAllText(_workersDataJsonFilePath, newWorkersData);
     }
 
     private void SetupWearables()
@@ -437,5 +486,10 @@ public class Character : MonoBehaviour
         }
 
         //Debug.Log("Loaded " + cases + " json data!");
+    }
+
+    private void ApplyWorkersStats()
+    {
+
     }
 }
