@@ -10,10 +10,13 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
 
     public GameObject DialogueTemplate;
+    [Space(10)]
     public Text LeftCharacterTitle;
     public Image LeftCharacterPortrait;
+    [Space(10)]
     public Text RightCharacterTitle;
     public Image RightCharacterPortrait;
+    [Space(10)]
     public Image DialogueBoxBackground;
     public Text DialogueText;
     public Text[] OptionsMenu = new Text[4];

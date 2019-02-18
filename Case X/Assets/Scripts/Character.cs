@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 public class Character : MonoBehaviour
 {
     public string Name;
+    [Space(10)]
     #region Stats
     public int Reputation;
     public int Stamina;
@@ -16,19 +17,21 @@ public class Character : MonoBehaviour
     public int Fitness;
     public int Charisma;
     public int Currency;
+    public int AvailableHints;
     #endregion
     #region Items
     [NonSerialized]
     public List<Clothing> Wearables = new List<Clothing>();
     [NonSerialized]
     public List<Item> Items = new List<Item>();
+    [Space(10)]
     public List<string> Clothing = new List<string>();
     #endregion
     public List<Case> AvailableCases = new List<Case>();
     public List<Case> CurrentCases = new List<Case>();
     public List<Case> CompletedCases = new List<Case>();
     public List<Worker> Workers = new List<Worker>();
-    public int AvailableHints;
+    [Space(10)]
     public string DateOfLastCoffee;
     public bool IsCoffeeAvailable;
 
