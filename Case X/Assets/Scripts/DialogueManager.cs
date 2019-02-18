@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public Image DialogueBoxBackground;
     public Text DialogueText;
     public Text[] OptionsMenu = new Text[4];
+    public List<Sprite> spritesForItems = new List<Sprite>();
 
     private void Awake()
     {

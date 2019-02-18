@@ -5,6 +5,7 @@ using UnityEngine;
 using LitJson;
 using System;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -23,9 +24,8 @@ public class Character : MonoBehaviour
     [NonSerialized]
     public List<Clothing> Wearables = new List<Clothing>();
     [NonSerialized]
-    public List<Item> Items = new List<Item>();
     [Space(10)]
-    public List<string> Clothing = new List<string>();
+    public List<Item> Items = new List<Item>();
     #endregion
     public List<Case> AvailableCases = new List<Case>();
     public List<Case> CurrentCases = new List<Case>();
@@ -36,6 +36,7 @@ public class Character : MonoBehaviour
     public bool IsCoffeeAvailable;
 
     // Location reference of player json file.
+    private string _pathToAssetsFolder = Application.streamingAssetsPath;
     private string _playerStatsFilePath;
     private string _casesJsonFilePath;
     private string _itemsJsonFilePath;
@@ -43,20 +44,33 @@ public class Character : MonoBehaviour
     private string _newCasesData;
     private string _workersDataJsonFilePath;
 
+    // Inventory-related references
+    private GameObject _inventoryPanel;
+    public GameObject ItemPrefab;
+
     private void Start()
     {
-        _playerStatsFilePath = Application.streamingAssetsPath + "/Player.json";
-        _casesJsonFilePath = Application.streamingAssetsPath + "/Cases.json";
-        _itemsJsonFilePath = Application.streamingAssetsPath + "/Items.json";
-        _wearablesJsonFilePath = Application.streamingAssetsPath + "/Wearables.json";
-        _workersDataJsonFilePath = Application.streamingAssetsPath + "/Workers.json";
+        _inventoryPanel = GameObject.FindGameObjectWithTag("Inventory Panel");
+
+        _playerStatsFilePath = _pathToAssetsFolder + "/Player.json";
+        _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
+        _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
+        _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
+        _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
         SetupJsonData();
         SetupCases();
         SetupItems();
         SetupWearables();
         SetupWorkers();
+        
+        LoadInventory();
     }
 
+    /// <summary>
+    /// The following functions extract the json data from the storage of
+    /// the game and imports it to the character (this) object for in-game
+    /// manipulation.
+    /// </summary>
     // We use this function to read the existing data from the
     // character's file and set his fields to match the data. Basically
     // we load his stored and previously saved data from the storage
@@ -75,12 +89,6 @@ public class Character : MonoBehaviour
             Fitness = int.Parse(characterData["Fitness"].ToString());
             Charisma = int.Parse(characterData["Charisma"].ToString());
             Currency = int.Parse(characterData["Currency"].ToString());
-
-            Clothing.Clear();
-            for (int i = 0; i < characterData["Clothing"].Count; i++)
-            {
-                Clothing.Add(characterData["Clothing"][i].ToString());
-            }
 
             AvailableHints = int.Parse(characterData["AvailableHints"].ToString());
             DateOfLastCoffee = characterData["DateOfLastCoffee"].ToString();
@@ -122,36 +130,35 @@ public class Character : MonoBehaviour
                 Items.Add(new Item(
                     characterData["Items"][i]["Name"].ToString(),
                     characterData["Items"][i]["Description"].ToString(),
-                    characterData["Items"][i]["Passives"].ToString(),
-                    characterData["Items"][i]["Actives"].ToString()));
+                    characterData["Items"][i]["Active"].ToString(),
+                    characterData["Items"][i]["AssetsImageName"].ToString()));
             }
         }
 
         //Debug.Log("Loaded items json data!");
     }
 
-    private void RefreshItems()
+    private void SetupWearables()
     {
-        // We reset the existing items json list content, so that we can
-        // append new one afterwards.
-        File.WriteAllText(_itemsJsonFilePath, "");
-
-        // This creates the starting wrapper of the json file.
-        string newItemsData = "{\"Items\":[";
-
-        foreach (Item item in Items)
+        if (File.Exists(_wearablesJsonFilePath))
         {
-            string itemJson = JsonUtility.ToJson(item);
-            newItemsData += itemJson + ",";
-        }
-        // This removes the last comma at the last item in the array, so
-        // that we wont get an error when getting the data later on.
-        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
-        // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
-        File.WriteAllText(_itemsJsonFilePath, newItemsData);
+            string dataToJson = File.ReadAllText(_wearablesJsonFilePath);
+            JsonData characterData = JsonMapper.ToObject(dataToJson);
 
-        //Debug.Log("Refreshed items json data!");
+            Wearables.Clear();
+            for (int i = 0; i < characterData["Wearables"].Count; i++)
+            {
+                Wearables.Add(new Clothing(
+                    characterData["Wearables"][i]["BodyPart"].ToString(),
+                    characterData["Wearables"][i]["Name"].ToString(),
+                    int.Parse(characterData["Wearables"][i]["Stamina"].ToString()),
+                    int.Parse(characterData["Wearables"][i]["Knowledge"].ToString()),
+                    int.Parse(characterData["Wearables"][i]["Fitness"].ToString()),
+                    int.Parse(characterData["Wearables"][i]["Charisma"].ToString())));
+            }
+        }
+
+        //Debug.Log("Loaded wearables json data!");
     }
 
     private void SetupWorkers()
@@ -176,110 +183,57 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void RefreshWorkersJson()
+    private void LoadCases(string cases, List<Case> casesContainer)
     {
-        File.WriteAllText(_workersDataJsonFilePath, "");
-        string newWorkersData = "{\"OwnedWorkers\":[";
-
-        for (int i = 0; i < Workers.Count; i++)
+        casesContainer.Clear();
+        if (File.Exists(_casesJsonFilePath))
         {
-            newWorkersData += "{";
-            newWorkersData += "\"Name\":\"" + Workers[i].Name + "\",";
-            newWorkersData += "\"Description\":\"" + Workers[i].Description + "\",";
-            newWorkersData += "\"Stamina\":" + Workers[i].Stamina + ",";
-            newWorkersData += "\"Knowledge\":" + Workers[i].Knowledge + ",";
-            newWorkersData += "\"Fitness\":" + Workers[i].Fitness + ",";
-            newWorkersData += "\"Charisma\":" + Workers[i].Charisma + ",";
-            newWorkersData += "\"RelationshipStatus\":\"" + Workers[i].RelationshipStatus + "\"";
-            newWorkersData += "},";
-        }
+            string dataToJson = File.ReadAllText(_casesJsonFilePath);
+            JsonData casesData = JsonMapper.ToObject(dataToJson);
 
-        newWorkersData = newWorkersData.Substring(0, newWorkersData.Length - 1);
-        newWorkersData += "]}";
-
-        File.WriteAllText(_workersDataJsonFilePath, newWorkersData);
-    }
-
-    private void SetupWearables()
-    {
-        if (File.Exists(_wearablesJsonFilePath))
-        {
-            string dataToJson = File.ReadAllText(_wearablesJsonFilePath);
-            JsonData characterData = JsonMapper.ToObject(dataToJson);
-
-            Wearables.Clear();
-            for (int i = 0; i < characterData["Wearables"].Count; i++)
+            for (int i = 0; i < casesData[cases].Count; i++)
             {
-                Wearables.Add(new Clothing(
-                    characterData["Wearables"][i]["BodyPart"].ToString(),
-                    characterData["Wearables"][i]["Name"].ToString()));
+                List<Objective> newCaseObjectives = new List<Objective>();
+
+                for (int j = 0; j < casesData[cases][i]["Objectives"].Count; j++)
+                {
+                    // These conditions make sure that we get the right type of data
+                    // from the json and convert it accurately for the dictionaries
+                    // of objectives for that case later on.
+                    bool isObjectiveComplete = false;
+                    if (casesData[cases][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                    {
+                        isObjectiveComplete = true;
+                    }
+                    else if (casesData[cases][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                    {
+                        isObjectiveComplete = false;
+                    }
+
+                    // Here we store the new dictionary (objective) to the list of
+                    // objectives after we set up the new objective.
+                    Objective newObjectives = new Objective(casesData[cases][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+
+                    newCaseObjectives.Add(newObjectives);
+                }
+
+                Case newCase = new Case(
+                    casesData[cases][i]["Name"].ToString(),
+                    casesData[cases][i]["Description"].ToString(),
+                    newCaseObjectives);
+
+                casesContainer.Add(newCase);
             }
         }
 
-        //Debug.Log("Loaded wearables json data!");
-    }
-
-    private void RefreshWearables()
-    {
-        File.WriteAllText(_wearablesJsonFilePath, "");
-        string newItemsData = "{\"Wearables\":[";
-
-        foreach (Clothing item in Wearables)
-        {
-            string itemJson = JsonUtility.ToJson(item);
-            newItemsData += itemJson + ",";
-        }
-        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
-        // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
-        File.WriteAllText(_wearablesJsonFilePath, newItemsData);
-
-        //Debug.Log("Refreshed wearables json data!");
+        //Debug.Log("Loaded " + cases + " json data!");
     }
 
     /// <summary>
-    /// Updates stats starting from left to right using the new stat values in the same order. You can use it the following way: "charisma fitness", new int[] {2, 5}. The charisma value will be incremented by two while the fitness by five. Dont forget to use small letters for the stat strings.
+    /// The functions below are used mainly for adding, removing and updating
+    /// elements into existing player lists and  data related to stats and cases.
     /// </summary>
-    /// <param name="stats"></param>
-    /// <param name="statValues"></param>
-    public void UpdateStats(string stats, params int[] statValues)
-    {
-        string[] splitStats = stats.Split(' ');
-
-        for (int i = 0; i < splitStats.Length; i++)
-        {
-            switch (splitStats[i])
-            {
-                case "reputation":
-                    Reputation += statValues[i];
-                    Debug.Log("Increased reputation by " + statValues[i] + "!");
-                    break;
-                case "stamina":
-                    Stamina += statValues[i];
-                    Debug.Log("Increased Stamina by " + statValues[i] + "!");
-                    break;
-                case "knowledge":
-                    Knowledge += statValues[i];
-                    Debug.Log("Increased Knowledge by " + statValues[i] + "!");
-                    break;
-                case "fitness":
-                    Fitness += statValues[i];
-                    Debug.Log("Increased Fitness by " + statValues[i] + "!");
-                    break;
-                case "charisma":
-                    Charisma += statValues[i];
-                    Debug.Log("Increased charisma by " + statValues[i] + "!");
-                    break;
-                case "currency":
-                    Currency += statValues[i];
-                    Debug.Log("Increased currency by " + statValues[i] + "!");
-                    break;
-            }
-        }
-
-        RefreshJsonData();
-    }
-
+    /// <param name="item"></param>
     public void AddItem(Item item)
     {
         Debug.Log(string.Format("Added {0} to current items!", item.Name));
@@ -362,6 +316,85 @@ public class Character : MonoBehaviour
         //Debug.Log(returnOutput);
     }
 
+    /// <summary>
+    /// Updates stats starting from left to right using the new stat values in the same order. You can use it the following way: "charisma fitness", new int[] {2, 5}. The charisma value will be incremented by two while the fitness by five. Dont forget to use small letters for the stat strings.
+    /// </summary>
+    /// <param name="stats"></param>
+    /// <param name="statValues"></param>
+    public void UpdateStats(string stats, params int[] statValues)
+    {
+        string[] splitStats = stats.Split(' ');
+
+        for (int i = 0; i < splitStats.Length; i++)
+        {
+            switch (splitStats[i])
+            {
+                case "reputation":
+                    Reputation += statValues[i];
+                    Debug.Log("Increased reputation by " + statValues[i] + "!");
+                    break;
+                case "stamina":
+                    Stamina += statValues[i];
+                    Debug.Log("Increased Stamina by " + statValues[i] + "!");
+                    break;
+                case "knowledge":
+                    Knowledge += statValues[i];
+                    Debug.Log("Increased Knowledge by " + statValues[i] + "!");
+                    break;
+                case "fitness":
+                    Fitness += statValues[i];
+                    Debug.Log("Increased Fitness by " + statValues[i] + "!");
+                    break;
+                case "charisma":
+                    Charisma += statValues[i];
+                    Debug.Log("Increased charisma by " + statValues[i] + "!");
+                    break;
+                case "currency":
+                    Currency += statValues[i];
+                    Debug.Log("Increased currency by " + statValues[i] + "!");
+                    break;
+            }
+        }
+
+        RefreshJsonData();
+    }
+
+    /// <summary>
+    /// These functions recount the effects of every worker/clothing for the player
+    /// and must be executed every time you recruit a new worker and/or add a new
+    /// clothing or one of their stats is changed.
+    /// </summary>
+    private void ApplyWorkersStats()
+    {
+        for (int i = 0; i < Workers.Count; i++)
+        {
+            Stamina += Workers[i].Stamina;
+            Knowledge += Workers[i].Knowledge;
+            Fitness += Workers[i].Fitness;
+            Charisma += Workers[i].Charisma;
+        }
+
+        RefreshJsonData();
+    }
+
+    private void ApplyClothingStats()
+    {
+        for (int i = 0; i < Wearables.Count; i++)
+        {
+            Stamina += Wearables[i].Stamina;
+            Knowledge += Wearables[i].Knowledge;
+            Fitness += Wearables[i].Fitness;
+            Charisma += Wearables[i].Charisma;
+        }
+
+        RefreshJsonData();
+    }
+
+    /// <summary>
+    /// All the following functions refresh sections of data from the game
+    /// and must be applied whenever a form of data is changed in-game to
+    /// reflect that of the files for storage.
+    /// </summary>
     private void RefreshCase(string caseToRefresh, List<Case> cases)
     {
         _newCasesData += "\"" + caseToRefresh + "\":[";
@@ -444,67 +477,85 @@ public class Character : MonoBehaviour
         //Debug.Log("Refreshed player json data!");
     }
 
-    private void LoadCases(string cases, List<Case> casesContainer)
+    private void RefreshItems()
     {
-        casesContainer.Clear();
-        if (File.Exists(_casesJsonFilePath))
+        // We reset the existing items json list content, so that we can
+        // append new one afterwards.
+        File.WriteAllText(_itemsJsonFilePath, "");
+
+        // This creates the starting wrapper of the json file.
+        string newItemsData = "{\"Items\":[";
+
+        foreach (Item item in Items)
         {
-            string dataToJson = File.ReadAllText(_casesJsonFilePath);
-            JsonData casesData = JsonMapper.ToObject(dataToJson);
-
-            for (int i = 0; i < casesData[cases].Count; i++)
-            {
-                List<Objective> newCaseObjectives = new List<Objective>();
-
-                for (int j = 0; j < casesData[cases][i]["Objectives"].Count; j++)
-                {
-                    // These conditions make sure that we get the right type of data
-                    // from the json and convert it accurately for the dictionaries
-                    // of objectives for that case later on.
-                    bool isObjectiveComplete = false;
-                    if (casesData[cases][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
-                    {
-                        isObjectiveComplete = true;
-                    }
-                    else if (casesData[cases][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
-                    {
-                        isObjectiveComplete = false;
-                    }
-
-                    // Here we store the new dictionary (objective) to the list of
-                    // objectives after we set up the new objective.
-                    Objective newObjectives = new Objective(casesData[cases][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
-
-                    newCaseObjectives.Add(newObjectives);
-                }
-
-                Case newCase = new Case(
-                    casesData[cases][i]["Name"].ToString(),
-                    casesData[cases][i]["Description"].ToString(),
-                    newCaseObjectives);
-
-                casesContainer.Add(newCase);
-            }
+            string itemJson = JsonUtility.ToJson(item);
+            newItemsData += itemJson + ",";
         }
+        // This removes the last comma at the last item in the array, so
+        // that we wont get an error when getting the data later on.
+        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        // This closes the wrapper of the json file made from the beginning.
+        newItemsData += "]}";
+        File.WriteAllText(_itemsJsonFilePath, newItemsData);
 
-        //Debug.Log("Loaded " + cases + " json data!");
+        //Debug.Log("Refreshed items json data!");
     }
 
-    /// <summary>
-    /// This function recounts the effects of every worker for the player
-    /// and must be executed every time you recruit a new worker or one of
-    /// their stats is changed.
-    /// </summary>
-    private void ApplyWorkersStats()
+    public void RefreshWorkersJson()
     {
+        File.WriteAllText(_workersDataJsonFilePath, "");
+        string newWorkersData = "{\"OwnedWorkers\":[";
+
         for (int i = 0; i < Workers.Count; i++)
         {
-            Stamina += Workers[i].Stamina;
-            Knowledge += Workers[i].Knowledge;
-            Fitness += Workers[i].Fitness;
-            Charisma += Workers[i].Charisma;
+            newWorkersData += "{";
+            newWorkersData += "\"Name\":\"" + Workers[i].Name + "\",";
+            newWorkersData += "\"Description\":\"" + Workers[i].Description + "\",";
+            newWorkersData += "\"Stamina\":" + Workers[i].Stamina + ",";
+            newWorkersData += "\"Knowledge\":" + Workers[i].Knowledge + ",";
+            newWorkersData += "\"Fitness\":" + Workers[i].Fitness + ",";
+            newWorkersData += "\"Charisma\":" + Workers[i].Charisma + ",";
+            newWorkersData += "\"RelationshipStatus\":\"" + Workers[i].RelationshipStatus + "\"";
+            newWorkersData += "},";
         }
 
-        RefreshJsonData();
+        newWorkersData = newWorkersData.Substring(0, newWorkersData.Length - 1);
+        newWorkersData += "]}";
+
+        File.WriteAllText(_workersDataJsonFilePath, newWorkersData);
+    }
+
+    private void RefreshWearables()
+    {
+        File.WriteAllText(_wearablesJsonFilePath, "");
+        string newItemsData = "{\"Wearables\":[";
+
+        foreach (Clothing item in Wearables)
+        {
+            string itemJson = JsonUtility.ToJson(item);
+            newItemsData += itemJson + ",";
+        }
+        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        // This closes the wrapper of the json file made from the beginning.
+        newItemsData += "]}";
+        File.WriteAllText(_wearablesJsonFilePath, newItemsData);
+
+        //Debug.Log("Refreshed wearables json data!");
+    }
+
+    private void LoadInventory()
+    {
+        foreach (Item item in Items)
+        {
+            GameObject newItem = Instantiate(ItemPrefab, _inventoryPanel.transform);
+            
+            foreach (Sprite sprite in DialogueManager.Instance.spritesForItems)
+            {
+                if (sprite.name == item.AssetsImageName)
+                {
+                    newItem.GetComponent<Image>().sprite = sprite;
+                }
+            }
+        }
     }
 }

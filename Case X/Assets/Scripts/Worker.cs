@@ -38,6 +38,7 @@ public class Worker : MonoBehaviour
         */
     }
 
+    /*
     private void InitiateJsonData()
     {
         if (!File.Exists(jsonFilePath))
@@ -46,6 +47,7 @@ public class Worker : MonoBehaviour
             File.WriteAllText(jsonFilePath, newWorkerData.ToString());
         }
     }
+    */
 
     // Whenever the worker data is updated or changed in-game, this
     // function makes sure the file related to this instance of workers
