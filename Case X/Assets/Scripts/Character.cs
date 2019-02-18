@@ -487,8 +487,21 @@ public class Character : MonoBehaviour
         //Debug.Log("Loaded " + cases + " json data!");
     }
 
+    /// <summary>
+    /// This function recounts the effects of every worker for the player
+    /// and must be executed every time you recruit a new worker or one of
+    /// their stats is changed.
+    /// </summary>
     private void ApplyWorkersStats()
     {
+        for (int i = 0; i < Workers.Count; i++)
+        {
+            Stamina += Workers[i].Stamina;
+            Knowledge += Workers[i].Knowledge;
+            Fitness += Workers[i].Fitness;
+            Charisma += Workers[i].Charisma;
+        }
 
+        RefreshJsonData();
     }
 }
