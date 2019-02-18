@@ -344,10 +344,29 @@ MonoBehaviour:
       type: 3}
     DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
       type: 3}
-    DialogueText: Honey did you watch the funny video i sent you earlier?
-    OptionsMenu:
-    - YOS!
-    - NO...
+    DialogueBranches:
+    - BranchTitle: Branch One
+      Priority: 0
+      ReputationMinimum: 10
+      StaminaMinimum: 10
+      KnowledgeMinimum: 10
+      FitnessMinimum: 10
+      CharismaMinimum: 10
+      CurrencyMinimum: 100
+      DialogueText: First dialogue branch one
+      OptionsMenu:
+      - YOS
+      - NO...
+    - BranchTitle: Branch Two
+      Priority: 1
+      ReputationMinimum: 0
+      StaminaMinimum: 0
+      KnowledgeMinimum: 0
+      FitnessMinimum: 0
+      CharismaMinimum: 0
+      CurrencyMinimum: 100
+      DialogueText: First dialogue branch two
+      OptionsMenu: []
   - DialogueTitle: Second Dialogue
     LeftCharacterTitle: Nikolay
     LeftCharacterPortrait: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
@@ -357,9 +376,19 @@ MonoBehaviour:
       type: 3}
     DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
       type: 3}
-    DialogueText: Yes milo, it was very funny i love watching funny videos you send
-      me!
-    OptionsMenu: []
+    DialogueBranches:
+    - BranchTitle: Branch One
+      Priority: 0
+      ReputationMinimum: 10
+      StaminaMinimum: 10
+      KnowledgeMinimum: 10
+      FitnessMinimum: 10
+      CharismaMinimum: 10
+      CurrencyMinimum: 100
+      DialogueText: Second dialogue branch one
+      OptionsMenu:
+      - ANAL
+      - ORAL
   - DialogueTitle: Third Dialogue
     LeftCharacterTitle: Nikolay
     LeftCharacterPortrait: {fileID: 21300000, guid: 182c798bf59b6694c99a143a9f9a81dc,
@@ -369,8 +398,17 @@ MonoBehaviour:
       type: 3}
     DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
       type: 3}
-    DialogueText: Yay im glad you liked it honeybeebooboo <3 <3 <3
-    OptionsMenu: []
+    DialogueBranches:
+    - BranchTitle: 
+      Priority: 0
+      ReputationMinimum: 0
+      StaminaMinimum: 0
+      KnowledgeMinimum: 0
+      FitnessMinimum: 0
+      CharismaMinimum: 0
+      CurrencyMinimum: 0
+      DialogueText: Third dialogue branch one
+      OptionsMenu: []
 --- !u!4 &200101719
 Transform:
   m_ObjectHideFlags: 0

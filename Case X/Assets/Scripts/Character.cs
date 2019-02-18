@@ -170,7 +170,6 @@ public class Character : MonoBehaviour
                     int.Parse(workersData["OwnedWorkers"][i]["Charisma"].ToString()),
                     workersData["OwnedWorkers"][i]["RelationshipStatus"].ToString()));
             }
-
         }
     }
 

@@ -11,13 +11,22 @@ public class NPC : MonoBehaviour
     [SerializeField]
     public List<Dialogue> Dialogue;
 
-    // Tracks the current dialogue object in the canvas.
+    // Tracks the current dialogue index in the canvas and whether or not
+    // the player is currently in a dialogue or not.
     private int _currentDialogueIndex = -1;
     private bool _isDialogueOngoing;
+
+    // We use this list to filter in every branch of dialogue that is
+    // available based on their conditions for the player and then we
+    // use that list to pick the one with the highest priority.
+    private List<DialogueBranch> _availableBranches = new List<DialogueBranch>();
+    private DialogueBranch _finalDialogueBranch = new DialogueBranch();
+    private Character _playerCharacterScript;
 
     private void Start()
     {
         DialogueManager.Instance.ToggleDialogue(false);
+        _playerCharacterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
 
     private void Update()
@@ -74,15 +83,53 @@ public class NPC : MonoBehaviour
         // Changing the dialogue box background
         DialogueManager.Instance.ChangeDialogueBoxBackground(Dialogue[_currentDialogueIndex].DialogueBoxBackground);
 
-        // Changing the dialogue text content
-        DialogueManager.Instance.ChangeDialogueText(Dialogue[_currentDialogueIndex].DialogueText);
+        // First we clear the previously selected dialogue branch, otherwise they
+        // would add on top of each other and get wrong output to the dialogue sequence.
+        _availableBranches.Clear();
+        _finalDialogueBranch = new DialogueBranch();
+
+        // Here we loop through every branch of dialogue in the current dialogue
+        // sequence and we filter out the ones that are available so we can pick
+        // the one with the highest priority for displaying.
+        for (int j = 0; j < Dialogue[_currentDialogueIndex].DialogueBranches.Count; j++)
+        {
+            // We check if every condition is met by the player before adding this dialogue branch as one for sorting by priority later on.
+            if (
+                _playerCharacterScript.Reputation >= Dialogue[_currentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
+                _playerCharacterScript.Stamina >= Dialogue[_currentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
+                _playerCharacterScript.Knowledge >= Dialogue[_currentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
+                _playerCharacterScript.Fitness >= Dialogue[_currentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
+                _playerCharacterScript.Charisma >= Dialogue[_currentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
+                _playerCharacterScript.Currency >= Dialogue[_currentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
+            {
+                _availableBranches.Add(Dialogue[_currentDialogueIndex].DialogueBranches[j]);
+            }
+        }
+
+        // After all the available branches of the new dialogue sequence are stored
+        // we now pick the one with the highest priority.
+        int highestPriority = _availableBranches[0].Priority;
+        _finalDialogueBranch = _availableBranches[0];
+
+        for (int i = 0; i < _availableBranches.Count; i++)
+        {
+            if (_availableBranches[i].Priority > highestPriority)
+            {
+                highestPriority = _availableBranches[i].Priority;
+                // We set the branch with the highest priority as our final branch
+                // for the new dialogue sequence to display.
+                _finalDialogueBranch = _availableBranches[i];
+            }
+        }
+        // And here we display the text of the final selected branch. 
+        DialogueManager.Instance.ChangeDialogueText(_finalDialogueBranch.DialogueText);
 
         // We clear the options menu before we populate it with data, because if
         // there is no data, we still want to clear it from its previous dialogue
         // options menu data
         DialogueManager.Instance.ClearOptionsMenu();
         // Changing the dialogue options menu buttons
-        DialogueManager.Instance.ChangeOptionsMenu(Dialogue[_currentDialogueIndex].OptionsMenu);
+        DialogueManager.Instance.ChangeOptionsMenu(_finalDialogueBranch.OptionsMenu);
 
         //Debug.LogWarning("New dialogue is loaded!");
     }

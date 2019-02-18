@@ -12,6 +12,5 @@ public class Dialogue
     public string RightCharacterTitle;
     public Sprite RightCharacterPortrait;
     public Sprite DialogueBoxBackground;
-    public string DialogueText;
-    public string[] OptionsMenu;
+    public List<DialogueBranch> DialogueBranches;
 }
