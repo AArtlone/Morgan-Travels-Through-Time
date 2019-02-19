@@ -21,7 +21,6 @@ public class Character : MonoBehaviour
     public int AvailableHints;
     #endregion
     #region Items
-    [NonSerialized]
     public List<Clothing> Wearables = new List<Clothing>();
     [NonSerialized]
     [Space(10)]
@@ -57,12 +56,13 @@ public class Character : MonoBehaviour
         _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
         _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
         _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
+
+        // These functions initialize the game state from the storage.
         SetupJsonData();
         SetupCases();
         SetupItems();
         SetupWearables();
         SetupWorkers();
-        
         LoadInventory();
     }
 
@@ -151,6 +151,8 @@ public class Character : MonoBehaviour
                 Wearables.Add(new Clothing(
                     characterData["Wearables"][i]["BodyPart"].ToString(),
                     characterData["Wearables"][i]["Name"].ToString(),
+                    characterData["Wearables"][i]["Icon"].ToString(),
+                    characterData["Wearables"][i]["PortraitImage"].ToString(),
                     int.Parse(characterData["Wearables"][i]["Stamina"].ToString()),
                     int.Parse(characterData["Wearables"][i]["Knowledge"].ToString()),
                     int.Parse(characterData["Wearables"][i]["Fitness"].ToString()),
