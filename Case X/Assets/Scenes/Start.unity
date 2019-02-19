@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 152042543}
   - component: {fileID: 152042545}
   - component: {fileID: 152042544}
+  - component: {fileID: 152042546}
   m_Layer: 5
   m_Name: Option One
   m_TagString: Untagged
@@ -403,172 +404,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152042542}
   m_CullTransparentMesh: 0
---- !u!1 &200101717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 200101719}
-  - component: {fileID: 200101718}
-  - component: {fileID: 200101721}
-  m_Layer: 0
-  m_Name: NPC
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &200101718
+--- !u!114 &152042546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200101717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d20fc93a2e651af40a7a88e479d963d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: John
-  Dialogue:
-  - DialogueTitle: First Dialogue
-    LeftCharacterTitle: Nikolay
-    LeftCharacterPortrait: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
-      type: 3}
-    RightCharacterTitle: John
-    RightCharacterPortrait: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
-      type: 3}
-    DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
-      type: 3}
-    DialogueBranches:
-    - BranchTitle: Branch One
-      Priority: 0
-      ReputationMinimum: 10
-      StaminaMinimum: 10
-      KnowledgeMinimum: 10
-      FitnessMinimum: 10
-      CharismaMinimum: 10
-      CurrencyMinimum: 100
-      ItemsRequired:
-      - gigantDick
-      ItemsDropped: []
-      DialogueText: First dialogue branch one
-      OptionsMenu:
-      - YOS
-      - NO...
-    - BranchTitle: Branch Two
-      Priority: 1
-      ReputationMinimum: 0
-      StaminaMinimum: 0
-      KnowledgeMinimum: 0
-      FitnessMinimum: 0
-      CharismaMinimum: 0
-      CurrencyMinimum: 100
-      ItemsRequired: []
-      ItemsDropped: []
-      DialogueText: First dialogue branch two
-      OptionsMenu: []
-  - DialogueTitle: Second Dialogue
-    LeftCharacterTitle: Nikolay
-    LeftCharacterPortrait: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
-      type: 3}
-    RightCharacterTitle: John
-    RightCharacterPortrait: {fileID: 21300000, guid: adc38591f1e894c44ad079d1f85448ac,
-      type: 3}
-    DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
-      type: 3}
-    DialogueBranches:
-    - BranchTitle: Branch One
-      Priority: 0
-      ReputationMinimum: 10
-      StaminaMinimum: 10
-      KnowledgeMinimum: 10
-      FitnessMinimum: 10
-      CharismaMinimum: 10
-      CurrencyMinimum: 100
-      ItemsRequired: []
-      ItemsDropped: []
-      DialogueText: Second dialogue branch one
-      OptionsMenu:
-      - ANAL
-      - ORAL
-  - DialogueTitle: Third Dialogue
-    LeftCharacterTitle: Nikolay
-    LeftCharacterPortrait: {fileID: 21300000, guid: 182c798bf59b6694c99a143a9f9a81dc,
-      type: 3}
-    RightCharacterTitle: John
-    RightCharacterPortrait: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
-      type: 3}
-    DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
-      type: 3}
-    DialogueBranches:
-    - BranchTitle: 
-      Priority: 0
-      ReputationMinimum: 0
-      StaminaMinimum: 0
-      KnowledgeMinimum: 0
-      FitnessMinimum: 0
-      CharismaMinimum: 0
-      CurrencyMinimum: 0
-      ItemsRequired: []
-      ItemsDropped: []
-      DialogueText: Third dialogue branch one
-      OptionsMenu: []
-  CurrentDialogueIndex: -1
-  FinalDialogueBranch:
-    BranchTitle: 
-    Priority: 0
-    ReputationMinimum: 0
-    StaminaMinimum: 0
-    KnowledgeMinimum: 0
-    FitnessMinimum: 0
-    CharismaMinimum: 0
-    CurrencyMinimum: 0
-    ItemsRequired: []
-    ItemsDropped: []
-    DialogueText: 
-    OptionsMenu: []
---- !u!4 &200101719
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200101717}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 639, y: 536, z: 67.0564}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &200101721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200101717}
+  m_GameObject: {fileID: 152042542}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 13
+  - eventID: 4
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 200101718}
-          m_MethodName: ContinueDialogue
-          m_Mode: 1
+        - m_Target: {fileID: 554528400}
+          m_MethodName: SelectOption
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 152042542}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -613,11 +471,11 @@ RectTransform:
   - {fileID: 882133883}
   - {fileID: 3912129}
   m_Father: {fileID: 1166190285}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.39508, y: -0.0018005}
+  m_AnchoredPosition: {x: -0.39508, y: 27}
   m_SizeDelta: {x: 799.21, y: 389.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &507620036
@@ -675,9 +533,9 @@ MonoBehaviour:
   - {fileID: 707841444}
   - {fileID: 1862048812}
   - {fileID: 1958958651}
-  spritesForItems:
-  - {fileID: 21300000, guid: 92f0a30cc7d4f77418218b9b01c6a42e, type: 3}
-  - {fileID: 21300000, guid: 85bd05bc0fb867c4c8621e609b4457eb, type: 3}
+  DialogueResponses:
+  - cum
+  - bucket
 --- !u!4 &554528401
 Transform:
   m_ObjectHideFlags: 0
@@ -836,6 +694,7 @@ GameObject:
   - component: {fileID: 707841443}
   - component: {fileID: 707841445}
   - component: {fileID: 707841444}
+  - component: {fileID: 707841446}
   m_Layer: 5
   m_Name: Option Two
   m_TagString: Untagged
@@ -904,6 +763,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707841442}
   m_CullTransparentMesh: 0
+--- !u!114 &707841446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707841442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 554528400}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 707841442}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &820862734
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,8 +829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10000, y: 358.63}
+  m_AnchoredPosition: {x: 0, y: 55}
+  m_SizeDelta: {x: 10000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820862736
 MonoBehaviour:
@@ -955,8 +845,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1269,7 +1159,7 @@ RectTransform:
   m_Children:
   - {fileID: 1145800460}
   m_Father: {fileID: 1166190285}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1442,9 +1332,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1812310367}
   - {fileID: 507620035}
   - {fileID: 1119813256}
-  - {fileID: 1812310367}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1961,9 +1851,9 @@ GameObject:
   - component: {fileID: 1812310367}
   - component: {fileID: 1812310371}
   - component: {fileID: 1812310370}
-  - component: {fileID: 1812310369}
   - component: {fileID: 1812310368}
   - component: {fileID: 1812310372}
+  - component: {fileID: 1812310369}
   m_Layer: 5
   m_Name: NPC
   m_TagString: Untagged
@@ -1984,7 +1874,7 @@ RectTransform:
   m_Children:
   - {fileID: 820862735}
   m_Father: {fileID: 1166190285}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2047,7 +1937,10 @@ MonoBehaviour:
       type: 3}
     DialogueBranches:
     - BranchTitle: Branch One
-      Priority: 0
+      PreviousResponses:
+      - YOS
+      - NO...
+      Priority: 2
       ReputationMinimum: 10
       StaminaMinimum: 10
       KnowledgeMinimum: 10
@@ -2062,7 +1955,10 @@ MonoBehaviour:
       - YOS
       - NO...
     - BranchTitle: Branch Two
-      Priority: 1
+      PreviousResponses:
+      - NO...
+      - YOS
+      Priority: 2
       ReputationMinimum: 0
       StaminaMinimum: 0
       KnowledgeMinimum: 0
@@ -2084,6 +1980,8 @@ MonoBehaviour:
       type: 3}
     DialogueBranches:
     - BranchTitle: Branch One
+      PreviousResponses:
+      - YOS
       Priority: 0
       ReputationMinimum: 10
       StaminaMinimum: 10
@@ -2094,6 +1992,22 @@ MonoBehaviour:
       ItemsRequired: []
       ItemsDropped: []
       DialogueText: Second dialogue branch one
+      OptionsMenu:
+      - ANAL
+      - ORAL
+    - BranchTitle: Branch Two
+      PreviousResponses:
+      - NO...
+      Priority: 0
+      ReputationMinimum: 10
+      StaminaMinimum: 10
+      KnowledgeMinimum: 10
+      FitnessMinimum: 10
+      CharismaMinimum: 10
+      CurrencyMinimum: 100
+      ItemsRequired: []
+      ItemsDropped: []
+      DialogueText: Second dialogue branch two
       OptionsMenu:
       - ANAL
       - ORAL
@@ -2108,6 +2022,7 @@ MonoBehaviour:
       type: 3}
     DialogueBranches:
     - BranchTitle: 
+      PreviousResponses: []
       Priority: 0
       ReputationMinimum: 0
       StaminaMinimum: 0
@@ -2119,9 +2034,9 @@ MonoBehaviour:
       ItemsDropped: []
       DialogueText: Third dialogue branch one
       OptionsMenu: []
-  CurrentDialogueIndex: -1
   FinalDialogueBranch:
     BranchTitle: 
+    PreviousResponses: []
     Priority: 0
     ReputationMinimum: 0
     StaminaMinimum: 0
@@ -2207,6 +2122,7 @@ GameObject:
   - component: {fileID: 1862048811}
   - component: {fileID: 1862048813}
   - component: {fileID: 1862048812}
+  - component: {fileID: 1862048814}
   m_Layer: 5
   m_Name: Option Three
   m_TagString: Untagged
@@ -2275,6 +2191,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862048810}
   m_CullTransparentMesh: 0
+--- !u!114 &1862048814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862048810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 554528400}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1862048810}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1898376449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2312,7 @@ GameObject:
   - component: {fileID: 1958958650}
   - component: {fileID: 1958958652}
   - component: {fileID: 1958958651}
+  - component: {fileID: 1958958653}
   m_Layer: 5
   m_Name: Option Four
   m_TagString: Untagged
@@ -2433,6 +2381,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958958649}
   m_CullTransparentMesh: 0
+--- !u!114 &1958958653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958958649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 554528400}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1958958649}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2043122706
 GameObject:
   m_ObjectHideFlags: 0

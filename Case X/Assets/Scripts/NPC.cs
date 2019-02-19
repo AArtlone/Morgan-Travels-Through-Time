@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,7 @@ public class NPC : MonoBehaviour
 
     // Tracks the current dialogue index in the canvas and whether or not
     // the player is currently in a dialogue or not.
+    [NonSerialized]
     public int CurrentDialogueIndex = -1;
     private bool _isDialogueOngoing;
 
@@ -23,11 +26,13 @@ public class NPC : MonoBehaviour
     private List<DialogueBranch> _availableBranches = new List<DialogueBranch>();
     public DialogueBranch FinalDialogueBranch = new DialogueBranch();
     private Character _playerCharacterScript;
+    private Image _dialogueDropBox;
 
     private void Start()
     {
         DialogueManager.Instance.ToggleDialogue(false);
         _playerCharacterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+        _dialogueDropBox = GameObject.FindGameObjectWithTag("Dialogue Box").GetComponent<Image>();
     }
 
     public void NextDialogue()
@@ -67,7 +72,29 @@ public class NPC : MonoBehaviour
                 _playerCharacterScript.Charisma >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
                 _playerCharacterScript.Currency >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
             {
-                _availableBranches.Add(Dialogue[CurrentDialogueIndex].DialogueBranches[j]);
+                // AND we check if we have matching previous responses for that
+                // dialogue sequence to be appropriate for use.
+                int elementsThatMatch = 0;
+                foreach (string requiredResponse in Dialogue[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses)
+                {
+                    foreach (string response in DialogueManager.Instance.DialogueResponses)
+                    {
+                        if (requiredResponse == response)
+                        {
+                            //Debug.Log(string.Format("Match between {0} and {1}", response, requiredResponse));
+
+                            elementsThatMatch++;
+                            break;
+                        }
+                    }
+                }
+
+                if (elementsThatMatch == Dialogue[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses.Count)
+                {
+                    _availableBranches.Add(Dialogue[CurrentDialogueIndex].DialogueBranches[j]);
+
+                    //Debug.Log("Number of elements match!");
+                }
             }
         }
 
@@ -86,6 +113,7 @@ public class NPC : MonoBehaviour
                 FinalDialogueBranch = _availableBranches[i];
             }
         }
+
         // And here we display the text of the final selected branch. 
         DialogueManager.Instance.ChangeDialogueText(FinalDialogueBranch.DialogueText);
 
@@ -126,7 +154,7 @@ public class NPC : MonoBehaviour
                         // the dialogue, otherwise if he had used any items in it and
                         // quit or restarted the game, he would lose them forever.
                         _playerCharacterScript.RefreshItems();
-                        transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                        _dialogueDropBox.raycastTarget = false;
                         return;
                     }
                 }
@@ -137,7 +165,7 @@ public class NPC : MonoBehaviour
                 _isDialogueOngoing = false;
 
                 _playerCharacterScript.RefreshItems();
-                transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                _dialogueDropBox.raycastTarget = false;
                 return;
             }
         }
@@ -163,7 +191,7 @@ public class NPC : MonoBehaviour
             // the dialogue is initiated, because we want to player to progress
             // further by clicking anywhere on the screen, not just on the NPC icon.
             // Once the dialogue is finished we disable this child's interaction.
-            transform.GetChild(0).GetComponent<Image>().raycastTarget = true;
+            _dialogueDropBox.raycastTarget = true;
 
             _isDialogueOngoing = true;
         }

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +23,9 @@ public class DialogueManager : MonoBehaviour
     public Image DialogueBoxBackground;
     public Text DialogueText;
     public Text[] OptionsMenu = new Text[4];
-    public List<Sprite> spritesForItems = new List<Sprite>();
+    public List<string> DialogueResponses;
+
+    private string _dialogueResponsesPath = Application.streamingAssetsPath + "/DialogueResponses.json";
 
     private void Awake()
     {
@@ -36,6 +40,44 @@ public class DialogueManager : MonoBehaviour
             // We want to be able to access the dialogue information from any scene.
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        SetupDialogueResponses();
+    }
+
+    private void SetupDialogueResponses()
+    {
+        string responsesToJson = File.ReadAllText(_dialogueResponsesPath);
+        JsonData responsesData = JsonMapper.ToObject(responsesToJson);
+        
+        DialogueResponses.Clear();
+        for (int i = 0; i < responsesData["DialogueResponses"].Count; i++)
+        {
+            DialogueResponses.Add(responsesData["DialogueResponses"][i].ToString());
+        }
+    }
+
+    public void RefreshDialogueResponses()
+    {
+        File.WriteAllText(_dialogueResponsesPath, "");
+
+        // This creates the starting wrapper of the json file.
+        string newItemsData = "{\"DialogueResponses\":[";
+
+        HashSet<string> uniqueResponses = new HashSet<string>(DialogueResponses);
+
+        foreach (string response in uniqueResponses)
+        {
+            newItemsData += "\"" + response + "\"" + ",";
+        }
+        // This removes the last comma at the last item in the array, so
+        // that we wont get an error when getting the data later on.
+        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        // This closes the wrapper of the json file made from the beginning.
+        newItemsData += "]}";
+        File.WriteAllText(_dialogueResponsesPath, newItemsData);
     }
 
     public void ChangePortrait(string side, Sprite newPortrait)
@@ -105,5 +147,17 @@ public class DialogueManager : MonoBehaviour
     public void ToggleDialogue(bool display)
     {
         DialogueTemplate.SetActive(display);
+    }
+
+    public void SelectOption(GameObject obj)
+    {
+        string textInOption = obj.GetComponent<Text>().text;
+        if (!DialogueResponses.Contains(textInOption))
+        {
+            DialogueResponses.Add(textInOption);
+        }
+
+        RefreshDialogueResponses();
+        //Debug.Log(string.Format("Added ({0}) to the responses list!", textInOption));
     }
 }

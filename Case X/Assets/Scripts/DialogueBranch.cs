@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueBranch
 {
     public string BranchTitle;
+    public List<string> PreviousResponses = new List<string>();
     [Range(0, 10)]
     [Tooltip("Priority decides whether this branch should be displayed compared to others that falls into the same player requirements.")]
     public int Priority;
