@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
 {
@@ -13,14 +14,14 @@ public class NPC : MonoBehaviour
 
     // Tracks the current dialogue index in the canvas and whether or not
     // the player is currently in a dialogue or not.
-    private int _currentDialogueIndex = -1;
+    public int CurrentDialogueIndex = -1;
     private bool _isDialogueOngoing;
 
     // We use this list to filter in every branch of dialogue that is
     // available based on their conditions for the player and then we
     // use that list to pick the one with the highest priority.
     private List<DialogueBranch> _availableBranches = new List<DialogueBranch>();
-    private DialogueBranch _finalDialogueBranch = new DialogueBranch();
+    public DialogueBranch FinalDialogueBranch = new DialogueBranch();
     private Character _playerCharacterScript;
 
     private void Start()
@@ -29,87 +30,51 @@ public class NPC : MonoBehaviour
         _playerCharacterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
     }
 
-    private void Update()
-    {
-        // This will have to be a tap eventually to progress the player in the
-        // dialogue every time he taps somewhere on the screen.
-        if (_isDialogueOngoing == true && Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_currentDialogueIndex < Dialogue.Count - 1)
-            {
-                NextDialogue();
-            }
-            else
-            {
-                // If we reach past the dialogue, then we reset the
-                // current dialogue index counter and we hide the dialogue
-                // until it is once again triggered to show up.
-                _currentDialogueIndex = -1;
-                DialogueManager.Instance.ToggleDialogue(false);
-                _isDialogueOngoing = false;
-            }
-        }
-
-        // This will also be a tap eventually, meant to initialize the
-        // dialogue once the player has tapped on top of an npc icon.
-        if (_isDialogueOngoing == false && Input.GetKeyDown(KeyCode.X))
-        {
-            // Once a dialogue is initiated, we display the dialogue template
-            // and give it the starting dialogue object's data. We also make sure
-            // to set _isDialogueOngoing to true because the player is still able
-            // to increment the current dialogue index number without having the
-            // dialogue visualized in the first place by clicking space.
-            DialogueManager.Instance.ToggleDialogue(true);
-            NextDialogue();
-            _isDialogueOngoing = true;
-        }
-    }
-
     public void NextDialogue()
     {
         // Loading the new set of dialogue data.
-        _currentDialogueIndex++;
+        CurrentDialogueIndex++;
 
         // We now change both sides of the dialogue and all of its
         // elements to match the new dialogue object's data.
         DialogueManager.Instance.ChangeTitle(
-            "left", Dialogue[_currentDialogueIndex].LeftCharacterTitle);
+            "left", Dialogue[CurrentDialogueIndex].LeftCharacterTitle);
         DialogueManager.Instance.ChangeTitle(
-            "right", Dialogue[_currentDialogueIndex].RightCharacterTitle);
+            "right", Dialogue[CurrentDialogueIndex].RightCharacterTitle);
 
-        DialogueManager.Instance.ChangePortrait("left", Dialogue[_currentDialogueIndex].LeftCharacterPortrait);
-        DialogueManager.Instance.ChangePortrait("right", Dialogue[_currentDialogueIndex].RightCharacterPortrait);
+        DialogueManager.Instance.ChangePortrait("left", Dialogue[CurrentDialogueIndex].LeftCharacterPortrait);
+        DialogueManager.Instance.ChangePortrait("right", Dialogue[CurrentDialogueIndex].RightCharacterPortrait);
 
         // Changing the dialogue box background
-        DialogueManager.Instance.ChangeDialogueBoxBackground(Dialogue[_currentDialogueIndex].DialogueBoxBackground);
+        DialogueManager.Instance.ChangeDialogueBoxBackground(Dialogue[CurrentDialogueIndex].DialogueBoxBackground);
 
         // First we clear the previously selected dialogue branch, otherwise they
         // would add on top of each other and get wrong output to the dialogue sequence.
         _availableBranches.Clear();
-        _finalDialogueBranch = new DialogueBranch();
+        FinalDialogueBranch = new DialogueBranch();
 
         // Here we loop through every branch of dialogue in the current dialogue
         // sequence and we filter out the ones that are available so we can pick
         // the one with the highest priority for displaying.
-        for (int j = 0; j < Dialogue[_currentDialogueIndex].DialogueBranches.Count; j++)
+        for (int j = 0; j < Dialogue[CurrentDialogueIndex].DialogueBranches.Count; j++)
         {
             // We check if every condition is met by the player before adding this dialogue branch as one for sorting by priority later on.
             if (
-                _playerCharacterScript.Reputation >= Dialogue[_currentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
-                _playerCharacterScript.Stamina >= Dialogue[_currentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
-                _playerCharacterScript.Knowledge >= Dialogue[_currentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
-                _playerCharacterScript.Fitness >= Dialogue[_currentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
-                _playerCharacterScript.Charisma >= Dialogue[_currentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
-                _playerCharacterScript.Currency >= Dialogue[_currentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
+                _playerCharacterScript.Reputation >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
+                _playerCharacterScript.Stamina >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
+                _playerCharacterScript.Knowledge >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
+                _playerCharacterScript.Fitness >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
+                _playerCharacterScript.Charisma >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
+                _playerCharacterScript.Currency >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
             {
-                _availableBranches.Add(Dialogue[_currentDialogueIndex].DialogueBranches[j]);
+                _availableBranches.Add(Dialogue[CurrentDialogueIndex].DialogueBranches[j]);
             }
         }
 
         // After all the available branches of the new dialogue sequence are stored
         // we now pick the one with the highest priority.
         int highestPriority = _availableBranches[0].Priority;
-        _finalDialogueBranch = _availableBranches[0];
+        FinalDialogueBranch = _availableBranches[0];
 
         for (int i = 0; i < _availableBranches.Count; i++)
         {
@@ -118,19 +83,89 @@ public class NPC : MonoBehaviour
                 highestPriority = _availableBranches[i].Priority;
                 // We set the branch with the highest priority as our final branch
                 // for the new dialogue sequence to display.
-                _finalDialogueBranch = _availableBranches[i];
+                FinalDialogueBranch = _availableBranches[i];
             }
         }
         // And here we display the text of the final selected branch. 
-        DialogueManager.Instance.ChangeDialogueText(_finalDialogueBranch.DialogueText);
+        DialogueManager.Instance.ChangeDialogueText(FinalDialogueBranch.DialogueText);
 
         // We clear the options menu before we populate it with data, because if
         // there is no data, we still want to clear it from its previous dialogue
         // options menu data
         DialogueManager.Instance.ClearOptionsMenu();
         // Changing the dialogue options menu buttons
-        DialogueManager.Instance.ChangeOptionsMenu(_finalDialogueBranch.OptionsMenu);
+        DialogueManager.Instance.ChangeOptionsMenu(FinalDialogueBranch.OptionsMenu);
 
         //Debug.LogWarning("New dialogue is loaded!");
+    }
+
+    public void ContinueDialogue()
+    {
+        // When the player taps on the npc or anywhere on the dialogue box, it
+        // will progress the dialogue further.
+        if (_isDialogueOngoing == true)
+        {
+            if (CurrentDialogueIndex < Dialogue.Count - 1)
+            {
+                foreach (DialogueBranch branch in Dialogue[CurrentDialogueIndex].DialogueBranches)
+                {
+                    if (branch.ItemsRequired.Count == branch.ItemsDropped.Count)
+                    {
+                        NextDialogue();
+                        return;
+                    } else
+                    {
+                        // If we reach past the dialogue, then we reset the
+                        // current dialogue index counter and we hide the dialogue
+                        // until it is once again triggered to show up.
+                        CurrentDialogueIndex = -1;
+                        DialogueManager.Instance.ToggleDialogue(false);
+                        _isDialogueOngoing = false;
+
+                        // We only update the player's inventory AFTER he has exited
+                        // the dialogue, otherwise if he had used any items in it and
+                        // quit or restarted the game, he would lose them forever.
+                        _playerCharacterScript.RefreshItems();
+                        transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                        return;
+                    }
+                }
+            } else
+            {
+                CurrentDialogueIndex = -1;
+                DialogueManager.Instance.ToggleDialogue(false);
+                _isDialogueOngoing = false;
+
+                _playerCharacterScript.RefreshItems();
+                transform.GetChild(0).GetComponent<Image>().raycastTarget = false;
+                return;
+            }
+        }
+
+        // This is meant to initialize the dialogue once the player 
+        // has tapped on top of an npc icon.
+        if (_isDialogueOngoing == false)
+        {
+            // Once a dialogue is initiated, we display the dialogue template
+            // and give it the starting dialogue object's data. We also make sure
+            // to set _isDialogueOngoing to true because the player is still able
+            // to increment the current dialogue index number without having the
+            // dialogue visualized in the first place by clicking space.
+            DialogueManager.Instance.ToggleDialogue(true);
+            NextDialogue();
+
+            // We also want to store which NPC has been responsible for initiating
+            // the dialogue, so that we can later access its branching data for
+            // storing dragged and dropped items
+            DialogueManager.Instance.CurrentNPCDialogue = this;
+
+            // The npc child is used as a field that encapsulates the screen once
+            // the dialogue is initiated, because we want to player to progress
+            // further by clicking anywhere on the screen, not just on the NPC icon.
+            // Once the dialogue is finished we disable this child's interaction.
+            transform.GetChild(0).GetComponent<Image>().raycastTarget = true;
+
+            _isDialogueOngoing = true;
+        }
     }
 }

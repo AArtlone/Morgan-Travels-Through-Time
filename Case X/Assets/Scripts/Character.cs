@@ -477,7 +477,7 @@ public class Character : MonoBehaviour
         //Debug.Log("Refreshed player json data!");
     }
 
-    private void RefreshItems()
+    public void RefreshItems()
     {
         // We reset the existing items json list content, so that we can
         // append new one afterwards.

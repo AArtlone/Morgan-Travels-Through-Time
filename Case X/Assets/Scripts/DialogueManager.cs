@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
     // The manager is a singleton used throughout the game
     // to manage the dialogue boxes of npc and interactables.
     public static DialogueManager Instance;
+    public NPC CurrentNPCDialogue;
 
     public GameObject DialogueTemplate;
     [Space(10)]

@@ -22,6 +22,10 @@ public class DialogueBranch
     public int CharismaMinimum;
     [Tooltip("Defines the minimum requirement for player currency.")]
     public int CurrencyMinimum;
+    [Tooltip("To pick an item correctly, you use the Resources -> Items folder for items and write down an item's name without its file type in the field.")]
+    public List<string> ItemsRequired = new List<string>();
+    [Tooltip("This shows the items the player has dragged and dropped into the current dialogue sequence.")]
+    public List<string> ItemsDropped = new List<string>();
     [TextArea(0, 100)]
     [Space(10)]
     [Tooltip("Text that will be displayed on the current dialogue sequence if t hat branch's requirements are met.")]
