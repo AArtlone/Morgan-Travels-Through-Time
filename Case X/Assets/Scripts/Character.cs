@@ -45,12 +45,12 @@ public class Character : MonoBehaviour
     private string _workersDataJsonFilePath;
 
     // Inventory-related references
-    private GameObject _inventoryPanel;
+    private GameObject _itemsPanel;
     public GameObject ItemPrefab;
 
     private void Start()
     {
-        _inventoryPanel = GameObject.FindGameObjectWithTag("Inventory Panel");
+        _itemsPanel = GameObject.FindGameObjectWithTag("Items Panel");
 
         _playerStatsFilePath = _pathToAssetsFolder + "/Player.json";
         _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
@@ -543,19 +543,32 @@ public class Character : MonoBehaviour
         //Debug.Log("Refreshed wearables json data!");
     }
 
-    private void LoadInventory()
+    public void LoadInventory()
     {
         foreach (Item item in Items)
         {
-            GameObject newItem = Instantiate(ItemPrefab, _inventoryPanel.transform);
-            
-            foreach (Sprite sprite in DialogueManager.Instance.spritesForItems)
-            {
-                if (sprite.name == item.AssetsImageName)
-                {
-                    newItem.GetComponent<Image>().sprite = sprite;
-                }
-            }
+            GameObject newItem = Instantiate(ItemPrefab, _itemsPanel.transform);
+            Item newItemScript = newItem.GetComponent<Item>();
+
+            // We use predefined images from the resources folder to load each
+            // item's sprites from outside the game and assign it to the new item.
+            Sprite sprite = Resources.Load<Sprite>("Items/" + item.AssetsImageName);
+
+            newItem.GetComponent<Image>().sprite = sprite;
+            newItemScript.Name = item.Name;
+            newItemScript.Description = item.Description;
+            newItemScript.Active = item.Active;
+            newItemScript.AssetsImageName = item.AssetsImageName;
         }
+    }
+
+    public void ReloadInventory()
+    {
+        for (int i = 0; i < _itemsPanel.transform.childCount; i++)
+        {
+            Destroy(_itemsPanel.transform.GetChild(i).gameObject);
+        }
+
+        LoadInventory();
     }
 }
