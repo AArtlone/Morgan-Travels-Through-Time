@@ -27,7 +27,6 @@ public class InterfaceManager : MonoBehaviour
     public GameObject SelectedCaseDescription;
     public GameObject SelectedCaseStatus;
     public GameObject SelectedCaseObjectivesDisplay;
-    private List<Case> _allCases = new List<Case>();
     private Case _currentlySelectedCase;
     #endregion
 
@@ -62,27 +61,21 @@ public class InterfaceManager : MonoBehaviour
             Destroy(CompletedCasesDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
         }
 
-        _allCases.Clear();
+        //_characterScript.AllCases.Clear();
         foreach (Case loadedCase in _characterScript.CurrentCases)
         {
-            _allCases.Add(loadedCase);
-
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, CurrentCasesDisplay.transform.GetChild(0).transform);
             newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
         }
 
         foreach (Case loadedCase in _characterScript.AvailableCases)
         {
-            _allCases.Add(loadedCase);
-
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, AvailableCasesDisplay.transform.GetChild(0).transform);
             newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
         }
 
         foreach (Case loadedCase in _characterScript.CompletedCases)
         {
-            _allCases.Add(loadedCase);
-
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, CompletedCasesDisplay.transform.GetChild(0).transform);
             newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
         }
@@ -158,7 +151,7 @@ public class InterfaceManager : MonoBehaviour
         GameObject button = obj as GameObject;
 
         _currentlySelectedCase = null;
-        foreach (Case loadedCase in _allCases)
+        foreach (Case loadedCase in _characterScript.AllCases)
         {
             if (loadedCase.Name == button.GetComponentInChildren<Text>().text)
             {
@@ -166,7 +159,7 @@ public class InterfaceManager : MonoBehaviour
 
                 SelectedCaseTitle.GetComponent<Text>().text = "Title: " + loadedCase.Name;
                 SelectedCaseDescription.GetComponent<Text>().text = "Description: " + loadedCase.Description;
-                SelectedCaseStatus.GetComponent<Text>().text = "Completion Status: " + loadedCase.CompletionStatus;
+                SelectedCaseStatus.GetComponent<Text>().text = "Completion Status: " + loadedCase.ProgressStatus;
 
                 for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
                 {
@@ -199,6 +192,8 @@ public class InterfaceManager : MonoBehaviour
             if (completedCase.Name == _currentlySelectedCase.Name)
             {
                 _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Completed Cases", "CurrentCases");
+                completedCase.ProgressStatus = "Ongoing";
+                _currentlySelectedCase.CompletionStatus = false;
                 break;
             }
         }
@@ -207,21 +202,29 @@ public class InterfaceManager : MonoBehaviour
             if (availableCase.Name == _currentlySelectedCase.Name)
             {
                 _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Available Cases", "Current Cases");
+                availableCase.ProgressStatus = "Ongoing";
+                _currentlySelectedCase.CompletionStatus = false;
                 break;
             }
         }
 
         _currentlySelectedCase = null;
 
+        _characterScript.RefreshAllCases();
+        _characterScript.SetupCases();
         SetupCasesInDiary();
     }
 
     public void AbandonCase()
     {
         _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Current Cases", "Available Cases");
+        _currentlySelectedCase.ProgressStatus = "Available";
+        _currentlySelectedCase.CompletionStatus = false;
 
         _currentlySelectedCase = null;
 
+        _characterScript.RefreshAllCases();
+        _characterScript.SetupCases();
         SetupCasesInDiary();
     }
     #endregion

@@ -31,6 +31,7 @@ public class Character : MonoBehaviour
     public List<Case> AvailableCases = new List<Case>();
     public List<Case> CurrentCases = new List<Case>();
     public List<Case> CompletedCases = new List<Case>();
+    public List<Case> AllCases = new List<Case>();
     public List<Worker> Workers = new List<Worker>();
     [Space(10)]
     public string DateOfLastCoffee;
@@ -65,12 +66,15 @@ public class Character : MonoBehaviour
         // These functions initialize the game state from the storage.
         #region Game state setup
         SetupJsonData();
+        SetupAreas();
         SetupCases();
         SetupItems();
         SetupWearables();
         SetupWorkers();
         LoadInventory();
         #endregion
+
+        RefreshAllCases();
     }
 
     #region Setup data from storage functionality
@@ -123,15 +127,39 @@ public class Character : MonoBehaviour
         //Debug.Log("Loaded character json data!");
     }
 
-    private void SetupCases()
+    public void SetupCases()
     {
         // *******************
         // This will load both the currently in progress cases from the player
         // json data and the completed cases into his in-game data storage for in-game
         // manipulation during gameplay
-        LoadCases("AvailableCases", AvailableCases);
-        LoadCases("CurrentCases", CurrentCases);
-        LoadCases("CompletedCases", CompletedCases);
+        LoadCases();
+
+        CurrentCases.Clear();
+        AvailableCases.Clear();
+        foreach (Area area in Areas)
+        {
+            //Debug.Log(area.Name);
+            foreach (Case caseInFile in AllCases)
+            {
+                if (caseInFile.Area == area.Name && area.Status == Area.AreaStatus.Unlocked)
+                {
+                    if (caseInFile.ProgressStatus == "Ongoing")
+                    {
+                        CurrentCases.Add(caseInFile);
+                        //Debug.Log("Ongoing " + caseInFile.Name);
+                    } else if (caseInFile.ProgressStatus == "Available" &&
+                        caseInFile.CompletionStatus)
+                    {
+                        CompletedCases.Add(caseInFile);
+                    } else if (caseInFile.ProgressStatus == "Available")
+                    {
+                        AvailableCases.Add(caseInFile);
+                        //Debug.Log("Available " + caseInFile.Name);
+                    }
+                }
+            }
+        }
     }
 
     private void SetupItems()
@@ -239,46 +267,58 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void LoadCases(string cases, List<Case> casesContainer)
+    private void LoadCases()
     {
-        casesContainer.Clear();
         if (File.Exists(_casesJsonFilePath))
         {
             string dataToJson = File.ReadAllText(_casesJsonFilePath);
             JsonData casesData = JsonMapper.ToObject(dataToJson);
 
-            for (int i = 0; i < casesData[cases].Count; i++)
+            AllCases.Clear();
+            for (int i = 0; i < casesData["Cases"].Count; i++)
             {
                 List<Objective> newCaseObjectives = new List<Objective>();
 
-                for (int j = 0; j < casesData[cases][i]["Objectives"].Count; j++)
+                for (int j = 0; j < casesData["Cases"][i]["Objectives"].Count; j++)
                 {
                     // These conditions make sure that we get the right type of data
                     // from the json and convert it accurately for the dictionaries
                     // of objectives for that case later on.
                     bool isObjectiveComplete = false;
-                    if (casesData[cases][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                    if (casesData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
                     {
                         isObjectiveComplete = true;
                     }
-                    else if (casesData[cases][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                    else if (casesData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
                     {
                         isObjectiveComplete = false;
                     }
 
                     // Here we store the new dictionary (objective) to the list of
                     // objectives after we set up the new objective.
-                    Objective newObjectives = new Objective(casesData[cases][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+                    Objective newObjectives = new Objective(casesData["Cases"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
 
                     newCaseObjectives.Add(newObjectives);
                 }
 
-                Case newCase = new Case(
-                    casesData[cases][i]["Name"].ToString(),
-                    casesData[cases][i]["Description"].ToString(),
-                    newCaseObjectives);
+                bool statusOfCaseCompletion = false;
+                if (casesData["Cases"][i]["Completed"].ToString() == "True")
+                {
+                    statusOfCaseCompletion = true;
+                } else if (casesData["Cases"][i]["Completed"].ToString() == "False")
+                {
+                    statusOfCaseCompletion = false;
+                }
 
-                casesContainer.Add(newCase);
+                Case newCase = new Case(
+                    casesData["Cases"][i]["Name"].ToString(),
+                    casesData["Cases"][i]["Area"].ToString(),
+                    casesData["Cases"][i]["ProgressStatus"].ToString(),
+                    casesData["Cases"][i]["Description"].ToString(),
+                    statusOfCaseCompletion,
+                    newCaseObjectives);
+                
+                AllCases.Add(newCase);
             }
         }
 
@@ -386,7 +426,7 @@ public class Character : MonoBehaviour
         returnOutput += "!";
 
         RefreshAllCases();
-        Debug.Log(returnOutput);
+        //Debug.Log(returnOutput);
     }
 
     /// <summary>
@@ -470,15 +510,14 @@ public class Character : MonoBehaviour
     /// and must be applied whenever a form of data is changed in-game to
     /// reflect that of the files for storage.
     /// </summary>
-    private void RefreshCase(string caseToRefresh, List<Case> cases)
+    private void RefreshCase(List<Case> cases)
     {
-        _newCasesData += "\"" + caseToRefresh + "\":[";
         // If we have an empty case then we will just create an
         // empty array of that case instead of populating it with
         // non-existent values.
         if (cases.Count == 0)
         {
-            _newCasesData += "],";
+            _newCasesData += "]}";
             return;
         }
         else
@@ -488,6 +527,8 @@ public class Character : MonoBehaviour
                 _newCasesData += "{";
                 // This is one field of the case object
                 _newCasesData += "\"Name\":\"" + cases[i].Name + "\",";
+                _newCasesData += "\"Area\":\"" + cases[i].Area + "\",";
+                _newCasesData += "\"ProgressStatus\":\"" + cases[i].ProgressStatus + "\",";
                 _newCasesData += "\"Description\":\"" + cases[i].Description + "\",";
 
                 if (cases[i].CompletionStatus == true)
@@ -519,24 +560,21 @@ public class Character : MonoBehaviour
 
                 _newCasesData += "]},";
             }
-            _newCasesData = _newCasesData.Substring(0, _newCasesData.Length - 1);
-            _newCasesData += "],";
         }
     }
 
-    private void RefreshAllCases()
+    public void RefreshAllCases()
     {
         File.WriteAllText(_casesJsonFilePath, "");
         // Reset the existing cases data string
         _newCasesData = "{";
+        _newCasesData += "\"Cases\":[";
 
-        RefreshCase("CurrentCases", CurrentCases);
-        RefreshCase("AvailableCases", AvailableCases);
-        RefreshCase("CompletedCases", CompletedCases);
+        RefreshCase(AllCases);
 
         _newCasesData = _newCasesData.Substring(0, _newCasesData.Length - 1);
         // This closes the wrapper of the json file made from the beginning.
-        _newCasesData += "}";
+        _newCasesData += "]}";
         File.WriteAllText(_casesJsonFilePath, _newCasesData);
 
         //Debug.Log("Refreshed all cases json data!");
