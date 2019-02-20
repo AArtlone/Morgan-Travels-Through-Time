@@ -25,10 +25,11 @@ public class DialogueManager : MonoBehaviour
     public Text[] OptionsMenu = new Text[4];
     public List<string> DialogueResponses;
 
-    private string _dialogueResponsesPath = Application.streamingAssetsPath + "/DialogueResponses.json";
+    private string _dialogueResponsesPath;
 
     private void Awake()
     {
+        _dialogueResponsesPath = Application.persistentDataPath + "/DialogueResponses.json";
         // If we have an instance of this singleton somewhere else
         // in the game, then we want to destroy the existing one.
         if (Instance != null && Instance != this)

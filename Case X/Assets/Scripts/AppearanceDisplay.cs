@@ -7,7 +7,6 @@ public class AppearanceDisplay : MonoBehaviour
 {
     private bool _showDisplayToggle;
     private Character _characterScript;
-    private string _pathToWearables;
     public GameObject IconPrefab;
     [Space(10)]
     public List<Clothing> Hairs;

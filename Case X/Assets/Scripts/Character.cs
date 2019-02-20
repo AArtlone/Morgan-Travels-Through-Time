@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class Character : MonoBehaviour
 {
     public string Name;
+    public bool CharacterCreation;
     [Space(10)]
     #region Stats
     public int Reputation;
@@ -35,7 +36,7 @@ public class Character : MonoBehaviour
     public bool IsCoffeeAvailable;
 
     // Location reference of player json file.
-    private string _pathToAssetsFolder = Application.streamingAssetsPath;
+    private string _pathToAssetsFolder;
     private string _playerStatsFilePath;
     private string _casesJsonFilePath;
     private string _itemsJsonFilePath;
@@ -49,6 +50,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        _pathToAssetsFolder = Application.persistentDataPath;
         _itemsPanel = GameObject.FindGameObjectWithTag("Items Panel");
 
         _playerStatsFilePath = _pathToAssetsFolder + "/Player.json";
@@ -58,14 +60,17 @@ public class Character : MonoBehaviour
         _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
 
         // These functions initialize the game state from the storage.
+        #region Game state setup
         SetupJsonData();
         SetupCases();
         SetupItems();
         SetupWearables();
         SetupWorkers();
         LoadInventory();
+        #endregion
     }
 
+    #region Setup data from storage functionality
     /// <summary>
     /// The following functions extract the json data from the storage of
     /// the game and imports it to the character (this) object for in-game
@@ -83,6 +88,15 @@ public class Character : MonoBehaviour
             JsonData characterData = JsonMapper.ToObject(dataToJson);
 
             Name = characterData["Name"].ToString();
+
+            if (characterData["CharacterCreation"].ToString() == "True")
+            {
+                CharacterCreation = true;
+            }
+            else if (characterData["CharacterCreation"].ToString() == "False")
+            {
+                CharacterCreation = false;
+            }
             Reputation = int.Parse(characterData["Reputation"].ToString());
             Stamina = int.Parse(characterData["Stamina"].ToString());
             Knowledge = int.Parse(characterData["Knowledge"].ToString());
@@ -242,6 +256,27 @@ public class Character : MonoBehaviour
         //Debug.Log("Loaded " + cases + " json data!");
     }
 
+    public void LoadInventory()
+    {
+        foreach (Item item in Items)
+        {
+            GameObject newItem = Instantiate(ItemPrefab, _itemsPanel.transform);
+            Item newItemScript = newItem.GetComponent<Item>();
+
+            // We use predefined images from the resources folder to load each
+            // item's sprites from outside the game and assign it to the new item.
+            Sprite sprite = Resources.Load<Sprite>("Items/" + item.AssetsImageName);
+
+            newItem.GetComponent<Image>().sprite = sprite;
+            newItemScript.Name = item.Name;
+            newItemScript.Description = item.Description;
+            newItemScript.Active = item.Active;
+            newItemScript.AssetsImageName = item.AssetsImageName;
+        }
+    }
+    #endregion
+
+    #region Data manipulation from existing player parameters
     /// <summary>
     /// The functions below are used mainly for adding, removing and updating
     /// elements into existing player lists and  data related to stats and cases.
@@ -402,7 +437,9 @@ public class Character : MonoBehaviour
 
         RefreshJsonData();
     }
+    #endregion
 
+    #region Refreshing functions that export the existing player data to storage.
     /// <summary>
     /// All the following functions refresh sections of data from the game
     /// and must be applied whenever a form of data is changed in-game to
@@ -480,7 +517,7 @@ public class Character : MonoBehaviour
         //Debug.Log("Refreshed all cases json data!");
     }
 
-    private void RefreshJsonData()
+    public void RefreshJsonData()
     {
         // We use the jsonMapper instead of the JsonUtility because the latter ruins
         // the objects in the items and clothing arrays for the json file.
@@ -556,25 +593,6 @@ public class Character : MonoBehaviour
         //Debug.Log("Refreshed wearables json data!");
     }
 
-    public void LoadInventory()
-    {
-        foreach (Item item in Items)
-        {
-            GameObject newItem = Instantiate(ItemPrefab, _itemsPanel.transform);
-            Item newItemScript = newItem.GetComponent<Item>();
-
-            // We use predefined images from the resources folder to load each
-            // item's sprites from outside the game and assign it to the new item.
-            Sprite sprite = Resources.Load<Sprite>("Items/" + item.AssetsImageName);
-
-            newItem.GetComponent<Image>().sprite = sprite;
-            newItemScript.Name = item.Name;
-            newItemScript.Description = item.Description;
-            newItemScript.Active = item.Active;
-            newItemScript.AssetsImageName = item.AssetsImageName;
-        }
-    }
-
     public void ReloadInventory()
     {
         for (int i = 0; i < _itemsPanel.transform.childCount; i++)
@@ -584,4 +602,5 @@ public class Character : MonoBehaviour
 
         LoadInventory();
     }
+    #endregion
 }
