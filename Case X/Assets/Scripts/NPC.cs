@@ -26,13 +26,17 @@ public class NPC : MonoBehaviour
     private List<DialogueBranch> _availableBranches = new List<DialogueBranch>();
     public DialogueBranch FinalDialogueBranch = new DialogueBranch();
     private Character _playerCharacterScript;
-    private Image _dialogueDropBox;
+    private Image _dialogueProgressionTrigger;
+    private Image _imageComponent;
 
     private void Start()
     {
         DialogueManager.Instance.ToggleDialogue(false);
         _playerCharacterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-        _dialogueDropBox = GameObject.FindGameObjectWithTag("Dialogue Box").GetComponent<Image>();
+        _dialogueProgressionTrigger = transform.GetChild(0).GetComponent<Image>();
+        _dialogueProgressionTrigger.raycastTarget = false;
+
+        _imageComponent = GetComponent<Image>();
     }
 
     public void NextDialogue()
@@ -131,7 +135,7 @@ public class NPC : MonoBehaviour
     {
         // When the player taps on the npc or anywhere on the dialogue box, it
         // will progress the dialogue further.
-        if (_isDialogueOngoing == true)
+        if (_isDialogueOngoing)
         {
             if (CurrentDialogueIndex < Dialogue.Count - 1)
             {
@@ -148,13 +152,14 @@ public class NPC : MonoBehaviour
                         // until it is once again triggered to show up.
                         CurrentDialogueIndex = -1;
                         DialogueManager.Instance.ToggleDialogue(false);
-                        _isDialogueOngoing = false;
-
                         // We only update the player's inventory AFTER he has exited
                         // the dialogue, otherwise if he had used any items in it and
                         // quit or restarted the game, he would lose them forever.
                         _playerCharacterScript.RefreshItems();
-                        _dialogueDropBox.raycastTarget = false;
+                        _dialogueProgressionTrigger.raycastTarget = false;
+                        _imageComponent.raycastTarget = true;
+
+                        _isDialogueOngoing = false;
                         return;
                     }
                 }
@@ -162,18 +167,19 @@ public class NPC : MonoBehaviour
             {
                 CurrentDialogueIndex = -1;
                 DialogueManager.Instance.ToggleDialogue(false);
-                _isDialogueOngoing = false;
-
                 _playerCharacterScript.RefreshItems();
-                _dialogueDropBox.raycastTarget = false;
+                _dialogueProgressionTrigger.raycastTarget = false;
+                _imageComponent.raycastTarget = true;
+
+                _isDialogueOngoing = false;
                 return;
             }
-        }
-
+        } else 
         // This is meant to initialize the dialogue once the player 
         // has tapped on top of an npc icon.
-        if (_isDialogueOngoing == false)
         {
+
+            _imageComponent.raycastTarget = false;
             // Once a dialogue is initiated, we display the dialogue template
             // and give it the starting dialogue object's data. We also make sure
             // to set _isDialogueOngoing to true because the player is still able
@@ -191,7 +197,7 @@ public class NPC : MonoBehaviour
             // the dialogue is initiated, because we want to player to progress
             // further by clicking anywhere on the screen, not just on the NPC icon.
             // Once the dialogue is finished we disable this child's interaction.
-            _dialogueDropBox.raycastTarget = true;
+            _dialogueProgressionTrigger.raycastTarget = true;
 
             _isDialogueOngoing = true;
         }

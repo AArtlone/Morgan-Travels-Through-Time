@@ -56,7 +56,6 @@ public class Item : MonoBehaviour
             // that dialogue branch's array of dropped items and check whether or
             // not all the required items have been dropped in order to progress
             // further in the dialogue
-            Debug.Log(hit.transform.tag);
             if (hit.transform.tag == "Dialogue Box")
             {
                 NPC currentNpc = DialogueManager.Instance.CurrentNPCDialogue;

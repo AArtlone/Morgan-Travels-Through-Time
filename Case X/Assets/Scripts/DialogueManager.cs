@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public Text RightCharacterTitle;
     public Image RightCharacterPortrait;
     [Space(10)]
+    public Image DialogueProgressionBox;
     public Image DialogueBoxBackground;
     public Text DialogueText;
     public Text[] OptionsMenu = new Text[4];

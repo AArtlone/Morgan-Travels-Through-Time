@@ -187,45 +187,72 @@ public class InterfaceManager : MonoBehaviour
 
     public void TakeOnCase()
     {
-        foreach (Case completedCase in _characterScript.CompletedCases)
+        if (_currentlySelectedCase.ProgressStatus == "Available")
         {
-            if (completedCase.Name == _currentlySelectedCase.Name)
+            foreach (Case completedCase in _characterScript.CompletedCases)
             {
-                _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Completed Cases", "CurrentCases");
-                completedCase.ProgressStatus = "Ongoing";
-                _currentlySelectedCase.CompletionStatus = false;
-                break;
+                if (completedCase.Name == _currentlySelectedCase.Name)
+                {
+                    _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Completed Cases", "CurrentCases");
+                    completedCase.ProgressStatus = "Ongoing";
+                    _currentlySelectedCase.CompletionStatus = false;
+                    break;
+                }
             }
-        }
-        foreach (Case availableCase in _characterScript.AvailableCases)
-        {
-            if (availableCase.Name == _currentlySelectedCase.Name)
+            foreach (Case availableCase in _characterScript.AvailableCases)
             {
-                _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Available Cases", "Current Cases");
-                availableCase.ProgressStatus = "Ongoing";
-                _currentlySelectedCase.CompletionStatus = false;
-                break;
+                if (availableCase.Name == _currentlySelectedCase.Name)
+                {
+                    _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Available Cases", "Current Cases");
+                    availableCase.ProgressStatus = "Ongoing";
+                    _currentlySelectedCase.CompletionStatus = false;
+                    break;
+                }
             }
+
+            _currentlySelectedCase = null;
+
+            _characterScript.RefreshAllCases();
+            _characterScript.SetupCases();
+            SetupCasesInDiary();
+
+            ResetFields();
         }
-
-        _currentlySelectedCase = null;
-
-        _characterScript.RefreshAllCases();
-        _characterScript.SetupCases();
-        SetupCasesInDiary();
     }
 
     public void AbandonCase()
     {
-        _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Current Cases", "Available Cases");
-        _currentlySelectedCase.ProgressStatus = "Available";
-        _currentlySelectedCase.CompletionStatus = false;
+        if (_currentlySelectedCase.ProgressStatus == "Ongoing")
+        {
+            _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Current Cases", "Available Cases");
+            _currentlySelectedCase.ProgressStatus = "Available";
+            _currentlySelectedCase.CompletionStatus = false;
 
-        _currentlySelectedCase = null;
+            _currentlySelectedCase = null;
 
-        _characterScript.RefreshAllCases();
-        _characterScript.SetupCases();
-        SetupCasesInDiary();
+            _characterScript.RefreshAllCases();
+            _characterScript.SetupCases();
+            SetupCasesInDiary();
+
+            ResetFields();
+        }
+    }
+
+    public void ResetFields()
+    {
+        SelectedCaseTitle.GetComponent<Text>().text = string.Empty;
+        SelectedCaseDescription.GetComponent<Text>().text = string.Empty;
+        SelectedCaseStatus.GetComponent<Text>().text = string.Empty;
+
+        for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
+        {
+            Destroy(SelectedCaseObjectivesDisplay.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
+        {
+            Destroy(SelectedCaseObjectivesDisplay.transform.GetChild(i));
+        }
     }
     #endregion
 }
