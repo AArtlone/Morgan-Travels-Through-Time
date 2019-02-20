@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Clothing : MonoBehaviour
 {
+    public bool Selected;
     public string BodyPart;
     public string Name;
     public string Icon;
@@ -16,8 +17,9 @@ public class Clothing : MonoBehaviour
     public int Charisma;
     #endregion
 
-    public Clothing(string BodyPart, string Name, string Icon, string PortraitImage, int Stamina, int Knowledge, int Fitness, int Charisma)
+    public Clothing(bool Selected, string BodyPart, string Name, string Icon, string PortraitImage, int Stamina, int Knowledge, int Fitness, int Charisma)
     {
+        this.Selected = Selected;
         this.BodyPart = BodyPart;
         this.Name = Name;
         this.Icon = Icon;

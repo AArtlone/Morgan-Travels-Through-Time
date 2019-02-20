@@ -148,7 +148,18 @@ public class Character : MonoBehaviour
             Wearables.Clear();
             for (int i = 0; i < characterData["Wearables"].Count; i++)
             {
+                bool isWearableSelected = false;
+                if (characterData["Wearables"][i]["Selected"].ToString() == "True")
+                {
+                    isWearableSelected = true;
+                }
+                else if (characterData["Wearables"][i]["Selected"].ToString() == "False")
+                {
+                    isWearableSelected = false;
+                }
+
                 Wearables.Add(new Clothing(
+                    isWearableSelected,
                     characterData["Wearables"][i]["BodyPart"].ToString(),
                     characterData["Wearables"][i]["Name"].ToString(),
                     characterData["Wearables"][i]["Icon"].ToString(),
@@ -527,7 +538,7 @@ public class Character : MonoBehaviour
         File.WriteAllText(_workersDataJsonFilePath, newWorkersData);
     }
 
-    private void RefreshWearables()
+    public void RefreshWearables()
     {
         File.WriteAllText(_wearablesJsonFilePath, "");
         string newItemsData = "{\"Wearables\":[";
