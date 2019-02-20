@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
     [Space(10)]
     public List<Item> Items = new List<Item>();
     #endregion
+    public List<Area> Areas = new List<Area>();
     public List<Case> AvailableCases = new List<Case>();
     public List<Case> CurrentCases = new List<Case>();
     public List<Case> CompletedCases = new List<Case>();
@@ -38,6 +39,7 @@ public class Character : MonoBehaviour
     // Location reference of player json file.
     private string _pathToAssetsFolder;
     private string _playerStatsFilePath;
+    private string _areasJsonFilePath;
     private string _casesJsonFilePath;
     private string _itemsJsonFilePath;
     private string _wearablesJsonFilePath;
@@ -54,6 +56,7 @@ public class Character : MonoBehaviour
         _itemsPanel = GameObject.FindGameObjectWithTag("Items Panel");
 
         _playerStatsFilePath = _pathToAssetsFolder + "/Player.json";
+        _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
         _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
         _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
         _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
@@ -150,6 +153,32 @@ public class Character : MonoBehaviour
         }
 
         //Debug.Log("Loaded items json data!");
+    }
+
+    private void SetupAreas()
+    {
+        if (File.Exists(_areasJsonFilePath))
+        {
+            string dataToJson = File.ReadAllText(_areasJsonFilePath);
+            JsonData areasData = JsonMapper.ToObject(dataToJson);
+
+            Areas.Clear();
+            for (int i = 0; i < areasData["Areas"].Count; i++)
+            {
+                Area.AreaStatus areaType = Area.AreaStatus.Locked;
+                if (areasData["Areas"][i]["Status"].ToString() == "Locked")
+                {
+                    areaType = Area.AreaStatus.Locked;
+                } else if (areasData["Areas"][i]["Status"].ToString() == "Unlocked")
+                {
+                    areaType = Area.AreaStatus.Unlocked;
+                }
+
+                Areas.Add(
+                    new Area(areasData["Areas"][i]["Name"].ToString(),
+                    areaType));
+            }
+        }
     }
 
     private void SetupWearables()
@@ -336,32 +365,28 @@ public class Character : MonoBehaviour
         }
     }
     
-    public void MoveCaseStageStatus(Case caseToMove, List<Case> fromStage, List<Case> newStage)
+    public void MoveCaseStageStatus(Case caseToMove, string from, string to)
     {
-        // I store caseToMove in a local variables because im not sure if by
-        // removing it from its list, that i am also able to 
-        if (fromStage.Contains(caseToMove))
+        if (from == "Current Cases")
         {
-            fromStage.Remove(caseToMove);
+            AvailableCases.Add(caseToMove);
+            CurrentCases.Remove(caseToMove);
+        } else if (from == "Available Cases")
+        {
+            CurrentCases.Add(caseToMove);
+            AvailableCases.Remove(caseToMove);
         }
-        newStage.Add(caseToMove);
-
-        string returnOutput = "Case (" + caseToMove.Name + ") status updated to ";
-
-        if (newStage == AvailableCases)
+        else if (from == "Completed Cases")
         {
-            returnOutput += "Available";
-        } else if (newStage == CurrentCases)
-        {
-            returnOutput += "Current";
-        } else if (newStage == CompletedCases)
-        {
-            returnOutput += "Complete";
+            CurrentCases.Add(caseToMove);
+            CompletedCases.Remove(caseToMove);
         }
+
+        string returnOutput = "Case (" + caseToMove.Name + ") status updated to " + to;
         returnOutput += "!";
 
         RefreshAllCases();
-        //Debug.Log(returnOutput);
+        Debug.Log(returnOutput);
     }
 
     /// <summary>
@@ -505,8 +530,8 @@ public class Character : MonoBehaviour
         // Reset the existing cases data string
         _newCasesData = "{";
 
-        RefreshCase("AvailableCases", AvailableCases);
         RefreshCase("CurrentCases", CurrentCases);
+        RefreshCase("AvailableCases", AvailableCases);
         RefreshCase("CompletedCases", CompletedCases);
 
         _newCasesData = _newCasesData.Substring(0, _newCasesData.Length - 1);
