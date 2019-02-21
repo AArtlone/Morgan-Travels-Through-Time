@@ -133,6 +133,7 @@ public class AppearanceDisplay : MonoBehaviour
             listOfItems.Add(item);
             GameObject newIcon = Instantiate(IconPrefab, display.transform.GetChild(0).transform);
             newIcon.GetComponent<AppearanceSelector>().PortraitImage = item.PortraitImage;
+            newIcon.GetComponent<AppearanceSelector>().BodyPart = item.BodyPart;
 
             Sprite sprite = Resources.Load<Sprite>("Icons/" + item.Icon);
             newIcon.GetComponent<Image>().sprite = sprite;

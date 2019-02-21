@@ -353,42 +353,51 @@ public class Character : MonoBehaviour
     /// <param name="item"></param>
     public void AddItem(Item item)
     {
-        Debug.Log(string.Format("Added {0} to current items!", item.Name));
-
         Items.Add(item);
         RefreshItems();
+
+        Debug.Log(string.Format("Added {0} to current items!", item.Name));
     }
 
     public void RemoveItem(Item item)
     {
-        Debug.Log(string.Format("Removed {0} from current items!", item.Name));
-
         Items.Remove(item);
         RefreshItems();
+
+        Debug.Log(string.Format("Removed {0} from current items!", item.Name));
     }
 
     public void AddWearable(Clothing clothing)
     {
-        Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
-
         Wearables.Add(clothing);
         RefreshWearables();
+
+        Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
     }
 
     public void RemoveWearable(Clothing clothing)
     {
-        Debug.Log(string.Format("Removed {0} from current wearables!", clothing.Name));
-
         Wearables.Remove(clothing);
         RefreshWearables();
+
+        Debug.Log(string.Format("Removed {0} from current wearables!", clothing.Name));
     }
 
-    public void UpdateAvailableHints(int value)
+    public void AddAvailableHints(int value)
     {
         AvailableHints += value;
         RefreshJsonData();
+
+        Debug.Log("Added a hint. Total hints left: " + AvailableHints);
     }
 
+    public void RemoveAvailableHints(int value)
+    {
+        AvailableHints -= value;
+        RefreshJsonData();
+
+        Debug.Log("Removed a hint. Total hints left: " + AvailableHints);
+    }
     public void DrinkCoffee()
     {
         if (IsCoffeeAvailable == true)

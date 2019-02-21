@@ -8,7 +8,9 @@ public class AppearanceSelector : MonoBehaviour
 {
     [NonSerialized]
     public string PortraitImage;
-    
+    [NonSerialized]
+    public string BodyPart;
+
     private GameObject _hairBodyPart;
     private GameObject _faceBodyPart;
     private GameObject _shoesBodyPart;
@@ -70,7 +72,9 @@ public class AppearanceSelector : MonoBehaviour
             if (PortraitImage == clothing.PortraitImage)
             {
                 clothing.Selected = true;
-                break;
+            } else if (PortraitImage != clothing.PortraitImage && BodyPart == clothing.BodyPart)
+            {
+                clothing.Selected = false;
             }
         }
 

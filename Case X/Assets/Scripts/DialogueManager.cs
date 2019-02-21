@@ -28,6 +28,10 @@ public class DialogueManager : MonoBehaviour
 
     private string _dialogueResponsesPath;
 
+    #region Puzzle references
+    public List<HiddenObjectsPuzzle> HiddenObjectsPuzzles = new List<HiddenObjectsPuzzle>();
+    #endregion
+
     private void Awake()
     {
         _dialogueResponsesPath = Application.persistentDataPath + "/DialogueResponses.json";
