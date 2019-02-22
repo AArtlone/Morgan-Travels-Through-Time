@@ -20,19 +20,31 @@ public class Puzzle : MonoBehaviour
         _jsonPuzzlesPath = Application.persistentDataPath + "/Puzzles.json";
         _puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
 
+        // Depending on the puzzle we want to use in this prefab, we will run
+        // different puzzle startup code, since the puzzles are entirely different
+        // from eachother and we cant just slap the same code for them, so instead we
+        // use functions made specifically for the puzzle we want in the PuzzleType field.
         if (TypeOfPuzzle == PuzzleType.HiddenObjects)
         {
             SetupHiddenObjectsPuzzle();
-            DialogueManager.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>());
+            Character.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>());
         }
     }
 
     public void InitiateHiddenObjectsPuzzle()
     {
-        PuzzleToLaunch.SetActive(true);
-        PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
-        PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartCoroutine(
-        PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().CountDown());
+        if (transform.GetComponent<Image>().raycastTarget == true)
+        {
+            // This centers the puzzle to the middle of the canvas because the actual puzzle
+            // object is a child of the puzzle prefab and that changes its position to the
+            // center of that prefab instead of the canvas instead.
+            PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+            PuzzleToLaunch.SetActive(true);
+            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
+            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartTimer();
+            transform.GetComponent<Image>().raycastTarget = false;
+        }
     }
 
     private void SetupHiddenObjectsPuzzle()
@@ -68,9 +80,9 @@ public class Puzzle : MonoBehaviour
         string newPuzzleData = string.Empty;
         newPuzzleData += "{\"Puzzles\":[";
 
-        for (int i = 0; i < DialogueManager.Instance.HiddenObjectsPuzzles.Count; i++)
+        for (int i = 0; i < Character.Instance.HiddenObjectsPuzzles.Count; i++)
         {
-            HiddenObjectsPuzzle currentPuzzle = DialogueManager.Instance.HiddenObjectsPuzzles[i];
+            HiddenObjectsPuzzle currentPuzzle = Character.Instance.HiddenObjectsPuzzles[i];
 
             newPuzzleData += "{";
             newPuzzleData += "\"Name\":\"" + currentPuzzle.PuzzleName + "\",";

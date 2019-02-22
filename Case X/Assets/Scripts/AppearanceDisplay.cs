@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class AppearanceDisplay : MonoBehaviour
 {
     private bool _showDisplayToggle;
-    private Character _characterScript;
     public GameObject IconPrefab;
     [Space(10)]
     public List<Clothing> Hairs;
@@ -45,8 +44,6 @@ public class AppearanceDisplay : MonoBehaviour
 
     private void Start()
     {
-        _characterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
         _hairBodyPart = GameObject.Find("Hair Body Part");
@@ -73,7 +70,7 @@ public class AppearanceDisplay : MonoBehaviour
     // predefined wearables from the wearables json processed by the player.
     private void SetupDisplays()
     {
-        foreach (Clothing clothing in _characterScript.Wearables)
+        foreach (Clothing clothing in Character.Instance.Wearables)
         {
             switch (clothing.BodyPart)
             {
@@ -145,7 +142,7 @@ public class AppearanceDisplay : MonoBehaviour
     // character view.
     public void LoadCharacterAppearance()
     {
-        foreach (Clothing clothing in _characterScript.Wearables)
+        foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (clothing.Selected)
             {

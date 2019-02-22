@@ -21,12 +21,8 @@ public class AppearanceSelector : MonoBehaviour
     private GameObject _skinColorBodyPart;
     private Sprite[] _spritesFromStorage;
 
-    private Character _characterScript;
-
     private void Start()
     {
-        _characterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
         _hairBodyPart = GameObject.Find("Hair Body Part");
@@ -67,7 +63,7 @@ public class AppearanceSelector : MonoBehaviour
 
     private void LoadNewBodyPart(GameObject bodyPart)
     {
-        foreach (Clothing clothing in _characterScript.Wearables)
+        foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (PortraitImage == clothing.PortraitImage)
             {
@@ -80,7 +76,7 @@ public class AppearanceSelector : MonoBehaviour
 
         foreach (Sprite sprite in _spritesFromStorage)
         {
-            _characterScript.RefreshWearables();
+            Character.Instance.RefreshWearables();
 
             if (sprite.name == PortraitImage)
             {
@@ -91,7 +87,7 @@ public class AppearanceSelector : MonoBehaviour
 
     public void ResetCharacterAppearance()
     {
-        foreach (Clothing clothing in _characterScript.Wearables)
+        foreach (Clothing clothing in Character.Instance.Wearables)
         {
             clothing.Selected = false;
         }
@@ -102,7 +98,7 @@ public class AppearanceSelector : MonoBehaviour
         _bottomOutfitsBodyPart.GetComponent<Image>().sprite = null;
         _shoesBodyPart.GetComponent<Image>().sprite = null;
 
-        _characterScript.RefreshWearables();
+        Character.Instance.RefreshWearables();
         SelectAppearance();
     }
 }

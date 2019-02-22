@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
+    public static Character Instance;
     public string Name;
     public bool CharacterCreation;
     [Space(10)]
@@ -23,21 +24,25 @@ public class Character : MonoBehaviour
     #endregion
     #region Items
     public List<Clothing> Wearables = new List<Clothing>();
-    [NonSerialized]
     [Space(10)]
     public List<Item> Items = new List<Item>();
     #endregion
     public List<Area> Areas = new List<Area>();
+    #region Cases references
     public List<Case> AvailableCases = new List<Case>();
     public List<Case> CurrentCases = new List<Case>();
     public List<Case> CompletedCases = new List<Case>();
     public List<Case> AllCases = new List<Case>();
+    #endregion
     public List<Worker> Workers = new List<Worker>();
+    #region Puzzle references
+    public List<HiddenObjectsPuzzle> HiddenObjectsPuzzles = new List<HiddenObjectsPuzzle>();
+    #endregion
     [Space(10)]
     public string DateOfLastCoffee;
     public bool IsCoffeeAvailable;
 
-    // Location reference of player json file.
+    #region Json files location reference of player data.
     private string _pathToAssetsFolder;
     private string _playerStatsFilePath;
     private string _areasJsonFilePath;
@@ -46,15 +51,29 @@ public class Character : MonoBehaviour
     private string _wearablesJsonFilePath;
     private string _newCasesData;
     private string _workersDataJsonFilePath;
+    #endregion
 
     // Inventory-related references
-    private GameObject _itemsPanel;
+    public GameObject ItemsPanel;
     public GameObject ItemPrefab;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+            // We want to be able to access the dialogue information from any scene.
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void Start()
     {
         _pathToAssetsFolder = Application.persistentDataPath;
-        _itemsPanel = GameObject.FindGameObjectWithTag("Items Panel");
 
         _playerStatsFilePath = _pathToAssetsFolder + "/Player.json";
         _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
@@ -71,10 +90,7 @@ public class Character : MonoBehaviour
         SetupItems();
         SetupWearables();
         SetupWorkers();
-        LoadInventory();
         #endregion
-
-        RefreshAllCases();
     }
 
     #region Setup data from storage functionality
@@ -180,6 +196,7 @@ public class Character : MonoBehaviour
             }
         }
 
+        LoadInventory();
         //Debug.Log("Loaded items json data!");
     }
 
@@ -329,12 +346,12 @@ public class Character : MonoBehaviour
     {
         foreach (Item item in Items)
         {
-            GameObject newItem = Instantiate(ItemPrefab, _itemsPanel.transform);
+            GameObject newItem = Instantiate(ItemPrefab, ItemsPanel.transform);
             Item newItemScript = newItem.GetComponent<Item>();
 
             // We use predefined images from the resources folder to load each
             // item's sprites from outside the game and assign it to the new item.
-            Sprite sprite = Resources.Load<Sprite>("Items/" + item.AssetsImageName);
+            Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
 
             newItem.GetComponent<Image>().sprite = sprite;
             newItemScript.Name = item.Name;
@@ -667,9 +684,9 @@ public class Character : MonoBehaviour
 
     public void ReloadInventory()
     {
-        for (int i = 0; i < _itemsPanel.transform.childCount; i++)
+        for (int i = 0; i < ItemsPanel.transform.childCount; i++)
         {
-            Destroy(_itemsPanel.transform.GetChild(i).gameObject);
+            Destroy(ItemsPanel.transform.GetChild(i).gameObject);
         }
 
         LoadInventory();

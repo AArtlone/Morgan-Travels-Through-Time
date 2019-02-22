@@ -9,14 +9,15 @@ using UnityEngine.UI;
 
 public class InterfaceManager : MonoBehaviour
 {
-    private Character _characterScript;
-
     #region Character creation references
     public GameObject CharacterCompletionPopup;
     public GameObject CharacterCreationMenu;
     public GameObject CharacterNameMenu;
     public GameObject CharacterNamePopupWindow;
     public GameObject CharacterNameErrorPopupWindow;
+
+    private string _jsonWordsFilter;
+    private List<string> _wordsFilter = new List<string>();
     #endregion
 
     #region Diary and cases interface references
@@ -38,9 +39,6 @@ public class InterfaceManager : MonoBehaviour
     public GameObject StartMenu;
     #endregion
 
-    private string _jsonWordsFilter;
-    private List<string> _wordsFilter = new List<string>();
-
     private void Start()
     {
         _jsonWordsFilter = Application.persistentDataPath + "/BadWords.json";
@@ -54,9 +52,7 @@ public class InterfaceManager : MonoBehaviour
             //Debug.Log(_wordsFilter[i]);
         }
 
-        _characterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-
-        if (_characterScript.CharacterCreation)
+        if (Character.Instance.CharacterCreation)
         {
             StartGame();
         }
@@ -79,20 +75,20 @@ public class InterfaceManager : MonoBehaviour
             Destroy(CompletedCasesDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
         }
 
-        //_characterScript.AllCases.Clear();
-        foreach (Case loadedCase in _characterScript.CurrentCases)
+        //Character.Instance.AllCases.Clear();
+        foreach (Case loadedCase in Character.Instance.CurrentCases)
         {
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, CurrentCasesDisplay.transform.GetChild(0).transform);
             newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
         }
 
-        foreach (Case loadedCase in _characterScript.AvailableCases)
+        foreach (Case loadedCase in Character.Instance.AvailableCases)
         {
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, AvailableCasesDisplay.transform.GetChild(0).transform);
             newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
         }
 
-        foreach (Case loadedCase in _characterScript.CompletedCases)
+        foreach (Case loadedCase in Character.Instance.CompletedCases)
         {
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, CompletedCasesDisplay.transform.GetChild(0).transform);
             newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
@@ -121,7 +117,7 @@ public class InterfaceManager : MonoBehaviour
         ClosePopup(CharacterCompletionPopup);
         ClosePopup(CharacterCreationMenu);
 
-        _characterScript.RefreshWearables();
+        Character.Instance.RefreshWearables();
         //Debug.Log("Character has been created!");
     }
 
@@ -146,10 +142,10 @@ public class InterfaceManager : MonoBehaviour
 
         if (foundMatch == false && nameInput.Length > 2 && nameInput.Length < 25)
         {
-            _characterScript.Name = nameInput;
-            _characterScript.CharacterCreation = true;
+            Character.Instance.Name = nameInput;
+            Character.Instance.CharacterCreation = true;
 
-            _characterScript.RefreshJsonData();
+            Character.Instance.RefreshJsonData();
             ClosePopup(CharacterNameMenu);
             ClosePopup(CharacterNamePopupWindow);
             OpenPopup(StartMenu);
@@ -183,7 +179,7 @@ public class InterfaceManager : MonoBehaviour
         GameObject button = obj as GameObject;
 
         _currentlySelectedCase = null;
-        foreach (Case loadedCase in _characterScript.AllCases)
+        foreach (Case loadedCase in Character.Instance.AllCases)
         {
             if (loadedCase.Name == button.GetComponentInChildren<Text>().text)
             {
@@ -221,21 +217,21 @@ public class InterfaceManager : MonoBehaviour
     {
         if (_currentlySelectedCase.ProgressStatus == "Available")
         {
-            foreach (Case completedCase in _characterScript.CompletedCases)
+            foreach (Case completedCase in Character.Instance.CompletedCases)
             {
                 if (completedCase.Name == _currentlySelectedCase.Name)
                 {
-                    _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Completed Cases", "CurrentCases");
+                    Character.Instance.MoveCaseStageStatus(_currentlySelectedCase, "Completed Cases", "CurrentCases");
                     completedCase.ProgressStatus = "Ongoing";
                     _currentlySelectedCase.CompletionStatus = false;
                     break;
                 }
             }
-            foreach (Case availableCase in _characterScript.AvailableCases)
+            foreach (Case availableCase in Character.Instance.AvailableCases)
             {
                 if (availableCase.Name == _currentlySelectedCase.Name)
                 {
-                    _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Available Cases", "Current Cases");
+                    Character.Instance.MoveCaseStageStatus(_currentlySelectedCase, "Available Cases", "Current Cases");
                     availableCase.ProgressStatus = "Ongoing";
                     _currentlySelectedCase.CompletionStatus = false;
                     break;
@@ -244,8 +240,8 @@ public class InterfaceManager : MonoBehaviour
 
             _currentlySelectedCase = null;
 
-            _characterScript.RefreshAllCases();
-            _characterScript.SetupCases();
+            Character.Instance.RefreshAllCases();
+            Character.Instance.SetupCases();
             SetupCasesInDiary();
 
             ResetFields();
@@ -256,14 +252,14 @@ public class InterfaceManager : MonoBehaviour
     {
         if (_currentlySelectedCase.ProgressStatus == "Ongoing")
         {
-            _characterScript.MoveCaseStageStatus(_currentlySelectedCase, "Current Cases", "Available Cases");
+            Character.Instance.MoveCaseStageStatus(_currentlySelectedCase, "Current Cases", "Available Cases");
             _currentlySelectedCase.ProgressStatus = "Available";
             _currentlySelectedCase.CompletionStatus = false;
 
             _currentlySelectedCase = null;
 
-            _characterScript.RefreshAllCases();
-            _characterScript.SetupCases();
+            Character.Instance.RefreshAllCases();
+            Character.Instance.SetupCases();
             SetupCasesInDiary();
 
             ResetFields();

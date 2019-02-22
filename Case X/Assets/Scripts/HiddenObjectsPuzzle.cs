@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -37,29 +38,38 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public Button HintButton;
     public GameObject PuzzleEndPopup;
 
-    // We need the player's reference in order to hand him the item at the end
-    // of the puzzle and refresh his data storage.
-    private Character _characterScript;
-
     private void Start()
     {
         Counter = TimeToComplete;
         Timer.text = Counter.ToString();
-        _characterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
 
         ItemsFound.Clear();
+    }
+
+    public void StartTimer()
+    {
+        if (IsInvoking("CountDown"))
+        {
+            CancelInvoke();
+        }
+
+        Counter = TimeToComplete;
+        Timer.text = Counter.ToString();
+
+        InvokeRepeating("CountDown", 1f, 1f);
     }
 
     public void CompletePuzzle()
     {
         // TODO: Change the stars values of this puzzle using different formulas.
+        CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
         PuzzleEndPopup.transform.GetChild(2).GetComponent<Text>().text = "You have successfully completed this puzzle and have received a new item in your inventory!";
 
         if (IsItemEarned == false)
         {
-            _characterScript.AddItem(
+            Character.Instance.AddItem(
                 new Item(
                     ItemRewardName,
                     ItemRewardDescription,
@@ -75,6 +85,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void LosePuzzle()
     {
+        CancelInvoke();
+
         PuzzleEndPopup.SetActive(true);
         PuzzleEndPopup.transform.GetChild(2).GetComponent<Text>().text = "You have failed to complete this puzzle.";
 
@@ -88,6 +100,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void ClosePuzzle()
     {
+        transform.GetComponentInParent<Image>().raycastTarget = true;
         gameObject.SetActive(false);
     }
 
@@ -144,28 +157,19 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void UseHint()
     {
-        _characterScript.RemoveAvailableHints(1);
+        Character.Instance.RemoveAvailableHints(1);
     }
 
-    public IEnumerator CountDown()
+    public void CountDown()
     {
-        // TODO: Fix timer counting down after puzzle is finished.
-        Counter = TimeToComplete;
-
-        for (int i = Counter; i > -1; i++)
+        if (Counter <= 0)
+        {
+            LosePuzzle();
+        }
+        else
         {
             Counter--;
-
-            if (Counter < 0)
-            {
-                LosePuzzle();
-            }
-            else
-            {
-                Timer.text = Counter.ToString();
-            }
-
-            yield return new WaitForSeconds(1f);
+            Timer.text = Counter.ToString();
         }
     }
 

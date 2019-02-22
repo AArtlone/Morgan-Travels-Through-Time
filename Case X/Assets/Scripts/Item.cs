@@ -12,17 +12,6 @@ public class Item : MonoBehaviour
     public string Active;
     public string AssetsImageName;
 
-    private Character _characterScript;
-    private Transform _itemsPanel;
-    private Transform _canvas;
-
-    private void Start()
-    {
-        _characterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-        _itemsPanel = GameObject.Find("Items").transform;
-        _canvas = GameObject.Find("Canvas").transform;
-    }
-
     public Item(string Name, string Description, string Active, string AssetsImageName)
     {
         this.Name = Name;
@@ -34,7 +23,7 @@ public class Item : MonoBehaviour
     public void DragItem()
     {
         Touch touch = Input.GetTouch(0);
-        transform.parent = _canvas;
+        transform.parent = GameObject.Find("Canvas").transform;
         transform.position = new Vector2(touch.position.x, touch.position.y);
     }
 
@@ -85,7 +74,7 @@ public class Item : MonoBehaviour
             }
         }
 
-        transform.parent = _itemsPanel;
-        _characterScript.ReloadInventory();
+        transform.parent = GameObject.Find("Items").transform;
+        Character.Instance.ReloadInventory();
     }
 }
