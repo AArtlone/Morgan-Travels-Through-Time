@@ -8,14 +8,17 @@ using UnityEngine.UI;
 public class Puzzle : MonoBehaviour
 {
     public GameObject PuzzleToLaunch;
+    public GameObject StarsDisplay;
     public enum PuzzleType { HiddenObjects };
     public PuzzleType TypeOfPuzzle;
+    private HiddenObjectsPuzzle _puzzleScript;
 
     private string _jsonPuzzlesPath;
 
     private void Start()
     {
         _jsonPuzzlesPath = Application.persistentDataPath + "/Puzzles.json";
+        _puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
 
         if (TypeOfPuzzle == PuzzleType.HiddenObjects)
         {
@@ -44,7 +47,7 @@ public class Puzzle : MonoBehaviour
                 HiddenObjectsPuzzle puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
                 if (puzzlesData["Puzzles"][i]["Name"].ToString() == puzzleScript.PuzzleName)
                 {
-                    puzzleScript.Score = int.Parse(puzzlesData["Puzzles"][i]["Score"].ToString());
+                    puzzleScript.Stars = int.Parse(puzzlesData["Puzzles"][i]["Stars"].ToString());
 
                     if (puzzlesData["Puzzles"][i]["Completed"].ToString() == "True")
                     {
@@ -56,12 +59,12 @@ public class Puzzle : MonoBehaviour
                 }
             }
         }
+
+        LoadStars();
     }
 
     public void RefreshHiddenObjectsPuzzle()
     {
-        HiddenObjectsPuzzle puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
-
         string newPuzzleData = string.Empty;
         newPuzzleData += "{\"Puzzles\":[";
 
@@ -71,7 +74,7 @@ public class Puzzle : MonoBehaviour
 
             newPuzzleData += "{";
             newPuzzleData += "\"Name\":\"" + currentPuzzle.PuzzleName + "\",";
-            newPuzzleData += "\"Score\":" + currentPuzzle.Score + ",";
+            newPuzzleData += "\"Stars\":" + currentPuzzle.Stars + ",";
             if (currentPuzzle.IsItemEarned)
             {
                 newPuzzleData += "\"Completed\":true";
@@ -85,5 +88,21 @@ public class Puzzle : MonoBehaviour
         newPuzzleData += "]}";
 
         File.WriteAllText(_jsonPuzzlesPath, newPuzzleData);
+
+        LoadStars();
+    }
+
+    // This part loads the stars on top of the puzzle on the minimap
+    public void LoadStars()
+    {
+        for (int i = 0; i < StarsDisplay.transform.childCount; i++)
+        {
+            StarsDisplay.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < _puzzleScript.Stars; i++)
+        {
+            StarsDisplay.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 }

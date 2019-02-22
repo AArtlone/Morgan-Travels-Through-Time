@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Case : MonoBehaviour
+public class Case
 {
     public string Name;
     public string Area;

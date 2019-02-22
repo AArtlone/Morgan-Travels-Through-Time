@@ -7,7 +7,7 @@ using System;
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
     public string PuzzleName;
-    public int Score;
+    public int Stars;
     public int TimeToComplete;
     public Image PuzzleBackground;
     // Those two lists are used for comparison mid-puzzle and are responsible
@@ -52,7 +52,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void CompletePuzzle()
     {
-        // TODO: Change the score values of this puzzle using different formulas.
+        // TODO: Change the stars values of this puzzle using different formulas.
 
         PuzzleEndPopup.SetActive(true);
         PuzzleEndPopup.transform.GetChild(2).GetComponent<Text>().text = "You have successfully completed this puzzle and have received a new item in your inventory!";
@@ -68,7 +68,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             IsItemEarned = true;
         }
 
-        Score = 3;
+        Stars = 3;
 
         transform.GetComponentInParent<Puzzle>().RefreshHiddenObjectsPuzzle();
     }
@@ -80,7 +80,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (IsItemEarned == false)
         {
-            Score = 1;
+            Stars = 1;
         }
 
         transform.GetComponentInParent<Puzzle>().RefreshHiddenObjectsPuzzle();

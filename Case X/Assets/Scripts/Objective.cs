@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Objective : MonoBehaviour
+public class Objective
 {
     public string Name;
     public bool CompletedStatus;

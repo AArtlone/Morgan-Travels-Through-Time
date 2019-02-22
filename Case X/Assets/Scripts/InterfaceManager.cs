@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +16,7 @@ public class InterfaceManager : MonoBehaviour
     public GameObject CharacterCreationMenu;
     public GameObject CharacterNameMenu;
     public GameObject CharacterNamePopupWindow;
+    public GameObject CharacterNameErrorPopupWindow;
     #endregion
 
     #region Diary and cases interface references
@@ -34,8 +38,22 @@ public class InterfaceManager : MonoBehaviour
     public GameObject StartMenu;
     #endregion
 
+    private string _jsonWordsFilter;
+    private List<string> _wordsFilter = new List<string>();
+
     private void Start()
     {
+        _jsonWordsFilter = Application.persistentDataPath + "/BadWords.json";
+
+        string filterWordsToJson = File.ReadAllText(_jsonWordsFilter);
+        JsonData filterWordsData = JsonMapper.ToObject(filterWordsToJson);
+
+        for (int i = 0; i < filterWordsData["BadWords"].Count; i++)
+        {
+            _wordsFilter.Add(filterWordsData["BadWords"][i].ToString());
+            //Debug.Log(_wordsFilter[i]);
+        }
+
         _characterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
 
         if (_characterScript.CharacterCreation)
@@ -97,9 +115,10 @@ public class InterfaceManager : MonoBehaviour
     #region Character creation functions
     public void ConfirmCharacter()
     {
-        ClosePopup(CharacterCompletionPopup);
-        // Closepopup is meant to be used mainly for in-game popups but since it
+        // Close/Open popup is meant to be used mainly for in-game popups but since it
         // does the same thing as closing one, we can reuse it for other UI as well.
+        OpenPopup(CharacterNameMenu);
+        ClosePopup(CharacterCompletionPopup);
         ClosePopup(CharacterCreationMenu);
 
         _characterScript.RefreshWearables();
@@ -108,11 +127,26 @@ public class InterfaceManager : MonoBehaviour
 
     public void ConfirmCharacterName(Object obj)
     {
-        GameObject inputFieldText = obj as GameObject;
+        GameObject inputField = obj as GameObject;
+        string nameInput = inputField.GetComponent<InputField>().text;
 
-        if (inputFieldText.GetComponent<Text>().text.Length > 2)
+        bool foundMatch = false;
+        for (int i = 0; i < _wordsFilter.Count; i++)
         {
-            _characterScript.Name = inputFieldText.GetComponent<Text>().text;
+            Match match = Regex.Match(nameInput, @"(\b" + _wordsFilter[i] + @"|\B" + _wordsFilter[i] + @")",
+                RegexOptions.IgnoreCase);
+            
+            if (match.Success && match.Length > 1)
+            {
+                //Debug.Log(nameInput);
+                //Debug.Log(_wordsFilter[i]);
+                foundMatch = true;
+            }
+        }
+
+        if (foundMatch == false && nameInput.Length > 2 && nameInput.Length < 25)
+        {
+            _characterScript.Name = nameInput;
             _characterScript.CharacterCreation = true;
 
             _characterScript.RefreshJsonData();
@@ -123,9 +157,7 @@ public class InterfaceManager : MonoBehaviour
             //Debug.Log("Character name has been chosen!");
         } else
         {
-            // TODO: Add feedback for name error handling.
-
-            //Debug.LogWarning("Character name is too short!");
+            OpenPopup(CharacterNameErrorPopupWindow);
         }
     }
 

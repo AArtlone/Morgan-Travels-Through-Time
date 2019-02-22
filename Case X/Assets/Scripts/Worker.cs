@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using LitJson;
 
-public class Worker : MonoBehaviour
+public class Worker
 {
     public string Name;
     public string Description;

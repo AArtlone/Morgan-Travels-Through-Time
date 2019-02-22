@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Clothing : MonoBehaviour
+public class Clothing
 {
     public bool Selected;
     public string BodyPart;
