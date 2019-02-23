@@ -893,7 +893,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142398772}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1812310367}
@@ -2890,9 +2890,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 507620035}
+  - component: {fileID: 507620036}
   m_Layer: 5
   m_Name: Dialogue Template
-  m_TagString: Untagged
+  m_TagString: Dialogue Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2923,6 +2924,19 @@ RectTransform:
   m_AnchoredPosition: {x: -0.39508, y: 27}
   m_SizeDelta: {x: 799.21, y: 389.19}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!65 &507620036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507620034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1000, y: 1000, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &508691053
 GameObject:
   m_ObjectHideFlags: 0
@@ -5144,7 +5158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 55}
+  m_AnchoredPosition: {x: 0, y: 23.3}
   m_SizeDelta: {x: 10000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820862736
@@ -11619,7 +11633,7 @@ GameObject:
   - component: {fileID: 1812310369}
   m_Layer: 5
   m_Name: NPC
-  m_TagString: Dialogue Box
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11711,7 +11725,7 @@ MonoBehaviour:
       CharismaMinimum: 10
       CurrencyMinimum: 100
       ItemsRequired:
-      - Gigant Dick
+      - Bottle One
       ItemsDropped: []
       DialogueText: First dialogue branch one
       OptionsMenu:
@@ -11753,7 +11767,7 @@ MonoBehaviour:
       CharismaMinimum: 10
       CurrencyMinimum: 100
       ItemsRequired:
-      - Gigant Dick
+      - Bottle Two
       ItemsDropped: []
       DialogueText: Second dialogue branch one
       OptionsMenu:
@@ -11798,20 +11812,6 @@ MonoBehaviour:
       ItemsDropped: []
       DialogueText: Third dialogue branch one
       OptionsMenu: []
-  FinalDialogueBranch:
-    BranchTitle: 
-    PreviousResponses: []
-    Priority: 0
-    ReputationMinimum: 0
-    StaminaMinimum: 0
-    KnowledgeMinimum: 0
-    FitnessMinimum: 0
-    CharismaMinimum: 0
-    CurrencyMinimum: 0
-    ItemsRequired: []
-    ItemsDropped: []
-    DialogueText: 
-    OptionsMenu: []
 --- !u!114 &1812310370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11849,32 +11849,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812310366}
   m_CullTransparentMesh: 0
---- !u!61 &1812310372
-BoxCollider2D:
+--- !u!65 &1812310372
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812310366}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10000, y: 10000}
-  m_EdgeRadius: 0
+  m_Size: {x: 100, y: 100, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1822696960
 GameObject:
   m_ObjectHideFlags: 0

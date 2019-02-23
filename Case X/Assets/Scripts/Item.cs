@@ -60,13 +60,16 @@ public class Item : MonoBehaviour
     public void DragItem()
     {
         Touch touch = Input.GetTouch(0);
-        transform.parent = GameObject.Find("Canvas").transform;
+        transform.SetParent(GameObject.Find("Canvas").transform);
         transform.position = new Vector2(touch.position.x, touch.position.y);
+        // This makes it so that the timer is not increasing if youre holding the
+        // item AND dragging it at the same time.
+        _timer = 0;
     }
-
+    
     public void DropItem()
     {
-        Ray ray = new Ray(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), transform.forward);
+        Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -74,7 +77,31 @@ public class Item : MonoBehaviour
             // We use the canvas tag for map interactions instead of the dialogue.
             if (hit.transform.tag == "Canvas")
             {
-                Debug.Log("Dropped on top of canvas");
+                //Debug.Log("Dropped on top of canvas");
+            }
+
+            if (hit.transform.tag == "NPC")
+            {
+                // TODO: Based on item throw, show a wrong item drop dialogue or the correct one for the main npc dialogue starting from the point after you drop the item.
+                if (DialogueManager.Instance.CurrentNPCDialogue == null)
+                {
+                    bool isCorrectItemDropped = false;
+                    NPC npc = hit.transform.gameObject.GetComponent<NPC>();
+                    if (npc.Dialogue[0].DialogueBranches[0].ItemsDropped.Count == 0 &&
+                        npc.Dialogue[0].DialogueBranches[0].ItemsRequired[0] ==
+                        Name)
+                    {
+                        npc.Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
+                        isCorrectItemDropped = true;
+                    } else
+                    {
+                        //Debug.Log("Wrong item!");
+                    }
+                    if (isCorrectItemDropped)
+                    {
+                        npc.ContinueDialogue();
+                    }
+                }
             }
 
             // Here we check if the item was dragged and dropped on top of the
@@ -111,7 +138,7 @@ public class Item : MonoBehaviour
             }
         }
 
-        transform.parent = GameObject.Find("Items").transform;
+        transform.SetParent(GameObject.Find("Items").transform);
         Character.Instance.ReloadInventory();
     }
 }

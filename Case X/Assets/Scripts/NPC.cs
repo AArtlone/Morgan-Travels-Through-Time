@@ -22,6 +22,7 @@ public class NPC : MonoBehaviour
     // available based on their conditions for the player and then we
     // use that list to pick the one with the highest priority.
     private List<DialogueBranch> _availableBranches = new List<DialogueBranch>();
+    [NonSerialized]
     public DialogueBranch FinalDialogueBranch = new DialogueBranch();
     private Character _playerCharacterScript;
     private Image _dialogueProgressionTrigger;
@@ -158,6 +159,7 @@ public class NPC : MonoBehaviour
                         _imageComponent.raycastTarget = true;
 
                         _isDialogueOngoing = false;
+                        DialogueManager.Instance.CurrentNPCDialogue = null;
                         return;
                     }
                 }
