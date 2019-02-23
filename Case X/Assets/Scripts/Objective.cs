@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Objective
+﻿public class Objective
 {
     public string Name;
     public bool CompletedStatus;

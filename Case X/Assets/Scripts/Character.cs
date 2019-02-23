@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using LitJson;
-using System;
-using Newtonsoft.Json;
 using UnityEngine.UI;
 
 public class Character : MonoBehaviour
@@ -40,11 +37,10 @@ public class Character : MonoBehaviour
     #endregion
     [Space(10)]
     public string DateOfLastCoffee;
-    public bool IsCoffeeAvailable;
 
     #region Json files location reference of player data.
     private string _pathToAssetsFolder;
-    private string _playerStatsFilePath;
+    public string PlayerStatsFilePath;
     private string _areasJsonFilePath;
     private string _casesJsonFilePath;
     private string _itemsJsonFilePath;
@@ -75,7 +71,7 @@ public class Character : MonoBehaviour
     {
         _pathToAssetsFolder = Application.persistentDataPath;
 
-        _playerStatsFilePath = _pathToAssetsFolder + "/Player.json";
+        PlayerStatsFilePath = _pathToAssetsFolder + "/Player.json";
         _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
         _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
         _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
@@ -105,9 +101,9 @@ public class Character : MonoBehaviour
     // into the in-game character.
     private void SetupJsonData()
     {
-        if (File.Exists(_playerStatsFilePath))
+        if (File.Exists(PlayerStatsFilePath))
         {
-            string dataToJson = File.ReadAllText(_playerStatsFilePath);
+            string dataToJson = File.ReadAllText(PlayerStatsFilePath);
             JsonData characterData = JsonMapper.ToObject(dataToJson);
 
             Name = characterData["Name"].ToString();
@@ -129,15 +125,6 @@ public class Character : MonoBehaviour
 
             AvailableHints = int.Parse(characterData["AvailableHints"].ToString());
             DateOfLastCoffee = characterData["DateOfLastCoffee"].ToString();
-
-            if (characterData["IsCoffeeAvailable"].ToString() == "True")
-            {
-                IsCoffeeAvailable = true;
-            }
-            else if (characterData["IsCoffeeAvailable"].ToString() == "False")
-            {
-                IsCoffeeAvailable = false;
-            }
         }
 
         //Debug.Log("Loaded character json data!");
@@ -413,24 +400,9 @@ public class Character : MonoBehaviour
         AvailableHints -= value;
         RefreshJsonData();
 
-        Debug.Log("Removed a hint. Total hints left: " + AvailableHints);
+        //Debug.Log("Removed a hint. Total hints left: " + AvailableHints);
     }
-    public void DrinkCoffee()
-    {
-        if (IsCoffeeAvailable == true)
-        {
-            DateOfLastCoffee = DateTime.Now.ToString();
-            IsCoffeeAvailable = false;
-            RefreshJsonData();
 
-            //Debug.Log("Drank coffee at " + DateOfLastCoffee + "!");
-        }
-        else
-        {
-            Debug.LogWarning("You cannot drink coffee at this time!");
-        }
-    }
-    
     public void MoveCaseStageStatus(Case caseToMove, string from, string to)
     {
         if (from == "Current Cases")
@@ -611,7 +583,7 @@ public class Character : MonoBehaviour
         // We use the jsonMapper instead of the JsonUtility because the latter ruins
         // the objects in the items and clothing arrays for the json file.
         string newPlayerData = JsonUtility.ToJson(this);
-        File.WriteAllText(_playerStatsFilePath, newPlayerData.ToString());
+        File.WriteAllText(PlayerStatsFilePath, newPlayerData.ToString());
 
         //Debug.Log("Refreshed player json data!");
     }

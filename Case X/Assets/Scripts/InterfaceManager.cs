@@ -1,14 +1,14 @@
 ﻿using LitJson;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InterfaceManager : MonoBehaviour
 {
+    public static InterfaceManager Instance;
+
     #region Character creation references
     public GameObject CharacterCompletionPopup;
     public GameObject CharacterCreationMenu;
@@ -36,8 +36,31 @@ public class InterfaceManager : MonoBehaviour
     #endregion
 
     #region Gameplay start references
+    [Space(10)]
     public GameObject StartMenu;
     #endregion
+
+    #region
+    [Space(10)]
+    public GameObject ItemDetailsWindow;
+    public Image ItemDetailsPortrait;
+    public Text ItemDetailsName;
+    public Text ItemDetailsDescription;
+    public Text ItemDetailsActives;
+    #endregion
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     private void Start()
     {

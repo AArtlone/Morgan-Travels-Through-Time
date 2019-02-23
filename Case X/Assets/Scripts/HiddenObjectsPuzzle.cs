@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -30,6 +29,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     // We use this to make it so that if the player completed the puzzle
     // more than once, he will not receive the same reward twice.
     public bool IsItemEarned;
+    private List<GameObject> _itemsInFindList = new List<GameObject>();
+    private GameObject _itemToHighlight;
 
     // Object references used for the puzzle canvas.
     public Text Timer;
@@ -40,6 +41,15 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     private void Start()
     {
+        // We get all the objects in the Objects To Find List in this hidden objects
+        // puzzle from the editor, and we use those objects for the hints mechanic.
+        for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
+        {
+            _itemsInFindList.Add(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject);
+
+            //Debug.Log(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject.name);
+        }
+
         Counter = TimeToComplete;
         Timer.text = Counter.ToString();
 
@@ -48,6 +58,15 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void StartTimer()
     {
+        // Here we reset the tapped and hinted at booleans because once the puzzle
+        // is over and started again, we need to hint at the right objects instead of.
+        // the old ones from the previous play session of that puzzle.
+        foreach (GameObject item in _itemsInFindList)
+        {
+            item.GetComponent<Item>().IsItemHintedAt = false;
+            item.GetComponent<Item>().ItemFound = false;
+        }
+
         if (IsInvoking("CountDown"))
         {
             CancelInvoke();
@@ -57,6 +76,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Timer.text = Counter.ToString();
 
         InvokeRepeating("CountDown", 1f, 1f);
+
+        for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
+        {
+            FoundItemsDisplay.transform.GetChild(i).GetComponent<Text>().text = string.Empty;
+        }
     }
 
     public void CompletePuzzle()
@@ -112,6 +136,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         if (!ItemsFound.Contains(objAsItem.Name))
         {
             ItemsFound.Add(objAsItem.Name);
+            objAsItem.ItemFound = true;
             int foundItemsCount = 0;
             foreach (string foundItem in ItemsFound)
             {
@@ -158,6 +183,54 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public void UseHint()
     {
         Character.Instance.RemoveAvailableHints(1);
+
+        Random rng = new Random();
+
+        List<GameObject> objectsForHinting = new List<GameObject>();
+        // We check if all the items for tapping are already hinted at, so
+        // that we can start hinting at different ones from the start again rather
+        // than hinting at objects already hinted at.
+        int itemsHinted = 0;
+        foreach (GameObject item in _itemsInFindList)
+        {
+            if (item.GetComponent<Item>().IsItemHintedAt) {
+                itemsHinted++;
+            }
+        }
+        Debug.Log(itemsHinted);
+
+        if (itemsHinted == _itemsInFindList.Count - 1)
+        {
+            foreach (GameObject item in _itemsInFindList)
+            {
+                item.GetComponent<Item>().IsItemHintedAt = false;
+            }
+        }
+
+        foreach (GameObject item in _itemsInFindList)
+        {
+            Item itemScript = item.GetComponent<Item>();
+            if (itemScript.IsItemHintedAt == false && itemScript.ItemFound == false)
+            {
+                objectsForHinting.Add(item);
+            }
+        }
+        _itemToHighlight = objectsForHinting[Random.Range(0, objectsForHinting.Count - 1)];
+
+        _itemToHighlight.GetComponent<Image>().color = Color.red;
+        _itemToHighlight.GetComponent<Item>().IsItemHintedAt = true;
+        Invoke("ReturnItemColors", 1f);
+
+        // The player can only use the button after the hint duration has passed.
+        HintButton.interactable = false;
+    }
+
+    private void ReturnItemColors()
+    {
+        _itemToHighlight.GetComponent<Image>().color = Color.gray;
+
+        // The player can only use the button after the hint duration has passed.
+        HintButton.interactable = true;
     }
 
     public void CountDown()

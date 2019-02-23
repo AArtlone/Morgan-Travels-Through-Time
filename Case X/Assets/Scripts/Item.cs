@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Newtonsoft.Json;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
+using System;
+using UnityEngine.UI;
 
-[System.Serializable]
+[Serializable]
 public class Item : MonoBehaviour
 {
     public string Name;
@@ -12,12 +10,51 @@ public class Item : MonoBehaviour
     public string Active;
     public string AssetsImageName;
 
+    #region Hidden objects puzzle bools
+    // Specifically for determining which items to hint at for the player.
+    [NonSerialized]
+    public bool IsItemHintedAt;
+    [NonSerialized]
+    public bool ItemFound;
+    #endregion
+
+    private int _timer;
+
     public Item(string Name, string Description, string Active, string AssetsImageName)
     {
         this.Name = Name;
         this.Description = Description;
         this.Active = Active;
         this.AssetsImageName = AssetsImageName;
+    }
+
+    public void HoldingDown()
+    {
+        InvokeRepeating("CountTimerUp", 0f, 1f);
+    }
+
+    public void Release()
+    {
+        CancelInvoke();
+        _timer = 0;
+    }
+
+    private void CountTimerUp()
+    {
+        _timer++;
+
+        if (_timer == 2)
+        {
+            InterfaceManager.Instance.OpenPopup(InterfaceManager.Instance.ItemDetailsWindow);
+
+            // It is mandatory you save the image from resources into a sprite variable
+            // otherwise it still will not convert it properly for the instance manager.
+            Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + AssetsImageName);
+            InterfaceManager.Instance.ItemDetailsPortrait.sprite = sprite;
+            InterfaceManager.Instance.ItemDetailsName.text = Name;
+            InterfaceManager.Instance.ItemDetailsDescription.text = Description;
+            InterfaceManager.Instance.ItemDetailsActives.text = Active;
+        }
     }
 
     public void DragItem()
