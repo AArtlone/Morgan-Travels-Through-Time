@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
+using TMPro;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     private GameObject _itemToHighlight;
 
     // Object references used for the puzzle canvas.
-    public Text Timer;
+    public TextMeshProUGUI Timer;
     public GameObject FoundItemsDisplay;
     public GameObject ItemDisplayPrefab;
     public Button HintButton;
@@ -59,6 +60,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void StartTimer()
     {
+        InterfaceManager.Instance.BottomUIInventory.SetActive(false);
+
         // Here we reset the tapped and hinted at booleans because once the puzzle
         // is over and started again, we need to hint at the right objects instead of.
         // the old ones from the previous play session of that puzzle.
@@ -80,7 +83,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            FoundItemsDisplay.transform.GetChild(i).GetComponent<Text>().text = string.Empty;
+            FoundItemsDisplay.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = string.Empty;
         }
     }
 
@@ -90,7 +93,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        PuzzleEndPopup.transform.GetChild(2).GetComponent<Text>().text = "You have successfully completed this puzzle and have received a new item in your inventory!";
+        PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have successfully completed this puzzle and have received a new item in your inventory!";
 
         if (IsItemEarned == false)
         {
@@ -113,7 +116,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        PuzzleEndPopup.transform.GetChild(2).GetComponent<Text>().text = "You have failed to complete this puzzle.";
+        PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have failed to complete this puzzle.";
 
         if (IsItemEarned == false)
         {
@@ -125,7 +128,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void ClosePuzzle()
     {
+        InterfaceManager.Instance.BottomUIInventory.SetActive(true);
         transform.GetComponentInParent<Image>().raycastTarget = true;
+
         gameObject.SetActive(false);
     }
 
@@ -175,14 +180,14 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     {
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            FoundItemsDisplay.transform.GetChild(i).GetComponent<Text>().text = string.Empty;
+            FoundItemsDisplay.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = string.Empty;
         }
 
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
             if (ItemsFound[i] != null)
             {
-                FoundItemsDisplay.transform.GetChild(i).GetComponent<Text>().text = ItemsFound[i];
+                FoundItemsDisplay.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = ItemsFound[i];
             }
         }
     }
@@ -206,7 +211,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
         //Debug.Log(itemsHinted);
 
-        if (itemsHinted == _itemsInFindList.Count - 1)
+        if (itemsHinted == _itemsInFindList.Count)
         {
             foreach (GameObject item in _itemsInFindList)
             {

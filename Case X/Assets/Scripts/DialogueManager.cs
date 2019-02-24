@@ -1,6 +1,7 @@
 ﻿using LitJson;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,17 +14,17 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject DialogueTemplate;
     [Space(10)]
-    public Text LeftCharacterTitle;
+    public TextMeshProUGUI LeftCharacterTitle;
     public Image LeftCharacterPortrait;
     [Space(10)]
-    public Text RightCharacterTitle;
+    public TextMeshProUGUI RightCharacterTitle;
     public Image RightCharacterPortrait;
     [Space(10)]
     public Image DialogueProgressionBox;
     public Image DialogueStageBackground;
     public Image DialogueBoxBackground;
-    public Text DialogueText;
-    public Text[] OptionsMenu = new Text[4];
+    public TextMeshProUGUI DialogueText;
+    public TextMeshProUGUI[] OptionsMenu = new TextMeshProUGUI[4];
     public List<string> DialogueResponses;
 
     private string _dialogueResponsesPath;
@@ -158,7 +159,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectOption(GameObject obj)
     {
-        string textInOption = obj.GetComponent<Text>().text;
+        string textInOption = obj.GetComponent<TextMeshProUGUI>().text;
         if (!DialogueResponses.Contains(textInOption))
         {
             DialogueResponses.Add(textInOption);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,9 +29,9 @@ public class InterfaceManager : MonoBehaviour
     public GameObject CompletedCasesDisplay;
     [Space(10)]
     public GameObject CaseObjectivePrefab;
-    public GameObject SelectedCaseTitle;
-    public GameObject SelectedCaseDescription;
-    public GameObject SelectedCaseStatus;
+    public TextMeshProUGUI SelectedCaseTitle;
+    public TextMeshProUGUI SelectedCaseDescription;
+    public TextMeshProUGUI SelectedCaseStatus;
     public GameObject SelectedCaseObjectivesDisplay;
     private Case _currentlySelectedCase;
     #endregion
@@ -42,11 +43,12 @@ public class InterfaceManager : MonoBehaviour
 
     #region Item details for bottom UI inventory
     [Space(10)]
+    public GameObject BottomUIInventory;
     public GameObject ItemDetailsWindow;
     public Image ItemDetailsPortrait;
-    public Text ItemDetailsName;
-    public Text ItemDetailsDescription;
-    public Text ItemDetailsActives;
+    public TextMeshProUGUI ItemDetailsName;
+    public TextMeshProUGUI ItemDetailsDescription;
+    public TextMeshProUGUI ItemDetailsActives;
     #endregion
 
     #region Area references
@@ -107,19 +109,19 @@ public class InterfaceManager : MonoBehaviour
         foreach (Case loadedCase in Character.Instance.CurrentCases)
         {
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, CurrentCasesDisplay.transform.GetChild(0).transform);
-            newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
+            newCaseButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedCase.Name;
         }
 
         foreach (Case loadedCase in Character.Instance.AvailableCases)
         {
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, AvailableCasesDisplay.transform.GetChild(0).transform);
-            newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
+            newCaseButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedCase.Name;
         }
 
         foreach (Case loadedCase in Character.Instance.CompletedCases)
         {
             GameObject newCaseButton = Instantiate(CaseButtonPrefab, CompletedCasesDisplay.transform.GetChild(0).transform);
-            newCaseButton.GetComponentInChildren<Text>().text = loadedCase.Name;
+            newCaseButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedCase.Name;
         }
     }
 
@@ -209,13 +211,13 @@ public class InterfaceManager : MonoBehaviour
         _currentlySelectedCase = null;
         foreach (Case loadedCase in Character.Instance.AllCases)
         {
-            if (loadedCase.Name == button.GetComponentInChildren<Text>().text)
+            if (loadedCase.Name == button.GetComponentInChildren<TextMeshProUGUI>().text)
             {
                 _currentlySelectedCase = loadedCase;
 
-                SelectedCaseTitle.GetComponent<Text>().text = "Title: " + loadedCase.Name;
-                SelectedCaseDescription.GetComponent<Text>().text = "Description: " + loadedCase.Description;
-                SelectedCaseStatus.GetComponent<Text>().text = "Completion Status: " + loadedCase.ProgressStatus;
+                SelectedCaseTitle.text = "Title: " + loadedCase.Name;
+                SelectedCaseDescription.text = "Description: " + loadedCase.Description;
+                SelectedCaseStatus.text = "Completion Status: " + loadedCase.ProgressStatus;
 
                 for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
                 {
@@ -226,15 +228,15 @@ public class InterfaceManager : MonoBehaviour
                 {
                     GameObject newObjective = Instantiate(CaseObjectivePrefab,
                     SelectedCaseObjectivesDisplay.transform);
-                    newObjective.transform.GetChild(0).GetComponent<Text>().text = objective.Name;
+                    newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
 
                     if (objective.CompletedStatus)
                     {
-                        newObjective.transform.GetChild(1).GetComponent<Text>().text = "Completed: No";
+                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
                     }
                     else
                     {
-                        newObjective.transform.GetChild(1).GetComponent<Text>().text = "Completed: Yes";
+                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
                     }
                 }
             }
@@ -296,9 +298,9 @@ public class InterfaceManager : MonoBehaviour
 
     public void ResetFields()
     {
-        SelectedCaseTitle.GetComponent<Text>().text = string.Empty;
-        SelectedCaseDescription.GetComponent<Text>().text = string.Empty;
-        SelectedCaseStatus.GetComponent<Text>().text = string.Empty;
+        SelectedCaseTitle.text = string.Empty;
+        SelectedCaseDescription.text = string.Empty;
+        SelectedCaseStatus.text = string.Empty;
 
         for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
         {
