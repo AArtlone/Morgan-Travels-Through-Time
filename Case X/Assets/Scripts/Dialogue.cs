@@ -12,6 +12,7 @@ public class Dialogue
     public string RightCharacterTitle;
     public Sprite RightCharacterPortrait;
     [Space(10)]
+    public Sprite DialogueStageBackground;
     public Sprite DialogueBoxBackground;
     public List<DialogueBranch> DialogueBranches;
 }

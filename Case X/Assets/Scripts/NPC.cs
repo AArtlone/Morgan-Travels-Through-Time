@@ -56,6 +56,8 @@ public class NPC : MonoBehaviour
         // Changing the dialogue box background
         DialogueManager.Instance.ChangeDialogueBoxBackground(Dialogue[CurrentDialogueIndex].DialogueBoxBackground);
 
+        DialogueManager.Instance.ChangeDialogueStageBackground(Dialogue[CurrentDialogueIndex].DialogueStageBackground);
+
         // First we clear the previously selected dialogue branch, otherwise they
         // would add on top of each other and get wrong output to the dialogue sequence.
         _availableBranches.Clear();

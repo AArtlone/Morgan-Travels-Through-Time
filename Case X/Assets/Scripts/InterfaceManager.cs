@@ -40,13 +40,18 @@ public class InterfaceManager : MonoBehaviour
     public GameObject StartMenu;
     #endregion
 
-    #region
+    #region Item details for bottom UI inventory
     [Space(10)]
     public GameObject ItemDetailsWindow;
     public Image ItemDetailsPortrait;
     public Text ItemDetailsName;
     public Text ItemDetailsDescription;
     public Text ItemDetailsActives;
+    #endregion
+
+    #region Area references
+    [Space(10)]
+    public GameObject AreaLockedErrorPopup;
     #endregion
 
     private void Awake()

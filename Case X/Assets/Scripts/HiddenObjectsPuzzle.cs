@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
+using Object = UnityEngine.Object;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -128,7 +129,13 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void PickItem(UnityEngine.Object obj)
+    public void ClosePopUp(Object obj)
+    {
+        GameObject objClicked = obj as GameObject;
+        objClicked.SetActive(false);
+    }
+
+    public void PickItem(Object obj)
     {
         GameObject itemObjClicked = obj as GameObject;
         Item objAsItem = itemObjClicked.GetComponent<Item>();
@@ -197,7 +204,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 itemsHinted++;
             }
         }
-        Debug.Log(itemsHinted);
+        //Debug.Log(itemsHinted);
 
         if (itemsHinted == _itemsInFindList.Count - 1)
         {

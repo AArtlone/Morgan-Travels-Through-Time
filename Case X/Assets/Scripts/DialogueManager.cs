@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     public Image RightCharacterPortrait;
     [Space(10)]
     public Image DialogueProgressionBox;
+    public Image DialogueStageBackground;
     public Image DialogueBoxBackground;
     public Text DialogueText;
     public Text[] OptionsMenu = new Text[4];
@@ -106,6 +107,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         //Debug.Log("Changed " + side + " title!");
+    }
+
+    public void ChangeDialogueStageBackground(Sprite newStage)
+    {
+        DialogueStageBackground.sprite = newStage;
     }
 
     public void ChangeDialogueBoxBackground(Sprite newBackground)

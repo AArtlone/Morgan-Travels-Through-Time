@@ -64,29 +64,26 @@ public class Character : MonoBehaviour
             Instance = this;
             // We want to be able to access the dialogue information from any scene.
             DontDestroyOnLoad(gameObject);
+
+            _pathToAssetsFolder = Application.persistentDataPath;
+
+            PlayerStatsFilePath = _pathToAssetsFolder + "/Player.json";
+            _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
+            _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
+            _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
+            _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
+            _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
+
+            // These functions initialize the game state from the storage.
+            #region Game state setup
+            SetupJsonData();
+            SetupAreas();
+            SetupCases();
+            SetupItems();
+            SetupWearables();
+            SetupWorkers();
+            #endregion
         }
-    }
-
-    private void Start()
-    {
-        _pathToAssetsFolder = Application.persistentDataPath;
-
-        PlayerStatsFilePath = _pathToAssetsFolder + "/Player.json";
-        _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
-        _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
-        _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
-        _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
-        _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
-
-        // These functions initialize the game state from the storage.
-        #region Game state setup
-        SetupJsonData();
-        SetupAreas();
-        SetupCases();
-        SetupItems();
-        SetupWearables();
-        SetupWorkers();
-        #endregion
     }
 
     #region Setup data from storage functionality
