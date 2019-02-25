@@ -1,25 +1,12 @@
-﻿using LitJson;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InterfaceManager : MonoBehaviour
 {
     public static InterfaceManager Instance;
-
-    #region Character creation references
-    public GameObject CharacterCompletionPopup;
-    public GameObject CharacterCreationMenu;
-    public GameObject CharacterNameMenu;
-    public GameObject CharacterNamePopupWindow;
-    public GameObject CharacterNameErrorPopupWindow;
-
-    private string _jsonWordsFilter;
-    private List<string> _wordsFilter = new List<string>();
-    #endregion
 
     #region Diary and cases interface references
     [Space(10)]
@@ -71,20 +58,6 @@ public class InterfaceManager : MonoBehaviour
 
     private void Start()
     {
-        TextAsset filterWordsToJson = Resources.Load<TextAsset>("Default World Data/BadWords");
-        JsonData filterWordsData = JsonMapper.ToObject(filterWordsToJson.text);
-
-        for (int i = 0; i < filterWordsData["BadWords"].Count; i++)
-        {
-            _wordsFilter.Add(filterWordsData["BadWords"][i].ToString());
-            //Debug.Log(_wordsFilter[i]);
-        }
-
-        if (Character.Instance.CharacterCreation)
-        {
-            StartGame();
-        }
-
         SetupCasesInDiary();
     }
 
@@ -136,70 +109,7 @@ public class InterfaceManager : MonoBehaviour
     }
 
     // ****************************
-    #region Character creation functions
-    public void ConfirmCharacter()
-    {
-        // Close/Open popup is meant to be used mainly for in-game popups but since it
-        // does the same thing as closing one, we can reuse it for other UI as well.
-        OpenPopup(CharacterNameMenu);
-        ClosePopup(CharacterCompletionPopup);
-        ClosePopup(CharacterCreationMenu);
-
-        Character.Instance.RefreshWearables();
-        //Debug.Log("Character has been created!");
-    }
-
-    public void ConfirmCharacterName(Object obj)
-    {
-        GameObject inputField = obj as GameObject;
-        string nameInput = inputField.GetComponent<InputField>().text;
-
-        bool foundMatch = false;
-        for (int i = 0; i < _wordsFilter.Count; i++)
-        {
-            Match match = Regex.Match(nameInput, @"(\b" + _wordsFilter[i] + @"|\B" + _wordsFilter[i] + @")",
-                RegexOptions.IgnoreCase);
-            
-            if (match.Success && match.Length > 1)
-            {
-                //Debug.Log(nameInput);
-                //Debug.Log(_wordsFilter[i]);
-                foundMatch = true;
-            }
-        }
-
-        if (foundMatch == false && nameInput.Length > 2 && nameInput.Length < 25)
-        {
-            Character.Instance.Name = nameInput;
-            Character.Instance.CharacterCreation = true;
-
-            Character.Instance.RefreshJsonData();
-            ClosePopup(CharacterNameMenu);
-            ClosePopup(CharacterNamePopupWindow);
-            OpenPopup(StartMenu);
-
-            Character.Instance.SetupWorldData();
-            //Debug.Log("Character name has been chosen!");Debug.Log
-        } else
-        {
-            OpenPopup(CharacterNameErrorPopupWindow);
-        }
-    }
-
-    public void ShowKeyboard()
-    {
-        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true, true);
-    }
-
-    private void StartGame()
-    {
-        ClosePopup(CharacterCreationMenu);
-        ClosePopup(CharacterCompletionPopup);
-        ClosePopup(CharacterNameMenu);
-        ClosePopup(CharacterNamePopupWindow);
-        OpenPopup(StartMenu);
-    }
-    #endregion
+    
 
     // ****************************
     #region Cases and diary functions
