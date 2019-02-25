@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
 {
     public static Character Instance;
     public string Name;
+    public bool IsDataCreated;
     public bool CharacterCreation;
     [Space(10)]
     #region Stats
@@ -65,8 +66,10 @@ public class Character : MonoBehaviour
             // We want to be able to access the dialogue information from any scene.
             DontDestroyOnLoad(gameObject);
 
-            _pathToAssetsFolder = Application.persistentDataPath;
+            TextAsset playerData = Resources.Load<TextAsset>("Default World Data/Player");
+            JsonData playerJsonData = JsonMapper.ToObject(playerData.text);
 
+            _pathToAssetsFolder = Application.persistentDataPath;
             PlayerStatsFilePath = _pathToAssetsFolder + "/Player.json";
             _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
             _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
@@ -74,15 +77,205 @@ public class Character : MonoBehaviour
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
             _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
 
-            // These functions initialize the game state from the storage.
-            #region Game state setup
-            SetupJsonData();
-            SetupAreas();
-            SetupCases();
-            SetupItems();
-            SetupWearables();
-            SetupWorkers();
-            #endregion
+            if (File.Exists(PlayerStatsFilePath))
+            {
+                //Debug.Log("data is retrieved");
+
+                string dataToJson = File.ReadAllText(PlayerStatsFilePath);
+                JsonData characterData = JsonMapper.ToObject(dataToJson);
+
+                // These functions initialize the game state from the storage.
+                SetupWorldData();
+            }
+            else
+            {
+                // This reads every default file settings for the world data
+                // and we use it to setup the starting player, cases, items
+                // and so on collections of data for when the game first starts.
+                if (IsDataCreated == false)
+                {
+                    //Debug.Log("data is created");
+
+                    #region Creating the player file
+                    Name = playerJsonData["Name"].ToString();
+                    IsDataCreated = true;
+
+                    if (playerJsonData["CharacterCreation"].ToString() == "True")
+                    {
+                        CharacterCreation = true;
+                    }
+                    else if (playerJsonData["CharacterCreation"].ToString() == "False")
+                    {
+                        CharacterCreation = false;
+                    }
+                    Reputation = int.Parse(playerJsonData["Reputation"].ToString());
+                    Stamina = int.Parse(playerJsonData["Stamina"].ToString());
+                    Knowledge = int.Parse(playerJsonData["Knowledge"].ToString());
+                    Fitness = int.Parse(playerJsonData["Fitness"].ToString());
+                    Charisma = int.Parse(playerJsonData["Charisma"].ToString());
+                    Currency = int.Parse(playerJsonData["Currency"].ToString());
+
+                    AvailableHints = int.Parse(playerJsonData["AvailableHints"].ToString());
+                    DateOfLastCoffee = playerJsonData["DateOfLastCoffee"].ToString();
+
+                    string newPlayerData = JsonUtility.ToJson(this);
+                    File.WriteAllText(PlayerStatsFilePath, newPlayerData.ToString());
+                    #endregion
+
+                    #region Creating the areas list
+                    TextAsset areasData = Resources.Load<TextAsset>("Default World Data/Areas");
+                    JsonData areasJsonData = JsonMapper.ToObject(areasData.text);
+
+                    Areas.Clear();
+                    for (int i = 0; i < areasJsonData["Areas"].Count; i++)
+                    {
+                        Area.AreaStatus areaType = Area.AreaStatus.Locked;
+                        if (areasJsonData["Areas"][i]["Status"].ToString() == "Locked")
+                        {
+                            areaType = Area.AreaStatus.Locked;
+                        }
+                        else if (areasJsonData["Areas"][i]["Status"].ToString() == "Unlocked")
+                        {
+                            areaType = Area.AreaStatus.Unlocked;
+                        }
+
+                        Areas.Add(
+                            new Area(areasJsonData["Areas"][i]["Name"].ToString(),
+                            areaType));
+                    }
+
+                    File.WriteAllText(_areasJsonFilePath, areasJsonData.ToJson());
+                    #endregion
+
+                    #region Creating the cases list
+                    TextAsset casesData = Resources.Load<TextAsset>("Default World Data/Cases");
+                    JsonData casesJsonData = JsonMapper.ToObject(casesData.text);
+
+                    AllCases.Clear();
+                    for (int i = 0; i < casesJsonData["Cases"].Count; i++)
+                    {
+                        List<Objective> newCaseObjectives = new List<Objective>();
+
+                        for (int j = 0; j < casesJsonData["Cases"][i]["Objectives"].Count; j++)
+                        {
+                            // These conditions make sure that we get the right type of data
+                            // from the json and convert it accurately for the dictionaries
+                            // of objectives for that case later on.
+                            bool isObjectiveComplete = false;
+                            if (casesJsonData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                            {
+                                isObjectiveComplete = true;
+                            }
+                            else if (casesJsonData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                            {
+                                isObjectiveComplete = false;
+                            }
+
+                            // Here we store the new dictionary (objective) to the list of
+                            // objectives after we set up the new objective.
+                            Objective newObjectives = new Objective(casesJsonData["Cases"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+
+                            newCaseObjectives.Add(newObjectives);
+                        }
+
+                        bool statusOfCaseCompletion = false;
+                        if (casesJsonData["Cases"][i]["Completed"].ToString() == "True")
+                        {
+                            statusOfCaseCompletion = true;
+                        }
+                        else if (casesJsonData["Cases"][i]["Completed"].ToString() == "False")
+                        {
+                            statusOfCaseCompletion = false;
+                        }
+
+                        Case newCase = new Case(
+                            casesJsonData["Cases"][i]["Name"].ToString(),
+                            casesJsonData["Cases"][i]["Area"].ToString(),
+                            casesJsonData["Cases"][i]["ProgressStatus"].ToString(),
+                            casesJsonData["Cases"][i]["Description"].ToString(),
+                            statusOfCaseCompletion,
+                            newCaseObjectives);
+
+                        AllCases.Add(newCase);
+                    }
+
+                    File.WriteAllText(_casesJsonFilePath, "");
+                    RefreshAllCases();
+                    #endregion
+
+                    #region Creating the items list
+                    TextAsset itemsData = Resources.Load<TextAsset>("Default World Data/Items");
+                    JsonData itemsJsonData = JsonMapper.ToObject(itemsData.text);
+
+                    Items.Clear();
+                    for (int i = 0; i < itemsJsonData["Items"].Count; i++)
+                    {
+                        Items.Add(new Item(
+                            itemsJsonData["Items"][i]["Name"].ToString(),
+                            itemsJsonData["Items"][i]["Description"].ToString(),
+                            itemsJsonData["Items"][i]["Active"].ToString(),
+                            itemsJsonData["Items"][i]["AssetsImageName"].ToString()));
+                    }
+
+                    File.WriteAllText(_itemsJsonFilePath, "");
+                    RefreshItems();
+                    #endregion
+
+                    #region Creating the wearables list
+                    TextAsset wearablesData = Resources.Load<TextAsset>("Default World Data/Wearables");
+                    JsonData wearablesJsonData = JsonMapper.ToObject(wearablesData.text);
+
+                    Wearables.Clear();
+                    for (int i = 0; i < wearablesJsonData["Wearables"].Count; i++)
+                    {
+                        bool isWearableSelected = false;
+                        if (wearablesJsonData["Wearables"][i]["Selected"].ToString() == "True")
+                        {
+                            isWearableSelected = true;
+                        }
+                        else if (wearablesJsonData["Wearables"][i]["Selected"].ToString() == "False")
+                        {
+                            isWearableSelected = false;
+                        }
+
+                        Wearables.Add(new Clothing(
+                            isWearableSelected,
+                            wearablesJsonData["Wearables"][i]["BodyPart"].ToString(),
+                            wearablesJsonData["Wearables"][i]["Name"].ToString(),
+                            wearablesJsonData["Wearables"][i]["Icon"].ToString(),
+                            wearablesJsonData["Wearables"][i]["PortraitImage"].ToString(),
+                            int.Parse(wearablesJsonData["Wearables"][i]["Stamina"].ToString()),
+                            int.Parse(wearablesJsonData["Wearables"][i]["Knowledge"].ToString()),
+                            int.Parse(wearablesJsonData["Wearables"][i]["Fitness"].ToString()),
+                            int.Parse(wearablesJsonData["Wearables"][i]["Charisma"].ToString())));
+                    }
+
+                    File.WriteAllText(_wearablesJsonFilePath, "");
+                    RefreshWearables();
+                    #endregion
+
+                    #region Creating the workers list
+                    TextAsset workersData = Resources.Load<TextAsset>("Default World Data/Workers");
+                    JsonData workersJsonData = JsonMapper.ToObject(workersData.text);
+
+                    Workers.Clear();
+                    for (int i = 0; i < workersJsonData["OwnedWorkers"].Count; i++)
+                    {
+                        Workers.Add(new Worker(
+                            workersJsonData["OwnedWorkers"][i]["Name"].ToString(),
+                            workersJsonData["OwnedWorkers"][i]["Description"].ToString(),
+                            int.Parse(workersJsonData["OwnedWorkers"][i]["Stamina"].ToString()),
+                            int.Parse(workersJsonData["OwnedWorkers"][i]["Knowledge"].ToString()),
+                            int.Parse(workersJsonData["OwnedWorkers"][i]["Fitness"].ToString()),
+                            int.Parse(workersJsonData["OwnedWorkers"][i]["Charisma"].ToString()),
+                            workersJsonData["OwnedWorkers"][i]["RelationshipStatus"].ToString()));
+                    }
+
+                    File.WriteAllText(_workersDataJsonFilePath, "");
+                    RefreshWorkersJson();
+                    #endregion
+                }
+            }
         }
     }
 
@@ -104,6 +297,15 @@ public class Character : MonoBehaviour
             JsonData characterData = JsonMapper.ToObject(dataToJson);
 
             Name = characterData["Name"].ToString();
+
+            if (characterData["IsDataCreated"].ToString() == "True")
+            {
+                IsDataCreated = true;
+            }
+            else if (characterData["IsDataCreated"].ToString() == "False")
+            {
+                IsDataCreated = false;
+            }
 
             if (characterData["CharacterCreation"].ToString() == "True")
             {
@@ -177,6 +379,8 @@ public class Character : MonoBehaviour
                     characterData["Items"][i]["Description"].ToString(),
                     characterData["Items"][i]["Active"].ToString(),
                     characterData["Items"][i]["AssetsImageName"].ToString()));
+
+                //Debug.Log(characterData["Items"][i]["Name"]);
             }
         }
 
@@ -344,6 +548,18 @@ public class Character : MonoBehaviour
             newItemScript.AssetsImageName = item.AssetsImageName;
         }
     }
+
+    public void SetupWorldData()
+    {
+        #region Game state setup
+        SetupJsonData();
+        SetupAreas();
+        SetupCases();
+        SetupItems();
+        SetupWearables();
+        SetupWorkers();
+        #endregion
+    }
     #endregion
 
     #region Data manipulation from existing player parameters
@@ -357,7 +573,7 @@ public class Character : MonoBehaviour
         Items.Add(item);
         RefreshItems();
 
-        Debug.Log(string.Format("Added {0} to current items!", item.Name));
+        //Debug.Log(string.Format("Added {0} to current items!", item.Name));
     }
 
     public void RemoveItem(Item item)
@@ -365,7 +581,7 @@ public class Character : MonoBehaviour
         Items.Remove(item);
         RefreshItems();
 
-        Debug.Log(string.Format("Removed {0} from current items!", item.Name));
+        //Debug.Log(string.Format("Removed {0} from current items!", item.Name));
     }
 
     public void AddWearable(Clothing clothing)
@@ -373,7 +589,7 @@ public class Character : MonoBehaviour
         Wearables.Add(clothing);
         RefreshWearables();
 
-        Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
+        //Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
     }
 
     public void RemoveWearable(Clothing clothing)
@@ -381,7 +597,7 @@ public class Character : MonoBehaviour
         Wearables.Remove(clothing);
         RefreshWearables();
 
-        Debug.Log(string.Format("Removed {0} from current wearables!", clothing.Name));
+        //Debug.Log(string.Format("Removed {0} from current wearables!", clothing.Name));
     }
 
     public void AddAvailableHints(int value)
@@ -389,7 +605,7 @@ public class Character : MonoBehaviour
         AvailableHints += value;
         RefreshJsonData();
 
-        Debug.Log("Added a hint. Total hints left: " + AvailableHints);
+        //Debug.Log("Added a hint. Total hints left: " + AvailableHints);
     }
 
     public void RemoveAvailableHints(int value)
@@ -439,27 +655,27 @@ public class Character : MonoBehaviour
             {
                 case "reputation":
                     Reputation += statValues[i];
-                    Debug.Log("Increased reputation by " + statValues[i] + "!");
+                    //Debug.Log("Increased reputation by " + statValues[i] + "!");
                     break;
                 case "stamina":
                     Stamina += statValues[i];
-                    Debug.Log("Increased Stamina by " + statValues[i] + "!");
+                    //Debug.Log("Increased Stamina by " + statValues[i] + "!");
                     break;
                 case "knowledge":
                     Knowledge += statValues[i];
-                    Debug.Log("Increased Knowledge by " + statValues[i] + "!");
+                    //Debug.Log("Increased Knowledge by " + statValues[i] + "!");
                     break;
                 case "fitness":
                     Fitness += statValues[i];
-                    Debug.Log("Increased Fitness by " + statValues[i] + "!");
+                    //Debug.Log("Increased Fitness by " + statValues[i] + "!");
                     break;
                 case "charisma":
                     Charisma += statValues[i];
-                    Debug.Log("Increased charisma by " + statValues[i] + "!");
+                    //Debug.Log("Increased charisma by " + statValues[i] + "!");
                     break;
                 case "currency":
                     Currency += statValues[i];
-                    Debug.Log("Increased currency by " + statValues[i] + "!");
+                    //Debug.Log("Increased currency by " + statValues[i] + "!");
                     break;
             }
         }

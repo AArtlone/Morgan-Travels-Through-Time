@@ -42,6 +42,21 @@ public class DialogueManager : MonoBehaviour
             Instance = this;
             // We want to be able to access the dialogue information from any scene.
             DontDestroyOnLoad(gameObject);
+
+            if (!File.Exists(_dialogueResponsesPath))
+            {
+                TextAsset responsesData = Resources.Load<TextAsset>("Default World Data/DialogueResponses");
+                JsonData responsesJsonData = JsonMapper.ToObject(responsesData.text);
+
+                DialogueResponses.Clear();
+                for (int i = 0; i < responsesJsonData["DialogueResponses"].Count; i++)
+                {
+                    DialogueResponses.Add(responsesJsonData["DialogueResponses"][i].ToString());
+                }
+
+                File.WriteAllText(_dialogueResponsesPath, "");
+                RefreshDialogueResponses();
+            }
         }
     }
 

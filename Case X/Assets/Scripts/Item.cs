@@ -122,7 +122,7 @@ public class Item : MonoBehaviour
                         {
                             branch.ItemsDropped.Add(Name);
 
-                            Debug.Log(string.Format("Item {0} is successfully dropped!", Name));
+                            //Debug.Log(string.Format("Item {0} is successfully dropped!", Name));
 
                             if (branch.ItemsDropped.Count == branch.ItemsRequired.Count)
                             {
@@ -131,7 +131,7 @@ public class Item : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log(string.Format("Item {0} was not dropped!", Name));
+                            //Debug.Log(string.Format("Item {0} was not dropped!", Name));
                         }
                     }
                 }

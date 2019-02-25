@@ -71,10 +71,8 @@ public class InterfaceManager : MonoBehaviour
 
     private void Start()
     {
-        _jsonWordsFilter = Application.persistentDataPath + "/BadWords.json";
-
-        string filterWordsToJson = File.ReadAllText(_jsonWordsFilter);
-        JsonData filterWordsData = JsonMapper.ToObject(filterWordsToJson);
+        TextAsset filterWordsToJson = Resources.Load<TextAsset>("Default World Data/BadWords");
+        JsonData filterWordsData = JsonMapper.ToObject(filterWordsToJson.text);
 
         for (int i = 0; i < filterWordsData["BadWords"].Count; i++)
         {
@@ -90,7 +88,7 @@ public class InterfaceManager : MonoBehaviour
         SetupCasesInDiary();
     }
 
-    private void SetupCasesInDiary()
+    public void SetupCasesInDiary()
     {
         for (int i = 0; i < CurrentCasesDisplay.transform.GetChild(0).transform.childCount; i++)
         {
@@ -180,7 +178,8 @@ public class InterfaceManager : MonoBehaviour
             ClosePopup(CharacterNamePopupWindow);
             OpenPopup(StartMenu);
 
-            //Debug.Log("Character name has been chosen!");
+            Character.Instance.SetupWorldData();
+            //Debug.Log("Character name has been chosen!");Debug.Log
         } else
         {
             OpenPopup(CharacterNameErrorPopupWindow);

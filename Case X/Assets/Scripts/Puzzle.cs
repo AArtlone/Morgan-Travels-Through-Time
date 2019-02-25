@@ -16,6 +16,7 @@ public class Puzzle : MonoBehaviour
     private void Start()
     {
         _jsonPuzzlesPath = Application.persistentDataPath + "/Puzzles.json";
+
         _puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
 
         // Depending on the puzzle we want to use in this prefab, we will run
