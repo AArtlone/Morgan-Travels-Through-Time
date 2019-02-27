@@ -8,19 +8,19 @@ public class InterfaceManager : MonoBehaviour
 {
     public static InterfaceManager Instance;
 
-    #region Diary and cases interface references
+    #region Diary and Quests interface references
     [Space(10)]
-    public GameObject CaseButtonPrefab;
-    public GameObject CurrentCasesDisplay;
-    public GameObject AvailableCasesDisplay;
-    public GameObject CompletedCasesDisplay;
+    public GameObject QuestButtonPrefab;
+    public GameObject CurrentQuestsDisplay;
+    public GameObject AvailableQuestsDisplay;
+    public GameObject CompletedQuestsDisplay;
     [Space(10)]
-    public GameObject CaseObjectivePrefab;
-    public TextMeshProUGUI SelectedCaseTitle;
-    public TextMeshProUGUI SelectedCaseDescription;
-    public TextMeshProUGUI SelectedCaseStatus;
-    public GameObject SelectedCaseObjectivesDisplay;
-    private Case _currentlySelectedCase;
+    public GameObject QuestObjectivePrefab;
+    public TextMeshProUGUI SelectedQuestTitle;
+    public TextMeshProUGUI SelectedQuestDescription;
+    public TextMeshProUGUI SelectedQuestStatus;
+    public GameObject SelectedQuestObjectivesDisplay;
+    private Quest _currentlySelectedQuest;
     #endregion
 
     #region Gameplay start references
@@ -58,41 +58,41 @@ public class InterfaceManager : MonoBehaviour
 
     private void Start()
     {
-        SetupCasesInDiary();
+        SetupQuestsInDiary();
     }
 
-    public void SetupCasesInDiary()
+    public void SetupQuestsInDiary()
     {
-        for (int i = 0; i < CurrentCasesDisplay.transform.GetChild(0).transform.childCount; i++)
+        for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
         {
-            Destroy(CurrentCasesDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+            Destroy(CurrentQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
         }
-        for (int i = 0; i < AvailableCasesDisplay.transform.GetChild(0).transform.childCount; i++)
+        for (int i = 0; i < AvailableQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
         {
-            Destroy(AvailableCasesDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+            Destroy(AvailableQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
         }
-        for (int i = 0; i < CompletedCasesDisplay.transform.GetChild(0).transform.childCount; i++)
+        for (int i = 0; i < CompletedQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
         {
-            Destroy(CompletedCasesDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
-        }
-
-        //Character.Instance.AllCases.Clear();
-        foreach (Case loadedCase in Character.Instance.CurrentCases)
-        {
-            GameObject newCaseButton = Instantiate(CaseButtonPrefab, CurrentCasesDisplay.transform.GetChild(0).transform);
-            newCaseButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedCase.Name;
+            Destroy(CompletedQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
         }
 
-        foreach (Case loadedCase in Character.Instance.AvailableCases)
+        //Character.Instance.AllQuests.Clear();
+        foreach (Quest loadedQuest in Character.Instance.CurrentQuests)
         {
-            GameObject newCaseButton = Instantiate(CaseButtonPrefab, AvailableCasesDisplay.transform.GetChild(0).transform);
-            newCaseButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedCase.Name;
+            GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
+            newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
         }
 
-        foreach (Case loadedCase in Character.Instance.CompletedCases)
+        foreach (Quest loadedQuest in Character.Instance.AvailableQuests)
         {
-            GameObject newCaseButton = Instantiate(CaseButtonPrefab, CompletedCasesDisplay.transform.GetChild(0).transform);
-            newCaseButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedCase.Name;
+            GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
+            newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+        }
+
+        foreach (Quest loadedQuest in Character.Instance.CompletedQuests)
+        {
+            GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
+            newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
         }
     }
 
@@ -109,34 +109,31 @@ public class InterfaceManager : MonoBehaviour
     }
 
     // ****************************
-    
-
-    // ****************************
-    #region Cases and diary functions
-    public void DisplayCaseDetails(Object obj)
+    #region Quests and diary functions
+    public void DisplayQuestDetails(Object obj)
     {
         GameObject button = obj as GameObject;
 
-        _currentlySelectedCase = null;
-        foreach (Case loadedCase in Character.Instance.AllCases)
+        _currentlySelectedQuest = null;
+        foreach (Quest loadedQuest in Character.Instance.AllQuests)
         {
-            if (loadedCase.Name == button.GetComponentInChildren<TextMeshProUGUI>().text)
+            if (loadedQuest.Name == button.GetComponentInChildren<TextMeshProUGUI>().text)
             {
-                _currentlySelectedCase = loadedCase;
+                _currentlySelectedQuest = loadedQuest;
 
-                SelectedCaseTitle.text = "Title: " + loadedCase.Name;
-                SelectedCaseDescription.text = "Description: " + loadedCase.Description;
-                SelectedCaseStatus.text = "Completion Status: " + loadedCase.ProgressStatus;
+                SelectedQuestTitle.text = "Title: " + loadedQuest.Name;
+                SelectedQuestDescription.text = "Description: " + loadedQuest.Description;
+                SelectedQuestStatus.text = "Completion Status: " + loadedQuest.ProgressStatus;
 
-                for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
+                for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
                 {
-                    Destroy(SelectedCaseObjectivesDisplay.transform.GetChild(i).gameObject);
+                    Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
                 }
 
-                foreach (Objective objective in loadedCase.Objectives)
+                foreach (Objective objective in loadedQuest.Objectives)
                 {
-                    GameObject newObjective = Instantiate(CaseObjectivePrefab,
-                    SelectedCaseObjectivesDisplay.transform);
+                    GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                    SelectedQuestObjectivesDisplay.transform);
                     newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
 
                     if (objective.CompletedStatus)
@@ -152,54 +149,54 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
-    public void TakeOnCase()
+    public void TakeOnQuest()
     {
-        if (_currentlySelectedCase.ProgressStatus == "Available")
+        if (_currentlySelectedQuest.ProgressStatus == "Available")
         {
-            foreach (Case completedCase in Character.Instance.CompletedCases)
+            foreach (Quest completedQuest in Character.Instance.CompletedQuests)
             {
-                if (completedCase.Name == _currentlySelectedCase.Name)
+                if (completedQuest.Name == _currentlySelectedQuest.Name)
                 {
-                    Character.Instance.MoveCaseStageStatus(_currentlySelectedCase, "Completed Cases", "CurrentCases");
-                    completedCase.ProgressStatus = "Ongoing";
-                    _currentlySelectedCase.CompletionStatus = false;
+                    Character.Instance.MoveQuestStageStatus(_currentlySelectedQuest, "Completed Quests", "CurrentQuests");
+                    completedQuest.ProgressStatus = "Ongoing";
+                    _currentlySelectedQuest.CompletionStatus = false;
                     break;
                 }
             }
-            foreach (Case availableCase in Character.Instance.AvailableCases)
+            foreach (Quest availableQuest in Character.Instance.AvailableQuests)
             {
-                if (availableCase.Name == _currentlySelectedCase.Name)
+                if (availableQuest.Name == _currentlySelectedQuest.Name)
                 {
-                    Character.Instance.MoveCaseStageStatus(_currentlySelectedCase, "Available Cases", "Current Cases");
-                    availableCase.ProgressStatus = "Ongoing";
-                    _currentlySelectedCase.CompletionStatus = false;
+                    Character.Instance.MoveQuestStageStatus(_currentlySelectedQuest, "Available Quests", "Current Quests");
+                    availableQuest.ProgressStatus = "Ongoing";
+                    _currentlySelectedQuest.CompletionStatus = false;
                     break;
                 }
             }
 
-            _currentlySelectedCase = null;
+            _currentlySelectedQuest = null;
 
-            Character.Instance.RefreshAllCases();
-            Character.Instance.SetupCases();
-            SetupCasesInDiary();
+            Character.Instance.RefreshAllQuests();
+            Character.Instance.SetupQuests();
+            SetupQuestsInDiary();
 
             ResetFields();
         }
     }
 
-    public void AbandonCase()
+    public void AbandonQuest()
     {
-        if (_currentlySelectedCase.ProgressStatus == "Ongoing")
+        if (_currentlySelectedQuest.ProgressStatus == "Ongoing")
         {
-            Character.Instance.MoveCaseStageStatus(_currentlySelectedCase, "Current Cases", "Available Cases");
-            _currentlySelectedCase.ProgressStatus = "Available";
-            _currentlySelectedCase.CompletionStatus = false;
+            Character.Instance.MoveQuestStageStatus(_currentlySelectedQuest, "Current Quests", "Available Quests");
+            _currentlySelectedQuest.ProgressStatus = "Available";
+            _currentlySelectedQuest.CompletionStatus = false;
 
-            _currentlySelectedCase = null;
+            _currentlySelectedQuest = null;
 
-            Character.Instance.RefreshAllCases();
-            Character.Instance.SetupCases();
-            SetupCasesInDiary();
+            Character.Instance.RefreshAllQuests();
+            Character.Instance.SetupQuests();
+            SetupQuestsInDiary();
 
             ResetFields();
         }
@@ -207,18 +204,18 @@ public class InterfaceManager : MonoBehaviour
 
     public void ResetFields()
     {
-        SelectedCaseTitle.text = string.Empty;
-        SelectedCaseDescription.text = string.Empty;
-        SelectedCaseStatus.text = string.Empty;
+        SelectedQuestTitle.text = string.Empty;
+        SelectedQuestDescription.text = string.Empty;
+        SelectedQuestStatus.text = string.Empty;
 
-        for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
+        for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
         {
-            Destroy(SelectedCaseObjectivesDisplay.transform.GetChild(i).gameObject);
+            Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < SelectedCaseObjectivesDisplay.transform.childCount; i++)
+        for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
         {
-            Destroy(SelectedCaseObjectivesDisplay.transform.GetChild(i));
+            Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i));
         }
     }
     #endregion

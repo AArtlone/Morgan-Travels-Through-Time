@@ -18,10 +18,11 @@ public class CharacterCreatorManager : MonoBehaviour
     private string _jsonWordsFilter;
     private List<string> _wordsFilter = new List<string>();
     #endregion
-
-    // Start is called before the first frame update
+    
     void Start()
     {
+        // When the game starts we extract all the bad words that we want to
+        // filter out whenever the player is deciding on a character name.
         TextAsset filterWordsToJson = Resources.Load<TextAsset>("Default World Data/BadWords");
         JsonData filterWordsData = JsonMapper.ToObject(filterWordsToJson.text);
 
@@ -31,6 +32,8 @@ public class CharacterCreatorManager : MonoBehaviour
             //Debug.Log(_wordsFilter[i]);
         }
 
+        // If the player has already created a character then 
+        // we just start the main menu instead.
         if (Character.Instance.CharacterCreation)
         {
             SceneManager.LoadScene("Main Map");
@@ -42,9 +45,9 @@ public class CharacterCreatorManager : MonoBehaviour
     {
         // Close/Open popup is meant to be used mainly for in-game popups but since it
         // does the same thing as closing one, we can reuse it for other UI as well.
-        InterfaceManager.Instance.OpenPopup(CharacterNameMenu);
-        InterfaceManager.Instance.ClosePopup(CharacterCompletionPopup);
-        InterfaceManager.Instance.ClosePopup(CharacterCreationMenu);
+        OpenWindow(CharacterNameMenu);
+        CloseWindow(CharacterCompletionPopup);
+        CloseWindow(CharacterCreationMenu);
 
         Character.Instance.RefreshWearables();
         //Debug.Log("Character has been created!");
@@ -58,14 +61,17 @@ public class CharacterCreatorManager : MonoBehaviour
         bool foundMatch = false;
         for (int i = 0; i < _wordsFilter.Count; i++)
         {
+            // We look for a match in the current name the player has picked for his character
+            // and if there is one, then an error will later be visualized and wont let him continue
+            // until he corrects his name.
             Match match = Regex.Match(nameInput, @"(\b" + _wordsFilter[i] + @"|\B" + _wordsFilter[i] + @")",
                 RegexOptions.IgnoreCase);
 
             if (match.Success && match.Length > 1)
             {
+                foundMatch = true;
                 //Debug.Log(nameInput);
                 //Debug.Log(_wordsFilter[i]);
-                foundMatch = true;
             }
         }
 
@@ -74,14 +80,13 @@ public class CharacterCreatorManager : MonoBehaviour
             Character.Instance.Name = nameInput;
             Character.Instance.CharacterCreation = true;
 
+            // We update the player's name now that its confirmed as valid and then we call SetupWorldData
+            // because once we load to a new scene with new gameo objects such as the
+            // inventory and Quests diary, we want to re-initialize the data since the
+            // scene before that did not contain those elements to put the data in.
             Character.Instance.RefreshJsonData();
-            //InterfaceManager.Instance.(CharacterNameMenu);
-            //InterfaceManager.Instance.(CharacterNamePopupWindow);
-            //InterfaceManager.Instance.(StartMenu);
-            SceneManager.LoadScene("Main Map");
-
+            SceneManager.LoadSceneAsync("Main Map");
             Character.Instance.SetupWorldData();
-            //Debug.Log("Character name has been chosen!");Debug.Log
         }
         else
         {

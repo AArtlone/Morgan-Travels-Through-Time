@@ -27,13 +27,12 @@ public class Character : MonoBehaviour
     public List<Item> Items = new List<Item>();
     #endregion
     public List<Area> Areas = new List<Area>();
-    #region Cases references
-    public List<Case> AvailableCases = new List<Case>();
-    public List<Case> CurrentCases = new List<Case>();
-    public List<Case> CompletedCases = new List<Case>();
-    public List<Case> AllCases = new List<Case>();
+    #region Quests references
+    public List<Quest> AvailableQuests = new List<Quest>();
+    public List<Quest> CurrentQuests = new List<Quest>();
+    public List<Quest> CompletedQuests = new List<Quest>();
+    public List<Quest> AllQuests = new List<Quest>();
     #endregion
-    public List<Worker> Workers = new List<Worker>();
     #region Puzzle references
     public List<HiddenObjectsPuzzle> HiddenObjectsPuzzles = new List<HiddenObjectsPuzzle>();
     #endregion
@@ -44,11 +43,10 @@ public class Character : MonoBehaviour
     private string _pathToAssetsFolder;
     public string PlayerStatsFilePath;
     private string _areasJsonFilePath;
-    private string _casesJsonFilePath;
+    private string _questsJsonFilePath;
     private string _itemsJsonFilePath;
     private string _wearablesJsonFilePath;
-    private string _newCasesData;
-    private string _workersDataJsonFilePath;
+    private string _newQuestsData;
     #endregion
 
     // Inventory-related references
@@ -73,10 +71,9 @@ public class Character : MonoBehaviour
             _pathToAssetsFolder = Application.persistentDataPath;
             PlayerStatsFilePath = _pathToAssetsFolder + "/Player.json";
             _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
-            _casesJsonFilePath = _pathToAssetsFolder + "/Cases.json";
+            _questsJsonFilePath = _pathToAssetsFolder + "/Quests.json";
             _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
-            _workersDataJsonFilePath = _pathToAssetsFolder + "/Workers.json";
 
             if (File.Exists(PlayerStatsFilePath))
             {
@@ -91,7 +88,7 @@ public class Character : MonoBehaviour
             else
             {
                 // This reads every default file settings for the world data
-                // and we use it to setup the starting player, cases, items
+                // and we use it to setup the starting player, Quests, items
                 // and so on collections of data for when the game first starts.
                 if (IsDataCreated == false)
                 {
@@ -148,60 +145,60 @@ public class Character : MonoBehaviour
                     File.WriteAllText(_areasJsonFilePath, areasJsonData.ToJson());
                     #endregion
 
-                    #region Creating the cases list
-                    TextAsset casesData = Resources.Load<TextAsset>("Default World Data/Cases");
-                    JsonData casesJsonData = JsonMapper.ToObject(casesData.text);
+                    #region Creating the quests list
+                    TextAsset questsData = Resources.Load<TextAsset>("Default World Data/Quests");
+                    JsonData questsJsonData = JsonMapper.ToObject(questsData.text);
 
-                    AllCases.Clear();
-                    for (int i = 0; i < casesJsonData["Cases"].Count; i++)
+                    AllQuests.Clear();
+                    for (int i = 0; i < questsJsonData["Quests"].Count; i++)
                     {
-                        List<Objective> newCaseObjectives = new List<Objective>();
+                        List<Objective> newQuestObjectives = new List<Objective>();
 
-                        for (int j = 0; j < casesJsonData["Cases"][i]["Objectives"].Count; j++)
+                        for (int j = 0; j < questsJsonData["Quests"][i]["Objectives"].Count; j++)
                         {
                             // These conditions make sure that we get the right type of data
                             // from the json and convert it accurately for the dictionaries
-                            // of objectives for that case later on.
+                            // of objectives for that quest later on.
                             bool isObjectiveComplete = false;
-                            if (casesJsonData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                            if (questsJsonData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
                             {
                                 isObjectiveComplete = true;
                             }
-                            else if (casesJsonData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                            else if (questsJsonData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
                             {
                                 isObjectiveComplete = false;
                             }
 
                             // Here we store the new dictionary (objective) to the list of
                             // objectives after we set up the new objective.
-                            Objective newObjectives = new Objective(casesJsonData["Cases"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+                            Objective newObjectives = new Objective(questsJsonData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
 
-                            newCaseObjectives.Add(newObjectives);
+                            newQuestObjectives.Add(newObjectives);
                         }
 
-                        bool statusOfCaseCompletion = false;
-                        if (casesJsonData["Cases"][i]["Completed"].ToString() == "True")
+                        bool statusOfQuestCompletion = false;
+                        if (questsJsonData["Quests"][i]["Completed"].ToString() == "True")
                         {
-                            statusOfCaseCompletion = true;
+                            statusOfQuestCompletion = true;
                         }
-                        else if (casesJsonData["Cases"][i]["Completed"].ToString() == "False")
+                        else if (questsJsonData["Quests"][i]["Completed"].ToString() == "False")
                         {
-                            statusOfCaseCompletion = false;
+                            statusOfQuestCompletion = false;
                         }
 
-                        Case newCase = new Case(
-                            casesJsonData["Cases"][i]["Name"].ToString(),
-                            casesJsonData["Cases"][i]["Area"].ToString(),
-                            casesJsonData["Cases"][i]["ProgressStatus"].ToString(),
-                            casesJsonData["Cases"][i]["Description"].ToString(),
-                            statusOfCaseCompletion,
-                            newCaseObjectives);
+                        Quest newQuest = new Quest(
+                            questsJsonData["Quests"][i]["Name"].ToString(),
+                            questsJsonData["Quests"][i]["Area"].ToString(),
+                            questsJsonData["Quests"][i]["ProgressStatus"].ToString(),
+                            questsJsonData["Quests"][i]["Description"].ToString(),
+                            statusOfQuestCompletion,
+                            newQuestObjectives);
 
-                        AllCases.Add(newCase);
+                        AllQuests.Add(newQuest);
                     }
 
-                    File.WriteAllText(_casesJsonFilePath, "");
-                    RefreshAllCases();
+                    File.WriteAllText(_questsJsonFilePath, "");
+                    RefreshAllQuests();
                     #endregion
 
                     #region Creating the items list
@@ -253,27 +250,6 @@ public class Character : MonoBehaviour
 
                     File.WriteAllText(_wearablesJsonFilePath, "");
                     RefreshWearables();
-                    #endregion
-
-                    #region Creating the workers list
-                    TextAsset workersData = Resources.Load<TextAsset>("Default World Data/Workers");
-                    JsonData workersJsonData = JsonMapper.ToObject(workersData.text);
-
-                    Workers.Clear();
-                    for (int i = 0; i < workersJsonData["OwnedWorkers"].Count; i++)
-                    {
-                        Workers.Add(new Worker(
-                            workersJsonData["OwnedWorkers"][i]["Name"].ToString(),
-                            workersJsonData["OwnedWorkers"][i]["Description"].ToString(),
-                            int.Parse(workersJsonData["OwnedWorkers"][i]["Stamina"].ToString()),
-                            int.Parse(workersJsonData["OwnedWorkers"][i]["Knowledge"].ToString()),
-                            int.Parse(workersJsonData["OwnedWorkers"][i]["Fitness"].ToString()),
-                            int.Parse(workersJsonData["OwnedWorkers"][i]["Charisma"].ToString()),
-                            workersJsonData["OwnedWorkers"][i]["RelationshipStatus"].ToString()));
-                    }
-
-                    File.WriteAllText(_workersDataJsonFilePath, "");
-                    RefreshWorkersJson();
                     #endregion
                 }
             }
@@ -330,35 +306,35 @@ public class Character : MonoBehaviour
         //Debug.Log("Loaded character json data!");
     }
 
-    public void SetupCases()
+    public void SetupQuests()
     {
         // *******************
-        // This will load both the currently in progress cases from the player
-        // json data and the completed cases into his in-game data storage for in-game
+        // This will load both the currently in progress quests from the player
+        // json data and the completed quests into his in-game data storage for in-game
         // manipulation during gameplay
-        LoadCases();
+        LoadQuests();
 
-        CurrentCases.Clear();
-        AvailableCases.Clear();
+        CurrentQuests.Clear();
+        AvailableQuests.Clear();
         foreach (Area area in Areas)
         {
             //Debug.Log(area.Name);
-            foreach (Case caseInFile in AllCases)
+            foreach (Quest questInFile in AllQuests)
             {
-                if (caseInFile.Area == area.Name && area.Status == Area.AreaStatus.Unlocked)
+                if (questInFile.Area == area.Name && area.Status == Area.AreaStatus.Unlocked)
                 {
-                    if (caseInFile.ProgressStatus == "Ongoing")
+                    if (questInFile.ProgressStatus == "Ongoing")
                     {
-                        CurrentCases.Add(caseInFile);
-                        //Debug.Log("Ongoing " + caseInFile.Name);
-                    } else if (caseInFile.ProgressStatus == "Available" &&
-                        caseInFile.CompletionStatus)
+                        CurrentQuests.Add(questInFile);
+                        //Debug.Log("Ongoing " + questInFile.Name);
+                    } else if (questInFile.ProgressStatus == "Available" &&
+                        questInFile.CompletionStatus)
                     {
-                        CompletedCases.Add(caseInFile);
-                    } else if (caseInFile.ProgressStatus == "Available")
+                        CompletedQuests.Add(questInFile);
+                    } else if (questInFile.ProgressStatus == "Available")
                     {
-                        AvailableCases.Add(caseInFile);
-                        //Debug.Log("Available " + caseInFile.Name);
+                        AvailableQuests.Add(questInFile);
+                        //Debug.Log("Available " + questInFile.Name);
                     }
                 }
             }
@@ -451,84 +427,62 @@ public class Character : MonoBehaviour
         //Debug.Log("Loaded wearables json data!");
     }
 
-    private void SetupWorkers()
+    private void LoadQuests()
     {
-        if (File.Exists(_workersDataJsonFilePath))
+        if (File.Exists(_questsJsonFilePath))
         {
-            string dataToJson = File.ReadAllText(_workersDataJsonFilePath);
-            JsonData workersData = JsonMapper.ToObject(dataToJson);
+            string dataToJson = File.ReadAllText(_questsJsonFilePath);
+            JsonData questsData = JsonMapper.ToObject(dataToJson);
 
-            Workers.Clear();
-            for (int i = 0; i < workersData["OwnedWorkers"].Count; i++)
+            AllQuests.Clear();
+            for (int i = 0; i < questsData["Quests"].Count; i++)
             {
-                Workers.Add(new Worker(
-                    workersData["OwnedWorkers"][i]["Name"].ToString(),
-                    workersData["OwnedWorkers"][i]["Description"].ToString(),
-                    int.Parse(workersData["OwnedWorkers"][i]["Stamina"].ToString()),
-                    int.Parse(workersData["OwnedWorkers"][i]["Knowledge"].ToString()),
-                    int.Parse(workersData["OwnedWorkers"][i]["Fitness"].ToString()),
-                    int.Parse(workersData["OwnedWorkers"][i]["Charisma"].ToString()),
-                    workersData["OwnedWorkers"][i]["RelationshipStatus"].ToString()));
-            }
-        }
-    }
+                List<Objective> newQuestObjectives = new List<Objective>();
 
-    private void LoadCases()
-    {
-        if (File.Exists(_casesJsonFilePath))
-        {
-            string dataToJson = File.ReadAllText(_casesJsonFilePath);
-            JsonData casesData = JsonMapper.ToObject(dataToJson);
-
-            AllCases.Clear();
-            for (int i = 0; i < casesData["Cases"].Count; i++)
-            {
-                List<Objective> newCaseObjectives = new List<Objective>();
-
-                for (int j = 0; j < casesData["Cases"][i]["Objectives"].Count; j++)
+                for (int j = 0; j < questsData["Quests"][i]["Objectives"].Count; j++)
                 {
                     // These conditions make sure that we get the right type of data
                     // from the json and convert it accurately for the dictionaries
-                    // of objectives for that case later on.
+                    // of objectives for that quest later on.
                     bool isObjectiveComplete = false;
-                    if (casesData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                    if (questsData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
                     {
                         isObjectiveComplete = true;
                     }
-                    else if (casesData["Cases"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                    else if (questsData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
                     {
                         isObjectiveComplete = false;
                     }
 
                     // Here we store the new dictionary (objective) to the list of
                     // objectives after we set up the new objective.
-                    Objective newObjectives = new Objective(casesData["Cases"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+                    Objective newObjectives = new Objective(questsData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
 
-                    newCaseObjectives.Add(newObjectives);
+                    newQuestObjectives.Add(newObjectives);
                 }
 
-                bool statusOfCaseCompletion = false;
-                if (casesData["Cases"][i]["Completed"].ToString() == "True")
+                bool statusOfQuestCompletion = false;
+                if (questsData["Quests"][i]["Completed"].ToString() == "True")
                 {
-                    statusOfCaseCompletion = true;
-                } else if (casesData["Cases"][i]["Completed"].ToString() == "False")
+                    statusOfQuestCompletion = true;
+                } else if (questsData["Quests"][i]["Completed"].ToString() == "False")
                 {
-                    statusOfCaseCompletion = false;
+                    statusOfQuestCompletion = false;
                 }
 
-                Case newCase = new Case(
-                    casesData["Cases"][i]["Name"].ToString(),
-                    casesData["Cases"][i]["Area"].ToString(),
-                    casesData["Cases"][i]["ProgressStatus"].ToString(),
-                    casesData["Cases"][i]["Description"].ToString(),
-                    statusOfCaseCompletion,
-                    newCaseObjectives);
+                Quest newQuest = new Quest(
+                    questsData["Quests"][i]["Name"].ToString(),
+                    questsData["Quests"][i]["Area"].ToString(),
+                    questsData["Quests"][i]["ProgressStatus"].ToString(),
+                    questsData["Quests"][i]["Description"].ToString(),
+                    statusOfQuestCompletion,
+                    newQuestObjectives);
                 
-                AllCases.Add(newCase);
+                AllQuests.Add(newQuest);
             }
         }
 
-        //Debug.Log("Loaded " + cases + " json data!");
+        //Debug.Log("Loaded " + quests + " json data!");
     }
 
     public void LoadInventory()
@@ -555,10 +509,9 @@ public class Character : MonoBehaviour
         #region Game state setup
         SetupJsonData();
         SetupAreas();
-        SetupCases();
+        SetupQuests();
         SetupItems();
         SetupWearables();
-        SetupWorkers();
         #endregion
     }
     #endregion
@@ -566,7 +519,7 @@ public class Character : MonoBehaviour
     #region Data manipulation from existing player parameters
     /// <summary>
     /// The functions below are used mainly for adding, removing and updating
-    /// elements into existing player lists and  data related to stats and cases.
+    /// elements into existing player lists and  data related to stats and quests.
     /// </summary>
     /// <param name="item"></param>
     public void AddItem(Item item)
@@ -617,27 +570,27 @@ public class Character : MonoBehaviour
         //Debug.Log("Removed a hint. Total hints left: " + AvailableHints);
     }
 
-    public void MoveCaseStageStatus(Case caseToMove, string from, string to)
+    public void MoveQuestStageStatus(Quest questToMove, string from, string to)
     {
-        if (from == "Current Cases")
+        if (from == "Current Quests")
         {
-            AvailableCases.Add(caseToMove);
-            CurrentCases.Remove(caseToMove);
-        } else if (from == "Available Cases")
+            AvailableQuests.Add(questToMove);
+            CurrentQuests.Remove(questToMove);
+        } else if (from == "Available Quests")
         {
-            CurrentCases.Add(caseToMove);
-            AvailableCases.Remove(caseToMove);
+            CurrentQuests.Add(questToMove);
+            AvailableQuests.Remove(questToMove);
         }
-        else if (from == "Completed Cases")
+        else if (from == "Completed Quests")
         {
-            CurrentCases.Add(caseToMove);
-            CompletedCases.Remove(caseToMove);
+            CurrentQuests.Add(questToMove);
+            CompletedQuests.Remove(questToMove);
         }
 
-        string returnOutput = "Case (" + caseToMove.Name + ") status updated to " + to;
+        string returnOutput = "Quest (" + questToMove.Name + ") status updated to " + to;
         returnOutput += "!";
 
-        RefreshAllCases();
+        RefreshAllQuests();
         //Debug.Log(returnOutput);
     }
 
@@ -685,22 +638,9 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
-    /// These functions recount the effects of every worker/clothing for the player
-    /// and must be executed every time you recruit a new worker and/or add a new
-    /// clothing or one of their stats is changed.
+    /// These function recountW the effects of every clothing for the player
+    /// and must be executed every time you  add a new clothing or one of their stats is changed.
     /// </summary>
-    private void ApplyWorkersStats()
-    {
-        for (int i = 0; i < Workers.Count; i++)
-        {
-            Stamina += Workers[i].Stamina;
-            Knowledge += Workers[i].Knowledge;
-            Fitness += Workers[i].Fitness;
-            Charisma += Workers[i].Charisma;
-        }
-
-        RefreshJsonData();
-    }
 
     private void ApplyClothingStats()
     {
@@ -716,80 +656,80 @@ public class Character : MonoBehaviour
     }
     #endregion
 
-    #region Refreshing functions that export the existing player data to storage.
+    #region Refreshing functions that export the existing player data to storage
     /// <summary>
     /// All the following functions refresh sections of data from the game
     /// and must be applied whenever a form of data is changed in-game to
     /// reflect that of the files for storage.
     /// </summary>
-    private void RefreshCase(List<Case> cases)
+    private void RefreshQuest(List<Quest> quests)
     {
-        // If we have an empty case then we will just create an
-        // empty array of that case instead of populating it with
+        // If we have an empty quest then we will just create an
+        // empty array of that quest instead of populating it with
         // non-existent values.
-        if (cases.Count == 0)
+        if (quests.Count == 0)
         {
-            _newCasesData += "]}";
+            _newQuestsData += "]}";
             return;
         }
         else
         {
-            for (int i = 0; i < cases.Count; i++)
+            for (int i = 0; i < quests.Count; i++)
             {
-                _newCasesData += "{";
-                // This is one field of the case object
-                _newCasesData += "\"Name\":\"" + cases[i].Name + "\",";
-                _newCasesData += "\"Area\":\"" + cases[i].Area + "\",";
-                _newCasesData += "\"ProgressStatus\":\"" + cases[i].ProgressStatus + "\",";
-                _newCasesData += "\"Description\":\"" + cases[i].Description + "\",";
+                _newQuestsData += "{";
+                // This is one field of the quest object
+                _newQuestsData += "\"Name\":\"" + quests[i].Name + "\",";
+                _newQuestsData += "\"Area\":\"" + quests[i].Area + "\",";
+                _newQuestsData += "\"ProgressStatus\":\"" + quests[i].ProgressStatus + "\",";
+                _newQuestsData += "\"Description\":\"" + quests[i].Description + "\",";
 
-                if (cases[i].CompletionStatus == true)
+                if (quests[i].CompletionStatus == true)
                 {
-                    _newCasesData += "\"Completed\":true,";
+                    _newQuestsData += "\"Completed\":true,";
                 }
-                else if (cases[i].CompletionStatus == false)
+                else if (quests[i].CompletionStatus == false)
                 {
-                    _newCasesData += "\"Completed\":false,";
+                    _newQuestsData += "\"Completed\":false,";
                 }
 
-                _newCasesData += "\"Objectives\":" + "[";
-                foreach (Objective objective in cases[i].Objectives)
+                _newQuestsData += "\"Objectives\":" + "[";
+                foreach (Objective objective in quests[i].Objectives)
                 {
-                    _newCasesData += "{";
-                    _newCasesData += "\"Name\":\"" + objective.Name + "\",";
+                    _newQuestsData += "{";
+                    _newQuestsData += "\"Name\":\"" + objective.Name + "\",";
                     if (objective.CompletedStatus == true)
                     {
-                        _newCasesData += "\"CompletedStatus\":true,";
+                        _newQuestsData += "\"CompletedStatus\":true,";
                     }
                     else if (objective.CompletedStatus == false)
                     {
-                        _newCasesData += "\"CompletedStatus\":false";
+                        _newQuestsData += "\"CompletedStatus\":false";
                     }
-                    _newCasesData += "},";
+                    _newQuestsData += "},";
                 }
-                // This closes the x type of cases
-                _newCasesData = _newCasesData.Substring(0, _newCasesData.Length - 1);
+                // This closes the x type of quests
+                _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1);
 
-                _newCasesData += "]},";
+                _newQuestsData += "]},";
             }
         }
     }
 
-    public void RefreshAllCases()
+    public void RefreshAllQuests()
     {
-        File.WriteAllText(_casesJsonFilePath, "");
-        // Reset the existing cases data string
-        _newCasesData = "{";
-        _newCasesData += "\"Cases\":[";
+        File.WriteAllText(_questsJsonFilePath, "");
+        // Reset the existing quests data string
+        _newQuestsData = "{";
+        _newQuestsData += "\"Quests\":[";
 
-        RefreshCase(AllCases);
+        RefreshQuest(AllQuests);
 
-        _newCasesData = _newCasesData.Substring(0, _newCasesData.Length - 1);
+        _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1);
         // This closes the wrapper of the json file made from the beginning.
-        _newCasesData += "]}";
-        File.WriteAllText(_casesJsonFilePath, _newCasesData);
+        _newQuestsData += "]}";
+        File.WriteAllText(_questsJsonFilePath, _newQuestsData);
 
-        //Debug.Log("Refreshed all cases json data!");
+        //Debug.Log("Refreshed all quests json data!");
     }
 
     public void RefreshJsonData()
@@ -824,30 +764,6 @@ public class Character : MonoBehaviour
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
 
         //Debug.Log("Refreshed items json data!");
-    }
-
-    public void RefreshWorkersJson()
-    {
-        File.WriteAllText(_workersDataJsonFilePath, "");
-        string newWorkersData = "{\"OwnedWorkers\":[";
-
-        for (int i = 0; i < Workers.Count; i++)
-        {
-            newWorkersData += "{";
-            newWorkersData += "\"Name\":\"" + Workers[i].Name + "\",";
-            newWorkersData += "\"Description\":\"" + Workers[i].Description + "\",";
-            newWorkersData += "\"Stamina\":" + Workers[i].Stamina + ",";
-            newWorkersData += "\"Knowledge\":" + Workers[i].Knowledge + ",";
-            newWorkersData += "\"Fitness\":" + Workers[i].Fitness + ",";
-            newWorkersData += "\"Charisma\":" + Workers[i].Charisma + ",";
-            newWorkersData += "\"RelationshipStatus\":\"" + Workers[i].RelationshipStatus + "\"";
-            newWorkersData += "},";
-        }
-
-        newWorkersData = newWorkersData.Substring(0, newWorkersData.Length - 1);
-        newWorkersData += "]}";
-
-        File.WriteAllText(_workersDataJsonFilePath, newWorkersData);
     }
 
     public void RefreshWearables()
