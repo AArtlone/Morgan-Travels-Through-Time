@@ -14,6 +14,7 @@ public class CharacterCreatorManager : MonoBehaviour
     public GameObject CharacterNameMenu;
     public GameObject CharacterNamePopupWindow;
     public GameObject CharacterNameErrorPopupWindow;
+    public GameObject CharacterClothesSelectionErrorPopup;
 
     //public bool allPartsSelected;
 
@@ -53,6 +54,56 @@ public class CharacterCreatorManager : MonoBehaviour
 
         Character.Instance.RefreshWearables();
         //Debug.Log("Character has been created!");
+    }
+
+    public void CheckForSelectedClothing()
+    {
+        bool hairSelected = false;
+        bool faceSelected = false;
+        bool outfitSelected = false;
+        bool genderSelected = false;
+        bool skinSelected = false;
+
+        foreach(Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.BodyPart == "Hair" &&
+                clothing.Selected)
+            {
+                hairSelected = true;
+            }
+            if (clothing.BodyPart == "Face" &&
+                clothing.Selected)
+            {
+                faceSelected = true;
+            }
+            if (clothing.BodyPart == "Gender" &&
+                clothing.Selected)
+            {
+                genderSelected = true;
+            }
+            if (clothing.BodyPart == "Skin Color" &&
+                clothing.Selected)
+            {
+                skinSelected = true;
+            }
+            if (clothing.BodyPart == "Outfit" &&
+                clothing.Selected)
+            {
+                outfitSelected = true;
+            }
+        }
+
+        if (hairSelected == false ||
+            faceSelected == false ||
+            genderSelected == false ||
+            skinSelected == false ||
+            outfitSelected == false)
+        {
+            OpenWindow(CharacterClothesSelectionErrorPopup);
+        } else
+        {
+            OpenWindow(CharacterNamePopupWindow);
+        }
     }
 
     public void ConfirmCharacterName(Object obj)

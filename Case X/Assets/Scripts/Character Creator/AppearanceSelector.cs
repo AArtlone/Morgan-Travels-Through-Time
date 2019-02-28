@@ -11,11 +11,8 @@ public class AppearanceSelector : MonoBehaviour
 
     private GameObject _hairBodyPart;
     private GameObject _faceBodyPart;
-    private GameObject _shoesBodyPart;
-    private GameObject _topOutfitsBodyPart;
-    private GameObject _bottomOutfitsBodyPart;
+    private GameObject _outfitsBodyPart;
     private GameObject _genderBodyPart;
-    private GameObject _raceBodyPart;
     private GameObject _skinColorBodyPart;
     private Sprite[] _spritesFromStorage;
 
@@ -25,9 +22,9 @@ public class AppearanceSelector : MonoBehaviour
 
         _hairBodyPart = GameObject.Find("Hair Body Part");
         _faceBodyPart = GameObject.Find("Face Body Part");
-        _shoesBodyPart = GameObject.Find("Shoes Body Part");
-        _topOutfitsBodyPart = GameObject.Find("Top Outfit Body Part");
-        _bottomOutfitsBodyPart = GameObject.Find("Bottom Outfit Body Part");
+        _outfitsBodyPart = GameObject.Find("Outfit Body Part");
+        _genderBodyPart = GameObject.Find("Gender Body Part");
+        _skinColorBodyPart = GameObject.Find("Skin Color Body Part");
     }
 
     public void SelectAppearance()
@@ -36,26 +33,20 @@ public class AppearanceSelector : MonoBehaviour
         {
             // More to add...
             case "Hair Display":
-                    LoadNewBodyPart(_hairBodyPart);
-                    break;
+                LoadNewBodyPart(_hairBodyPart);
+                break;
             case "Face Display":
-                    LoadNewBodyPart(_faceBodyPart);
-                    break;
-            case "Top Outfit Display":
-                    LoadNewBodyPart(_topOutfitsBodyPart);
-                    break;
-            case "Bottom Outfit Display":
-                    LoadNewBodyPart(_bottomOutfitsBodyPart);
-                    break;
-            case "Shoes Display":
-                    LoadNewBodyPart(_shoesBodyPart);
-                    break;
-            case "Race Display":
-                    break;
+                LoadNewBodyPart(_faceBodyPart);
+                break;
+            case "Outfit Display":
+                LoadNewBodyPart(_outfitsBodyPart);
+                break;
             case "Gender Display":
-                    break;
+                LoadNewBodyPart(_genderBodyPart);
+                break;
             case "Skin Color Display":
-                    break;
+                LoadNewBodyPart(_skinColorBodyPart);
+                break;
         }
     }
 
@@ -92,9 +83,9 @@ public class AppearanceSelector : MonoBehaviour
 
         _hairBodyPart.GetComponent<Image>().sprite = null;
         _faceBodyPart.GetComponent<Image>().sprite = null;
-        _topOutfitsBodyPart.GetComponent<Image>().sprite = null;
-        _bottomOutfitsBodyPart.GetComponent<Image>().sprite = null;
-        _shoesBodyPart.GetComponent<Image>().sprite = null;
+        _outfitsBodyPart.GetComponent<Image>().sprite = null;
+        _genderBodyPart.GetComponent<Image>().sprite = null;
+        _skinColorBodyPart.GetComponent<Image>().sprite = null;
 
         Character.Instance.RefreshWearables();
         SelectAppearance();
