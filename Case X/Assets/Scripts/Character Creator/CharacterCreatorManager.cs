@@ -15,6 +15,8 @@ public class CharacterCreatorManager : MonoBehaviour
     public GameObject CharacterNamePopupWindow;
     public GameObject CharacterNameErrorPopupWindow;
 
+    //public bool allPartsSelected;
+
     private string _jsonWordsFilter;
     private List<string> _wordsFilter = new List<string>();
     #endregion
@@ -85,8 +87,8 @@ public class CharacterCreatorManager : MonoBehaviour
             // inventory and Quests diary, we want to re-initialize the data since the
             // scene before that did not contain those elements to put the data in.
             Character.Instance.RefreshJsonData();
-            SceneManager.LoadSceneAsync("Main Map");
             Character.Instance.SetupWorldData();
+            SceneManager.LoadScene("Main Map");
         }
         else
         {
@@ -110,5 +112,14 @@ public class CharacterCreatorManager : MonoBehaviour
         GameObject windowObj = (GameObject)obj;
         windowObj.SetActive(false);
     }
+
+    //public void ConfirmCharacterOutfit(Object obj)
+    //{
+    //    if (allPartsSelected)
+    //    {
+    //        GameObject windowObj = (GameObject)obj;
+    //        windowObj.SetActive(true);
+    //    }
+    //}
     #endregion
 }

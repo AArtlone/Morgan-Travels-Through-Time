@@ -50,7 +50,6 @@ public class Character : MonoBehaviour
     #endregion
 
     // Inventory-related references
-    public GameObject ItemsPanel;
     public GameObject ItemPrefab;
 
     private void Awake()
@@ -489,7 +488,7 @@ public class Character : MonoBehaviour
     {
         foreach (Item item in Items)
         {
-            GameObject newItem = Instantiate(ItemPrefab, ItemsPanel.transform);
+            GameObject newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
             Item newItemScript = newItem.GetComponent<Item>();
 
             // We use predefined images from the resources folder to load each
@@ -786,9 +785,9 @@ public class Character : MonoBehaviour
 
     public void ReloadInventory()
     {
-        for (int i = 0; i < ItemsPanel.transform.childCount; i++)
+        for (int i = 0; i < GameObject.FindGameObjectWithTag("Items Panel").transform.childCount; i++)
         {
-            Destroy(ItemsPanel.transform.GetChild(i).gameObject);
+            Destroy(GameObject.FindGameObjectWithTag("Items Panel").transform.GetChild(i).gameObject);
         }
 
         LoadInventory();

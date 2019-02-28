@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private bool _SettingsUIDisplay = false;
-    private bool _DiaryUIDisplay = false;
-    private bool _InventoryDisplay = false;
+    public bool _SettingsUIDisplay = false;
+    public bool _DiaryUIDisplay = false;
+    public bool _InventoryDisplay = false;
 
     public GameObject SettingsDisplay;
     public GameObject DiaryDisplay;
@@ -17,12 +17,13 @@ public class UIManager : MonoBehaviour
         if (_DiaryUIDisplay)
         {
             DiaryDisplay.SetActive(false);
+            _DiaryUIDisplay = !_DiaryUIDisplay;
         }
         _SettingsUIDisplay = !_SettingsUIDisplay;
-        if (!_SettingsUIDisplay)
+        if (_SettingsUIDisplay)
         {
             SettingsDisplay.SetActive(true);
-        } else if(_SettingsUIDisplay)
+        } else if(!_SettingsUIDisplay)
         {
             SettingsDisplay.SetActive(false);
         }
@@ -32,13 +33,14 @@ public class UIManager : MonoBehaviour
         if (_SettingsUIDisplay)
         {
             SettingsDisplay.SetActive(false);
+            _SettingsUIDisplay = !_SettingsUIDisplay;
         }
         _DiaryUIDisplay = !_DiaryUIDisplay;
-        if (!_DiaryUIDisplay)
+        if (_DiaryUIDisplay)
         {
             DiaryDisplay.SetActive(true);
         }
-        else if (_DiaryUIDisplay)
+        else if (!_DiaryUIDisplay)
         {
             DiaryDisplay.SetActive(false);
         }
@@ -46,11 +48,11 @@ public class UIManager : MonoBehaviour
     public void ToggleInventoryUI()
     {
         _InventoryDisplay = !_InventoryDisplay;
-        if (!_InventoryDisplay)
+        if (_InventoryDisplay)
         {
             InventoryDisplay.SetActive(true);
         }
-        else if (_InventoryDisplay)
+        else if (!_InventoryDisplay)
         {
             InventoryDisplay.SetActive(false);
         }

@@ -41,6 +41,15 @@ public class AppearanceDisplay : MonoBehaviour
     private GameObject _skinColorBodyPart;
     private Sprite[] _spritesFromStorage;
 
+    private bool _hairSelected;
+    private bool _faceSelected;
+    private bool _shoesSelected;
+    private bool _topOutfitSelected;
+    private bool _bottomOutfitSelected;
+    private bool _genderSelected;
+    private bool _raceSelected;
+    private bool _skinColorSelected;
+
     private void Start()
     {
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
