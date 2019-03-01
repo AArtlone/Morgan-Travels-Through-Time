@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using LitJson;
+using System.IO;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,6 +45,14 @@ public class InterfaceManager : MonoBehaviour
     public GameObject AreaLockedErrorPopup;
     #endregion
 
+    #region Blueprint pieces references
+    public Image Blueprint1;
+    public Image Blueprint2;
+    public Image Blueprint3;
+    public Image Blueprint4;
+    public Image Blueprint5;
+    #endregion
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -52,13 +62,67 @@ public class InterfaceManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
     private void Start()
     {
         SetupQuestsInDiary();
+    }
+
+    public void LoadBlueprints()
+    {
+        Character.Instance.RefreshJsonData();
+        string dataToJson = File.ReadAllText(Character.Instance.PlayerStatsFilePath);
+        JsonData characterData = JsonMapper.ToObject(dataToJson);
+        
+        for (int i = 1; i < 6; i++)
+        {
+            if (characterData["Blueprint" + i].ToString() == "True")
+            {
+                Sprite blueprintSprite = Resources.Load<Sprite>("Blueprints/Blueprint" + i + "Unlocked");
+                if (i == 1)
+                {
+                    Blueprint1.sprite = blueprintSprite;
+                }
+                else if (i == 2)
+                {
+                    Blueprint2.sprite = blueprintSprite;
+                }
+                else if (i == 3)
+                {
+                    Blueprint3.sprite = blueprintSprite;
+                }
+                else if (i == 4)
+                {
+                    Blueprint4.sprite = blueprintSprite;
+                }
+                else if (i == 5)
+                {
+                    Blueprint5.sprite = blueprintSprite;
+                }
+            }
+            else if (characterData["Blueprint" + i].ToString() == "False")
+            {
+                Sprite blueprintSprite = Resources.Load<Sprite>("Blueprints/Blueprint" + i + "Locked");
+                if (i == 1)
+                {
+                    Blueprint1.sprite = blueprintSprite;
+                } else if (i == 2)
+                {
+                    Blueprint2.sprite = blueprintSprite;
+                } else if (i == 3)
+                {
+                    Blueprint3.sprite = blueprintSprite;
+                } else if (i == 4)
+                {
+                    Blueprint4.sprite = blueprintSprite;
+                } else if (i == 5)
+                {
+                    Blueprint5.sprite = blueprintSprite;
+                }
+            }
+        }
     }
 
     public void SetupQuestsInDiary()

@@ -6,11 +6,10 @@ public class MapArea : MonoBehaviour
     public Area.AreaStatus AreaStatus;
     public GameObject AreaEnvironment;
     public GameObject PlayerEnterStartPosition;
+    public GameObject Icons;
 
     private void Start()
     {
-        Avatar.Instance.transform.SetParent(InterfaceManager.Instance.transform);
-
         foreach (Area area in Character.Instance.Areas)
         {
             if (area.Name == Name)
@@ -25,15 +24,8 @@ public class MapArea : MonoBehaviour
     {
         if (AreaStatus == Area.AreaStatus.Unlocked)
         {
-            Avatar.Instance.gameObject.transform.position = PlayerEnterStartPosition.transform.position;
-
-            Avatar.Instance.gameObject.SetActive(true);
-            Animator characterAnimator = Avatar.Instance.gameObject.GetComponent<Animator>();
-            characterAnimator.SetBool("Idle", true);
-            characterAnimator.SetBool("Right", false);
-            characterAnimator.SetBool("Left", false);
-
             AreaEnvironment.SetActive(true);
+            Icons.SetActive(false);
         }
         else
         {
@@ -45,6 +37,6 @@ public class MapArea : MonoBehaviour
     {
         AreaEnvironment.transform.GetChild(3).GetComponent<WalkablePathController>().HasPlayerReachedDestination = true;
         AreaEnvironment.SetActive(false);
-        Avatar.Instance.gameObject.SetActive(false);
+        Icons.SetActive(true);
     }
 }

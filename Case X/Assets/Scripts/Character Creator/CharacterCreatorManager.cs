@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterCreatorManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class CharacterCreatorManager : MonoBehaviour
     public GameObject CharacterNamePopupWindow;
     public GameObject CharacterNameErrorPopupWindow;
     public GameObject CharacterClothesSelectionErrorPopup;
+
+    public TextMeshProUGUI CharacterSelectionErrorMessage;
+    private string errorString;
 
     //public bool allPartsSelected;
 
@@ -92,6 +96,79 @@ public class CharacterCreatorManager : MonoBehaviour
                 outfitSelected = true;
             }
         }
+        
+
+        if (hairSelected == false ||
+            faceSelected == false ||
+            genderSelected == false ||
+            skinSelected == false ||
+            outfitSelected == false)
+        {
+            if(genderSelected == false)
+            {
+                errorString = errorString + "gender, ";
+            }
+            if (faceSelected == false)
+            {
+                errorString = errorString + "face, ";
+            }
+            if (hairSelected == false)
+            {
+                errorString = errorString + "hair, ";
+            }
+            if (outfitSelected == false)
+            {
+                errorString = errorString + "outfit, ";
+            }
+            if (skinSelected == false)
+            {
+                errorString = errorString + "skin color, ";
+            }
+
+            CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
+            OpenWindow(CharacterClothesSelectionErrorPopup);
+            errorString = string.Empty;
+        } else
+        {
+            OpenWindow(CharacterNamePopupWindow);
+        }
+    }
+    public void ReturnToMainMapAndCheck()
+    {
+        bool hairSelected = false;
+        bool faceSelected = false;
+        bool outfitSelected = false;
+        bool genderSelected = false;
+        bool skinSelected = false;
+
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.BodyPart == "Hair" &&
+                clothing.Selected)
+            {
+                hairSelected = true;
+            }
+            if (clothing.BodyPart == "Face" &&
+                clothing.Selected)
+            {
+                faceSelected = true;
+            }
+            if (clothing.BodyPart == "Gender" &&
+                clothing.Selected)
+            {
+                genderSelected = true;
+            }
+            if (clothing.BodyPart == "Skin Color" &&
+                clothing.Selected)
+            {
+                skinSelected = true;
+            }
+            if (clothing.BodyPart == "Outfit" &&
+                clothing.Selected)
+            {
+                outfitSelected = true;
+            }
+        }
 
         if (hairSelected == false ||
             faceSelected == false ||
@@ -100,9 +177,12 @@ public class CharacterCreatorManager : MonoBehaviour
             outfitSelected == false)
         {
             OpenWindow(CharacterClothesSelectionErrorPopup);
-        } else
+        }
+        else
         {
-            OpenWindow(CharacterNamePopupWindow);
+            Character.Instance.CharacterCreation = true;
+            Character.Instance.RefreshJsonData();
+            SceneManager.LoadScene("Main Map");
         }
     }
 
@@ -139,7 +219,13 @@ public class CharacterCreatorManager : MonoBehaviour
             // scene before that did not contain those elements to put the data in.
             Character.Instance.RefreshJsonData();
             Character.Instance.SetupWorldData();
-            SceneManager.LoadScene("Main Map");
+            if(SceneManager.GetActiveScene().name == "Begining Character Creation")
+            {
+                SceneManager.LoadScene("Main Map");
+            } else
+            {
+                GameObject.Find("Character Name Menu").SetActive(false);
+            }
         }
         else
         {
@@ -163,14 +249,5 @@ public class CharacterCreatorManager : MonoBehaviour
         GameObject windowObj = (GameObject)obj;
         windowObj.SetActive(false);
     }
-
-    //public void ConfirmCharacterOutfit(Object obj)
-    //{
-    //    if (allPartsSelected)
-    //    {
-    //        GameObject windowObj = (GameObject)obj;
-    //        windowObj.SetActive(true);
-    //    }
-    //}
     #endregion
 }

@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 public class WalkablePathController : MonoBehaviour
 {
+    public GameObject Avatar;
+    private Avatar _avatarScript;
     private Animator _characterAnimator;
     private Vector3 DestinationPosition;
     [NonSerialized]
@@ -12,7 +12,8 @@ public class WalkablePathController : MonoBehaviour
 
     private void Start()
     {
-        _characterAnimator = Avatar.Instance.GetComponent<Animator>();
+        _avatarScript = Avatar.GetComponent<Avatar>();
+        _characterAnimator = Avatar.GetComponent<Animator>();
     }
 
     public void MovePlayer()
@@ -37,10 +38,10 @@ public class WalkablePathController : MonoBehaviour
     {
         if (HasPlayerReachedDestination == false)
         {
-            Avatar.Instance.transform.position = Vector3.MoveTowards(Avatar.Instance.transform.position, DestinationPosition, Avatar.Instance.MovementSpeed * 0.5f);
+            Avatar.transform.position = Vector3.MoveTowards(Avatar.transform.position, DestinationPosition, _avatarScript.MovementSpeed * 0.5f);
 
             if (Vector3.Distance(
-                Avatar.Instance.transform.position,
+                Avatar.transform.position,
                 DestinationPosition) < 10f)
             {
                 _characterAnimator.SetBool("Idle", true);

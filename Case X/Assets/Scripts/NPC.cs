@@ -133,9 +133,7 @@ public class NPC : MonoBehaviour
     }
 
     public void ContinueDialogue()
-    {
-        Avatar.Instance.gameObject.SetActive(false);
-
+    {   
         // When the player taps on the npc or anywhere on the dialogue box, it
         // will progress the dialogue further.
         if (_isDialogueOngoing)
@@ -164,7 +162,6 @@ public class NPC : MonoBehaviour
 
                         _isDialogueOngoing = false;
                         DialogueManager.Instance.CurrentNPCDialogue = null;
-                        Avatar.Instance.gameObject.SetActive(true);
                         return;
                     }
                 }

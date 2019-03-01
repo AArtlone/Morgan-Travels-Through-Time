@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using LitJson;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -47,6 +47,14 @@ public class Character : MonoBehaviour
     private string _itemsJsonFilePath;
     private string _wearablesJsonFilePath;
     private string _newQuestsData;
+    #endregion
+
+    #region Blueprints references
+    public bool Blueprint1;
+    public bool Blueprint2;
+    public bool Blueprint3;
+    public bool Blueprint4;
+    public bool Blueprint5;
     #endregion
 
     // Inventory-related references
@@ -105,6 +113,43 @@ public class Character : MonoBehaviour
                     {
                         CharacterCreation = false;
                     }
+
+                    #region Blueprints
+                    for (int i = 1; i < 6; i++)
+                    {
+                        bool isBlueprintCollected = false;
+                        if (playerJsonData["Blueprint" + i].ToString() == "True")
+                        {
+                            isBlueprintCollected = true;
+                        }
+                        else if (playerJsonData["Blueprint" + i].ToString() == "False")
+                        {
+                            isBlueprintCollected = false;
+                        }
+
+                        if (i == 1)
+                        {
+                            Blueprint1 = isBlueprintCollected;
+                        }
+                        else if (i == 2)
+                        {
+                            Blueprint2 = isBlueprintCollected;
+                        }
+                        else if (i == 3)
+                        {
+                            Blueprint3 = isBlueprintCollected;
+                        }
+                        else if (i == 4)
+                        {
+                            Blueprint4 = isBlueprintCollected;
+                        }
+                        else if (i == 5)
+                        {
+                            Blueprint5 = isBlueprintCollected;
+                        }
+                    }
+                    #endregion
+
                     Reputation = int.Parse(playerJsonData["Reputation"].ToString());
                     Stamina = int.Parse(playerJsonData["Stamina"].ToString());
                     Knowledge = int.Parse(playerJsonData["Knowledge"].ToString());
@@ -291,6 +336,41 @@ public class Character : MonoBehaviour
             {
                 CharacterCreation = false;
             }
+
+            #region Blueprints
+            for (int i = 1; i < 6; i++)
+            {
+                bool isBlueprintCollected = false;
+                if (characterData["Blueprint" + i].ToString() == "True")
+                {
+                    isBlueprintCollected = true;
+                } else if (characterData["Blueprint" + i].ToString() == "False")
+                {
+                    isBlueprintCollected = false;
+                }
+
+                if (i == 1)
+                {
+                    Blueprint1 = isBlueprintCollected;
+                }
+                else if (i == 2)
+                {
+                    Blueprint2 = isBlueprintCollected;
+                }
+                else if (i == 3)
+                {
+                    Blueprint3 = isBlueprintCollected;
+                }
+                else if (i == 4)
+                {
+                    Blueprint4 = isBlueprintCollected;
+                }
+                else if (i == 5)
+                {
+                    Blueprint5 = isBlueprintCollected;
+                }
+            }
+            #endregion
             Reputation = int.Parse(characterData["Reputation"].ToString());
             Stamina = int.Parse(characterData["Stamina"].ToString());
             Knowledge = int.Parse(characterData["Knowledge"].ToString());
@@ -591,6 +671,41 @@ public class Character : MonoBehaviour
 
         RefreshAllQuests();
         //Debug.Log(returnOutput);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CollectBlueprint("Blueprint5");
+        }
+    }
+
+    public void CollectBlueprint(string blueprint)
+    {
+        if (blueprint == "Blueprint1")
+        {
+            Blueprint1 = true;
+        } else if (blueprint == "Blueprint2")
+        {
+            Blueprint2 = true;
+        }
+        else if (blueprint == "Blueprint3")
+        {
+            Blueprint3 = true;
+        }
+        else if (blueprint == "Blueprint4")
+        {
+            Blueprint4 = true;
+        }
+        else if (blueprint == "Blueprint5")
+        {
+            Blueprint5 = true;
+        }
+
+        RefreshJsonData();
+
+        Debug.Log("Collected the blueprint: " + blueprint);
     }
 
     /// <summary>
