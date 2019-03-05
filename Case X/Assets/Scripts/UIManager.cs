@@ -1,16 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public bool _SettingsUIDisplay = false;
-    public bool _DiaryUIDisplay = false;
-    public bool _InventoryDisplay = false;
+    private bool _SettingsUIDisplay = false;
+    private bool _DiaryUIDisplay = false;
+    private bool _InventoryDisplay = false;
 
     public GameObject SettingsDisplay;
     public GameObject DiaryDisplay;
     public GameObject InventoryDisplay;
+
+    public Image _hairIcon;
+    public Image _faceIcon;
+
+    private Sprite[] _spritesFromStorage;
+
+    private void Start()
+    {
+        _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.BodyPart == "Hair" && clothing.Selected == true)
+            {
+                foreach(Sprite sprite in _spritesFromStorage)
+                {
+                    if(sprite.name == clothing.Name)
+                    {
+                        _hairIcon.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Face" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _faceIcon.sprite = sprite;
+                    }
+                }
+            }
+        }
+    }
 
     public void ToggleSettingsUI()
     {

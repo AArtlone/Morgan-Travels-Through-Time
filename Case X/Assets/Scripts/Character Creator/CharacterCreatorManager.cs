@@ -17,6 +17,7 @@ public class CharacterCreatorManager : MonoBehaviour
     public GameObject CharacterNameErrorPopupWindow;
     public GameObject CharacterClothesSelectionErrorPopup;
     public GameObject CharacterClothesChangedErrorPopop;
+    public GameObject SaveCharacterPopup;
 
     public TextMeshProUGUI CharacterSelectionErrorMessage;
     private string errorString;
@@ -378,6 +379,69 @@ public class CharacterCreatorManager : MonoBehaviour
         TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true, true);
     }
     
+    //function for the save button of the character customization
+    public void SaveButton()
+    {
+        bool _genderChanged = false;
+        bool _faceChanged = false;
+        bool _hairChanged = false;
+        bool _outfitChanged = false;
+        bool _skinColorChanged = false;
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.Selected == true)
+            {
+                if (clothing.BodyPart == "Gender")
+                {
+                    if (clothing.Name != _currentGender)
+                    {
+                        _genderChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Face")
+                {
+                    if (clothing.Name != _currentFace)
+                    {
+                        _faceChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Hair")
+                {
+                    if (clothing.Name != _currentHair)
+                    {
+                        _hairChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Outfit")
+                {
+                    if (clothing.Name != _currentOutfit)
+                    {
+                        _outfitChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Skin Color")
+                {
+                    if (clothing.Name != _currentSkinColor)
+                    {
+                        _skinColorChanged = true;
+                    }
+                }
+            }
+        }
+        if (_faceChanged == true ||
+            _genderChanged == true ||
+            _skinColorChanged == true ||
+            _hairChanged == true ||
+            _outfitChanged == true)
+        {
+            OpenWindow(SaveCharacterPopup);
+        }
+        else
+        {
+            return;
+        }
+    }
+
     public void OpenWindow(Object obj)
     {
         GameObject windowObj = (GameObject)obj;
