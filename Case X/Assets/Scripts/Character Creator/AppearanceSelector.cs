@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AppearanceSelector : MonoBehaviour
 {
@@ -65,7 +66,10 @@ public class AppearanceSelector : MonoBehaviour
 
         foreach (Sprite sprite in _spritesFromStorage)
         {
-            Character.Instance.RefreshWearables();
+            if(SceneManager.GetActiveScene().name == "Begining Character Creation")
+            {
+                Character.Instance.RefreshWearables();
+            }
 
             if (sprite.name == PortraitImage)
             {

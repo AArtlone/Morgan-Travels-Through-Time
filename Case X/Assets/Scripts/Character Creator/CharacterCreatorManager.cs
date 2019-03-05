@@ -16,11 +16,17 @@ public class CharacterCreatorManager : MonoBehaviour
     public GameObject CharacterNamePopupWindow;
     public GameObject CharacterNameErrorPopupWindow;
     public GameObject CharacterClothesSelectionErrorPopup;
+    public GameObject CharacterClothesChangedErrorPopop;
 
     public TextMeshProUGUI CharacterSelectionErrorMessage;
     private string errorString;
 
-    //public bool allPartsSelected;
+    
+    private string _currentGender;
+    private string _currentFace;
+    private string _currentHair;
+    private string _currentOutfit;
+    private string _currentSkinColor;
 
     private string _jsonWordsFilter;
     private List<string> _wordsFilter = new List<string>();
@@ -39,11 +45,47 @@ public class CharacterCreatorManager : MonoBehaviour
             //Debug.Log(_wordsFilter[i]);
         }
 
+        DefineCurrentWearables();
+
         // If the player has already created a character then 
         // we just start the main menu instead.
         if (Character.Instance.CharacterCreation)
         {
             SceneManager.LoadScene("Main Map");
+        }
+    }
+
+    //defining current player's appearances in order to later check if any has changed
+    public void DefineCurrentWearables()
+    {
+        if (SceneManager.GetActiveScene().name == "Character Customization")
+        {
+            foreach (Clothing clothing in Character.Instance.Wearables)
+            {
+                if (clothing.Selected == true)
+                {
+                    if (clothing.BodyPart == "Gender")
+                    {
+                        _currentGender = clothing.Name;
+                    }
+                    else if (clothing.BodyPart == "Face")
+                    {
+                        _currentFace = clothing.Name;
+                    }
+                    else if (clothing.BodyPart == "Hair")
+                    {
+                        _currentHair = clothing.Name;
+                    }
+                    else if (clothing.BodyPart == "Outfit")
+                    {
+                        _currentOutfit = clothing.Name;
+                    }
+                    else if (clothing.BodyPart == "Skin Color")
+                    {
+                        _currentSkinColor = clothing.Name;
+                    }
+                }
+            }
         }
     }
 
@@ -58,6 +100,13 @@ public class CharacterCreatorManager : MonoBehaviour
 
         Character.Instance.RefreshWearables();
         //Debug.Log("Character has been created!");
+    }
+
+    //function for the Character Customization scene only
+    public void ConfirmCharacterChanges()
+    {
+        Character.Instance.RefreshWearables();
+        DefineCurrentWearables();
     }
 
     public void CheckForSelectedClothing()
@@ -176,14 +225,105 @@ public class CharacterCreatorManager : MonoBehaviour
             skinSelected == false ||
             outfitSelected == false)
         {
+            if (genderSelected == false)
+            {
+                errorString = errorString + "gender, ";
+            }
+            if (faceSelected == false)
+            {
+                errorString = errorString + "face, ";
+            }
+            if (hairSelected == false)
+            {
+                errorString = errorString + "hair, ";
+            }
+            if (outfitSelected == false)
+            {
+                errorString = errorString + "outfit, ";
+            }
+            if (skinSelected == false)
+            {
+                errorString = errorString + "skin color, ";
+            }
+
+            CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
             OpenWindow(CharacterClothesSelectionErrorPopup);
-        }
-        else
+            errorString = string.Empty;
+        } else
         {
-            Character.Instance.CharacterCreation = true;
-            Character.Instance.RefreshJsonData();
-            SceneManager.LoadScene("Main Map");
+            CheckIfClothingChanged();
         }
+    }
+
+    //function that checks if any of the body parts were changed
+    public void CheckIfClothingChanged()
+    {
+        bool _genderChanged = false;
+        bool _faceChanged = false;
+        bool _hairChanged = false;
+        bool _outfitChanged = false;
+        bool _skinColorChanged = false;
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.Selected == true)
+            {
+                if (clothing.BodyPart == "Gender")
+                {
+                    if(clothing.Name != _currentGender)
+                    {
+                        _genderChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Face")
+                {
+                    if (clothing.Name != _currentFace)
+                    {
+                        _faceChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Hair")
+                {
+                    if (clothing.Name != _currentHair)
+                    {
+                        _hairChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Outfit")
+                {
+                    if (clothing.Name != _currentOutfit)
+                    {
+                        _outfitChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Skin Color")
+                {
+                    if (clothing.Name != _currentSkinColor)
+                    {
+                        _skinColorChanged = true;
+                    }
+                }
+            }
+        }
+        if(_faceChanged == true ||
+            _genderChanged == true ||
+            _skinColorChanged == true ||
+            _hairChanged == true ||
+            _outfitChanged == true)
+        {
+            //display error message
+            OpenWindow(CharacterClothesChangedErrorPopop);
+        } else
+        {
+            ReturnToMainMap();
+        }
+    }
+
+    //simply return to main map without any additional checks
+    public void ReturnToMainMap()
+    {
+        Character.Instance.CharacterCreation = true;
+        Character.Instance.RefreshJsonData();
+        SceneManager.LoadScene("Main Map");
     }
 
     public void ConfirmCharacterName(Object obj)
@@ -237,7 +377,7 @@ public class CharacterCreatorManager : MonoBehaviour
     {
         TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true, true);
     }
-
+    
     public void OpenWindow(Object obj)
     {
         GameObject windowObj = (GameObject)obj;
