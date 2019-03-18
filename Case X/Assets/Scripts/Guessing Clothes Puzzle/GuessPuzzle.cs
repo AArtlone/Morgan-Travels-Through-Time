@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using LitJson;
 using System.IO;
+using TMPro;
 
 public class GuessPuzzle : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GuessPuzzle : MonoBehaviour
     public string Name;
     [Tooltip("This checkbox either allows or disallows loading clothes from the editor by hand instead of loading the default ones.")]
     public bool Customizable;
+    public int PuzzleTimeInSeconds;
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
     public List<GuessClothing> HeadList = new List<GuessClothing>();
     private int _currentHeadIndex = 0;
@@ -29,8 +31,14 @@ public class GuessPuzzle : MonoBehaviour
     private string _defaultsJsonPath;
     private string _guessingPuzzlesPath;
 
+    public GameObject PuzzleFinishedWindow;
+    private bool _isGameStarted = false;
+    public TextMeshProUGUI Timer;
+    private float _timer = 0;
+
     void Start()
     {
+        _timer = PuzzleTimeInSeconds;
         _defaultsJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
         _guessingPuzzlesPath = Application.persistentDataPath + "/GuessingPuzzles.json";
         
@@ -58,6 +66,25 @@ public class GuessPuzzle : MonoBehaviour
         _bottomPart = gameObject.transform.GetChild(1).transform.GetChild(2).gameObject;
         _shoesPart = gameObject.transform.GetChild(1).transform.GetChild(3).gameObject;
         #endregion
+    }
+
+    private void Update()
+    {
+        if (_isGameStarted)
+        {
+            if (_timer > 0)
+            {
+                _timer -= Time.deltaTime;
+            }
+            else
+            {
+                _timer = 0;
+                OpenPopup(PuzzleFinishedWindow);
+                SavePuzzleScore();
+                _isGameStarted = false;
+            }
+            Timer.text = ((int)_timer).ToString();
+        }
     }
 
     public void NextClothing(string bodyPart)
@@ -235,6 +262,7 @@ public class GuessPuzzle : MonoBehaviour
     public void StartPuzzle(GameObject puzzle)
     {
         puzzle.SetActive(true);
+        _isGameStarted = true;
     }
 
     private void SavePuzzleScore()
@@ -273,5 +301,31 @@ public class GuessPuzzle : MonoBehaviour
             TorsoList[_currentTorsoIndex].Points +
             BottomList[_currentBottomIndex].Points +
             ShoesList[_currentShoesIndex].Points;
+    }
+
+    public void ResetPuzzle()
+    {
+        _currentHeadIndex = 0;
+        _currentTorsoIndex = 0;
+        _currentBottomIndex = 0;
+        _currentShoesIndex = 0;
+        _timer = PuzzleTimeInSeconds;
+
+        LoadNewClothing("Head");
+        LoadNewClothing("Torso");
+        LoadNewClothing("Bottom");
+        LoadNewClothing("Shoes");
+    }
+
+    public void ClosePopup(Object obj)
+    {
+        GameObject popupObject = obj as GameObject;
+        popupObject.SetActive(false);
+    }
+
+    public void OpenPopup(Object obj)
+    {
+        GameObject popupObject = obj as GameObject;
+        popupObject.SetActive(true);
     }
 }
