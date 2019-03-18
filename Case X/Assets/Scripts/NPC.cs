@@ -27,6 +27,7 @@ public class NPC : MonoBehaviour
     private Character _playerCharacterScript;
     private Image _dialogueProgressionTrigger;
     private Image _imageComponent;
+    private SpriteRenderer _spriteComponent;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class NPC : MonoBehaviour
         _dialogueProgressionTrigger = transform.GetChild(0).GetComponent<Image>();
         _dialogueProgressionTrigger.raycastTarget = false;
 
+        _spriteComponent = GetComponent<SpriteRenderer>();
         _imageComponent = GetComponent<Image>();
     }
 
@@ -158,7 +160,10 @@ public class NPC : MonoBehaviour
                         // quit or restarted the game, he would lose them forever.
                         _playerCharacterScript.RefreshItems();
                         _dialogueProgressionTrigger.raycastTarget = false;
-                        _imageComponent.raycastTarget = true;
+                        if (_imageComponent)
+                        {
+                            _imageComponent.raycastTarget = true;
+                        }
 
                         _isDialogueOngoing = false;
                         DialogueManager.Instance.CurrentNPCDialogue = null;
@@ -171,7 +176,10 @@ public class NPC : MonoBehaviour
                 DialogueManager.Instance.ToggleDialogue(false);
                 _playerCharacterScript.RefreshItems();
                 _dialogueProgressionTrigger.raycastTarget = false;
-                _imageComponent.raycastTarget = true;
+                if (_imageComponent)
+                {
+                    _imageComponent.raycastTarget = true;
+                }
 
                 _isDialogueOngoing = false;
                 return;
@@ -181,7 +189,10 @@ public class NPC : MonoBehaviour
         // has tapped on top of an npc icon.
         {
 
-            _imageComponent.raycastTarget = false;
+            if (_imageComponent)
+            {
+                _imageComponent.raycastTarget = false;
+            }
             // Once a dialogue is initiated, we display the dialogue template
             // and give it the starting dialogue object's data. We also make sure
             // to set _isDialogueOngoing to true because the player is still able

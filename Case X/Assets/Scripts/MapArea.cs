@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapArea : MonoBehaviour
 {
@@ -20,12 +21,13 @@ public class MapArea : MonoBehaviour
         }
     }
 
-    public void EnterArea()
+    public void EnterArea(string SceneToLoad)
     {
         if (AreaStatus == Area.AreaStatus.Unlocked)
         {
-            AreaEnvironment.SetActive(true);
-            Icons.SetActive(false);
+            SceneManager.LoadScene(SceneToLoad);
+            //AreaEnvironment.SetActive(true);
+            //Icons.SetActive(false);
         }
         else
         {

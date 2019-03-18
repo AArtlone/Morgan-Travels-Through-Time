@@ -42,7 +42,7 @@ public class Refugee : MonoBehaviour
 
             if (Vector2.Distance(transform.position, _targetCheckpoint.gameObject.transform.position) > 1f)
             {
-                transform.position = Vector2.Lerp(transform.position, _targetCheckpoint.gameObject.transform.position, .7f * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.gameObject.transform.position, .7f * Time.deltaTime);
             }
             //TODO: make him towards the target checkpoint
         } else

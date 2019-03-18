@@ -60,7 +60,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void StartTimer()
     {
-        InterfaceManager.Instance.BottomUIInventory.SetActive(false);
+        //InterfaceManager.Instance.BottomUIInventory.SetActive(false);
 
         // Here we reset the tapped and hinted at booleans because once the puzzle
         // is over and started again, we need to hint at the right objects instead of.

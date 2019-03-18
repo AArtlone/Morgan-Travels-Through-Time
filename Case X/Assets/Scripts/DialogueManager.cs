@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         {
             Instance = this;
             // We want to be able to access the dialogue information from any scene.
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
             if (!File.Exists(_dialogueResponsesPath))
             {

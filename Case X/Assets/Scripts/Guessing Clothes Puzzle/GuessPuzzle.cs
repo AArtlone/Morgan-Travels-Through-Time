@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using LitJson;
 using System.IO;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GuessPuzzle : MonoBehaviour
 {
@@ -61,10 +62,19 @@ public class GuessPuzzle : MonoBehaviour
         #endregion
 
         #region Assigning body parts to the game objects
-        _headPart = gameObject.transform.GetChild(1).transform.GetChild(0).gameObject;
-        _torsoPart = gameObject.transform.GetChild(1).transform.GetChild(1).gameObject;
-        _bottomPart = gameObject.transform.GetChild(1).transform.GetChild(2).gameObject;
-        _shoesPart = gameObject.transform.GetChild(1).transform.GetChild(3).gameObject;
+        if (SceneManager.GetActiveScene().name == "Main Map")
+        {
+            _headPart = gameObject.transform.GetChild(1).transform.GetChild(0).gameObject;
+            _torsoPart = gameObject.transform.GetChild(1).transform.GetChild(1).gameObject;
+            _bottomPart = gameObject.transform.GetChild(1).transform.GetChild(2).gameObject;
+            _shoesPart = gameObject.transform.GetChild(1).transform.GetChild(3).gameObject;
+        } else
+        {
+            _headPart = gameObject.transform.GetChild(0).transform.GetChild(0).gameObject;
+            _torsoPart = gameObject.transform.GetChild(0).transform.GetChild(1).gameObject;
+            _bottomPart = gameObject.transform.GetChild(0).transform.GetChild(2).gameObject;
+            _shoesPart = gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
+        }
         #endregion
     }
 
@@ -261,6 +271,7 @@ public class GuessPuzzle : MonoBehaviour
 
     public void StartPuzzle(GameObject puzzle)
     {
+        ResetPuzzle();
         puzzle.SetActive(true);
         _isGameStarted = true;
     }

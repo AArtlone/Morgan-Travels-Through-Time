@@ -7,7 +7,7 @@ public class Puzzle : MonoBehaviour
 {
     public GameObject PuzzleToLaunch;
     public GameObject StarsDisplay;
-    public enum PuzzleType { HiddenObjects, CannonGame };
+    public enum PuzzleType { HiddenObjects, CannonGame, GuessClothes };
     public PuzzleType TypeOfPuzzle;
     private HiddenObjectsPuzzle _puzzleScript;
 
@@ -27,8 +27,7 @@ public class Puzzle : MonoBehaviour
         {
             SetupHiddenObjectsPuzzle();
             Character.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>());
-        }
-        if (TypeOfPuzzle == PuzzleType.CannonGame)
+        } else if (TypeOfPuzzle == PuzzleType.CannonGame)
         {
             //Debug.Log("aa");
             //SetupHiddenObjectsPuzzle();
@@ -36,9 +35,14 @@ public class Puzzle : MonoBehaviour
         }
     }
 
+    public void InitiateGuessClothesPuzzle()
+    {
+        PuzzleToLaunch.GetComponentInParent<GuessPuzzle>().StartPuzzle(PuzzleToLaunch);
+    }
+
     public void InitiateHiddenObjectsPuzzle()
     {
-        if (transform.GetComponent<Image>().raycastTarget == true)
+        if (transform.GetComponent<Image>() && transform.GetComponent<Image>().raycastTarget == true)
         {
             // This centers the puzzle to the middle of the canvas because the actual puzzle
             // object is a child of the puzzle prefab and that changes its position to the
@@ -49,6 +53,13 @@ public class Puzzle : MonoBehaviour
             PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
             PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartTimer();
             transform.GetComponent<Image>().raycastTarget = false;
+        } else
+        {
+            PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+            PuzzleToLaunch.SetActive(true);
+            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
+            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartTimer();
         }
     }
 
