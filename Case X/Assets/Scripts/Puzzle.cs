@@ -2,7 +2,6 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Puzzle : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class Puzzle : MonoBehaviour
         }
         if (TypeOfPuzzle == PuzzleType.CannonGame)
         {
-            Debug.Log("aa");
+            //Debug.Log("aa");
             //SetupHiddenObjectsPuzzle();
             //Character.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>());
         }

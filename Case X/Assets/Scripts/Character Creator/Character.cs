@@ -3,7 +3,6 @@ using System.IO;
 using UnityEngine;
 using LitJson;
 using UnityEngine.UI;
-using System;
 
 public class Character : MonoBehaviour
 {
@@ -47,6 +46,8 @@ public class Character : MonoBehaviour
     private string _itemsJsonFilePath;
     private string _wearablesJsonFilePath;
     private string _newQuestsData;
+    private string _defaultsGuessingClothesJsonPath;
+    private string _guessingPuzzlesPath;
     #endregion
 
     #region Blueprints references
@@ -81,6 +82,8 @@ public class Character : MonoBehaviour
             _questsJsonFilePath = _pathToAssetsFolder + "/Quests.json";
             _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
+            _defaultsGuessingClothesJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
+            _guessingPuzzlesPath = Application.persistentDataPath + "/GuessingPuzzles.json";
 
             if (File.Exists(PlayerStatsFilePath))
             {
@@ -294,6 +297,11 @@ public class Character : MonoBehaviour
 
                     File.WriteAllText(_wearablesJsonFilePath, "");
                     RefreshWearables();
+                    #endregion
+
+                    #region Creating the default guessing clothes puzzles data list
+                    TextAsset puzzleData = Resources.Load<TextAsset>("Default World Data/GuessingPuzzles");
+                    File.WriteAllText(_guessingPuzzlesPath, puzzleData.text);
                     #endregion
                 }
             }

@@ -1,9 +1,7 @@
 ﻿using LitJson;
 using System.IO;
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InterfaceManager : MonoBehaviour

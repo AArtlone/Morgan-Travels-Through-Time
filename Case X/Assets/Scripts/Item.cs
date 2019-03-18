@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using UnityEngine.UI;
 
 [Serializable]
 public class Item : MonoBehaviour
