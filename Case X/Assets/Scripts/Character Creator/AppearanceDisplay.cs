@@ -4,43 +4,56 @@ using UnityEngine.UI;
 
 public class AppearanceDisplay : MonoBehaviour
 {
-    private bool _showDisplayToggle;
     public GameObject IconPrefab;
     [Space(10)]
-    public List<Clothing> Hairs;
-    public GameObject HairsDisplay;
+    public List<Clothing> Bodies;
+    public GameObject BodiesDisplay;
     [Space(10)]
     public List<Clothing> Faces;
     public GameObject FacesDisplay;
     [Space(10)]
-    public List<Clothing> Outfits;
-    public GameObject OutfitsDisplay;
+    public List<Clothing> Hairs;
+    public GameObject HairsDisplay;
     [Space(10)]
-    public List<Clothing> Genders;
-    public GameObject GendersDisplay;
+    public List<Clothing> Tops;
+    public GameObject TopsDisplay;
     [Space(10)]
-    public List<Clothing> SkinColors;
-    public GameObject SkinColorsDisplay;
+    public List<Clothing> Bots;
+    public GameObject BotsDisplay;
+    [Space(10)]
+    public List<Clothing> Shoes;
+    public GameObject ShoesDisplay;
 
+    public List<GameObject> Buttons;
+    public List<GameObject> Displays;
+
+    private GameObject _bodyBodyPart;
     private GameObject _hairBodyPart;
     private GameObject _faceBodyPart;
-    private GameObject _outfitsBodyPart;
-    private GameObject _genderBodyPart;
-    private GameObject _skinColorBodyPart;
+    private GameObject _topBodyPart;
+    private GameObject _botBodyPart;
+    private GameObject _shoesBodyPart;
     private Sprite[] _spritesFromStorage;
+
+    public Sprite UnSelectedButton;
+    public Sprite SelectedButton;
+
+    public Animator PanelAnimator;
 
     private void Start()
     {
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
+        _bodyBodyPart = GameObject.Find("Body Body Part");
         _hairBodyPart = GameObject.Find("Hair Body Part");
         _faceBodyPart = GameObject.Find("Face Body Part");
-        _outfitsBodyPart = GameObject.Find("Outfit Body Part");
-        _skinColorBodyPart = GameObject.Find("Skin Color Body Part");
-        _genderBodyPart = GameObject.Find("Gender Body Part");
+        _topBodyPart = GameObject.Find("Top Body Part");
+        _botBodyPart = GameObject.Find("Bot Body Part");
+        _shoesBodyPart = GameObject.Find("Shoes Body Part");
 
         Invoke("SetupDisplays", 1f);
-        Invoke("LoadCharacterAppearance", 1f);
+        //LoadCharacterAppearance();
+        Invoke("LoadCharacterAppearance", .1f);
     }
 
     // Whenever the player clicks on a button to view a body type's elements
@@ -48,9 +61,43 @@ public class AppearanceDisplay : MonoBehaviour
     // whenever he clicks on the body type button.
     public void ToggleDisplay(Object display)
     {
-        _showDisplayToggle = !_showDisplayToggle;
+        PanelAnimator.SetBool("IsOpen", true);
         GameObject displayObj = (GameObject)display;
-        displayObj.SetActive(_showDisplayToggle);
+        foreach(GameObject _display in Displays)
+        {
+            if(_display != displayObj)
+            {
+                _display.SetActive(false);
+            }
+        }
+        if(displayObj.activeSelf)
+        {
+            displayObj.SetActive(false);
+            PanelAnimator.SetBool("IsOpen", false);
+        } else
+        {
+            displayObj.SetActive(true);
+        }
+    }
+
+    public void ToggleButton(Object button)
+    {
+        GameObject buttonObj = (GameObject)button;
+        foreach(GameObject _button in Buttons)
+        {
+            if(_button != buttonObj)
+            {
+                _button.GetComponent<Image>().sprite = UnSelectedButton;
+            }
+        }
+        if(buttonObj.GetComponent<Image>().sprite == SelectedButton)
+        {
+            buttonObj.GetComponent<Image>().sprite = UnSelectedButton;
+        } else
+        {
+            buttonObj.GetComponent<Image>().sprite = SelectedButton;
+        }
+        
     }
 
     // This function creates the icons in the body tab's lists (displays) using the
@@ -61,9 +108,9 @@ public class AppearanceDisplay : MonoBehaviour
         {
             switch (clothing.BodyPart)
             {
-                case "Hair":
+                case "Body":
                     {
-                        LoadIcon(clothing, HairsDisplay, Hairs);
+                        LoadIcon(clothing, BodiesDisplay, Bodies);
                         break;
                     }
                 case "Face":
@@ -71,22 +118,24 @@ public class AppearanceDisplay : MonoBehaviour
                         LoadIcon(clothing, FacesDisplay, Faces);
                         break;
                     }
-                case "Outfit":
+                case "Hair":
                     {
-                        LoadIcon(clothing, OutfitsDisplay, Outfits);
+                        LoadIcon(clothing, HairsDisplay, Hairs);
                         break;
                     }
-                // Yes they are not considered clothing, but since its related to
-                // the player appearance and we didn't initially thought about these
-                // elements, we will leave it like that for now.
-                case "Gender":
+                case "Top":
                     {
-                        LoadIcon(clothing, GendersDisplay, Genders);
+                        LoadIcon(clothing, TopsDisplay, Tops);
                         break;
                     }
-                case "Skin Color":
+                case "Bot":
                     {
-                        LoadIcon(clothing, SkinColorsDisplay, SkinColors);
+                        LoadIcon(clothing, BotsDisplay, Bots);
+                        break;
+                    }
+                case "Shoes":
+                    {
+                        LoadIcon(clothing, ShoesDisplay, Shoes);
                         break;
                     }
             }
@@ -125,20 +174,23 @@ public class AppearanceDisplay : MonoBehaviour
                         // More to add...
                         switch (clothing.BodyPart)
                         {
+                            case "Body":
+                                 _bodyBodyPart.GetComponent<Image>().sprite = sprite;
+                                break;
                             case "Hair":
-                                 _hairBodyPart.GetComponent<Image>().sprite = sprite;
+                                  _hairBodyPart.GetComponent<Image>().sprite = sprite;
                                 break;
                             case "Face":
-                                  _faceBodyPart.GetComponent<Image>().sprite = sprite;
+                                _faceBodyPart.GetComponent<Image>().sprite = sprite;
                                 break;
-                            case "Outfit":
-                                _outfitsBodyPart.GetComponent<Image>().sprite = sprite;
+                            case "Top":
+                                _topBodyPart.GetComponent<Image>().sprite = sprite;
                                 break;
-                            case "Gender":
-                                _genderBodyPart.GetComponent<Image>().sprite = sprite;
+                            case "Bot":
+                                _botBodyPart.GetComponent<Image>().sprite = sprite;
                                 break;
-                            case "Skin Color":
-                                _skinColorBodyPart.GetComponent<Image>().sprite = sprite;
+                            case "Shoes":
+                                _shoesBodyPart.GetComponent<Image>().sprite = sprite;
                                 break;
                         }
                     }

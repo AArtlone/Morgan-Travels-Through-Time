@@ -11,23 +11,25 @@ public class UIManager : MonoBehaviour
     public GameObject DiaryDisplay;
     public GameObject InventoryDisplay;
 
-    public Image _hairIcon;
+    public Image _bodyIcon;
     public Image _faceIcon;
+    public Image _hairIcon;
+    public Image _topIcon;
 
     private Sprite[] _spritesFromStorage;
 
     private void Start()
     {
-        _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
+        _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
-            if (clothing.BodyPart == "Hair" && clothing.Selected == true)
+            if (clothing.BodyPart == "Body" && clothing.Selected == true)
             {
                 foreach(Sprite sprite in _spritesFromStorage)
                 {
                     if(sprite.name == clothing.Name)
                     {
-                        _hairIcon.sprite = sprite;
+                        _bodyIcon.sprite = sprite;
                     }
                 }
             }
@@ -38,6 +40,26 @@ public class UIManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _faceIcon.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Hair" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _hairIcon.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Top" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _topIcon.sprite = sprite;
                     }
                 }
             }

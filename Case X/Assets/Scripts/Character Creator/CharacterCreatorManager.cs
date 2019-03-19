@@ -21,12 +21,13 @@ public class CharacterCreatorManager : MonoBehaviour
     public TextMeshProUGUI CharacterSelectionErrorMessage;
     private string errorString;
 
-    
-    private string _currentGender;
+
+    private string _currentBody;
     private string _currentFace;
     private string _currentHair;
-    private string _currentOutfit;
-    private string _currentSkinColor;
+    private string _currentTop;
+    private string _currentBot;
+    private string _currentShoes;
 
     private string _jsonWordsFilter;
     private List<string> _wordsFilter = new List<string>();
@@ -49,7 +50,7 @@ public class CharacterCreatorManager : MonoBehaviour
 
         // If the player has already created a character then 
         // we just start the main menu instead.
-        if (Character.Instance.CharacterCreation)
+        if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
         {
             SceneManager.LoadScene("Main Map");
         }
@@ -64,11 +65,11 @@ public class CharacterCreatorManager : MonoBehaviour
             {
                 if (clothing.Selected == true)
                 {
-                    if (clothing.BodyPart == "Gender")
+                    if (clothing.BodyPart == "Body")
                     {
-                        _currentGender = clothing.Name;
+                        _currentBody = clothing.Name;
                     }
-                    else if (clothing.BodyPart == "Face")
+                    if (clothing.BodyPart == "Face")
                     {
                         _currentFace = clothing.Name;
                     }
@@ -76,13 +77,17 @@ public class CharacterCreatorManager : MonoBehaviour
                     {
                         _currentHair = clothing.Name;
                     }
-                    else if (clothing.BodyPart == "Outfit")
+                    else if (clothing.BodyPart == "Top")
                     {
-                        _currentOutfit = clothing.Name;
+                        _currentTop = clothing.Name;
                     }
-                    else if (clothing.BodyPart == "Skin Color")
+                    else if (clothing.BodyPart == "Bot")
                     {
-                        _currentSkinColor = clothing.Name;
+                        _currentBot = clothing.Name;
+                    }
+                    else if (clothing.BodyPart == "Shoes")
+                    {
+                        _currentShoes = clothing.Name;
                     }
                 }
             }
@@ -111,14 +116,20 @@ public class CharacterCreatorManager : MonoBehaviour
 
     public void CheckForSelectedClothing()
     {
+        bool bodySelected = false;
         bool hairSelected = false;
         bool faceSelected = false;
-        bool outfitSelected = false;
-        bool genderSelected = false;
-        bool skinSelected = false;
+        bool topSelected = false;
+        bool botSelected = false;
+        bool shoesSelected = false;
 
         foreach(Clothing clothing in Character.Instance.Wearables)
         {
+            if (clothing.BodyPart == "Body" &&
+                clothing.Selected)
+            {
+                bodySelected = true;
+            }
             if (clothing.BodyPart == "Hair" &&
                 clothing.Selected)
             {
@@ -129,49 +140,53 @@ public class CharacterCreatorManager : MonoBehaviour
             {
                 faceSelected = true;
             }
-            if (clothing.BodyPart == "Gender" &&
+            if (clothing.BodyPart == "Top" &&
                 clothing.Selected)
             {
-                genderSelected = true;
+                topSelected = true;
             }
-            if (clothing.BodyPart == "Skin Color" &&
+            if (clothing.BodyPart == "Bot" &&
                 clothing.Selected)
             {
-                skinSelected = true;
+                botSelected = true;
             }
-            if (clothing.BodyPart == "Outfit" &&
+            if (clothing.BodyPart == "Shoes" &&
                 clothing.Selected)
             {
-                outfitSelected = true;
+                shoesSelected = true;
             }
         }
         
-
-        if (hairSelected == false ||
+        if (bodySelected == false ||
+            hairSelected == false ||
             faceSelected == false ||
-            genderSelected == false ||
-            skinSelected == false ||
-            outfitSelected == false)
+            topSelected == false ||
+            botSelected == false ||
+            shoesSelected == false)
         {
-            if(genderSelected == false)
+            if(bodySelected == false)
             {
-                errorString = errorString + "gender, ";
-            }
-            if (faceSelected == false)
-            {
-                errorString = errorString + "face, ";
+                errorString = errorString + "body, ";
             }
             if (hairSelected == false)
             {
                 errorString = errorString + "hair, ";
             }
-            if (outfitSelected == false)
+            if (faceSelected == false)
             {
-                errorString = errorString + "outfit, ";
+                errorString = errorString + "face, ";
             }
-            if (skinSelected == false)
+            if (topSelected == false)
             {
-                errorString = errorString + "skin color, ";
+                errorString = errorString + "top, ";
+            }
+            if (botSelected == false)
+            {
+                errorString = errorString + "bot, ";
+            }
+            if (shoesSelected == false)
+            {
+                errorString = errorString + "shoes, ";
             }
 
             CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
@@ -184,14 +199,20 @@ public class CharacterCreatorManager : MonoBehaviour
     }
     public void ReturnToMainMapAndCheck()
     {
+        bool bodySelected = false;
         bool hairSelected = false;
         bool faceSelected = false;
-        bool outfitSelected = false;
-        bool genderSelected = false;
-        bool skinSelected = false;
+        bool topSelected = false;
+        bool botSelected = false;
+        bool shoesSelected = false;
 
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
+            if (clothing.BodyPart == "Body" &&
+                clothing.Selected)
+            {
+                bodySelected = true;
+            }
             if (clothing.BodyPart == "Hair" &&
                 clothing.Selected)
             {
@@ -202,54 +223,60 @@ public class CharacterCreatorManager : MonoBehaviour
             {
                 faceSelected = true;
             }
-            if (clothing.BodyPart == "Gender" &&
+            if (clothing.BodyPart == "Top" &&
                 clothing.Selected)
             {
-                genderSelected = true;
+                topSelected = true;
             }
-            if (clothing.BodyPart == "Skin Color" &&
+            if (clothing.BodyPart == "Bot" &&
                 clothing.Selected)
             {
-                skinSelected = true;
+                botSelected = true;
             }
-            if (clothing.BodyPart == "Outfit" &&
+            if (clothing.BodyPart == "Shoes" &&
                 clothing.Selected)
             {
-                outfitSelected = true;
+                shoesSelected = true;
             }
         }
 
-        if (hairSelected == false ||
+        if (bodySelected == false ||
+            hairSelected == false ||
             faceSelected == false ||
-            genderSelected == false ||
-            skinSelected == false ||
-            outfitSelected == false)
+            topSelected == false ||
+            botSelected == false ||
+            shoesSelected == false)
         {
-            if (genderSelected == false)
+            if (bodySelected == false)
             {
-                errorString = errorString + "gender, ";
-            }
-            if (faceSelected == false)
-            {
-                errorString = errorString + "face, ";
+                errorString = errorString + "body, ";
             }
             if (hairSelected == false)
             {
                 errorString = errorString + "hair, ";
             }
-            if (outfitSelected == false)
+            if (faceSelected == false)
             {
-                errorString = errorString + "outfit, ";
+                errorString = errorString + "face, ";
             }
-            if (skinSelected == false)
+            if (topSelected == false)
             {
-                errorString = errorString + "skin color, ";
+                errorString = errorString + "top, ";
+            }
+            if (botSelected == false)
+            {
+                errorString = errorString + "bot, ";
+            }
+            if (shoesSelected == false)
+            {
+                errorString = errorString + "shoes, ";
             }
 
             CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
             OpenWindow(CharacterClothesSelectionErrorPopup);
             errorString = string.Empty;
-        } else
+        }
+        else
         {
             CheckIfClothingChanged();
         }
@@ -258,25 +285,26 @@ public class CharacterCreatorManager : MonoBehaviour
     //function that checks if any of the body parts were changed
     public void CheckIfClothingChanged()
     {
-        bool _genderChanged = false;
+        bool _bodyChanged = false;
         bool _faceChanged = false;
         bool _hairChanged = false;
-        bool _outfitChanged = false;
-        bool _skinColorChanged = false;
+        bool _topChanged = false;
+        bool _botChanged = false;
+        bool _shoesChanged = false;
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (clothing.Selected == true)
             {
-                if (clothing.BodyPart == "Gender")
+                if (clothing.BodyPart == "Body")
                 {
-                    if(clothing.Name != _currentGender)
+                    if (clothing.Name != _currentBody)
                     {
-                        _genderChanged = true;
+                        _bodyChanged = true;
                     }
                 }
-                else if (clothing.BodyPart == "Face")
+                if (clothing.BodyPart == "Face")
                 {
-                    if (clothing.Name != _currentFace)
+                    if(clothing.Name != _currentFace)
                     {
                         _faceChanged = true;
                     }
@@ -288,27 +316,35 @@ public class CharacterCreatorManager : MonoBehaviour
                         _hairChanged = true;
                     }
                 }
-                else if (clothing.BodyPart == "Outfit")
+                else if (clothing.BodyPart == "Top")
                 {
-                    if (clothing.Name != _currentOutfit)
+                    if (clothing.Name != _currentTop)
                     {
-                        _outfitChanged = true;
+                        _topChanged = true;
                     }
                 }
-                else if (clothing.BodyPart == "Skin Color")
+                else if (clothing.BodyPart == "Bot")
                 {
-                    if (clothing.Name != _currentSkinColor)
+                    if (clothing.Name != _currentBot)
                     {
-                        _skinColorChanged = true;
+                        _botChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Shoes")
+                {
+                    if (clothing.Name != _currentShoes)
+                    {
+                        _shoesChanged = true;
                     }
                 }
             }
         }
-        if(_faceChanged == true ||
-            _genderChanged == true ||
-            _skinColorChanged == true ||
+        if(_bodyChanged == true ||
+            _faceChanged == true ||
             _hairChanged == true ||
-            _outfitChanged == true)
+            _topChanged == true ||
+            _botChanged == true ||
+            _shoesChanged == true)
         {
             //display error message
             OpenWindow(CharacterClothesChangedErrorPopop);
@@ -369,7 +405,7 @@ public class CharacterCreatorManager : MonoBehaviour
         }
         else
         {
-            InterfaceManager.Instance.OpenPopup(CharacterNameErrorPopupWindow);
+            OpenWindow(CharacterNameErrorPopupWindow);
         }
     }
 
@@ -381,23 +417,24 @@ public class CharacterCreatorManager : MonoBehaviour
     //function for the save button of the character customization
     public void SaveButton()
     {
-        bool _genderChanged = false;
+        bool _bodyChanged = false;
         bool _faceChanged = false;
         bool _hairChanged = false;
-        bool _outfitChanged = false;
-        bool _skinColorChanged = false;
+        bool _topChanged = false;
+        bool _botChanged = false;
+        bool _shoesChanged = false;
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (clothing.Selected == true)
             {
-                if (clothing.BodyPart == "Gender")
+                if (clothing.BodyPart == "Body")
                 {
-                    if (clothing.Name != _currentGender)
+                    if (clothing.Name != _currentBody)
                     {
-                        _genderChanged = true;
+                        _bodyChanged = true;
                     }
                 }
-                else if (clothing.BodyPart == "Face")
+                if (clothing.BodyPart == "Face")
                 {
                     if (clothing.Name != _currentFace)
                     {
@@ -408,30 +445,38 @@ public class CharacterCreatorManager : MonoBehaviour
                 {
                     if (clothing.Name != _currentHair)
                     {
-                        _hairChanged = true;
+                        _faceChanged = true;
                     }
                 }
-                else if (clothing.BodyPart == "Outfit")
+                else if (clothing.BodyPart == "Top")
                 {
-                    if (clothing.Name != _currentOutfit)
+                    if (clothing.Name != _currentTop)
                     {
-                        _outfitChanged = true;
+                        _topChanged = true;
                     }
                 }
-                else if (clothing.BodyPart == "Skin Color")
+                else if (clothing.BodyPart == "Bot")
                 {
-                    if (clothing.Name != _currentSkinColor)
+                    if (clothing.Name != _currentBot)
                     {
-                        _skinColorChanged = true;
+                        _botChanged = true;
+                    }
+                }
+                else if (clothing.BodyPart == "Shoes")
+                {
+                    if (clothing.Name != _currentShoes)
+                    {
+                        _shoesChanged = true;
                     }
                 }
             }
         }
-        if (_faceChanged == true ||
-            _genderChanged == true ||
-            _skinColorChanged == true ||
+        if (_bodyChanged == true ||
+            _faceChanged == true ||
             _hairChanged == true ||
-            _outfitChanged == true)
+            _topChanged == true ||
+            _botChanged == true ||
+            _shoesChanged == true)
         {
             OpenWindow(SaveCharacterPopup);
         }
