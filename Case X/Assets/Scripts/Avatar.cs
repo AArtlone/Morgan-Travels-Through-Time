@@ -8,6 +8,7 @@ public class Avatar : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _isAvatarMoving = false;
     private string _direction;
+    private bool _isInteracting = false;
 
     public Sprite ButtonIdle;
     public Sprite ButtonTouched;
@@ -82,27 +83,29 @@ public class Avatar : MonoBehaviour
         _animator.SetBool("Idle", true);
     }
 
+    public void IsInteracting()
+    {
+        _isInteracting = true;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.transform.tag == "NPC")
+        if (_isInteracting)
         {
-            // Replace with interaction mechanic in the future
-            if (Input.GetKeyDown(KeyCode.Space)) {
+            if (collision.transform.tag == "NPC")
+            {
+                // Replace with interaction mechanic in the future
                 collision.GetComponent<NPC>().ContinueDialogue();
             }
-        }
-        else if (collision.transform.tag == "Hidden Objects Puzzle")
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
+            else if (collision.transform.tag == "Hidden Objects Puzzle")
             {
                 collision.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
             }
-        } else if (collision.transform.tag == "Guess Clothes Puzzle")
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
+            else if (collision.transform.tag == "Guess Clothes Puzzle")
             {
                 collision.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
             }
+            _isInteracting = false;
         }
     }
 }

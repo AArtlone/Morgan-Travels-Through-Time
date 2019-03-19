@@ -32,4 +32,7 @@ public class DialogueBranch
     public string DialogueText;
     [Tooltip("Do not define more than four option fields or an error will occur!")]
     public string[] OptionsMenu;
+
+    [Tooltip("At the end of this dialogue, the player is going to earn the following items")]
+    public Item[] ItemsEarned;
 }

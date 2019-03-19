@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1237295977238734217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308369154275840482}
+  m_Layer: 0
+  m_Name: Item Rewards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1308369154275840482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237295977238734217}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.77, y: -1.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8004301126409690350}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8004301126409690337
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +43,7 @@ GameObject:
   - component: {fileID: 8004301126409690348}
   - component: {fileID: 8004301126409690351}
   m_Layer: 0
-  m_Name: Area NPC
+  m_Name: 2D Area NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,10 +56,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8004301126409690337}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.77, y: 1.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1308369154275840482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,4 +159,19 @@ MonoBehaviour:
     RightCharacterPortrait: {fileID: 0}
     DialogueStageBackground: {fileID: 0}
     DialogueBoxBackground: {fileID: 0}
-    DialogueBranches: []
+    DialogueBranches:
+    - BranchTitle: 
+      PreviousResponses: []
+      Priority: 0
+      ReputationMinimum: 0
+      StaminaMinimum: 0
+      KnowledgeMinimum: 0
+      FitnessMinimum: 0
+      CharismaMinimum: 0
+      CurrencyMinimum: 0
+      ItemsRequired: []
+      ItemsDropped: []
+      DialogueText: 
+      OptionsMenu: []
+      ItemsEarned:
+      - {fileID: 0}

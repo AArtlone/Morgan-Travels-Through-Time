@@ -438,13 +438,13 @@ public class Character : MonoBehaviour
             Items.Clear();
             for (int i = 0; i < characterData["Items"].Count; i++)
             {
-                Items.Add(new Item(
+                Item newItem = new Item(
                     characterData["Items"][i]["Name"].ToString(),
                     characterData["Items"][i]["Description"].ToString(),
                     characterData["Items"][i]["Active"].ToString(),
-                    characterData["Items"][i]["AssetsImageName"].ToString()));
+                    characterData["Items"][i]["AssetsImageName"].ToString());
 
-                //Debug.Log(characterData["Items"][i]["Name"]);
+                Items.Add(newItem);
             }
         }
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LitJson;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +11,8 @@ public class NPC : MonoBehaviour
     // if we want to extend that information to the main map, it would
     // prove to be useful and helpful to the player.
     public string Name;
+    // Used for detecting clicks on that object's image (region of space on camera)
+    public Image DialogueProgressionTrigger2D;
     [SerializeField]
     public List<Dialogue> Dialogue;
 
@@ -24,7 +28,6 @@ public class NPC : MonoBehaviour
     private List<DialogueBranch> _availableBranches = new List<DialogueBranch>();
     [NonSerialized]
     public DialogueBranch FinalDialogueBranch = new DialogueBranch();
-    private Character _playerCharacterScript;
     private Image _dialogueProgressionTrigger;
     private Image _imageComponent;
     private SpriteRenderer _spriteComponent;
@@ -32,9 +35,14 @@ public class NPC : MonoBehaviour
     private void Start()
     {
         DialogueManager.Instance.ToggleDialogue(false);
-        _playerCharacterScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
-        _dialogueProgressionTrigger = transform.GetChild(0).GetComponent<Image>();
-        _dialogueProgressionTrigger.raycastTarget = false;
+        if (DialogueProgressionTrigger2D == null)
+        {
+            _dialogueProgressionTrigger = transform.GetChild(0).GetComponent<Image>();
+            _dialogueProgressionTrigger.raycastTarget = false;
+        } else
+        {
+            _dialogueProgressionTrigger = DialogueProgressionTrigger2D;
+        }
 
         _spriteComponent = GetComponent<SpriteRenderer>();
         _imageComponent = GetComponent<Image>();
@@ -72,12 +80,12 @@ public class NPC : MonoBehaviour
         {
             // We check if every condition is met by the player before adding this dialogue branch as one for sorting by priority later on.
             if (
-                _playerCharacterScript.Reputation >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
-                _playerCharacterScript.Stamina >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
-                _playerCharacterScript.Knowledge >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
-                _playerCharacterScript.Fitness >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
-                _playerCharacterScript.Charisma >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
-                _playerCharacterScript.Currency >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
+                Character.Instance.Reputation >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
+                Character.Instance.Stamina >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
+                Character.Instance.Knowledge >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
+                Character.Instance.Fitness >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
+                Character.Instance.Charisma >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
+                Character.Instance.Currency >= Dialogue[CurrentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
             {
                 // AND we check if we have matching previous responses for that
                 // dialogue sequence to be appropriate for use.
@@ -130,6 +138,39 @@ public class NPC : MonoBehaviour
         DialogueManager.Instance.ClearOptionsMenu();
         // Changing the dialogue options menu buttons
         DialogueManager.Instance.ChangeOptionsMenu(FinalDialogueBranch.OptionsMenu);
+        
+        bool areItemsEarnedAlready = false;
+
+        string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+        JsonData itemsJsonData = JsonMapper.ToObject(dataToJson);
+
+        for (int i = 0; i < itemsJsonData["Items"].Count; i++)
+        {
+            foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
+            {
+                if (itemsJsonData["Items"][i]["Name"].ToString() == dialogueItem.Name)
+                {
+                    Debug.Log("Item " + dialogueItem.Name + " is already in possession!");
+                    areItemsEarnedAlready = true;
+                    break;
+                }
+            }
+
+            if (areItemsEarnedAlready)
+            {
+                break;
+            }
+        }
+
+        if (areItemsEarnedAlready == false)
+        {
+            foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
+            {
+                Character.Instance.AddItem(dialogueItem);
+                areItemsEarnedAlready = true;
+                Debug.Log("Item " + dialogueItem.Name + " received!");
+            }
+        }
 
         //Debug.LogWarning("New dialogue is loaded!");
     }
@@ -158,7 +199,7 @@ public class NPC : MonoBehaviour
                         // We only update the player's inventory AFTER he has exited
                         // the dialogue, otherwise if he had used any items in it and
                         // quit or restarted the game, he would lose them forever.
-                        _playerCharacterScript.RefreshItems();
+                        //Character.Instance.RefreshItems();
                         _dialogueProgressionTrigger.raycastTarget = false;
                         if (_imageComponent)
                         {
@@ -174,7 +215,7 @@ public class NPC : MonoBehaviour
             {
                 CurrentDialogueIndex = -1;
                 DialogueManager.Instance.ToggleDialogue(false);
-                _playerCharacterScript.RefreshItems();
+                //Character.Instance.RefreshItems();
                 _dialogueProgressionTrigger.raycastTarget = false;
                 if (_imageComponent)
                 {

@@ -211,7 +211,6 @@ public class GuessPuzzle : MonoBehaviour
 
     public void LoadNewClothing(string bodyPart)
     {
-        Debug.Log(bodyPart);
         switch (bodyPart)
         {
             case "Head":
