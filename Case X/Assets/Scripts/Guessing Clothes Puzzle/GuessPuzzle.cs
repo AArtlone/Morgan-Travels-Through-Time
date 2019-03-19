@@ -37,7 +37,7 @@ public class GuessPuzzle : MonoBehaviour
     public TextMeshProUGUI Timer;
     private float _timer = 0;
 
-    void Start()
+    void Awake()
     {
         _timer = PuzzleTimeInSeconds;
         _defaultsJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";

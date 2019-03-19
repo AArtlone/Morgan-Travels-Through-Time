@@ -1,5 +1,6 @@
 ﻿using LitJson;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class Puzzle : MonoBehaviour
 {
     public GameObject PuzzleToLaunch;
     public GameObject StarsDisplay;
+    public TextMeshProUGUI ScoreText;
     public enum PuzzleType { HiddenObjects, CannonGame, GuessClothes };
     public PuzzleType TypeOfPuzzle;
     private HiddenObjectsPuzzle _puzzleScript;
@@ -32,6 +34,9 @@ public class Puzzle : MonoBehaviour
             //Debug.Log("aa");
             //SetupHiddenObjectsPuzzle();
             //Character.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>());
+        } else if (TypeOfPuzzle == PuzzleType.GuessClothes)
+        {
+            LoadScore();
         }
     }
 
@@ -146,5 +151,10 @@ public class Puzzle : MonoBehaviour
         {
             StarsDisplay.transform.GetChild(i).gameObject.SetActive(true);
         }
+    }
+
+    public void LoadScore()
+    {
+        ScoreText.text = PuzzleToLaunch.GetComponentInParent<GuessPuzzle>().TotalScore.ToString();
     }
 }

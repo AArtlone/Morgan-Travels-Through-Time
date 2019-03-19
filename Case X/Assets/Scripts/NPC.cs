@@ -42,6 +42,7 @@ public class NPC : MonoBehaviour
         } else
         {
             _dialogueProgressionTrigger = DialogueProgressionTrigger2D;
+            _dialogueProgressionTrigger.raycastTarget = false;
         }
 
         _spriteComponent = GetComponent<SpriteRenderer>();

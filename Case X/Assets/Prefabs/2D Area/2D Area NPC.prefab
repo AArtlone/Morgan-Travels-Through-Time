@@ -151,13 +151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Jack
+  DialogueProgressionTrigger2D: {fileID: 0}
   Dialogue:
   - DialogueTitle: 
-    LeftCharacterTitle: 
-    LeftCharacterPortrait: {fileID: 0}
-    RightCharacterTitle: 
-    RightCharacterPortrait: {fileID: 0}
-    DialogueStageBackground: {fileID: 0}
+    LeftCharacterTitle: AA
+    LeftCharacterPortrait: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
+      type: 3}
+    RightCharacterTitle: EE
+    RightCharacterPortrait: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
+      type: 3}
+    DialogueStageBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
+      type: 3}
     DialogueBoxBackground: {fileID: 0}
     DialogueBranches:
     - BranchTitle: 
@@ -171,7 +175,22 @@ MonoBehaviour:
       CurrencyMinimum: 0
       ItemsRequired: []
       ItemsDropped: []
-      DialogueText: 
+      DialogueText: IF I SAID I WANT YOUR BODY NOW
+      OptionsMenu: []
+      ItemsEarned:
+      - {fileID: 0}
+    - BranchTitle: 
+      PreviousResponses: []
+      Priority: 0
+      ReputationMinimum: 0
+      StaminaMinimum: 0
+      KnowledgeMinimum: 0
+      FitnessMinimum: 0
+      CharismaMinimum: 0
+      CurrencyMinimum: 0
+      ItemsRequired: []
+      ItemsDropped: []
+      DialogueText: WOULD YOU HOLD IT AGAINST ME!! <3
       OptionsMenu: []
       ItemsEarned:
       - {fileID: 0}
