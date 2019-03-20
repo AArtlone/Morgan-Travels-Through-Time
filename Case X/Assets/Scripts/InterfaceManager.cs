@@ -2,6 +2,7 @@
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InterfaceManager : MonoBehaviour
@@ -125,36 +126,39 @@ public class InterfaceManager : MonoBehaviour
 
     public void SetupQuestsInDiary()
     {
-        for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+        if (SceneManager.GetActiveScene().name == "Main Map")
         {
-            Destroy(CurrentQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
-        }
-        for (int i = 0; i < AvailableQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
-        {
-            Destroy(AvailableQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
-        }
-        for (int i = 0; i < CompletedQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
-        {
-            Destroy(CompletedQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
-        }
+            for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+            {
+                Destroy(CurrentQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < AvailableQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+            {
+                Destroy(AvailableQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < CompletedQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+            {
+                Destroy(CompletedQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+            }
 
-        //Character.Instance.AllQuests.Clear();
-        foreach (Quest loadedQuest in Character.Instance.CurrentQuests)
-        {
-            GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
-            newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
-        }
+            //Character.Instance.AllQuests.Clear();
+            foreach (Quest loadedQuest in Character.Instance.CurrentQuests)
+            {
+                GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
+                newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+            }
 
-        foreach (Quest loadedQuest in Character.Instance.AvailableQuests)
-        {
-            GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
-            newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
-        }
+            foreach (Quest loadedQuest in Character.Instance.AvailableQuests)
+            {
+                GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
+                newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+            }
 
-        foreach (Quest loadedQuest in Character.Instance.CompletedQuests)
-        {
-            GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
-            newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+            foreach (Quest loadedQuest in Character.Instance.CompletedQuests)
+            {
+                GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
+                newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+            }
         }
     }
 

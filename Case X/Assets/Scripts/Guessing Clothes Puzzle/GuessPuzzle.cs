@@ -28,6 +28,8 @@ public class GuessPuzzle : MonoBehaviour
     private GameObject _bottomPart;
     private GameObject _shoesPart;
 
+    public TextMeshProUGUI finalScore;
+
     public int TotalScore;
     private string _defaultsJsonPath;
     private string _guessingPuzzlesPath;
@@ -89,7 +91,7 @@ public class GuessPuzzle : MonoBehaviour
             else
             {
                 _timer = 0;
-                OpenPopup(PuzzleFinishedWindow);
+                OpenCompletePuzzleWindow();
                 SavePuzzleScore();
                 _isGameStarted = false;
             }
@@ -337,5 +339,13 @@ public class GuessPuzzle : MonoBehaviour
     {
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
+    }
+
+    private void OpenCompletePuzzleWindow()
+    {
+
+        finalScore.text = "Time is up. Your final score is " +
+            TotalScore + ". Congratulations!";
+        OpenPopup(PuzzleFinishedWindow);
     }
 }
