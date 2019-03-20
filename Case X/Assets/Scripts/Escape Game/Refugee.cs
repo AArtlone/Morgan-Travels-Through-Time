@@ -11,6 +11,7 @@ public class Refugee : MonoBehaviour
     public RefugeeStatus Status;
     private Animator _animator;
     private Rigidbody2D _rb;
+    public int RewardInPoints;
     
     public GameObject IconPrefab;
     [NonSerialized]
@@ -24,11 +25,9 @@ public class Refugee : MonoBehaviour
         _animator = GetComponent<Animator>();
         _gameInterface = GetComponentInParent<Escape>();
 
-        IconOfRefugee = Instantiate(IconPrefab).GetComponent<RefugeeIcon>();
+        IconOfRefugee = Instantiate(IconPrefab, GameObject.FindGameObjectWithTag("Icons Container").transform).GetComponent<RefugeeIcon>();
         IconOfRefugee.RefugeeForIcon = this;
         IconOfRefugee.gameObject.SetActive(false);
-
-        _gameInterface.Refugees.Add(this);
 
         _targetCheckpoint = _gameInterface.Checkpoints[_currentCheckpointIndex];
     }
@@ -42,7 +41,7 @@ public class Refugee : MonoBehaviour
 
             if (Vector2.Distance(transform.position, _targetCheckpoint.gameObject.transform.position) > 1f)
             {
-                transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.gameObject.transform.position, .7f * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.gameObject.transform.position, Speed * .5f * Time.deltaTime);
             }
             //TODO: make him towards the target checkpoint
         } else
@@ -56,8 +55,21 @@ public class Refugee : MonoBehaviour
     {
         if (collision.transform.tag == "Final Checkpoint")
         {
+            Destroy(IconOfRefugee);
             _gameInterface.RefugeesSaved++;
-            _gameInterface.Refugees.Remove(this);
+            _gameInterface.TotalPoints += RewardInPoints;
+            _gameInterface.CurrentRefugees.Remove(this);
+
+            //Debug.Log(_gameInterface.CurrentWave + " | " + (_gameInterface.RefugeeWaves.Count - 1));
+
+            if (_gameInterface.CurrentRefugees.Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
+            {
+                _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
+
+                _gameInterface.CurrentWave++;
+                _gameInterface.StartNextWave();
+            }
+
             Destroy(gameObject);
         }
         if(collision.gameObject.tag == "Checkpoint")
@@ -69,13 +81,19 @@ public class Refugee : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        IconOfRefugee.gameObject.SetActive(true);
-        Debug.Log("AAAAAAAA");
+        if (IconOfRefugee != null)
+        {
+            IconOfRefugee.gameObject.SetActive(true);
+            //Debug.Log("Refugee is now invisible");
+        }
     }
 
     private void OnBecameVisible()
     {
-        IconOfRefugee.gameObject.SetActive(false);
-        Debug.Log("EEEEEEEE");
+        if (IconOfRefugee != null)
+        {
+            IconOfRefugee.gameObject.SetActive(false);
+            //Debug.Log("Refugee is now visible");
+        }
     }
 }

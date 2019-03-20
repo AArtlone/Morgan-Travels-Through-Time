@@ -42,11 +42,6 @@ public class GuessPuzzle : MonoBehaviour
         _timer = PuzzleTimeInSeconds;
         _defaultsJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
         _guessingPuzzlesPath = Application.persistentDataPath + "/GuessingPuzzles.json";
-        
-        if (Customizable == false)
-        {
-            LoadDefaults();
-        }
 
         #region Loading the guessing clothes puzzle file data
         string dataToJson = File.ReadAllText(_guessingPuzzlesPath);
@@ -76,6 +71,11 @@ public class GuessPuzzle : MonoBehaviour
             _shoesPart = gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
         }
         #endregion
+
+        if (Customizable == false)
+        {
+            LoadDefaults();
+        }
     }
 
     private void Update()
