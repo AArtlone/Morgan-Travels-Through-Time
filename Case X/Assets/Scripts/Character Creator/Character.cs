@@ -48,6 +48,7 @@ public class Character : MonoBehaviour
     private string _newQuestsData;
     private string _defaultsGuessingClothesJsonPath;
     private string _guessingPuzzlesPath;
+    private string _escapeGamesJsonFile;
     #endregion
 
     #region Blueprints references
@@ -82,8 +83,9 @@ public class Character : MonoBehaviour
             _questsJsonFilePath = _pathToAssetsFolder + "/Quests.json";
             _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
-            _defaultsGuessingClothesJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
-            _guessingPuzzlesPath = Application.persistentDataPath + "/GuessingPuzzles.json";
+            _defaultsGuessingClothesJsonPath = _pathToAssetsFolder + "/GuessClothingDefaults.json";
+            _guessingPuzzlesPath = _pathToAssetsFolder + "/GuessingPuzzles.json";
+            _escapeGamesJsonFile = _pathToAssetsFolder + "/EscapeGames.json";
 
             if (File.Exists(PlayerStatsFilePath))
             {
@@ -301,7 +303,12 @@ public class Character : MonoBehaviour
 
                     #region Creating the default guessing clothes puzzles data list
                     TextAsset puzzleData = Resources.Load<TextAsset>("Default World Data/GuessingPuzzles");
-                    File.WriteAllText(_guessingPuzzlesPath, puzzleData.text);
+                    File.WriteAllText(_guessingPuzzlesPath,             puzzleData.text);
+                    #endregion
+
+                    #region Creating the default escape games data list
+                    TextAsset escapeGamesData = Resources.Load<TextAsset>("Default World Data/EscapeGames");
+                    File.WriteAllText(_escapeGamesJsonFile, escapeGamesData.text);
                     #endregion
                 }
             }

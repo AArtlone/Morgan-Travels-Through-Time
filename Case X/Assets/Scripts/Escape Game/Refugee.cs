@@ -70,6 +70,8 @@ public class Refugee : MonoBehaviour
                 _gameInterface.StartNextWave();
             }
 
+            _gameInterface.SaveEscapeGamesData();
+
             Destroy(gameObject);
         }
         if(collision.gameObject.tag == "Checkpoint")

@@ -4,7 +4,7 @@ public class Obstacle : MonoBehaviour
 {
     public Checkpoint CheckpointLink;
     public LayerMask ObstacleLayer;
-    private float _timeHoldingDown = 10;
+    private float _timeHoldingDown = 1;
     private float _currentTimeHoldingDown = 0;
     private bool _holdingDownObstacle;
 
