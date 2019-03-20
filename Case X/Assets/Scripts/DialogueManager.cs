@@ -181,6 +181,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         RefreshDialogueResponses();
+        CurrentNPCDialogue.ContinueDialogue();
         //Debug.Log(string.Format("Added ({0}) to the responses list!", textInOption));
     }
 }

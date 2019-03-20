@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 4688143}
   - component: {fileID: 4688145}
   - component: {fileID: 4688144}
+  - component: {fileID: 4688146}
   m_Layer: 5
   m_Name: Option Three
   m_TagString: Untagged
@@ -272,6 +273,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4688142}
   m_CullTransparentMesh: 0
+--- !u!114 &4688146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4688142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191242345}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4688142}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &52014771
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +438,7 @@ GameObject:
   - component: {fileID: 56313389}
   - component: {fileID: 56313391}
   - component: {fileID: 56313390}
+  - component: {fileID: 56313392}
   m_Layer: 5
   m_Name: Option Two
   m_TagString: Untagged
@@ -555,6 +588,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 56313388}
   m_CullTransparentMesh: 0
+--- !u!114 &56313392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56313388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191242345}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 56313388}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &89090998 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
@@ -726,6 +790,7 @@ GameObject:
   - component: {fileID: 523424890}
   - component: {fileID: 523424892}
   - component: {fileID: 523424891}
+  - component: {fileID: 523424893}
   m_Layer: 5
   m_Name: Option Four
   m_TagString: Untagged
@@ -875,6 +940,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523424889}
   m_CullTransparentMesh: 0
+--- !u!114 &523424893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523424889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191242345}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 523424889}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &585357607
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +982,7 @@ GameObject:
   - component: {fileID: 585357608}
   - component: {fileID: 585357610}
   - component: {fileID: 585357609}
+  - component: {fileID: 585357611}
   m_Layer: 5
   m_Name: Option One
   m_TagString: Untagged
@@ -1035,6 +1132,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585357607}
   m_CullTransparentMesh: 0
+--- !u!114 &585357611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585357607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1191242345}
+          m_MethodName: SelectOption
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 585357607}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &683476002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,7 +2427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1718097794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2364,7 +2492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3389,6 +3517,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
         type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[1].OptionsMenu.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
       propertyPath: DialogueProgressionTrigger2D
       value: 
       objectReference: {fileID: 1718097796}
@@ -3406,6 +3544,36 @@ PrefabInstance:
         type: 3}
       propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[1].Priority
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[1].OptionsMenu.Array.data[0]
+      value: llll
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[1].OptionsMenu.Array.data[1]
+      value: kkk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[1].Quest
+      value: My moon and light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[1].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: My moon and light
       objectReference: {fileID: 0}
     - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
         type: 3}
@@ -3611,6 +3779,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: ObjectivesToComplete.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: PuzzleTimeInSeconds
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: ObjectivesToComplete.Array.data[0]
+      value: Find a spot with no trees to look at the sky
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: ObjectivesToComplete.Array.data[1]
+      value: Cuddle with your knight and bask
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786dd7175382ca94f854a58e26b0577c, type: 3}

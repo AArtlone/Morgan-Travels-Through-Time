@@ -723,6 +723,45 @@ public class Character : MonoBehaviour
         Debug.Log("Collected the blueprint: " + blueprint);
     }
 
+    public void CompleteObjectiveInQuest(string objective, string quest)
+    {
+        foreach (Quest aQuest in CurrentQuests)
+        {
+            if (aQuest.Name == quest && aQuest.ProgressStatus == "Ongoing")
+            {
+                foreach (Objective aObjective in aQuest.Objectives)
+                {
+                    if (aObjective.Name == objective &&
+                        aObjective.CompletedStatus == false)
+                    {
+                        aObjective.CompletedStatus = true;
+                        RefreshAllQuests();
+                    }
+                }
+            }
+        }
+    }
+
+    public void CompleteObjective(string objective)
+    {
+        foreach (Quest aQuest in AllQuests)
+        {
+            if (aQuest.ProgressStatus == "Ongoing")
+            {
+                foreach (Objective aObjective in aQuest.Objectives)
+                {
+                    Debug.Log(aObjective.Name + " | " + objective);
+                    if (aObjective.Name == objective &&
+                        aObjective.CompletedStatus == false)
+                    {
+                        aObjective.CompletedStatus = true;
+                        RefreshAllQuests();
+                    }
+                }
+            }
+        }
+    }
+
     /// <summary>
     /// Updates stats starting from left to right using the new stat values in the same order. You can use it the following way: "charisma fitness", new int[] {2, 5}. The charisma value will be incremented by two while the fitness by five. Dont forget to use small letters for the stat strings.
     /// </summary>
@@ -828,7 +867,7 @@ public class Character : MonoBehaviour
                     _newQuestsData += "\"Name\":\"" + objective.Name + "\",";
                     if (objective.CompletedStatus == true)
                     {
-                        _newQuestsData += "\"CompletedStatus\":true,";
+                        _newQuestsData += "\"CompletedStatus\":true";
                     }
                     else if (objective.CompletedStatus == false)
                     {

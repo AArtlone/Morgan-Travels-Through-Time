@@ -204,11 +204,11 @@ public class InterfaceManager : MonoBehaviour
 
                     if (objective.CompletedStatus)
                     {
-                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
+                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
                     }
                     else
                     {
-                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
+                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
                     }
                 }
             }

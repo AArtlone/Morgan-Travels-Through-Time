@@ -15,6 +15,7 @@ public class Escape : MonoBehaviour
     public List<Refugee> CurrentRefugees = new List<Refugee>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
+    public List<string> ObjectivesToComplete = new List<string>();
 
     private string _escapeGamesJsonFile;
 
@@ -89,5 +90,11 @@ public class Escape : MonoBehaviour
         newGameData = newGameData.Substring(0, newGameData.Length - 1);
         newGameData += "]}";
         File.WriteAllText(_escapeGamesJsonFile, newGameData);
+
+        foreach (string objective in ObjectivesToComplete)
+        {
+            Character.Instance.CompleteObjective(objective);
+        }
+
     }
 }

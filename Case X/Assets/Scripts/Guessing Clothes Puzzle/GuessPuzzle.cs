@@ -13,6 +13,7 @@ public class GuessPuzzle : MonoBehaviour
     [Tooltip("This checkbox either allows or disallows loading clothes from the editor by hand instead of loading the default ones.")]
     public bool Customizable;
     public int PuzzleTimeInSeconds;
+    public List<string> ObjectivesToComplete = new List<string>();
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
     public List<GuessClothing> HeadList = new List<GuessClothing>();
     private int _currentHeadIndex = 0;
@@ -303,6 +304,11 @@ public class GuessPuzzle : MonoBehaviour
         newScoreData = newScoreData.Substring(0, newScoreData.Length - 1);
         newScoreData += "]}";
         File.WriteAllText(_guessingPuzzlesPath, newScoreData);
+
+        foreach (string objective in ObjectivesToComplete)
+        {
+            Character.Instance.CompleteObjective(objective);
+        }
     }
 
     // Returns the score based on the clothing currently on the character.

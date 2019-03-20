@@ -172,11 +172,23 @@ public class NPC : MonoBehaviour
             }
         }
 
+        if (FinalDialogueBranch.OptionsMenu.Length > 0)
+        {
+            DialogueProgressionTrigger2D.raycastTarget = false;
+            _dialogueProgressionTrigger.raycastTarget = false;
+        } else
+        {
+            DialogueProgressionTrigger2D.raycastTarget = true;
+            _dialogueProgressionTrigger.raycastTarget = true;
+        }
+        
+        Character.Instance.CompleteObjectiveInQuest(FinalDialogueBranch.ObjectiveToComplete, FinalDialogueBranch.QuestOfDialogue);
+
         //Debug.LogWarning("New dialogue is loaded!");
     }
 
     public void ContinueDialogue()
-    {   
+    {
         // When the player taps on the npc or anywhere on the dialogue box, it
         // will progress the dialogue further.
         if (_isDialogueOngoing)
@@ -251,7 +263,7 @@ public class NPC : MonoBehaviour
             // the dialogue is initiated, because we want to player to progress
             // further by clicking anywhere on the screen, not just on the NPC icon.
             // Once the dialogue is finished we disable this child's interaction.
-            _dialogueProgressionTrigger.raycastTarget = true;
+            //_dialogueProgressionTrigger.raycastTarget = true;
 
             _isDialogueOngoing = true;
         }

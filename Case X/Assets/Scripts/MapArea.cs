@@ -6,8 +6,6 @@ public class MapArea : MonoBehaviour
     public string Name;
     public Area.AreaStatus AreaStatus;
     public GameObject AreaEnvironment;
-    public GameObject PlayerEnterStartPosition;
-    public GameObject Icons;
 
     private void Start()
     {
@@ -33,12 +31,5 @@ public class MapArea : MonoBehaviour
         {
             InterfaceManager.Instance.OpenPopup(InterfaceManager.Instance.AreaLockedErrorPopup);
         }
-    }
-
-    public void ExitArea()
-    {
-        AreaEnvironment.transform.GetChild(3).GetComponent<WalkablePathController>().HasPlayerReachedDestination = true;
-        AreaEnvironment.SetActive(false);
-        Icons.SetActive(true);
     }
 }

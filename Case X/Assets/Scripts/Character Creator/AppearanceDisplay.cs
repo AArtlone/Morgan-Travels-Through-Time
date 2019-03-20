@@ -80,6 +80,12 @@ public class AppearanceDisplay : MonoBehaviour
         }
     }
 
+    public void ToggleQuestDisplay(Object display)
+    {
+        GameObject displayObj = (GameObject)display;
+        displayObj.SetActive(!displayObj.activeSelf);
+    }
+
     public void ToggleButton(Object button)
     {
         GameObject buttonObj = (GameObject)button;

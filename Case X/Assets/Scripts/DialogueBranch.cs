@@ -6,6 +6,7 @@ public class DialogueBranch
 {
     public string BranchTitle;
     public List<string> PreviousResponses = new List<string>();
+    //[Header("Defined below are fields that the character must meet in order to see this dialogue branch.")]
     [Range(0, 10)]
     [Tooltip("Priority decides whether this branch should be displayed compared to others that falls into the same player requirements.")]
     public int Priority;
@@ -28,11 +29,13 @@ public class DialogueBranch
     public List<string> ItemsDropped = new List<string>();
     [TextArea(0, 100)]
     [Space(10)]
-    [Tooltip("Text that will be displayed on the current dialogue sequence if t hat branch's requirements are met.")]
+    [Tooltip("Text that will be displayed on the current dialogue sequence if that branch's requirements are met.")]
     public string DialogueText;
     [Tooltip("Do not define more than four option fields or an error will occur!")]
     public string[] OptionsMenu;
 
     [Tooltip("At the end of this dialogue, the player is going to earn the following items")]
     public Item[] ItemsEarned;
+    public string QuestOfDialogue;
+    public string ObjectiveToComplete;
 }
