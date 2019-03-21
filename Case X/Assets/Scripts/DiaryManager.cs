@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DiaryManager : MonoBehaviour
 {
@@ -29,24 +27,24 @@ public class DiaryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        originalPosition1 = _button1.transform.position;
-        originalPosition2 = _button2.transform.position;
-        originalPosition3 = _button3.transform.position;
+        //originalPosition1 = _button1.transform.position;
+        //originalPosition2 = _button2.transform.position;
+        //originalPosition3 = _button3.transform.position;
         _page1Selected = true;
-        _button1.transform.position += _offset;
+        //_button1.transform.position += _offset;
         _page1.SetActive(true);
     }
 
     public void SelectPage(Object button)
     {
         GameObject buttonObj = button as GameObject;
-        if(buttonObj.name == "Button1")
+        if(buttonObj.name == "Quest Button")
         {
             if(_page1Selected == false)
             {
-                _button1.transform.position += _offset;
-                _button2.transform.position = originalPosition2;
-                _button3.transform.position = originalPosition3;
+                //_button1.transform.position += _offset;
+                //_button2.transform.position = originalPosition2;
+                //_button3.transform.position = originalPosition3;
                 _page1Selected = true;
                 _page2Selected = false;
                 _page3Selected = false;
@@ -54,13 +52,13 @@ public class DiaryManager : MonoBehaviour
                 _page2.SetActive(false);
                 _page3.SetActive(false);
             }
-        } else if(buttonObj.name == "Button2")
+        } else if(buttonObj.name == "Blueprints Button")
         {
             if (_page2Selected == false)
             {
-                _button1.transform.position = originalPosition1;
-                _button2.transform.position += _offset;
-                _button3.transform.position = originalPosition3;
+                //_button1.transform.position = originalPosition1;
+                //_button2.transform.position += _offset;
+                //_button3.transform.position = originalPosition3;
                 _page1Selected = false;
                 _page2Selected = true;
                 _page3Selected = false;
@@ -68,13 +66,13 @@ public class DiaryManager : MonoBehaviour
                 _page2.SetActive(true);
                 _page3.SetActive(false);
             }
-        } else if(buttonObj.name == "Button3")
+        } else if(buttonObj.name == "Help Button")
         {
             if (_page3Selected == false)
             {
-                _button1.transform.position = originalPosition1;
-                _button2.transform.position = originalPosition2;
-                _button3.transform.position += _offset;
+                //_button1.transform.position = originalPosition1;
+                //_button2.transform.position = originalPosition2;
+                //_button3.transform.position += _offset;
                 _page1Selected = false;
                 _page2Selected = false;
                 _page3Selected = true;

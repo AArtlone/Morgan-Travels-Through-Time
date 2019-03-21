@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using LitJson;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -644,6 +645,10 @@ public class Character : MonoBehaviour
         SetupQuests();
         SetupItems();
         SetupWearables();
+        if (SceneManager.GetActiveScene().name == "Main Map")
+        {
+            InterfaceManager.Instance.LoadBlueprints();
+        }
         #endregion
     }
     #endregion

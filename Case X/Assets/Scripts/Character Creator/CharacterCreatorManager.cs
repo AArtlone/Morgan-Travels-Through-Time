@@ -52,9 +52,10 @@ public class CharacterCreatorManager : MonoBehaviour
         // we just start the main menu instead.
         if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
         {
-            if(Character.Instance.TutorialCompleted)
+            SceneManager.LoadScene("Main Map");
+            if (Character.Instance.TutorialCompleted)
             {
-                SceneManager.LoadScene("Main Map");
+                //SceneManager.LoadScene("Main Map");
             } else
             {
                 SceneManager.LoadScene("Tutorial Map Area");

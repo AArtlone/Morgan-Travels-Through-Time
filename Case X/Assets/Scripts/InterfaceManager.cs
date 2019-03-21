@@ -83,22 +83,27 @@ public class InterfaceManager : MonoBehaviour
                 if (i == 1)
                 {
                     Blueprint1.sprite = blueprintSprite;
+                    Blueprint1.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 2)
                 {
                     Blueprint2.sprite = blueprintSprite;
+                    Blueprint1.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 3)
                 {
                     Blueprint3.sprite = blueprintSprite;
+                    Blueprint1.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 4)
                 {
                     Blueprint4.sprite = blueprintSprite;
+                    Blueprint1.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 5)
                 {
                     Blueprint5.sprite = blueprintSprite;
+                    Blueprint1.color = new Color(255, 255, 255, 1);
                 }
             }
             else if (characterData["Blueprint" + i].ToString() == "False")
@@ -189,7 +194,7 @@ public class InterfaceManager : MonoBehaviour
 
                 SelectedQuestTitle.text = "Title: " + loadedQuest.Name;
                 SelectedQuestDescription.text = "Description: " + loadedQuest.Description;
-                SelectedQuestStatus.text = "Completion Status: " + loadedQuest.ProgressStatus;
+                SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
 
                 for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
                 {

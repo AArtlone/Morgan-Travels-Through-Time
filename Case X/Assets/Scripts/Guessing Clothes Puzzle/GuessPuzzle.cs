@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GuessPuzzle : MonoBehaviour
 {
+    public Puzzle CanvasElementOfPuzzle;
     [Tooltip("Necessary to seperate the puzzles in storage!")]
     public string Name;
     [Tooltip("This checkbox either allows or disallows loading clothes from the editor by hand instead of loading the default ones.")]
@@ -92,8 +93,8 @@ public class GuessPuzzle : MonoBehaviour
             else
             {
                 _timer = 0;
-                OpenCompletePuzzleWindow();
                 SavePuzzleScore();
+                OpenCompletePuzzleWindow();
                 _isGameStarted = false;
             }
             Timer.text = ((int)_timer).ToString();
@@ -309,6 +310,8 @@ public class GuessPuzzle : MonoBehaviour
         {
             Character.Instance.CompleteObjective(objective);
         }
+
+        CanvasElementOfPuzzle.LoadScore();
     }
 
     // Returns the score based on the clothing currently on the character.
@@ -349,7 +352,6 @@ public class GuessPuzzle : MonoBehaviour
 
     private void OpenCompletePuzzleWindow()
     {
-
         finalScore.text = "Time is up. Your final score is " +
             TotalScore + ". Congratulations!";
         OpenPopup(PuzzleFinishedWindow);
