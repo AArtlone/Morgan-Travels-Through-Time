@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class MapEnvironmentManager : MonoBehaviour
 {
     private GameObject _hiddenObjectPuzzleNpc;
-    private GameObject _clothingPuzzleNpc;
+    public GameObject ClothingPuzzleNpc;
     private GameObject _dialogueNpc;
-    private GameObject _closeButton;
+    public GameObject CloseButton;
     private GameObject _playerIcon;
 
 
@@ -17,26 +17,24 @@ public class MapEnvironmentManager : MonoBehaviour
     void Start()
     {
         _hiddenObjectPuzzleNpc = GameObject.Find("2D Hidden Objects Puzzle NPC");
-        _clothingPuzzleNpc = GameObject.Find("2D Guess Clothing Puzzle NPC");
         _dialogueNpc = GameObject.Find("2D Area NPC");
-        _closeButton = GameObject.Find("Close Button");
         _playerIcon = GameObject.Find("Player Icon");
-        if (Character.Instance.TutorialCompleted == false)
+        if(Character.Instance.HasMap == true)
         {
-            ChangeEnvironmentForTutorial();
+            CloseButton.SetActive(true);
+            ClothingPuzzleNpc.SetActive(true);
         }
-    }
-
-    private void ChangeEnvironmentForTutorial()
-    {
-        _hiddenObjectPuzzleNpc.SetActive(false);
-        _clothingPuzzleNpc.SetActive(false);
-        _closeButton.SetActive(false);
     }
 
     private void EnablePuzzleNpc(GameObject gameObjectName)
     {
         gameObjectName.gameObject.SetActive(true);
+    }
+
+    public void ReceivedMapEvents()
+    {
+        CloseButton.SetActive(true);
+        ClothingPuzzleNpc.SetActive(true);
     }
     
     // Update is called once per frame

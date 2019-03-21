@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MapArea : MonoBehaviour
 {
     public string Name;
     public Area.AreaStatus AreaStatus;
     public GameObject AreaEnvironment;
+    public Sprite EnabledMapPoint;
+    public Sprite DisabledMapPoint;
 
     private void Start()
     {
@@ -15,6 +18,13 @@ public class MapArea : MonoBehaviour
             {
                 Name = area.Name;
                 AreaStatus = area.Status;
+                if(AreaStatus == Area.AreaStatus.Locked)
+                {
+                    GetComponent<Image>().sprite = DisabledMapPoint;
+                } else
+                {
+                    GetComponent<Image>().sprite = EnabledMapPoint;
+                }
             }
         }
     }

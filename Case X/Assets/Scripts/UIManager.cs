@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     public Image _hairIcon;
     public Image _topIcon;
 
+    public GameObject[] MapAreas;
+
     private Sprite[] _spritesFromStorage;
 
     private void Start()
@@ -64,6 +66,16 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+        //if(Character.Instance.TutorialCompleted == false)
+        //{
+        //    foreach(GameObject mapArea in MapAreas)
+        //    {
+        //        if(mapArea.name != "Map Area 1")
+        //        {
+        //            mapArea.SetActive(false);
+        //        }
+        //    }
+        //}
     }
 
     public void ToggleSettingsUI()

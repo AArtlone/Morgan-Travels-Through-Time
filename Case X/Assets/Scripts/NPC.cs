@@ -169,6 +169,12 @@ public class NPC : MonoBehaviour
                 Character.Instance.AddItem(dialogueItem);
                 areItemsEarnedAlready = true;
                 Debug.Log("Item " + dialogueItem.Name + " received!");
+                if(dialogueItem.Name == "Map")
+                {
+                    Character.Instance.HasMap = true;
+                    Character.Instance.RefreshJsonData();
+                    FindObjectOfType<MapEnvironmentManager>().ReceivedMapEvents();
+                }
             }
         }
 

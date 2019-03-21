@@ -1758,7 +1758,34 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1726175fb0197374a99c18e04d0464b4,
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
+        type: 3}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Map Area 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: Name
+      value: Area 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: DisabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: bb1bbb1e42f6c4b4cb5e82d1c2891ebe,
+        type: 3}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: EnabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de2853634d47c746bc636128518c703, type: 3}
@@ -1771,6 +1798,12 @@ RectTransform:
 --- !u!224 &216334354 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8648785938155644630, guid: 1de2853634d47c746bc636128518c703,
+    type: 3}
+  m_PrefabInstance: {fileID: 216334352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &216334355 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8648785937033873038, guid: 1de2853634d47c746bc636128518c703,
     type: 3}
   m_PrefabInstance: {fileID: 216334352}
   m_PrefabAsset: {fileID: 0}
@@ -3650,7 +3683,34 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1726175fb0197374a99c18e04d0464b4,
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
+        type: 3}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Map Area 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: Name
+      value: Area 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: DisabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: bb1bbb1e42f6c4b4cb5e82d1c2891ebe,
+        type: 3}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: EnabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de2853634d47c746bc636128518c703, type: 3}
@@ -3663,6 +3723,12 @@ RectTransform:
 --- !u!224 &562483182 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8648785938155644630, guid: 1de2853634d47c746bc636128518c703,
+    type: 3}
+  m_PrefabInstance: {fileID: 562483180}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &562483183 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8648785937033873038, guid: 1de2853634d47c746bc636128518c703,
     type: 3}
   m_PrefabInstance: {fileID: 562483180}
   m_PrefabAsset: {fileID: 0}
@@ -8493,6 +8559,12 @@ MonoBehaviour:
   _faceIcon: {fileID: 109683162}
   _hairIcon: {fileID: 12002011}
   _topIcon: {fileID: 1954517406}
+  MapAreas:
+  - {fileID: 8648785938024362980}
+  - {fileID: 1467558243}
+  - {fileID: 562483183}
+  - {fileID: 216334355}
+  - {fileID: 1948682447}
 --- !u!1 &1055447728
 GameObject:
   m_ObjectHideFlags: 0
@@ -13112,7 +13184,34 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1726175fb0197374a99c18e04d0464b4,
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
+        type: 3}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Map Area 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: Name
+      value: Area 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: DisabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: bb1bbb1e42f6c4b4cb5e82d1c2891ebe,
+        type: 3}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: EnabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de2853634d47c746bc636128518c703, type: 3}
@@ -13125,6 +13224,12 @@ RectTransform:
 --- !u!224 &1467558242 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8648785938155644630, guid: 1de2853634d47c746bc636128518c703,
+    type: 3}
+  m_PrefabInstance: {fileID: 1467558240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1467558243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8648785937033873038, guid: 1de2853634d47c746bc636128518c703,
     type: 3}
   m_PrefabInstance: {fileID: 1467558240}
   m_PrefabAsset: {fileID: 0}
@@ -16994,7 +17099,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1726175fb0197374a99c18e04d0464b4,
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
         type: 3}
     - target: {fileID: 8526765675741330290, guid: 1de2853634d47c746bc636128518c703,
         type: 3}
@@ -17019,8 +17124,25 @@ PrefabInstance:
     - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Map Environment
+      value: Map Area 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: Name
+      value: Area 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: DisabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: bb1bbb1e42f6c4b4cb5e82d1c2891ebe,
+        type: 3}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: EnabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de2853634d47c746bc636128518c703, type: 3}
 --- !u!224 &1948682445 stripped
@@ -17032,6 +17154,12 @@ RectTransform:
 --- !u!224 &1948682446 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8648785938155644630, guid: 1de2853634d47c746bc636128518c703,
+    type: 3}
+  m_PrefabInstance: {fileID: 1948682444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1948682447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8648785937033873038, guid: 1de2853634d47c746bc636128518c703,
     type: 3}
   m_PrefabInstance: {fileID: 1948682444}
   m_PrefabAsset: {fileID: 0}
@@ -18813,12 +18941,45 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1726175fb0197374a99c18e04d0464b4,
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
         type: 3}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418604, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Tutorial Map Area
+      objectReference: {fileID: 0}
     - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
         type: 3}
       propertyPath: Icons
       value: 
       objectReference: {fileID: 1776775861}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: Name
+      value: Tutorial Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: DisabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: bb1bbb1e42f6c4b4cb5e82d1c2891ebe,
+        type: 3}
+    - target: {fileID: 8648785936944418611, guid: 1de2853634d47c746bc636128518c703,
+        type: 3}
+      propertyPath: EnabledMapPoint
+      value: 
+      objectReference: {fileID: 21300000, guid: 579b51e690b46fb45babd513cea38879,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1de2853634d47c746bc636128518c703, type: 3}
+--- !u!1 &8648785938024362980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8648785937033873038, guid: 1de2853634d47c746bc636128518c703,
+    type: 3}
+  m_PrefabInstance: {fileID: 8648785938024362979}
+  m_PrefabAsset: {fileID: 0}

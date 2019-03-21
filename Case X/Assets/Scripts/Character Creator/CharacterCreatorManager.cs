@@ -57,8 +57,9 @@ public class CharacterCreatorManager : MonoBehaviour
                 SceneManager.LoadScene("Main Map");
             } else
             {
-                SceneManager.LoadScene("Map Environment");
-            }        }
+                SceneManager.LoadScene("Tutorial Map Area");
+            }
+        }
     }
 
     //defining current player's appearances in order to later check if any has changed
@@ -351,7 +352,6 @@ public class CharacterCreatorManager : MonoBehaviour
             _botChanged == true ||
             _shoesChanged == true)
         {
-            //display error message
             OpenWindow(CharacterClothesChangedErrorPopop);
         } else
         {
@@ -402,8 +402,7 @@ public class CharacterCreatorManager : MonoBehaviour
             Character.Instance.SetupWorldData();
             if(SceneManager.GetActiveScene().name == "Begining Character Creation")
             {
-                SceneManager.LoadScene("Map Environment");
-                //SceneManager.LoadScene("Main Map");
+                SceneManager.LoadScene("Tutorial Map Area");
             } else
             {
                 GameObject.Find("Character Name Menu").SetActive(false);

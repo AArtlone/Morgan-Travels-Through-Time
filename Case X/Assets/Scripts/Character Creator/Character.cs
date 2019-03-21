@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     public bool IsDataCreated;
     public bool CharacterCreation;
     public bool TutorialCompleted;
+    public bool HasMap;
     [Space(10)]
     #region Stats
     public int Reputation;
@@ -127,6 +128,15 @@ public class Character : MonoBehaviour
                     else if (playerJsonData["TutorialCompleted"].ToString() == "False")
                     {
                         TutorialCompleted = false;
+                    }
+
+                    if (playerJsonData["HasMap"].ToString() == "True")
+                    {
+                        HasMap = true;
+                    }
+                    else if (playerJsonData["HasMap"].ToString() == "False")
+                    {
+                        HasMap = false;
                     }
 
                     #region Blueprints
@@ -360,6 +370,24 @@ public class Character : MonoBehaviour
             else if (characterData["CharacterCreation"].ToString() == "False")
             {
                 CharacterCreation = false;
+            }
+
+            if (characterData["TutorialCompleted"].ToString() == "True")
+            {
+                TutorialCompleted = true;
+            }
+            else if (characterData["TutorialCompleted"].ToString() == "False")
+            {
+                TutorialCompleted = false;
+            }
+
+            if (characterData["HasMap"].ToString() == "True")
+            {
+                HasMap = true;
+            }
+            else if (characterData["HasMap"].ToString() == "False")
+            {
+                HasMap = false;
             }
 
             #region Blueprints
@@ -760,7 +788,7 @@ public class Character : MonoBehaviour
             {
                 foreach (Objective aObjective in aQuest.Objectives)
                 {
-                    Debug.Log(aObjective.Name + " | " + objective);
+                    //Debug.Log(aObjective.Name + " | " + objective);
                     if (aObjective.Name == objective &&
                         aObjective.CompletedStatus == false)
                     {
