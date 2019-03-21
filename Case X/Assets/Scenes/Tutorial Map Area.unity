@@ -325,6 +325,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 204209934}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &204209937 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1519882367664504713, guid: 259069465cb688744bc791d20ad99778,
+    type: 3}
+  m_PrefabInstance: {fileID: 204209934}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204209936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b0f20c4298c5d4ba6e3b561bc6817b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &370587156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3473,18 +3485,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1425624451}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1425624453 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7503837135622421926, guid: ef866524bb0860c458b8930c8fd0be2b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1425624451}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b0f20c4298c5d4ba6e3b561bc6817b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1550781323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,7 +4069,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CanvasElementOfPuzzle
       value: 
-      objectReference: {fileID: 1425624453}
+      objectReference: {fileID: 204209937}
     - target: {fileID: 6267611897775384445, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}
       propertyPath: m_IsActive
