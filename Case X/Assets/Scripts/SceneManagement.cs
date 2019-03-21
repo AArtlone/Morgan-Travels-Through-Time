@@ -9,4 +9,9 @@ public class SceneManagement : MonoBehaviour
         Character.Instance.RefreshJsonData();
         SceneManager.LoadScene("Character Customization");
     }
+
+    public void LoadMainMap()
+    {
+        SceneManager.LoadScene("Main Map");
+    }
 }

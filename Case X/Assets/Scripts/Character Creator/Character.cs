@@ -912,21 +912,25 @@ public class Character : MonoBehaviour
 
     public void RefreshItems()
     {
+        //SetupItems();
         // We reset the existing items json list content, so that we can
         // append new one afterwards.
         File.WriteAllText(_itemsJsonFilePath, "");
 
         // This creates the starting wrapper of the json file.
         string newItemsData = "{\"Items\":[";
-
+        
         foreach (Item item in Items)
         {
+            //Debug.Log(item.Name);
             string itemJson = JsonUtility.ToJson(item);
             newItemsData += itemJson + ",";
         }
-        // This removes the last comma at the last item in the array, so
-        // that we wont get an error when getting the data later on.
-        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        if (Items.Count > 0) {
+            // This removes the last comma at the last item in the array, so
+            // that we wont get an error when getting the data later on.
+            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        }
         // This closes the wrapper of the json file made from the beginning.
         newItemsData += "]}";
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
