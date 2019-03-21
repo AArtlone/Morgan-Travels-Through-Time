@@ -52,8 +52,13 @@ public class CharacterCreatorManager : MonoBehaviour
         // we just start the main menu instead.
         if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
         {
-            SceneManager.LoadScene("Main Map");
-        }
+            if(Character.Instance.TutorialCompleted)
+            {
+                SceneManager.LoadScene("Main Map");
+            } else
+            {
+                SceneManager.LoadScene("Map Environment");
+            }        }
     }
 
     //defining current player's appearances in order to later check if any has changed
@@ -397,7 +402,8 @@ public class CharacterCreatorManager : MonoBehaviour
             Character.Instance.SetupWorldData();
             if(SceneManager.GetActiveScene().name == "Begining Character Creation")
             {
-                SceneManager.LoadScene("Main Map");
+                SceneManager.LoadScene("Map Environment");
+                //SceneManager.LoadScene("Main Map");
             } else
             {
                 GameObject.Find("Character Name Menu").SetActive(false);

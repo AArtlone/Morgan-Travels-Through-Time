@@ -705,6 +705,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91942047}
   m_CullTransparentMesh: 0
+--- !u!1 &172138678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172138679}
+  - component: {fileID: 172138681}
+  - component: {fileID: 172138680}
+  m_Layer: 5
+  m_Name: Top Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &172138679
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172138678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 630286417}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5, y: -102}
+  m_SizeDelta: {x: 146, y: 114}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &172138680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172138678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &172138681
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172138678}
+  m_CullTransparentMesh: 0
 --- !u!1001 &173030712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1122,6 +1196,80 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!1 &525496837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 525496838}
+  - component: {fileID: 525496840}
+  - component: {fileID: 525496839}
+  m_Layer: 5
+  m_Name: Face Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &525496838
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525496837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 630286417}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3.7, y: -12.9}
+  m_SizeDelta: {x: 85, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &525496839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525496837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &525496840
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525496837}
+  m_CullTransparentMesh: 0
 --- !u!1 &585357607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,6 +1462,98 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!1 &630286416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 630286417}
+  - component: {fileID: 630286420}
+  - component: {fileID: 630286419}
+  - component: {fileID: 630286418}
+  m_Layer: 5
+  m_Name: Player Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &630286417
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630286416}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.59999996, y: 0.59999996, z: 1}
+  m_Children:
+  - {fileID: 2024401079}
+  - {fileID: 525496838}
+  - {fileID: 1209830838}
+  - {fileID: 172138679}
+  m_Father: {fileID: 1191242344}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -579, y: 299}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &630286418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630286416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &630286419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630286416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 28c97fd52f4c6cf42ae1c68a8a55ad14, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &630286420
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630286416}
+  m_CullTransparentMesh: 0
 --- !u!1 &683476002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,7 +1870,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &988357161
 GameObject:
@@ -1841,12 +2081,13 @@ RectTransform:
   - {fileID: 683476003}
   - {fileID: 702578653}
   - {fileID: 988357162}
+  - {fileID: 630286417}
   - {fileID: 1915563260}
   - {fileID: 2010536289}
   - {fileID: 590293963454918284}
   - {fileID: 1718097794}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1994,8 +2235,82 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1209830837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209830838}
+  - component: {fileID: 1209830840}
+  - component: {fileID: 1209830839}
+  m_Layer: 5
+  m_Name: Hair Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1209830838
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209830837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 630286417}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000002861, y: 0.00000095367}
+  m_SizeDelta: {x: 146, y: 114}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1209830839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209830837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1209830840
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209830837}
+  m_CullTransparentMesh: 0
 --- !u!1 &1241654342
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,7 +2344,7 @@ Transform:
   - {fileID: 738118079}
   - {fileID: 1975862500}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249597823
 GameObject:
@@ -2211,6 +2526,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1286039324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286039326}
+  - component: {fileID: 1286039325}
+  m_Layer: 0
+  m_Name: Map Environment Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1286039325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286039324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4879bee8a96a34b43ac8650c7e61477e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1286039326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286039324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 446.09894, y: 334.9385, z: 31.462421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290687035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,7 +3075,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1191242344}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3097,7 +3455,7 @@ RectTransform:
   - {fileID: 1290687036}
   - {fileID: 1868023423}
   m_Father: {fileID: 1191242344}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3165,7 +3523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2010536289, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2010536289, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3398,6 +3756,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018298886}
+  m_CullTransparentMesh: 0
+--- !u!1 &2024401078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024401079}
+  - component: {fileID: 2024401081}
+  - component: {fileID: 2024401080}
+  m_Layer: 5
+  m_Name: Body Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2024401079
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024401078}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 630286417}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -67, y: -86}
+  m_SizeDelta: {x: 270, y: 350}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2024401080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024401078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &2024401081
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024401078}
   m_CullTransparentMesh: 0
 --- !u!1 &2121818806
 GameObject:
@@ -3809,6 +4241,61 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
         type: 3}
+      propertyPath: Dialogue.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.data[0].ItemsEarned.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.data[0].ItemsEarned.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.data[0].ItemsEarned.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
       propertyPath: DialogueProgressionTrigger2D
       value: 
       objectReference: {fileID: 1718097796}
@@ -3862,6 +4349,282 @@ PrefabInstance:
       propertyPath: Dialogue.Array.data[0].DialogueBranches.Array.data[0].ItemsEarned.Array.data[1]
       value: 
       objectReference: {fileID: 173030713}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].LeftCharacterTitle
+      value: AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].LeftCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].RightCharacterTitle
+      value: EE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].RightCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueStageBackground
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.data[0].DialogueText
+      value: IF I SAID I WANT YOUR BODY NOW
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
+      value: 
+      objectReference: {fileID: 1389594582}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.data[0].ItemsEarned.Array.data[1]
+      value: 
+      objectReference: {fileID: 173030713}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: My moon and light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[1].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].LeftCharacterTitle
+      value: AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].LeftCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].RightCharacterTitle
+      value: EE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].RightCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueStageBackground
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.data[0].DialogueText
+      value: IF I SAID I WANT YOUR BODY NOW
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
+      value: 
+      objectReference: {fileID: 1389594582}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.data[0].ItemsEarned.Array.data[1]
+      value: 
+      objectReference: {fileID: 173030713}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: My moon and light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[2].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].LeftCharacterTitle
+      value: AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].LeftCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].RightCharacterTitle
+      value: EE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].RightCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueStageBackground
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.data[0].DialogueText
+      value: IF I SAID I WANT YOUR BODY NOW
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
+      value: 
+      objectReference: {fileID: 1389594582}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.data[0].ItemsEarned.Array.data[1]
+      value: 
+      objectReference: {fileID: 173030713}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: My moon and light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[3].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].LeftCharacterTitle
+      value: AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].LeftCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].RightCharacterTitle
+      value: EE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].RightCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueStageBackground
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.data[0].DialogueText
+      value: IF I SAID I WANT YOUR BODY NOW
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
+      value: 
+      objectReference: {fileID: 1389594582}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.data[1]
+      value: 
+      objectReference: {fileID: 173030713}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: My moon and light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[4].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].LeftCharacterTitle
+      value: AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].LeftCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: f373de5c359730d4dba022670f766e4d,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].RightCharacterTitle
+      value: EE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].RightCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueStageBackground
+      value: 
+      objectReference: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.data[0].DialogueText
+      value: IF I SAID I WANT YOUR BODY NOW
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
+      value: 
+      objectReference: {fileID: 1389594582}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.data[1]
+      value: 
+      objectReference: {fileID: 173030713}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: My moon and light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[5].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Venture into the Varvara mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].RightCharacterPortrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 89d1b7e0b0ff7294ba0697d9081eb690,
+        type: 3}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: Dialogue.Array.data[0].RightCharacterTitle
+      value: Uncle Ben
+      objectReference: {fileID: 0}
     - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3921,7 +4684,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e2ff9ca883cf1984da2385d5c84f34ee,
+      objectReference: {fileID: 21300000, guid: 89d1b7e0b0ff7294ba0697d9081eb690,
         type: 3}
     - target: {fileID: 8004301126409690349, guid: 446aa4024397a28469978c9a4a8d6d3c,
         type: 3}
@@ -4000,7 +4763,7 @@ PrefabInstance:
     - target: {fileID: 590293963454918284, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 590293963454918284, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}

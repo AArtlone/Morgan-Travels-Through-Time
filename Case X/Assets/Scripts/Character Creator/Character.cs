@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     public string Name;
     public bool IsDataCreated;
     public bool CharacterCreation;
+    public bool TutorialCompleted;
     [Space(10)]
     #region Stats
     public int Reputation;
@@ -117,6 +118,15 @@ public class Character : MonoBehaviour
                     else if (playerJsonData["CharacterCreation"].ToString() == "False")
                     {
                         CharacterCreation = false;
+                    }
+
+                    if (playerJsonData["TutorialCompleted"].ToString() == "True")
+                    {
+                        TutorialCompleted = true;
+                    }
+                    else if (playerJsonData["TutorialCompleted"].ToString() == "False")
+                    {
+                        TutorialCompleted = false;
                     }
 
                     #region Blueprints
