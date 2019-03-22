@@ -73,6 +73,10 @@ public class Refugee : MonoBehaviour
             _gameInterface.SaveEscapeGamesData();
 
             Destroy(gameObject);
+            if(_gameInterface.CurrentWave == _gameInterface.RefugeeWaves.Count)
+            {
+                _gameInterface.EndGame();
+            }
         }
         if(collision.gameObject.tag == "Checkpoint")
         {

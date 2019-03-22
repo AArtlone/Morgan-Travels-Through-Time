@@ -16,6 +16,7 @@ public class Escape : MonoBehaviour
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
     public List<string> ObjectivesToComplete = new List<string>();
+    public GameObject EndGamePopUp;
 
     private string _escapeGamesJsonFile;
 
@@ -95,6 +96,10 @@ public class Escape : MonoBehaviour
         {
             Character.Instance.CompleteObjective(objective);
         }
+    }
 
+    public void EndGame()
+    {
+        EndGamePopUp.SetActive(true);
     }
 }

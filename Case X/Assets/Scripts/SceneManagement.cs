@@ -14,4 +14,9 @@ public class SceneManagement : MonoBehaviour
     {
         SceneManager.LoadScene("Main Map");
     }
+
+    public void LoadMapArea2()
+    {
+        SceneManager.LoadScene("Map Area 2");
+    }
 }
