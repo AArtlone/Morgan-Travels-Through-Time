@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DiaryManager : MonoBehaviour
 {
@@ -30,9 +31,12 @@ public class DiaryManager : MonoBehaviour
         //originalPosition1 = _button1.transform.position;
         //originalPosition2 = _button2.transform.position;
         //originalPosition3 = _button3.transform.position;
-        _page1Selected = true;
         //_button1.transform.position += _offset;
+        _page1Selected = true;
         _page1.SetActive(true);
+        _button1.GetComponentInChildren<Image>().color = new Color(255, 255, 255, 1);
+        _button2.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
+        _button3.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
     }
 
     public void SelectPage(Object button)
@@ -45,6 +49,9 @@ public class DiaryManager : MonoBehaviour
                 //_button1.transform.position += _offset;
                 //_button2.transform.position = originalPosition2;
                 //_button3.transform.position = originalPosition3;
+                _button1.GetComponentInChildren<Image>().color = new Color(255, 255, 255, 1);
+                _button2.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
+                _button3.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
                 _page1Selected = true;
                 _page2Selected = false;
                 _page3Selected = false;
@@ -59,6 +66,9 @@ public class DiaryManager : MonoBehaviour
                 //_button1.transform.position = originalPosition1;
                 //_button2.transform.position += _offset;
                 //_button3.transform.position = originalPosition3;
+                _button1.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
+                _button2.GetComponentInChildren<Image>().color = new Color(255, 255, 255, 1f);
+                _button3.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
                 _page1Selected = false;
                 _page2Selected = true;
                 _page3Selected = false;
@@ -73,6 +83,9 @@ public class DiaryManager : MonoBehaviour
                 //_button1.transform.position = originalPosition1;
                 //_button2.transform.position = originalPosition2;
                 //_button3.transform.position += _offset;
+                _button1.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
+                _button2.GetComponentInChildren<Image>().color = new Color(255, 255, 255, .5f);
+                _button3.GetComponentInChildren<Image>().color = new Color(255, 255, 255, 1);
                 _page1Selected = false;
                 _page2Selected = false;
                 _page3Selected = true;

@@ -459,7 +459,7 @@ public class Character : MonoBehaviour
                     if (questInFile.ProgressStatus == "Ongoing")
                     {
                         CurrentQuests.Add(questInFile);
-                        //Debug.Log("Ongoing " + questInFile.Name);
+                        Debug.Log("Ongoing " + questInFile.Name);
                     } else if (questInFile.ProgressStatus == "Available" &&
                         questInFile.CompletionStatus)
                     {
@@ -735,7 +735,7 @@ public class Character : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CollectBlueprint("Blueprint5");
+            CollectBlueprint("Blueprint1");
         }
     }
 

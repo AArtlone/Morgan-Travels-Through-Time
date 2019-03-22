@@ -88,22 +88,22 @@ public class InterfaceManager : MonoBehaviour
                 else if (i == 2)
                 {
                     Blueprint2.sprite = blueprintSprite;
-                    Blueprint1.color = new Color(255, 255, 255, 1);
+                    Blueprint2.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 3)
                 {
                     Blueprint3.sprite = blueprintSprite;
-                    Blueprint1.color = new Color(255, 255, 255, 1);
+                    Blueprint3.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 4)
                 {
                     Blueprint4.sprite = blueprintSprite;
-                    Blueprint1.color = new Color(255, 255, 255, 1);
+                    Blueprint4.color = new Color(255, 255, 255, 1);
                 }
                 else if (i == 5)
                 {
                     Blueprint5.sprite = blueprintSprite;
-                    Blueprint1.color = new Color(255, 255, 255, 1);
+                    Blueprint5.color = new Color(255, 255, 255, 1);
                 }
             }
             else if (characterData["Blueprint" + i].ToString() == "False")
@@ -112,18 +112,23 @@ public class InterfaceManager : MonoBehaviour
                 if (i == 1)
                 {
                     Blueprint1.sprite = blueprintSprite;
+                    Blueprint1.color = new Color(255, 255, 255, 0);
                 } else if (i == 2)
                 {
                     Blueprint2.sprite = blueprintSprite;
+                    Blueprint2.color = new Color(255, 255, 255, 0);
                 } else if (i == 3)
                 {
                     Blueprint3.sprite = blueprintSprite;
+                    Blueprint3.color = new Color(255, 255, 255, 0);
                 } else if (i == 4)
                 {
                     Blueprint4.sprite = blueprintSprite;
+                    Blueprint4.color = new Color(255, 255, 255, 0);
                 } else if (i == 5)
                 {
                     Blueprint5.sprite = blueprintSprite;
+                    Blueprint5.color = new Color(255, 255, 255, 0);
                 }
             }
         }
@@ -147,22 +152,28 @@ public class InterfaceManager : MonoBehaviour
             }
 
             //Character.Instance.AllQuests.Clear();
-            foreach (Quest loadedQuest in Character.Instance.CurrentQuests)
+            foreach (Quest loadedQuest in Character.Instance.AllQuests)
             {
-                GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
-                newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                if (loadedQuest.ProgressStatus == "Ongoing")
+                {
+                    GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
+                    newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                }
             }
 
-            foreach (Quest loadedQuest in Character.Instance.AvailableQuests)
+            foreach (Quest loadedQuest in Character.Instance.AllQuests)
             {
                 GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
                 newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
             }
 
-            foreach (Quest loadedQuest in Character.Instance.CompletedQuests)
+            foreach (Quest loadedQuest in Character.Instance.AllQuests)
             {
-                GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
-                newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                if (loadedQuest.ProgressStatus == "Completed")
+                {
+                    GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
+                    newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                }
             }
         }
     }
