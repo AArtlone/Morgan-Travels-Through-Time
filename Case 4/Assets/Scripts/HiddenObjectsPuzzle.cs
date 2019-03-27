@@ -141,6 +141,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         InterfaceManager.Instance.BottomUIInventory.SetActive(true);
         //transform.GetComponentInParent<Image>().raycastTarget = true;
 
+        Character.Instance.InitiateInteraction();
+
         gameObject.SetActive(false);
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using LitJson;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Character : MonoBehaviour
 {
@@ -1066,4 +1067,16 @@ public class Character : MonoBehaviour
         LoadInventory();
     }
     #endregion
+
+    public void InitiateInteraction()
+    {
+        StartCoroutine(EnablePlayerInteraction());
+    }
+
+    public IEnumerator EnablePlayerInteraction()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        FindObjectOfType<CameraBehavior>().IsInteracting = false;
+    }
 }

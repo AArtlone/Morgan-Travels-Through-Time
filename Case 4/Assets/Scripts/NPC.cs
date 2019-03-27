@@ -305,6 +305,7 @@ public class NPC : MonoBehaviour
 
                         _isDialogueOngoing = false;
                         DialogueManager.Instance.CurrentNPCDialogue = null;
+                        Character.Instance.InitiateInteraction();
                         return;
                     }
                 }
@@ -320,6 +321,7 @@ public class NPC : MonoBehaviour
                 }
 
                 _isDialogueOngoing = false;
+                Character.Instance.InitiateInteraction();
                 return;
             }
         } else 

@@ -373,6 +373,12 @@ public class GuessPuzzle : MonoBehaviour
     public void ClosePopup(Object obj)
     {
         GameObject popupObject = obj as GameObject;
+
+        if (popupObject == gameObject)
+        {
+            Character.Instance.InitiateInteraction();
+        }
+
         popupObject.SetActive(false);
     }
 
