@@ -269,7 +269,7 @@ public class NPC : MonoBehaviour
 
         foreach (Dialogue dia in FinalSequence)
         {
-            Debug.Log("Dialogue matched: " + dia.DialogueTitle);
+            //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
         }
 
         // PRIORITY

@@ -10,15 +10,16 @@ public class CameraBehavior : MonoBehaviour
     private bool _isCameraTravelling = false;
     private Vector3 _tapPosition;
     public bool IsInteracting = false;
+    private UIManager _uiManager;
 
     private void Start()
     {
         _backgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+        _uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
     {
-        Debug.Log(IsInteracting);
         if (IsInteracting == false)
         {
             if (Input.touchCount > 0 || _isCameraTravelling == false)
@@ -34,7 +35,7 @@ public class CameraBehavior : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, _tapPosition) > 1f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tapPosition.x, transform.position.y, transform.position.z), CameraSpeed * Time.deltaTime * 2);
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tapPosition.x, transform.position.y, transform.position.z), CameraSpeed * Time.deltaTime * 0.5f);
 
                     Vector3 newPosition = transform.position;
                     newPosition.x = Mathf.Clamp(transform.position.x, _backgroundBounds.min.x + 5, _backgroundBounds.max.x - 5);
@@ -53,6 +54,7 @@ public class CameraBehavior : MonoBehaviour
 
             if (hitObj.transform.tag == "NPC")
             {
+                _uiManager.LoadCharacterAppearance();
                 // Replace with interaction mechanic in the future
                 hitObj.transform.GetComponent<NPC>().ContinueDialogue();
                 IsInteracting = true;

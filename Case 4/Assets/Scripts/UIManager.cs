@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     public Image _faceIcon;
     public Image _hairIcon;
     public Image _topIcon;
+    public Image _botIcon;
+    public Image _shoesIcon;
 
     public GameObject[] MapAreas;
 
@@ -22,14 +24,29 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        LoadCharacterAppearance();
+        //if(Character.Instance.TutorialCompleted == false)
+        //{
+        //    foreach(GameObject mapArea in MapAreas)
+        //    {
+        //        if(mapArea.name != "Map Area 1")
+        //        {
+        //            mapArea.SetActive(false);
+        //        }
+        //    }
+        //}
+    }
+
+    public void LoadCharacterAppearance()
+    {
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (clothing.BodyPart == "Body" && clothing.Selected == true)
             {
-                foreach(Sprite sprite in _spritesFromStorage)
+                foreach (Sprite sprite in _spritesFromStorage)
                 {
-                    if(sprite.name == clothing.Name)
+                    if (sprite.name == clothing.Name)
                     {
                         _bodyIcon.sprite = sprite;
                     }
@@ -65,17 +82,30 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+            if (_botIcon != null || _shoesIcon != null)
+            {
+                if (clothing.BodyPart == "Bot" && clothing.Selected == true)
+                {
+                    foreach (Sprite sprite in _spritesFromStorage)
+                    {
+                        if (sprite.name == clothing.Name)
+                        {
+                            _botIcon.sprite = sprite;
+                        }
+                    }
+                }
+                if (clothing.BodyPart == "Shoes" && clothing.Selected == true)
+                {
+                    foreach (Sprite sprite in _spritesFromStorage)
+                    {
+                        if (sprite.name == clothing.Name)
+                        {
+                            _shoesIcon.sprite = sprite;
+                        }
+                    }
+                }
+            }
         }
-        //if(Character.Instance.TutorialCompleted == false)
-        //{
-        //    foreach(GameObject mapArea in MapAreas)
-        //    {
-        //        if(mapArea.name != "Map Area 1")
-        //        {
-        //            mapArea.SetActive(false);
-        //        }
-        //    }
-        //}
     }
 
     public void ToggleSettingsUI()
