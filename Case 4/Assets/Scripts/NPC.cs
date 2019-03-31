@@ -128,7 +128,7 @@ public class NPC : MonoBehaviour
                 {
                     _availableBranches.Add(FinalSequence[CurrentDialogueIndex].DialogueBranches[j]);
 
-                    Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
+                    //Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
                     //Debug.Log("Number of elements match!");
                 }
             }

@@ -9,19 +9,9 @@ public class SceneManagement : MonoBehaviour
         Character.Instance.RefreshJsonData();
         SceneManager.LoadScene("Character Customization");
     }
-
-    public void LoadMainMap()
+    
+    public void LoadScene(string newScene)
     {
-        SceneManager.LoadScene("Main Map");
-    }
-
-    public void LoadEscapeGame()
-    {
-        SceneManager.LoadScene("Escape Game");
-    }
-
-    public void LoadMapArea2()
-    {
-        SceneManager.LoadScene("Map Area 2");
+        SceneManager.LoadScene(newScene);
     }
 }

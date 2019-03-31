@@ -6,7 +6,7 @@ public class QuestSelector : MonoBehaviour
 
     private void Start()
     {
-        _interfaceManager = GameObject.FindGameObjectWithTag("Interface Manager").GetComponent<InterfaceManager>();
+        _interfaceManager = FindObjectOfType<InterfaceManager>();
     }
 
     public void LoadQuestToInterface(Object obj)

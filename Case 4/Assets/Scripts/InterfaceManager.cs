@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class InterfaceManager : MonoBehaviour
 {
     public static InterfaceManager Instance;
 
+    [Header("Only populate if current scene requires the diary!")]
+    [Space(10)]
     #region Diary and Quests interface references
     [Space(10)]
     public GameObject QuestButtonPrefab;
@@ -24,11 +27,8 @@ public class InterfaceManager : MonoBehaviour
     private Quest _currentlySelectedQuest;
     #endregion
 
-    #region Gameplay start references
+    [Header("Only populate if current scene requires the diary!")]
     [Space(10)]
-    public GameObject StartMenu;
-    #endregion
-
     #region Item details for bottom UI inventory
     [Space(10)]
     public GameObject BottomUIInventory;
@@ -39,17 +39,44 @@ public class InterfaceManager : MonoBehaviour
     public TextMeshProUGUI ItemDetailsActives;
     #endregion
 
+    [Header("Only populate if current scene is the main map!")]
     #region Area references
     [Space(10)]
     public GameObject AreaLockedErrorPopup;
     #endregion
 
+    [Header("Only populate if current scene requires the diary!")]
+    [Space(10)]
     #region Blueprint pieces references
+    [Space(10)]
     public Image Blueprint1;
     public Image Blueprint2;
     public Image Blueprint3;
     public Image Blueprint4;
     public Image Blueprint5;
+    #endregion
+    
+    [Header("Only populate if current scene has an interface of icons!")]
+    [Space(10)]
+    #region Icons display variables
+    [Space(10)]
+    public List<GameObject> IconDisplays = new List<GameObject>();
+
+    public Image _bodyIcon;
+    public Image _faceIcon;
+    public Image _hairIcon;
+    public Image _topIcon;
+    #endregion
+
+    [Header("Only populate if current scene requires NPCs for dialogue!")]
+    [Space(10)]
+    #region Dialogue body parts display variables
+    public Image _bodyPart;
+    public Image _facePart;
+    public Image _hairPart;
+    public Image _topPart;
+    public Image _botPart;
+    public Image _shoesPart;
     #endregion
 
     private void Awake()
@@ -67,6 +94,18 @@ public class InterfaceManager : MonoBehaviour
     private void Start()
     {
         SetupQuestsInDiary();
+        LoadCharacterAppearance();
+
+        //if(Character.Instance.TutorialCompleted == false)
+        //{
+        //    foreach(GameObject mapArea in MapAreas)
+        //    {
+        //        if(mapArea.name != "Map Area 1")
+        //        {
+        //            mapArea.SetActive(false);
+        //        }
+        //    }
+        //}
     }
 
     public void LoadBlueprints()
@@ -136,7 +175,7 @@ public class InterfaceManager : MonoBehaviour
 
     public void SetupQuestsInDiary()
     {
-        if (SceneManager.GetActiveScene().name == "Main Map")
+        if (SceneManager.GetActiveScene().name == "Main Map" || SceneManager.GetActiveScene().name == "Tutorial Map Area")
         {
             for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
             {
@@ -178,6 +217,27 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
+    public void ToggleUI(Object ui)
+    {
+        GameObject uiObj = (GameObject)ui;
+
+        foreach (GameObject obj in IconDisplays)
+        {
+            if (obj == uiObj && obj.activeSelf == false)
+            {
+                obj.SetActive(true);
+            }
+            else if (obj == uiObj && obj.activeSelf == true)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                obj.SetActive(false);
+            }
+        }
+    }
+
     public void ClosePopup(Object obj)
     {
         GameObject popupObject = obj as GameObject;
@@ -191,7 +251,7 @@ public class InterfaceManager : MonoBehaviour
     }
 
     // ****************************
-    #region Quests and diary functions
+    #region Quests, diary and character functions
     public void DisplayQuestDetails(Object obj)
     {
         GameObject button = obj as GameObject;
@@ -298,6 +358,122 @@ public class InterfaceManager : MonoBehaviour
         for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
         {
             Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i));
+        }
+    }
+
+    public void LoadCharacterAppearance()
+    {
+        Sprite[] _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.BodyPart == "Body" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _bodyIcon.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Face" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _faceIcon.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Hair" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _hairIcon.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Top" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _topIcon.sprite = sprite;
+                    }
+                }
+            }
+        }
+    }
+
+    public void LoadCharacterDialogueAppearance()
+    {
+        Sprite[] _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.BodyPart == "Body" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _bodyPart.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Face" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _facePart.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Hair" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _hairPart.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Top" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _topPart.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Bot" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _botPart.sprite = sprite;
+                    }
+                }
+            }
+            if (clothing.BodyPart == "Shoes" && clothing.Selected == true)
+            {
+                foreach (Sprite sprite in _spritesFromStorage)
+                {
+                    if (sprite.name == clothing.Name)
+                    {
+                        _shoesPart.sprite = sprite;
+                    }
+                }
+            }
         }
     }
     #endregion
