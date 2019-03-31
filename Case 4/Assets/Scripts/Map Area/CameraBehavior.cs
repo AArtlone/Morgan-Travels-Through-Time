@@ -1,19 +1,30 @@
 ﻿using UnityEngine;
+using System;
 
 public class CameraBehavior : MonoBehaviour
 {
+    #region Camera screen movement variables
     public GameObject Background;
-    private Bounds _backgroundBounds;
+    [NonSerialized]
+    public Bounds BackgroundBounds;
+    #endregion
+
+    #region Camera screen interaction properties
     [Range(0, 100)]
     [SerializeField]
     private float _cameraSpeed = 30f;
     private bool _isCameraTravelling = false;
     private Vector3 _tapPosition;
     public bool IsInteracting = false;
+    #endregion
+
+    // Camera components
+    private MapEnvironmentManager _mapEnvironmentManager;
 
     private void Start()
     {
-        _backgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+        BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+        _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
     }
 
     private void Update()
@@ -53,7 +64,7 @@ public class CameraBehavior : MonoBehaviour
                     transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tapPosition.x, transform.position.y, transform.position.z), _cameraSpeed * Time.deltaTime * 0.5f);
 
                     Vector3 newPosition = transform.position;
-                    newPosition.x = Mathf.Clamp(transform.position.x, _backgroundBounds.min.x + 5, _backgroundBounds.max.x - 5);
+                    newPosition.x = Mathf.Clamp(transform.position.x, BackgroundBounds.min.x + 5, BackgroundBounds.max.x - 5);
                     transform.position = newPosition;
                 }
                 else
@@ -90,6 +101,9 @@ public class CameraBehavior : MonoBehaviour
                 {
                     hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
                     IsInteracting = true;
+                } else if (hitObj.transform.tag == "Sign")
+                {
+                    _mapEnvironmentManager.EnterAreaPart(hitObj.transform.GetComponent<SignController>().NewArea);
                 }
             }
         }
