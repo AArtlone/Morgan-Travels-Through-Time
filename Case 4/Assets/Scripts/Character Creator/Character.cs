@@ -642,7 +642,14 @@ public class Character : MonoBehaviour
     {
         foreach (Item item in Items)
         {
-            GameObject newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
+            GameObject newItem;
+            if (GameObject.FindGameObjectWithTag("Items Panel") == null)
+            {
+                newItem = Instantiate(ItemPrefab, InterfaceManager.Instance.ItemsLoader.transform);
+            } else
+            {
+                newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
+            }
             Item newItemScript = newItem.GetComponent<Item>();
 
             // We use predefined images from the resources folder to load each

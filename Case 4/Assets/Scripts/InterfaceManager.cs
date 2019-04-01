@@ -524,7 +524,8 @@ public class InterfaceManager : MonoBehaviour
 
     public void UseItem()
     {
-        Debug.Log("Used " + ItemSelected.Name);
+        // TODO: Create item actives and test them from here.
+        //Debug.Log("Used " + ItemSelected.Name);
     }
     #endregion
 }

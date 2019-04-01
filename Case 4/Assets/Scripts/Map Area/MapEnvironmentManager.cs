@@ -100,10 +100,10 @@ public class MapEnvironmentManager : MonoBehaviour
             }
         }
 
-        Debug.Log(matchingClothing + " | " + (newAreaPartClothing.Count));
+        //Debug.Log(matchingClothing + " | " + (newAreaPartClothing.Count));
         if (matchingObjectives < newAreaPartObjectives.Count || matchingClothing < newAreaPartClothing.Count)
         {
-            Debug.Log("You cannot enter!");
+            //Debug.Log("You cannot enter!");
             return;
         }
 

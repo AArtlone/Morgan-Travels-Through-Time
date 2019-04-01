@@ -12,6 +12,8 @@ public class Puzzle : MonoBehaviour
     public enum PuzzleType { HiddenObjects, CannonGame, GuessClothes };
     public PuzzleType TypeOfPuzzle;
     private HiddenObjectsPuzzle _puzzleScript;
+    [Header("Only necessary if player is in tutorial mode!")]
+    public GameObject InstructionManual;
 
     private string _jsonPuzzlesPath;
 
@@ -65,6 +67,13 @@ public class Puzzle : MonoBehaviour
             PuzzleToLaunch.SetActive(true);
             PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
             PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartTimer();
+        }
+
+        // Shows the instruction manual to the player if it is his first time
+        // playing the game/tutorial.
+        if (Character.Instance.TutorialCompleted == false)
+        {
+            InterfaceManager.Instance.OpenPopup(InstructionManual);
         }
     }
 

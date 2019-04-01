@@ -34,6 +34,11 @@ public class CameraBehavior : MonoBehaviour
         _isEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
+            {
+                InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
+            }
+
             RaycastHit2D hitCanvas = Physics2D.Raycast(Input.GetTouch(0).position, Vector2.down, 1000);
 
             RaycastHit2D hit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.down, 1000);
