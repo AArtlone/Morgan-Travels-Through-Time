@@ -16,6 +16,7 @@ public class CameraBehavior : MonoBehaviour
     private bool _isCameraTravelling = false;
     private Vector3 _tapPosition;
     public bool IsInteracting = false;
+    private bool _isEntityTappedOn = false;
     #endregion
 
     // Camera components
@@ -30,22 +31,54 @@ public class CameraBehavior : MonoBehaviour
     private void Update()
     {
         bool IsInterfaceElementSelected = false;
-        if (Input.touchCount > 0)
+        _isEntityTappedOn = false;
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Input.GetTouch(0).position, Vector2.down, 1000);
-            
-            if (hit.transform != null)
+            RaycastHit2D hitCanvas = Physics2D.Raycast(Input.GetTouch(0).position, Vector2.down, 1000);
+
+            RaycastHit2D hit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.down, 1000);
+
+            if (hitCanvas.transform != null)
             {
-                if (hit.transform.gameObject.layer == 10)
+                // Layer 11 is IgnoreCamera meant only for this script!
+                if (hitCanvas.transform.gameObject.layer == 11)
                 {
                     IsInterfaceElementSelected = true;
                 }
             }
+
+            if (hit2D.transform != null)
+            {
+                // Layer 11 is IgnoreCamera meant only for this script!
+                // We also check if we clicked over an entity in the map area, because
+                // we want it to be interactable unlike the canvas elements. This
+                // includes the second if statement after!
+                if (hit2D.transform.gameObject.layer == 11 &&
+                    (hit2D.transform.tag != "Item Drop" &&
+                    hit2D.transform.tag != "NPC" &&
+                    hit2D.transform.tag != "Hidden Objects Puzzle" &&
+                    hit2D.transform.tag != "Guess Clothes Puzzle" &&
+                    hit2D.transform.tag != "Escape Game" &&
+                    hit2D.transform.tag != "Sign"))
+                {
+                    IsInterfaceElementSelected = true;
+                }
+
+                if (hit2D.transform.tag == "Item Drop"||
+                    hit2D.transform.tag == "NPC" ||
+                    hit2D.transform.tag == "Hidden Objects Puzzle" ||
+                    hit2D.transform.tag == "Guess Clothes Puzzle" ||
+                    hit2D.transform.tag == "Escape Game" ||
+                    hit2D.transform.tag == "Sign")
+                {
+                    _isEntityTappedOn = true;
+                }
+            }
         }
 
-        if (IsInteracting == false && IsInterfaceElementSelected == false)
+        if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false)
         {
-            if (Input.touchCount > 0 || _isCameraTravelling == false)
+            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || _isCameraTravelling == false)
             {
                 if (Input.touchCount > 0)
                 {
@@ -74,36 +107,40 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if (Input.touchCount > 0 && IsInteracting == false && IsInterfaceElementSelected == false)
+        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsInterfaceElementSelected == false)
         {
             RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
 
             if (hitObj.transform != null)
             {
-                if (hitObj.transform.tag == "NPC")
+                switch(hitObj.transform.tag)
                 {
-                    InterfaceManager.Instance.LoadCharacterDialogueAppearance();
-                    // Replace with interaction mechanic in the future
-                    hitObj.transform.GetComponent<NPC>().ContinueDialogue();
-                    IsInteracting = true;
-                }
-                else if (hitObj.transform.tag == "Hidden Objects Puzzle")
-                {
-                    hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
-                    IsInteracting = true;
-                }
-                else if (hitObj.transform.tag == "Guess Clothes Puzzle")
-                {
-                    hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
-                    IsInteracting = true;
-                }
-                else if (hitObj.transform.tag == "Escape Game")
-                {
-                    hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
-                    IsInteracting = true;
-                } else if (hitObj.transform.tag == "Sign")
-                {
-                    _mapEnvironmentManager.EnterAreaPart(hitObj.transform.GetComponent<SignController>().NewArea);
+                    case "NPC":
+                        InterfaceManager.Instance.LoadCharacterDialogueAppearance();
+                        // Replace with interaction mechanic in the future
+                        hitObj.transform.GetComponent<NPC>().ContinueDialogue();
+                        IsInteracting = true;
+                        break;
+                    case "Hidden Objects Puzzle":
+                        hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
+                        IsInteracting = true;
+                        break;
+                    case "Guess Clothes Puzzle":
+                        hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
+                        IsInteracting = true;
+                        break;
+                    case "Escape Game":
+                        hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
+                        IsInteracting = true;
+                        break;
+                    case "Sign":
+                        _mapEnvironmentManager.EnterAreaPart(hitObj.transform.GetComponent<SignController>().NewArea);
+                        break;
+                    case "Item Drop":
+                        Item hitItemDrop = hitObj.transform.GetComponent<Item>();
+                        InterfaceManager.Instance.ItemSelected = hitItemDrop;
+                        InterfaceManager.Instance.DisplayActionsMenu();
+                        break;
                 }
             }
         }

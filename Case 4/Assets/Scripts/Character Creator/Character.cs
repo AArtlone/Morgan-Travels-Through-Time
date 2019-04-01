@@ -683,6 +683,7 @@ public class Character : MonoBehaviour
     {
         Items.Add(item);
         RefreshItems();
+        LoadInventory();
 
         //Debug.Log(string.Format("Added {0} to current items!", item.Name));
     }

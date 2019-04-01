@@ -56,6 +56,19 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void DisplayItemDetails()
+    {
+        InterfaceManager.Instance.OpenPopup(InterfaceManager.Instance.ItemDetailsWindow);
+
+        // It is mandatory you save the image from resources into a sprite variable
+        // otherwise it still will not convert it properly for the instance manager.
+        Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + AssetsImageName);
+        InterfaceManager.Instance.ItemDetailsPortrait.sprite = sprite;
+        InterfaceManager.Instance.ItemDetailsName.text = Name;
+        InterfaceManager.Instance.ItemDetailsDescription.text = Description;
+        InterfaceManager.Instance.ItemDetailsActives.text = Active;
+    }
+
     public void DragItem()
     {
         Touch touch = Input.GetTouch(0);

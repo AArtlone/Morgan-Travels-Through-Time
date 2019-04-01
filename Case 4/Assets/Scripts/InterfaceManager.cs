@@ -31,7 +31,10 @@ public class InterfaceManager : MonoBehaviour
     [Space(10)]
     #region Item details for bottom UI inventory
     [Space(10)]
+    public ItemsLoader ItemsLoader;
     public GameObject BottomUIInventory;
+    public GameObject ItemActionsWindow;
+    public Item ItemSelected;
     public GameObject ItemDetailsWindow;
     public Image ItemDetailsPortrait;
     public TextMeshProUGUI ItemDetailsName;
@@ -106,6 +109,15 @@ public class InterfaceManager : MonoBehaviour
         //        }
         //    }
         //}
+    }
+
+    /// <summary>
+    /// This function must run whenever a scene containing the inventory backpack
+    /// is initiated OR the player's inventory has to be updated.
+    /// </summary>
+    public void RefreshInvetory()
+    {
+        Character.Instance.LoadInventory();
     }
 
     public void LoadBlueprints()
@@ -249,8 +261,7 @@ public class InterfaceManager : MonoBehaviour
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
     }
-
-    // ****************************
+    
     #region Quests, diary and character functions
     public void DisplayQuestDetails(Object obj)
     {
@@ -475,6 +486,45 @@ public class InterfaceManager : MonoBehaviour
                 }
             }
         }
+    }
+    #endregion
+
+    #region Item drops functions
+    // Display the menu that gives the player the options of different actions to
+    // do on that item he tapped.
+    public void DisplayActionsMenu()
+    {
+        if (ItemActionsWindow.activeSelf == true)
+        {
+            ClosePopup(ItemActionsWindow);
+        } else
+        {
+            OpenPopup(ItemActionsWindow);
+        }
+    }
+
+    public void CollectItem()
+    {
+        Character.Instance.AddItem(ItemSelected);
+        Destroy(ItemSelected.gameObject);
+    }
+
+    // Displays the selected item on the item details window if the action "view"
+    // is pressed by the player.
+    public void ViewItem()
+    {
+        Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + ItemSelected.AssetsImageName);
+        ItemDetailsPortrait.sprite = sprite;
+        ItemDetailsName.text = ItemSelected.Name;
+        ItemDetailsDescription.text = ItemSelected.Description;
+        ItemDetailsActives.text = ItemSelected.Active;
+
+        ItemSelected.DisplayItemDetails();
+    }
+
+    public void UseItem()
+    {
+        Debug.Log("Used " + ItemSelected.Name);
     }
     #endregion
 }
