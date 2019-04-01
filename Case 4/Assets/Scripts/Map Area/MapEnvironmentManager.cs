@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapEnvironmentManager : MonoBehaviour
@@ -61,6 +62,51 @@ public class MapEnvironmentManager : MonoBehaviour
     /// <param name="newArea"></param>
     public void EnterAreaPart(GameObject newArea)
     {
+        // Here we check if the objectives necessary to enter newArea have been
+        // completed by the player
+        int matchingObjectives = 0;
+        List<Objective> newAreaPartObjectives = newArea.GetComponent<MapPart>().ObjectivesRequired;
+
+        foreach (Objective objective in newAreaPartObjectives)
+        {
+            foreach (Quest playerQuest in Character.Instance.AllQuests)
+            {
+                foreach (Objective playerObjective in playerQuest.Objectives)
+                {
+                    if (playerObjective.Name == objective.Name)
+                    {
+                        if (playerObjective.CompletedStatus)
+                        {
+                            matchingObjectives++;
+                        }
+                    }
+                }
+            }
+        }
+
+        // After that we check if the clothing necessary to enter newArea has been
+        // acquired or equipped by the player
+        int matchingClothing = 0;
+        List<Clothing> newAreaPartClothing = newArea.GetComponent<MapPart>().ClothingRequired;
+
+        foreach (Clothing clothing in newAreaPartClothing)
+        {
+            foreach (Clothing playerClothing in Character.Instance.Wearables)
+            {
+                if (playerClothing.Name == clothing.Name && playerClothing.Selected)
+                {
+                    matchingClothing++;
+                }
+            }
+        }
+
+        Debug.Log(matchingClothing + " | " + (newAreaPartClothing.Count));
+        if (matchingObjectives < newAreaPartObjectives.Count || matchingClothing < newAreaPartClothing.Count)
+        {
+            Debug.Log("You cannot enter!");
+            return;
+        }
+
         Vector3 newAreaPosition = newArea.transform.position;
 
         // Calculates the new bounds our camera has to stay between in order to
@@ -78,24 +124,28 @@ public class MapEnvironmentManager : MonoBehaviour
         _fadeScreenController.StartTransition();
         _fadeScreenController.FadeOutCamera();
 
-        Invoke("MoveCameraToNewPosition", 1f);
+        StartCoroutine(MoveCameraToNewPosition());
     }
 
     /// <summary>
     /// Moves the camera to the new area part and fades it in after that.
     /// </summary>
-    private void MoveCameraToNewPosition()
+    private IEnumerator MoveCameraToNewPosition()
     {
-        _cameraBehaviour.transform.position = _newCameraPosition;
+        yield return new WaitForSeconds(1f);
         _fadeScreenController.FadeInCamera();
-        Invoke("ResetCameraScreen", 1f);
+
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(ResetCameraScreen());
     }
 
     /// <summary>
     /// Completes the fade effect by stopping further animations.
     /// </summary>
-    private void ResetCameraScreen()
+    private IEnumerator ResetCameraScreen()
     {
+        _cameraBehaviour.transform.position = _newCameraPosition;
         _fadeScreenController.EndTransition();
+        return null;
     }
 }

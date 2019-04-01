@@ -133,9 +133,6 @@ public class CameraBehavior : MonoBehaviour
                         hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
                         IsInteracting = true;
                         break;
-                    case "Sign":
-                        _mapEnvironmentManager.EnterAreaPart(hitObj.transform.GetComponent<SignController>().NewArea);
-                        break;
                     case "Item Drop":
                         Item hitItemDrop = hitObj.transform.GetComponent<Item>();
                         InterfaceManager.Instance.ItemSelected = hitItemDrop;
