@@ -109,41 +109,83 @@ public class AppearanceDisplay : MonoBehaviour
     // predefined wearables from the wearables json processed by the player.
     private void SetupDisplays()
     {
+        // The length starts from the maximum amount the displays for body part
+        // clothings can display at max without overflowing it.
+        int bodyPartLength = 28;
+        int facePartLength = 28;
+        int hairPartLength = 28;
+        int topPartLength = 28;
+        int botPartLength = 28;
+        int shoesPartLength = 28;
+
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
             switch (clothing.BodyPart)
             {
                 case "Body":
                     {
+                        bodyPartLength--;
                         LoadIcon(clothing, BodiesDisplay, Bodies);
                         break;
                     }
                 case "Face":
                     {
+                        facePartLength--;
                         LoadIcon(clothing, FacesDisplay, Faces);
                         break;
                     }
                 case "Hair":
                     {
+                        hairPartLength--;
                         LoadIcon(clothing, HairsDisplay, Hairs);
                         break;
                     }
                 case "Top":
                     {
+                        topPartLength--;
                         LoadIcon(clothing, TopsDisplay, Tops);
                         break;
                     }
                 case "Bot":
                     {
+                        botPartLength--;
                         LoadIcon(clothing, BotsDisplay, Bots);
                         break;
                     }
                 case "Shoes":
                     {
+                        shoesPartLength--;
                         LoadIcon(clothing, ShoesDisplay, Shoes);
                         break;
                     }
             }
+        }
+
+        GenerateDummieIcons(bodyPartLength, BodiesDisplay, "bodyIcon001");
+        GenerateDummieIcons(facePartLength, FacesDisplay, "faceIcon001");
+        GenerateDummieIcons(hairPartLength, HairsDisplay, "hairIcon001");
+        GenerateDummieIcons(topPartLength, TopsDisplay, "topIcon001");
+        GenerateDummieIcons(botPartLength, BotsDisplay, "botIcon001");
+        GenerateDummieIcons(shoesPartLength, ShoesDisplay, "shoesIcon001");
+    }
+
+    /// <summary>
+    /// Generates a number of dummies based on a specific body part inside the
+    /// display it must fill after all the real clothes were generated.
+    /// </summary>
+    /// <param name="numberOfDummies"></param>
+    /// <param name="display"></param>
+    /// <param name="bodyPart"></param>
+    private void GenerateDummieIcons(int numberOfDummies, GameObject display, string bodyPart)
+    {
+        for (int i = 0; i < numberOfDummies; i++)
+        {
+            GameObject newIcon = Instantiate(IconPrefab, display.transform.GetChild(0).transform);
+
+            Sprite sprite = Resources.Load<Sprite>("Icons/" + bodyPart);
+            Image imageComponent = newIcon.GetComponent<Image>();
+            imageComponent.sprite = sprite;
+            imageComponent.color = new Color(0, 0, 0, 0.5f);
         }
     }
 
