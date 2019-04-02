@@ -16,7 +16,6 @@ public class DiaryManager : MonoBehaviour
         
         foreach (GameObject button in _buttonsForPages)
         {
-            Debug.Log("A");
             if (button == buttonObj)
             {
                 button.SetActive(true);
@@ -24,7 +23,6 @@ public class DiaryManager : MonoBehaviour
 
                 foreach (GameObject page in _pages)
                 {
-                    Debug.Log("E");
                     if (button.name == "Quest Button")
                     {
                         if (page.name == "Quests Page")

@@ -171,32 +171,100 @@ public class CharacterCreatorManager : MonoBehaviour
             botSelected == false ||
             shoesSelected == false)
         {
+            LanguageController.Language language = LanguageController.Language.Dutch;
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    language = LanguageController.Language.English;
+                    break;
+                case "Dutch":
+                    language = LanguageController.Language.Dutch;
+                    break;
+            }
+
             if(bodySelected == false)
             {
-                errorString = errorString + "body, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "body, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "het lichaam, ";
+                        break;
+                }
             }
             if (hairSelected == false)
             {
-                errorString = errorString + "hair, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "hair, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "het haar, ";
+                        break;
+                }
             }
             if (faceSelected == false)
             {
-                errorString = errorString + "face, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "face, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "het gezicht, ";
+                        break;
+                }
             }
             if (topSelected == false)
             {
-                errorString = errorString + "top, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "top, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "de top, ";
+                        break;
+                }
             }
             if (botSelected == false)
             {
-                errorString = errorString + "bot, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "bot, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "de broek, ";
+                        break;
+                }
             }
             if (shoesSelected == false)
             {
-                errorString = errorString + "shoes, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "shoes, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "de schoenen, ";
+                        break;
+                }
             }
 
-            CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
+            switch (language)
+            {
+                case LanguageController.Language.English:
+                    CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
+                    break;
+                case LanguageController.Language.Dutch:
+                    CharacterSelectionErrorMessage.text = "Je bent " + errorString.Substring(0, errorString.Length - 2) + " vergeten.";
+                    break;
+            }
+            
             OpenWindow(CharacterClothesSelectionErrorPopup);
             errorString = string.Empty;
         } else
@@ -254,32 +322,100 @@ public class CharacterCreatorManager : MonoBehaviour
             botSelected == false ||
             shoesSelected == false)
         {
+            LanguageController.Language language = LanguageController.Language.Dutch;
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    language = LanguageController.Language.English;
+                    break;
+                case "Dutch":
+                    language = LanguageController.Language.Dutch;
+                    break;
+            }
+
             if (bodySelected == false)
             {
-                errorString = errorString + "body, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "body, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "het lichaam, ";
+                        break;
+                }
             }
             if (hairSelected == false)
             {
-                errorString = errorString + "hair, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "hair, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "het haar, ";
+                        break;
+                }
             }
             if (faceSelected == false)
             {
-                errorString = errorString + "face, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "face, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "het gezicht, ";
+                        break;
+                }
             }
             if (topSelected == false)
             {
-                errorString = errorString + "top, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "top, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "de top, ";
+                        break;
+                }
             }
             if (botSelected == false)
             {
-                errorString = errorString + "bot, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "de broek, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "bot, ";
+                        break;
+                }
             }
             if (shoesSelected == false)
             {
-                errorString = errorString + "shoes, ";
+                switch (language)
+                {
+                    case LanguageController.Language.English:
+                        errorString = errorString + "shoes, ";
+                        break;
+                    case LanguageController.Language.Dutch:
+                        errorString = errorString + "de schoenen, ";
+                        break;
+                }
             }
 
-            CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
+            switch (language)
+            {
+                case LanguageController.Language.English:
+                    CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
+                    break;
+                case LanguageController.Language.Dutch:
+                    CharacterSelectionErrorMessage.text = "Je bent " + errorString.Substring(0, errorString.Length - 2) + " vergeten.";
+                    break;
+            }
+            
             OpenWindow(CharacterClothesSelectionErrorPopup);
             errorString = string.Empty;
         }

@@ -1420,6 +1420,7 @@ GameObject:
   - component: {fileID: 269101366}
   - component: {fileID: 269101368}
   - component: {fileID: 269101367}
+  - component: {fileID: 269101369}
   m_Layer: 11
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -1570,6 +1571,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269101365}
   m_CullTransparentMesh: 0
+--- !u!114 &269101369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269101365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: QUESTS
+  Dutch: MISSIES
 --- !u!1 &287865556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,11 +2587,11 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2654,7 +2670,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3e41bcf1c57fa094d94556a184866d5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31c8ec6cd090a54408bc88d61d46faf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3276,6 +3292,7 @@ GameObject:
   - component: {fileID: 470745957}
   - component: {fileID: 470745959}
   - component: {fileID: 470745958}
+  - component: {fileID: 470745960}
   m_Layer: 11
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -3426,6 +3443,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470745956}
   m_CullTransparentMesh: 0
+--- !u!114 &470745960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470745956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: TIME MACHINE
+  Dutch: TIJDMAC-HINE
 --- !u!1 &482561015
 GameObject:
   m_ObjectHideFlags: 0
@@ -8892,6 +8924,7 @@ GameObject:
   - component: {fileID: 1066442525}
   - component: {fileID: 1066442527}
   - component: {fileID: 1066442526}
+  - component: {fileID: 1066442528}
   m_Layer: 11
   m_Name: Middle Left
   m_TagString: Untagged
@@ -8974,7 +9007,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 1025
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -9005,7 +9038,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -17.760529, z: 0, w: 2.401123}
   m_textInfo:
     textComponent: {fileID: 1066442526}
     characterCount: 36
@@ -9042,6 +9075,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066442524}
   m_CullTransparentMesh: 0
+--- !u!114 &1066442528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066442524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: STRONG HULL - to protect the insides
+  Dutch: STERK METAAL - om de binnenkant te beschermen
 --- !u!1 &1071093519
 GameObject:
   m_ObjectHideFlags: 0
@@ -10283,11 +10331,11 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -10643,6 +10691,7 @@ GameObject:
   - component: {fileID: 1191313146}
   - component: {fileID: 1191313148}
   - component: {fileID: 1191313147}
+  - component: {fileID: 1191313149}
   m_Layer: 11
   m_Name: Top Left
   m_TagString: Untagged
@@ -10793,6 +10842,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1191313145}
   m_CullTransparentMesh: 0
+--- !u!114 &1191313149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191313145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: CLOCK HANDS - for precision
+  Dutch: KLOKWIJZERS - voor precisie
 --- !u!1 &1192231753
 GameObject:
   m_ObjectHideFlags: 0
@@ -11062,6 +11126,7 @@ GameObject:
   - component: {fileID: 1198469422}
   - component: {fileID: 1198469424}
   - component: {fileID: 1198469423}
+  - component: {fileID: 1198469425}
   m_Layer: 11
   m_Name: Top Right
   m_TagString: Untagged
@@ -11212,6 +11277,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198469421}
   m_CullTransparentMesh: 0
+--- !u!114 &1198469425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198469421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: GEARS - for power
+  Dutch: TANDWIELEN - voor kracht
 --- !u!1 &1227132661
 GameObject:
   m_ObjectHideFlags: 0
@@ -11674,6 +11754,7 @@ GameObject:
   - component: {fileID: 1296277822}
   - component: {fileID: 1296277824}
   - component: {fileID: 1296277823}
+  - component: {fileID: 1296277825}
   m_Layer: 11
   m_Name: Bottom Left
   m_TagString: Untagged
@@ -11824,6 +11905,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296277821}
   m_CullTransparentMesh: 0
+--- !u!114 &1296277825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296277821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: ENGINE - Functions with any fuel
+  Dutch: MOTOR - werkt met alle brandstoftypes
 --- !u!1 &1344727640
 GameObject:
   m_ObjectHideFlags: 0
@@ -15123,11 +15219,11 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -15677,6 +15773,7 @@ GameObject:
   - component: {fileID: 1767956819}
   - component: {fileID: 1767956821}
   - component: {fileID: 1767956820}
+  - component: {fileID: 1767956822}
   m_Layer: 11
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -15801,11 +15898,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -15827,6 +15924,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767956818}
   m_CullTransparentMesh: 0
+--- !u!114 &1767956822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767956818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: Quests
+  Dutch: Missies
 --- !u!1001 &1819112445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15897,12 +16009,12 @@ PrefabInstance:
     - target: {fileID: 590293963454918284, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 274.95337
+      value: 280
       objectReference: {fileID: 0}
     - target: {fileID: 590293963454918284, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25.269531
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 590293963454918284, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}
@@ -18753,6 +18865,7 @@ GameObject:
   - component: {fileID: 2041411680}
   - component: {fileID: 2041411682}
   - component: {fileID: 2041411681}
+  - component: {fileID: 2041411683}
   m_Layer: 11
   m_Name: Middle Right
   m_TagString: Untagged
@@ -18835,7 +18948,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 260
+  m_textAlignment: 1028
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -18866,7 +18979,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -22.857574, z: 0, w: 7.4604797}
   m_textInfo:
     textComponent: {fileID: 2041411681}
     characterCount: 33
@@ -18903,6 +19016,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041411679}
   m_CullTransparentMesh: 0
+--- !u!114 &2041411683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041411679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: SPIDER LEGS - to carry the weight
+  Dutch: SPINNENPOTEN - om het gewicht te dragen
 --- !u!1 &2056653705
 GameObject:
   m_ObjectHideFlags: 0

@@ -490,7 +490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0024643, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0.0024719238, y: -0.000030517578}
   m_SizeDelta: {x: -0.0050659, y: -0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &54373617
@@ -1208,6 +1208,7 @@ GameObject:
   - component: {fileID: 210968239}
   - component: {fileID: 210968241}
   - component: {fileID: 210968240}
+  - component: {fileID: 210968242}
   m_Layer: 5
   m_Name: Item Description
   m_TagString: Untagged
@@ -1331,7 +1332,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1357,6 +1358,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210968238}
   m_CullTransparentMesh: 0
+--- !u!114 &210968242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210968238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: 
+  Dutch: 
 --- !u!1001 &216334352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2017,6 +2033,7 @@ GameObject:
   - component: {fileID: 365390973}
   - component: {fileID: 365390975}
   - component: {fileID: 365390974}
+  - component: {fileID: 365390976}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -2167,6 +2184,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365390972}
   m_CullTransparentMesh: 0
+--- !u!114 &365390976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365390972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: TIME MACHINE
+  Dutch: TIJDMAC-HINE
 --- !u!1 &378951325
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,6 +2344,7 @@ GameObject:
   - component: {fileID: 476961612}
   - component: {fileID: 476961614}
   - component: {fileID: 476961613}
+  - component: {fileID: 476961615}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -2462,6 +2495,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476961611}
   m_CullTransparentMesh: 0
+--- !u!114 &476961615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476961611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: QUESTS
+  Dutch: MISSIES
 --- !u!1 &489701620
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3163,7 @@ GameObject:
   - component: {fileID: 563247267}
   - component: {fileID: 563247269}
   - component: {fileID: 563247268}
+  - component: {fileID: 563247270}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -3161,7 +3210,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: You have not unlocked this area just yet and cannot enter!
+  m_text: You haven't unlocked this area yet.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3230,7 +3279,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 563247268}
-    characterCount: 57
+    characterCount: 58
     spriteCount: 0
     spaceCount: 10
     wordCount: 11
@@ -3264,6 +3313,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563247266}
   m_CullTransparentMesh: 0
+--- !u!114 &563247270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563247266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: You haven't unlocked this area yet.
+  Dutch: Je hebt dit gebied nog niet vrijgespeeld.
 --- !u!1 &563481083
 GameObject:
   m_ObjectHideFlags: 0
@@ -3438,7 +3502,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -4481,6 +4545,7 @@ GameObject:
   - component: {fileID: 759870912}
   - component: {fileID: 759870914}
   - component: {fileID: 759870913}
+  - component: {fileID: 759870915}
   m_Layer: 5
   m_Name: Top Right
   m_TagString: Untagged
@@ -4631,6 +4696,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759870911}
   m_CullTransparentMesh: 0
+--- !u!114 &759870915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759870911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: GEARS - for power
+  Dutch: TANDWIELEN - voor kracht
 --- !u!1 &782045400
 GameObject:
   m_ObjectHideFlags: 0
@@ -5796,7 +5876,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3e41bcf1c57fa094d94556a184866d5b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31c8ec6cd090a54408bc88d61d46faf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5947,7 +6027,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -6639,7 +6719,7 @@ Transform:
   m_GameObject: {fileID: 1055504763}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -10269,7 +10349,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -10456,6 +10536,7 @@ GameObject:
   - component: {fileID: 1587812071}
   - component: {fileID: 1587812073}
   - component: {fileID: 1587812072}
+  - component: {fileID: 1587812074}
   m_Layer: 5
   m_Name: Bottom Left
   m_TagString: Untagged
@@ -10606,6 +10687,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587812070}
   m_CullTransparentMesh: 0
+--- !u!114 &1587812074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587812070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: ENGINE - Functions with any fuel
+  Dutch: 'MOTOR - werkt met alle brandstoftypes '
 --- !u!1 &1622264994
 GameObject:
   m_ObjectHideFlags: 0
@@ -10841,6 +10937,7 @@ GameObject:
   - component: {fileID: 1671653318}
   - component: {fileID: 1671653320}
   - component: {fileID: 1671653319}
+  - component: {fileID: 1671653321}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -10991,6 +11088,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671653317}
   m_CullTransparentMesh: 0
+--- !u!114 &1671653321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671653317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: Quests
+  Dutch: Missies
 --- !u!1 &1674450418
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,6 +11582,7 @@ GameObject:
   - component: {fileID: 1715680543}
   - component: {fileID: 1715680545}
   - component: {fileID: 1715680544}
+  - component: {fileID: 1715680546}
   m_Layer: 5
   m_Name: Item Actives
   m_TagString: Untagged
@@ -11593,7 +11706,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -11619,6 +11732,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715680542}
   m_CullTransparentMesh: 0
+--- !u!114 &1715680546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715680542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: 
+  Dutch: 
 --- !u!1 &1726714393
 GameObject:
   m_ObjectHideFlags: 0
@@ -11630,6 +11758,7 @@ GameObject:
   - component: {fileID: 1726714394}
   - component: {fileID: 1726714396}
   - component: {fileID: 1726714395}
+  - component: {fileID: 1726714397}
   m_Layer: 5
   m_Name: Item Name
   m_TagString: Untagged
@@ -11753,7 +11882,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -11779,6 +11908,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726714393}
   m_CullTransparentMesh: 0
+--- !u!114 &1726714397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726714393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: 
+  Dutch: 
 --- !u!1 &1753585344
 GameObject:
   m_ObjectHideFlags: 0
@@ -11790,6 +11934,7 @@ GameObject:
   - component: {fileID: 1753585345}
   - component: {fileID: 1753585347}
   - component: {fileID: 1753585346}
+  - component: {fileID: 1753585348}
   m_Layer: 5
   m_Name: Middle Right
   m_TagString: Untagged
@@ -11813,8 +11958,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197, y: -6}
-  m_SizeDelta: {x: 226.9, y: 72.6}
+  m_AnchoredPosition: {x: 197, y: -3.7}
+  m_SizeDelta: {x: 226.9, y: 68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1753585346
 MonoBehaviour:
@@ -11872,7 +12017,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 260
+  m_textAlignment: 1028
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -11903,7 +12048,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -24.968018, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1753585346}
     characterCount: 33
@@ -11940,6 +12085,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753585344}
   m_CullTransparentMesh: 0
+--- !u!114 &1753585348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753585344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: SPIDER LEGS - to carry the weight
+  Dutch: SPINNENPOTEN - om het gewicht te dragen
 --- !u!1 &1776775861
 GameObject:
   m_ObjectHideFlags: 0
@@ -12331,6 +12491,7 @@ GameObject:
   - component: {fileID: 1810796594}
   - component: {fileID: 1810796596}
   - component: {fileID: 1810796595}
+  - component: {fileID: 1810796597}
   m_Layer: 5
   m_Name: Top Left
   m_TagString: Untagged
@@ -12481,6 +12642,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810796593}
   m_CullTransparentMesh: 0
+--- !u!114 &1810796597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810796593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: CLOCK HANDS - for precision
+  Dutch: KLOKWIJZERS - voor precisie
 --- !u!1 &1831159897
 GameObject:
   m_ObjectHideFlags: 0
@@ -12939,6 +13115,7 @@ GameObject:
   - component: {fileID: 1950228269}
   - component: {fileID: 1950228271}
   - component: {fileID: 1950228270}
+  - component: {fileID: 1950228272}
   m_Layer: 5
   m_Name: Middle Left
   m_TagString: Untagged
@@ -12962,8 +13139,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -216, y: 50}
-  m_SizeDelta: {x: 226.9, y: 72.6}
+  m_AnchoredPosition: {x: -215.73, y: 59.91}
+  m_SizeDelta: {x: 227.43, y: 85.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1950228270
 MonoBehaviour:
@@ -13021,7 +13198,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 1025
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -13089,6 +13266,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950228268}
   m_CullTransparentMesh: 0
+--- !u!114 &1950228272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950228268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: STRONG HULL - to protect the insides
+  Dutch: STERK METAAL - om de binnenkant te beschermen
 --- !u!1 &1954517404
 GameObject:
   m_ObjectHideFlags: 0

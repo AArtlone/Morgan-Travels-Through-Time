@@ -386,8 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: No
+  Dutch: Nee
 --- !u!1 &21260857
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,8 +800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Save
+  Dutch: Opslaan
 --- !u!1 &47826653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,8 +1271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Rename
+  Dutch: Hernoem
 --- !u!1 &266239373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,8 +1522,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Face
+  Dutch: Gezicht
 --- !u!1 &323238376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,8 +2540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: No
+  Dutch: Nee
 --- !u!1 &576258045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,8 +2827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Body
+  Dutch: Lichaam
 --- !u!1 &593976095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +2914,7 @@ GameObject:
   - component: {fileID: 599202610}
   - component: {fileID: 599202612}
   - component: {fileID: 599202611}
+  - component: {fileID: 599202613}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -2960,7 +2961,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Are you sure you want to save changes to the character
+  m_text: "Do you want to save the changes?\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d424dcec0f358f459b912f4f5c07a4a, type: 2}
   m_sharedMaterial: {fileID: 21032496967733310, guid: 4d424dcec0f358f459b912f4f5c07a4a,
@@ -3038,11 +3039,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3064,6 +3065,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599202609}
   m_CullTransparentMesh: 0
+--- !u!114 &599202613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599202609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: "Do you want to save the changes?\r"
+  Dutch: Wil je de veranderingen opslaan?
 --- !u!1 &609695876
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,8 +3452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Close
+  Dutch: Sluiten
 --- !u!1 &727320941
 GameObject:
   m_ObjectHideFlags: 0
@@ -3515,6 +3531,7 @@ GameObject:
   - component: {fileID: 753785366}
   - component: {fileID: 753785368}
   - component: {fileID: 753785367}
+  - component: {fileID: 753785369}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -3561,7 +3578,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: You have made some changes to the character. Do you wish to save them?
+  m_text: Do you want to save the changes?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d424dcec0f358f459b912f4f5c07a4a, type: 2}
   m_sharedMaterial: {fileID: 21032496967733310, guid: 4d424dcec0f358f459b912f4f5c07a4a,
@@ -3639,11 +3656,11 @@ MonoBehaviour:
     lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3665,6 +3682,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753785365}
   m_CullTransparentMesh: 0
+--- !u!114 &753785369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753785365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: Do you want to save the changes?
+  Dutch: Wil je de veranderingen opslaan?
 --- !u!1 &771576331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4088,8 +4120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Reset
+  Dutch: Reset
 --- !u!1 &819226535
 GameObject:
   m_ObjectHideFlags: 0
@@ -5471,8 +5503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Yes
+  Dutch: Ja
 --- !u!1 &1137763394
 GameObject:
   m_ObjectHideFlags: 0
@@ -6320,8 +6352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: OK
+  Dutch: OK
 --- !u!1 &1318421043
 GameObject:
   m_ObjectHideFlags: 0
@@ -6696,8 +6728,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Bot
+  Dutch: Broek
 --- !u!1 &1391498603
 GameObject:
   m_ObjectHideFlags: 0
@@ -7508,8 +7540,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Yes
+  Dutch: Ja
 --- !u!1 &1535494244
 GameObject:
   m_ObjectHideFlags: 0
@@ -7759,8 +7791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Yes
+  Dutch: Ja
 --- !u!1 &1549570221
 GameObject:
   m_ObjectHideFlags: 0
@@ -7936,8 +7968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: No
+  Dutch: Nee
 --- !u!1 &1561346239
 GameObject:
   m_ObjectHideFlags: 0
@@ -8981,8 +9013,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Hair
+  Dutch: Haar
 --- !u!1 &1804990483
 GameObject:
   m_ObjectHideFlags: 0
@@ -9304,8 +9336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Top
+  Dutch: Top
 --- !u!1 &1901885355
 GameObject:
   m_ObjectHideFlags: 0
@@ -9776,8 +9808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: OK
+  Dutch: OK
 --- !u!1 &1956171845
 GameObject:
   m_ObjectHideFlags: 0
@@ -10941,5 +10973,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: 
-  Dutch: 
+  English: Shoes
+  Dutch: Schoenen
