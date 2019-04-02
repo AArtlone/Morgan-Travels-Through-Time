@@ -14,9 +14,11 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField]
     private float _cameraSpeed = 30f;
     private bool _isCameraTravelling = false;
-    private Vector3 _tapPosition;
+    public Vector3 TapPosition;
     public bool IsInteracting = false;
     private bool _isEntityTappedOn = false;
+    public bool IsInterfaceElementSelected = false;
+    public bool IsUIOpen = false;
     #endregion
 
     // Camera components
@@ -30,7 +32,6 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-        bool IsInterfaceElementSelected = false;
         _isEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -81,25 +82,28 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false)
+        if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {
             if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || _isCameraTravelling == false)
             {
                 if (Input.touchCount > 0)
                 {
-                    _tapPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                    if (IsUIOpen == false)
+                    {
+                        TapPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                    }
                 }
 
                 //GameObject prim = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 //prim.transform.position = _tapPosition;
-
+                
                 _isCameraTravelling = true;
             }
             else
             {
-                if (Vector3.Distance(transform.position, _tapPosition) > 1f)
+                if (Vector3.Distance(transform.position, TapPosition) > 1f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(_tapPosition.x, transform.position.y, transform.position.z), _cameraSpeed * Time.deltaTime * 0.5f);
+                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(TapPosition.x, transform.position.y, transform.position.z), _cameraSpeed * Time.deltaTime * 0.5f);
 
                     Vector3 newPosition = transform.position;
                     newPosition.x = Mathf.Clamp(transform.position.x, BackgroundBounds.min.x + 5, BackgroundBounds.max.x - 5);
@@ -112,7 +116,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsInterfaceElementSelected == false)
+        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsInterfaceElementSelected == false && IsUIOpen == false)
         {
             RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
 

@@ -238,16 +238,29 @@ public class InterfaceManager : MonoBehaviour
             if (obj == uiObj && obj.activeSelf == false)
             {
                 obj.SetActive(true);
+
+                FindObjectOfType<CameraBehavior>().IsUIOpen = true;
             }
             else if (obj == uiObj && obj.activeSelf == true)
             {
                 obj.SetActive(false);
+
+                FindObjectOfType<CameraBehavior>().IsInterfaceElementSelected = false;
+
+                EnableCameraMovement();
             }
             else
             {
                 obj.SetActive(false);
             }
         }
+    }
+
+    private void EnableCameraMovement()
+    {
+        FindObjectOfType<CameraBehavior>().TapPosition = Camera.main.transform.position;
+
+        FindObjectOfType<CameraBehavior>().IsUIOpen = false;
     }
 
     public void ClosePopup(Object obj)
