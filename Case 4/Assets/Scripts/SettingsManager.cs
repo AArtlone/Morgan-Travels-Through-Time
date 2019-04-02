@@ -9,18 +9,12 @@ public class SettingsManager : MonoBehaviour
     [NonSerialized]
     public static SettingsManager Instance;
 
-    [SerializeField]
-    private string Language { get; set; }
-    [SerializeField]
-    private int ResolutionWidth { get; set; }
-    [SerializeField]
-    private int ResolutionHeight { get; set; }
-    [SerializeField]
-    private int MasterVolume { get; set; }
-    [SerializeField]
-    private int SoundEffectsVolume { get; set; }
-    [SerializeField]
-    private int BackgroundMusicVolume { get; set; }
+    public string Language;
+    public int ResolutionWidth;
+    public int ResolutionHeight;
+    public int MasterVolume;
+    public int SoundEffectsVolume;
+    public int BackgroundMusicVolume;
 
     private string _pathToSettingsJson;
 
@@ -35,19 +29,14 @@ public class SettingsManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
 
-    private void Start()
-    {
         _pathToSettingsJson = Application.persistentDataPath + "/Settings.json";
 
         if (File.Exists(_pathToSettingsJson))
         {
             LoadSettingsFromFile(_pathToSettingsJson);
-
-            Language = "Ass";
-            RefreshSettings();
-        } else
+        }
+        else
         {
             ResetSettings();
 

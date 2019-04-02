@@ -14,7 +14,7 @@ public class NPC : MonoBehaviour
     // Used for detecting clicks on that object's image (region of space on camera)
     public Image DialogueProgressionTrigger2D;
     [SerializeField]
-    public List<Dialogue> Dialogue;
+    public List<DialogueLanguages> DialogueFormats;
 
     // Tracks the current dialogue index in the canvas and whether or not
     // the player is currently in a dialogue or not.
@@ -222,11 +222,23 @@ public class NPC : MonoBehaviour
 
     public void ContinueDialogue()
     {
+        int index = 0;
+        for (int i = 0; i < DialogueFormats.Count; i++)
+        {
+            if (DialogueFormats[i].Language == SettingsManager.Instance.Language)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        Debug.Log(DialogueFormats[index].Language);
+
         dialoguesToPickFrom.Clear();
-        for (int i = 0; i < Dialogue.Count; i++)
+        for (int i = 0; i < DialogueFormats[index].Dialogue.Count; i++)
         {
             int objectivesCompleted = 0;
-            foreach (Objective objective in Dialogue[i].ObjectivesToMeet)
+            foreach (Objective objective in DialogueFormats[index].Dialogue[i].ObjectivesToMeet)
             {
                 foreach (Quest quest in Character.Instance.AllQuests)
                 {
@@ -243,9 +255,9 @@ public class NPC : MonoBehaviour
             }
 
             //Debug.Log(objectivesCompleted + " | " + (Dialogue[i].ObjectivesToMeet.Count));
-            if (objectivesCompleted == Dialogue[i].ObjectivesToMeet.Count)
+            if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count)
             {
-                dialoguesToPickFrom.Add(Dialogue[i]);
+                dialoguesToPickFrom.Add(DialogueFormats[index].Dialogue[i]);
             }
         }
 

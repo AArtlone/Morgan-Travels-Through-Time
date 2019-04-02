@@ -99,11 +99,22 @@ public class Item : MonoBehaviour
                 {
                     bool isCorrectItemDropped = false;
                     NPC npc = hit.transform.gameObject.GetComponent<NPC>();
-                    if (npc.Dialogue[0].DialogueBranches[0].ItemsDropped.Count == 0 &&
-                        npc.Dialogue[0].DialogueBranches[0].ItemsRequired[0] ==
+
+                    int index = 0;
+                    for (int i = 0; i < npc.DialogueFormats.Count; i++)
+                    {
+                        if (npc.DialogueFormats[i].Language == SettingsManager.Instance.Language)
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+
+                    if (npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Count == 0 &&
+                        npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsRequired[0] ==
                         Name)
                     {
-                        npc.Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
+                        npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
                         isCorrectItemDropped = true;
                     } else
                     {
@@ -124,7 +135,18 @@ public class Item : MonoBehaviour
             if (hit.transform.tag == "Dialogue Box")
             {
                 NPC currentNpc = DialogueManager.Instance.CurrentNPCDialogue;
-                foreach (DialogueBranch branch in currentNpc.Dialogue[currentNpc.CurrentDialogueIndex].DialogueBranches)
+
+                int index = 0;
+                for (int i = 0; i < currentNpc.DialogueFormats.Count; i++)
+                {
+                    if (currentNpc.DialogueFormats[i].Language == SettingsManager.Instance.Language)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+
+                foreach (DialogueBranch branch in currentNpc.DialogueFormats[index].Dialogue[currentNpc.CurrentDialogueIndex].DialogueBranches)
                 {
                     foreach (string requiredItem in branch.ItemsRequired)
                     {
