@@ -117,7 +117,7 @@ public class InterfaceManager : MonoBehaviour
     /// </summary>
     public void RefreshInvetory()
     {
-        Character.Instance.LoadInventory();
+        Character.Instance.ReloadInventory();
     }
 
     public void LoadBlueprints()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemsLoader : MonoBehaviour
@@ -14,7 +15,25 @@ public class ItemsLoader : MonoBehaviour
 
     public void LoadInventory()
     {
-        foreach (Item item in Character.Instance.Items)
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                InstantiateItemsFormatToPanel(Character.Instance.Items);
+                break;
+            case "Dutch":
+                InstantiateItemsFormatToPanel(Character.Instance.ItemsDutch);
+                break;
+        }
+    }
+
+    private void InstantiateItemsFormatToPanel(List<Item> itemsForPanel)
+    {
+        for (int i = 0; i < GameObject.FindGameObjectWithTag("Items Panel").transform.childCount; i++)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Items Panel").transform.GetChild(i).gameObject);
+        }
+
+        foreach (Item item in itemsForPanel)
         {
             GameObject newItem = Instantiate(ItemPrefab, ItemsPanel.transform);
             Item newItemScript = newItem.GetComponent<Item>();
@@ -25,9 +44,19 @@ public class ItemsLoader : MonoBehaviour
             Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
 
             newItem.GetComponent<Image>().sprite = sprite;
-            newItemScript.Name = item.Name;
-            newItemScript.Description = item.Description;
-            newItemScript.Active = item.Active;
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    newItemScript.Name = item.Name;
+                    newItemScript.Description = item.Description;
+                    newItemScript.Active = item.Active;
+                    break;
+                case "Dutch":
+                    newItemScript.NameDutch = item.NameDutch;
+                    newItemScript.DescriptionDutch = item.DescriptionDutch;
+                    newItemScript.ActiveDutch = item.ActiveDutch;
+                    break;
+            }
             newItemScript.AssetsImageName = item.AssetsImageName;
         }
     }

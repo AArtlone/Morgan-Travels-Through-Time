@@ -63,15 +63,7 @@ public class Item : MonoBehaviour
 
         if (_timer == 2)
         {
-            InterfaceManager.Instance.OpenPopup(InterfaceManager.Instance.ItemDetailsWindow);
-
-            // It is mandatory you save the image from resources into a sprite variable
-            // otherwise it still will not convert it properly for the instance manager.
-            Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + AssetsImageName);
-            InterfaceManager.Instance.ItemDetailsPortrait.sprite = sprite;
-            InterfaceManager.Instance.ItemDetailsName.text = Name;
-            InterfaceManager.Instance.ItemDetailsDescription.text = Description;
-            InterfaceManager.Instance.ItemDetailsActives.text = Active;
+            DisplayItemDetails();
         }
     }
 
@@ -79,13 +71,23 @@ public class Item : MonoBehaviour
     {
         InterfaceManager.Instance.OpenPopup(InterfaceManager.Instance.ItemDetailsWindow);
 
-        // It is mandatory you save the image from resources into a sprite variable
-        // otherwise it still will not convert it properly for the instance manager.
         Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + AssetsImageName);
-        InterfaceManager.Instance.ItemDetailsPortrait.sprite = sprite;
-        InterfaceManager.Instance.ItemDetailsName.text = Name;
-        InterfaceManager.Instance.ItemDetailsDescription.text = Description;
-        InterfaceManager.Instance.ItemDetailsActives.text = Active;
+
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                InterfaceManager.Instance.ItemDetailsPortrait.sprite = sprite;
+                InterfaceManager.Instance.ItemDetailsName.text = Name;
+                InterfaceManager.Instance.ItemDetailsDescription.text = Description;
+                InterfaceManager.Instance.ItemDetailsActives.text = Active;
+                break;
+            case "Dutch":
+                InterfaceManager.Instance.ItemDetailsPortrait.sprite = sprite;
+                InterfaceManager.Instance.ItemDetailsName.text = NameDutch;
+                InterfaceManager.Instance.ItemDetailsDescription.text = DescriptionDutch;
+                InterfaceManager.Instance.ItemDetailsActives.text = ActiveDutch;
+                break;
+        }
     }
 
     public void DragItem()

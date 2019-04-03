@@ -232,7 +232,7 @@ public class NPC : MonoBehaviour
             }
         }
 
-        Debug.Log(DialogueFormats[index].Language);
+        //Debug.Log(DialogueFormats[index].Language);
 
         dialoguesToPickFrom.Clear();
         for (int i = 0; i < DialogueFormats[index].Dialogue.Count; i++)

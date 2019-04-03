@@ -693,13 +693,27 @@ public class Character : MonoBehaviour
 
     public void LoadInventory()
     {
-        foreach (Item item in Items)
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                InstantiateItemFormatInInventory(Items);
+                break;
+            case "Dutch":
+                InstantiateItemFormatInInventory(ItemsDutch);
+                break;
+        }
+    }
+
+    private void InstantiateItemFormatInInventory(List<Item> itemsForPanel)
+    {
+        foreach (Item item in itemsForPanel)
         {
             GameObject newItem;
             if (GameObject.FindGameObjectWithTag("Items Panel") == null)
             {
                 newItem = Instantiate(ItemPrefab, InterfaceManager.Instance.ItemsLoader.transform);
-            } else
+            }
+            else
             {
                 newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
             }
@@ -709,11 +723,23 @@ public class Character : MonoBehaviour
             // item's sprites from outside the game and assign it to the new item.
             Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
 
-            newItem.GetComponent<Image>().sprite = sprite;
-            newItemScript.Name = item.Name;
-            newItemScript.Description = item.Description;
-            newItemScript.Active = item.Active;
-            newItemScript.AssetsImageName = item.AssetsImageName;
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    newItem.GetComponent<Image>().sprite = sprite;
+                    newItemScript.Name = item.Name;
+                    newItemScript.Description = item.Description;
+                    newItemScript.Active = item.Active;
+                    newItemScript.AssetsImageName = item.AssetsImageName;
+                    break;
+                case "Dutch":
+                    newItem.GetComponent<Image>().sprite = sprite;
+                    newItemScript.NameDutch = item.NameDutch;
+                    newItemScript.DescriptionDutch = item.DescriptionDutch;
+                    newItemScript.ActiveDutch = item.ActiveDutch;
+                    newItemScript.AssetsImageName = item.AssetsImageName;
+                    break;
+            }
         }
     }
 
