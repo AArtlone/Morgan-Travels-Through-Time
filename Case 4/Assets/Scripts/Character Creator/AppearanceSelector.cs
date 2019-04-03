@@ -56,6 +56,12 @@ public class AppearanceSelector : MonoBehaviour
         }
     }
 
+    public void ToggleIcon(System.Object icon)
+    {
+        GameObject iconObj = (GameObject)icon;
+        FindObjectOfType<AppearanceDisplay>().ToggleIconFrame(iconObj);
+    }
+
     private void LoadNewBodyPart(GameObject bodyPart)
     {
         if(bodyPart.GetComponent<Image>().color.a == 0)

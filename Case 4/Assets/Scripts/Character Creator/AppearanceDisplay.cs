@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class AppearanceDisplay : MonoBehaviour
 {
     public GameObject IconPrefab;
+    public GameObject DummieIconPrefab;
     [Space(10)]
     public List<Clothing> Bodies;
     public GameObject BodiesDisplay;
@@ -26,6 +27,14 @@ public class AppearanceDisplay : MonoBehaviour
 
     public List<GameObject> Buttons;
     public List<GameObject> Displays;
+
+
+    public List<GameObject> BodyIcons;
+    public List<GameObject> FaceIcons;
+    public List<GameObject> HairIcons;
+    public List<GameObject> TopIcons;
+    public List<GameObject> BotIcons;
+    public List<GameObject> ShoesIcons;
 
     private GameObject _bodyBodyPart;
     private GameObject _hairBodyPart;
@@ -76,6 +85,53 @@ public class AppearanceDisplay : MonoBehaviour
         } else
         {
             displayObj.SetActive(true);
+        }
+    }
+
+    public void ToggleIconFrame(GameObject button)
+    {
+        if(button.transform.parent.transform.parent.transform.name == "Bodies Display")
+        {
+            foreach(GameObject icon in BodyIcons)
+            {
+                icon.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            button.transform.GetChild(0).gameObject.SetActive(true);
+        } else if (button.transform.parent.transform.parent.transform.name == "Faces Display")
+        {
+            foreach (GameObject icon in FaceIcons)
+            {
+                icon.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            button.transform.GetChild(0).gameObject.SetActive(true);
+        } else if (button.transform.parent.transform.parent.transform.name == "Hairs Display")
+        {
+            foreach (GameObject icon in HairIcons)
+            {
+                icon.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            button.transform.GetChild(0).gameObject.SetActive(true);
+        } else if (button.transform.parent.transform.parent.transform.name == "Tops Display")
+        {
+            foreach (GameObject icon in TopIcons)
+            {
+                icon.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            button.transform.GetChild(0).gameObject.SetActive(true);
+        } else if (button.transform.parent.transform.parent.transform.name == "Bots Display")
+        {
+            foreach (GameObject icon in BotIcons)
+            {
+                icon.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            button.transform.GetChild(0).gameObject.SetActive(true);
+        } else if (button.transform.parent.transform.parent.transform.name == "Shoes Display")
+        {
+            foreach (GameObject icon in ShoesIcons)
+            {
+                icon.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            button.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -180,7 +236,7 @@ public class AppearanceDisplay : MonoBehaviour
     {
         for (int i = 0; i < numberOfDummies; i++)
         {
-            GameObject newIcon = Instantiate(IconPrefab, display.transform.GetChild(0).transform);
+            GameObject newIcon = Instantiate(DummieIconPrefab, display.transform.GetChild(0).transform);
 
             Sprite sprite = Resources.Load<Sprite>("Icons/" + bodyPart);
             Image imageComponent = newIcon.GetComponent<Image>();
@@ -199,9 +255,40 @@ public class AppearanceDisplay : MonoBehaviour
             GameObject newIcon = Instantiate(IconPrefab, display.transform.GetChild(0).transform);
             newIcon.GetComponent<AppearanceSelector>().PortraitImage = item.PortraitImage;
             newIcon.GetComponent<AppearanceSelector>().BodyPart = item.BodyPart;
+            if(item.BodyPart == "Body")
+            {
+                BodyIcons.Add(newIcon);
+            } else if(item.BodyPart == "Face")
+            {
+                FaceIcons.Add(newIcon);
+            } else if(item.BodyPart == "Hair")
+            {
+                HairIcons.Add(newIcon);
+            } else if(item.BodyPart == "Top")
+            {
+                TopIcons.Add(newIcon);
+            } else if(item.BodyPart == "Bot")
+            {
+                BotIcons.Add(newIcon);
+            } else if(item.BodyPart == "Shoes")
+            {
+                ShoesIcons.Add(newIcon);
+            }
+            
+            
 
-            Sprite sprite = Resources.Load<Sprite>("Icons/" + item.Icon);
-            newIcon.GetComponent<Image>().sprite = sprite;
+            Sprite selectedFrameSprite = Resources.Load<Sprite>("Icons/" + "selectedFrame");
+            GameObject selectedFrame = newIcon.transform.GetChild(0).gameObject;
+            selectedFrame.GetComponent<Image>().sprite = selectedFrameSprite;
+            selectedFrame.SetActive(false);
+            Sprite iconSprite = Resources.Load<Sprite>("Icons/" + item.Icon);
+            GameObject clothingIcon = newIcon.transform.GetChild(1).gameObject;
+            clothingIcon.GetComponent<Image>().sprite = iconSprite;
+
+            if (item.Selected == true)
+            {
+                selectedFrame.SetActive(true);
+            }
         }
     }
 
