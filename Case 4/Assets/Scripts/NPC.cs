@@ -13,6 +13,7 @@ public class NPC : MonoBehaviour
     public string Name;
     // Used for detecting clicks on that object's image (region of space on camera)
     public Image DialogueProgressionTrigger2D;
+    public GameObject SpeechBubble;
     [SerializeField]
     public List<DialogueLanguages> DialogueFormats;
 
@@ -48,6 +49,8 @@ public class NPC : MonoBehaviour
 
         _spriteComponent = GetComponent<SpriteRenderer>();
         _imageComponent = GetComponent<Image>();
+
+        CheckForNotCompletedObjective();
     }
 
     public void NextDialogue()
@@ -365,6 +368,89 @@ public class NPC : MonoBehaviour
             //_dialogueProgressionTrigger.raycastTarget = true;
 
             _isDialogueOngoing = true;
+        }
+    }
+
+    private void CheckForNotCompletedObjective()
+    {
+        List<Dialogue> dialogueToFilter = new List<Dialogue>();
+        foreach (DialogueLanguages dialogueFormat in DialogueFormats)
+        {
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    dialogueToFilter = dialogueFormat.Dialogue;
+                    break;
+                case "Dutch":
+                    dialogueToFilter = dialogueFormat.Dialogue;
+                    break;
+            }
+        }
+
+        List<DialogueBranch> branchesForFiltering = new List<DialogueBranch>();
+        foreach (Dialogue dialogue in dialogueToFilter)
+        {
+            for (int j = 0; j < dialogue.DialogueBranches.Count; j++)
+            {
+                // We check if every condition is met by the player before adding this dialogue branch as one for sorting by priority later on.
+                if (
+                    Character.Instance.Reputation >= dialogue.DialogueBranches[j].ReputationMinimum &&
+                    Character.Instance.Stamina >= dialogue.DialogueBranches[j].StaminaMinimum &&
+                    Character.Instance.Knowledge >= dialogue.DialogueBranches[j].KnowledgeMinimum &&
+                    Character.Instance.Fitness >= dialogue.DialogueBranches[j].FitnessMinimum &&
+                    Character.Instance.Charisma >= dialogue.DialogueBranches[j].CharismaMinimum &&
+                    Character.Instance.Currency >= dialogue.DialogueBranches[j].CurrencyMinimum)
+                {
+                    // AND we check if we have matching previous responses for that
+                    // dialogue sequence to be appropriate for use.
+                    int elementsThatMatch = 0;
+                    foreach (string requiredResponse in dialogue.DialogueBranches[j].PreviousResponses)
+                    {
+                        foreach (string response in DialogueManager.Instance.DialogueResponses)
+                        {
+                            if (requiredResponse == response)
+                            {
+                                //Debug.Log(string.Format("Match between {0} and {1}", response, requiredResponse));
+
+                                elementsThatMatch++;
+                                break;
+                            }
+                        }
+                    }
+
+                    int objectivesThatMatch = 0;
+                    foreach (Objective objective in dialogue.DialogueBranches[j].ObjectivesRequired)
+                    {
+                        foreach (Quest quest in Character.Instance.AllQuests)
+                        {
+                            foreach (Objective objOfCharacter in quest.Objectives)
+                            {
+                                if (objOfCharacter.Name == objective.Name &&
+                                    objOfCharacter.CompletedStatus == true)
+                                {
+                                    objectivesThatMatch++;
+                                }
+                            }
+                        }
+                    }
+
+                    if ((elementsThatMatch == dialogue.DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch != dialogue.DialogueBranches[j].ObjectivesRequired.Count))
+                    {
+                        branchesForFiltering.Add(dialogue.DialogueBranches[j]);
+
+                        //Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
+                        //Debug.Log("Number of elements match!");
+                    }
+                }
+            }
+        }
+
+        if (branchesForFiltering.Count > 0)
+        {
+            SpeechBubble.SetActive(true);
+        } else
+        {
+            SpeechBubble.SetActive(false);
         }
     }
 }
