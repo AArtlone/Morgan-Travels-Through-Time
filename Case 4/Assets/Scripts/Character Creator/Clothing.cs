@@ -4,6 +4,7 @@ public class Clothing
     public bool Selected;
     public string BodyPart;
     public string Name;
+    public string NameDutch;
     public string Icon;
     public string PortraitImage;
     #region Stats
@@ -13,11 +14,12 @@ public class Clothing
     public int Charisma;
     #endregion
 
-    public Clothing(bool Selected, string BodyPart, string Name, string Icon, string PortraitImage, int Stamina, int Knowledge, int Fitness, int Charisma)
+    public Clothing(bool Selected, string BodyPart, string Name, string NameDutch, string Icon, string PortraitImage, int Stamina, int Knowledge, int Fitness, int Charisma)
     {
         this.Selected = Selected;
         this.BodyPart = BodyPart;
         this.Name = Name;
+        this.NameDutch = NameDutch;
         this.Icon = Icon;
         this.PortraitImage = PortraitImage;
         this.Stamina = Stamina;

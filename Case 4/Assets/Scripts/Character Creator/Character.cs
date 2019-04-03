@@ -28,6 +28,7 @@ public class Character : MonoBehaviour
     #endregion
     #region Items
     public List<Clothing> Wearables = new List<Clothing>();
+    public List<Clothing> WearablesDutch = new List<Clothing>();
     [Space(10)]
     public List<Item> Items = new List<Item>();
     public List<Item> ItemsDutch = new List<Item>();
@@ -53,6 +54,7 @@ public class Character : MonoBehaviour
     private string _itemsJsonFilePath;
     private string _itemsDutchJsonFilePath;
     private string _wearablesJsonFilePath;
+    private string _wearablesDutchJsonFilePath;
     private string _newQuestsData;
     private string _defaultsGuessingClothesJsonPath;
     private string _guessingPuzzlesPath;
@@ -92,6 +94,7 @@ public class Character : MonoBehaviour
             _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
             _itemsDutchJsonFilePath = _pathToAssetsFolder + "/ItemsDutch.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
+            _wearablesDutchJsonFilePath = _pathToAssetsFolder + "/WearablesDutch.json";
             _defaultsGuessingClothesJsonPath = _pathToAssetsFolder + "/GuessClothingDefaults.json";
             _guessingPuzzlesPath = _pathToAssetsFolder + "/GuessingPuzzles.json";
             _escapeGamesJsonFile = _pathToAssetsFolder + "/EscapeGames.json";
@@ -105,8 +108,6 @@ public class Character : MonoBehaviour
 
                 // These functions initialize the game state from the storage.
                 SetupWorldData();
-
-                AddItem(Items[0]);
             }
             else
             {
@@ -297,7 +298,11 @@ public class Character : MonoBehaviour
                     TextAsset wearablesData = Resources.Load<TextAsset>("Default World Data/Wearables");
                     JsonData wearablesJsonData = JsonMapper.ToObject(wearablesData.text);
 
+                    TextAsset wearablesDataDutch = Resources.Load<TextAsset>("Default World Data/WearablesDutch");
+                    JsonData wearablesJsonDataDutch = JsonMapper.ToObject(wearablesDataDutch.text);
+
                     Wearables.Clear();
+                    WearablesDutch.Clear();
                     for (int i = 0; i < wearablesJsonData["Wearables"].Count; i++)
                     {
                         bool isWearableSelected = false;
@@ -310,19 +315,24 @@ public class Character : MonoBehaviour
                             isWearableSelected = false;
                         }
 
-                        Wearables.Add(new Clothing(
+                        Clothing clothing = new Clothing(
                             isWearableSelected,
                             wearablesJsonData["Wearables"][i]["BodyPart"].ToString(),
                             wearablesJsonData["Wearables"][i]["Name"].ToString(),
+                            wearablesJsonDataDutch["Wearables"][i]["Name"].ToString(),
                             wearablesJsonData["Wearables"][i]["Icon"].ToString(),
                             wearablesJsonData["Wearables"][i]["PortraitImage"].ToString(),
                             int.Parse(wearablesJsonData["Wearables"][i]["Stamina"].ToString()),
                             int.Parse(wearablesJsonData["Wearables"][i]["Knowledge"].ToString()),
                             int.Parse(wearablesJsonData["Wearables"][i]["Fitness"].ToString()),
-                            int.Parse(wearablesJsonData["Wearables"][i]["Charisma"].ToString())));
-                    }
+                            int.Parse(wearablesJsonData["Wearables"][i]["Charisma"].ToString()));
 
-                    File.WriteAllText(_wearablesJsonFilePath, "");
+                        Wearables.Add(clothing);
+                        WearablesDutch.Add(clothing);
+                    }
+                    
+                    File.WriteAllText(_wearablesJsonFilePath, wearablesData.text);
+                    File.WriteAllText(_wearablesDutchJsonFilePath, wearablesDataDutch.text);
                     RefreshWearables();
                     #endregion
 
@@ -582,12 +592,16 @@ public class Character : MonoBehaviour
 
     private void SetupWearables()
     {
-        if (File.Exists(_wearablesJsonFilePath))
+        if (File.Exists(_wearablesJsonFilePath) && File.Exists(_wearablesDutchJsonFilePath))
         {
             string dataToJson = File.ReadAllText(_wearablesJsonFilePath);
             JsonData characterData = JsonMapper.ToObject(dataToJson);
 
+            string dataToJsonDutch = File.ReadAllText(_wearablesDutchJsonFilePath);
+            JsonData characterDataDutch = JsonMapper.ToObject(dataToJsonDutch);
+
             Wearables.Clear();
+            WearablesDutch.Clear();
             for (int i = 0; i < characterData["Wearables"].Count; i++)
             {
                 bool isWearableSelected = false;
@@ -600,19 +614,22 @@ public class Character : MonoBehaviour
                     isWearableSelected = false;
                 }
 
-                Wearables.Add(new Clothing(
+                Clothing clothing = new Clothing(
                     isWearableSelected,
                     characterData["Wearables"][i]["BodyPart"].ToString(),
                     characterData["Wearables"][i]["Name"].ToString(),
+                    characterDataDutch["Wearables"][i]["Name"].ToString(),
                     characterData["Wearables"][i]["Icon"].ToString(),
                     characterData["Wearables"][i]["PortraitImage"].ToString(),
                     int.Parse(characterData["Wearables"][i]["Stamina"].ToString()),
                     int.Parse(characterData["Wearables"][i]["Knowledge"].ToString()),
                     int.Parse(characterData["Wearables"][i]["Fitness"].ToString()),
-                    int.Parse(characterData["Wearables"][i]["Charisma"].ToString())));
+                    int.Parse(characterData["Wearables"][i]["Charisma"].ToString()));
+
+                Wearables.Add(clothing);
+                WearablesDutch.Add(clothing);
             }
         }
-
         //Debug.Log("Loaded wearables json data!");
     }
 
@@ -761,6 +778,8 @@ public class Character : MonoBehaviour
     public void AddWearable(Clothing clothing)
     {
         Wearables.Add(clothing);
+        WearablesDutch.Add(clothing);
+        
         RefreshWearables();
 
         //Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
@@ -769,6 +788,8 @@ public class Character : MonoBehaviour
     public void RemoveWearable(Clothing clothing)
     {
         Wearables.Remove(clothing);
+        WearablesDutch.Remove(clothing);
+
         RefreshWearables();
 
         //Debug.Log(string.Format("Removed {0} from current wearables!", clothing.Name));
@@ -1139,20 +1160,87 @@ public class Character : MonoBehaviour
 
     public void RefreshWearables()
     {
+
+        // *************************************
+        // ENGLISH VERSION to refresh
+        // *************************************
+        // We reset the existing items json list content, so that we can
+        // append new one afterwards.
         File.WriteAllText(_wearablesJsonFilePath, "");
+
+        // This creates the starting wrapper of the json file.
         string newItemsData = "{\"Wearables\":[";
 
-        foreach (Clothing item in Wearables)
+        foreach (Clothing cloth in Wearables)
         {
-            string itemJson = JsonUtility.ToJson(item);
-            newItemsData += itemJson + ",";
+            newItemsData += "{";
+            if (cloth.Selected)
+            {
+                newItemsData += "\"Selected\":true,";
+            }
+            else
+            {
+                newItemsData += "\"Selected\":false,";
+            }
+            newItemsData += "\"BodyPart\":\"" + cloth.BodyPart + "\",";
+            newItemsData += "\"Name\":\"" + cloth.Name + "\",";
+            newItemsData += "\"Icon\":\"" + cloth.Icon + "\",";
+            newItemsData += "\"PortraitImage\":\"" + cloth.PortraitImage + "\",";
+            newItemsData += "\"Stamina\":" + cloth.Stamina + ",";
+            newItemsData += "\"Knowledge\":" + cloth.Knowledge + ",";
+            newItemsData += "\"Fitness\":" + cloth.Fitness + ",";
+            newItemsData += "\"Charisma\":" + cloth.Charisma;
+            newItemsData += "},";
         }
-        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+
+        if (Wearables.Count > 0)
+        {
+            // This removes the last comma at the last item in the array, so
+            // that we wont get an error when getting the data later on.
+            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        }
         // This closes the wrapper of the json file made from the beginning.
         newItemsData += "]}";
         File.WriteAllText(_wearablesJsonFilePath, newItemsData);
 
-        //Debug.Log("Refreshed wearables json data!");
+        // *************************************
+        // DUTCH VERSION to refresh
+        // *************************************
+        File.WriteAllText(_wearablesDutchJsonFilePath, "");
+
+        // This creates the starting wrapper of the json file.
+        newItemsData = "{\"Wearables\":[";
+
+        foreach (Clothing cloth in WearablesDutch)
+        {
+            newItemsData += "{";
+            if (cloth.Selected)
+            {
+                newItemsData += "\"Selected\":true,";
+            } else
+            {
+                newItemsData += "\"Selected\":false,";
+            }
+            newItemsData += "\"BodyPart\":\"" + cloth.BodyPart + "\",";
+            newItemsData += "\"Name\":\"" + cloth.NameDutch + "\",";
+            newItemsData += "\"Icon\":\"" + cloth.Icon + "\",";
+            newItemsData += "\"PortraitImage\":\"" + cloth.PortraitImage + "\",";
+            newItemsData += "\"Stamina\":" + cloth.Stamina + ",";
+            newItemsData += "\"Knowledge\":" + cloth.Knowledge + ",";
+            newItemsData += "\"Fitness\":" + cloth.Fitness + ",";
+            newItemsData += "\"Charisma\":" + cloth.Charisma;
+            newItemsData += "},";
+        }
+
+        if (WearablesDutch.Count > 0)
+        {
+            // This removes the last comma at the last item in the array, so
+            // that we wont get an error when getting the data later on.
+            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        }
+        // This closes the wrapper of the json file made from the beginning.
+        newItemsData += "]}";
+        File.WriteAllText(_wearablesDutchJsonFilePath, newItemsData);
     }
 
     public void ReloadInventory()
