@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class DialogueBranch
 {
     public string BranchTitle;
@@ -12,16 +13,22 @@ public class DialogueBranch
     public int Priority;
     [Space(10)]
     [Tooltip("Defines the minimum requirement for player reputation.")]
+    [NonSerialized]
     public int ReputationMinimum;
     [Tooltip("Defines the minimum requirement for player stamina.")]
+    [NonSerialized]
     public int StaminaMinimum;
     [Tooltip("Defines the minimum requirement for player knowledge.")]
+    [NonSerialized]
     public int KnowledgeMinimum;
     [Tooltip("Defines the minimum requirement for player fitness.")]
+    [NonSerialized]
     public int FitnessMinimum;
     [Tooltip("Defines the minimum requirement for player charisma.")]
+    [NonSerialized]
     public int CharismaMinimum;
     [Tooltip("Defines the minimum requirement for player currency.")]
+    [NonSerialized]
     public int CurrencyMinimum;
     [Tooltip("To pick an item correctly, you use the Resources -> Items folder for items and write down an item's name without its file type in the field.")]
     public List<string> ItemsRequired = new List<string>();

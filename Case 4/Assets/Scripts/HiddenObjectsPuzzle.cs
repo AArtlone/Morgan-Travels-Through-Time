@@ -19,13 +19,21 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public List<string> ItemsFound = new List<string>();
     [Space(15)]
     [Tooltip("Item reward's name")]
+    [Header("Item Earned once the puzzle is done is defined here!")]
     public string ItemRewardName;
+    public string ItemRewardNameDutch;
+    [Space(10)]
     [Tooltip("Item reward's description")]
     public string ItemRewardDescription;
+    public string ItemRewardDescriptionDutch;
+    [Space(10)]
     [Tooltip("Item reward's active/s description")]
     public string ItemRewardActive;
+    public string ItemRewardActiveDutch;
+    [Space(10)]
     [Tooltip("Item reward's assets image name (without file type)")]
     public string ItemRewardAssetsImageName;
+    [Space(15)]
     public List<string> ObjectivesToComplete = new List<string>();
     [NonSerialized]
     public int Counter;
@@ -104,8 +112,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 Character.Instance.AddItem(
                     new Item(
                         ItemRewardName,
+                        ItemRewardNameDutch,
                         ItemRewardDescription,
+                        ItemRewardDescriptionDutch,
                         ItemRewardActive,
+                        ItemRewardActiveDutch,
                         ItemRewardAssetsImageName));
                 IsItemEarned = true;
             }

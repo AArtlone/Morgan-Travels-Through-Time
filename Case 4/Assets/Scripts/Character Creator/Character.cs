@@ -5,6 +5,7 @@ using LitJson;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class Character : MonoBehaviour
     public List<Clothing> Wearables = new List<Clothing>();
     [Space(10)]
     public List<Item> Items = new List<Item>();
+    public List<Item> ItemsDutch = new List<Item>();
     #endregion
     public List<Area> Areas = new List<Area>();
     #region Quests references
@@ -49,6 +51,7 @@ public class Character : MonoBehaviour
     private string _areasJsonFilePath;
     private string _questsJsonFilePath;
     private string _itemsJsonFilePath;
+    private string _itemsDutchJsonFilePath;
     private string _wearablesJsonFilePath;
     private string _newQuestsData;
     private string _defaultsGuessingClothesJsonPath;
@@ -87,6 +90,7 @@ public class Character : MonoBehaviour
             _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
             _questsJsonFilePath = _pathToAssetsFolder + "/Quests.json";
             _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
+            _itemsDutchJsonFilePath = _pathToAssetsFolder + "/ItemsDutch.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
             _defaultsGuessingClothesJsonPath = _pathToAssetsFolder + "/GuessClothingDefaults.json";
             _guessingPuzzlesPath = _pathToAssetsFolder + "/GuessingPuzzles.json";
@@ -101,6 +105,8 @@ public class Character : MonoBehaviour
 
                 // These functions initialize the game state from the storage.
                 SetupWorldData();
+
+                AddItem(Items[0]);
             }
             else
             {
@@ -282,22 +288,9 @@ public class Character : MonoBehaviour
                     RefreshAllQuests();
                     #endregion
 
-                    #region Creating the items list
-                    TextAsset itemsData = Resources.Load<TextAsset>("Default World Data/Items");
-                    JsonData itemsJsonData = JsonMapper.ToObject(itemsData.text);
-
-                    Items.Clear();
-                    for (int i = 0; i < itemsJsonData["Items"].Count; i++)
-                    {
-                        Items.Add(new Item(
-                            itemsJsonData["Items"][i]["Name"].ToString(),
-                            itemsJsonData["Items"][i]["Description"].ToString(),
-                            itemsJsonData["Items"][i]["Active"].ToString(),
-                            itemsJsonData["Items"][i]["AssetsImageName"].ToString()));
-                    }
-
-                    File.WriteAllText(_itemsJsonFilePath, "");
-                    RefreshItems();
+                    #region Creating the items list BASED on the default language
+                    InstantiateItems();
+                    //RefreshItems();
                     #endregion
 
                     #region Creating the wearables list
@@ -348,11 +341,47 @@ public class Character : MonoBehaviour
     }
 
     #region Setup data from storage functionality
+    // The following functions extract the json data from the storage of
+    // the game and imports it to the character (this) object for in-game
+    // manipulation.
+
     /// <summary>
-    /// The following functions extract the json data from the storage of
-    /// the game and imports it to the character (this) object for in-game
-    /// manipulation.
+    /// Given a default items json file, it will extract its data and store it in a
+    /// new or existing (overwrittes it) file and to the character's specified list
+    /// of items (multiple languages, multiple lists).
     /// </summary>
+    /// <param name="ResourceFilePath"></param>
+    /// <param name="NewFilePath"></param>
+    /// <param name="listForItems"></param>
+    private void InstantiateItems()
+    {
+        TextAsset itemsData = Resources.Load<TextAsset>("Default World Data/Items");
+        JsonData itemsJsonData = JsonMapper.ToObject(itemsData.text);
+
+        TextAsset itemsDataDutch = Resources.Load<TextAsset>("Default World Data/ItemsDutch");
+        JsonData itemsJsonDataDutch = JsonMapper.ToObject(itemsDataDutch.text);
+
+        Items.Clear();
+        ItemsDutch.Clear();
+        for (int i = 0; i < itemsJsonData["Items"].Count; i++)
+        {
+            Item newItem = new Item(
+                itemsJsonData["Items"][i]["Name"].ToString(),
+                itemsJsonDataDutch["Items"][i]["Name"].ToString(),
+                itemsJsonData["Items"][i]["Description"].ToString(),
+                itemsJsonDataDutch["Items"][i]["Description"].ToString(),
+                itemsJsonData["Items"][i]["Active"].ToString(),
+                itemsJsonDataDutch["Items"][i]["Active"].ToString(),
+                itemsJsonData["Items"][i]["AssetsImageName"].ToString());
+
+            Items.Add(newItem);
+            ItemsDutch.Add(newItem);
+        }
+
+        File.WriteAllText(_itemsJsonFilePath, itemsData.text);
+        File.WriteAllText(_itemsDutchJsonFilePath, itemsDataDutch.text);
+    }
+
     // We use this function to read the existing data from the
     // character's file and set his fields to match the data. Basically
     // we load his stored and previously saved data from the storage
@@ -496,24 +525,31 @@ public class Character : MonoBehaviour
 
     private void SetupItems()
     {
-        if (File.Exists(_itemsJsonFilePath))
-        {
-            string dataToJson = File.ReadAllText(_itemsJsonFilePath);
-            JsonData characterData = JsonMapper.ToObject(dataToJson);
+        string dataToJson = File.ReadAllText(_itemsJsonFilePath);
+        JsonData itemData = JsonMapper.ToObject(dataToJson);
 
+        string dataToJsonDutch = File.ReadAllText(_itemsDutchJsonFilePath);
+        JsonData itemDataDutch = JsonMapper.ToObject(dataToJsonDutch);
+
+        if (File.Exists(_itemsJsonFilePath) && File.Exists(_itemsDutchJsonFilePath))
+        {
             Items.Clear();
-            for (int i = 0; i < characterData["Items"].Count; i++)
+            ItemsDutch.Clear();
+            for (int i = 0; i < itemData["Items"].Count; i++)
             {
                 Item newItem = new Item(
-                    characterData["Items"][i]["Name"].ToString(),
-                    characterData["Items"][i]["Description"].ToString(),
-                    characterData["Items"][i]["Active"].ToString(),
-                    characterData["Items"][i]["AssetsImageName"].ToString());
+                    itemData["Items"][i]["Name"].ToString(),
+                    itemDataDutch["Items"][i]["Name"].ToString(),
+                    itemData["Items"][i]["Description"].ToString(),
+                    itemDataDutch["Items"][i]["Description"].ToString(),
+                    itemData["Items"][i]["Active"].ToString(),
+                    itemDataDutch["Items"][i]["Active"].ToString(),
+                    itemData["Items"][i]["AssetsImageName"].ToString());
 
                 Items.Add(newItem);
+                ItemsDutch.Add(newItem);
             }
         }
-
         //LoadInventory();
         //Debug.Log("Loaded items json data!");
     }
@@ -689,6 +725,11 @@ public class Character : MonoBehaviour
     public void AddItem(Item item)
     {
         Items.Add(item);
+        ItemsDutch.Add(item);
+
+        //UpdateItemIDs(Items);
+        //UpdateItemIDs(ItemsDutch);
+
         RefreshItems();
         LoadInventory();
 
@@ -698,10 +739,24 @@ public class Character : MonoBehaviour
     public void RemoveItem(Item item)
     {
         Items.Remove(item);
+        ItemsDutch.Remove(item);
+
+        //UpdateItemIDs(Items);
+        //UpdateItemIDs(ItemsDutch);
+
         RefreshItems();
+        LoadInventory();
 
         //Debug.Log(string.Format("Removed {0} from current items!", item.Name));
     }
+
+    //public void UpdateItemIDs(List<Item> listForItems)
+    //{
+    //    for (int i = 0; i < listForItems.Count; i++)
+    //    {
+    //        listForItems[i].ID = i;
+    //    }
+    //}
 
     public void AddWearable(Clothing clothing)
     {
@@ -1021,7 +1076,9 @@ public class Character : MonoBehaviour
 
     public void RefreshItems()
     {
-        //SetupItems();
+        // *************************************
+        // ENGLISH VERSION to refresh
+        // *************************************
         // We reset the existing items json list content, so that we can
         // append new one afterwards.
         File.WriteAllText(_itemsJsonFilePath, "");
@@ -1031,11 +1088,16 @@ public class Character : MonoBehaviour
         
         foreach (Item item in Items)
         {
-            //Debug.Log(item.Name);
-            string itemJson = JsonUtility.ToJson(item);
-            newItemsData += itemJson + ",";
+            newItemsData += "{";
+            newItemsData += "\"Name\":\"" + item.Name + "\",";
+            newItemsData += "\"Description\":\"" + item.Description + "\",";
+            newItemsData += "\"Active\":\"" + item.Active + "\",";
+            newItemsData += "\"AssetsImageName\":\"" + item.AssetsImageName + "\"";
+            newItemsData += "},";
         }
-        if (Items.Count > 0) {
+
+        if (Items.Count > 0)
+        {
             // This removes the last comma at the last item in the array, so
             // that we wont get an error when getting the data later on.
             newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
@@ -1043,6 +1105,34 @@ public class Character : MonoBehaviour
         // This closes the wrapper of the json file made from the beginning.
         newItemsData += "]}";
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
+
+        // *************************************
+        // DUTCH VERSION to refresh
+        // *************************************
+        File.WriteAllText(_itemsDutchJsonFilePath, "");
+
+        // This creates the starting wrapper of the json file.
+        newItemsData = "{\"Items\":[";
+
+        foreach (Item item in ItemsDutch)
+        {
+            newItemsData += "{";
+            newItemsData += "\"Name\":\"" + item.NameDutch + "\",";
+            newItemsData += "\"Description\":\"" + item.DescriptionDutch + "\",";
+            newItemsData += "\"Active\":\"" + item.ActiveDutch + "\",";
+            newItemsData += "\"AssetsImageName\":\"" + item.AssetsImageName + "\"";
+            newItemsData += "},";
+        }
+
+        if (ItemsDutch.Count > 0)
+        {
+            // This removes the last comma at the last item in the array, so
+            // that we wont get an error when getting the data later on.
+            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        }
+        // This closes the wrapper of the json file made from the beginning.
+        newItemsData += "]}";
+        File.WriteAllText(_itemsDutchJsonFilePath, newItemsData);
 
         //Debug.Log("Refreshed items json data!");
     }

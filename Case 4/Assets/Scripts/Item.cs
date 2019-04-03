@@ -5,8 +5,14 @@ using System;
 public class Item : MonoBehaviour
 {
     public string Name;
+    public string NameDutch;
+    [Space(10)]
     public string Description;
+    public string DescriptionDutch;
+    [Space(10)]
     public string Active;
+    public string ActiveDutch;
+    [Space(10)]
     public string AssetsImageName;
 
     #region Hidden objects puzzle bools
@@ -19,11 +25,24 @@ public class Item : MonoBehaviour
 
     private int _timer;
 
-    public Item(string Name, string Description, string Active, string AssetsImageName)
+    public Item(
+        string Name,
+        string NameDutch,
+        string Description,
+        string DescriptionDutch,
+        string Active,
+        string ActiveDutch,
+        string AssetsImageName)
     {
         this.Name = Name;
+        this.NameDutch = NameDutch;
+
         this.Description = Description;
+        this.DescriptionDutch = DescriptionDutch;
+
         this.Active = Active;
+        this.ActiveDutch = ActiveDutch;
+
         this.AssetsImageName = AssetsImageName;
     }
 
