@@ -8,6 +8,8 @@ public class Puzzle : MonoBehaviour
 {
     public GameObject PuzzleToLaunch;
     public GameObject StarsDisplay;
+    public GameObject CharacterIcon;
+    public GameObject NPCIcon;
     public TextMeshProUGUI ScoreText;
     public enum PuzzleType { HiddenObjects, CannonGame, GuessClothes };
     public PuzzleType TypeOfPuzzle;
@@ -42,10 +44,22 @@ public class Puzzle : MonoBehaviour
         }
     }
 
+    public void StartPuzzleIconToggle()
+    {
+        CharacterIcon.SetActive(false);
+        NPCIcon.SetActive(true);
+    }
+
+    public void FinishPuzzleIconToggle()
+    {
+        CharacterIcon.SetActive(true);
+        NPCIcon.SetActive(false);
+    }
+
     public void InitiateGuessClothesPuzzle()
     {
         PuzzleToLaunch.GetComponentInParent<GuessPuzzle>().StartPuzzle(PuzzleToLaunch);
-
+        StartPuzzleIconToggle();
         // Shows the instruction manual to the player if it is his first time
         // playing the game/tutorial.
         if (Character.Instance.TutorialCompleted == false)
@@ -75,7 +89,7 @@ public class Puzzle : MonoBehaviour
             PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
             PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
         }
-        
+        StartPuzzleIconToggle();
         if (Character.Instance.TutorialCompleted == false)
         {
             InterfaceManager.Instance.OpenPopup(InstructionManual);

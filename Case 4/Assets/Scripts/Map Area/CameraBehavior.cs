@@ -72,7 +72,7 @@ public class CameraBehavior : MonoBehaviour
                     IsInterfaceElementSelected = true;
                 }
 
-                if (hit2D.transform.tag == "Item Drop"||
+                if (hit2D.transform.tag == "Item Drop" ||
                     hit2D.transform.tag == "NPC" ||
                     hit2D.transform.tag == "Hidden Objects Puzzle" ||
                     hit2D.transform.tag == "Guess Clothes Puzzle" ||
@@ -83,6 +83,8 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
         }
+
+        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
 
         if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {
@@ -98,7 +100,7 @@ public class CameraBehavior : MonoBehaviour
 
                 //GameObject prim = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 //prim.transform.position = _tapPosition;
-                
+
                 _isCameraTravelling = true;
             }
             else
@@ -118,7 +120,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsInterfaceElementSelected == false && IsUIOpen == false)
+        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsInterfaceElementSelected == false && IsUIOpen == false && DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
         {
             RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
 
@@ -131,21 +133,25 @@ public class CameraBehavior : MonoBehaviour
                         // Replace with interaction mechanic in the future
                         hitObj.transform.GetComponent<NPC>().ContinueDialogue();
                         IsInteracting = true;
+                        IsUIOpen = true;
                         _swipeController.enabled = false;
                         break;
                     case "Hidden Objects Puzzle":
                         hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
                         _swipeController.enabled = false;
                         IsInteracting = true;
+                        IsUIOpen = true;
                         break;
                     case "Guess Clothes Puzzle":
                         hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
                         IsInteracting = true;
+                        IsUIOpen = true;
                         _swipeController.enabled = false;
                         break;
                     case "Escape Game":
                         hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
                         IsInteracting = true;
+                        IsUIOpen = true;
                         _swipeController.enabled = false;
                         break;
                     case "Item Drop":

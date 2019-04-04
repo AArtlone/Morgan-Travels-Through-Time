@@ -1283,12 +1283,20 @@ public class Character : MonoBehaviour
     public void InitiateInteraction()
     {
         StartCoroutine(EnablePlayerInteraction());
+        StartCoroutine(EnableEntityTapping());
     }
 
     public IEnumerator EnablePlayerInteraction()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         FindObjectOfType<CameraBehavior>().IsInteracting = false;
+    }
+
+    public IEnumerator EnableEntityTapping()
+    {
+        yield return new WaitForSeconds(1f);
+
+        FindObjectOfType<CameraBehavior>().IsUIOpen = false;
     }
 }

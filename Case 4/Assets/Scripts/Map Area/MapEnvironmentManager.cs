@@ -60,7 +60,7 @@ public class MapEnvironmentManager : MonoBehaviour
     /// to that area that is assigned to the function parameter.
     /// </summary>
     /// <param name="newArea"></param>
-    public void EnterAreaPart(GameObject newArea)
+    public bool EnterAreaPart(GameObject newArea)
     {
         // Here we check if the objectives necessary to enter newArea have been
         // completed by the player
@@ -104,7 +104,7 @@ public class MapEnvironmentManager : MonoBehaviour
         if (matchingObjectives < newAreaPartObjectives.Count || matchingClothing < newAreaPartClothing.Count)
         {
             //Debug.Log("You cannot enter!");
-            return;
+            return false;
         }
 
         Vector3 newAreaPosition = newArea.transform.position;
@@ -121,10 +121,12 @@ public class MapEnvironmentManager : MonoBehaviour
         _newCameraPosition = new Vector3(newAreaPosition.x + 6.4f, newAreaPosition.y, -10);
 
         // FADE EFFECT initiates
-        _fadeScreenController.StartTransition();
-        _fadeScreenController.FadeOutCamera();
+        //_fadeScreenController.StartTransition();
+        //_fadeScreenController.FadeOutCamera();
 
-        StartCoroutine(MoveCameraToNewPosition());
+        //StartCoroutine(MoveCameraToNewPosition());
+        _cameraBehaviour.transform.position = _newCameraPosition;
+        return true;
     }
 
     /// <summary>

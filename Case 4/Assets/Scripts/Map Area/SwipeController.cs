@@ -36,8 +36,11 @@ public class SwipeController : MonoBehaviour
                     _currentAreaPartIndex = 0;   
                 } else if (_currentAreaPartIndex > 0)
                 {
-                    _currentAreaPartIndex--;
-                    _mapEnvironmentManager.EnterAreaPart(AreaPartsList[_currentAreaPartIndex]);
+                    if (_mapEnvironmentManager.EnterAreaPart(AreaPartsList[_currentAreaPartIndex - 1]))
+                    {
+                        _currentAreaPartIndex--;
+                    }
+                    
                 }
             } else if (_swipeDirection == "Right")
             {
@@ -46,8 +49,10 @@ public class SwipeController : MonoBehaviour
                     _currentAreaPartIndex = AreaPartsList.Count - 1;
                 } else
                 {
-                    _currentAreaPartIndex++;
-                    _mapEnvironmentManager.EnterAreaPart(AreaPartsList[_currentAreaPartIndex]);
+                    if (_mapEnvironmentManager.EnterAreaPart(AreaPartsList[_currentAreaPartIndex + 1]))
+                    {
+                        _currentAreaPartIndex++;
+                    }
                 }
             }
         }
@@ -55,7 +60,8 @@ public class SwipeController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        //Debug.Log(DialogueManager.Instance.DialogueTemplate.activeSelf + " " + _cameraBehaviour.IsUIOpen + " " + _cameraBehaviour.IsInteracting);
+        if (Input.touchCount > 0 && DialogueManager.Instance.DialogueTemplate.activeSelf == false && _cameraBehaviour.IsUIOpen == false && _cameraBehaviour.IsInteracting == false)
         {
             foreach (Touch touch in Input.touches)
             {
@@ -68,11 +74,9 @@ public class SwipeController : MonoBehaviour
                 if (touch.phase == TouchPhase.Moved)
                 {
                     _endTapPosition = touch.position;
-                    
-
                 }
 
-                if (touch.phase == TouchPhase.Ended)
+                if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
                 {
                     _endTapPosition = touch.position;
                     _directionOfSwipeNormalized = (_endTapPosition - _startTapPosition).normalized;

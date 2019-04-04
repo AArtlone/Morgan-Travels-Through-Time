@@ -51,8 +51,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public Button HintButton;
     public GameObject PuzzleEndPopup;
 
+    private CameraBehavior _cameraBehaviour;
+
     private void Start()
     {
+        _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         // We get all the objects in the Objects To Find List in this hidden objects
         // puzzle from the editor, and we use those objects for the hints mechanic.
         for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
@@ -115,8 +118,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
+        _cameraBehaviour.IsInteracting = false;
 
-        switch(SettingsManager.Instance.Language)
+        switch (SettingsManager.Instance.Language)
         {
             case "English":
                 PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have successfully completed this puzzle!";
@@ -158,6 +162,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
+        _cameraBehaviour.IsInteracting = false;
+
+        PuzzleEndPopup.SetActive(true);
 
         switch (SettingsManager.Instance.Language)
         {
@@ -184,6 +191,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         Character.Instance.InitiateInteraction();
 
+        puzzleNPC.FinishPuzzleIconToggle();
         gameObject.SetActive(false);
     }
 

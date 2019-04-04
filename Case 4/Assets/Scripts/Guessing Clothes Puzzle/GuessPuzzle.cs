@@ -43,9 +43,13 @@ public class GuessPuzzle : MonoBehaviour
     public TextMeshProUGUI Timer;
     private float _timer = 0;
     private SwipeController _swipeController;
+    private Puzzle _puzzle;
+
+    private CameraBehavior _cameraBehaviour;
 
     void Awake()
     {
+        _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         _swipeController = FindObjectOfType<SwipeController>();
         _timer = PuzzleTimeInSeconds;
         _defaultsJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
@@ -103,10 +107,19 @@ public class GuessPuzzle : MonoBehaviour
                 _timer = 0;
                 SavePuzzleScore();
                 OpenCompletePuzzleWindow();
+                _cameraBehaviour.IsInteracting = false;
                 _isGameStarted = false;
             }
             Timer.text = ((int)_timer).ToString();
         }
+    }
+
+    public void ManuallyEndGame()
+    {
+        SavePuzzleScore();
+        OpenCompletePuzzleWindow();
+        _cameraBehaviour.IsInteracting = false;
+        _isGameStarted = false;
     }
 
     public void NextClothing(string bodyPart)
@@ -309,8 +322,6 @@ public class GuessPuzzle : MonoBehaviour
             }
         }
 
-        Debug.Log("Aa");
-
         puzzle.SetActive(true);
         _isGameStarted = true;
     }
@@ -384,12 +395,19 @@ public class GuessPuzzle : MonoBehaviour
         }
 
         popupObject.SetActive(false);
+
+        Character.Instance.InitiateInteraction();
     }
 
     public void OpenPopup(Object obj)
     {
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
+    }
+
+    public void ToggleIcons()
+    {
+        CanvasElementOfPuzzle.FinishPuzzleIconToggle();
     }
 
     private void OpenCompletePuzzleWindow()
