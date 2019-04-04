@@ -240,12 +240,21 @@ public class InterfaceManager : MonoBehaviour
                 obj.SetActive(true);
 
                 FindObjectOfType<CameraBehavior>().IsUIOpen = true;
+                
+                if (uiObj.transform.tag == "Settings UI")
+                {
+                    FindObjectOfType<SwipeController>().enabled = false;
+                }
             }
             else if (obj == uiObj && obj.activeSelf == true)
             {
                 obj.SetActive(false);
 
                 FindObjectOfType<CameraBehavior>().IsInterfaceElementSelected = false;
+                if (uiObj.transform.tag == "Settings UI")
+                {
+                    FindObjectOfType<SwipeController>().enabled = true;
+                }
 
                 EnableCameraMovement();
             }

@@ -17,10 +17,19 @@ public class LanguageController : MonoBehaviour
     // currently selected language by the player.
     private TextMeshProUGUI _textField;
 
+    private SettingsManager _settingsManager;
+
     private void Start()
     {
         _textField = GetComponent<TextMeshProUGUI>();
+
+        _settingsManager = FindObjectOfType<SettingsManager>();
         
+        if (!_settingsManager.LanguageControllers.Contains(this))
+        {
+            _settingsManager.LanguageControllers.Add(this);
+        }
+
         UpdateCurrentLanguage();
         LoadLanguage(SelectedLanguage);
     }
@@ -36,6 +45,8 @@ public class LanguageController : MonoBehaviour
                 SelectedLanguage = Language.Dutch;
                 break;
         }
+
+        LoadLanguage(SelectedLanguage);
     }
         
     public void LoadLanguage(Language language)

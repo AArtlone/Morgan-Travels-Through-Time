@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class SettingsManager : MonoBehaviour
@@ -19,12 +19,9 @@ public class SettingsManager : MonoBehaviour
     public int BackgroundMusicVolume;
 
     private string _pathToSettingsJson;
-
-    // Settings that will be loaded into the interface window
-    private int _currentResolutionIndex;
-    private string _currentResolutionName;
-    List<string> Resolutions = new List<string>();
-    public TextMeshProUGUI _currentResolutionText;
+    public LanguageToggle[] LanguageIconObjects;
+    public List<Image> LanguageIcons;
+    public List<LanguageController> LanguageControllers = new List<LanguageController>();
 
     private void Awake()
     {
@@ -59,11 +56,6 @@ public class SettingsManager : MonoBehaviour
 
             File.WriteAllText(_pathToSettingsJson, settingsText);
         }
-    }
-
-    private void Start()
-    {
-        _currentResolutionText = GameObject.FindGameObjectWithTag("ResolutionSetting").GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
@@ -127,50 +119,5 @@ public class SettingsManager : MonoBehaviour
     {
         string newSettingsData = JsonUtility.ToJson(this);
         File.WriteAllText(_pathToSettingsJson, ExtractCurrentSettings());
-    }
-
-    public void NextResolution()
-    {
-        GetCurrentResolution();
-
-        GetCurrentResolution();
-
-        _currentResolutionIndex++;
-        if (_currentResolutionIndex > Resolutions.Count - 1)
-        {
-            _currentResolutionIndex = Resolutions.Count - 1;
-        }
-
-        _currentResolutionText.text = Resolutions[_currentResolutionIndex];
-    }
-
-    public void PreviousResolution()
-    {
-        GetCurrentResolution();
-
-        _currentResolutionIndex--;
-        if (_currentResolutionIndex <= 0)
-        {
-            _currentResolutionIndex = 0;
-        }
-
-        _currentResolutionText.text = Resolutions[_currentResolutionIndex];
-    }
-
-    public void GetCurrentResolution()
-    {
-        _currentResolutionText = GameObject.FindGameObjectWithTag("ResolutionSetting").GetComponent<TextMeshProUGUI>();
-
-        _currentResolutionName = string.Empty;
-        _currentResolutionName += Screen.currentResolution.width + "x" + Screen.currentResolution.height;
-
-        for (int i = 0; i < Resolutions.Count; i++)
-        {
-            if (_currentResolutionName == Resolutions[i])
-            {
-                _currentResolutionIndex = i;
-                break;
-            }
-        }
     }
 }
