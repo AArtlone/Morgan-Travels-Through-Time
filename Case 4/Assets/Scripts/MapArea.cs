@@ -33,6 +33,8 @@ public class MapArea : MonoBehaviour
     {
         if (AreaStatus == Area.AreaStatus.Unlocked)
         {
+            Character.Instance.LastMapArea = SceneToLoad;
+            Character.Instance.RefreshJsonData();
             SceneManager.LoadScene(SceneToLoad);
             //AreaEnvironment.SetActive(true);
             //Icons.SetActive(false);

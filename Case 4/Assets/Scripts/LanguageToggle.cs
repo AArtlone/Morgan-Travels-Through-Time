@@ -49,12 +49,16 @@ public class LanguageToggle : MonoBehaviour
     {
         foreach (Image image in _settingsManager.LanguageIcons)
         {
-            if (image.gameObject != gameObject)
+            if (image != null)
             {
-                image.color = new Color(255, 255, 255, 0.5f);
-            } else
-            {
-                image.color = new Color(255, 255, 255, 1f);
+                if (image.gameObject != gameObject)
+                {
+                    image.color = new Color(255, 255, 255, 0.5f);
+                }
+                else
+                {
+                    image.color = new Color(255, 255, 255, 1f);
+                }
             }
         }
     }

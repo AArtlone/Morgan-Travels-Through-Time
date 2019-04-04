@@ -90,48 +90,50 @@ public class AppearanceDisplay : MonoBehaviour
 
     public void ToggleIconFrame(GameObject button)
     {
-        if(button.transform.parent.transform.parent.transform.name == "Bodies Display")
+        switch (button.transform.parent.transform.parent.transform.name)
         {
-            foreach(GameObject icon in BodyIcons)
-            {
-                icon.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            button.transform.GetChild(0).gameObject.SetActive(true);
-        } else if (button.transform.parent.transform.parent.transform.name == "Faces Display")
-        {
-            foreach (GameObject icon in FaceIcons)
-            {
-                icon.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            button.transform.GetChild(0).gameObject.SetActive(true);
-        } else if (button.transform.parent.transform.parent.transform.name == "Hairs Display")
-        {
-            foreach (GameObject icon in HairIcons)
-            {
-                icon.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            button.transform.GetChild(0).gameObject.SetActive(true);
-        } else if (button.transform.parent.transform.parent.transform.name == "Tops Display")
-        {
-            foreach (GameObject icon in TopIcons)
-            {
-                icon.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            button.transform.GetChild(0).gameObject.SetActive(true);
-        } else if (button.transform.parent.transform.parent.transform.name == "Bots Display")
-        {
-            foreach (GameObject icon in BotIcons)
-            {
-                icon.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            button.transform.GetChild(0).gameObject.SetActive(true);
-        } else if (button.transform.parent.transform.parent.transform.name == "Shoes Display")
-        {
-            foreach (GameObject icon in ShoesIcons)
-            {
-                icon.transform.GetChild(0).gameObject.SetActive(false);
-            }
-            button.transform.GetChild(0).gameObject.SetActive(true);
+            case "Bodies Display":
+                for (int i = 0; i < BodyIcons.Count; i++)
+                {
+                    BodyIcons[i].transform.GetChild(0).gameObject.SetActive(false);
+                }
+                button.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case "Faces Display":
+                for (int i = 0; i < FaceIcons.Count; i++)
+                {
+                    FaceIcons[i].transform.GetChild(0).gameObject.SetActive(false);
+                }
+                button.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case "Hairs Display":
+                for (int i = 0; i < HairIcons.Count; i++)
+                {
+                    HairIcons[i].transform.GetChild(0).gameObject.SetActive(false);
+                }
+                button.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case "Tops Display":
+                for (int i = 0; i < TopIcons.Count; i++)
+                {
+                    TopIcons[i].transform.GetChild(0).gameObject.SetActive(false);
+                }
+                button.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case "Bots Display":
+                for (int i = 0; i < BotIcons.Count; i++)
+                {
+                    BotIcons[i].transform.GetChild(0).gameObject.SetActive(false);
+                }
+                button.transform.GetChild(0).gameObject.SetActive(true);
+                break;
+            case "Shoes Display":
+                for (int i = 0; i < ShoesIcons.Count; i++)
+                {
+                    ShoesIcons[i].transform.GetChild(0).gameObject.SetActive(false);
+                }
+                button.transform.GetChild(0).gameObject.SetActive(true);
+                break;
         }
     }
 

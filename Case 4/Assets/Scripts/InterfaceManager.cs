@@ -549,5 +549,19 @@ public class InterfaceManager : MonoBehaviour
         // TODO: Create item actives and test them from here.
         //Debug.Log("Used " + ItemSelected.Name);
     }
+
+    public void LoadScene(string scene)
+    {
+        if (scene == "Main Map" || scene == "Tutorial Map Area")
+        {
+            Character.Instance.LastMapArea = scene;
+        } else
+        {
+            Character.Instance.LastScene = scene;
+        }
+        Character.Instance.RefreshJsonData();
+
+        SceneManager.LoadScene(scene);
+    }
     #endregion
 }

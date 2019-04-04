@@ -19,8 +19,11 @@ public class AppearanceSelector : MonoBehaviour
     private GameObject _shoesBodyPart;
     private Sprite[] _spritesFromStorage;
 
+    private AppearanceDisplay _appearanceDisplay;
+
     private void Start()
     {
+        _appearanceDisplay = FindObjectOfType<AppearanceDisplay>();
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
         _bodyBodyPart = GameObject.Find("Body Body Part");
@@ -59,7 +62,7 @@ public class AppearanceSelector : MonoBehaviour
     public void ToggleIcon(System.Object icon)
     {
         GameObject iconObj = (GameObject)icon;
-        FindObjectOfType<AppearanceDisplay>().ToggleIconFrame(iconObj);
+        _appearanceDisplay.ToggleIconFrame(iconObj);
     }
 
     private void LoadNewBodyPart(GameObject bodyPart)
@@ -69,6 +72,7 @@ public class AppearanceSelector : MonoBehaviour
             Color color = bodyPart.GetComponent<Image>().color;
             bodyPart.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 1);
         }
+
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (PortraitImage == clothing.PortraitImage)
@@ -82,15 +86,15 @@ public class AppearanceSelector : MonoBehaviour
 
         foreach (Sprite sprite in _spritesFromStorage)
         {
-            if(SceneManager.GetActiveScene().name == "Beginning Character Creation")
-            {
-                Character.Instance.RefreshWearables();
-            }
-
             if (sprite.name == PortraitImage)
             {
                 bodyPart.GetComponent<Image>().sprite = sprite;
             }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
+        {
+            Character.Instance.RefreshWearables();
         }
     }
 

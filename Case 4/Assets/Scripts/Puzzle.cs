@@ -23,7 +23,7 @@ public class Puzzle : MonoBehaviour
     {
         _jsonPuzzlesPath = Application.persistentDataPath + "/Puzzles.json";
 
-        _puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
+        _puzzleScript = PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>();
 
         // Depending on the puzzle we want to use in this prefab, we will run
         // different puzzle startup code, since the puzzles are entirely different
@@ -32,7 +32,7 @@ public class Puzzle : MonoBehaviour
         if (TypeOfPuzzle == PuzzleType.HiddenObjects)
         {
             SetupHiddenObjectsPuzzle();
-            Character.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>());
+            Character.Instance.HiddenObjectsPuzzles.Add(PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>());
         } else if (TypeOfPuzzle == PuzzleType.CannonGame)
         {
             //Debug.Log("aa");

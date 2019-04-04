@@ -51,6 +51,7 @@ public class CameraBehavior : MonoBehaviour
                 // Layer 11 is IgnoreCamera meant only for this script!
                 if (hitCanvas.transform.gameObject.layer == 11)
                 {
+                    //Debug.Log(hitCanvas.transform.name);
                     IsInterfaceElementSelected = true;
                 }
             }
@@ -150,6 +151,8 @@ public class CameraBehavior : MonoBehaviour
                         break;
                     case "Escape Game":
                         hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
+                        Character.Instance.LastScene = "Escape Game";
+                        Character.Instance.RefreshJsonData();
                         IsInteracting = true;
                         IsUIOpen = true;
                         _swipeController.enabled = false;

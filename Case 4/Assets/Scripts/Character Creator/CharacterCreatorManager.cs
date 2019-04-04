@@ -499,8 +499,9 @@ public class CharacterCreatorManager : MonoBehaviour
     public void ReturnToMainMap()
     {
         Character.Instance.CharacterCreation = true;
+        Character.Instance.LastScene = Character.Instance.LastMapArea;
         Character.Instance.RefreshJsonData();
-        SceneManager.LoadScene("Main Map");
+        SceneManager.LoadScene(Character.Instance.LastMapArea);
     }
 
     public void ConfirmCharacterName(Object obj)
@@ -538,6 +539,8 @@ public class CharacterCreatorManager : MonoBehaviour
             Character.Instance.SetupWorldData();
             if(SceneManager.GetActiveScene().name == "Beginning Character Creation")
             {
+                Character.Instance.LastScene = "Tutorial Map Area";
+                Character.Instance.RefreshJsonData();
                 SceneManagement.Instance.LoadScene("Tutorial Map Area");
             } else
             {

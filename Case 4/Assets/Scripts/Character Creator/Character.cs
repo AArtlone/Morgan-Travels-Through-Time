@@ -16,6 +16,8 @@ public class Character : MonoBehaviour
     public bool TutorialCompleted;
     public bool HasMap;
     public bool HasSchematics;
+    public string LastMapArea;
+    public string LastScene;
     [Space(10)]
     #region Stats
     public int Reputation;
@@ -194,6 +196,8 @@ public class Character : MonoBehaviour
                     }
                     #endregion
 
+                    LastMapArea = playerJsonData["LastMapArea"].ToString();
+                    LastScene = playerJsonData["LastScene"].ToString();
                     Reputation = int.Parse(playerJsonData["Reputation"].ToString());
                     Stamina = int.Parse(playerJsonData["Stamina"].ToString());
                     Knowledge = int.Parse(playerJsonData["Knowledge"].ToString());
@@ -484,6 +488,9 @@ public class Character : MonoBehaviour
                 }
             }
             #endregion
+
+            LastMapArea = characterData["LastMapArea"].ToString();
+            LastScene = characterData["LastScene"].ToString();
             Reputation = int.Parse(characterData["Reputation"].ToString());
             Stamina = int.Parse(characterData["Stamina"].ToString());
             Knowledge = int.Parse(characterData["Knowledge"].ToString());
