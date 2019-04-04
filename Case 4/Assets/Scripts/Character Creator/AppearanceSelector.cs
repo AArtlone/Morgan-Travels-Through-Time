@@ -82,7 +82,7 @@ public class AppearanceSelector : MonoBehaviour
 
         foreach (Sprite sprite in _spritesFromStorage)
         {
-            if(SceneManager.GetActiveScene().name == "Begining Character Creation")
+            if(SceneManager.GetActiveScene().name == "Beginning Character Creation")
             {
                 Character.Instance.RefreshWearables();
             }

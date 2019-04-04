@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class LanguageToggle : MonoBehaviour
 {
-    public string LanguageToToggle;
     private SettingsManager _settingsManager;
 
     private void Start()
@@ -16,7 +15,7 @@ public class LanguageToggle : MonoBehaviour
         }
     }
 
-    public void ChangeLanguage()
+    public void ChangeLanguage(string LanguageToToggle)
     {
         switch (LanguageToToggle)
         {

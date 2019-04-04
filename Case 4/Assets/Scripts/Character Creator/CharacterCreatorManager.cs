@@ -48,19 +48,18 @@ public class CharacterCreatorManager : MonoBehaviour
 
         DefineCurrentWearables();
 
-        // If the player has already created a character then 
-        // we just start the main menu instead.
-        if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
-        {
-            SceneManager.LoadScene("Main Map");
-            if (Character.Instance.TutorialCompleted)
-            {
-                //SceneManager.LoadScene("Main Map");
-            } else
-            {
-                SceneManager.LoadScene("Tutorial Map Area");
-            }
-        }
+        //// If the player has already created a character then 
+        //// we just start the main menu instead.
+        //if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
+        //{
+        //    if (Character.Instance.TutorialCompleted)
+        //    {
+        //        SceneManagement.Instance.LoadScene("Main Map");
+        //    } else
+        //    {
+        //        SceneManagement.Instance.LoadScene("Tutorial Map Area");
+        //    }
+        //}
     }
 
     //defining current player's appearances in order to later check if any has changed
@@ -537,9 +536,9 @@ public class CharacterCreatorManager : MonoBehaviour
             // scene before that did not contain those elements to put the data in.
             Character.Instance.RefreshJsonData();
             Character.Instance.SetupWorldData();
-            if(SceneManager.GetActiveScene().name == "Begining Character Creation")
+            if(SceneManager.GetActiveScene().name == "Beginning Character Creation")
             {
-                SceneManager.LoadScene("Tutorial Map Area");
+                SceneManagement.Instance.LoadScene("Tutorial Map Area");
             } else
             {
                 GameObject.Find("Character Name Menu").SetActive(false);

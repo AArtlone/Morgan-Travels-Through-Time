@@ -3486,7 +3486,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -4150,6 +4150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IconPrefab: {fileID: 0}
+  DummieIconPrefab: {fileID: 0}
   Bodies: []
   BodiesDisplay: {fileID: 0}
   Faces: []
@@ -4164,6 +4165,12 @@ MonoBehaviour:
   ShoesDisplay: {fileID: 0}
   Buttons: []
   Displays: []
+  BodyIcons: []
+  FaceIcons: []
+  HairIcons: []
+  TopIcons: []
+  BotIcons: []
+  ShoesIcons: []
   UnSelectedButton: {fileID: 0}
   SelectedButton: {fileID: 0}
   PanelAnimator: {fileID: 0}
@@ -4780,6 +4787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IconPrefab: {fileID: 0}
+  DummieIconPrefab: {fileID: 0}
   Bodies: []
   BodiesDisplay: {fileID: 0}
   Faces: []
@@ -4794,6 +4802,12 @@ MonoBehaviour:
   ShoesDisplay: {fileID: 0}
   Buttons: []
   Displays: []
+  BodyIcons: []
+  FaceIcons: []
+  HairIcons: []
+  TopIcons: []
+  BotIcons: []
+  ShoesIcons: []
   UnSelectedButton: {fileID: 0}
   SelectedButton: {fileID: 0}
   PanelAnimator: {fileID: 0}
@@ -6431,6 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IconPrefab: {fileID: 0}
+  DummieIconPrefab: {fileID: 0}
   Bodies: []
   BodiesDisplay: {fileID: 0}
   Faces: []
@@ -6445,6 +6460,12 @@ MonoBehaviour:
   ShoesDisplay: {fileID: 0}
   Buttons: []
   Displays: []
+  BodyIcons: []
+  FaceIcons: []
+  HairIcons: []
+  TopIcons: []
+  BotIcons: []
+  ShoesIcons: []
   UnSelectedButton: {fileID: 0}
   SelectedButton: {fileID: 0}
   PanelAnimator: {fileID: 0}
@@ -7505,7 +7526,7 @@ RectTransform:
   - {fileID: 1387067175}
   - {fileID: 358458177}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8236,7 +8257,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1491664717}
+        - m_Target: {fileID: 0}
           m_MethodName: LoadCharacterCustomization
           m_Mode: 1
           m_Arguments:
@@ -9783,49 +9804,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472968829}
   m_CullTransparentMesh: 0
---- !u!1 &1491664715
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1491664716}
-  - component: {fileID: 1491664717}
-  m_Layer: 0
-  m_Name: Scene Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1491664716
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491664715}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.24754, y: 283.7968, z: -0.26964286}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1491664717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491664715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e59f8eafc7bb2ad449d15d11d1c021ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1494498183
 GameObject:
   m_ObjectHideFlags: 0
