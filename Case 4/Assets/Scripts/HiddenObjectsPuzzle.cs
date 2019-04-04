@@ -66,6 +66,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Timer.text = Counter.ToString();
 
         ItemsFound.Clear();
+        TextMeshProUGUI hintButton = HintButton.GetComponentInChildren<TextMeshProUGUI>();
+        hintButton.text = Character.Instance.AvailableHints + Environment.NewLine;
+        
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                hintButton.text += (Character.Instance.AvailableHints > 1 ? "hints" : "hint");
+                break;
+            case "Dutch":
+                hintButton.text += (Character.Instance.AvailableHints > 1 ? "hints" : "hint");
+                break;
+        }
     }
 
     public void StartTimer()
@@ -93,7 +105,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            FoundItemsDisplay.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = string.Empty;
+            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
         }
     }
 
@@ -103,7 +115,16 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have successfully completed this puzzle!";
+
+        switch(SettingsManager.Instance.Language)
+        {
+            case "English":
+                PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have successfully completed this puzzle!";
+                break;
+            case "Dutch":
+                PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Je bent er in geslaagd de puzzel te voltooien!";
+                break;
+        }
 
         if (IsItemEarned == false)
         {
@@ -137,7 +158,16 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have failed to complete this puzzle.";
+
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "You have failed to complete this puzzle.";
+                break;
+            case "Dutch":
+                PuzzleEndPopup.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "Het is je niet gelukt om de puzzel te klaren!";
+                break;
+        }
 
         if (IsItemEarned == false)
         {
@@ -203,14 +233,14 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     {
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            FoundItemsDisplay.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = string.Empty;
+            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
         }
 
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
             if (ItemsFound[i] != null)
             {
-                FoundItemsDisplay.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = ItemsFound[i];
+                FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsFound[i];
             }
         }
     }
@@ -218,6 +248,19 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public void UseHint()
     {
         Character.Instance.RemoveAvailableHints(1);
+
+        TextMeshProUGUI hintButton = HintButton.GetComponentInChildren<TextMeshProUGUI>();
+        hintButton.text = Character.Instance.AvailableHints + Environment.NewLine;
+
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                hintButton.text += (Character.Instance.AvailableHints > 1 ? "hints" : "hint");
+                break;
+            case "Dutch":
+                hintButton.text += (Character.Instance.AvailableHints > 1 ? "hints" : "hint");
+                break;
+        }
 
         Random rng = new Random();
 

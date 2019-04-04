@@ -42,9 +42,11 @@ public class GuessPuzzle : MonoBehaviour
     private bool _isGameStarted = false;
     public TextMeshProUGUI Timer;
     private float _timer = 0;
+    private SwipeController _swipeController;
 
     void Awake()
     {
+        _swipeController = FindObjectOfType<SwipeController>();
         _timer = PuzzleTimeInSeconds;
         _defaultsJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
         _guessingPuzzlesPath = Application.persistentDataPath + "/GuessingPuzzles.json";
@@ -307,6 +309,8 @@ public class GuessPuzzle : MonoBehaviour
             }
         }
 
+        Debug.Log("Aa");
+
         puzzle.SetActive(true);
         _isGameStarted = true;
     }
@@ -390,8 +394,17 @@ public class GuessPuzzle : MonoBehaviour
 
     private void OpenCompletePuzzleWindow()
     {
-        finalScore.text = "Time is up. Your final score is " +
-            TotalScore + ". Congratulations!";
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                finalScore.text = "Time is up. You have successfully completed this puzzle!";
+                break;
+            case "Dutch":
+                finalScore.text = "De tijd is om!. Je bent er in geslaagd de puzzel te voltooien!";
+                break;
+        }
+
+        _swipeController.enabled = true;
         OpenPopup(PuzzleFinishedWindow);
     }
 }

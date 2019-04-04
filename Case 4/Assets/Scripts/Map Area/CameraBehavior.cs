@@ -23,11 +23,13 @@ public class CameraBehavior : MonoBehaviour
 
     // Camera components
     private MapEnvironmentManager _mapEnvironmentManager;
+    private SwipeController _swipeController;
 
     private void Start()
     {
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
+        _swipeController = FindObjectOfType<SwipeController>();
     }
 
     private void Update()
@@ -129,18 +131,22 @@ public class CameraBehavior : MonoBehaviour
                         // Replace with interaction mechanic in the future
                         hitObj.transform.GetComponent<NPC>().ContinueDialogue();
                         IsInteracting = true;
+                        _swipeController.enabled = false;
                         break;
                     case "Hidden Objects Puzzle":
                         hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
+                        _swipeController.enabled = false;
                         IsInteracting = true;
                         break;
                     case "Guess Clothes Puzzle":
                         hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
                         IsInteracting = true;
+                        _swipeController.enabled = false;
                         break;
                     case "Escape Game":
                         hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
                         IsInteracting = true;
+                        _swipeController.enabled = false;
                         break;
                     case "Item Drop":
                         Item hitItemDrop = hitObj.transform.GetComponent<Item>();

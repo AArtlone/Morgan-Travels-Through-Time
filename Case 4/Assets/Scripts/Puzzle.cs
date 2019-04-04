@@ -45,6 +45,13 @@ public class Puzzle : MonoBehaviour
     public void InitiateGuessClothesPuzzle()
     {
         PuzzleToLaunch.GetComponentInParent<GuessPuzzle>().StartPuzzle(PuzzleToLaunch);
+
+        // Shows the instruction manual to the player if it is his first time
+        // playing the game/tutorial.
+        if (Character.Instance.TutorialCompleted == false)
+        {
+            InterfaceManager.Instance.OpenPopup(InstructionManual);
+        }
     }
 
     public void InitiateHiddenObjectsPuzzle()
@@ -57,20 +64,18 @@ public class Puzzle : MonoBehaviour
             PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
             PuzzleToLaunch.SetActive(true);
-            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
-            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartTimer();
+            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
+            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
             transform.GetComponent<Image>().raycastTarget = false;
         } else
         {
             PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
             PuzzleToLaunch.SetActive(true);
-            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().ItemsFound.Clear();
-            PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>().StartTimer();
+            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
+            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
         }
-
-        // Shows the instruction manual to the player if it is his first time
-        // playing the game/tutorial.
+        
         if (Character.Instance.TutorialCompleted == false)
         {
             InterfaceManager.Instance.OpenPopup(InstructionManual);
@@ -100,7 +105,7 @@ public class Puzzle : MonoBehaviour
 
             for (int i = 0; i < puzzlesData["Puzzles"].Count; i++)
             {
-                HiddenObjectsPuzzle puzzleScript = PuzzleToLaunch.GetComponent<HiddenObjectsPuzzle>();
+                HiddenObjectsPuzzle puzzleScript = PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>();
                 if (puzzlesData["Puzzles"][i]["Name"].ToString() == puzzleScript.PuzzleName)
                 {
                     puzzleScript.Stars = int.Parse(puzzlesData["Puzzles"][i]["Stars"].ToString());
@@ -164,6 +169,9 @@ public class Puzzle : MonoBehaviour
 
     public void LoadScore()
     {
-        ScoreText.text = PuzzleToLaunch.GetComponentInParent<GuessPuzzle>().TotalScore.ToString() + " points";
+        if (ScoreText != null)
+        {
+            //ScoreText.text = PuzzleToLaunch.GetComponentInParent<GuessPuzzle>().TotalScore.ToString() + " points";
+        }
     }
 }

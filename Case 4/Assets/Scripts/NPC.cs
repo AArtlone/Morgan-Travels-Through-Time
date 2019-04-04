@@ -34,9 +34,11 @@ public class NPC : MonoBehaviour
     private SpriteRenderer _spriteComponent;
     List<Dialogue> dialoguesToPickFrom = new List<Dialogue>();
     List<Dialogue> FinalSequence = new List<Dialogue>();
+    private SwipeController _swipeController;
 
     private void Start()
     {
+        _swipeController = FindObjectOfType<SwipeController>();
         DialogueManager.Instance.ToggleDialogue(false);
         if (DialogueProgressionTrigger2D == null)
         {
@@ -321,6 +323,7 @@ public class NPC : MonoBehaviour
                         _isDialogueOngoing = false;
                         DialogueManager.Instance.CurrentNPCDialogue = null;
                         Character.Instance.InitiateInteraction();
+                        _swipeController.enabled = true;
                         return;
                     }
                 }
@@ -337,6 +340,7 @@ public class NPC : MonoBehaviour
 
                 _isDialogueOngoing = false;
                 Character.Instance.InitiateInteraction();
+                _swipeController.enabled = true;
                 return;
             }
         } else 
