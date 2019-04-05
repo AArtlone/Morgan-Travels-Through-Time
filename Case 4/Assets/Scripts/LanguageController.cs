@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LanguageController : MonoBehaviour
 {
@@ -16,12 +17,18 @@ public class LanguageController : MonoBehaviour
     // Component for the text field that will be overwritten depending on the
     // currently selected language by the player.
     private TextMeshProUGUI _textField;
+    private Text _textInputField;
 
     private SettingsManager _settingsManager;
 
     private void Start()
     {
         _textField = GetComponent<TextMeshProUGUI>();
+        
+        if (GetComponent<Text>())
+        {
+            _textInputField = GetComponent<Text>();
+        }
 
         _settingsManager = FindObjectOfType<SettingsManager>();
         
@@ -54,14 +61,33 @@ public class LanguageController : MonoBehaviour
         switch (language)
         {
             case Language.English:
-                _textField.text = English;
+                LoadTextIntoField(English);
+                if (_textField != null)
+                {
+                    _textField.text = English;
+                }
                 break;
             case Language.Dutch:
-                _textField.text = Dutch;
+                LoadTextIntoField(Dutch);
+                if (_textField != null)
+                {
+                    _textField.text = Dutch;
+                }
                 break;
             default:
-                _textField.text = Dutch;
+                LoadTextIntoField(Dutch);
+                if (_textField != null)
+                {
+                    _textField.text = Dutch;
+                }
                 break;
+        }
+    }
+
+    private void LoadTextIntoField(string text) {
+        if (GetComponent<Text>())
+        {
+            _textInputField.text = text;
         }
     }
 }

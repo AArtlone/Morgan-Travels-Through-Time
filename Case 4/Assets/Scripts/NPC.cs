@@ -176,7 +176,7 @@ public class NPC : MonoBehaviour
             {
                 if (itemsJsonData["Items"][i]["Name"].ToString() == dialogueItem.Name)
                 {
-                    Debug.Log("Item " + dialogueItem.Name + " is already in possession!");
+                    //Debug.Log("Item " + dialogueItem.Name + " is already in possession!");
                     areItemsEarnedAlready = true;
                     break;
                 }
@@ -194,7 +194,7 @@ public class NPC : MonoBehaviour
             {
                 Character.Instance.AddItem(dialogueItem);
                 areItemsEarnedAlready = true;
-                Debug.Log("Item " + dialogueItem.Name + " received!");
+                //Debug.Log("Item " + dialogueItem.Name + " received!");
                 if(dialogueItem.Name == "Map")
                 {
                     Character.Instance.HasMap = true;

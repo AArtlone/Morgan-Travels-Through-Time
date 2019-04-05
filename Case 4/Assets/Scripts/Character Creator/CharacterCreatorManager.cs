@@ -535,9 +535,10 @@ public class CharacterCreatorManager : MonoBehaviour
             // because once we load to a new scene with new gameo objects such as the
             // inventory and Quests diary, we want to re-initialize the data since the
             // scene before that did not contain those elements to put the data in.
+            Character.Instance.RefreshWearables();
             Character.Instance.RefreshJsonData();
             Character.Instance.SetupWorldData();
-            if(SceneManager.GetActiveScene().name == "Beginning Character Creation")
+            if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
             {
                 Character.Instance.LastScene = "Tutorial Map Area";
                 Character.Instance.RefreshJsonData();

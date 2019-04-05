@@ -4,6 +4,7 @@ using System;
 [Serializable]
 public class Quest
 {
+    public int ID;
     public string Name;
     public string Area;
     public string ProgressStatus;
@@ -11,8 +12,9 @@ public class Quest
     public bool CompletionStatus;
     public List<Objective> Objectives;
 
-    public Quest(string Name, string Area, string ProgressStatus, string Description, bool CompletionStatus, List<Objective> Objectives)
+    public Quest(int ID, string Name, string Area, string ProgressStatus, string Description, bool CompletionStatus, List<Objective> Objectives)
     {
+        this.ID = ID;
         this.Name = Name;
         this.Area = Area;
         this.ProgressStatus = ProgressStatus;

@@ -92,10 +92,10 @@ public class AppearanceSelector : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
-        {
-            Character.Instance.RefreshWearables();
-        }
+        //if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
+        //{
+        //    Character.Instance.RefreshWearables();
+        //}
     }
 
     public void ResetCharacterAppearance()

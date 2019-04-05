@@ -34,7 +34,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     [Tooltip("Item reward's assets image name (without file type)")]
     public string ItemRewardAssetsImageName;
     [Space(15)]
-    public List<string> ObjectivesToComplete = new List<string>();
+    public string QuestForObjective;
+    public string ObjectiveToComplete;
     [NonSerialized]
     public int Counter;
     private int _missclicks;
@@ -146,11 +147,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 IsItemEarned = true;
             }
         }
-        
-        foreach (string objective in ObjectivesToComplete)
-        {
-            Character.Instance.CompleteObjective(objective);
-        }
+
+        Character.Instance.CompleteObjectiveInQuest(ObjectiveToComplete, QuestForObjective);
 
         Stars = 3;
 

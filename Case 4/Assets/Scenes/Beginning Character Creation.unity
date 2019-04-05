@@ -6993,6 +6993,7 @@ GameObject:
   - component: {fileID: 1202269291}
   - component: {fileID: 1202269290}
   - component: {fileID: 1202269289}
+  - component: {fileID: 1202269292}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -7061,6 +7062,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.5}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1202269292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202269288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLanguage: 0
+  English: Enter Name...
+  Dutch: Naam invoeren...
 --- !u!1 &1205860290
 GameObject:
   m_ObjectHideFlags: 0

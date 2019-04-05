@@ -202,25 +202,37 @@ public class InterfaceManager : MonoBehaviour
                 Destroy(CompletedQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
             }
 
-            //Character.Instance.AllQuests.Clear();
-            foreach (Quest loadedQuest in Character.Instance.AllQuests)
+            List<Quest> questsToLoad = new List<Quest>();
+
+            switch (SettingsManager.Instance.Language)
             {
-                if (loadedQuest.ProgressStatus == "Ongoing")
+                case "English":
+                    questsToLoad = Character.Instance.AllQuests;
+                    break;
+                case "Dutch":
+                    questsToLoad = Character.Instance.AllQuestsDutch;
+                    break;
+            }
+
+            //Character.Instance.AllQuests.Clear();
+            foreach (Quest loadedQuest in questsToLoad)
+            {
+                if (loadedQuest.ProgressStatus == "Ongoing" || loadedQuest.ProgressStatus == "Nedovurshen")
                 {
                     GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
                     newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
                 }
             }
 
-            foreach (Quest loadedQuest in Character.Instance.AllQuests)
+            foreach (Quest loadedQuest in questsToLoad)
             {
                 GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
                 newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
             }
 
-            foreach (Quest loadedQuest in Character.Instance.AllQuests)
+            foreach (Quest loadedQuest in questsToLoad)
             {
-                if (loadedQuest.ProgressStatus == "Completed")
+                if (loadedQuest.ProgressStatus == "Completed" || loadedQuest.ProgressStatus == "Zavurshen")
                 {
                     GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
                     newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
@@ -244,6 +256,7 @@ public class InterfaceManager : MonoBehaviour
                 if (uiObj.transform.tag == "Settings UI")
                 {
                     FindObjectOfType<SwipeController>().enabled = false;
+                    SettingsManager.Instance.UpdateHiglightedLanguageIcons();
                 }
             }
             else if (obj == uiObj && obj.activeSelf == true)
@@ -287,39 +300,92 @@ public class InterfaceManager : MonoBehaviour
     #region Quests, diary and character functions
     public void DisplayQuestDetails(Object obj)
     {
-        GameObject button = obj as GameObject;
-
-        _currentlySelectedQuest = null;
-        foreach (Quest loadedQuest in Character.Instance.AllQuests)
+        if (obj == null)
         {
-            if (loadedQuest.Name == button.GetComponentInChildren<TextMeshProUGUI>().text)
+            SelectedQuestTitle.text = string.Empty;
+            SelectedQuestDescription.text = string.Empty;
+            SelectedQuestStatus.text = string.Empty;
+
+            for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
             {
-                _currentlySelectedQuest = loadedQuest;
+                Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
+            }
+        } else
+        {
+            GameObject button = obj as GameObject;
 
-                SelectedQuestTitle.text = "Title: " + loadedQuest.Name;
-                SelectedQuestDescription.text = "Description: " + loadedQuest.Description;
-                SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
+            _currentlySelectedQuest = null;
 
-                for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
-                {
-                    Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
-                }
-
-                foreach (Objective objective in loadedQuest.Objectives)
-                {
-                    GameObject newObjective = Instantiate(QuestObjectivePrefab,
-                    SelectedQuestObjectivesDisplay.transform);
-                    newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
-
-                    if (objective.CompletedStatus)
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    foreach (Quest loadedQuest in Character.Instance.AllQuests)
                     {
-                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
+                        if (loadedQuest.Name == button.GetComponentInChildren<TextMeshProUGUI>().text)
+                        {
+                            _currentlySelectedQuest = loadedQuest;
+
+                            SelectedQuestTitle.text = "Title: " + loadedQuest.Name;
+                            SelectedQuestDescription.text = "Description: " + loadedQuest.Description;
+                            SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
+
+                            for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
+                            {
+                                Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
+                            }
+
+                            foreach (Objective objective in loadedQuest.Objectives)
+                            {
+                                GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                                SelectedQuestObjectivesDisplay.transform);
+                                newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
+
+                                if (objective.CompletedStatus)
+                                {
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
+                                }
+                                else
+                                {
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
+                                }
+                            }
+                        }
                     }
-                    else
+                    break;
+                case "Dutch":
+                    foreach (Quest loadedQuest in Character.Instance.AllQuestsDutch)
                     {
-                        newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
+                        if (loadedQuest.Name == button.GetComponentInChildren<TextMeshProUGUI>().text)
+                        {
+                            _currentlySelectedQuest = loadedQuest;
+
+                            SelectedQuestTitle.text = "Ima: " + loadedQuest.Name;
+                            SelectedQuestDescription.text = "Opisanie: " + loadedQuest.Description;
+                            SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
+
+                            for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
+                            {
+                                Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
+                            }
+
+                            foreach (Objective objective in loadedQuest.Objectives)
+                            {
+                                GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                                SelectedQuestObjectivesDisplay.transform);
+                                newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
+
+                                if (objective.CompletedStatus)
+                                {
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gotov: Da";
+                                }
+                                else
+                                {
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gotov: Ne";
+                                }
+                            }
+                        }
                     }
-                }
+                    break;
             }
         }
     }

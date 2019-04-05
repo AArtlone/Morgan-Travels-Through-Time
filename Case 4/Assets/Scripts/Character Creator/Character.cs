@@ -41,6 +41,7 @@ public class Character : MonoBehaviour
     public List<Quest> CurrentQuests = new List<Quest>();
     public List<Quest> CompletedQuests = new List<Quest>();
     public List<Quest> AllQuests = new List<Quest>();
+    public List<Quest> AllQuestsDutch = new List<Quest>();
     #endregion
     #region Puzzle references
     public List<HiddenObjectsPuzzle> HiddenObjectsPuzzles = new List<HiddenObjectsPuzzle>();
@@ -53,11 +54,13 @@ public class Character : MonoBehaviour
     public string PlayerStatsFilePath;
     private string _areasJsonFilePath;
     private string _questsJsonFilePath;
+    private string _questsDutchJsonFilePath;
     private string _itemsJsonFilePath;
     private string _itemsDutchJsonFilePath;
     private string _wearablesJsonFilePath;
     private string _wearablesDutchJsonFilePath;
     private string _newQuestsData;
+    private string _newQuestsDutchData;
     private string _defaultsGuessingClothesJsonPath;
     private string _guessingPuzzlesPath;
     private string _escapeGamesJsonFile;
@@ -93,6 +96,7 @@ public class Character : MonoBehaviour
             PlayerStatsFilePath = _pathToAssetsFolder + "/Player.json";
             _areasJsonFilePath = _pathToAssetsFolder + "/Areas.json";
             _questsJsonFilePath = _pathToAssetsFolder + "/Quests.json";
+            _questsDutchJsonFilePath = _pathToAssetsFolder + "/QuestsDutch.json";
             _itemsJsonFilePath = _pathToAssetsFolder + "/Items.json";
             _itemsDutchJsonFilePath = _pathToAssetsFolder + "/ItemsDutch.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
@@ -241,6 +245,9 @@ public class Character : MonoBehaviour
                     TextAsset questsData = Resources.Load<TextAsset>("Default World Data/Quests");
                     JsonData questsJsonData = JsonMapper.ToObject(questsData.text);
 
+                    TextAsset questsDutchData = Resources.Load<TextAsset>("Default World Data/QuestsDutch");
+                    JsonData questsDutchJsonData = JsonMapper.ToObject(questsDutchData.text);
+
                     AllQuests.Clear();
                     for (int i = 0; i < questsJsonData["Quests"].Count; i++)
                     {
@@ -263,7 +270,10 @@ public class Character : MonoBehaviour
 
                             // Here we store the new dictionary (objective) to the list of
                             // objectives after we set up the new objective.
-                            Objective newObjectives = new Objective(questsJsonData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+                            Objective newObjectives = 
+                                new Objective(
+                                    int.Parse(questsJsonData["Quests"][i]["Objectives"][j]["ID"].ToString()),
+                                    questsJsonData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
 
                             newQuestObjectives.Add(newObjectives);
                         }
@@ -279,6 +289,7 @@ public class Character : MonoBehaviour
                         }
 
                         Quest newQuest = new Quest(
+                            int.Parse(questsJsonData["Quests"][i]["ID"].ToString()),
                             questsJsonData["Quests"][i]["Name"].ToString(),
                             questsJsonData["Quests"][i]["Area"].ToString(),
                             questsJsonData["Quests"][i]["ProgressStatus"].ToString(),
@@ -289,7 +300,60 @@ public class Character : MonoBehaviour
                         AllQuests.Add(newQuest);
                     }
 
-                    File.WriteAllText(_questsJsonFilePath, "");
+                    AllQuestsDutch.Clear();
+                    for (int i = 0; i < questsDutchJsonData["Quests"].Count; i++)
+                    {
+                        List<Objective> newQuestObjectives = new List<Objective>();
+
+                        for (int j = 0; j < questsDutchJsonData["Quests"][i]["Objectives"].Count; j++)
+                        {
+                            // These conditions make sure that we get the right type of data
+                            // from the json and convert it accurately for the dictionaries
+                            // of objectives for that quest later on.
+                            bool isObjectiveComplete = false;
+                            if (questsDutchJsonData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                            {
+                                isObjectiveComplete = true;
+                            }
+                            else if (questsDutchJsonData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                            {
+                                isObjectiveComplete = false;
+                            }
+
+                            // Here we store the new dictionary (objective) to the list of
+                            // objectives after we set up the new objective.
+                            Objective newObjectives =
+                                new Objective(
+                                    int.Parse(questsDutchJsonData["Quests"][i]["Objectives"][j]["ID"].ToString()),
+                                    questsDutchJsonData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+
+                            newQuestObjectives.Add(newObjectives);
+                        }
+
+                        bool statusOfQuestCompletion = false;
+                        if (questsDutchJsonData["Quests"][i]["Completed"].ToString() == "True")
+                        {
+                            statusOfQuestCompletion = true;
+                        }
+                        else if (questsDutchJsonData["Quests"][i]["Completed"].ToString() == "False")
+                        {
+                            statusOfQuestCompletion = false;
+                        }
+
+                        Quest newQuest = new Quest(
+                            int.Parse(questsDutchJsonData["Quests"][i]["ID"].ToString()),
+                            questsDutchJsonData["Quests"][i]["Name"].ToString(),
+                            questsDutchJsonData["Quests"][i]["Area"].ToString(),
+                            questsDutchJsonData["Quests"][i]["ProgressStatus"].ToString(),
+                            questsDutchJsonData["Quests"][i]["Description"].ToString(),
+                            statusOfQuestCompletion,
+                            newQuestObjectives);
+
+                        AllQuestsDutch.Add(newQuest);
+                    }
+
+                    File.WriteAllText(_questsJsonFilePath, questsData.text);
+                    File.WriteAllText(_questsDutchJsonFilePath, questsDutchData.text);
                     RefreshAllQuests();
                     #endregion
 
@@ -642,10 +706,13 @@ public class Character : MonoBehaviour
 
     private void LoadQuests()
     {
-        if (File.Exists(_questsJsonFilePath))
+        if (File.Exists(_questsJsonFilePath) && File.Exists(_questsDutchJsonFilePath))
         {
             string dataToJson = File.ReadAllText(_questsJsonFilePath);
             JsonData questsData = JsonMapper.ToObject(dataToJson);
+
+            string dataToJsonDutch = File.ReadAllText(_questsDutchJsonFilePath);
+            JsonData questsDutchData = JsonMapper.ToObject(dataToJsonDutch);
 
             AllQuests.Clear();
             for (int i = 0; i < questsData["Quests"].Count; i++)
@@ -669,7 +736,9 @@ public class Character : MonoBehaviour
 
                     // Here we store the new dictionary (objective) to the list of
                     // objectives after we set up the new objective.
-                    Objective newObjectives = new Objective(questsData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+                    Objective newObjectives = new Objective(
+                        int.Parse(questsData["Quests"][i]["Objectives"][j]["ID"].ToString()),
+                        questsData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
 
                     newQuestObjectives.Add(newObjectives);
                 }
@@ -684,6 +753,7 @@ public class Character : MonoBehaviour
                 }
 
                 Quest newQuest = new Quest(
+                    int.Parse(questsData["Quests"][i]["ID"].ToString()),
                     questsData["Quests"][i]["Name"].ToString(),
                     questsData["Quests"][i]["Area"].ToString(),
                     questsData["Quests"][i]["ProgressStatus"].ToString(),
@@ -692,6 +762,57 @@ public class Character : MonoBehaviour
                     newQuestObjectives);
                 
                 AllQuests.Add(newQuest);
+            }
+
+            AllQuestsDutch.Clear();
+            for (int i = 0; i < questsDutchData["Quests"].Count; i++)
+            {
+                List<Objective> newQuestObjectives = new List<Objective>();
+
+                for (int j = 0; j < questsDutchData["Quests"][i]["Objectives"].Count; j++)
+                {
+                    // These conditions make sure that we get the right type of data
+                    // from the json and convert it accurately for the dictionaries
+                    // of objectives for that quest later on.
+                    bool isObjectiveComplete = false;
+                    if (questsDutchData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "True")
+                    {
+                        isObjectiveComplete = true;
+                    }
+                    else if (questsDutchData["Quests"][i]["Objectives"][j]["CompletedStatus"].ToString() == "False")
+                    {
+                        isObjectiveComplete = false;
+                    }
+
+                    // Here we store the new dictionary (objective) to the list of
+                    // objectives after we set up the new objective.
+                    Objective newObjectives = new Objective(
+                        int.Parse(questsDutchData["Quests"][i]["Objectives"][j]["ID"].ToString()),
+                        questsDutchData["Quests"][i]["Objectives"][j]["Name"].ToString(), isObjectiveComplete);
+
+                    newQuestObjectives.Add(newObjectives);
+                }
+
+                bool statusOfQuestCompletion = false;
+                if (questsDutchData["Quests"][i]["Completed"].ToString() == "True")
+                {
+                    statusOfQuestCompletion = true;
+                }
+                else if (questsDutchData["Quests"][i]["Completed"].ToString() == "False")
+                {
+                    statusOfQuestCompletion = false;
+                }
+
+                Quest newQuest = new Quest(
+                    int.Parse(questsDutchData["Quests"][i]["ID"].ToString()),
+                    questsDutchData["Quests"][i]["Name"].ToString(),
+                    questsDutchData["Quests"][i]["Area"].ToString(),
+                    questsDutchData["Quests"][i]["ProgressStatus"].ToString(),
+                    questsDutchData["Quests"][i]["Description"].ToString(),
+                    statusOfQuestCompletion,
+                    newQuestObjectives);
+
+                AllQuestsDutch.Add(newQuest);
             }
         }
 
@@ -897,88 +1018,287 @@ public class Character : MonoBehaviour
 
     public void CompleteObjectiveInQuest(string objective, string quest)
     {
-        foreach (Quest aQuest in CurrentQuests)
+        int QuestID = 0;
+        int ObjectiveID = 0;
+        bool completedStatus = false;
+        bool completionStatusOfQuest = false;
+
+        string whichLanguageIsTheQuestIn = string.Empty;
+        foreach (Quest questInEnglish in AllQuests)
         {
-            if (aQuest.Name == quest && aQuest.ProgressStatus == "Ongoing")
+            if (questInEnglish.Name == quest)
             {
-                foreach (Objective aObjective in aQuest.Objectives)
-                {
-                    if (aObjective.Name == objective &&
-                        aObjective.CompletedStatus == false)
-                    {
-                        aObjective.CompletedStatus = true;
-
-                        bool areAllObjectivesDone = true;
-                        foreach (Objective obj in aQuest.Objectives)
-                        {
-                            if (obj.CompletedStatus == false)
-                            {
-                                areAllObjectivesDone = false;
-                            }
-                        }
-
-                        if (areAllObjectivesDone)
-                        {
-                            aQuest.ProgressStatus = "Completed";
-                            aQuest.CompletionStatus = true;
-                            if(aQuest.Name == "Tutorial")
-                            {
-                                //Debug.Log(aQuest.Name);
-                                TutorialCompleted = true;
-                                RefreshJsonData();
-                                CollectBlueprint("Blueprint1");
-                                FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
-                            }
-                        }
-
-                        RefreshAllQuests();
-                    }
-                }
+                whichLanguageIsTheQuestIn = "English";
             }
         }
-    }
 
-    public void CompleteObjective(string objective)
-    {
-        foreach (Quest aQuest in AllQuests)
+        foreach (Quest questInDutch in AllQuestsDutch)
         {
-            if (aQuest.ProgressStatus == "Ongoing")
+            if (questInDutch.Name == quest)
             {
-                foreach (Objective aObjective in aQuest.Objectives)
-                {
-                    //Debug.Log(aObjective.Name + " | " + objective);
-                    if (aObjective.Name == objective &&
-                        aObjective.CompletedStatus == false)
-                    {
-                        aObjective.CompletedStatus = true;
-                        bool areAllObjectivesDone = true;
-                        foreach (Objective obj in aQuest.Objectives)
-                        {
-                            if (obj.CompletedStatus == false)
-                            {
-                                areAllObjectivesDone = false;
-                            }
-                        }
-
-                        if (areAllObjectivesDone)
-                        {
-                            aQuest.ProgressStatus = "Completed";
-                            aQuest.CompletionStatus = true;
-                            if (aQuest.Name == "Tutorial")
-                            {
-                                //Debug.Log(aQuest.Name);
-                                TutorialCompleted = true;
-                                RefreshJsonData();
-                                CollectBlueprint("Blueprint1");
-                                FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
-                            }
-                        }
-                        RefreshAllQuests();
-                    }
-                }
+                whichLanguageIsTheQuestIn = "Dutch";
             }
         }
+
+        switch (whichLanguageIsTheQuestIn)
+        {
+            case "English":
+                foreach (Quest aQuest in AllQuests)
+                {
+                    if (aQuest.Name == quest && aQuest.ProgressStatus == "Ongoing")
+                    {
+                        QuestID = aQuest.ID;
+                        foreach (Objective aObjective in aQuest.Objectives)
+                        {
+                            if (aObjective.Name == objective &&
+                                aObjective.CompletedStatus == false)
+                            {
+                                ObjectiveID = aObjective.ID;
+                                aObjective.CompletedStatus = true;
+                                completedStatus = true;
+
+                                bool areAllObjectivesDone = true;
+                                foreach (Objective obj in aQuest.Objectives)
+                                {
+                                    if (obj.CompletedStatus == false)
+                                    {
+                                        areAllObjectivesDone = false;
+                                    }
+                                }
+
+                                if (areAllObjectivesDone)
+                                {
+                                    aQuest.ProgressStatus = "Completed";
+                                    aQuest.CompletionStatus = true;
+                                    completionStatusOfQuest = true;
+                                    if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
+                                    {
+                                        //Debug.Log(aQuest.Name);
+                                        TutorialCompleted = true;
+                                        RefreshJsonData();
+                                        CollectBlueprint("Blueprint1");
+                                        FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                                    }
+                                }
+
+                                RefreshAllQuests();
+                            }
+                        }
+                    }
+                }
+
+                foreach (Quest aQuest in AllQuestsDutch)
+                {
+                    if (aQuest.ID == QuestID)
+                    {
+                        aQuest.CompletionStatus = completionStatusOfQuest;
+                        foreach (Objective aObjective in aQuest.Objectives)
+                        {
+                            if (aObjective.ID == ObjectiveID)
+                            {
+                                aObjective.CompletedStatus = completedStatus;
+                            }
+                        }
+                    }
+                }
+                break;
+            case "Dutch":
+                foreach (Quest aQuest in AllQuestsDutch)
+                {
+                    //Debug.Log(quest + " | " + aQuest.Name);
+                    if (aQuest.Name == quest && aQuest.ProgressStatus == "Nedovurshen")
+                    {
+                        QuestID = aQuest.ID;
+                        foreach (Objective aObjective in aQuest.Objectives)
+                        {
+                            if (aObjective.Name == objective &&
+                                aObjective.CompletedStatus == false)
+                            {
+                                ObjectiveID = aObjective.ID;
+                                aObjective.CompletedStatus = true;
+                                completedStatus = true;
+
+                                bool areAllObjectivesDone = true;
+                                foreach (Objective obj in aQuest.Objectives)
+                                {
+                                    if (obj.CompletedStatus == false)
+                                    {
+                                        areAllObjectivesDone = false;
+                                    }
+                                }
+
+                                if (areAllObjectivesDone)
+                                {
+                                    aQuest.ProgressStatus = "Zavurshen";
+                                    aQuest.CompletionStatus = true;
+                                    completionStatusOfQuest = true;
+                                    if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
+                                    {
+                                        //Debug.Log(aQuest.Name);
+                                        TutorialCompleted = true;
+                                        RefreshJsonData();
+                                        CollectBlueprint("Blueprint1");
+                                        FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach (Quest aQuest in AllQuests)
+                {
+                    if (aQuest.ID == QuestID)
+                    {
+                        //Debug.Log("Not bad");
+                        aQuest.CompletionStatus = completionStatusOfQuest;
+                        foreach (Objective aObjective in aQuest.Objectives)
+                        {
+                            if (aObjective.ID == ObjectiveID)
+                            {
+                                aObjective.CompletedStatus = completedStatus;
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+
+        RefreshAllQuests();
     }
+
+    //public void CompleteObjective(string objective)
+    //{
+    //    int QuestID = 0;
+    //    int ObjectiveID = 0;
+    //    bool completedStatus = false;
+    //    bool completionStatusOfQuest = false;
+
+    //    switch (SettingsManager.Instance.Language)
+    //    {
+    //        case "English":
+    //            foreach (Quest aQuest in AllQuests)
+    //            {
+    //                if (aQuest.ProgressStatus == "Ongoing")
+    //                {
+    //                    foreach (Objective aObjective in aQuest.Objectives)
+    //                    {
+    //                        //Debug.Log(aObjective.Name + " | " + objective);
+    //                        if (aObjective.Name == objective &&
+    //                            aObjective.CompletedStatus == false)
+    //                        {
+    //                            aObjective.CompletedStatus = true;
+    //                            completedStatus = true;
+    //                            QuestID = aQuest.ID;
+    //                            ObjectiveID = aObjective.ID;
+
+    //                            bool areAllObjectivesDone = true;
+    //                            foreach (Objective obj in aQuest.Objectives)
+    //                            {
+    //                                if (obj.CompletedStatus == false)
+    //                                {
+    //                                    areAllObjectivesDone = false;
+    //                                }
+    //                            }
+
+    //                            if (areAllObjectivesDone)
+    //                            {
+    //                                aQuest.ProgressStatus = "Completed";
+    //                                aQuest.CompletionStatus = true;
+    //                                aQuest.CompletionStatus = true;
+    //                                if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
+    //                                {
+    //                                    //Debug.Log(aQuest.Name);
+    //                                    TutorialCompleted = true;
+    //                                    RefreshJsonData();
+    //                                    CollectBlueprint("Blueprint1");
+    //                                    FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+    //                                }
+    //                            }
+    //                            RefreshAllQuests();
+    //                        }
+    //                    }
+    //                }
+    //            }
+
+    //            foreach (Quest aQuest in AllQuestsDutch)
+    //            {
+    //                if (aQuest.ID == QuestID)
+    //                {
+    //                    aQuest.CompletionStatus = completionStatusOfQuest;
+    //                    foreach (Objective aObjective in aQuest.Objectives)
+    //                    {
+    //                        if (aObjective.ID == ObjectiveID)
+    //                        {
+    //                            aObjective.CompletedStatus = completedStatus;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            break;
+    //        case "Dutch":
+    //            foreach (Quest aQuest in AllQuestsDutch)
+    //            {
+    //                if (aQuest.ProgressStatus == "Nedovurshen")
+    //                {
+    //                    foreach (Objective aObjective in aQuest.Objectives)
+    //                    {
+    //                        //Debug.Log(aObjective.Name + " | " + objective);
+    //                        if (aObjective.Name == objective &&
+    //                            aObjective.CompletedStatus == false)
+    //                        {
+    //                            aObjective.CompletedStatus = true;
+    //                            completedStatus = true;
+    //                            QuestID = aQuest.ID;
+    //                            ObjectiveID = aObjective.ID;
+
+    //                            bool areAllObjectivesDone = true;
+    //                            foreach (Objective obj in aQuest.Objectives)
+    //                            {
+    //                                if (obj.CompletedStatus == false)
+    //                                {
+    //                                    areAllObjectivesDone = false;
+    //                                }
+    //                            }
+
+    //                            if (areAllObjectivesDone)
+    //                            {
+    //                                aQuest.ProgressStatus = "Zavurshen";
+    //                                aQuest.CompletionStatus = true;
+    //                                aQuest.CompletionStatus = true;
+    //                                if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
+    //                                {
+    //                                    //Debug.Log(aQuest.Name);
+    //                                    TutorialCompleted = true;
+    //                                    RefreshJsonData();
+    //                                    CollectBlueprint("Blueprint1");
+    //                                    FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+    //                                }
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+
+    //            foreach (Quest aQuest in AllQuests)
+    //            {
+    //                if (aQuest.ID == QuestID)
+    //                {
+    //                    aQuest.CompletionStatus = completionStatusOfQuest;
+    //                    foreach (Objective aObjective in aQuest.Objectives)
+    //                    {
+    //                        if (aObjective.ID == ObjectiveID)
+    //                        {
+    //                            aObjective.CompletedStatus = completedStatus;
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //            break;
+    //    }
+
+    //    RefreshAllQuests();
+    //}
 
     /// <summary>
     /// Updates stats starting from left to right using the new stat values in the same order. You can use it the following way: "charisma fitness", new int[] {2, 5}. The charisma value will be incremented by two while the fitness by five. Dont forget to use small letters for the stat strings.
@@ -1015,7 +1335,7 @@ public class Character : MonoBehaviour
                     break;
                 case "currency":
                     Currency += statValues[i];
-                    //Debug.Log("Increased currency by " + statValues[i] + "!");
+                    //1("Increased currency by " + statValues[i] + "!");
                     break;
             }
         }
@@ -1024,10 +1344,9 @@ public class Character : MonoBehaviour
     }
 
     /// <summary>
-    /// These function recountW the effects of every clothing for the player
-    /// and must be executed every time you  add a new clothing or one of their stats is changed.
+    /// This function recounts the effects of every clothing for the player
+    /// and must be executed every time you add a new clothing or one of their stats is changed.
     /// </summary>
-
     private void ApplyClothingStats()
     {
         for (int i = 0; i < Wearables.Count; i++)
@@ -1043,45 +1362,45 @@ public class Character : MonoBehaviour
     #endregion
 
     #region Refreshing functions that export the existing player data to storage
-    /// <summary>
-    /// All the following functions refresh sections of data from the game
-    /// and must be applied whenever a form of data is changed in-game to
-    /// reflect that of the files for storage.
-    /// </summary>
-    private void RefreshQuest(List<Quest> quests)
+    public void RefreshAllQuests()
     {
-        // If we have an empty quest then we will just create an
-        // empty array of that quest instead of populating it with
-        // non-existent values.
-        if (quests.Count == 0)
+        File.WriteAllText(_questsJsonFilePath, "");
+        File.WriteAllText(_questsDutchJsonFilePath, "");
+        // Reset the existing quests data string
+        _newQuestsData = "{";
+        _newQuestsData += "\"Quests\":[";
+
+        if (AllQuests.Count == 0)
         {
             _newQuestsData += "]}";
             return;
         }
         else
         {
-            for (int i = 0; i < quests.Count; i++)
+            for (int i = 0; i < AllQuests.Count; i++)
             {
                 _newQuestsData += "{";
                 // This is one field of the quest object
-                _newQuestsData += "\"Name\":\"" + quests[i].Name + "\",";
-                _newQuestsData += "\"Area\":\"" + quests[i].Area + "\",";
-                _newQuestsData += "\"ProgressStatus\":\"" + quests[i].ProgressStatus + "\",";
-                _newQuestsData += "\"Description\":\"" + quests[i].Description + "\",";
+                _newQuestsData += "\"ID\":" + AllQuests[i].ID + ",";
+                _newQuestsData += "\"Name\":\"" + AllQuests[i].Name + "\",";
+                _newQuestsData += "\"Area\":\"" + AllQuests[i].Area + "\",";
+                _newQuestsData += "\"ProgressStatus\":\"" + AllQuests[i].ProgressStatus + "\",";
+                _newQuestsData += "\"Description\":\"" + AllQuests[i].Description + "\",";
 
-                if (quests[i].CompletionStatus == true)
+                if (AllQuests[i].CompletionStatus == true)
                 {
                     _newQuestsData += "\"Completed\":true,";
                 }
-                else if (quests[i].CompletionStatus == false)
+                else if (AllQuests[i].CompletionStatus == false)
                 {
                     _newQuestsData += "\"Completed\":false,";
                 }
 
                 _newQuestsData += "\"Objectives\":" + "[";
-                foreach (Objective objective in quests[i].Objectives)
+                foreach (Objective objective in AllQuests[i].Objectives)
                 {
                     _newQuestsData += "{";
+                    _newQuestsData += "\"ID\":" + objective.ID + ",";
                     _newQuestsData += "\"Name\":\"" + objective.Name + "\",";
                     if (objective.CompletedStatus == true)
                     {
@@ -1099,21 +1418,66 @@ public class Character : MonoBehaviour
                 _newQuestsData += "]},";
             }
         }
-    }
-
-    public void RefreshAllQuests()
-    {
-        File.WriteAllText(_questsJsonFilePath, "");
-        // Reset the existing quests data string
-        _newQuestsData = "{";
-        _newQuestsData += "\"Quests\":[";
-
-        RefreshQuest(AllQuests);
 
         _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1);
-        // This closes the wrapper of the json file made from the beginning.
         _newQuestsData += "]}";
         File.WriteAllText(_questsJsonFilePath, _newQuestsData);
+
+        _newQuestsDutchData = "{";
+        _newQuestsDutchData += "\"Quests\":[";
+
+        if (AllQuestsDutch.Count == 0)
+        {
+            _newQuestsDutchData += "]}";
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < AllQuestsDutch.Count; i++)
+            {
+                _newQuestsDutchData += "{";
+                // This is one field of the quest object
+                _newQuestsDutchData += "\"ID\":" + AllQuestsDutch[i].ID + ",";
+                _newQuestsDutchData += "\"Name\":\"" + AllQuestsDutch[i].Name + "\",";
+                _newQuestsDutchData += "\"Area\":\"" + AllQuestsDutch[i].Area + "\",";
+                _newQuestsDutchData += "\"ProgressStatus\":\"" + AllQuestsDutch[i].ProgressStatus + "\",";
+                _newQuestsDutchData += "\"Description\":\"" + AllQuestsDutch[i].Description + "\",";
+
+                if (AllQuestsDutch[i].CompletionStatus == true)
+                {
+                    _newQuestsDutchData += "\"Completed\":true,";
+                }
+                else if (AllQuestsDutch[i].CompletionStatus == false)
+                {
+                    _newQuestsDutchData += "\"Completed\":false,";
+                }
+
+                _newQuestsDutchData += "\"Objectives\":" + "[";
+                foreach (Objective objective in AllQuestsDutch[i].Objectives)
+                {
+                    _newQuestsDutchData += "{";
+                    _newQuestsDutchData += "\"ID\":" + objective.ID + ",";
+                    _newQuestsDutchData += "\"Name\":\"" + objective.Name + "\",";
+                    if (objective.CompletedStatus == true)
+                    {
+                        _newQuestsDutchData += "\"CompletedStatus\":true";
+                    }
+                    else if (objective.CompletedStatus == false)
+                    {
+                        _newQuestsDutchData += "\"CompletedStatus\":false";
+                    }
+                    _newQuestsDutchData += "},";
+                }
+                // This closes the x type of quests
+                _newQuestsDutchData = _newQuestsDutchData.Substring(0, _newQuestsDutchData.Length - 1);
+
+                _newQuestsDutchData += "]},";
+            }
+        }
+        _newQuestsDutchData = _newQuestsDutchData.Substring(0, _newQuestsDutchData.Length - 1);
+        // This closes the wrapper of the json file made from the beginning.
+        _newQuestsDutchData += "]}";
+        File.WriteAllText(_questsDutchJsonFilePath, _newQuestsDutchData);
 
         //Debug.Log("Refreshed all quests json data!");
     }

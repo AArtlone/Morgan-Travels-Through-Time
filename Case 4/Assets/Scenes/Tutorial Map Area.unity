@@ -7674,6 +7674,16 @@ PrefabInstance:
       propertyPath: TimeToComplete
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: QuestForObjective
+      value: Trenirovka
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: ObjectiveToComplete
+      value: Dovurshi purviq puzel
+      objectReference: {fileID: 0}
     - target: {fileID: 6332718786678768949, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -17097,6 +17107,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 829759611}
+          m_MethodName: DisplayQuestDetails
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
@@ -17926,6 +17947,16 @@ PrefabInstance:
         type: 3}
       propertyPath: PuzzleTimeInSeconds
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: QuestForObjective
+      value: Trenirovka
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: ObjectiveToComplete
+      value: Dovurshi puzela za drehi
       objectReference: {fileID: 0}
     - target: {fileID: 6267611897775384445, guid: 786dd7175382ca94f854a58e26b0577c,
         type: 3}
@@ -19571,6 +19602,26 @@ PrefabInstance:
       propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].QuestOfDialogue
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].QuestOfDialogue
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].ObjectiveToComplete
+      value: Find the main map
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].QuestOfDialogue
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
+        type: 3}
+      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectiveToComplete
+      value: Get the schematics
+      objectReference: {fileID: 0}
     - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20396,6 +20447,17 @@ MonoBehaviour:
         - m_Target: {fileID: 1022711369}
           m_MethodName: CheckForUIElements
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 829759611}
+          m_MethodName: DisplayQuestDetails
+          m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

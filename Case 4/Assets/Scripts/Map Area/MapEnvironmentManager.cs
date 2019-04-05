@@ -82,6 +82,20 @@ public class MapEnvironmentManager : MonoBehaviour
                     }
                 }
             }
+
+            foreach (Quest playerQuest in Character.Instance.AllQuestsDutch)
+            {
+                foreach (Objective playerObjective in playerQuest.Objectives)
+                {
+                    if (playerObjective.Name == objective.Name)
+                    {
+                        if (playerObjective.CompletedStatus)
+                        {
+                            matchingObjectives++;
+                        }
+                    }
+                }
+            }
         }
 
         // After that we check if the clothing necessary to enter newArea has been
@@ -92,6 +106,13 @@ public class MapEnvironmentManager : MonoBehaviour
         foreach (Clothing clothing in newAreaPartClothing)
         {
             foreach (Clothing playerClothing in Character.Instance.Wearables)
+            {
+                if (playerClothing.Name == clothing.Name && playerClothing.Selected)
+                {
+                    matchingClothing++;
+                }
+            }
+            foreach (Clothing playerClothing in Character.Instance.WearablesDutch)
             {
                 if (playerClothing.Name == clothing.Name && playerClothing.Selected)
                 {

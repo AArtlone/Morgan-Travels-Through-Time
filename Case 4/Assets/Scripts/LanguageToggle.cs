@@ -13,6 +13,8 @@ public class LanguageToggle : MonoBehaviour
         {
             _settingsManager.LanguageIcons.Add(GetComponent<Image>());
         }
+
+        SettingsManager.Instance.UpdateHiglightedLanguageIcons();
     }
 
     public void ChangeLanguage(string LanguageToToggle)

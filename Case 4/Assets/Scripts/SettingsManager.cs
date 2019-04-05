@@ -58,6 +58,11 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        UpdateHiglightedLanguageIcons();
+    }
+
     /// <summary>
     /// Loads the file from the data storage of the device instead of the game
     /// resources.
@@ -119,5 +124,44 @@ public class SettingsManager : MonoBehaviour
     {
         string newSettingsData = JsonUtility.ToJson(this);
         File.WriteAllText(_pathToSettingsJson, ExtractCurrentSettings());
+    }
+
+    public void UpdateHiglightedLanguageIcons()
+    {
+        switch (Language)
+        {
+            case "English":
+                foreach (Image languageIcon in LanguageIcons)
+                {
+                    if (languageIcon != null)
+                    {
+                        if (languageIcon.name == "English")
+                        {
+                            languageIcon.color = new Color(255, 255, 255, 1f);
+                        }
+                        else
+                        {
+                            languageIcon.color = new Color(255, 255, 255, 0.5f);
+                        }
+                    }
+                }
+                break;
+            case "Dutch":
+                foreach (Image languageIcon in LanguageIcons)
+                {
+                    if (languageIcon != null)
+                    {
+                        if (languageIcon.name == "Dutch")
+                        {
+                            languageIcon.color = new Color(255, 255, 255, 1f);
+                        }
+                        else
+                        {
+                            languageIcon.color = new Color(255, 255, 255, 0.5f);
+                        }
+                    }
+                }
+                break;
+        }
     }
 }
