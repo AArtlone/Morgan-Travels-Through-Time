@@ -18,4 +18,5 @@ public class Dialogue
     public Sprite DialogueBoxBackground;
     public List<DialogueBranch> DialogueBranches;
     public List<Objective> ObjectivesToMeet;
+    public List<string> RequiredItems;
 }

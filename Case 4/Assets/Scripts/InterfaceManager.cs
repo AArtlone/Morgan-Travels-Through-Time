@@ -217,7 +217,7 @@ public class InterfaceManager : MonoBehaviour
             //Character.Instance.AllQuests.Clear();
             foreach (Quest loadedQuest in questsToLoad)
             {
-                if (loadedQuest.ProgressStatus == "Ongoing" || loadedQuest.ProgressStatus == "Nedovurshen")
+                if (loadedQuest.ProgressStatus == "Ongoing" || loadedQuest.ProgressStatus == "Nog niet gedaan")
                 {
                     GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
                     newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
@@ -232,7 +232,7 @@ public class InterfaceManager : MonoBehaviour
 
             foreach (Quest loadedQuest in questsToLoad)
             {
-                if (loadedQuest.ProgressStatus == "Completed" || loadedQuest.ProgressStatus == "Zavurshen")
+                if (loadedQuest.ProgressStatus == "Completed" || loadedQuest.ProgressStatus == "Gedaan")
                 {
                     GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
                     newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
@@ -359,8 +359,8 @@ public class InterfaceManager : MonoBehaviour
                         {
                             _currentlySelectedQuest = loadedQuest;
 
-                            SelectedQuestTitle.text = "Ima: " + loadedQuest.Name;
-                            SelectedQuestDescription.text = "Opisanie: " + loadedQuest.Description;
+                            SelectedQuestTitle.text = "Naam: " + loadedQuest.Name;
+                            SelectedQuestDescription.text = "Omschrijving: " + loadedQuest.Description;
                             SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
 
                             for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
@@ -376,11 +376,11 @@ public class InterfaceManager : MonoBehaviour
 
                                 if (objective.CompletedStatus)
                                 {
-                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gotov: Da";
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gedaan: Ja";
                                 }
                                 else
                                 {
-                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gotov: Ne";
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gedaan: Nee";
                                 }
                             }
                         }

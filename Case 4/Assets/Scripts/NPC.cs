@@ -201,9 +201,9 @@ public class NPC : MonoBehaviour
                     Character.Instance.RefreshJsonData();
                     FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
                 }
-                if (dialogueItem.Name == "Schematics")
+                if (dialogueItem.Name == "Diary")
                 {
-                    Character.Instance.HasSchematics = true;
+                    Character.Instance.HasDiary = true;
                     Character.Instance.RefreshJsonData();
                     FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
                 }
@@ -259,8 +259,27 @@ public class NPC : MonoBehaviour
                 }
             }
 
+            int itemsMatching = 0;
+            foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
+            {
+                Debug.Log("Required: " + itemRequired);
+                string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+                JsonData data = JsonMapper.ToObject(dataToJson);
+
+                for (int j = 0; j < data["Items"].Count; j++)
+                {
+                    Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+                    if (data["Items"][j]["Name"].ToString() == itemRequired)
+                    {
+                        itemsMatching++;
+                        Debug.Log("MATCH");
+                    }
+                }
+            }
+
             //Debug.Log(objectivesCompleted + " | " + (Dialogue[i].ObjectivesToMeet.Count));
-            if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count)
+            if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count &&
+                itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count)
             {
                 dialoguesToPickFrom.Add(DialogueFormats[index].Dialogue[i]);
             }

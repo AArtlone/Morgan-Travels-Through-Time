@@ -510,21 +510,20 @@ public class CharacterCreatorManager : MonoBehaviour
         string nameInput = inputField.GetComponent<InputField>().text;
 
         bool foundMatch = false;
-        for (int i = 0; i < _wordsFilter.Count; i++)
-        {
-            // We look for a match in the current name the player has picked for his character
-            // and if there is one, then an error will later be visualized and wont let him continue
-            // until he corrects his name.
-            Match match = Regex.Match(nameInput, @"(\b" + _wordsFilter[i] + @"|\B" + _wordsFilter[i] + @")",
-                RegexOptions.IgnoreCase);
+        //for (int i = 0; i < _wordsFilter.Count; i++)
+        //{
+        //    // We look for a match in the current name the player has picked for his character
+        //    // and if there is one, then an error will later be visualized and wont let him continue
+        //    // until he corrects his name.
+        //    Match match = Regex.Match(nameInput, @"(\b" + _wordsFilter[i] + @"|\B" + _wordsFilter[i] + @")",
+        //        RegexOptions.IgnoreCase);
 
-            if (match.Success && match.Length > 1)
-            {
-                foundMatch = true;
-                //Debug.Log(nameInput);
-                //Debug.Log(_wordsFilter[i]);
-            }
-        }
+        //    if (match.Success && match.Length > 1)
+        //    {
+        //        foundMatch = true;
+        //        //Debug.Log(nameInput);
+        //        //Debug.Log(_wordsFilter[i]);
+        //    }
 
         if (foundMatch == false && nameInput.Length > 2 && nameInput.Length < 25)
         {

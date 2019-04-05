@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public bool CharacterCreation;
     public bool TutorialCompleted;
     public bool HasMap;
-    public bool HasSchematics;
+    public bool HasDiary;
     public string LastMapArea;
     public string LastScene;
     [Space(10)]
@@ -155,13 +155,13 @@ public class Character : MonoBehaviour
                         HasMap = false;
                     }
 
-                    if (playerJsonData["HasSchematics"].ToString() == "True")
+                    if (playerJsonData["HasDiary"].ToString() == "True")
                     {
-                        HasSchematics = true;
+                        HasDiary = true;
                     }
-                    else if (playerJsonData["HasSchematics"].ToString() == "False")
+                    else if (playerJsonData["HasDiary"].ToString() == "False")
                     {
-                        HasSchematics = false;
+                        HasDiary = false;
                     }
 
                     #region Blueprints
@@ -509,13 +509,13 @@ public class Character : MonoBehaviour
                 HasMap = false;
             }
 
-            if (characterData["HasSchematics"].ToString() == "True")
+            if (characterData["HasDiary"].ToString() == "True")
             {
-                HasSchematics = true;
+                HasDiary = true;
             }
-            else if (characterData["HasSchematics"].ToString() == "False")
+            else if (characterData["HasDiary"].ToString() == "False")
             {
-                HasSchematics = false;
+                HasDiary = false;
             }
 
             #region Blueprints
@@ -837,14 +837,7 @@ public class Character : MonoBehaviour
         foreach (Item item in itemsForPanel)
         {
             GameObject newItem;
-            if (GameObject.FindGameObjectWithTag("Items Panel") == null)
-            {
-                newItem = Instantiate(ItemPrefab, InterfaceManager.Instance.ItemsLoader.transform);
-            }
-            else
-            {
-                newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
-            }
+            newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
             Item newItemScript = newItem.GetComponent<Item>();
 
             // We use predefined images from the resources folder to load each
@@ -1071,7 +1064,7 @@ public class Character : MonoBehaviour
                                     aQuest.ProgressStatus = "Completed";
                                     aQuest.CompletionStatus = true;
                                     completionStatusOfQuest = true;
-                                    if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
+                                    if (aQuest.Name == "1672???" || aQuest.Name == "1672???")
                                     {
                                         //Debug.Log(aQuest.Name);
                                         TutorialCompleted = true;
@@ -1106,7 +1099,7 @@ public class Character : MonoBehaviour
                 foreach (Quest aQuest in AllQuestsDutch)
                 {
                     //Debug.Log(quest + " | " + aQuest.Name);
-                    if (aQuest.Name == quest && aQuest.ProgressStatus == "Nedovurshen")
+                    if (aQuest.Name == quest && aQuest.ProgressStatus == "Nog niet gedaan")
                     {
                         QuestID = aQuest.ID;
                         foreach (Objective aObjective in aQuest.Objectives)
@@ -1129,10 +1122,10 @@ public class Character : MonoBehaviour
 
                                 if (areAllObjectivesDone)
                                 {
-                                    aQuest.ProgressStatus = "Zavurshen";
+                                    aQuest.ProgressStatus = "Gedaan";
                                     aQuest.CompletionStatus = true;
                                     completionStatusOfQuest = true;
-                                    if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
+                                    if (aQuest.Name == "1672???" || aQuest.Name == "1672???")
                                     {
                                         //Debug.Log(aQuest.Name);
                                         TutorialCompleted = true;
