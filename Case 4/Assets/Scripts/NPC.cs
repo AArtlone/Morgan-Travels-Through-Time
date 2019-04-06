@@ -14,6 +14,9 @@ public class NPC : MonoBehaviour
     // Used for detecting clicks on that object's image (region of space on camera)
     public Image DialogueProgressionTrigger2D;
     public GameObject SpeechBubble;
+    private Vector2 _posToMoveTo;
+    private bool _canWalkToNextPosition;
+    private bool _canInteractWithPlayer = true;
     [SerializeField]
     public List<DialogueLanguages> DialogueFormats;
 
@@ -53,6 +56,39 @@ public class NPC : MonoBehaviour
         _imageComponent = GetComponent<Image>();
 
         CheckForNotCompletedObjective();
+    }
+
+    private void Update()
+    {
+        foreach(Quest quest in Character.Instance.AllQuests)
+        {
+            if(quest.Name == "1672???")
+            {
+                foreach(Objective objective in quest.Objectives)
+                {
+                    if(objective.ID == 0)
+                    {
+                        if(objective.CompletedStatus == true)
+                        {
+                            _canWalkToNextPosition = true;
+                        }
+                    }
+                }
+            }
+        }
+        if(_canWalkToNextPosition && !_isDialogueOngoing)
+        {
+            _canInteractWithPlayer = false;
+            SpeechBubble.SetActive(false);
+            _posToMoveTo = new Vector2(31f, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, 15f * .5f * Time.deltaTime);
+            if(Vector2.Distance(transform.position, _posToMoveTo) < 1f)
+            {
+                Debug.Log("bla");
+                _canInteractWithPlayer = true;
+                SpeechBubble.SetActive(true);
+            }
+        }
     }
 
     public void NextDialogue()
@@ -284,193 +320,199 @@ public class NPC : MonoBehaviour
 
     public void ContinueDialogue()
     {
-        int index = 0;
-        for (int i = 0; i < DialogueFormats.Count; i++)
+        if (_canInteractWithPlayer)
         {
-            if (DialogueFormats[i].Language == SettingsManager.Instance.Language)
+            int index = 0;
+            for (int i = 0; i < DialogueFormats.Count; i++)
             {
-                index = i;
-                break;
-            }
-        }
-
-        //Debug.Log(DialogueFormats[index].Language);
-
-        dialoguesToPickFrom.Clear();
-        for (int i = 0; i < DialogueFormats[index].Dialogue.Count; i++)
-        {
-            int objectivesCompleted = 0;
-            foreach (Objective objective in DialogueFormats[index].Dialogue[i].ObjectivesToMeet)
-            {
-                foreach (Quest quest in Character.Instance.AllQuests)
+                if (DialogueFormats[i].Language == SettingsManager.Instance.Language)
                 {
-                    foreach (Objective characterObjective in quest.Objectives)
+                    index = i;
+                    break;
+                }
+            }
+
+            //Debug.Log(DialogueFormats[index].Language);
+
+            dialoguesToPickFrom.Clear();
+            for (int i = 0; i < DialogueFormats[index].Dialogue.Count; i++)
+            {
+                int objectivesCompleted = 0;
+                foreach (Objective objective in DialogueFormats[index].Dialogue[i].ObjectivesToMeet)
+                {
+                    foreach (Quest quest in Character.Instance.AllQuests)
                     {
-                        if (objective.Name == characterObjective.Name &&
-                            characterObjective.CompletedStatus == true)
+                        foreach (Objective characterObjective in quest.Objectives)
                         {
-                            objectivesCompleted++;
-                            //Debug.Log(objective.Name);
+                            if (objective.Name == characterObjective.Name &&
+                                characterObjective.CompletedStatus == true)
+                            {
+                                objectivesCompleted++;
+                                //Debug.Log(objective.Name);
+                            }
+                        }
+                    }
+                    foreach (Quest quest in Character.Instance.AllQuestsDutch)
+                    {
+                        foreach (Objective characterObjective in quest.Objectives)
+                        {
+                            if (objective.Name == characterObjective.Name &&
+                                characterObjective.CompletedStatus == true)
+                            {
+                                objectivesCompleted++;
+                                //Debug.Log(objective.Name);
+                            }
                         }
                     }
                 }
-                foreach (Quest quest in Character.Instance.AllQuestsDutch)
+
+                int itemsMatching = 0;
+                foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
                 {
-                    foreach (Objective characterObjective in quest.Objectives)
+                    //Debug.Log("Required: " + itemRequired);
+                    string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+                    JsonData data = JsonMapper.ToObject(dataToJson);
+
+                    for (int j = 0; j < data["Items"].Count; j++)
                     {
-                        if (objective.Name == characterObjective.Name &&
-                            characterObjective.CompletedStatus == true)
+                        //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+                        if (data["Items"][j]["Name"].ToString() == itemRequired)
                         {
-                            objectivesCompleted++;
-                            //Debug.Log(objective.Name);
+                            itemsMatching++;
+                            //Debug.Log("MATCH");
+                        }
+                    }
+
+                    string itemsDutchData = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
+                    data = JsonMapper.ToObject(itemsDutchData);
+
+                    for (int k = 0; k < data["Items"].Count; k++)
+                    {
+                        if (data["Items"][k]["Name"].ToString() == itemRequired)
+                        {
+                            itemsMatching++;
                         }
                     }
                 }
-            }
 
-            int itemsMatching = 0;
-            foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
-            {
-                //Debug.Log("Required: " + itemRequired);
-                string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
-                JsonData data = JsonMapper.ToObject(dataToJson);
-
-                for (int j = 0; j < data["Items"].Count; j++)
+                //Debug.Log(objectivesCompleted + " | " + (Dialogue[i].ObjectivesToMeet.Count));
+                if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count &&
+                    itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count)
                 {
-                    //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
-                    if (data["Items"][j]["Name"].ToString() == itemRequired)
-                    {
-                        itemsMatching++;
-                        //Debug.Log("MATCH");
-                    }
-                }
-
-                string itemsDutchData = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
-                data = JsonMapper.ToObject(itemsDutchData);
-
-                for (int k = 0; k < data["Items"].Count; k++)
-                {
-                    if (data["Items"][k]["Name"].ToString() == itemRequired)
-                    {
-                        itemsMatching++;
-                    }
+                    dialoguesToPickFrom.Add(DialogueFormats[index].Dialogue[i]);
                 }
             }
 
-            //Debug.Log(objectivesCompleted + " | " + (Dialogue[i].ObjectivesToMeet.Count));
-            if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count &&
-                itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count)
+            FinalSequence.Clear();
+            int highestPriorityOutOfDialogues = 0;
+            foreach (Dialogue dialogue in dialoguesToPickFrom)
             {
-                dialoguesToPickFrom.Add(DialogueFormats[index].Dialogue[i]);
-            }
-        }
-
-        FinalSequence.Clear();
-        int highestPriorityOutOfDialogues = 0;
-        foreach (Dialogue dialogue in dialoguesToPickFrom)
-        {
-            if (dialogue.PriorityIndex > highestPriorityOutOfDialogues)
-            {
-                highestPriorityOutOfDialogues = dialogue.PriorityIndex;
-            }
-        }
-
-        foreach (Dialogue dialogue in dialoguesToPickFrom)
-        {
-            if (dialogue.PriorityIndex == highestPriorityOutOfDialogues)
-            {
-                FinalSequence.Add(dialogue);
-            }
-        }
-
-        foreach (Dialogue dia in FinalSequence)
-        {
-            //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
-        }
-
-        // PRIORITY
-
-        // When the player taps on the npc or anywhere on the dialogue box, it
-        // will progress the dialogue further.
-        if (_isDialogueOngoing)
-        {
-            if (CurrentDialogueIndex < FinalSequence.Count - 1)
-            {
-                foreach (DialogueBranch branch in FinalSequence[CurrentDialogueIndex].DialogueBranches)
+                if (dialogue.PriorityIndex > highestPriorityOutOfDialogues)
                 {
-                    if (branch.ItemsRequired.Count == branch.ItemsDropped.Count)
+                    highestPriorityOutOfDialogues = dialogue.PriorityIndex;
+                }
+            }
+
+            foreach (Dialogue dialogue in dialoguesToPickFrom)
+            {
+                if (dialogue.PriorityIndex == highestPriorityOutOfDialogues)
+                {
+                    FinalSequence.Add(dialogue);
+                }
+            }
+
+            foreach (Dialogue dia in FinalSequence)
+            {
+                //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
+            }
+
+            // PRIORITY
+
+            // When the player taps on the npc or anywhere on the dialogue box, it
+            // will progress the dialogue further.
+            if (_isDialogueOngoing)
+            {
+                if (CurrentDialogueIndex < FinalSequence.Count - 1)
+                {
+                    foreach (DialogueBranch branch in FinalSequence[CurrentDialogueIndex].DialogueBranches)
                     {
-                        NextDialogue();
-                        return;
-                    } else
-                    {
-                        // If we reach past the dialogue, then we reset the
-                        // current dialogue index counter and we hide the dialogue
-                        // until it is once again triggered to show up.
-                        CurrentDialogueIndex = -1;
-                        DialogueManager.Instance.ToggleDialogue(false);
-                        // We only update the player's inventory AFTER he has exited
-                        // the dialogue, otherwise if he had used any items in it and
-                        // quit or restarted the game, he would lose them forever.
-                        //Character.Instance.RefreshItems();
-                        _dialogueProgressionTrigger.raycastTarget = false;
-                        if (_imageComponent)
+                        if (branch.ItemsRequired.Count == branch.ItemsDropped.Count)
                         {
-                            _imageComponent.raycastTarget = true;
+                            NextDialogue();
+                            return;
                         }
+                        else
+                        {
+                            // If we reach past the dialogue, then we reset the
+                            // current dialogue index counter and we hide the dialogue
+                            // until it is once again triggered to show up.
+                            CurrentDialogueIndex = -1;
+                            DialogueManager.Instance.ToggleDialogue(false);
+                            // We only update the player's inventory AFTER he has exited
+                            // the dialogue, otherwise if he had used any items in it and
+                            // quit or restarted the game, he would lose them forever.
+                            //Character.Instance.RefreshItems();
+                            _dialogueProgressionTrigger.raycastTarget = false;
+                            if (_imageComponent)
+                            {
+                                _imageComponent.raycastTarget = true;
+                            }
 
-                        _isDialogueOngoing = false;
-                        DialogueManager.Instance.CurrentNPCDialogue = null;
-                        Character.Instance.InitiateInteraction();
-                        _swipeController.enabled = true;
-                        return;
+                            _isDialogueOngoing = false;
+                            DialogueManager.Instance.CurrentNPCDialogue = null;
+                            Character.Instance.InitiateInteraction();
+                            _swipeController.enabled = true;
+                            return;
+                        }
                     }
                 }
-            } else
+                else
+                {
+                    CurrentDialogueIndex = -1;
+                    DialogueManager.Instance.ToggleDialogue(false);
+                    //Character.Instance.RefreshItems();
+                    _dialogueProgressionTrigger.raycastTarget = false;
+                    if (_imageComponent)
+                    {
+                        _imageComponent.raycastTarget = true;
+                    }
+
+                    _isDialogueOngoing = false;
+                    Character.Instance.InitiateInteraction();
+                    _swipeController.enabled = true;
+                    return;
+                }
+            }
+            else
+            // This is meant to initialize the dialogue once the player 
+            // has tapped on top of an npc icon.
             {
-                CurrentDialogueIndex = -1;
-                DialogueManager.Instance.ToggleDialogue(false);
-                //Character.Instance.RefreshItems();
-                _dialogueProgressionTrigger.raycastTarget = false;
+
                 if (_imageComponent)
                 {
-                    _imageComponent.raycastTarget = true;
+                    _imageComponent.raycastTarget = false;
                 }
+                // Once a dialogue is initiated, we display the dialogue template
+                // and give it the starting dialogue object's data. We also make sure
+                // to set _isDialogueOngoing to true because the player is still able
+                // to increment the current dialogue index number without having the
+                // dialogue visualized in the first place by clicking space.
+                DialogueManager.Instance.ToggleDialogue(true);
+                NextDialogue();
 
-                _isDialogueOngoing = false;
-                Character.Instance.InitiateInteraction();
-                _swipeController.enabled = true;
-                return;
+                // We also want to store which NPC has been responsible for initiating
+                // the dialogue, so that we can later access its branching data for
+                // storing dragged and dropped items
+                DialogueManager.Instance.CurrentNPCDialogue = this;
+
+                // The npc child is used as a field that encapsulates the screen once
+                // the dialogue is initiated, because we want to player to progress
+                // further by clicking anywhere on the screen, not just on the NPC icon.
+                // Once the dialogue is finished we disable this child's interaction.
+                //_dialogueProgressionTrigger.raycastTarget = true;
+
+                _isDialogueOngoing = true;
             }
-        } else 
-        // This is meant to initialize the dialogue once the player 
-        // has tapped on top of an npc icon.
-        {
-
-            if (_imageComponent)
-            {
-                _imageComponent.raycastTarget = false;
-            }
-            // Once a dialogue is initiated, we display the dialogue template
-            // and give it the starting dialogue object's data. We also make sure
-            // to set _isDialogueOngoing to true because the player is still able
-            // to increment the current dialogue index number without having the
-            // dialogue visualized in the first place by clicking space.
-            DialogueManager.Instance.ToggleDialogue(true);
-            NextDialogue();
-
-            // We also want to store which NPC has been responsible for initiating
-            // the dialogue, so that we can later access its branching data for
-            // storing dragged and dropped items
-            DialogueManager.Instance.CurrentNPCDialogue = this;
-
-            // The npc child is used as a field that encapsulates the screen once
-            // the dialogue is initiated, because we want to player to progress
-            // further by clicking anywhere on the screen, not just on the NPC icon.
-            // Once the dialogue is finished we disable this child's interaction.
-            //_dialogueProgressionTrigger.raycastTarget = true;
-
-            _isDialogueOngoing = true;
         }
     }
 

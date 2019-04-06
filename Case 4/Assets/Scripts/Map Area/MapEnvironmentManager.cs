@@ -41,17 +41,17 @@ public class MapEnvironmentManager : MonoBehaviour
         }
 
         // Checks for tutorial completeion status and enables/disables corresponding npcs
-        foreach(Quest quest in Character.Instance.AllQuests)
-        {
-            foreach(Objective objective in quest.Objectives)
-            {
-                if(objective.Name == "Talk to Jacob" && objective.CompletedStatus == true)
-                {
-                    JacobNearHouse.SetActive(false);
-                    JacobNearGate.SetActive(true);
-                }
-            }
-        }
+        //foreach(Quest quest in Character.Instance.AllQuests)
+        //{
+        //    foreach(Objective objective in quest.Objectives)
+        //    {
+        //        if(objective.Name == "Talk to Jacob" && objective.CompletedStatus == true)
+        //        {
+        //            JacobNearHouse.SetActive(false);
+        //            JacobNearGate.SetActive(true);
+        //        }
+        //    }
+        //}
     }
 
     /// <summary>

@@ -68,6 +68,11 @@ public class Puzzle : MonoBehaviour
         }
     }
 
+    public void InitiateEscapePuzzle()
+    {
+        SceneManagement.Instance.LoadScene("Escape Game");
+    }
+
     public void InitiateHiddenObjectsPuzzle()
     {
         if (transform.GetComponent<Image>() && transform.GetComponent<Image>().raycastTarget == true)

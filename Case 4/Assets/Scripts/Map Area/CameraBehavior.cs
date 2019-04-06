@@ -87,7 +87,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
+        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
 
         if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {
