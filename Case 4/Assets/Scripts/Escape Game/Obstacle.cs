@@ -9,6 +9,12 @@ public class Obstacle : MonoBehaviour
     private bool _holdingDownObstacle;
 
     public GameObject Bridge;
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -34,10 +40,10 @@ public class Obstacle : MonoBehaviour
                 if (_currentTimeHoldingDown < _timeHoldingDown)
                 {
                     _currentTimeHoldingDown += Time.deltaTime;
-                    
+                    _animator.enabled = true;
+
                     if (Bridge != null)
                     {
-                        Debug.Log("left");
                         Vector3 newBridgePosition = Bridge.transform.position;
                         newBridgePosition.x -= Time.deltaTime * 5;
                         Bridge.transform.position = newBridgePosition;
@@ -59,18 +65,19 @@ public class Obstacle : MonoBehaviour
         if (_currentTimeHoldingDown > 0 && _holdingDownObstacle == false)
         {
             //Debug.Log("Falling...");
-            Debug.Log("right");
             Vector3 newBridgePosition = Bridge.transform.position;
             newBridgePosition.x += Time.deltaTime * 5;
             Bridge.transform.position = newBridgePosition;
 
             _currentTimeHoldingDown -= Time.deltaTime;
             CheckpointLink.Passable = true;
+            _animator.enabled = true;
         }
 
         if (_currentTimeHoldingDown <= 0.5f)
         {
             CheckpointLink.Passable = false;
+            _animator.enabled = false;
         }
     }
 

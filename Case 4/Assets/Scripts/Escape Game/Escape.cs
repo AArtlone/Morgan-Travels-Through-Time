@@ -18,6 +18,8 @@ public class Escape : MonoBehaviour
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public GameObject EndGamePopUp;
+    public List<GameObject> Stars;
+    public int RefugeesSavedInThisSession;
 
     private string _escapeGamesJsonFile;
 
@@ -97,12 +99,28 @@ public class Escape : MonoBehaviour
         newGameData += "]}";
         File.WriteAllText(_escapeGamesJsonFile, newGameData);
 
-
-        Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
+        if (QuestForObjective != string.Empty)
+        {
+            Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
+        }
     }
 
     public void EndGame()
     {
         EndGamePopUp.SetActive(true);
+
+        StartCoroutine(ShowStars());
+    }
+
+    private IEnumerator ShowStars()
+    {
+        if (RefugeesSavedInThisSession > 2)
+        {
+            for (int i = 0; i < Stars.Count; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                Stars[i].SetActive(true);
+            }
+        }
     }
 }

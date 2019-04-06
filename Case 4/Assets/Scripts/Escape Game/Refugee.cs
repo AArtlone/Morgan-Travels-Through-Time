@@ -47,7 +47,35 @@ public class Refugee : MonoBehaviour
             {
                 if(_targetCheckpoint.tag == "Final Checkpoint")
                 {
+                    Destroy(IconOfRefugee);
+                    _gameInterface.RefugeesSaved++;
+                    _gameInterface.RefugeesSavedInThisSession++;
+                    _gameInterface.TotalPoints += RewardInPoints;
                     _gameInterface.CurrentRefugees.Remove(this);
+
+                    for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
+                    {
+                        _gameInterface.CurrentRefugees[i].RefugeeIndex = i;
+                    }
+
+                    if (_gameInterface.CurrentRefugees.Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
+                    {
+                        _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
+
+                        _gameInterface.CurrentWave++;
+                        _gameInterface.StartNextWave();
+                    }
+
+                    _gameInterface.SaveEscapeGamesData();
+
+                    foreach (Checkpoint checkpoint in _gameInterface.Checkpoints)
+                    {
+                        checkpoint.RemoveQueueElement(RefugeeIndex);
+                    }
+                    if (_gameInterface.CurrentWave == _gameInterface.RefugeeWaves.Count)
+                    {
+                        _gameInterface.EndGame();
+                    }
                     Destroy(gameObject);
                 }
                 _animator.SetBool("IsWalking", false);
@@ -66,37 +94,6 @@ public class Refugee : MonoBehaviour
     {
         if (collision.transform.tag == "Final Checkpoint")
         {
-            Destroy(IconOfRefugee);
-            _gameInterface.RefugeesSaved++;
-            _gameInterface.TotalPoints += RewardInPoints;
-            _gameInterface.CurrentRefugees.Remove(this);
-
-            for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
-            {
-                _gameInterface.CurrentRefugees[i].RefugeeIndex = i;
-            }
-
-            //Debug.Log(_gameInterface.CurrentWave + " | " + (_gameInterface.RefugeeWaves.Count - 1));
-
-            if (_gameInterface.CurrentRefugees.Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
-            {
-                _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
-
-                _gameInterface.CurrentWave++;
-                _gameInterface.StartNextWave();
-            }
-
-            _gameInterface.SaveEscapeGamesData();
-
-            Destroy(gameObject);
-            foreach(Checkpoint checkpoint in _gameInterface.Checkpoints)
-            {
-                checkpoint.RemoveQueueElement(RefugeeIndex);
-            }
-            if(_gameInterface.CurrentWave == _gameInterface.RefugeeWaves.Count)
-            {
-                _gameInterface.EndGame();
-            }
         }
         //if (collision.gameObject.tag == "Checkpoint")
         //{
