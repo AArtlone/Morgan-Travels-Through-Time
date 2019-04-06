@@ -127,9 +127,50 @@ public class NPC : MonoBehaviour
                             }
                         }
                     }
+                    foreach (Quest quest in Character.Instance.AllQuestsDutch)
+                    {
+                        foreach (Objective objOfCharacter in quest.Objectives)
+                        {
+                            if (objOfCharacter.Name == objective.Name &&
+                                objOfCharacter.CompletedStatus == true)
+                            {
+                                objectivesThatMatch++;
+                            }
+                        }
+                    }
                 }
 
-                if ((elementsThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired.Count))
+                int itemsMatching = 0;
+                foreach (string itemRequired in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired)
+                {
+                    //Debug.Log("Required: " + itemRequired);
+                    string itemsEngData = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+                    JsonData data = JsonMapper.ToObject(itemsEngData);
+
+                    for (int l = 0; l < data["Items"].Count; l++)
+                    {
+                        //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+                        if (data["Items"][l]["Name"].ToString() == itemRequired)
+                        {
+                            itemsMatching++;
+                            //Debug.Log("MATCH");
+                        }
+                    }
+                    
+                    string itemsDutchData = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
+                    data = JsonMapper.ToObject(itemsDutchData);
+
+                    for (int k = 0; k < data["Items"].Count; k++)
+                    {
+                        if (data["Items"][k]["Name"].ToString() == itemRequired)
+                        {
+                            itemsMatching++;
+                        }
+                    }
+                }
+
+                if ((elementsThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired.Count) &&
+                itemsMatching == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired.Count)
                 {
                     _availableBranches.Add(FinalSequence[CurrentDialogueIndex].DialogueBranches[j]);
 
@@ -157,6 +198,22 @@ public class NPC : MonoBehaviour
 
         // And here we display the text of the final selected branch. 
         DialogueManager.Instance.ChangeDialogueText(FinalDialogueBranch.DialogueText);
+
+        // We also activate all the game objects in this branch once it is visualized.
+        foreach (GameObject entity in FinalDialogueBranch.EntitiesToActivate)
+        {
+            if (entity != null)
+            {
+                entity.SetActive(true);
+            }
+        }
+        foreach (GameObject entity in FinalDialogueBranch.EntitiesToDeactive)
+        {
+            if (entity != null)
+            {
+                entity.SetActive(false);
+            }
+        }
 
         // We clear the options menu before we populate it with data, because if
         // there is no data, we still want to clear it from its previous dialogue
@@ -194,7 +251,7 @@ public class NPC : MonoBehaviour
             {
                 Character.Instance.AddItem(dialogueItem);
                 areItemsEarnedAlready = true;
-                //Debug.Log("Item " + dialogueItem.Name + " received!");
+                Debug.Log("Item " + dialogueItem.Name + " received!");
                 if(dialogueItem.Name == "Map")
                 {
                     Character.Instance.HasMap = true;
@@ -257,22 +314,45 @@ public class NPC : MonoBehaviour
                         }
                     }
                 }
+                foreach (Quest quest in Character.Instance.AllQuestsDutch)
+                {
+                    foreach (Objective characterObjective in quest.Objectives)
+                    {
+                        if (objective.Name == characterObjective.Name &&
+                            characterObjective.CompletedStatus == true)
+                        {
+                            objectivesCompleted++;
+                            //Debug.Log(objective.Name);
+                        }
+                    }
+                }
             }
 
             int itemsMatching = 0;
             foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
             {
-                Debug.Log("Required: " + itemRequired);
+                //Debug.Log("Required: " + itemRequired);
                 string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
                 JsonData data = JsonMapper.ToObject(dataToJson);
 
                 for (int j = 0; j < data["Items"].Count; j++)
                 {
-                    Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+                    //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
                     if (data["Items"][j]["Name"].ToString() == itemRequired)
                     {
                         itemsMatching++;
-                        Debug.Log("MATCH");
+                        //Debug.Log("MATCH");
+                    }
+                }
+
+                string itemsDutchData = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
+                data = JsonMapper.ToObject(itemsDutchData);
+
+                for (int k = 0; k < data["Items"].Count; k++)
+                {
+                    if (data["Items"][k]["Name"].ToString() == itemRequired)
+                    {
+                        itemsMatching++;
                     }
                 }
             }
@@ -470,10 +550,10 @@ public class NPC : MonoBehaviour
 
         if (branchesForFiltering.Count > 0)
         {
-            SpeechBubble.SetActive(true);
+            SpeechBubble.SetActive(false);
         } else
         {
-            SpeechBubble.SetActive(false);
+            SpeechBubble.SetActive(true);
         }
     }
 }

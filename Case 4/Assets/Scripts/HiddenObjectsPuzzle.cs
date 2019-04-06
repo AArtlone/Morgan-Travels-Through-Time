@@ -5,6 +5,7 @@ using System;
 using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     // for deciding whether or not a puzzle is complete succcessfully.
     public List<string> ItemsRequired = new List<string>();
     public List<string> ItemsFound = new List<string>();
+    public List<GameObject> EntitiesToActivate = new List<GameObject>();
     [Space(15)]
     [Tooltip("Item reward's name")]
     [Header("Item Earned once the puzzle is done is defined here!")]
@@ -35,7 +37,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public string ItemRewardAssetsImageName;
     [Space(15)]
     public string QuestForObjective;
-    public string ObjectiveToComplete;
+    public int ObjectiveToCompleteID;
     [NonSerialized]
     public int Counter;
     private int _missclicks;
@@ -148,7 +150,14 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             }
         }
 
-        Character.Instance.CompleteObjectiveInQuest(ObjectiveToComplete, QuestForObjective);
+        Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
+
+        foreach (GameObject objToActivate in EntitiesToActivate)
+        {
+            objToActivate.SetActive(true);
+        }
+        Character.Instance.HasDiary = true;
+        Character.Instance.RefreshJsonData();
 
         Stars = 3;
 
@@ -190,6 +199,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Character.Instance.InitiateInteraction();
 
         puzzleNPC.FinishPuzzleIconToggle();
+
+        SceneManager.LoadScene("Tutorial Map Area");
+
         gameObject.SetActive(false);
     }
 

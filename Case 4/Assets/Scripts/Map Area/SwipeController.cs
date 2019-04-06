@@ -9,6 +9,7 @@ public class SwipeController : MonoBehaviour
     private Vector3 _endTapPosition;
     private Vector3 _directionOfSwipeNormalized;
     private string _swipeDirection;
+    private float _swipeLength;
     #endregion
 
     #region Area-swiping mechanic
@@ -81,6 +82,9 @@ public class SwipeController : MonoBehaviour
                     _endTapPosition = touch.position;
                     _directionOfSwipeNormalized = (_endTapPosition - _startTapPosition).normalized;
 
+                    _swipeLength = _endTapPosition.x - _startTapPosition.x;
+                    //Debug.Log(_swipeLength);
+
                     CheckDirection();
                 }
             }
@@ -92,11 +96,19 @@ public class SwipeController : MonoBehaviour
         if (_directionOfSwipeNormalized.x > 0)
         {
             _swipeDirection = "Right";
-        } else if (_directionOfSwipeNormalized.x < 0)
+
+            if (_swipeLength >= 200)
+            {
+                ChangeArea();
+            }
+        }
+        else if (_directionOfSwipeNormalized.x < 0)
         {
             _swipeDirection = "Left";
+            if (_swipeLength <= -200)
+            {
+                ChangeArea();
+            }
         }
-
-        ChangeArea();
     }
 }

@@ -15,7 +15,7 @@ public class GuessPuzzle : MonoBehaviour
     public bool Customizable;
     public int PuzzleTimeInSeconds;
     public string QuestForObjective;
-    public string ObjectiveToComplete;
+    public int ObjectiveToCompleteID;
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
     public List<GuessClothing> HeadList = new List<GuessClothing>();
     private int _currentHeadIndex = 0;
@@ -354,7 +354,7 @@ public class GuessPuzzle : MonoBehaviour
         newScoreData += "]}";
         File.WriteAllText(_guessingPuzzlesPath, newScoreData);
         
-        Character.Instance.CompleteObjectiveInQuest(ObjectiveToComplete, QuestForObjective);
+        Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
 
         CanvasElementOfPuzzle.LoadScore();
     }

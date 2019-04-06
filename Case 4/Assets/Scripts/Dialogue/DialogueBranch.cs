@@ -44,7 +44,14 @@ public class DialogueBranch
     [Tooltip("At the end of this dialogue, the player is going to earn the following items")]
     public Item[] ItemsEarned;
 
+    [Tooltip("You can list a number of objectives that the branch will have to be filtered for before it is selected as the one to visualize.")]
     public List<Objective> ObjectivesRequired;
+    [Tooltip("So far, you may complete one objective and potentially the quest of all of its objectives are completed before that one.")]
     public string QuestOfDialogue;
-    public string ObjectiveToComplete;
+    public int ObjectiveToComplete;
+
+    [Tooltip("After the dialogue is reached, it will activate the game objects you have placed in this list, so as to progress the game.")]
+    public List<GameObject> EntitiesToActivate;
+    [Tooltip("After the dialogue is reached, it will DEactivate the game objects you have placed in this list, so as to progress the game.")]
+    public List<GameObject> EntitiesToDeactive;
 }

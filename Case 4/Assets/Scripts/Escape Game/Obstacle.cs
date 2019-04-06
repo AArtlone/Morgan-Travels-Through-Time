@@ -8,8 +8,19 @@ public class Obstacle : MonoBehaviour
     private float _currentTimeHoldingDown = 0;
     private bool _holdingDownObstacle;
 
+    public GameObject Bridge;
+
     private void Update()
     {
+        //if(Input.GetKeyUp(KeyCode.A))
+        //{
+        //    CheckpointLink.Passable = true;
+        //}
+        //if (Input.GetKeyUp(KeyCode.S))
+        //{
+        //    DCheckpointLink.Passable = false;
+        //}
+
         //Debug.Log(_currentTimeHoldingDown);
         if (Input.touchCount > 0)
         {
@@ -23,6 +34,14 @@ public class Obstacle : MonoBehaviour
                 if (_currentTimeHoldingDown < _timeHoldingDown)
                 {
                     _currentTimeHoldingDown += Time.deltaTime;
+                    
+                    if (Bridge != null)
+                    {
+                        Debug.Log("left");
+                        Vector3 newBridgePosition = Bridge.transform.position;
+                        newBridgePosition.x -= Time.deltaTime * 5;
+                        Bridge.transform.position = newBridgePosition;
+                    }
                 } 
 
                 //Debug.Log("Holding...");
@@ -34,13 +53,24 @@ public class Obstacle : MonoBehaviour
         } else
         {
             _holdingDownObstacle = false;
-            CheckpointLink.Passable = false;
+            //CheckpointLink.Passable = false;
         }
 
         if (_currentTimeHoldingDown > 0 && _holdingDownObstacle == false)
         {
             //Debug.Log("Falling...");
+            Debug.Log("right");
+            Vector3 newBridgePosition = Bridge.transform.position;
+            newBridgePosition.x += Time.deltaTime * 5;
+            Bridge.transform.position = newBridgePosition;
+
             _currentTimeHoldingDown -= Time.deltaTime;
+            CheckpointLink.Passable = true;
+        }
+
+        if (_currentTimeHoldingDown <= 0.5f)
+        {
+            CheckpointLink.Passable = false;
         }
     }
 

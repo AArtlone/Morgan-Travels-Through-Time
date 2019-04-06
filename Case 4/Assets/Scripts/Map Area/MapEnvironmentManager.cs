@@ -7,9 +7,11 @@ public class MapEnvironmentManager : MonoBehaviour
     public GameObject HiddenObjectPuzzleNpc;
     public GameObject ClothingPuzzleNpc;
     public GameObject EscapeGameNpc;
-    private GameObject _dialogueNpc;
+    public GameObject JacobNearHouse;
+    public GameObject JacobNearGate;
     public GameObject CloseButton;
-    private GameObject _playerIcon;
+    public GameObject DiaryButton;
+    private GameObject _playerIcon; 
 
     private CameraBehavior _cameraBehaviour;
     private FadeScreenController _fadeScreenController;
@@ -26,11 +28,29 @@ public class MapEnvironmentManager : MonoBehaviour
         {
             CloseButton.SetActive(true);
             HiddenObjectPuzzleNpc.SetActive(true);
-            ClothingPuzzleNpc.SetActive(true);
+            //DiaryButton.SetActive(true);
+            //ClothingPuzzleNpc.SetActive(true);
+        }
+        if(Character.Instance.HasDiary == true)
+        {
+            DiaryButton.SetActive(true);
         }
         if(Character.Instance.TutorialCompleted == true)
         {
             EscapeGameNpc.SetActive(true);
+        }
+
+        // Checks for tutorial completeion status and enables/disables corresponding npcs
+        foreach(Quest quest in Character.Instance.AllQuests)
+        {
+            foreach(Objective objective in quest.Objectives)
+            {
+                if(objective.Name == "Talk to Jacob" && objective.CompletedStatus == true)
+                {
+                    JacobNearHouse.SetActive(false);
+                    JacobNearGate.SetActive(true);
+                }
+            }
         }
     }
 

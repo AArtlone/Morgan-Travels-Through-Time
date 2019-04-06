@@ -76,6 +76,7 @@ public class Character : MonoBehaviour
 
     // Inventory-related references
     public GameObject ItemPrefab;
+    public CameraBehavior CameraBehavior;
 
     private void Awake()
     {
@@ -836,30 +837,33 @@ public class Character : MonoBehaviour
     {
         foreach (Item item in itemsForPanel)
         {
-            GameObject newItem;
-            newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
-            Item newItemScript = newItem.GetComponent<Item>();
-
-            // We use predefined images from the resources folder to load each
-            // item's sprites from outside the game and assign it to the new item.
-            Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
-
-            switch (SettingsManager.Instance.Language)
+            if (GameObject.FindGameObjectWithTag("Items Panel") != null)
             {
-                case "English":
-                    newItem.GetComponent<Image>().sprite = sprite;
-                    newItemScript.Name = item.Name;
-                    newItemScript.Description = item.Description;
-                    newItemScript.Active = item.Active;
-                    newItemScript.AssetsImageName = item.AssetsImageName;
-                    break;
-                case "Dutch":
-                    newItem.GetComponent<Image>().sprite = sprite;
-                    newItemScript.NameDutch = item.NameDutch;
-                    newItemScript.DescriptionDutch = item.DescriptionDutch;
-                    newItemScript.ActiveDutch = item.ActiveDutch;
-                    newItemScript.AssetsImageName = item.AssetsImageName;
-                    break;
+                GameObject newItem;
+                newItem = Instantiate(ItemPrefab, GameObject.FindGameObjectWithTag("Items Panel").transform);
+                Item newItemScript = newItem.GetComponent<Item>();
+
+                // We use predefined images from the resources folder to load each
+                // item's sprites from outside the game and assign it to the new item.
+                Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
+
+                switch (SettingsManager.Instance.Language)
+                {
+                    case "English":
+                        newItem.GetComponent<Image>().sprite = sprite;
+                        newItemScript.Name = item.Name;
+                        newItemScript.Description = item.Description;
+                        newItemScript.Active = item.Active;
+                        newItemScript.AssetsImageName = item.AssetsImageName;
+                        break;
+                    case "Dutch":
+                        newItem.GetComponent<Image>().sprite = sprite;
+                        newItemScript.NameDutch = item.NameDutch;
+                        newItemScript.DescriptionDutch = item.DescriptionDutch;
+                        newItemScript.ActiveDutch = item.ActiveDutch;
+                        newItemScript.AssetsImageName = item.AssetsImageName;
+                        break;
+                }
             }
         }
     }
@@ -1009,31 +1013,13 @@ public class Character : MonoBehaviour
         //Debug.Log("Collected the blueprint: " + blueprint);
     }
 
-    public void CompleteObjectiveInQuest(string objective, string quest)
+    public void CompleteObjectiveInQuest(int objectiveID, string quest)
     {
         int QuestID = 0;
-        int ObjectiveID = 0;
         bool completedStatus = false;
         bool completionStatusOfQuest = false;
-
-        string whichLanguageIsTheQuestIn = string.Empty;
-        foreach (Quest questInEnglish in AllQuests)
-        {
-            if (questInEnglish.Name == quest)
-            {
-                whichLanguageIsTheQuestIn = "English";
-            }
-        }
-
-        foreach (Quest questInDutch in AllQuestsDutch)
-        {
-            if (questInDutch.Name == quest)
-            {
-                whichLanguageIsTheQuestIn = "Dutch";
-            }
-        }
-
-        switch (whichLanguageIsTheQuestIn)
+        
+        switch (SettingsManager.Instance.Language)
         {
             case "English":
                 foreach (Quest aQuest in AllQuests)
@@ -1043,10 +1029,9 @@ public class Character : MonoBehaviour
                         QuestID = aQuest.ID;
                         foreach (Objective aObjective in aQuest.Objectives)
                         {
-                            if (aObjective.Name == objective &&
+                            if (aObjective.ID == objectiveID &&
                                 aObjective.CompletedStatus == false)
                             {
-                                ObjectiveID = aObjective.ID;
                                 aObjective.CompletedStatus = true;
                                 completedStatus = true;
 
@@ -1073,8 +1058,6 @@ public class Character : MonoBehaviour
                                         FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
                                     }
                                 }
-
-                                RefreshAllQuests();
                             }
                         }
                     }
@@ -1087,7 +1070,7 @@ public class Character : MonoBehaviour
                         aQuest.CompletionStatus = completionStatusOfQuest;
                         foreach (Objective aObjective in aQuest.Objectives)
                         {
-                            if (aObjective.ID == ObjectiveID)
+                            if (aObjective.ID == objectiveID)
                             {
                                 aObjective.CompletedStatus = completedStatus;
                             }
@@ -1096,18 +1079,21 @@ public class Character : MonoBehaviour
                 }
                 break;
             case "Dutch":
+                //Debug.Log("OOOO");
                 foreach (Quest aQuest in AllQuestsDutch)
                 {
-                    //Debug.Log(quest + " | " + aQuest.Name);
+                    //Debug.Log(aQuest.Name + " | " + quest);
                     if (aQuest.Name == quest && aQuest.ProgressStatus == "Nog niet gedaan")
                     {
+                        //Debug.Log(QuestID + " | " + aQuest.ID);
                         QuestID = aQuest.ID;
                         foreach (Objective aObjective in aQuest.Objectives)
                         {
-                            if (aObjective.Name == objective &&
+                            //Debug.Log(aObjective.Name + " | " + objectiveID);
+                            if (aObjective.ID == objectiveID &&
                                 aObjective.CompletedStatus == false)
                             {
-                                ObjectiveID = aObjective.ID;
+                                objectiveID = aObjective.ID;
                                 aObjective.CompletedStatus = true;
                                 completedStatus = true;
 
@@ -1143,11 +1129,10 @@ public class Character : MonoBehaviour
                 {
                     if (aQuest.ID == QuestID)
                     {
-                        //Debug.Log("Not bad");
                         aQuest.CompletionStatus = completionStatusOfQuest;
                         foreach (Objective aObjective in aQuest.Objectives)
                         {
-                            if (aObjective.ID == ObjectiveID)
+                            if (aObjective.ID == objectiveID)
                             {
                                 aObjective.CompletedStatus = completedStatus;
                             }
@@ -1156,8 +1141,9 @@ public class Character : MonoBehaviour
                 }
                 break;
         }
-
+        
         RefreshAllQuests();
+        RefreshJsonData();
     }
 
     //public void CompleteObjective(string objective)
@@ -1654,13 +1640,20 @@ public class Character : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        FindObjectOfType<CameraBehavior>().IsInteracting = false;
+        CameraBehavior.IsInteracting = false;
     }
 
     public IEnumerator EnableEntityTapping()
     {
         yield return new WaitForSeconds(1f);
 
-        FindObjectOfType<CameraBehavior>().IsUIOpen = false;
+        CameraBehavior.IsUIOpen = false;
+    }
+
+    public IEnumerator EnableCameraInteraction()
+    {
+        yield return new WaitForSeconds(1f);
+
+        CameraBehavior.IsInterfaceElementSelected = false;
     }
 }

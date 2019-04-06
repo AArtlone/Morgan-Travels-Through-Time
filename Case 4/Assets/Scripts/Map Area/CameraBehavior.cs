@@ -29,7 +29,9 @@ public class CameraBehavior : MonoBehaviour
     {
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
-        _swipeController = FindObjectOfType<SwipeController>();
+        _swipeController = InterfaceManager.Instance.SwipeController;
+        InterfaceManager.Instance.CameraBehavior = this;
+        Character.Instance.CameraBehavior = this;
     }
 
     private void Update()
@@ -85,7 +87,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
+        Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
 
         if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {
@@ -121,7 +123,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsInterfaceElementSelected == false && IsUIOpen == false && DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
+        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsUIOpen == false && DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
         {
             RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
 

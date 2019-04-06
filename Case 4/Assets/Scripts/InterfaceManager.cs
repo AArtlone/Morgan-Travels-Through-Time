@@ -82,6 +82,9 @@ public class InterfaceManager : MonoBehaviour
     public Image _shoesPart;
     #endregion
 
+    public CameraBehavior CameraBehavior;
+    public SwipeController SwipeController;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -96,8 +99,11 @@ public class InterfaceManager : MonoBehaviour
 
     private void Start()
     {
-        SetupQuestsInDiary();
-        LoadCharacterAppearance();
+        if (SceneManager.GetActiveScene().name != "Escape Game")
+        {
+            SetupQuestsInDiary();
+            LoadCharacterAppearance();
+        }
 
         //if(Character.Instance.TutorialCompleted == false)
         //{
@@ -249,24 +255,26 @@ public class InterfaceManager : MonoBehaviour
         {
             if (obj == uiObj && obj.activeSelf == false)
             {
-                obj.SetActive(true);
+                CameraBehavior.IsUIOpen = true;
 
-                FindObjectOfType<CameraBehavior>().IsUIOpen = true;
+                obj.SetActive(true);
                 
                 if (uiObj.transform.tag == "Settings UI")
                 {
-                    FindObjectOfType<SwipeController>().enabled = false;
+                    SwipeController.enabled = false;
                     SettingsManager.Instance.UpdateHiglightedLanguageIcons();
                 }
             }
             else if (obj == uiObj && obj.activeSelf == true)
             {
+                CameraBehavior.IsUIOpen = false;
+                CameraBehavior.IsInterfaceElementSelected = false;
+
                 obj.SetActive(false);
 
-                FindObjectOfType<CameraBehavior>().IsInterfaceElementSelected = false;
                 if (uiObj.transform.tag == "Settings UI")
                 {
-                    FindObjectOfType<SwipeController>().enabled = true;
+                    SwipeController.enabled = true;
                 }
 
                 EnableCameraMovement();
@@ -280,15 +288,21 @@ public class InterfaceManager : MonoBehaviour
 
     private void EnableCameraMovement()
     {
-        FindObjectOfType<CameraBehavior>().TapPosition = Camera.main.transform.position;
+        CameraBehavior.TapPosition = Camera.main.transform.position;
 
-        FindObjectOfType<CameraBehavior>().IsUIOpen = false;
+        CameraBehavior.IsUIOpen = false;
     }
 
     public void ClosePopup(Object obj)
     {
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(false);
+
+        if (IconDisplays.Contains(popupObject))
+        {
+            StartCoroutine(Character.Instance.EnableEntityTapping());
+            StartCoroutine(Character.Instance.EnableCameraInteraction());
+        }
     }
 
     public void OpenPopup(Object obj)

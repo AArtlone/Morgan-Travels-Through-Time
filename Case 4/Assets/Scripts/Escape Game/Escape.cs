@@ -16,7 +16,7 @@ public class Escape : MonoBehaviour
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
     public string QuestForObjective;
-    public string ObjectiveToComplete;
+    public int ObjectiveToCompleteID;
     public GameObject EndGamePopUp;
 
     private string _escapeGamesJsonFile;
@@ -51,8 +51,12 @@ public class Escape : MonoBehaviour
         }
         for (int i = 0; i < RefugeeWaves[CurrentWave].Wave.Count; i++)
         {
+            foreach(Checkpoint checkPoint in Checkpoints)
+            {
+                checkPoint.CreateNewQueueElement();
+            }
             GameObject newRefugee = Instantiate(RefugeePrefab, GameObject.FindGameObjectWithTag("Refugees Container").transform);
-
+            newRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees.Count;
             CurrentRefugees.Add(newRefugee.GetComponent<Refugee>());
             yield return new WaitForSeconds(2f);
         }
@@ -94,7 +98,7 @@ public class Escape : MonoBehaviour
         File.WriteAllText(_escapeGamesJsonFile, newGameData);
 
 
-        Character.Instance.CompleteObjectiveInQuest(ObjectiveToComplete, QuestForObjective);
+        Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
     }
 
     public void EndGame()
