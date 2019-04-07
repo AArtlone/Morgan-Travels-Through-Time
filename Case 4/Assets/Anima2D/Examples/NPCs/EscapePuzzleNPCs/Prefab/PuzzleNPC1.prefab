@@ -1625,8 +1625,8 @@ GameObject:
   - component: {fileID: 1349378213363472698}
   - component: {fileID: 1349378213363472697}
   - component: {fileID: 2006425917753043439}
-  - component: {fileID: 8133050817888722673}
   - component: {fileID: 4305012838885839233}
+  - component: {fileID: 8907208551948419694}
   m_Layer: 0
   m_Name: PuzzleNPC1
   m_TagString: Untagged
@@ -1690,33 +1690,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &8133050817888722673
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1349378213363472699}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.85552, y: -0.12903619}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.71104, y: 4.2302556}
-  m_EdgeRadius: 0
+  m_Constraints: 4
 --- !u!114 &4305012838885839233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,9 +1705,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Status: 0
   RewardInPoints: 0
+  RefugeeIndex: 0
   IconPrefab: {fileID: 3066035201624692417, guid: 4f833bc6ebc52d84d9cda53af9524aff,
     type: 3}
   Speed: 9
+--- !u!70 &8907208551948419694
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349378213363472699}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.7897794, y: -0.32669044}
+  m_Size: {x: 2.0795588, y: 3.7735596}
+  m_Direction: 0
 --- !u!1 &1349378213382413377
 GameObject:
   m_ObjectHideFlags: 0

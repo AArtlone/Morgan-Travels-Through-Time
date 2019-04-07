@@ -61,7 +61,6 @@ public class SwipeController : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(DialogueManager.Instance.DialogueTemplate.activeSelf + " " + _cameraBehaviour.IsUIOpen + " " + _cameraBehaviour.IsInteracting);
         if (Input.touchCount > 0 && DialogueManager.Instance.DialogueTemplate.activeSelf == false && _cameraBehaviour.IsUIOpen == false && _cameraBehaviour.IsInteracting == false)
         {
             foreach (Touch touch in Input.touches)

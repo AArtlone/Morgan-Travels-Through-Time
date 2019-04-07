@@ -37,7 +37,7 @@ public class CameraBehavior : MonoBehaviour
     private void Update()
     {
         _isEntityTappedOn = false;
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
             {
@@ -91,7 +91,7 @@ public class CameraBehavior : MonoBehaviour
 
         if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) || _isCameraTravelling == false)
+            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || _isCameraTravelling == false)
             {
                 if (Input.touchCount > 0)
                 {

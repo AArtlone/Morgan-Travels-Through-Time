@@ -24,16 +24,38 @@ public class Obstacle : MonoBehaviour
         //}
         //if (Input.GetKeyUp(KeyCode.S))
         //{
-        //    DCheckpointLink.Passable = false;
+        //    CheckpointLink.Passable = false;
         //}
 
         //Debug.Log(_currentTimeHoldingDown);
+        
+        if (gameObject.name == "Bridge Lever")
+        {
+            PlayBridge();
+        } else if (gameObject.name == "Tree Obstacle")
+        {
+            PlayTree();
+        }
+    }
+
+    public void ToggleObstacle()
+    {
+        if (CheckpointLink.Passable)
+        {
+            return;
+        }
+        //Debug.Log("Completed");
+        CheckpointLink.Passable = !CheckpointLink.Passable;
+    }
+
+    public void PlayBridge()
+    {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
             Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            
+
             if (Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ObstacleLayer))
             {
                 _holdingDownObstacle = true;
@@ -44,11 +66,11 @@ public class Obstacle : MonoBehaviour
 
                     if (Bridge != null)
                     {
-                        Vector3 newBridgePosition = Bridge.transform.position;
-                        newBridgePosition.x -= Time.deltaTime * 5;
-                        Bridge.transform.position = newBridgePosition;
+                        Vector3 newBridgePosition = Bridge.transform.localScale;
+                        newBridgePosition.x += Time.deltaTime * 0.3f;
+                        Bridge.transform.localScale = newBridgePosition;
                     }
-                } 
+                }
 
                 //Debug.Log("Holding...");
                 if (_currentTimeHoldingDown >= _timeHoldingDown)
@@ -56,7 +78,8 @@ public class Obstacle : MonoBehaviour
                     ToggleObstacle();
                 }
             }
-        } else
+        }
+        else
         {
             _holdingDownObstacle = false;
             //CheckpointLink.Passable = false;
@@ -65,9 +88,9 @@ public class Obstacle : MonoBehaviour
         if (_currentTimeHoldingDown > 0 && _holdingDownObstacle == false)
         {
             //Debug.Log("Falling...");
-            Vector3 newBridgePosition = Bridge.transform.position;
-            newBridgePosition.x += Time.deltaTime * 5;
-            Bridge.transform.position = newBridgePosition;
+            Vector3 newBridgePosition = Bridge.transform.localScale;
+            newBridgePosition.x -= Time.deltaTime * 0.3f;
+            Bridge.transform.localScale = newBridgePosition;
 
             _currentTimeHoldingDown -= Time.deltaTime;
             CheckpointLink.Passable = true;
@@ -81,13 +104,24 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-    public void ToggleObstacle()
+    public void PlayTree()
     {
-        if (CheckpointLink.Passable)
+        if (Input.touchCount > 0)
         {
-            return;
+            Touch touch = Input.GetTouch(0);
+
+            Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ObstacleLayer);
+            
+            if (hitObj.transform != null)
+            {
+                if (hitObj.transform.name == gameObject.name)
+                {
+                    ToggleObstacle();
+                    GetComponent<SpriteRenderer>().sprite = null;
+                    GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
         }
-        //Debug.Log("Completed");
-        CheckpointLink.Passable = !CheckpointLink.Passable;
     }
 }

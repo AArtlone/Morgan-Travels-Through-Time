@@ -1,0 +1,127 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class CameraManager : MonoBehaviour
+{
+    public List<GameObject> Cameras;
+    private int _currentCameraIndex;
+
+    #region Swiping mechanic variables
+    private enum DraggedDirection { Up, Down, Left, Right };
+    private Vector3 _startTapPosition;
+    private Vector3 _endTapPosition;
+    private Vector3 _directionOfSwipeNormalized;
+    private string _swipeDirection;
+    private float _swipeLength;
+    #endregion
+
+    private CameraBehavior _cameraBehaviour;
+
+    private void Start()
+    {
+        _cameraBehaviour = FindObjectOfType<CameraBehavior>();
+    }
+
+    private void Update()
+    {
+        //Debug.Log(DialogueManager.Instance.DialogueTemplate.activeSelf + " " + _cameraBehaviour.IsUIOpen + " " + _cameraBehaviour.IsInteracting);
+        if (SceneManager.GetActiveScene().name != "Escape Game")
+        {
+            if (Input.touchCount > 0 && DialogueManager.Instance.DialogueTemplate.activeSelf == false && _cameraBehaviour.IsUIOpen == false && _cameraBehaviour.IsInteracting == false)
+            {
+                GetSwipe();
+            }
+        } else
+        {
+            if (Input.touchCount > 0)
+            {
+                GetSwipe();
+            }
+        }
+    }
+
+    private void GetSwipe()
+    {
+        foreach (Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                _startTapPosition = touch.position;
+                _endTapPosition = touch.position;
+            }
+
+            if (touch.phase == TouchPhase.Moved)
+            {
+                _endTapPosition = touch.position;
+            }
+
+            if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                _endTapPosition = touch.position;
+                _directionOfSwipeNormalized = (_endTapPosition - _startTapPosition).normalized;
+
+                _swipeLength = _endTapPosition.x - _startTapPosition.x;
+                //Debug.Log(_swipeLength);
+
+                CheckDirection();
+            }
+        }
+    }
+
+    private void CheckDirection()
+    {
+        if (_directionOfSwipeNormalized.x > 0)
+        {
+            _swipeDirection = "Right";
+
+            if (_swipeLength >= 200)
+            {
+                _currentCameraIndex--;
+                if (_currentCameraIndex < 0)
+                {
+                    _currentCameraIndex = 0;
+                }
+
+                for (int i = 0; i < Cameras.Count; i++)
+                {
+                    if (i == _currentCameraIndex)
+                    {
+                        Cameras[i].SetActive(true);
+                    } else
+                    {
+                        Cameras[i].SetActive(false);
+                    }
+                }
+            }
+        }
+        else if (_directionOfSwipeNormalized.x < 0)
+        {
+            _swipeDirection = "Left";
+
+            if (_swipeLength <= -200)
+            {
+                _currentCameraIndex++;
+                if (_currentCameraIndex > Cameras.Count - 1)
+                {
+                    _currentCameraIndex = Cameras.Count - 1;
+                }
+
+                for (int i = 0; i < Cameras.Count; i++)
+                {
+                    if (i == _currentCameraIndex)
+                    {
+                        Cameras[i].SetActive(true);
+                    }
+                    else
+                    {
+                        Cameras[i].SetActive(false);
+                    }
+                }
+            }
+        }
+        //Debug.Log(_currentCameraIndex);
+        //Debug.Log(_swipeDirection);
+    }
+}
