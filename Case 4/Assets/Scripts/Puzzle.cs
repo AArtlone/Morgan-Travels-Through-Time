@@ -84,7 +84,10 @@ public class Puzzle : MonoBehaviour
 
             PuzzleToLaunch.SetActive(true);
             PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
-            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
+            if (Character.Instance.TutorialCompleted)
+            {
+                PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
+            }
             transform.GetComponent<Image>().raycastTarget = false;
         } else
         {
@@ -92,7 +95,10 @@ public class Puzzle : MonoBehaviour
 
             PuzzleToLaunch.SetActive(true);
             PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
-            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
+            if (Character.Instance.TutorialCompleted)
+            {
+                PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
+            }
         }
         StartPuzzleIconToggle();
         if (Character.Instance.TutorialCompleted == false)

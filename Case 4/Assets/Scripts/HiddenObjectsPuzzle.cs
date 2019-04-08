@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 using Object = UnityEngine.Object;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public GameObject ItemDisplayPrefab;
     public Button HintButton;
     public GameObject PuzzleEndPopup;
+    public List<GameObject> StarsList;
 
     private CameraBehavior _cameraBehaviour;
 
@@ -161,6 +163,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         Stars = 3;
 
+        StartCoroutine(ShowStars());
         puzzleNPC.RefreshHiddenObjectsPuzzle();
     }
 
@@ -188,6 +191,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             Stars = 1;
         }
 
+        StartCoroutine(ShowStars());
         puzzleNPC.RefreshHiddenObjectsPuzzle();
     }
 
@@ -218,7 +222,15 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (!ItemsFound.Contains(objAsItem.Name))
         {
-            ItemsFound.Add(objAsItem.Name);
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    ItemsFound.Add(objAsItem.GetComponent<LanguageController>().English);
+                    break;
+                case "Dutch":
+                    ItemsFound.Add(objAsItem.GetComponent<LanguageController>().Dutch);
+                    break;
+            }
             objAsItem.ItemFound = true;
             int foundItemsCount = 0;
             foreach (string foundItem in ItemsFound)
@@ -347,5 +359,16 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         _missclicks += 1;
 
         //Debug.Log(_missclicks);
+    }
+
+    private IEnumerator ShowStars()
+    {
+        Debug.Log("AA");
+        for (int i = 0; i < StarsList.Count; i++)
+        {
+            Debug.Log("ee");
+            yield return new WaitForSeconds(0.5f);
+            StarsList[i].SetActive(true);
+        }
     }
 }

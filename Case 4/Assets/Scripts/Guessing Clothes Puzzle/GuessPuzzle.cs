@@ -324,6 +324,10 @@ public class GuessPuzzle : MonoBehaviour
         }
 
         puzzle.SetActive(true);
+    }
+
+    public void StartTimer()
+    {
         _isGameStarted = true;
     }
 

@@ -84,7 +84,6 @@ public class NPC : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, 15f * .5f * Time.deltaTime);
             if(Vector2.Distance(transform.position, _posToMoveTo) < 1f)
             {
-                Debug.Log("bla");
                 _canInteractWithPlayer = true;
                 SpeechBubble.SetActive(true);
             }

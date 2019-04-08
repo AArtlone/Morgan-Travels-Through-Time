@@ -18,6 +18,8 @@ public class MapEnvironmentManager : MonoBehaviour
     public List<Sequence> SequencesOfTutorial = new List<Sequence>();
     private int _currentIndexOfSequence;
     private Vector3 _newCameraPosition;
+
+    public GameObject CurrentCamera;
     
     void Start()
     {

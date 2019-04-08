@@ -92,8 +92,10 @@ public class Refugee : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Final Checkpoint")
+        if (collision.transform.tag == "Water")
         {
+            _gameInterface.CurrentRefugees.Remove(this);
+            Destroy(gameObject);
         }
         //if (collision.gameObject.tag == "Checkpoint")
         //{

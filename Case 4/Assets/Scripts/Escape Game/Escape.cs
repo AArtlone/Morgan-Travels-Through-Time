@@ -57,7 +57,7 @@ public class Escape : MonoBehaviour
             {
                 checkPoint.CreateNewQueueElement();
             }
-            GameObject newRefugee = Instantiate(RefugeePrefab, GameObject.FindGameObjectWithTag("Refugees Container").transform);
+            GameObject newRefugee = Instantiate(RefugeeWaves[CurrentWave].Wave[i].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
             newRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees.Count;
             CurrentRefugees.Add(newRefugee.GetComponent<Refugee>());
             yield return new WaitForSeconds(2f);
