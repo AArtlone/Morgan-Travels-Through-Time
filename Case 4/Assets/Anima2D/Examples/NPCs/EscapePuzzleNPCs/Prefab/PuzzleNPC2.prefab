@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5220427493735551980}
-  m_LocalRotation: {x: 0, y: 0, z: -0.997851, w: 0.065524176}
+  m_LocalRotation: {x: 0, y: 0, z: -0.97235286, w: 0.23351635}
   m_LocalPosition: {x: 0.83633626, y: -0.37352175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5220427493790906327}
   m_Father: {fileID: 5220427495739317332}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -172.48601}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -152.992}
 --- !u!114 &5220427493735551982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.71716
+  m_Length: 0.7171598
   m_ChildTransform: {fileID: 5220427493790906327}
   m_AttachedIK: {fileID: 5220427493991547200}
 --- !u!1 &5220427493790906324
@@ -72,13 +72,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5220427493790906324}
-  m_LocalRotation: {x: 0, y: 0, z: 0.34542325, w: 0.938447}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.71715987, y: 0.00000011920929, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5220427493735551983}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 40.415}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5220427493790906326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 8
+  m_SortingLayerID: 0
+  m_SortingOrder: 13
   m_BoneTransforms:
   - {fileID: 5220427495761386658}
 --- !u!137 &5220427493828132471
@@ -181,9 +181,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 13
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -292,8 +292,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 10
+  m_SortingLayerID: 0
+  m_SortingOrder: 15
   m_BoneTransforms:
   - {fileID: 5220427495330975394}
 --- !u!137 &5220427493918402652
@@ -330,9 +330,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -356,9 +356,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5220427493949221662}
   - component: {fileID: 5220427493949221657}
-  - component: {fileID: 8794990698512118140}
-  - component: {fileID: 835572887230224804}
-  - component: {fileID: 1093110377140272509}
+  - component: {fileID: 7342729190676248299}
+  - component: {fileID: 8190069127598212611}
+  - component: {fileID: 4556925634108950139}
   m_Layer: 0
   m_Name: PuzzleNPC2
   m_TagString: Untagged
@@ -402,7 +402,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8794990698512118140
+--- !u!114 &7342729190676248299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,12 +415,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Status: 0
-  RewardInPoints: 0
+  RewardInPoints: 10
   RefugeeIndex: 0
   IconPrefab: {fileID: 3066035201624692417, guid: 4f833bc6ebc52d84d9cda53af9524aff,
     type: 3}
   Speed: 9
---- !u!50 &835572887230224804
+--- !u!50 &8190069127598212611
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &1093110377140272509
+--- !u!70 &4556925634108950139
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,8 +454,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.03}
-  m_Size: {x: 1.64, y: 3.79}
+  m_Offset: {x: -0.09, y: 0}
+  m_Size: {x: 2.39, y: 4.65}
   m_Direction: 0
 --- !u!1 &5220427493957246512
 GameObject:
@@ -552,15 +552,15 @@ MonoBehaviour:
     m_SolverPoses:
     - m_BoneTransform: {fileID: 5220427493735551983}
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.99785095, w: 0.06552417}
+      solverRotation: {x: 0, y: 0, z: -0.97235286, w: 0.23351635}
       defaultLocalRotation: {x: 0, y: 0, z: -0.98233294, w: 0.18714142}
     - m_BoneTransform: {fileID: 5220427493790906327}
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.34542325, w: 0.938447}
+      solverRotation: {x: 0, y: 0, z: 0, w: 1}
       defaultLocalRotation: {x: 0, y: 0, z: -0.017150385, w: 0.99985296}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 0.76063997, y: -0.8144307, z: 0}
+    targetPosition: {x: 1.01, y: -0.8116307, z: 0}
     flip: 0
 --- !u!1 &5220427494077284646
 GameObject:
@@ -610,8 +610,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 8
+  m_SortingLayerID: 0
+  m_SortingOrder: 13
   m_BoneTransforms:
   - {fileID: 5220427493790906327}
 --- !u!137 &5220427494077284640
@@ -648,9 +648,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 13
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -712,8 +712,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 10
+  m_SortingLayerID: 0
+  m_SortingOrder: 15
   m_BoneTransforms:
   - {fileID: 5220427495677679438}
 --- !u!137 &5220427494125625989
@@ -750,9 +750,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -861,8 +861,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 8
+  m_SortingLayerID: 0
+  m_SortingOrder: 13
   m_BoneTransforms:
   - {fileID: 5220427495691798306}
 --- !u!137 &5220427494481051625
@@ -899,9 +899,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 13
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -939,14 +939,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5220427494534708847}
-  m_LocalRotation: {x: 0, y: 0, z: 0.9999999, w: 0.00055177615}
+  m_LocalRotation: {x: 0, y: 0, z: -0.99993014, w: -0.01181925}
   m_LocalPosition: {x: 0.9448459, y: 0.30723315, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5220427495330975394}
   m_Father: {fileID: 5220427495739317332}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 179.93701}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 178.64601}
 --- !u!114 &5220427494534708841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -960,7 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.82626706
+  m_Length: 0.7568772
   m_ChildTransform: {fileID: 5220427495330975394}
   m_AttachedIK: {fileID: 5220427494942049953}
 --- !u!1 &5220427494578971575
@@ -1066,7 +1066,7 @@ MonoBehaviour:
     m_SolverPoses:
     - m_BoneTransform: {fileID: 5220427495691798306}
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.99999815, w: 0.0019251851}
+      solverRotation: {x: 0, y: 0, z: 0.9974807, w: 0.07093851}
       defaultLocalRotation: {x: 0, y: 0, z: 0.9922217, w: 0.12448351}
     - m_BoneTransform: {fileID: 5220427494452533432}
       solverPosition: {x: 0, y: 0, z: 0}
@@ -1074,7 +1074,7 @@ MonoBehaviour:
       defaultLocalRotation: {x: 0, y: 0, z: 0.11791546, w: 0.99302363}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: -0.48728004, y: -1.9844308, z: 0}
+    targetPosition: {x: -0.35000005, y: -2.1216307, z: 0}
     flip: 0
 --- !u!1 &5220427494926681930
 GameObject:
@@ -1124,8 +1124,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 10
+  m_SortingLayerID: 0
+  m_SortingOrder: 15
   m_BoneTransforms:
   - {fileID: 5220427494534708846}
 --- !u!137 &5220427494926681924
@@ -1162,9 +1162,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1203,7 +1203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5220427494942049958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.16, y: -1.17, z: 0}
+  m_LocalPosition: {x: -0.83, y: -1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5220427495102513381}
@@ -1233,15 +1233,15 @@ MonoBehaviour:
     m_SolverPoses:
     - m_BoneTransform: {fileID: 5220427494534708846}
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.9999998, w: 0.0005517761}
+      solverRotation: {x: 0, y: 0, z: -0.99993014, w: -0.01181925}
       defaultLocalRotation: {x: 0, y: 0, z: 0.97574097, w: 0.21892849}
     - m_BoneTransform: {fileID: 5220427495330975394}
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0, w: 1}
+      solverRotation: {x: 0, y: 0, z: 0.18892959, w: 0.98199064}
       defaultLocalRotation: {x: 0, y: 0, z: 0.407359, w: 0.91326815}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: -0.4, y: -1.0316306, z: 0}
+    targetPosition: {x: -0.070000015, y: -0.9216306, z: 0}
     flip: 0
 --- !u!1 &5220427495062544613
 GameObject:
@@ -1298,7 +1298,7 @@ MonoBehaviour:
     m_SolverPoses:
     - m_BoneTransform: {fileID: 5220427495761386658}
       solverPosition: {x: 0, y: 0, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.99685794, w: 0.07921002}
+      solverRotation: {x: 0, y: 0, z: 0.9981373, w: 0.06100805}
       defaultLocalRotation: {x: 0, y: 0, z: -0.9912527, w: -0.1319777}
     - m_BoneTransform: {fileID: 5220427493873151886}
       solverPosition: {x: 0, y: 0, z: 0}
@@ -1306,7 +1306,7 @@ MonoBehaviour:
       defaultLocalRotation: {x: 0, y: 0, z: 0.11059741, w: 0.9938653}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 0.2522399, y: -1.9798706, z: 0}
+    targetPosition: {x: 0.18999997, y: -2.0316308, z: 0}
     flip: 0
 --- !u!1 &5220427495102513386
 GameObject:
@@ -1390,8 +1390,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 9
+  m_SortingLayerID: 0
+  m_SortingOrder: 14
   m_BoneTransforms:
   - {fileID: 5220427495739317332}
   - {fileID: 5220427494578971574}
@@ -1429,9 +1429,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 14
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1494,8 +1494,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 7
+  m_SortingLayerID: 0
+  m_SortingOrder: 12
   m_BoneTransforms:
   - {fileID: 5220427494452533432}
 --- !u!137 &5220427495195753882
@@ -1532,9 +1532,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 12
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1596,8 +1596,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 8
+  m_SortingLayerID: 0
+  m_SortingOrder: 13
   m_BoneTransforms:
   - {fileID: 5220427493735551983}
 --- !u!137 &5220427495216291460
@@ -1634,9 +1634,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 13
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -1674,13 +1674,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5220427495330975395}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8262668, y: -0.00000017881393, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.18892959, w: 0.98199064}
+  m_LocalPosition: {x: 0.75687724, y: -0.00000011920929, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5220427494534708846}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 21.781}
 --- !u!114 &5220427495330975421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1871,8 +1871,8 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SortingLayerID: -478312279
-  m_SortingOrder: 7
+  m_SortingLayerID: 0
+  m_SortingOrder: 12
   m_BoneTransforms:
   - {fileID: 5220427493873151886}
 --- !u!137 &5220427495732949742
@@ -1909,9 +1909,9 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -478312279
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 12
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
