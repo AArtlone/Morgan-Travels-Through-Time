@@ -351,17 +351,19 @@ public class InterfaceManager : MonoBehaviour
 
                             foreach (Objective objective in loadedQuest.Objectives)
                             {
-                                GameObject newObjective = Instantiate(QuestObjectivePrefab,
-                                SelectedQuestObjectivesDisplay.transform);
-                                newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
-
-                                if (objective.CompletedStatus)
+                                if(objective.CompletedStatus == false)
                                 {
-                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
-                                }
-                                else
-                                {
+                                    GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                                    SelectedQuestObjectivesDisplay.transform);
+                                    newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
                                     newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
+                                    break;
+                                } else
+                                {
+                                    GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                                    SelectedQuestObjectivesDisplay.transform);
+                                    newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: Yes";
                                 }
                             }
                         }
@@ -382,20 +384,22 @@ public class InterfaceManager : MonoBehaviour
                             {
                                 Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
                             }
-
                             foreach (Objective objective in loadedQuest.Objectives)
                             {
-                                GameObject newObjective = Instantiate(QuestObjectivePrefab,
-                                SelectedQuestObjectivesDisplay.transform);
-                                newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
-
-                                if (objective.CompletedStatus)
+                                if (objective.CompletedStatus == false)
                                 {
-                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gedaan: Ja";
+                                    GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                                    SelectedQuestObjectivesDisplay.transform);
+                                    newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gedaan: Nee";
+                                    break;
                                 }
                                 else
                                 {
-                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gedaan: Nee";
+                                    GameObject newObjective = Instantiate(QuestObjectivePrefab,
+                                    SelectedQuestObjectivesDisplay.transform);
+                                    newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
+                                    newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Gedaan: Ja";
                                 }
                             }
                         }

@@ -484,7 +484,7 @@ public class NPC : MonoBehaviour
                 }
                 else
                 {
-                    if (SceneToLoadAfterDialogue != string.Empty)
+                    if (SceneToLoadAfterDialogue != null)
                     {
                         StartCoroutine(LoadSceneCo(SceneToLoadAfterDialogue));
                     }
