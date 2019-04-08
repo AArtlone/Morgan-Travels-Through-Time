@@ -18,6 +18,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     // Those two lists are used for comparison mid-puzzle and are responsible
     // for deciding whether or not a puzzle is complete succcessfully.
     public List<string> ItemsRequired = new List<string>();
+    public List<string> ItemsRequiredDutch = new List<string>();
     public List<string> ItemsFound = new List<string>();
     public List<GameObject> EntitiesToActivate = new List<GameObject>();
     [Space(15)]
@@ -220,7 +221,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         GameObject itemObjClicked = obj as GameObject;
         Item objAsItem = itemObjClicked.GetComponent<Item>();
 
-        if (!ItemsFound.Contains(objAsItem.Name))
+        string NameOfItem = string.Empty;
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                NameOfItem = objAsItem.GetComponent<LanguageController>().English;
+                break;
+            case "Dutch":
+                NameOfItem = objAsItem.GetComponent<LanguageController>().Dutch;
+                break;
+        }
+
+        if (!ItemsFound.Contains(NameOfItem))
         {
             switch (SettingsManager.Instance.Language)
             {
@@ -231,14 +243,27 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                     ItemsFound.Add(objAsItem.GetComponent<LanguageController>().Dutch);
                     break;
             }
+
             objAsItem.ItemFound = true;
             int foundItemsCount = 0;
             foreach (string foundItem in ItemsFound)
             {
-                if (ItemsRequired.Contains(foundItem))
+                switch (SettingsManager.Instance.Language)
                 {
-                    foundItemsCount++;
-                    //Debug.Log(foundItemsCount);
+                    case "English":
+                        if (ItemsRequired.Contains(foundItem))
+                        {
+                            foundItemsCount++;
+                            //Debug.Log(foundItemsCount);
+                        }
+                        break;
+                    case "Dutch":
+                        if (ItemsRequiredDutch.Contains(foundItem))
+                        {
+                            foundItemsCount++;
+                            //Debug.Log(foundItemsCount);
+                        }
+                        break;
                 }
             }
 
@@ -335,7 +360,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     private void ReturnItemColors()
     {
-        _itemToHighlight.GetComponent<Image>().color = Color.gray;
+        _itemToHighlight.GetComponent<Image>().color = Color.white;
 
         // The player can only use the button after the hint duration has passed.
         HintButton.interactable = true;
