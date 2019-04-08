@@ -71,6 +71,12 @@ public class DialogueManager : MonoBehaviour
         LeftPortraitInitialPos = LeftCharacterPortrait.transform.position;
     }
 
+    public void DeleteJsonFile()
+    {
+        File.Delete(_dialogueResponsesPath);
+        Destroy(gameObject);
+    }
+
     private void SetupDialogueResponses()
     {
         string responsesToJson = File.ReadAllText(_dialogueResponsesPath);

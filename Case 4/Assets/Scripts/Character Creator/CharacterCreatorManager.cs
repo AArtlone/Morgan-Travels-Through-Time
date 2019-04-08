@@ -642,4 +642,12 @@ public class CharacterCreatorManager : MonoBehaviour
         windowObj.SetActive(false);
     }
     #endregion
+
+    public void ResetTheGame()
+    {
+        Character.Instance.DeleteJsonFiles();
+        SettingsManager.Instance.DeleteJsonFile();
+        DialogueManager.Instance.DeleteJsonFile();
+        SceneManagement.Instance.LoadScene("Logo Introduction");
+    }
 }

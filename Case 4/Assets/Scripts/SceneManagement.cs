@@ -62,17 +62,24 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadScene(string newScene)
     {
-        if (newScene == "Main Map" || newScene == "Tutorial Map Area" || newScene == "Castle Area")
+        if (newScene == "Logo Introduction")
         {
-            Character.Instance.LastMapArea = newScene;
+            SceneManager.LoadScene(newScene);
         }
         else
         {
-            Character.Instance.LastScene = newScene;
+            if (newScene == "Main Map" || newScene == "Tutorial Map Area" || newScene == "Castle Area")
+            {
+                Character.Instance.LastMapArea = newScene;
+            }
+            else
+            {
+                Character.Instance.LastScene = newScene;
+            }
+
+            Character.Instance.RefreshJsonData();
+
+            SceneManager.LoadScene(newScene);
         }
-
-        Character.Instance.RefreshJsonData();
-
-        SceneManager.LoadScene(newScene);
     }
 }

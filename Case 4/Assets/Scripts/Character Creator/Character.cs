@@ -1490,6 +1490,22 @@ public class Character : MonoBehaviour
         //Debug.Log("Refreshed player json data!");
     }
 
+    public void DeleteJsonFiles()
+    {
+        File.Delete(PlayerStatsFilePath);
+        File.Delete(_areasJsonFilePath);
+        File.Delete(_questsJsonFilePath);
+        File.Delete(_questsDutchJsonFilePath);
+        File.Delete(_itemsJsonFilePath);
+        File.Delete(_itemsDutchJsonFilePath);
+        File.Delete(_wearablesJsonFilePath);
+        File.Delete(_wearablesDutchJsonFilePath);
+        File.Delete(_defaultsGuessingClothesJsonPath);
+        File.Delete(_guessingPuzzlesPath);
+        File.Delete(_escapeGamesJsonFile);
+        Destroy(gameObject);
+    }
+
     public void RefreshItems()
     {
         // *************************************

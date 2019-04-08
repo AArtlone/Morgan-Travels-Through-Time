@@ -649,4 +649,12 @@ public class InterfaceManager : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
     #endregion
+    
+    public void ResetTheGame()
+    {
+        Character.Instance.DeleteJsonFiles();
+        SettingsManager.Instance.DeleteJsonFile();
+        DialogueManager.Instance.DeleteJsonFile();
+        SceneManagement.Instance.LoadScene("Logo Introduction");
+    }
 }
