@@ -70,6 +70,7 @@ public class SceneManagement : MonoBehaviour
         {
             Character.Instance.LastScene = newScene;
         }
+
         Character.Instance.RefreshJsonData();
 
         SceneManager.LoadScene(newScene);

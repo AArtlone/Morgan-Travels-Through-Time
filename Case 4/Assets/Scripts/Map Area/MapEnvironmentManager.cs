@@ -8,7 +8,6 @@ public class MapEnvironmentManager : MonoBehaviour
     public GameObject ClothingPuzzleNpc;
     public GameObject EscapeGameNpc;
     public GameObject JacobNearHouse;
-    public GameObject JacobNearGate;
     public GameObject CloseButton;
     public GameObject DiaryButton;
     private GameObject _playerIcon; 
@@ -28,18 +27,30 @@ public class MapEnvironmentManager : MonoBehaviour
 
         if (Character.Instance.HasMap == true)
         {
-            CloseButton.SetActive(true);
-            HiddenObjectPuzzleNpc.SetActive(true);
+            if (CloseButton != null)
+            {
+                CloseButton.SetActive(true);
+            }
+            if (HiddenObjectPuzzleNpc != null)
+            {
+                HiddenObjectPuzzleNpc.SetActive(true);
+            }
             //DiaryButton.SetActive(true);
             //ClothingPuzzleNpc.SetActive(true);
         }
         if(Character.Instance.HasDiary == true)
         {
-            DiaryButton.SetActive(true);
+            if (DiaryButton != null)
+            {
+                DiaryButton.SetActive(true);
+            }
         }
         if(Character.Instance.TutorialCompleted == true)
         {
-            EscapeGameNpc.SetActive(true);
+            if (EscapeGameNpc != null)
+            {
+                EscapeGameNpc.SetActive(true);
+            }
         }
 
         // Checks for tutorial completeion status and enables/disables corresponding npcs

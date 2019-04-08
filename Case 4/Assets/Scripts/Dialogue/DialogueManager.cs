@@ -121,12 +121,10 @@ public class DialogueManager : MonoBehaviour
     {
         if (side == "left")
         {
-            Debug.Log("left trying to talk");
             RightCharacterPortrait.rectTransform.position = RightPortraitInitialPos;
             LeftCharacterPortrait.rectTransform.position = new Vector3(LeftCharacterPortrait.rectTransform.position.x, LeftCharacterPortrait.rectTransform.position.y + _offSet, 0f);
         } else if(side == "right")
         {
-            Debug.Log("right trying to talk");
             LeftCharacterPortrait.rectTransform.position = LeftPortraitInitialPos;
             if (RightCharacterPortrait.rectTransform.position == RightPortraitInitialPos)
             {

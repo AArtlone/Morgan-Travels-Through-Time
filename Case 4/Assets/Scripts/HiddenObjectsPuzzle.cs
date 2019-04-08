@@ -388,10 +388,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     private IEnumerator ShowStars()
     {
-        Debug.Log("AA");
         for (int i = 0; i < StarsList.Count; i++)
         {
-            Debug.Log("ee");
             yield return new WaitForSeconds(0.5f);
             StarsList[i].SetActive(true);
         }

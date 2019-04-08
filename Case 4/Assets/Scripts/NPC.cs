@@ -1,8 +1,10 @@
 ﻿using LitJson;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
@@ -14,7 +16,7 @@ public class NPC : MonoBehaviour
     // Used for detecting clicks on that object's image (region of space on camera)
     public Image DialogueProgressionTrigger2D;
     public GameObject SpeechBubble;
-    private Vector2 _posToMoveTo;
+    public Vector2 _posToMoveTo;
     private bool _canWalkToNextPosition;
     private bool _canInteractWithPlayer = true;
     [SerializeField]
@@ -38,6 +40,7 @@ public class NPC : MonoBehaviour
     List<Dialogue> dialoguesToPickFrom = new List<Dialogue>();
     List<Dialogue> FinalSequence = new List<Dialogue>();
     private SwipeController _swipeController;
+    private string SceneToLoadAfterDialogue;
 
     private void Start()
     {
@@ -80,7 +83,6 @@ public class NPC : MonoBehaviour
         {
             _canInteractWithPlayer = false;
             SpeechBubble.SetActive(false);
-            _posToMoveTo = new Vector2(31f, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, 15f * .5f * Time.deltaTime);
             if(Vector2.Distance(transform.position, _posToMoveTo) < 1f)
             {
@@ -322,6 +324,11 @@ public class NPC : MonoBehaviour
         }
         
         Character.Instance.CompleteObjectiveInQuest(FinalDialogueBranch.ObjectiveToComplete, FinalDialogueBranch.QuestOfDialogue);
+
+        if (FinalDialogueBranch.SceneToLoad != string.Empty)
+        {
+            SceneToLoadAfterDialogue = FinalDialogueBranch.SceneToLoad;
+        }
         
         //Debug.LogWarning("New dialogue is loaded!");
     }
@@ -470,12 +477,17 @@ public class NPC : MonoBehaviour
                             DialogueManager.Instance.CurrentNPCDialogue = null;
                             Character.Instance.InitiateInteraction();
                             _swipeController.enabled = true;
+                            
                             return;
                         }
                     }
                 }
                 else
                 {
+                    if (SceneToLoadAfterDialogue != string.Empty)
+                    {
+                        StartCoroutine(LoadSceneCo(SceneToLoadAfterDialogue));
+                    }
                     CurrentDialogueIndex = -1;
                     DialogueManager.Instance.ToggleDialogue(false);
                     //Character.Instance.RefreshItems();
@@ -487,7 +499,10 @@ public class NPC : MonoBehaviour
 
                     _isDialogueOngoing = false;
                     Character.Instance.InitiateInteraction();
-                    _swipeController.enabled = true;
+                    if (_swipeController != null)
+                    {
+                        _swipeController.enabled = true;
+                    }
                     return;
                 }
             }
@@ -522,6 +537,13 @@ public class NPC : MonoBehaviour
                 _isDialogueOngoing = true;
             }
         }
+    }
+
+    private IEnumerator LoadSceneCo(string sceneToLoad)
+    {
+        Debug.Log(sceneToLoad);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     private void CheckForNotCompletedObjective()

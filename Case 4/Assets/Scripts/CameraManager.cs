@@ -91,7 +91,10 @@ public class CameraManager : MonoBehaviour
                     if (i == _currentCameraIndex)
                     {
                         Cameras[i].SetActive(true);
-                        _mapEnvironmentManager.CurrentCamera = Cameras[i].gameObject;
+                        if (Cameras[i].gameObject != null)
+                        {
+                            _mapEnvironmentManager.CurrentCamera = Cameras[i].gameObject;
+                        }
                     } else
                     {
                         Cameras[i].SetActive(false);
@@ -116,7 +119,10 @@ public class CameraManager : MonoBehaviour
                     if (i == _currentCameraIndex)
                     {
                         Cameras[i].SetActive(true);
-                        _mapEnvironmentManager.CurrentCamera = Cameras[i].gameObject;
+                        if (Cameras[i].gameObject != null)
+                        {
+                            _mapEnvironmentManager.CurrentCamera = Cameras[i].gameObject;
+                        }
                     }
                     else
                     {

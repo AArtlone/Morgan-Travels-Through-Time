@@ -310,16 +310,7 @@ public class InterfaceManager : MonoBehaviour
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
     }
-
-    public void TempFunctionStartPuzzle()
-    {
-        SceneManagement.Instance.LoadScene("Escape Game");
-    }
-
-    public void TempFunction()
-    {
-        SceneManagement.Instance.LoadScene("Castle Area");
-    }
+    
     
     #region Quests, diary and character functions
     public void DisplayQuestDetails(Object obj)

@@ -54,4 +54,6 @@ public class DialogueBranch
     public List<GameObject> EntitiesToActivate;
     [Tooltip("After the dialogue is reached, it will DEactivate the game objects you have placed in this list, so as to progress the game.")]
     public List<GameObject> EntitiesToDeactive;
+    [Tooltip("A name of the scene that needs to be loaded after this dialogue branch.")]
+    public string SceneToLoad;
 }

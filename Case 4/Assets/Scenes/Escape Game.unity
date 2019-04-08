@@ -2542,6 +2542,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
+        type: 3}
+      propertyPath: Passable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5796841520237925583, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2596,11 +2601,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
-        type: 3}
-      propertyPath: Passable
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3, type: 3}
@@ -3659,7 +3659,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Main Map
+            m_StringArgument: Castle Area
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -3883,6 +3883,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
+        type: 3}
+      propertyPath: Passable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5796841520237925583, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3937,11 +3942,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
-        type: 3}
-      propertyPath: Passable
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3, type: 3}
@@ -4129,6 +4129,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Checkpoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
+        type: 3}
+      propertyPath: Passable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
+        type: 3}
+      propertyPath: ObstacleLink
+      value: 
+      objectReference: {fileID: 821478507}
     - target: {fileID: 5796841520237925583, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4184,16 +4194,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
-        type: 3}
-      propertyPath: Passable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
-        type: 3}
-      propertyPath: ObstacleLink
-      value: 
-      objectReference: {fileID: 821478507}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3, type: 3}
 --- !u!4 &2096743511 stripped
@@ -4335,6 +4335,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Checkpoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
+        type: 3}
+      propertyPath: Passable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
+        type: 3}
+      propertyPath: ObstacleLink
+      value: 
+      objectReference: {fileID: 903071280}
     - target: {fileID: 5796841520237925583, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4390,16 +4400,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
-        type: 3}
-      propertyPath: Passable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8350813877586662684, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3,
-        type: 3}
-      propertyPath: ObstacleLink
-      value: 
-      objectReference: {fileID: 903071280}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c96b8665c04b2b94b8c2a6e49e4cf8c3, type: 3}
 --- !u!4 &5796841520237925583 stripped

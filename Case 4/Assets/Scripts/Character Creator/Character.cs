@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     public bool TutorialCompleted;
     public bool HasMap;
     public bool HasDiary;
+    public bool IsCutscenePassed;
     public string LastMapArea;
     public string LastScene;
     [Space(10)]
@@ -163,6 +164,15 @@ public class Character : MonoBehaviour
                     else if (playerJsonData["HasDiary"].ToString() == "False")
                     {
                         HasDiary = false;
+                    }
+
+                    if (playerJsonData["IsCutscenePassed"].ToString() == "True")
+                    {
+                        IsCutscenePassed = true;
+                    }
+                    else if (playerJsonData["IsCutscenePassed"].ToString() == "False")
+                    {
+                        IsCutscenePassed = false;
                     }
 
                     #region Blueprints
@@ -517,6 +527,15 @@ public class Character : MonoBehaviour
             else if (characterData["HasDiary"].ToString() == "False")
             {
                 HasDiary = false;
+            }
+
+            if (characterData["IsCutscenePassed"].ToString() == "True")
+            {
+                IsCutscenePassed = true;
+            }
+            else if (characterData["IsCutscenePassed"].ToString() == "False")
+            {
+                IsCutscenePassed = false;
             }
 
             #region Blueprints
