@@ -28,6 +28,9 @@ public class DialogueManager : MonoBehaviour
     public List<string> DialogueResponses;
 
     private string _dialogueResponsesPath;
+    private float _offSet = 100f;
+    private Vector3 LeftPortraitInitialPos;
+    private Vector3 RightPortraitInitialPos;
 
     private void Awake()
     {
@@ -63,6 +66,9 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         SetupDialogueResponses();
+
+        RightPortraitInitialPos = RightCharacterPortrait.rectTransform.position;
+        LeftPortraitInitialPos = LeftCharacterPortrait.rectTransform.position;
     }
 
     private void SetupDialogueResponses()
@@ -109,6 +115,24 @@ public class DialogueManager : MonoBehaviour
         }
 
         //Debug.Log("Changed " + side + " portrait!");
+    }
+
+    public void OffSetPortrait(string side)
+    {
+        if (side == "left")
+        {
+            Debug.Log("left trying to talk");
+            RightCharacterPortrait.rectTransform.position = RightPortraitInitialPos;
+            LeftCharacterPortrait.rectTransform.position = new Vector3(LeftCharacterPortrait.rectTransform.position.x, LeftCharacterPortrait.rectTransform.position.y + _offSet, 0f);
+        } else if(side == "right")
+        {
+            Debug.Log("right trying to talk");
+            LeftCharacterPortrait.rectTransform.position = LeftPortraitInitialPos;
+            if (RightCharacterPortrait.rectTransform.position == RightPortraitInitialPos)
+            {
+                RightCharacterPortrait.rectTransform.position = new Vector3(RightCharacterPortrait.rectTransform.position.x, RightCharacterPortrait.rectTransform.position.y + _offSet, 0f);
+            }
+        }
     }
 
     public void ChangeTitle(string side, string newTitle)

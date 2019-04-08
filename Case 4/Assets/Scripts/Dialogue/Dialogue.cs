@@ -10,9 +10,11 @@ public class Dialogue
     [Space(10)]
     public string LeftCharacterTitle;
     public Sprite LeftCharacterPortrait;
+    public bool LeftPortraitTalking;
     [Space(10)]
     public string RightCharacterTitle;
     public Sprite RightCharacterPortrait;
+    public bool RightPortraitTalking;
     [Space(10)]
     public Sprite DialogueStageBackground;
     public Sprite DialogueBoxBackground;
