@@ -17,6 +17,7 @@ public class NPC : MonoBehaviour
     public Image DialogueProgressionTrigger2D;
     public GameObject SpeechBubble;
     public Vector2 _posToMoveTo;
+    public bool NeedsToMove;
     private bool _canWalkToNextPosition;
     private bool _canInteractWithPlayer = true;
     [SerializeField]
@@ -42,8 +43,12 @@ public class NPC : MonoBehaviour
     private SwipeController _swipeController;
     private string SceneToLoadAfterDialogue;
 
+    // ANIMATION-related references
+    private Animator _animator;
+
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _swipeController = FindObjectOfType<SwipeController>();
         DialogueManager.Instance.ToggleDialogue(false);
         if (DialogueProgressionTrigger2D == null)
@@ -79,15 +84,23 @@ public class NPC : MonoBehaviour
                 }
             }
         }
-        if(_canWalkToNextPosition && !_isDialogueOngoing)
+        if(_canWalkToNextPosition && !_isDialogueOngoing && NeedsToMove)
         {
+            // Once the npc starts walking, we toggle his animations
+            _animator.SetBool("IsWalking", true);
             _canInteractWithPlayer = false;
-            SpeechBubble.SetActive(false);
-            transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, 15f * .5f * Time.deltaTime);
+            SpeechBubble.GetComponent<SpriteRenderer>().enabled = false;
+
+            transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, 5f * .5f * Time.deltaTime);
+            transform.localScale = new Vector3(-0.5f, 0.5f, 1);
+
             if(Vector2.Distance(transform.position, _posToMoveTo) < 1f)
             {
                 _canInteractWithPlayer = true;
-                SpeechBubble.SetActive(true);
+                SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
+
+                _animator.SetBool("IsWalking", false);
+                transform.localScale = new Vector3(0.5f, 0.5f, 1);
             }
         }
     }

@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialogueTemplate;
     [Space(10)]
     public TextMeshProUGUI LeftCharacterTitle;
-    public Image LeftCharacterPortrait;
+    public GameObject LeftCharacterPortrait;
     [Space(10)]
     public TextMeshProUGUI RightCharacterTitle;
     public Image RightCharacterPortrait;
@@ -68,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         SetupDialogueResponses();
 
         RightPortraitInitialPos = RightCharacterPortrait.rectTransform.position;
-        LeftPortraitInitialPos = LeftCharacterPortrait.rectTransform.position;
+        LeftPortraitInitialPos = LeftCharacterPortrait.transform.position;
     }
 
     private void SetupDialogueResponses()
@@ -108,7 +108,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (side == "left")
         {
-            LeftCharacterPortrait.sprite = newPortrait;
+            //LeftCharacterPortrait.GetComponent<Image>().sprite = newPortrait;
         } else if (side == "right")
         {
             RightCharacterPortrait.sprite = newPortrait;
@@ -122,13 +122,16 @@ public class DialogueManager : MonoBehaviour
         if (side == "left")
         {
             RightCharacterPortrait.rectTransform.position = RightPortraitInitialPos;
-            LeftCharacterPortrait.rectTransform.position = new Vector3(LeftCharacterPortrait.rectTransform.position.x, LeftCharacterPortrait.rectTransform.position.y + _offSet, 0f);
+            LeftCharacterPortrait.transform.position = new Vector3(LeftCharacterPortrait.transform.position.x, LeftCharacterPortrait.transform.position.y + _offSet, 0f);
         } else if(side == "right")
         {
-            LeftCharacterPortrait.rectTransform.position = LeftPortraitInitialPos;
-            if (RightCharacterPortrait.rectTransform.position == RightPortraitInitialPos)
+            LeftCharacterPortrait.transform.position = LeftPortraitInitialPos;
+            if (RightCharacterPortrait.sprite.name != "UncleBen001")
             {
-                RightCharacterPortrait.rectTransform.position = new Vector3(RightCharacterPortrait.rectTransform.position.x, RightCharacterPortrait.rectTransform.position.y + _offSet, 0f);
+                if (RightCharacterPortrait.rectTransform.position == RightPortraitInitialPos)
+                {
+                    RightCharacterPortrait.rectTransform.position = new Vector3(RightCharacterPortrait.rectTransform.position.x, RightCharacterPortrait.rectTransform.position.y + _offSet, 0f);
+                }
             }
         }
     }

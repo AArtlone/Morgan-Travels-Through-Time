@@ -39,9 +39,12 @@ public class CameraBehavior : MonoBehaviour
         _isEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
+            if (InterfaceManager.Instance.ItemActionsWindow != null)
             {
-                InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
+                if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
+                {
+                    InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
+                }
             }
 
             RaycastHit2D hitCanvas = Physics2D.Raycast(Input.GetTouch(0).position, Vector2.down, 1000);
@@ -87,7 +90,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
+        Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
 
         if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {
@@ -129,6 +132,7 @@ public class CameraBehavior : MonoBehaviour
 
             if (hitObj.transform != null)
             {
+                Debug.Log(hitObj.transform.tag);
                 switch(hitObj.transform.tag)
                 {
                     case "NPC":

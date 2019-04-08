@@ -3963,11 +3963,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4715,6 +4715,111 @@ RectTransform:
   m_AnchoredPosition: {x: 539, y: -264.3}
   m_SizeDelta: {x: 136, y: 191.4}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &588745563
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1425263187}
+    m_Modifications:
+    - target: {fileID: 1541413055169549410, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Name
+      value: Speech Bubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541413055169549413, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742883726290735467, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742883726290735467, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742883726290735467, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742883726290735467, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1425263190}
+    - target: {fileID: 3742883726290735467, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742883726290735467, guid: ad52de8536c74624b928d0eb35e7c5c4,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad52de8536c74624b928d0eb35e7c5c4, type: 3}
+--- !u!1 &588745564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1541413055169549410, guid: ad52de8536c74624b928d0eb35e7c5c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 588745563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &588822489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5426,11 +5531,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6208,11 +6313,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6968,9 +7073,10 @@ MonoBehaviour:
   HiddenObjectPuzzleNpc: {fileID: 1425624453}
   ClothingPuzzleNpc: {fileID: 204209936}
   EscapeGameNpc: {fileID: 1633493005}
-  JacobNearHouse: {fileID: 1904641205}
+  JacobNearHouse: {fileID: 0}
   CloseButton: {fileID: 94918415}
   DiaryButton: {fileID: 2020847334}
+  BackpackButton: {fileID: 545233280}
   SequencesOfTutorial: []
   CurrentCamera: {fileID: 684567188}
 --- !u!4 &771343033
@@ -7421,7 +7527,7 @@ MonoBehaviour:
   CurrentNPCDialogue: {fileID: 0}
   DialogueTemplate: {fileID: 1380177415}
   LeftCharacterTitle: {fileID: 638807884}
-  LeftCharacterPortrait: {fileID: 796514767}
+  LeftCharacterPortrait: {fileID: 312481965}
   RightCharacterTitle: {fileID: 464518320}
   RightCharacterPortrait: {fileID: 710270841}
   DialogueProgressionBox: {fileID: 1235571926}
@@ -7889,11 +7995,11 @@ MonoBehaviour:
     lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -8156,6 +8262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2D Hidden Objects Puzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 500087120032631221, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2010536289, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8247,6 +8358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
         type: 3}
+      propertyPath: EntitiesToActivate.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
       propertyPath: puzzleNPC
       value: 
       objectReference: {fileID: 1425624454}
@@ -8315,10 +8431,625 @@ PrefabInstance:
       propertyPath: ItemsRequiredDutch.Array.data[11]
       value: Rugzak
       objectReference: {fileID: 0}
+    - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: EntitiesToActivate.Array.data[1]
+      value: 
+      objectReference: {fileID: 545233280}
+    - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: TimeToComplete
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7976134379006816317, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: ItemRewardAssetsImageName
+      value: diary
+      objectReference: {fileID: 0}
     - target: {fileID: 1855494718, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 829759611}
+    - target: {fileID: 5662878661915733912, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662878661915733912, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662878661915733912, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662878661915733912, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662878661915733912, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662878661915733912, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504855925666740539, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504855925666740539, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504855925666740539, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504855925666740539, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504855925666740539, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504855925666740539, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705702889517241720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705702889517241720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705702889517241720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705702889517241720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705702889517241720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8705702889517241720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666373462531561293, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666373462531561293, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666373462531561293, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666373462531561293, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666373462531561293, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666373462531561293, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257326896208146697, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257326896208146697, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257326896208146697, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257326896208146697, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257326896208146697, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257326896208146697, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355398021782200620, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355398021782200620, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355398021782200620, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355398021782200620, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355398021782200620, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 355398021782200620, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145306615635093872, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145306615635093872, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145306615635093872, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145306615635093872, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145306615635093872, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145306615635093872, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982730308873713729, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982730308873713729, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982730308873713729, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982730308873713729, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982730308873713729, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2982730308873713729, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416125991055358382, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416125991055358382, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416125991055358382, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416125991055358382, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416125991055358382, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416125991055358382, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920310616525356516, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920310616525356516, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920310616525356516, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920310616525356516, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920310616525356516, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 920310616525356516, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505792653356984901, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505792653356984901, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505792653356984901, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505792653356984901, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505792653356984901, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3505792653356984901, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235373210620932041, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235373210620932041, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235373210620932041, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235373210620932041, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235373210620932041, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 235373210620932041, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231441959589213801, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231441959589213801, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231441959589213801, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231441959589213801, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231441959589213801, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2231441959589213801, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320898030036047446, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320898030036047446, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320898030036047446, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320898030036047446, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320898030036047446, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320898030036047446, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779726251950280893, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779726251950280893, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779726251950280893, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779726251950280893, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779726251950280893, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779726251950280893, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367377453059668720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367377453059668720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367377453059668720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367377453059668720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367377453059668720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367377453059668720, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782957595978764309, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782957595978764309, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782957595978764309, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782957595978764309, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782957595978764309, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782957595978764309, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311551062156954858, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311551062156954858, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311551062156954858, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311551062156954858, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311551062156954858, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311551062156954858, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434278263066027418, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434278263066027418, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434278263066027418, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434278263066027418, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434278263066027418, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434278263066027418, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967380655724247770, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967380655724247770, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967380655724247770, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967380655724247770, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967380655724247770, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8967380655724247770, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63aaf2d1cb68e7e41ae1ba4c116ef181, type: 3}
 --- !u!1 &926157652 stripped
@@ -8608,11 +9339,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -8849,11 +9580,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -9504,6 +10235,162 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1001 &1047157590
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1425263187}
+    m_Modifications:
+    - target: {fileID: 699082045241937159, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_Name
+      value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732275574344712968, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543859248464545062, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: Name
+      value: Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543859248464545062, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: NameDutch
+      value: Kaart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543859248464545062, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: Description
+      value: The map
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543859248464545062, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: DescriptionDutch
+      value: De kaart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543859248464545062, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+        type: 3}
+      propertyPath: AssetsImageName
+      value: old map
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65e0550b776d8cc4d8c72b22da7f0d4e, type: 3}
+--- !u!114 &1047157591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7543859248464545062, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1047157590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c33b436b44fbc045aeb010b0de6ad8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1054708897
 GameObject:
   m_ObjectHideFlags: 0
@@ -12595,7 +13482,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1904641202}
+        - m_Target: {fileID: 1425263190}
           m_MethodName: ContinueDialogue
           m_Mode: 1
           m_Arguments:
@@ -14018,6 +14905,1010 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410483249}
   m_CullTransparentMesh: 0
+--- !u!1001 &1425263186
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1599863843}
+    m_Modifications:
+    - target: {fileID: 9015574016689963620, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Name
+      value: Jacob Near House
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963620, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017106424102, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.26092944
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016024824554, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.063223206
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574015890454526, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574015890454512, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574015890454512, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574015965396156, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574015965396158, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574015965396158, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016273015736, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016273015738, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016273015738, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016370978288, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016370978290, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016370978290, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016549243289, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016549243291, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016549243291, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016692947507, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016692947509, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016692947509, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016755813600, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016755813602, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016755813602, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016992388780, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016992388782, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016992388782, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017274609940, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017274609942, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017274609942, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017367343724, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017367343726, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017367343726, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017439665025, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017439665027, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017439665027, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017644426546, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017644426547, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017644426547, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 63f16c9a56c5b9b48918398714815a80, type: 3}
+--- !u!4 &1425263187 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9015574016689963619, guid: 63f16c9a56c5b9b48918398714815a80,
+    type: 3}
+  m_PrefabInstance: {fileID: 1425263186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1425263188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9015574016689963620, guid: 63f16c9a56c5b9b48918398714815a80,
+    type: 3}
+  m_PrefabInstance: {fileID: 1425263186}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1425263189
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425263188}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.12819803, y: 0.30852652}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.493604, y: 4.8470526}
+  m_EdgeRadius: 0
+--- !u!114 &1425263190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425263188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20fc93a2e651af40a7a88e479d963d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Jacob
+  DialogueProgressionTrigger2D: {fileID: 1235571926}
+  SpeechBubble: {fileID: 588745564}
+  _posToMoveTo: {x: 31, y: 0.79}
+  NeedsToMove: 1
+  DialogueFormats:
+  - Language: English
+    Dialogue:
+    - DialogueTitle: Dialogue1Q1
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: "Hey, are you alright? It must have been those soldiers\u2026"
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1R1
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 1
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: '...?'
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q2
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: "Hey, you, come on, there's no time to be laying about. We need
+          to get going before the soldiers come!\r\nWe should be able to reach Groningen
+          by nightfall, mother guesses.\r\n"
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1R2
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 1
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Where are we?
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q3
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: "They must have hit you pretty hard. But that's fine, you'll
+          be fine again.\r\nWe're in Drenthe right now, taking the nature route to
+          Groningen, so it's less likely we'll encounter soldiers on our way.\r\n"
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q4
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Here, you can have this. Sister has another one, so it's fine.
+          And don't worry about the date. Not that much has changed between 1665 and
+          1672 according to Mother, the map is still fine to use.
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 2058965403}
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q5
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 07d35ab4725e93e4eb7000d700763c5f,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: We're going here!
+        OptionsMenu: []
+        ItemsEarned:
+        - {fileID: 1047157591}
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 94918415}
+        EntitiesToDeactive:
+        - {fileID: 2058965403}
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue2Q1
+      PriorityIndex: 1
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Hey, are those your things on the ground?
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 1425624453}
+        EntitiesToDeactive:
+        - {fileID: 2058965403}
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems:
+      - Map
+    - DialogueTitle: Dialogue3Q1
+      PriorityIndex: 2
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Let's get going!
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 1672???
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems:
+      - Diary
+    - DialogueTitle: Dialogue5Q1
+      PriorityIndex: 3
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 41ad7a2871270fa4390af1282495a2ad,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Look! It's Groningen!
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 1672???
+        ObjectiveToComplete: 1
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: Escape Game
+      ObjectivesToMeet:
+      - ID: 0
+        Name: Talk to Jacob
+        CompletedStatus: 1
+      RequiredItems:
+      - Diary
+  - Language: Dutch
+    Dialogue:
+    - DialogueTitle: Dialogue1Q1
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Hey, gaat het met je? ...Het waren zeker die soldaten..
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1R1
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: '....?'
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q2
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Hey, kom op! Er is geen tijd om te blijven liggen! We moeten
+          gaan voordat de soldaten komen. Moeder denkt dat we Groningen rond de avond
+          kunnen halen.
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1R2
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Waar zijn we?
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q3
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Ze hebben je vast hard slagen.. Maar geen zorgen, het komt vast
+          wel weer goed. We zijn nu in Drenthe en we gaan de natuur route nemen naar
+          Groningen. De kans is dan kleiner dat we soldaten tegen komen.
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q4
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Hier, je mag dit wel hebben. Mijn zus heeft er nog een, dus
+          het is prima. Maak je geen zorgen over de datum. Er is niet veel veranderd
+          tussen 1665 en 1672 volgens moeder, dus de kaart is nog prima om te gebruiken.
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 2058965403}
+        EntitiesToDeactive: []
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue1Q5
+      PriorityIndex: 0
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 07d35ab4725e93e4eb7000d700763c5f,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Hier gaan we heen!
+        OptionsMenu: []
+        ItemsEarned:
+        - {fileID: 1047157591}
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 94918415}
+        EntitiesToDeactive:
+        - {fileID: 2058965403}
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems: []
+    - DialogueTitle: Dialogue2Q1
+      PriorityIndex: 1
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Hey, zijn die dingen op de grond van jou?
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 1425624453}
+        EntitiesToDeactive:
+        - {fileID: 2058965403}
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems:
+      - Kaart
+    - DialogueTitle: Dialogue3Q1
+      PriorityIndex: 2
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: 69b8287044d2bac4cbc2ed7c9c6e40a3,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Laten we gaan!
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 1672???
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 1425624453}
+        EntitiesToDeactive:
+        - {fileID: 2058965403}
+        SceneToLoad: 
+      ObjectivesToMeet: []
+      RequiredItems:
+      - Dagboek
+    - DialogueTitle: Dialogue5Q1
+      PriorityIndex: 2
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: 41ad7a2871270fa4390af1282495a2ad,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Kijk! Dat is Groningen!
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 0}
+        EntitiesToDeactive:
+        - {fileID: 0}
+        SceneToLoad: Escape Game
+      ObjectivesToMeet:
+      - ID: 0
+        Name: Praat met Jacob
+        CompletedStatus: 1
+      RequiredItems: []
+--- !u!114 &1425263191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425263188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1425263190}
+          m_MethodName: ContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1001 &1425624451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14186,6 +16077,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -1.51
       objectReference: {fileID: 0}
+    - target: {fileID: 3667433609669081332, guid: ef866524bb0860c458b8930c8fd0be2b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.74
+      objectReference: {fileID: 0}
     - target: {fileID: 5125067410815410004, guid: ef866524bb0860c458b8930c8fd0be2b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14201,6 +16097,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 5125067410815410004, guid: ef866524bb0860c458b8930c8fd0be2b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.74
+      objectReference: {fileID: 0}
     - target: {fileID: 5125067412478379008, guid: ef866524bb0860c458b8930c8fd0be2b,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -14215,6 +16116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125067412478379008, guid: ef866524bb0860c458b8930c8fd0be2b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.74
       objectReference: {fileID: 0}
     - target: {fileID: 701633026799464147, guid: ef866524bb0860c458b8930c8fd0be2b,
         type: 3}
@@ -14252,6 +16158,11 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8487230149413082400, guid: ef866524bb0860c458b8930c8fd0be2b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 14073873554450900, guid: ef866524bb0860c458b8930c8fd0be2b,
         type: 3}
       propertyPath: m_Sprite
@@ -14273,6 +16184,11 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 14073873554450900, guid: ef866524bb0860c458b8930c8fd0be2b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 14073875083211392, guid: ef866524bb0860c458b8930c8fd0be2b,
         type: 3}
       propertyPath: m_Sprite
@@ -14293,6 +16209,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14073875083211392, guid: ef866524bb0860c458b8930c8fd0be2b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef866524bb0860c458b8930c8fd0be2b, type: 3}
@@ -15745,7 +17666,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1904641204}
+  - {fileID: 1425263187}
   - {fileID: 1605451627}
   - {fileID: 1425624452}
   - {fileID: 204209935}
@@ -16947,7 +18868,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1904641202}
+      - m_Target: {fileID: 0}
         m_MethodName: ContinueDialogue
         m_Mode: 1
         m_Arguments:
@@ -17519,11 +19440,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -19683,2087 +21604,6 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!1001 &1904641201
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1599863843}
-    m_Modifications:
-    - target: {fileID: 8004301126409690337, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_Name
-      value: Jacob Near House
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690337, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].ObjectivesToMeet.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].ObjectivesRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectivesRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectivesRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueBranches.Array.data[0].ObjectivesRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].ObjectivesToMeet.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].RequiredItems.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].RequiredItems.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].RequiredItems.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].RequiredItems.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].RequiredItems.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].RequiredItems.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].ItemsRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].RequiredItems.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].RequiredItems.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].ObjectivesToMeet.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].ObjectivesToMeet.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToActivate.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].RequiredItems.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].ObjectivesToMeet.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].ObjectivesToMeet.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ObjectivesRequired.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueProgressionTrigger2D
-      value: 
-      objectReference: {fileID: 1235571926}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].ObjectivesToMeet.Array.data[0].Name
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].ObjectivesToMeet.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].DialogueText
-      value: I see the stars and the planets to follow.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].ObjectivesRequired.Array.data[0].Name
-      value: Find the main map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].ObjectivesRequired.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].Name
-      value: Find the main map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueBranches.Array.data[0].DialogueText
-      value: '....?'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].Name
-      value: Finish the first puzzle
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].Name
-      value: Find the main map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].QuestOfDialogue
-      value: Tutorial
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[1].ObjectiveToComplete
-      value: Find the main map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].ObjectiveToComplete
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueBranches.Array.data[0].DialogueText
-      value: "Hey, are you alright? It must have been those soldiers\u2026"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].DialogueBranches.Array.data[0].DialogueText
-      value: '...?'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].DialogueTitle
-      value: Dialogue1R1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].DialogueBranches.Array.data[0].BranchTitle
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].DialogueTitle
-      value: Dialogue1Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].DialogueTitle
-      value: Dialogue1Q2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].DialogueBranches.Array.data[0].DialogueText
-      value: "Hey, you, come on, there's no time to be laying about. We need to get
-        going before the soldiers come!\r\nWe should be able to reach Groningen by
-        nightfall, mother guesses.\r\n"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].DialogueTitle
-      value: Dialogue1R2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].DialogueBranches.Array.data[0].DialogueText
-      value: Where are we?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueTitle
-      value: Dialogue1Q3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueBranches.Array.data[0].DialogueText
-      value: "They must have hit you pretty hard. But that's fine, you'll be fine
-        again.\r\nWe're in Drenthe right now, taking the nature route to Groningen,
-        so it's less likely we'll encounter soldiers on our way.\r\n"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueTitle
-      value: Dialogue1Q4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].DialogueText
-      value: Here, you can have this. Sister has another one, so it's fine. And don't
-        worry about the date. Not that much has changed between 1665 and 1672 according
-        to Mother, the map is still fine to use.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueTitle
-      value: Dialogue1Q5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 07d35ab4725e93e4eb7000d700763c5f,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].DialogueText
-      value: We're going here!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].DialogueBranches.Array.data[0].DialogueText
-      value: Hey, kom op! Er is geen tijd om te blijven liggen! We moeten gaan voordat
-        de soldaten komen. Moeder denkt dat we Groningen rond de avond kunnen halen.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].DialogueBranches.Array.data[0].DialogueText
-      value: Waar zijn we?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueBranches.Array.data[0].DialogueText
-      value: Ze hebben je vast hard slagen.. Maar geen zorgen, het komt vast wel weer
-        goed. We zijn nu in Drenthe en we gaan de natuur route nemen naar Groningen.
-        De kans is dan kleiner dat we soldaten tegen komen.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].DialogueText
-      value: Hier, je mag dit wel hebben. Mijn zus heeft er nog een, dus het is prima.
-        Maak je geen zorgen over de datum. Er is niet veel veranderd tussen 1665 en
-        1672 volgens moeder, dus de kaart is nog prima om te gebruiken.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueTitle
-      value: Dialogue1Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].DialogueText
-      value: Hey, gaat het met je? ...Het waren zeker die soldaten..
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[1].DialogueTitle
-      value: Dialogue1R1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[2].DialogueTitle
-      value: Dialogue1Q2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[3].DialogueTitle
-      value: Dialogue1R2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueTitle
-      value: Dialogue1Q3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueTitle
-      value: Dialogue1Q4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueTitle
-      value: Dialogue1Q5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 07d35ab4725e93e4eb7000d700763c5f,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].DialogueText
-      value: Hier gaan we heen!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].ObjectivesToMeet.Array.data[0].Name
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].ObjectivesToMeet.Array.data[0].CompletedStatus
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].RequiredItems.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].PriorityIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueTitle
-      value: Dialogue2Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].PriorityIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: e89544fe59e34764f90ef73c4b46cf1e,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].DialogueText
-      value: Hey, are those your things on the ground?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueTitle
-      value: Dialogue3Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].PriorityIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: e89544fe59e34764f90ef73c4b46cf1e,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].DialogueText
-      value: Let's get going!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueTitle
-      value: Dialogue5Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].PriorityIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: e89544fe59e34764f90ef73c4b46cf1e,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].DialogueText
-      value: Look! It's Groningen!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueTitle
-      value: Dialogue2Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBranches.Array.data[0].DialogueText
-      value: Yo
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueTitle
-      value: Dialogue1Q4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBranches.Array.data[0].DialogueText
-      value: Here, you can have this. Sister has another one, so it's fine. And don't
-        worry about the date. Not that much has changed between 1665 and 1672 according
-        to Mother, the map is still fine to use.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueTitle
-      value: Dialogue1Q4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBranches.Array.data[0].DialogueText
-      value: Here, you can have this. Sister has another one, so it's fine. And don't
-        worry about the date. Not that much has changed between 1665 and 1672 according
-        to Mother, the map is still fine to use.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueTitle
-      value: Dialogue1Q4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBranches.Array.data[0].DialogueText
-      value: Here, you can have this. Sister has another one, so it's fine. And don't
-        worry about the date. Not that much has changed between 1665 and 1672 according
-        to Mother, the map is still fine to use.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueTitle
-      value: Dialogue1Q4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBranches.Array.data[0].DialogueText
-      value: Here, you can have this. Sister has another one, so it's fine. And don't
-        worry about the date. Not that much has changed between 1665 and 1672 according
-        to Mother, the map is still fine to use.
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[11].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[12].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[13].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[14].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].RequiredItems.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].PriorityIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].RequiredItems.Array.data[0]
-      value: Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 94918415}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641205}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641205}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[1]
-      value: 
-      objectReference: {fileID: 2020847334}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[2]
-      value: 
-      objectReference: {fileID: 1425624453}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].RequiredItems.Array.data[0]
-      value: Diary
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].RequiredItems.Array.data[0]
-      value: Diary
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].PriorityIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[10].RequiredItems.Array.data[0]
-      value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[3]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 1425624453}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[1]
-      value: 
-      objectReference: {fileID: 1953893189}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].DialogueBranches.Array.data[0].Priority
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 94918415}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueTitle
-      value: Dialogue2Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].PriorityIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: e89544fe59e34764f90ef73c4b46cf1e,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].ItemsRequired.Array.data[0]
-      value: Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].DialogueText
-      value: Hey, zijn die dingen op de grond van jou?
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 1425624453}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[7].RequiredItems.Array.data[0]
-      value: Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueTitle
-      value: Dialogue3Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].PriorityIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: e89544fe59e34764f90ef73c4b46cf1e,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.data[0].DialogueText
-      value: Laten we gaan!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 1425624453}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].RequiredItems.Array.data[0]
-      value: Dagboek
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 94918415}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[1]
-      value: 
-      objectReference: {fileID: 2020847334}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[2]
-      value: 
-      objectReference: {fileID: 1425624453}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[3]
-      value: 
-      objectReference: {fileID: 2058965403}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641205}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].ObjectivesToMeet.Array.data[0].Name
-      value: Talk to Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].ObjectivesToMeet.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[4].DialogueBranches.Array.data[0].ItemsEarned.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641203}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641205}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].ObjectivesToMeet.Array.data[0].Name
-      value: Talk to Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].ObjectivesToMeet.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueTitle
-      value: Dialogue5Q1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].PriorityIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].RightCharacterTitle
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].RightCharacterPortrait
-      value: 
-      objectReference: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueStageBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: e89544fe59e34764f90ef73c4b46cf1e,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBoxBackground
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.data[0].DialogueText
-      value: Kijk! Dat is Groningen!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToActivate.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.data[0].EntitiesToDeactive.Array.data[0]
-      value: 
-      objectReference: {fileID: 1904641205}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].RequiredItems.Array.data[0]
-      value: Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].ObjectivesToMeet.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].ObjectivesToMeet.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[6].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 1672???
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[8].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 1672???
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: PlayerCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].QuestOfDialogue
-      value: 1672???
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ObjectiveToComplete
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].Name
-      value: 1672???
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].ObjectivesRequired.Array.data[0].CompletedStatus
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].LeftPortraitTalking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[1].LeftPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[0].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[2].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[3].LeftPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[4].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[5].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[6].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[7].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[8].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[0].Dialogue.Array.data[9].DialogueBranches.Array.data[0].SceneToLoad
-      value: Escape Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: Name
-      value: Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: _posToMoveTo.x
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: _posToMoveTo.y
-      value: 1.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].RightPortraitTalking
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].DialogueBranches.Array.data[0].SceneToLoad
-      value: Escape Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[9].ObjectivesToMeet.Array.data[0].Name
-      value: Praat met Jacob
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 699082046945187567, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_Name
-      value: Diary
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543859248538033381, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: NameDutch
-      value: Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543859248538033381, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DescriptionDutch
-      value: De Kaart
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543859246752653006, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: Name
-      value: Diary
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543859246752653006, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: Description
-      value: The Diary
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543859246752653006, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: NameDutch
-      value: Dagboek
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543859246752653006, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: DescriptionDutch
-      value: The Dagboek
-      objectReference: {fileID: 0}
-    - target: {fileID: 8004301126409690349, guid: 446aa4024397a28469978c9a4a8d6d3c,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 446aa4024397a28469978c9a4a8d6d3c, type: 3}
---- !u!114 &1904641202 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8004301126409690351, guid: 446aa4024397a28469978c9a4a8d6d3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1904641201}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904641205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d20fc93a2e651af40a7a88e479d963d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1904641203 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7543859248538033381, guid: 446aa4024397a28469978c9a4a8d6d3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1904641201}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c33b436b44fbc045aeb010b0de6ad8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1904641204 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8004301126409690350, guid: 446aa4024397a28469978c9a4a8d6d3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1904641201}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1904641205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8004301126409690337, guid: 446aa4024397a28469978c9a4a8d6d3c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1904641201}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1945156499
 PrefabInstance:
   m_ObjectHideFlags: 0

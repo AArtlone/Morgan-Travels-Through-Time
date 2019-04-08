@@ -59,10 +59,10 @@ public class SceneManagement : MonoBehaviour
 
         SceneManager.LoadScene("Character Customization");
     }
-    
+
     public void LoadScene(string newScene)
     {
-        if (newScene == "Main Map" || newScene == "Tutorial Map Area")
+        if (newScene == "Main Map" || newScene == "Tutorial Map Area" || newScene == "Castle Area")
         {
             Character.Instance.LastMapArea = newScene;
         }

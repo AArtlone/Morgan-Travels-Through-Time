@@ -637,7 +637,7 @@ public class InterfaceManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
-        if (scene == "Main Map" || scene == "Tutorial Map Area")
+        if (scene == "Main Map" || scene == "Tutorial Map Area" || scene == "Castle Area")
         {
             Character.Instance.LastMapArea = scene;
         } else

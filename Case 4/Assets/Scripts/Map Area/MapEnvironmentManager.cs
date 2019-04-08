@@ -10,6 +10,7 @@ public class MapEnvironmentManager : MonoBehaviour
     public GameObject JacobNearHouse;
     public GameObject CloseButton;
     public GameObject DiaryButton;
+    public GameObject BackpackButton;
     private GameObject _playerIcon; 
 
     private CameraBehavior _cameraBehaviour;
@@ -43,6 +44,7 @@ public class MapEnvironmentManager : MonoBehaviour
             if (DiaryButton != null)
             {
                 DiaryButton.SetActive(true);
+                BackpackButton.SetActive(true);
             }
         }
         if(Character.Instance.TutorialCompleted == true)
