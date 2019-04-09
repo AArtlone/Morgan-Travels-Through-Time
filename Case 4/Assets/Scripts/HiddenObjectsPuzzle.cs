@@ -111,10 +111,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         InvokeRepeating("CountDown", 1f, 1f);
 
-        for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
-        {
-            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
-        }
+        //for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
+        //{
+        //    FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
+        //}
     }
 
     public void CompletePuzzle()
