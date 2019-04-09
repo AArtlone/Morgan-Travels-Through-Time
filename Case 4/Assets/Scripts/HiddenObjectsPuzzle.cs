@@ -58,10 +58,12 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public List<GameObject> StarsList;
 
     private CameraBehavior _cameraBehaviour;
+    private AudioManager _audioManager;
 
     private void Start()
     {
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
+        _audioManager = FindObjectOfType<AudioManager>();
         // We get all the objects in the Objects To Find List in this hidden objects
         // puzzle from the editor, and we use those objects for the hints mechanic.
         for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
@@ -120,6 +122,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void CompletePuzzle()
     {
+        _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+
         // TODO: Change the stars values of this puzzle using different formulas.
         CancelInvoke();
 
@@ -234,6 +238,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (!ItemsFound.Contains(NameOfItem))
         {
+            _audioManager.PlaySound(_audioManager.ItemFoundUsed);
+
             switch (SettingsManager.Instance.Language)
             {
                 case "English":

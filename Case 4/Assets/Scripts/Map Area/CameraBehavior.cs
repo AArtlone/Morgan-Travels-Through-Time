@@ -24,9 +24,11 @@ public class CameraBehavior : MonoBehaviour
     // Camera components
     private MapEnvironmentManager _mapEnvironmentManager;
     private SwipeController _swipeController;
+    private AudioManager _audioManager;
 
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
         _swipeController = InterfaceManager.Instance.SwipeController;
@@ -39,6 +41,7 @@ public class CameraBehavior : MonoBehaviour
         _isEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
+            _audioManager.PlaySound(_audioManager.HitScreen);
             if (InterfaceManager.Instance.ItemActionsWindow != null)
             {
                 if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
@@ -90,7 +93,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
+        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
 
         if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
         {

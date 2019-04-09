@@ -18,6 +18,9 @@ public class SettingsManager : MonoBehaviour
     public int SoundEffectsVolume;
     public int BackgroundMusicVolume;
 
+    public List<AudioSource> BackgroundSources;
+    public List<AudioSource> SoundSources;
+
     private string _pathToSettingsJson;
     public LanguageToggle[] LanguageIconObjects;
     public List<Image> LanguageIcons;
@@ -168,6 +171,25 @@ public class SettingsManager : MonoBehaviour
                     }
                 }
                 break;
+        }
+    }
+
+    public void UpdateAudioVolume()
+    {
+        foreach (AudioSource audioSource in BackgroundSources)
+        {
+            if (audioSource != null)
+            {
+                audioSource.volume = SoundEffectsVolume / 100f;
+            }
+        }
+
+        foreach (AudioSource audioSource in BackgroundSources)
+        {
+            if (audioSource != null)
+            {
+                audioSource.volume = BackgroundMusicVolume / 100f;
+            }
         }
     }
 }

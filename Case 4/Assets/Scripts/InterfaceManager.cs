@@ -261,7 +261,10 @@ public class InterfaceManager : MonoBehaviour
                 
                 if (uiObj.transform.tag == "Settings UI")
                 {
-                    SwipeController.enabled = false;
+                    if (SwipeController != null)
+                    {
+                        SwipeController.enabled = false;
+                    }
                     SettingsManager.Instance.UpdateHiglightedLanguageIcons();
                 }
             }

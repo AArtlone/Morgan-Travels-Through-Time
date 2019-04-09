@@ -81,19 +81,15 @@ public class Puzzle : MonoBehaviour
             // object is a child of the puzzle prefab and that changes its position to the
             // center of that prefab instead of the canvas instead.
             PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-
-            Debug.Log("ooo");
+            
             PuzzleToLaunch.SetActive(true);
             PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
-            Debug.Log("ppp");
+
             if (Character.Instance.TutorialCompleted)
             {
                 PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
-                Debug.Log("ee");
             }
             transform.GetComponent<Image>().raycastTarget = false;
-
-            Debug.Log("AAA");
         } else
         {
             PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -103,9 +99,7 @@ public class Puzzle : MonoBehaviour
             if (Character.Instance.TutorialCompleted)
             {
                 PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
-                Debug.Log("cum");
             }
-            Debug.Log("cunt");
         }
         StartPuzzleIconToggle();
         if (Character.Instance.TutorialCompleted == false)
