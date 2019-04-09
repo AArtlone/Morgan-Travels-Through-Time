@@ -655,9 +655,20 @@ public class InterfaceManager : MonoBehaviour
     
     public void ResetTheGame()
     {
-        Character.Instance.DeleteJsonFiles();
-        SettingsManager.Instance.DeleteJsonFile();
-        DialogueManager.Instance.DeleteJsonFile();
-        SceneManagement.Instance.LoadScene("Logo Introduction");
+        if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
+        {
+            SceneManagement.Instance.DestroySceneManagementInstance();
+            Character.Instance.DeleteJsonFiles();
+            SettingsManager.Instance.DeleteJsonFile();
+            SceneManager.LoadScene("Logo Introduction");
+        }
+        else
+        {
+            SceneManagement.Instance.DestroySceneManagementInstance();
+            Character.Instance.DeleteJsonFiles();
+            SettingsManager.Instance.DeleteJsonFile();
+            DialogueManager.Instance.DeleteJsonFile();
+            SceneManager.LoadScene("Logo Introduction");
+        }
     }
 }

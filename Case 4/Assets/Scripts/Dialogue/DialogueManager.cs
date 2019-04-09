@@ -73,8 +73,12 @@ public class DialogueManager : MonoBehaviour
 
     public void DeleteJsonFile()
     {
-        File.Delete(_dialogueResponsesPath);
-        Destroy(gameObject);
+        if(File.Exists(_dialogueResponsesPath))
+        {
+            File.Delete(_dialogueResponsesPath);
+            Destroy(Instance);
+            Destroy(gameObject);
+        }
     }
 
     private void SetupDialogueResponses()

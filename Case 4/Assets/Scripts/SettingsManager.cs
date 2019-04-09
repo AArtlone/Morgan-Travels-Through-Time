@@ -28,6 +28,11 @@ public class SettingsManager : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -59,16 +64,13 @@ public class SettingsManager : MonoBehaviour
 
             File.WriteAllText(_pathToSettingsJson, settingsText);
         }
-    }
-
-    private void Start()
-    {
         UpdateHiglightedLanguageIcons();
     }
 
     public void DeleteJsonFile()
     {
         File.Delete(_pathToSettingsJson);
+        Destroy(Instance);
         Destroy(gameObject);
     }
 

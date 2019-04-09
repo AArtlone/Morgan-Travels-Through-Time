@@ -82,4 +82,10 @@ public class SceneManagement : MonoBehaviour
             SceneManager.LoadScene(newScene);
         }
     }
+
+    public void DestroySceneManagementInstance()
+    {
+        Destroy(Instance);
+        Destroy(gameObject);
+    }
 }
