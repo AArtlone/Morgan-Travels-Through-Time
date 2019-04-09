@@ -81,6 +81,7 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
+        #region
         //if (Instance != null && Instance != this)
         //{
         //    Destroy(Instance);
@@ -409,7 +410,7 @@ public class Character : MonoBehaviour
         //                Wearables.Add(clothing);
         //                WearablesDutch.Add(clothing);
         //            }
-                    
+
         //            File.WriteAllText(_wearablesJsonFilePath, wearablesData.text);
         //            File.WriteAllText(_wearablesDutchJsonFilePath, wearablesDataDutch.text);
         //            RefreshWearables();
@@ -427,6 +428,7 @@ public class Character : MonoBehaviour
         //        }
         //    }
         //}
+        #endregion
     }
 
     private void Start()
@@ -777,6 +779,8 @@ public class Character : MonoBehaviour
                 }
             }
         }
+
+        //UpdateAreaStatus("Castle Area", "Unlocked");
     }
 
     #region Setup data from storage functionality
@@ -1353,6 +1357,31 @@ public class Character : MonoBehaviour
 
         RefreshAllQuests();
         //Debug.Log(returnOutput);
+    }
+
+    public void UpdateAreaStatus(string areaName, string status)
+    {
+        Area.AreaStatus newAreaStatus;
+        if (status == "Locked")
+        {
+            newAreaStatus = Area.AreaStatus.Locked;
+        } else if (status == "Unlocked")
+        {
+            newAreaStatus = Area.AreaStatus.Unlocked;
+        } else
+        {
+            newAreaStatus = Area.AreaStatus.Unlocked;
+        }
+
+        foreach (Area area in Areas)
+        {
+            if (area.Name == areaName)
+            {
+                area.Status = newAreaStatus;
+            }
+        }
+
+        RefreshAreas();
     }
 
     public void CollectBlueprint(string blueprint)
@@ -2013,6 +2042,32 @@ public class Character : MonoBehaviour
         }
 
         LoadInventory();
+    }
+
+    public void RefreshAreas()
+    {
+        File.WriteAllText(_areasJsonFilePath, "");
+
+        // This creates the starting wrapper of the json file.
+        string newAreasData = "{\"Areas\":[";
+
+        foreach (Area area in Areas)
+        {
+            newAreasData += "{";
+            newAreasData += "\"Name\":\"" + area.Name + "\",";
+            newAreasData += "\"Status\":\"" + area.Status.ToString() + "\"";
+            newAreasData += "},";
+        }
+
+        if (Areas.Count > 0)
+        {
+            // This removes the last comma at the last item in the array, so
+            // that we wont get an error when getting the data later on.
+            newAreasData = newAreasData.Substring(0, newAreasData.Length - 1);
+        }
+        // This closes the wrapper of the json file made from the beginning.
+        newAreasData += "]}";
+        File.WriteAllText(_areasJsonFilePath, newAreasData);
     }
     #endregion
 

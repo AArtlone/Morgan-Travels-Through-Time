@@ -49,8 +49,11 @@ public class AppearanceDisplay : MonoBehaviour
 
     public Animator PanelAnimator;
 
+    private AudioManager _audioManager;
+
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
         _bodyBodyPart = GameObject.Find("Body Body Part");
@@ -69,6 +72,8 @@ public class AppearanceDisplay : MonoBehaviour
     // whenever he clicks on the body type button.
     public void ToggleDisplay(Object display)
     {
+        _audioManager.PlaySound(_audioManager.NewPageInDiary);
+
         PanelAnimator.SetBool("IsOpen", true);
         GameObject displayObj = (GameObject)display;
         foreach(GameObject _display in Displays)
@@ -135,6 +140,8 @@ public class AppearanceDisplay : MonoBehaviour
                 button.transform.GetChild(0).gameObject.SetActive(true);
                 break;
         }
+
+        _audioManager.PlaySound(_audioManager.CloseWindow);
     }
 
     public void ToggleQuestDisplay(Object display)

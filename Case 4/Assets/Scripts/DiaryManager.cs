@@ -10,8 +10,17 @@ public class DiaryManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> _pages = new List<GameObject>();
 
+    private AudioManager _audioManager;
+
+    private void Start()
+    {
+        _audioManager = FindObjectOfType<AudioManager>();
+    }
+
     public void SelectPage(Object selectedButton)
     {
+        _audioManager.PlaySound(_audioManager.NewPageInDiary);
+
         GameObject buttonObj = (GameObject)selectedButton;
         
         foreach (GameObject button in _buttonsForPages)

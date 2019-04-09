@@ -84,6 +84,7 @@ public class InterfaceManager : MonoBehaviour
 
     public CameraBehavior CameraBehavior;
     public SwipeController SwipeController;
+    private AudioManager _audioManager;
 
     private void Awake()
     {
@@ -99,6 +100,8 @@ public class InterfaceManager : MonoBehaviour
 
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
+
         if (SceneManager.GetActiveScene().name != "Escape Game")
         {
             SetupQuestsInDiary();
@@ -249,6 +252,8 @@ public class InterfaceManager : MonoBehaviour
 
     public void ToggleUI(Object ui)
     {
+        _audioManager.PlaySound(_audioManager.ButtonPress);
+
         GameObject uiObj = (GameObject)ui;
 
         foreach (GameObject obj in IconDisplays)
@@ -493,7 +498,10 @@ public class InterfaceManager : MonoBehaviour
                 {
                     if (sprite.name == clothing.Name)
                     {
-                        _bodyIcon.sprite = sprite;
+                        if (_bodyIcon != null)
+                        {
+                            _bodyIcon.sprite = sprite;
+                        }
                     }
                 }
             }
@@ -503,7 +511,10 @@ public class InterfaceManager : MonoBehaviour
                 {
                     if (sprite.name == clothing.Name)
                     {
-                        _faceIcon.sprite = sprite;
+                        if (_faceIcon != null)
+                        {
+                            _faceIcon.sprite = sprite;
+                        }
                     }
                 }
             }
@@ -513,7 +524,10 @@ public class InterfaceManager : MonoBehaviour
                 {
                     if (sprite.name == clothing.Name)
                     {
-                        _hairIcon.sprite = sprite;
+                        if (_hairIcon != null)
+                        {
+                            _hairIcon.sprite = sprite;
+                        }
                     }
                 }
             }
@@ -523,7 +537,10 @@ public class InterfaceManager : MonoBehaviour
                 {
                     if (sprite.name == clothing.Name)
                     {
-                        _topIcon.sprite = sprite;
+                        if (_topIcon != null)
+                        {
+                            _topIcon.sprite = sprite;
+                        }
                     }
                 }
             }

@@ -19,8 +19,9 @@ public class AudioManager : MonoBehaviour
     [Header("These clips are only for the diary")]
     public AudioClip NewPageInDiary;
 
-    [Header("UI/Interface related sound clups here only")]
+    [Header("UI/Interface related sound clips here only")]
     public AudioClip CloseWindow;
+    public AudioClip ButtonPress;
 
     private AudioSource _audioSource;
 

@@ -48,9 +48,11 @@ public class GuessPuzzle : MonoBehaviour
     private Puzzle _puzzle;
 
     private CameraBehavior _cameraBehaviour;
+    private AudioManager _audioManager;
 
     void Awake()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         _swipeController = FindObjectOfType<SwipeController>();
         _timer = PuzzleTimeInSeconds;
@@ -118,6 +120,8 @@ public class GuessPuzzle : MonoBehaviour
 
     public void ManuallyEndGame()
     {
+        _audioManager.PlaySound(_audioManager.ButtonPress);
+
         SavePuzzleScore();
         OpenCompletePuzzleWindow();
         _cameraBehaviour.IsInteracting = false;
@@ -126,6 +130,8 @@ public class GuessPuzzle : MonoBehaviour
 
     public void NextClothing(string bodyPart)
     {
+        _audioManager.PlaySound(_audioManager.CloseWindow);
+
         switch (bodyPart)
         {
             case "Hair":
@@ -183,6 +189,8 @@ public class GuessPuzzle : MonoBehaviour
 
     public void PreviousClothing(string bodyPart)
     {
+        _audioManager.PlaySound(_audioManager.CloseWindow);
+
         switch (bodyPart)
         {
             case "Hair":
@@ -329,6 +337,8 @@ public class GuessPuzzle : MonoBehaviour
 
     public void StartTimer()
     {
+        _audioManager.PlaySound(_audioManager.ButtonPress);
+
         _isGameStarted = true;
     }
 
@@ -366,6 +376,8 @@ public class GuessPuzzle : MonoBehaviour
 
         Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
 
+        _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+
         CanvasElementOfPuzzle.LoadScore();
     }
 
@@ -395,6 +407,8 @@ public class GuessPuzzle : MonoBehaviour
 
     public void ClosePopup(Object obj)
     {
+        _audioManager.PlaySound(_audioManager.ButtonPress);
+
         GameObject popupObject = obj as GameObject;
 
         if (popupObject == gameObject)
@@ -409,6 +423,8 @@ public class GuessPuzzle : MonoBehaviour
 
     public void OpenPopup(Object obj)
     {
+        _audioManager.PlaySound(_audioManager.ButtonPress);
+
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
     }

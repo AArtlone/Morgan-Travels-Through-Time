@@ -21,8 +21,11 @@ public class AppearanceSelector : MonoBehaviour
 
     private AppearanceDisplay _appearanceDisplay;
 
+    private AudioManager _audioManager;
+
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         _appearanceDisplay = FindObjectOfType<AppearanceDisplay>();
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
@@ -100,6 +103,8 @@ public class AppearanceSelector : MonoBehaviour
 
     public void ResetCharacterAppearance()
     {
+        _audioManager.PlaySound(_audioManager.ButtonPress);
+
         TextAsset wearablesData = Resources.Load<TextAsset>("Default World Data/Wearables");
         JsonData wearablesJsonData = JsonMapper.ToObject(wearablesData.text);
         

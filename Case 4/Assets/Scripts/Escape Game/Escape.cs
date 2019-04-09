@@ -17,14 +17,18 @@ public class Escape : MonoBehaviour
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
+    public string AreaToUnlock;
     public GameObject EndGamePopUp;
     public List<GameObject> Stars;
     public int RefugeesSavedInThisSession;
 
     private string _escapeGamesJsonFile;
 
+    private AudioManager _audioManager;
+
     private void Awake()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         _escapeGamesJsonFile = Application.persistentDataPath + "/EscapeGames.json";
 
         string dataToJson = File.ReadAllText(_escapeGamesJsonFile);
@@ -47,6 +51,11 @@ public class Escape : MonoBehaviour
 
     private IEnumerator SpawnRefugee()
     {
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.RefugeeSaved);
+        }
+
         if (CurrentWave > 0)
         {
             yield return new WaitForSeconds(DelayBetweenWaves);
@@ -114,6 +123,10 @@ public class Escape : MonoBehaviour
 
     private IEnumerator ShowStars()
     {
+        _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+
+        Character.Instance.UpdateAreaStatus(AreaToUnlock, "Unlocked");
+
         if (RefugeesSavedInThisSession > 2)
         {
             for (int i = 0; i < Stars.Count; i++)

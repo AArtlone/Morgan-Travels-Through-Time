@@ -46,8 +46,11 @@ public class NPC : MonoBehaviour
     // ANIMATION-related references
     private Animator _animator;
 
+    private AudioManager _audioManager;
+
     private void Start()
     {
+        _audioManager = FindObjectOfType<AudioManager>();
         _animator = GetComponent<Animator>();
         _swipeController = FindObjectOfType<SwipeController>();
         DialogueManager.Instance.ToggleDialogue(false);
@@ -348,6 +351,11 @@ public class NPC : MonoBehaviour
 
     public void ContinueDialogue()
     {
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.NewPageInDiary);
+        }
+
         if (_canInteractWithPlayer)
         {
             int index = 0;
@@ -554,7 +562,7 @@ public class NPC : MonoBehaviour
 
     private IEnumerator LoadSceneCo(string sceneToLoad)
     {
-        Debug.Log(sceneToLoad);
+        //Debug.Log(sceneToLoad);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(sceneToLoad);
     }
