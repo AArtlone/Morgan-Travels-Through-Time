@@ -12,23 +12,16 @@ public class InstructionsLoader : MonoBehaviour
 
     private int _currentLineIndex;
     private TextMeshProUGUI _instructionsText;
-
-    private void Awake()
-    {
-        if (Character.Instance.TutorialCompleted == false)
-        {
-            gameObject.SetActive(true);
-        } else
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
+    
     private void Start()
     {
         if (Character.Instance.TutorialCompleted == false)
         {
             gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 

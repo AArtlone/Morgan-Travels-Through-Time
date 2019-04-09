@@ -28,7 +28,6 @@ public class Escape : MonoBehaviour
 
     private void Awake()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
         _escapeGamesJsonFile = Application.persistentDataPath + "/EscapeGames.json";
 
         string dataToJson = File.ReadAllText(_escapeGamesJsonFile);
@@ -51,11 +50,6 @@ public class Escape : MonoBehaviour
 
     private IEnumerator SpawnRefugee()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.RefugeeSaved);
-        }
-
         if (CurrentWave > 0)
         {
             yield return new WaitForSeconds(DelayBetweenWaves);
@@ -123,11 +117,6 @@ public class Escape : MonoBehaviour
 
     private IEnumerator ShowStars()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
-        }
-
         Character.Instance.UpdateAreaStatus(AreaToUnlock, "Unlocked");
 
         if (RefugeesSavedInThisSession > 2)
