@@ -109,9 +109,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             CancelInvoke();
         }
 
-        Counter = TimeToComplete;
-        Timer.text = Counter.ToString();
-
         InvokeRepeating("CountDown", 1f, 1f);
 
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)

@@ -430,7 +430,10 @@ public class GuessPuzzle : MonoBehaviour
                 break;
         }
 
-        _swipeController.enabled = true;
+        if (_swipeController != null)
+        {
+            _swipeController.enabled = true;
+        }
         OpenPopup(PuzzleFinishedWindow);
     }
 }

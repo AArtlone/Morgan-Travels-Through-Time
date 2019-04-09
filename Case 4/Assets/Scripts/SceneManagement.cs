@@ -78,7 +78,6 @@ public class SceneManagement : MonoBehaviour
             }
 
             Character.Instance.RefreshJsonData();
-
             SceneManager.LoadScene(newScene);
         }
     }

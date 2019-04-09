@@ -37,12 +37,13 @@ public class CameraIntroController : MonoBehaviour
         }
     }
 
-    private void LoadGame()
+    public void LoadGame()
     {
         AnimatorOfFade.gameObject.SetActive(false);
         Character.Instance.IsCutscenePassed = true;
         Character.Instance.RefreshJsonData();
 
-        SceneManager.LoadScene("Language Selection");
+        Debug.Log(Character.Instance.LastMapArea);
+        SceneManager.LoadScene(Character.Instance.LastMapArea);
     }
 }
