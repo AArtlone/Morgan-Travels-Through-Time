@@ -111,15 +111,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         InvokeRepeating("CountDown", 1f, 1f);
 
-        for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
-        {
-            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
-        }
+        //for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
+        //{
+        //    FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
+        //}
     }
 
     public void CompletePuzzle()
     {
-        _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+        }
 
         // TODO: Change the stars values of this puzzle using different formulas.
         CancelInvoke();
@@ -235,7 +238,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (!ItemsFound.Contains(NameOfItem))
         {
-            _audioManager.PlaySound(_audioManager.ItemFoundUsed);
+            if (_audioManager != null)
+            {
+                _audioManager.PlaySound(_audioManager.ItemFoundUsed);
+            }
 
             switch (SettingsManager.Instance.Language)
             {

@@ -7948,7 +7948,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &536910781
 MonoBehaviour:
@@ -11198,7 +11198,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &893904670
 MonoBehaviour:
@@ -19643,7 +19643,7 @@ MonoBehaviour:
     lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -21089,6 +21089,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 9015574016557773605, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9882686
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016557773605, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.15272571
+      objectReference: {fileID: 0}
     - target: {fileID: 9015574017106424102, guid: 63f16c9a56c5b9b48918398714815a80,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -21103,6 +21113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.06322285
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574017262103476, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.09411626
       objectReference: {fileID: 0}
     - target: {fileID: 9015574015890454526, guid: 63f16c9a56c5b9b48918398714815a80,
         type: 3}
@@ -21148,6 +21163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015574016342857210, guid: 63f16c9a56c5b9b48918398714815a80,
+        type: 3}
+      propertyPath: m_Length
+      value: 0.6277833
       objectReference: {fileID: 0}
     - target: {fileID: 9015574016370978288, guid: 63f16c9a56c5b9b48918398714815a80,
         type: 3}
@@ -21283,26 +21303,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9015574016557773605, guid: 63f16c9a56c5b9b48918398714815a80,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.9882686
-      objectReference: {fileID: 0}
-    - target: {fileID: 9015574016557773605, guid: 63f16c9a56c5b9b48918398714815a80,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.15272571
-      objectReference: {fileID: 0}
-    - target: {fileID: 9015574017262103476, guid: 63f16c9a56c5b9b48918398714815a80,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.09411626
-      objectReference: {fileID: 0}
-    - target: {fileID: 9015574016342857210, guid: 63f16c9a56c5b9b48918398714815a80,
-        type: 3}
-      propertyPath: m_Length
-      value: 0.6277833
       objectReference: {fileID: 0}
     - target: {fileID: 9015574016024824553, guid: 63f16c9a56c5b9b48918398714815a80,
         type: 3}
@@ -23136,7 +23136,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121849760
 MonoBehaviour:
@@ -23253,7 +23253,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -23388,8 +23388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 36.3, y: 0}
+  m_SizeDelta: {x: 0, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128087520
 MonoBehaviour:
@@ -23504,7 +23504,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

@@ -123,7 +123,10 @@ public class Escape : MonoBehaviour
 
     private IEnumerator ShowStars()
     {
-        _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+        }
 
         Character.Instance.UpdateAreaStatus(AreaToUnlock, "Unlocked");
 

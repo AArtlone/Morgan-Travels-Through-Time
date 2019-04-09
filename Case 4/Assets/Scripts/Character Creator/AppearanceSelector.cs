@@ -103,7 +103,10 @@ public class AppearanceSelector : MonoBehaviour
 
     public void ResetCharacterAppearance()
     {
-        _audioManager.PlaySound(_audioManager.ButtonPress);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.ButtonPress);
+        }
 
         TextAsset wearablesData = Resources.Load<TextAsset>("Default World Data/Wearables");
         JsonData wearablesJsonData = JsonMapper.ToObject(wearablesData.text);

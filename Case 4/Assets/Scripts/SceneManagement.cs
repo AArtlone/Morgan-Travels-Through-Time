@@ -5,7 +5,7 @@ public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
 
-    private void Awake()
+    private void Start()
     {
         if (Instance != null && Instance != this)
         {
@@ -16,7 +16,7 @@ public class SceneManagement : MonoBehaviour
             Instance = this;
             // We want to be able to access the dialogue information from any scene.
             DontDestroyOnLoad(gameObject);
-            
+
             // If the player has already created a character then 
             // we just start the main menu instead.
             if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")

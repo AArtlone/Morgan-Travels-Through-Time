@@ -41,7 +41,10 @@ public class CameraBehavior : MonoBehaviour
         _isEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            _audioManager.PlaySound(_audioManager.HitScreen);
+            if (_audioManager != null)
+            {
+                _audioManager.PlaySound(_audioManager.HitScreen);
+            }
             if (InterfaceManager.Instance.ItemActionsWindow != null)
             {
                 if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
@@ -135,7 +138,7 @@ public class CameraBehavior : MonoBehaviour
 
             if (hitObj.transform != null)
             {
-                Debug.Log(hitObj.transform.tag);
+                //Debug.Log(hitObj.transform.tag);
                 switch(hitObj.transform.tag)
                 {
                     case "NPC":
@@ -144,11 +147,17 @@ public class CameraBehavior : MonoBehaviour
                         hitObj.transform.GetComponent<NPC>().ContinueDialogue();
                         IsInteracting = true;
                         IsUIOpen = true;
-                        _swipeController.enabled = false;
+                        if (_swipeController != null)
+                        {
+                            _swipeController.enabled = false;
+                        }
                         break;
                     case "Hidden Objects Puzzle":
                         hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
-                        _swipeController.enabled = false;
+                        if (_swipeController != null)
+                        {
+                            _swipeController.enabled = false;
+                        }
                         IsInteracting = true;
                         IsUIOpen = true;
                         break;
@@ -156,7 +165,10 @@ public class CameraBehavior : MonoBehaviour
                         hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
                         IsInteracting = true;
                         IsUIOpen = true;
-                        _swipeController.enabled = false;
+                        if (_swipeController != null)
+                        {
+                            _swipeController.enabled = false;
+                        }
                         break;
                     case "Escape Game":
                         hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
@@ -164,7 +176,10 @@ public class CameraBehavior : MonoBehaviour
                         Character.Instance.RefreshJsonData();
                         IsInteracting = true;
                         IsUIOpen = true;
-                        _swipeController.enabled = false;
+                        if (_swipeController != null)
+                        {
+                            _swipeController.enabled = false;
+                        }
                         break;
                     case "Item Drop":
                         Item hitItemDrop = hitObj.transform.GetComponent<Item>();

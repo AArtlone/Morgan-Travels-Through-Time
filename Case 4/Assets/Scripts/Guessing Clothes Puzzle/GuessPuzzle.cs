@@ -120,7 +120,10 @@ public class GuessPuzzle : MonoBehaviour
 
     public void ManuallyEndGame()
     {
-        _audioManager.PlaySound(_audioManager.ButtonPress);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.ButtonPress);
+        }
 
         SavePuzzleScore();
         OpenCompletePuzzleWindow();
@@ -130,7 +133,10 @@ public class GuessPuzzle : MonoBehaviour
 
     public void NextClothing(string bodyPart)
     {
-        _audioManager.PlaySound(_audioManager.CloseWindow);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.CloseWindow);
+        }
 
         switch (bodyPart)
         {
@@ -189,7 +195,10 @@ public class GuessPuzzle : MonoBehaviour
 
     public void PreviousClothing(string bodyPart)
     {
-        _audioManager.PlaySound(_audioManager.CloseWindow);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.CloseWindow);
+        }
 
         switch (bodyPart)
         {
@@ -337,7 +346,10 @@ public class GuessPuzzle : MonoBehaviour
 
     public void StartTimer()
     {
-        _audioManager.PlaySound(_audioManager.ButtonPress);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.ButtonPress);
+        }
 
         _isGameStarted = true;
     }
@@ -376,7 +388,10 @@ public class GuessPuzzle : MonoBehaviour
 
         Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
 
-        _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.SoundPuzzleCompleted);
+        }
 
         CanvasElementOfPuzzle.LoadScore();
     }
@@ -407,7 +422,10 @@ public class GuessPuzzle : MonoBehaviour
 
     public void ClosePopup(Object obj)
     {
-        _audioManager.PlaySound(_audioManager.ButtonPress);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.ButtonPress);
+        }
 
         GameObject popupObject = obj as GameObject;
 
@@ -423,7 +441,10 @@ public class GuessPuzzle : MonoBehaviour
 
     public void OpenPopup(Object obj)
     {
-        _audioManager.PlaySound(_audioManager.ButtonPress);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.ButtonPress);
+        }
 
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);

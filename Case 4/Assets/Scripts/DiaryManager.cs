@@ -19,7 +19,10 @@ public class DiaryManager : MonoBehaviour
 
     public void SelectPage(Object selectedButton)
     {
-        _audioManager.PlaySound(_audioManager.NewPageInDiary);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.NewPageInDiary);
+        }
 
         GameObject buttonObj = (GameObject)selectedButton;
         

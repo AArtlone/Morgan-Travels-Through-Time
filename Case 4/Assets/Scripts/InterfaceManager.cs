@@ -252,7 +252,10 @@ public class InterfaceManager : MonoBehaviour
 
     public void ToggleUI(Object ui)
     {
-        _audioManager.PlaySound(_audioManager.ButtonPress);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.ButtonPress);
+        }
 
         GameObject uiObj = (GameObject)ui;
 

@@ -72,7 +72,10 @@ public class AppearanceDisplay : MonoBehaviour
     // whenever he clicks on the body type button.
     public void ToggleDisplay(Object display)
     {
-        _audioManager.PlaySound(_audioManager.NewPageInDiary);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.NewPageInDiary);
+        }
 
         PanelAnimator.SetBool("IsOpen", true);
         GameObject displayObj = (GameObject)display;
@@ -141,7 +144,10 @@ public class AppearanceDisplay : MonoBehaviour
                 break;
         }
 
-        _audioManager.PlaySound(_audioManager.CloseWindow);
+        if (_audioManager != null)
+        {
+            _audioManager.PlaySound(_audioManager.CloseWindow);
+        }
     }
 
     public void ToggleQuestDisplay(Object display)

@@ -40,10 +40,19 @@ public class CameraIntroController : MonoBehaviour
     public void LoadGame()
     {
         AnimatorOfFade.gameObject.SetActive(false);
-        Character.Instance.IsCutscenePassed = true;
-        Character.Instance.RefreshJsonData();
 
-        Debug.Log(Character.Instance.LastMapArea);
-        SceneManager.LoadScene(Character.Instance.LastMapArea);
+        //Debug.Log(Character.Instance.LastMapArea);
+        if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation)
+        {
+            SceneManager.LoadScene(Character.Instance.LastMapArea);
+        } else if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation == false)
+        {
+            SceneManager.LoadScene("Beginning Character Creation");
+        } else
+        {
+            Character.Instance.IsCutscenePassed = true;
+            Character.Instance.RefreshJsonData();
+            SceneManager.LoadScene("Beginning Character Creation");
+        }
     }
 }
