@@ -49,11 +49,8 @@ public class AppearanceDisplay : MonoBehaviour
 
     public Animator PanelAnimator;
 
-    private AudioManager _audioManager;
-
     private void Start()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
         _bodyBodyPart = GameObject.Find("Body Body Part");
@@ -72,10 +69,7 @@ public class AppearanceDisplay : MonoBehaviour
     // whenever he clicks on the body type button.
     public void ToggleDisplay(Object display)
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.NewPageInDiary);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.NewPageInDiary);
 
         PanelAnimator.SetBool("IsOpen", true);
         GameObject displayObj = (GameObject)display;
@@ -143,19 +137,16 @@ public class AppearanceDisplay : MonoBehaviour
                 button.transform.GetChild(0).gameObject.SetActive(true);
                 break;
         }
-
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.CloseWindow);
-        }
+        
+        AudioManager.Instance.PlaySound(AudioManager.Instance.CloseWindow);
     }
 
-    public void ToggleQuestDisplay(Object display)
-    {
-        GameObject displayObj = (GameObject)display;
-        displayObj.SetActive(!displayObj.activeSelf);
-    }
-
+    /// <summary>
+    ///  This function makes every button for every body type that can be clicked to
+    ///  display its items to become highlighted and every other body type button to
+    ///  be de-selected for clarity.
+    /// </summary>
+    /// <param name="button"></param>
     public void ToggleButton(Object button)
     {
         GameObject buttonObj = (GameObject)button;
@@ -176,8 +167,10 @@ public class AppearanceDisplay : MonoBehaviour
         
     }
 
-    // This function creates the icons in the body tab's lists (displays) using the
-    // predefined wearables from the wearables json processed by the player.
+    /// <summary>
+    /// This function creates the icons in the body tab's lists (displays) using the
+    /// predefined wearables from the wearables json processed by the player.
+    /// </summary>
     private void SetupDisplays()
     {
         // The length starts from the maximum amount the displays for body part
@@ -232,6 +225,9 @@ public class AppearanceDisplay : MonoBehaviour
             }
         }
 
+        // After all the items from the player's inventory have been displayed
+        // for selection, we create dummy icons that show more items can be
+        // acquired throughout the game.
         GenerateDummieIcons(bodyPartLength, BodiesDisplay, "bodyIcon001");
         GenerateDummieIcons(facePartLength, FacesDisplay, "faceIcon001");
         GenerateDummieIcons(hairPartLength, HairsDisplay, "hairIcon001");
@@ -260,8 +256,13 @@ public class AppearanceDisplay : MonoBehaviour
         }
     }
 
-    // This retrieves the icons from the storage and assigns them to buttons in the
-    // appearance selection tabs on the right.
+    /// <summary>
+    /// This retrieves the icons from the storage and assigns them to buttons in the
+    /// appearance selection tabs on the right.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="display"></param>
+    /// <param name="listOfItems"></param>
     private void LoadIcon(Clothing item, GameObject display, List<Clothing> listOfItems)
     {
         if (display != null)
@@ -307,9 +308,11 @@ public class AppearanceDisplay : MonoBehaviour
         }
     }
 
-    // This imports the appearance elements according to the body parts and selected
-    // appearance elements from the player and it will load them into the player's
-    // character view.
+    /// <summary>
+    /// This imports the appearance elements according to the body parts and selected
+    /// appearance elements from the player and it will load them into the player's
+    /// character view.
+    /// </summary>
     public void LoadCharacterAppearance()
     {
         foreach (Clothing clothing in Character.Instance.Wearables)

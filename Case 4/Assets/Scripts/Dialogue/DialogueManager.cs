@@ -114,19 +114,11 @@ public class DialogueManager : MonoBehaviour
         File.WriteAllText(_dialogueResponsesPath, newItemsData);
     }
 
-    public void ChangePortrait(string side, Sprite newPortrait)
-    {
-        if (side == "left")
-        {
-            //LeftCharacterPortrait.GetComponent<Image>().sprite = newPortrait;
-        } else if (side == "right")
-        {
-            RightCharacterPortrait.sprite = newPortrait;
-        }
-
-        //Debug.Log("Changed " + side + " portrait!");
-    }
-
+    /// <summary>
+    /// This function moves the currently speaking character in the dialogue up in
+    /// order to provide clarity as to who is speaking.
+    /// </summary>
+    /// <param name="side"></param>
     public void OffSetPortrait(string side)
     {
         if (side == "left")
@@ -146,6 +138,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    #region The following functions serve to display the upcoming dialogues to the screen.
     public void ChangeTitle(string side, string newTitle)
     {
         if (side == "left")
@@ -156,8 +149,20 @@ public class DialogueManager : MonoBehaviour
         {
             RightCharacterTitle.text = newTitle;
         }
+    }
 
-        //Debug.Log("Changed " + side + " title!");
+    public void ChangePortrait(string side, Sprite newPortrait)
+    {
+        if (side == "left")
+        {
+            // Not necessary due to the fact that the player can customize his
+            // appearance which is then displayed, so he does not require a portrait.
+            //LeftCharacterPortrait.GetComponent<Image>().sprite = newPortrait;
+        }
+        else if (side == "right")
+        {
+            RightCharacterPortrait.sprite = newPortrait;
+        }
     }
 
     public void ChangeDialogueStageBackground(Sprite newStage)
@@ -168,15 +173,11 @@ public class DialogueManager : MonoBehaviour
     public void ChangeDialogueBoxBackground(Sprite newBackground)
     {
         DialogueBoxBackground.sprite = newBackground;
-
-        //Debug.Log("Changed dialogue background!");
     }
 
     public void ChangeDialogueText(string newText)
     {
         DialogueText.text = newText;
-
-        //Debug.Log("Changed dialogue text!");
     }
 
     public void ChangeOptionsMenu(string[] newOptions)
@@ -188,8 +189,6 @@ public class DialogueManager : MonoBehaviour
                 OptionsMenu[i].text = newOptions[i];
             }
         }
-
-        //Debug.Log("Changed dialogue options!");
     }
 
     public void ClearOptionsMenu()
@@ -198,15 +197,19 @@ public class DialogueManager : MonoBehaviour
         {
             OptionsMenu[i].text = string.Empty;
         }
-
-        //Debug.Log("Cleared the dialogue options menu!");
     }
 
     public void ToggleDialogue(bool display)
     {
         DialogueTemplate.SetActive(display);
     }
+    #endregion
 
+    /// <summary>
+    /// This function runs whenever the player has tapped on an options from the
+    /// dialogue's options menu.
+    /// </summary>
+    /// <param name="obj"></param>
     public void SelectOption(GameObject obj)
     {
         string textInOption = obj.GetComponent<TextMeshProUGUI>().text;
@@ -217,6 +220,5 @@ public class DialogueManager : MonoBehaviour
 
         RefreshDialogueResponses();
         CurrentNPCDialogue.ContinueDialogue();
-        //Debug.Log(string.Format("Added ({0}) to the responses list!", textInOption));
     }
 }

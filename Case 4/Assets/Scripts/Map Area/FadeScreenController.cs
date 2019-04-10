@@ -9,7 +9,7 @@ public class FadeScreenController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    // These two functions start either fade effects from a transition
+    #region These two functions start either fade effects from a transition
     public void FadeInCamera()
     {
         _animator.SetBool("Fade", false);
@@ -19,6 +19,7 @@ public class FadeScreenController : MonoBehaviour
     {
         _animator.SetBool("Fade", true);
     }
+    #endregion
 
     // These two will start/stop the effects once they are first initiated. Once
     // the fade bool is initiated, it will transition from fade out to fade in

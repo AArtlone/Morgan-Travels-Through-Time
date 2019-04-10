@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using LitJson;
 
 public class AppearanceSelector : MonoBehaviour
@@ -21,11 +20,8 @@ public class AppearanceSelector : MonoBehaviour
 
     private AppearanceDisplay _appearanceDisplay;
 
-    private AudioManager _audioManager;
-
     private void Start()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
         _appearanceDisplay = FindObjectOfType<AppearanceDisplay>();
         _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing");
 
@@ -68,6 +64,11 @@ public class AppearanceSelector : MonoBehaviour
         _appearanceDisplay.ToggleIconFrame(iconObj);
     }
 
+    /// <summary>
+    /// Once an item is selected, this function will display its resource image linked
+    /// to that item to the character appearance display.
+    /// </summary>
+    /// <param name="bodyPart"></param>
     private void LoadNewBodyPart(GameObject bodyPart)
     {
         if(bodyPart.GetComponent<Image>().color.a == 0)
@@ -101,12 +102,13 @@ public class AppearanceSelector : MonoBehaviour
         //}
     }
 
+    /// <summary>
+    /// Returns the character's default apprearance in the customization scene from
+    /// the one he had after he customized it.
+    /// </summary>
     public void ResetCharacterAppearance()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         TextAsset wearablesData = Resources.Load<TextAsset>("Default World Data/Wearables");
         JsonData wearablesJsonData = JsonMapper.ToObject(wearablesData.text);

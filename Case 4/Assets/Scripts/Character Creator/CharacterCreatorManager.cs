@@ -1,7 +1,6 @@
 ﻿using LitJson;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
@@ -32,13 +31,9 @@ public class CharacterCreatorManager : MonoBehaviour
     private string _jsonWordsFilter;
     private List<string> _wordsFilter = new List<string>();
     #endregion
-
-    private AudioManager _audioManager;
     
     void Start()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
-
         // When the game starts we extract all the bad words that we want to
         // filter out whenever the player is deciding on a character name.
         TextAsset filterWordsToJson = Resources.Load<TextAsset>("Default World Data/BadWords");
@@ -107,10 +102,7 @@ public class CharacterCreatorManager : MonoBehaviour
     #region Character creation functions
     public void ConfirmCharacter()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         // Close/Open popup is meant to be used mainly for in-game popups but since it
         // does the same thing as closing one, we can reuse it for other UI as well.
@@ -125,10 +117,7 @@ public class CharacterCreatorManager : MonoBehaviour
     //function for the Character Customization scene only
     public void ConfirmCharacterChanges()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         Character.Instance.RefreshWearables();
         DefineCurrentWearables();
@@ -136,10 +125,7 @@ public class CharacterCreatorManager : MonoBehaviour
 
     public void CheckForSelectedClothing()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         bool bodySelected = false;
         bool hairSelected = false;
@@ -292,10 +278,7 @@ public class CharacterCreatorManager : MonoBehaviour
     }
     public void ReturnToMainMapAndCheck()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         bool bodySelected = false;
         bool hairSelected = false;
@@ -451,10 +434,7 @@ public class CharacterCreatorManager : MonoBehaviour
     //function that checks if any of the body parts were changed
     public void CheckIfClothingChanged()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         bool _bodyChanged = false;
         bool _faceChanged = false;
@@ -538,10 +518,7 @@ public class CharacterCreatorManager : MonoBehaviour
         GameObject inputField = obj as GameObject;
         string nameInput = inputField.GetComponent<InputField>().text;
 
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         bool foundMatch = false;
         //for (int i = 0; i < _wordsFilter.Count; i++)
@@ -595,10 +572,7 @@ public class CharacterCreatorManager : MonoBehaviour
     //function for the save button of the character customization
     public void SaveButton()
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         bool _bodyChanged = false;
         bool _faceChanged = false;
@@ -671,10 +645,7 @@ public class CharacterCreatorManager : MonoBehaviour
 
     public void OpenWindow(Object obj)
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         GameObject windowObj = (GameObject)obj;
         windowObj.SetActive(true);
@@ -682,10 +653,7 @@ public class CharacterCreatorManager : MonoBehaviour
 
     public void CloseWindow(Object obj)
     {
-        if (_audioManager != null)
-        {
-            _audioManager.PlaySound(_audioManager.ButtonPress);
-        }
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         GameObject windowObj = (GameObject)obj;
         windowObj.SetActive(false);

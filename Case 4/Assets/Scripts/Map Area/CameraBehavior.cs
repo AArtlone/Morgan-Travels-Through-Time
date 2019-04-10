@@ -23,15 +23,11 @@ public class CameraBehavior : MonoBehaviour
 
     // Camera components
     private MapEnvironmentManager _mapEnvironmentManager;
-    private SwipeController _swipeController;
-    private AudioManager _audioManager;
 
     private void Start()
     {
-        _audioManager = FindObjectOfType<AudioManager>();
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
-        _swipeController = InterfaceManager.Instance.SwipeController;
         InterfaceManager.Instance.CameraBehavior = this;
         Character.Instance.CameraBehavior = this;
     }
@@ -41,10 +37,8 @@ public class CameraBehavior : MonoBehaviour
         _isEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            if (_audioManager != null)
-            {
-                _audioManager.PlaySound(_audioManager.HitScreen);
-            }
+            AudioManager.Instance.PlaySound(AudioManager.Instance.HitScreen);
+
             if (InterfaceManager.Instance.ItemActionsWindow != null)
             {
                 if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
@@ -147,17 +141,9 @@ public class CameraBehavior : MonoBehaviour
                         hitObj.transform.GetComponent<NPC>().ContinueDialogue();
                         IsInteracting = true;
                         IsUIOpen = true;
-                        if (_swipeController != null)
-                        {
-                            _swipeController.enabled = false;
-                        }
                         break;
                     case "Hidden Objects Puzzle":
                         hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
-                        if (_swipeController != null)
-                        {
-                            _swipeController.enabled = false;
-                        }
                         IsInteracting = true;
                         IsUIOpen = true;
                         break;
@@ -165,10 +151,6 @@ public class CameraBehavior : MonoBehaviour
                         hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
                         IsInteracting = true;
                         IsUIOpen = true;
-                        if (_swipeController != null)
-                        {
-                            _swipeController.enabled = false;
-                        }
                         break;
                     case "Escape Game":
                         hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
@@ -176,10 +158,6 @@ public class CameraBehavior : MonoBehaviour
                         Character.Instance.RefreshJsonData();
                         IsInteracting = true;
                         IsUIOpen = true;
-                        if (_swipeController != null)
-                        {
-                            _swipeController.enabled = false;
-                        }
                         break;
                     case "Item Drop":
                         Item hitItemDrop = hitObj.transform.GetComponent<Item>();

@@ -19,6 +19,8 @@ public class Dialogue
     public Sprite DialogueStageBackground;
     public Sprite DialogueBoxBackground;
     public List<DialogueBranch> DialogueBranches;
+    [Tooltip("You can list a number of objectives here that the player has to have completed in order for this dialogue to happen.")]
     public List<Objective> ObjectivesToMeet;
+    [Tooltip("You can list a number of items here that the player has to have acquired in order for this dialogue to happen.")]
     public List<string> RequiredItems;
 }

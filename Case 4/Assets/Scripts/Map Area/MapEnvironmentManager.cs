@@ -36,8 +36,6 @@ public class MapEnvironmentManager : MonoBehaviour
             {
                 HiddenObjectPuzzleNpc.SetActive(true);
             }
-            //DiaryButton.SetActive(true);
-            //ClothingPuzzleNpc.SetActive(true);
         }
         if(Character.Instance.HasDiary == true)
         {
@@ -55,7 +53,7 @@ public class MapEnvironmentManager : MonoBehaviour
             }
         }
 
-        // Checks for tutorial completeion status and enables/disables corresponding npcs
+        #region Checks for tutorial completion status and enables/disables corresponding npcs
         //foreach(Quest quest in Character.Instance.AllQuests)
         //{
         //    foreach(Objective objective in quest.Objectives)
@@ -67,6 +65,7 @@ public class MapEnvironmentManager : MonoBehaviour
         //        }
         //    }
         //}
+        #endregion
     }
 
     /// <summary>
