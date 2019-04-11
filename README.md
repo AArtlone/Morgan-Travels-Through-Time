@@ -1,4 +1,5 @@
-# Morgan travels through time
+![Imgur](https://i.imgur.com/Ndc2Bgy.png)
+# Morgan Travels Through Time <img src="https://i.imgur.com/eIhPfrS.png" width="50px">
 
 ## Description
 
@@ -10,7 +11,7 @@ The first installment of the game series, called Morgan & Bommen Berend , introd
 player to Morgan’s story and takens them along on a journey through the events of Bommen
 Berend.
 
-![Imgur](https://i.imgur.com/gz75oVZ.png)
+![Imgur](https://i.imgur.com/fBF94xI.png)
 
 ## Mechanics
 
@@ -25,7 +26,7 @@ interaction with the game will be via touch screen motions. The player can inter
 elements on the screen, they can collect objects into their inventory and move around in
 areas by holding one of the two direction buttons.
 
-![Imgur](https://i.imgur.com/hR23sdv.png)
+![Imgur](https://i.imgur.com/oU9DYHq.png)
 
 Team:
 
