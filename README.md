@@ -1,4 +1,4 @@
-![Imgur](https://i.imgur.com/Ndc2Bgy.png)
+![Imgur](https://i.imgur.com/MA5Sc9n.png)
 # Morgan Travels Through Time <img src="https://i.imgur.com/eIhPfrS.png" width="50px">
 
 ## Description
