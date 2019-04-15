@@ -10,19 +10,26 @@ public class CameraManager : MonoBehaviour
     #region Swiping mechanic variables
     private enum DraggedDirection { Up, Down, Left, Right };
     private Vector3 _startTapPosition;
+    private Vector3 _tapPositionStartWorld;
     private Vector3 _endTapPosition;
     private Vector3 _directionOfSwipeNormalized;
     private string _swipeDirection;
     private float _swipeLength;
+    private float _swipeLengthWorld;
     #endregion
 
     private CameraBehavior _cameraBehaviour;
     private MapEnvironmentManager _mapEnvironmentManager;
+    //private int _currentAreaPart;
+    //private float _maxBound;
+    //private float _minBound;
 
     private void Start()
     {
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
+        //_currentAreaPart = 0;
+        //_minBound = _mapEnvironmentManager.MapParts[0].GetComponent<SpriteRenderer>().bounds.min.x;
     }
 
     private void Update()
@@ -54,21 +61,68 @@ public class CameraManager : MonoBehaviour
             {
                 _startTapPosition = touch.position;
                 _endTapPosition = touch.position;
+                _tapPositionStartWorld = Camera.main.ScreenToWorldPoint(_startTapPosition);
             }
 
             if (touch.phase == TouchPhase.Moved)
             {
                 _endTapPosition = touch.position;
+                _directionOfSwipeNormalized = (_endTapPosition - _startTapPosition).normalized;
+
+                Vector3 tapPositionEndWorld = Camera.main.ScreenToWorldPoint(_endTapPosition);
+
+                _swipeLength = _endTapPosition.x - _startTapPosition.x;
+                _swipeLengthWorld = Mathf.Abs(tapPositionEndWorld.x - _tapPositionStartWorld.x);
+
+                Vector3 newCameraPosition = _mapEnvironmentManager.CurrentCamera.transform.position;
+                if (_directionOfSwipeNormalized.x > 0)
+                {
+                    newCameraPosition.x -= _swipeLengthWorld * 0.15f;
+                    _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
+                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + 5, _cameraBehaviour.BackgroundBounds.max.x - 5),
+                        newCameraPosition.y,
+                        newCameraPosition.z);
+
+                    //if (newCameraPosition.x <= _cameraBehaviour.BackgroundBounds.min.x + 5 &&
+                    //    _mapEnvironmentManager.MapParts[_currentAreaPart - 1].gameObject != null)
+                    //{
+                    //    if (_mapEnvironmentManager.EnterAreaPart(_mapEnvironmentManager.MapParts[_currentAreaPart - 1].gameObject))
+                    //    {
+                    //        _currentAreaPart--;
+                    //        _cameraBehaviour.BackgroundBounds = _mapEnvironmentManager.MapParts[_currentAreaPart].gameObject.GetComponent<SpriteRenderer>().bounds;
+                    //        _maxBound = _cameraBehaviour.BackgroundBounds.max.x;
+                    //        Debug.Log("Entered!");
+                    //    }
+                    //}
+                }
+                else if (_directionOfSwipeNormalized.x < 0)
+                {
+                    newCameraPosition.x += _swipeLengthWorld * 0.15f;
+                    _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
+                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + 5, _cameraBehaviour.BackgroundBounds.max.x - 5),
+                        newCameraPosition.y,
+                        newCameraPosition.z);
+
+                    //if (newCameraPosition.x >= _cameraBehaviour.BackgroundBounds.min.x + 5 &&
+                    //    _mapEnvironmentManager.MapParts[_currentAreaPart + 1].gameObject != null)
+                    //{
+                    //    if (_mapEnvironmentManager.EnterAreaPart(_mapEnvironmentManager.MapParts[_currentAreaPart + 1].gameObject))
+                    //    {
+                    //        _currentAreaPart++;
+                    //        _cameraBehaviour.BackgroundBounds = _mapEnvironmentManager.MapParts[_currentAreaPart].gameObject.GetComponent<SpriteRenderer>().bounds;
+                    //        _maxBound = _cameraBehaviour.BackgroundBounds.max.x;
+                    //        Debug.Log("Entered!");
+                    //    }
+                    //}
+                }
+
+                //Debug.Log(_tapPositionStartWorld + " | " + tapPositionEndWorld);
             }
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 _endTapPosition = touch.position;
-                _directionOfSwipeNormalized = (_endTapPosition - _startTapPosition).normalized;
-
-                _swipeLength = _endTapPosition.x - _startTapPosition.x;
-
-                CheckDirection();
+                //CheckDirection();
             }
         }
     }

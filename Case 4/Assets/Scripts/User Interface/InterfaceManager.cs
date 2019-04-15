@@ -199,7 +199,7 @@ public class InterfaceManager : MonoBehaviour
     /// </summary>
     public void SetupQuestsInDiary()
     {
-        if (SceneManager.GetActiveScene().name == "Main Map" || SceneManager.GetActiveScene().name == "Tutorial Map Area")
+        if (SceneManager.GetActiveScene().name != "Escape Game")
         {
             for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
             {
@@ -654,11 +654,21 @@ public class InterfaceManager : MonoBehaviour
         //Debug.Log("Used " + ItemSelected.Name);
     }
 
+    /// <summary>
+    /// Map area =/= from main map. This function will load the last scene that is
+    /// also considered a map area type.
+    /// </summary>
+    public void LoadLastMapAreaScene()
+    {
+        Character.Instance.LastScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(Character.Instance.LastMapArea);
+    }
+
     public void LoadScene(string scene)
     {
-        if (scene == "Main Map" || scene == "Tutorial Map Area" || scene == "Castle Area")
+        if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House")
         {
-            Character.Instance.LastMapArea = scene;
+            Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
         } else
         {
             Character.Instance.LastScene = scene;

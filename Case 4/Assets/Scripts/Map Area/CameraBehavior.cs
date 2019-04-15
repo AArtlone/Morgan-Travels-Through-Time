@@ -5,6 +5,7 @@ public class CameraBehavior : MonoBehaviour
 {
     #region Camera screen movement variables
     public GameObject Background;
+    public MapPart MapPart;
     [NonSerialized]
     public Bounds BackgroundBounds;
     #endregion
@@ -113,11 +114,11 @@ public class CameraBehavior : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, TapPosition) > 1f)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, new Vector3(TapPosition.x, transform.position.y, transform.position.z), _cameraSpeed * Time.deltaTime * 0.5f);
+                    //transform.position = Vector3.MoveTowards(transform.position, new Vector3(TapPosition.x, transform.position.y, transform.position.z), _cameraSpeed * Time.deltaTime * 0.5f);
 
-                    Vector3 newPosition = transform.position;
-                    newPosition.x = Mathf.Clamp(transform.position.x, BackgroundBounds.min.x + 5, BackgroundBounds.max.x - 5);
-                    transform.position = newPosition;
+                    //Vector3 newPosition = transform.position;
+                    //newPosition.x = Mathf.Clamp(transform.position.x, BackgroundBounds.min.x + 5, BackgroundBounds.max.x - 5);
+                    //transform.position = newPosition;
                 }
                 else
                 {

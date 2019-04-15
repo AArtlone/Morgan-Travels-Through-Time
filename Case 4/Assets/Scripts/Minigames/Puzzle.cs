@@ -75,37 +75,29 @@ public class Puzzle : MonoBehaviour
 
     public void InitiateHiddenObjectsPuzzle()
     {
-        if (transform.GetComponent<Image>() && transform.GetComponent<Image>().raycastTarget == true)
-        {
-            // This centers the puzzle to the middle of the canvas because the actual puzzle
-            // object is a child of the puzzle prefab and that changes its position to the
-            // center of that prefab instead of the canvas instead.
-            PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-            
-            PuzzleToLaunch.SetActive(true);
-            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
+        PuzzleToLaunch.SetActive(true);
+        HiddenObjectsPuzzle HOPScript = PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>();
 
-            if (Character.Instance.TutorialCompleted)
-            {
-                PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
-            }
-            transform.GetComponent<Image>().raycastTarget = false;
-        } else
-        {
-            PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        // This centers the puzzle to the middle of the canvas because the actual puzzle
+        // object is a child of the puzzle prefab and that changes its position to the
+        // center of that prefab instead of the canvas instead.
+        PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
-            PuzzleToLaunch.SetActive(true);
-            PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().ItemsFound.Clear();
-            if (Character.Instance.TutorialCompleted)
-            {
-                PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>().StartTimer();
-            }
+        HOPScript.ItemsFound.Clear();
+
+        if (Character.Instance.TutorialCompleted)
+        {
+            HOPScript.StartTimer();
         }
+
         StartPuzzleIconToggle();
+
         if (Character.Instance.TutorialCompleted == false)
         {
             InterfaceManager.Instance.OpenPopup(InstructionManual);
         }
+
+        HOPScript.UpdateFoundItemsDisplay();
     }
 
     public void InitiateCannonGame()

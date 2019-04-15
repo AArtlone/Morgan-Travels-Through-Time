@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapEnvironmentManager : MonoBehaviour
 {
+    //public List<MapPart> MapParts;
     public GameObject HiddenObjectPuzzleNpc;
     public GameObject ClothingPuzzleNpc;
     public GameObject EscapeGameNpc;

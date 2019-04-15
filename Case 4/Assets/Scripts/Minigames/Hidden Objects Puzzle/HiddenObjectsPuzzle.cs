@@ -74,7 +74,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Counter = TimeToComplete;
         Timer.text = Counter.ToString();
 
-        ItemsFound.Clear();
         TextMeshProUGUI hintButton = HintButton.GetComponentInChildren<TextMeshProUGUI>();
         hintButton.text = Character.Instance.AvailableHints + Environment.NewLine;
         
@@ -268,6 +267,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 }
             }
 
+            StartCoroutine(FadeAwayItem(itemObjClicked));
+
             if (foundItemsCount == ItemsRequired.Count)
             {
                 CompletePuzzle();
@@ -285,18 +286,55 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         */
     }
 
+    /// <summary>
+    /// Reload the list of items in the botton UI and if any of the item names
+    /// that are loaded match ones from the found items list, then turn those
+    /// green and the ones that dont match to white.
+    /// </summary>
     public void UpdateFoundItemsDisplay()
     {
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
-        }
-
-        for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
-        {
-            if (ItemsFound[i] != null)
+            string nameOfItem = string.Empty;
+            string language = string.Empty;
+            switch (SettingsManager.Instance.Language)
             {
-                FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsFound[i];
+                case "English":
+                    nameOfItem = ItemsRequired[i];
+                    break;
+                case "Dutch":
+                    nameOfItem = ItemsRequiredDutch[i];
+                    break;
+            }
+            // Checking if the item we have in the required items list will
+            // have a match in the items found list and if so make it green
+            // instead of white text.
+            if (ItemsFound.Count > 0)
+            {
+                foreach (string item in ItemsFound)
+                {
+                    if (item == nameOfItem)
+                    {
+                        TextMeshProUGUI itemLabel = FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>();
+                        itemLabel.text = nameOfItem;
+                        StartCoroutine(FadeInGreenColor(itemLabel));
+                    }
+                    else
+                    {
+                        FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = nameOfItem;
+                    }
+                }
+            } else
+            {
+                switch (SettingsManager.Instance.Language)
+                {
+                    case "English":
+                        FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequired[i];
+                        break;
+                    case "Dutch":
+                        FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequiredDutch[i];
+                        break;
+                }
             }
         }
     }
@@ -365,6 +403,35 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         // The player can only use the button after the hint duration has passed.
         HintButton.interactable = true;
+    }
+
+    private IEnumerator FadeAwayItem(GameObject obj)
+    {
+        Image imageComponent = obj.GetComponent<Image>();
+        Color newColor = imageComponent.color;
+        for (int i = 0; i < 100; i++)
+        {
+            newColor.a -= 0.1f;
+            imageComponent.color = newColor;
+            // The lower the parameter, the faster the animation.
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        Destroy(obj);
+    }
+
+    private IEnumerator FadeInGreenColor(TextMeshProUGUI text)
+    {
+        Color newColor = text.color;
+        for (int i = 0; i < 255; i++)
+        {
+            newColor.r -= 0.05f;
+            newColor.g += 0.05f;
+            newColor.b -= 0.05f;
+            text.color = newColor;
+            // The lower the parameter, the faster the animation.
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 
     public void CountDown()
