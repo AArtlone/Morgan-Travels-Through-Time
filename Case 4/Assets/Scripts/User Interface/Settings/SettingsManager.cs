@@ -62,9 +62,8 @@ public class SettingsManager : MonoBehaviour
         UpdateHiglightedLanguageIcons();
     }
 
-    public void DeleteJsonFile()
+    public void RemoveSingletonInstance()
     {
-        File.Delete(_pathToSettingsJson);
         Destroy(Instance);
         Destroy(gameObject);
     }

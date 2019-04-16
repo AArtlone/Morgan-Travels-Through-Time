@@ -101,7 +101,7 @@ public class SceneManagement : MonoBehaviour
         }
     }
 
-    public void DestroySceneManagementInstance()
+    public void RemoveSingletonInstance()
     {
         Destroy(Instance);
         Destroy(gameObject);

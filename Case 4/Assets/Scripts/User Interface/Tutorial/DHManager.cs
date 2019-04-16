@@ -9,7 +9,7 @@ public class DHManager : MonoBehaviour
     {
         if (Character.Instance.TutorialCompleted == false)
         {
-            LoadSequence("Teach Main Interface");
+            //LoadSequence("Teach Main Interface");
         }
     }
 

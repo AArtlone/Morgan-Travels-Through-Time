@@ -683,18 +683,61 @@ public class InterfaceManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
         {
-            SceneManagement.Instance.DestroySceneManagementInstance();
-            Character.Instance.DeleteJsonFiles();
-            SettingsManager.Instance.DeleteJsonFile();
+            SettingsManager.Instance.RemoveSingletonInstance();
+            Character.Instance.RemoveSingletonInstance();
+            SceneManagement.Instance.RemoveSingletonInstance();
+            DeleteJsonDataFromStorage();
             SceneManager.LoadScene("Logo Introduction");
         }
         else
         {
-            SceneManagement.Instance.DestroySceneManagementInstance();
-            Character.Instance.DeleteJsonFiles();
-            SettingsManager.Instance.DeleteJsonFile();
-            DialogueManager.Instance.DeleteJsonFile();
+            SettingsManager.Instance.RemoveSingletonInstance();
+            Character.Instance.RemoveSingletonInstance();
+            SceneManagement.Instance.RemoveSingletonInstance();
+            DeleteJsonDataFromStorage();
             SceneManager.LoadScene("Logo Introduction");
+        }
+    }
+
+    public void DeleteJsonDataFromStorage()
+    {
+        string path = Application.persistentDataPath;
+        DirectoryInfo gameDataDirectory = new DirectoryInfo(path);
+        FileInfo[] gameData = gameDataDirectory.GetFiles();
+
+        List<FileInfo> filesToRemove = new List<FileInfo>();
+
+        // Here we retrieve the relevant files from the game's data directory
+        // and store a list of them for removal.
+        foreach (FileInfo file in gameData)
+        {
+            string fileTypeString = string.Empty;
+            for (int i = 0; i < file.Name.Length; i++)
+            {
+                if (file.Name[i] == '.')
+                {
+                    fileTypeString = file.Name.Substring(i, file.Name.Length - i);
+
+                    if (fileTypeString == ".json")
+                    {
+                        filesToRemove.Add(file);
+                    }
+                }
+            }
+        }
+
+        // Then we use the list of files to remove to delete the ones that match
+        // in the game data directory.
+        foreach (FileInfo file in gameData)
+        {
+            foreach (FileInfo fileToRemove in filesToRemove)
+            {
+                if (file.Name == fileToRemove.Name)
+                {
+                    Debug.Log(file.Name);
+                    File.Delete(path + "/" + fileToRemove.Name);
+                }
+            }
         }
     }
 }
