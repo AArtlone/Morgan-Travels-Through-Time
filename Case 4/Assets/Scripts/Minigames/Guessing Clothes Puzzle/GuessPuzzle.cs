@@ -367,7 +367,10 @@ public class GuessPuzzle : MonoBehaviour
 
         foreach (GameObject objToActivate in EntitiesToActivate)
         {
-            objToActivate.SetActive(true);
+            if (objToActivate != null)
+            {
+                objToActivate.SetActive(true);
+            }
         }
 
         Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);

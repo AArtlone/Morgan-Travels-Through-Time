@@ -46,14 +46,26 @@ public class Puzzle : MonoBehaviour
 
     public void StartPuzzleIconToggle()
     {
-        CharacterIcon.SetActive(false);
-        NPCIcon.SetActive(true);
+        if (CharacterIcon != null)
+        {
+            CharacterIcon.SetActive(false);
+        }
+        if (NPCIcon != null)
+        {
+            NPCIcon.SetActive(true);
+        }
     }
 
     public void FinishPuzzleIconToggle()
     {
-        CharacterIcon.SetActive(true);
-        NPCIcon.SetActive(false);
+        if (CharacterIcon != null)
+        {
+            CharacterIcon.SetActive(true);
+        }
+        if (NPCIcon != null)
+        {
+            NPCIcon.SetActive(false);
+        }
     }
 
     public void InitiateGuessClothesPuzzle()
@@ -76,18 +88,17 @@ public class Puzzle : MonoBehaviour
     public void InitiateHiddenObjectsPuzzle()
     {
         PuzzleToLaunch.SetActive(true);
-        HiddenObjectsPuzzle HOPScript = PuzzleToLaunch.GetComponentInChildren<HiddenObjectsPuzzle>();
 
         // This centers the puzzle to the middle of the canvas because the actual puzzle
         // object is a child of the puzzle prefab and that changes its position to the
         // center of that prefab instead of the canvas instead.
         PuzzleToLaunch.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
-        HOPScript.ItemsFound.Clear();
+        _puzzleScript.ItemsFound.Clear();
 
         if (Character.Instance.TutorialCompleted)
         {
-            HOPScript.StartTimer();
+            _puzzleScript.StartTimer();
         }
 
         StartPuzzleIconToggle();
@@ -97,7 +108,8 @@ public class Puzzle : MonoBehaviour
             InterfaceManager.Instance.OpenPopup(InstructionManual);
         }
 
-        HOPScript.UpdateFoundItemsDisplay();
+        //_puzzleScript.ResetPuzzle();
+        _puzzleScript.UpdateFoundItemsDisplay();
     }
 
     public void InitiateCannonGame()

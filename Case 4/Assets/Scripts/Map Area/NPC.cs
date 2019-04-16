@@ -45,9 +45,13 @@ public class NPC : MonoBehaviour
     // ANIMATION-related references
     private Animator _animator;
 
+    private DHManager _DHManager;
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _DHManager = FindObjectOfType<DHManager>();
+
         DialogueManager.Instance.ToggleDialogue(false);
         if (DialogueProgressionTrigger2D == null)
         {
@@ -479,10 +483,19 @@ public class NPC : MonoBehaviour
                         }
                         else
                         {
-                            // If we reach past the dialogue, then we reset the
-                            // current dialogue index counter and we hide the dialogue
-                            // until it is once again triggered to show up.
-                            CurrentDialogueIndex = -1;
+                            // This does not work now since we have the scene
+                            // reload as band-aid fix for resetting the HOP.
+                            foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
+                            {
+                                if (dialogueItem.Name == "Map")
+                                {
+                                    _DHManager.LoadSequence("Teach Map Icon");
+                                }
+                            }
+                                    // If we reach past the dialogue, then we reset the
+                                    // current dialogue index counter and we hide the dialogue
+                                    // until it is once again triggered to show up.
+                                    CurrentDialogueIndex = -1;
                             DialogueManager.Instance.ToggleDialogue(false);
                             // We only update the player's inventory AFTER he has exited
                             // the dialogue, otherwise if he had used any items in it and
@@ -504,6 +517,14 @@ public class NPC : MonoBehaviour
                 }
                 else
                 {
+                    foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
+                    {
+                        if (dialogueItem.Name == "Map")
+                        {
+                            _DHManager.LoadSequence("Teach Map Icon");
+                        }
+                    }
+
                     if (SceneToLoadAfterDialogue != null)
                     {
                         StartCoroutine(LoadSceneCo(SceneToLoadAfterDialogue));
@@ -558,7 +579,7 @@ public class NPC : MonoBehaviour
     private IEnumerator LoadSceneCo(string sceneToLoad)
     {
         //Debug.Log(sceneToLoad);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(sceneToLoad);
     }
 

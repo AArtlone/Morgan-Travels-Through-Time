@@ -18,7 +18,8 @@ public class CameraIntroController : MonoBehaviour
             SkipButton.SetActive(true);
         } else
         {
-            SkipButton.SetActive(false);
+            // True only for the playtest
+            SkipButton.SetActive(true);
         }
     }
 

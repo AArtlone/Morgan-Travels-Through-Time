@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DHManager : MonoBehaviour
 {
@@ -7,9 +8,17 @@ public class DHManager : MonoBehaviour
 
     private void Start()
     {
-        if (Character.Instance.TutorialCompleted == false)
+        if (SceneManager.GetActiveScene().name == "Tutorial Map Area" && Character.Instance.HasMap == false)
         {
-            //LoadSequence("Teach Main Interface");
+            LoadSequence("Teach Character Portrait");
+        }
+
+        if (SceneManager.GetActiveScene().name == "Tutorial Map Area" && Character.Instance.HasDiary == true && Character.Instance.AreIconsExplained == true)
+        {
+            Debug.Log("AA");
+            Character.Instance.AreIconsExplained = false;
+            Character.Instance.RefreshJsonData();
+            LoadSequence("Teach Diary and Backpack");
         }
     }
 

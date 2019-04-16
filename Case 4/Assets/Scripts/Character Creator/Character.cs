@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     public bool TutorialCompleted;
     public bool HasMap;
     public bool HasDiary;
+    public bool AreIconsExplained;
     public bool IsCutscenePassed;
     public string LastMapArea;
     public string LastScene;
@@ -64,6 +65,7 @@ public class Character : MonoBehaviour
     private string _defaultsGuessingClothesJsonPath;
     private string _guessingPuzzlesPath;
     private string _escapeGamesJsonFile;
+    private string _puzzlesJsonPath;
     #endregion
 
     #region Blueprints references
@@ -105,6 +107,7 @@ public class Character : MonoBehaviour
             _defaultsGuessingClothesJsonPath = _pathToAssetsFolder + "/GuessClothingDefaults.json";
             _guessingPuzzlesPath = _pathToAssetsFolder + "/GuessingPuzzles.json";
             _escapeGamesJsonFile = _pathToAssetsFolder + "/EscapeGames.json";
+            _puzzlesJsonPath = _pathToAssetsFolder + "/Puzzles.json";
 
             if (File.Exists(PlayerStatsFilePath))
             {
@@ -163,6 +166,15 @@ public class Character : MonoBehaviour
                     else if (playerJsonData["HasDiary"].ToString() == "False")
                     {
                         HasDiary = false;
+                    }
+
+                    if (playerJsonData["AreIconsExplained"].ToString() == "True")
+                    {
+                        AreIconsExplained = true;
+                    }
+                    else if (playerJsonData["AreIconsExplained"].ToString() == "False")
+                    {
+                        AreIconsExplained = false;
                     }
 
                     if (playerJsonData["IsCutscenePassed"].ToString() == "True")
@@ -423,6 +435,11 @@ public class Character : MonoBehaviour
                     TextAsset escapeGamesData = Resources.Load<TextAsset>("Default World Data/EscapeGames");
                     File.WriteAllText(_escapeGamesJsonFile, escapeGamesData.text);
                     #endregion
+
+                    #region Creating the puzzles file
+                    TextAsset puzzlesData = Resources.Load<TextAsset>("Default World Data/Puzzles");
+                    File.WriteAllText(_puzzlesJsonPath, puzzlesData.text);
+                    #endregion
                 }
             }
         }
@@ -526,6 +543,15 @@ public class Character : MonoBehaviour
             else if (characterData["HasDiary"].ToString() == "False")
             {
                 HasDiary = false;
+            }
+
+            if (characterData["AreIconsExplained"].ToString() == "True")
+            {
+                AreIconsExplained = true;
+            }
+            else if (characterData["AreIconsExplained"].ToString() == "False")
+            {
+                AreIconsExplained = false;
             }
 
             if (characterData["IsCutscenePassed"].ToString() == "True")
@@ -1713,21 +1739,22 @@ public class Character : MonoBehaviour
 
     public IEnumerator EnablePlayerInteraction()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
         CameraBehavior.IsInteracting = false;
     }
 
     public IEnumerator EnableEntityTapping()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
         CameraBehavior.IsUIOpen = false;
+        CameraBehavior.IsEntityTappedOn = false;
     }
 
     public IEnumerator EnableCameraInteraction()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
         CameraBehavior.IsInterfaceElementSelected = false;
     }

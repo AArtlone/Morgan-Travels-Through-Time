@@ -32,9 +32,21 @@ public class CharacterCreatorManager : MonoBehaviour
     private string _jsonWordsFilter;
     private List<string> _wordsFilter = new List<string>();
     #endregion
+
+    private DHManager _DHManager;
     
     void Start()
     {
+        _DHManager = FindObjectOfType<DHManager>();
+
+        if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
+        {
+            if (_DHManager != null)
+            {
+                _DHManager.LoadSequence("Teach Settings");
+            }
+        }
+
         // When the game starts we extract all the bad words that we want to
         // filter out whenever the player is deciding on a character name.
         TextAsset filterWordsToJson = Resources.Load<TextAsset>("Default World Data/BadWords");

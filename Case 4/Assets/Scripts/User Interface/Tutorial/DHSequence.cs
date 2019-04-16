@@ -46,6 +46,9 @@ public class DHSequence : MonoBehaviour
     {
         _instructionsText = textUI;
         _currentInstructionIndex++;
+
+        NextHighlight();
+
         switch (SettingsManager.Instance.Language)
         {
             case "English":
@@ -57,8 +60,6 @@ public class DHSequence : MonoBehaviour
                 textUI.text = DutchInstructions[_currentInstructionIndex];
                 break;
         }
-
-        NextHighlight();
     }
 
     private void CheckLengthOfLines(string[] lines)

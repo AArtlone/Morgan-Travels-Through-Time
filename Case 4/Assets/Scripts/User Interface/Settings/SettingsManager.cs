@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [Serializable]
@@ -12,6 +13,7 @@ public class SettingsManager : MonoBehaviour
     public static SettingsManager Instance;
 
     public string Language;
+    public bool DevelopmentMode;
     public int ResolutionWidth;
     public int ResolutionHeight;
     public int MasterVolume;
@@ -25,6 +27,10 @@ public class SettingsManager : MonoBehaviour
     public LanguageToggle[] LanguageIconObjects;
     public List<Image> LanguageIcons;
     public List<LanguageController> LanguageControllers = new List<LanguageController>();
+    private int NumberOfTaps = 0;
+    private bool _isDevModeEnabled = false;
+
+    public object Scenemanager { get; private set; }
 
     private void Start()
     {
@@ -49,6 +55,7 @@ public class SettingsManager : MonoBehaviour
             ResetSettings();
 
             string settingsText = "{\"Settings\":{";
+            settingsText += "\"DevelopmentMode\":" + (DevelopmentMode ? "true" : "false") + ",";
             settingsText += "\"Language\":" + "\"" + Language + "\",";
             settingsText += "\"ResolutionWidth\":" + ResolutionWidth + ",";
             settingsText += "\"ResolutionHeight\":" + ResolutionHeight + ","; ;
@@ -60,6 +67,31 @@ public class SettingsManager : MonoBehaviour
             File.WriteAllText(_pathToSettingsJson, settingsText);
         }
         UpdateHiglightedLanguageIcons();
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Logo Introduction" && _isDevModeEnabled == false)
+        {
+            if (Input.touchCount > 0)
+            {
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    NumberOfTaps++;
+                }
+            }
+
+            if (NumberOfTaps == 20)
+            {
+                if (DevelopmentMode == false)
+                {
+                    DevelopmentMode = true;
+                    RefreshSettings();
+                }
+                SceneManager.LoadScene("Test Area");
+                _isDevModeEnabled = true;
+            }
+        }
     }
 
     public void RemoveSingletonInstance()
@@ -79,6 +111,13 @@ public class SettingsManager : MonoBehaviour
         JsonData settingsJson = JsonMapper.ToObject(settingsData);
 
         Language = settingsJson["Settings"]["Language"].ToString();
+        if (settingsJson["Settings"]["DevelopmentMode"].ToString() == "True")
+        {
+            DevelopmentMode = true;
+        } else if (settingsJson["Settings"]["DevelopmentMode"].ToString() == "False")
+        {
+            DevelopmentMode = false;
+        }
         ResolutionWidth = int.Parse(settingsJson["Settings"]["ResolutionWidth"].ToString());
         ResolutionHeight = int.Parse(settingsJson["Settings"]["ResolutionHeight"].ToString());
         MasterVolume = int.Parse(settingsJson["Settings"]["MasterVolume"].ToString());
@@ -95,6 +134,7 @@ public class SettingsManager : MonoBehaviour
     {
         string settingsText = "{\"Settings\":{";
         settingsText += "\"Language\":" + "\"" + Language + "\",";
+        settingsText += "\"DevelopmentMode\":" + (DevelopmentMode ? "true" : "false") + ",";
         settingsText += "\"ResolutionWidth\":" + ResolutionWidth + ",";
         settingsText += "\"ResolutionHeight\":" + ResolutionHeight + ","; ;
         settingsText += "\"MasterVolume\":" + MasterVolume + ","; ;
@@ -115,6 +155,14 @@ public class SettingsManager : MonoBehaviour
 
         // Reading and assigning data from the settings file to this manager class.
         Language = settingsJson["Settings"]["Language"].ToString();
+        if (settingsJson["Settings"]["DevelopmentMode"].ToString() == "True")
+        {
+            DevelopmentMode = true;
+        }
+        else if (settingsJson["Settings"]["DevelopmentMode"].ToString() == "False")
+        {
+            DevelopmentMode = false;
+        }
         ResolutionWidth = int.Parse(settingsJson["Settings"]["ResolutionWidth"].ToString());
         ResolutionHeight = int.Parse(settingsJson["Settings"]["ResolutionHeight"].ToString());
         MasterVolume = int.Parse(settingsJson["Settings"]["MasterVolume"].ToString());

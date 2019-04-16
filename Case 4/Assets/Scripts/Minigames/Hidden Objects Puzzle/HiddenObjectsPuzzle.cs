@@ -7,6 +7,8 @@ using Object = UnityEngine.Object;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using LitJson;
+using System.IO;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public string PuzzleName;
     public int Stars;
     public int TimeToComplete;
+    public bool Completed;
     public Image PuzzleBackground;
     // Those two lists are used for comparison mid-puzzle and are responsible
     // for deciding whether or not a puzzle is complete succcessfully.
@@ -58,17 +61,33 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public List<GameObject> StarsList;
 
     private CameraBehavior _cameraBehaviour;
+    private DHManager _DHManager;
+
+    public HiddenObjectsPuzzle(string name, int stars, bool completed)
+    {
+        PuzzleName = name;
+        Stars = stars;
+        Completed = completed;
+    }
 
     private void Start()
     {
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
+        _DHManager = FindObjectOfType<DHManager>();
+        // List does not end up being created at the top of the class, so i
+        // make it again here instead.
+        _itemsInFindList = new List<GameObject>();
+
         // We get all the objects in the Objects To Find List in this hidden objects
         // puzzle from the editor, and we use those objects for the hints mechanic.
         for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
         {
-            _itemsInFindList.Add(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject);
-
             //Debug.Log(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject.name);
+
+            if (transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject != null)
+            {
+                _itemsInFindList.Add(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject);
+            }
         }
 
         Counter = TimeToComplete;
@@ -86,6 +105,90 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 hintButton.text += (Character.Instance.AvailableHints > 1 ? "hints" : "hint");
                 break;
         }
+
+        if (Stars == 0)
+        {
+            SetupPuzzleData();
+        } else if (Stars > 0)
+        {
+            LoadPuzzleData();
+        }
+        puzzleNPC.LoadStars();
+    }
+
+    private void SetupPuzzleData()
+    {
+        TextAsset puzzlesData = Resources.Load<TextAsset>("Default World Data/Puzzles");
+        JsonData puzzlesJsonData = JsonMapper.ToObject(puzzlesData.text);
+
+        for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
+        {
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName)
+            {
+                Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
+                Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
+            }
+        }
+    }
+
+    private void LoadPuzzleData()
+    {
+        JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Puzzles.json"));
+
+        for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
+        {
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName)
+            {
+                Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
+                Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
+            }
+        }
+    }
+
+    private void RefreshPuzzleData()
+    {
+        JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Puzzles.json").ToString());
+
+        List<HiddenObjectsPuzzle> HOPs = new List<HiddenObjectsPuzzle>();
+
+        for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
+        {
+            HOPs.Add(
+                new HiddenObjectsPuzzle(
+                    puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
+                    (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false)));
+        }
+
+        foreach (HiddenObjectsPuzzle HOP in HOPs)
+        {
+            if (HOP.PuzzleName == PuzzleName)
+            {
+                HOP.Stars = Stars;
+                HOP.Completed = Completed;
+            }
+        }
+
+        string newJsonData = "{\"Puzzles\":[";
+
+        foreach (HiddenObjectsPuzzle HOP in HOPs)
+        {
+            newJsonData += "{";
+            newJsonData += "\"Name\":\"" + HOP.PuzzleName + "\",";
+            newJsonData += "\"Stars\":" + HOP.Stars + ",";
+
+            if (HOP.Completed == true)
+            {
+                newJsonData += "\"Completed\":true},";
+            }
+            else if (HOP.Completed == false)
+            {
+                newJsonData += "\"Completed\":false},";
+            }
+        }
+        newJsonData = newJsonData.Substring(0, newJsonData.Length - 1);
+        newJsonData += "]}";
+        File.WriteAllText(Application.persistentDataPath + "/Puzzles.json", newJsonData);
     }
 
     public void StartTimer()
@@ -113,6 +216,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         //    FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
         //}
     }
+    public void ResetPuzzle()
+    {
+        for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
+        {
+            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        }
+
+        for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
+        {
+            transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).GetComponentInChildren<Image>().color = new Color(255, 255, 255, 255);
+        }
+    }
 
     public void CompletePuzzle()
     {
@@ -122,7 +237,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        _cameraBehaviour.IsInteracting = false;
+        //_cameraBehaviour.IsInteracting = false;
 
         switch (SettingsManager.Instance.Language)
         {
@@ -134,28 +249,44 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 break;
         }
 
-        if (IsItemEarned == false)
-        {
-            if (ItemRewardName != string.Empty)
-            {
-                Character.Instance.AddItem(
-                    new Item(
-                        ItemRewardName,
-                        ItemRewardNameDutch,
-                        ItemRewardDescription,
-                        ItemRewardDescriptionDutch,
-                        ItemRewardActive,
-                        ItemRewardActiveDutch,
-                        ItemRewardAssetsImageName));
-                IsItemEarned = true;
-            }
-        }
-
         Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
 
         foreach (GameObject objToActivate in EntitiesToActivate)
         {
             objToActivate.SetActive(true);
+        }
+
+        if (IsItemEarned == false)
+        {
+            if (ItemRewardName != string.Empty)
+            {
+                // This does not work now since we have the scene
+                // reload as band-aid fix for resetting the HOP.
+                if (ItemRewardName == "Diary")
+                {
+                    if (_DHManager != null)
+                    {
+                        _DHManager.LoadSequence("Teach Main Interface");
+                    }
+                }
+
+                Character.Instance.AddItem(
+                new Item(
+                    ItemRewardName,
+                    ItemRewardNameDutch,
+                    ItemRewardDescription,
+                    ItemRewardDescriptionDutch,
+                    ItemRewardActive,
+                    ItemRewardActiveDutch,
+                    ItemRewardAssetsImageName));
+                IsItemEarned = true;
+            }
+        }
+
+        if (Character.Instance.AreIconsExplained == false && Character.Instance.HasDiary == false)
+        {
+            Character.Instance.AreIconsExplained = true;
+            Character.Instance.RefreshJsonData();
         }
         Character.Instance.HasDiary = true;
         Character.Instance.RefreshJsonData();
@@ -163,7 +294,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Stars = 3;
 
         StartCoroutine(ShowStars());
-        puzzleNPC.RefreshHiddenObjectsPuzzle();
+        RefreshPuzzleData();
     }
 
     public void LosePuzzle()
@@ -191,7 +322,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
 
         StartCoroutine(ShowStars());
-        puzzleNPC.RefreshHiddenObjectsPuzzle();
+        RefreshPuzzleData();
     }
 
     public void ClosePuzzle()
@@ -203,9 +334,12 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         puzzleNPC.FinishPuzzleIconToggle();
 
-        SceneManager.LoadScene("Tutorial Map Area");
+        if (SceneManager.GetActiveScene().name != "Test Area")
+        {
+            SceneManager.LoadScene("Tutorial Map Area");
+        }
 
-        gameObject.SetActive(false);
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     public void ClosePopUp(Object obj)
@@ -295,45 +429,51 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     {
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            string nameOfItem = string.Empty;
-            string language = string.Empty;
-            switch (SettingsManager.Instance.Language)
+            if (i < ItemsRequired.Count)
             {
-                case "English":
-                    nameOfItem = ItemsRequired[i];
-                    break;
-                case "Dutch":
-                    nameOfItem = ItemsRequiredDutch[i];
-                    break;
-            }
-            // Checking if the item we have in the required items list will
-            // have a match in the items found list and if so make it green
-            // instead of white text.
-            if (ItemsFound.Count > 0)
-            {
-                foreach (string item in ItemsFound)
-                {
-                    if (item == nameOfItem)
-                    {
-                        TextMeshProUGUI itemLabel = FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>();
-                        itemLabel.text = nameOfItem;
-                        StartCoroutine(FadeInGreenColor(itemLabel));
-                    }
-                    else
-                    {
-                        FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = nameOfItem;
-                    }
-                }
-            } else
-            {
+                string nameOfItem = string.Empty;
+                string language = string.Empty;
                 switch (SettingsManager.Instance.Language)
                 {
                     case "English":
-                        FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequired[i];
+                        nameOfItem = ItemsRequired[i];
+
                         break;
                     case "Dutch":
-                        FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequiredDutch[i];
+                        nameOfItem = ItemsRequiredDutch[i];
+
                         break;
+                }
+                // Checking if the item we have in the required items list will
+                // have a match in the items found list and if so make it green
+                // instead of white text.
+                if (ItemsFound.Count > 0)
+                {
+                    foreach (string item in ItemsFound)
+                    {
+                        if (item == nameOfItem)
+                        {
+                            TextMeshProUGUI itemLabel = FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>();
+                            itemLabel.text = nameOfItem;
+                            StartCoroutine(FadeInGreenColor(itemLabel));
+                        }
+                        else
+                        {
+                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = nameOfItem;
+                        }
+                    }
+                }
+                else
+                {
+                    switch (SettingsManager.Instance.Language)
+                    {
+                        case "English":
+                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequired[i];
+                            break;
+                        case "Dutch":
+                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequiredDutch[i];
+                            break;
+                    }
                 }
             }
         }

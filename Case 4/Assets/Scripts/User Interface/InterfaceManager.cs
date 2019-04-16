@@ -671,11 +671,16 @@ public class InterfaceManager : MonoBehaviour
             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
         } else
         {
-            Character.Instance.LastScene = scene;
+            if (Character.Instance.LastMapArea == "Test Area")
+            {
+                SceneManager.LoadScene("Test Area");
+            } else
+            {
+                Character.Instance.LastScene = scene;
+                SceneManager.LoadScene(scene);
+            }
         }
         Character.Instance.RefreshJsonData();
-
-        SceneManager.LoadScene(scene);
     }
     #endregion
     

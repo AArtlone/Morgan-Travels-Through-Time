@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class CameraBehavior : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class CameraBehavior : MonoBehaviour
     private bool _isCameraTravelling = false;
     public Vector3 TapPosition;
     public bool IsInteracting = false;
-    private bool _isEntityTappedOn = false;
+    public bool IsEntityTappedOn = false;
     public bool IsInterfaceElementSelected = false;
     public bool IsUIOpen = false;
     #endregion
@@ -35,7 +36,7 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-        _isEntityTappedOn = false;
+        //IsEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             AudioManager.Instance.PlaySound(AudioManager.Instance.HitScreen);
@@ -78,22 +79,12 @@ public class CameraBehavior : MonoBehaviour
                 {
                     IsInterfaceElementSelected = true;
                 }
-
-                if (hit2D.transform.tag == "Item Drop" ||
-                    hit2D.transform.tag == "NPC" ||
-                    hit2D.transform.tag == "Hidden Objects Puzzle" ||
-                    hit2D.transform.tag == "Guess Clothes Puzzle" ||
-                    hit2D.transform.tag == "Escape Game" ||
-                    hit2D.transform.tag == "Sign")
-                {
-                    _isEntityTappedOn = true;
-                }
             }
         }
 
-        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + _isEntityTappedOn + " " + IsUIOpen);
+        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + IsEntityTappedOn + " " + IsUIOpen);
 
-        if (IsInteracting == false && IsInterfaceElementSelected == false && _isEntityTappedOn == false && IsUIOpen == false)
+        if (IsInteracting == false && IsInterfaceElementSelected == false && IsEntityTappedOn == false && IsUIOpen == false)
         {
             if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || _isCameraTravelling == false)
             {
@@ -127,46 +118,54 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsUIOpen == false && DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
+        if (SceneManager.GetActiveScene().name != "Escape Game")
         {
-            RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
-
-            if (hitObj.transform != null)
+            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsUIOpen == false && IsEntityTappedOn == false && DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
             {
-                //Debug.Log(hitObj.transform.tag);
-                switch(hitObj.transform.tag)
+                RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
+
+                if (hitObj.transform != null)
                 {
-                    case "NPC":
-                        InterfaceManager.Instance.LoadCharacterDialogueAppearance();
-                        // Replace with interaction mechanic in the future
-                        hitObj.transform.GetComponent<NPC>().ContinueDialogue();
-                        IsInteracting = true;
-                        IsUIOpen = true;
-                        break;
-                    case "Hidden Objects Puzzle":
-                        hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
-                        IsInteracting = true;
-                        IsUIOpen = true;
-                        break;
-                    case "Guess Clothes Puzzle":
-                        hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
-                        IsInteracting = true;
-                        IsUIOpen = true;
-                        break;
-                    case "Escape Game":
-                        hitObj.transform.GetComponent<SceneManagement>().LoadScene("Escape Game");
-                        Character.Instance.LastScene = "Escape Game";
-                        Character.Instance.RefreshJsonData();
-                        IsInteracting = true;
-                        IsUIOpen = true;
-                        break;
-                    case "Item Drop":
-                        Item hitItemDrop = hitObj.transform.GetComponent<Item>();
-                        InterfaceManager.Instance.ItemSelected = hitItemDrop;
-                        InterfaceManager.Instance.DisplayActionsMenu();
-                        break;
+                    //Debug.Log(hitObj.transform.tag);
+                    switch (hitObj.transform.tag)
+                    {
+                        case "NPC":
+                            InterfaceManager.Instance.LoadCharacterDialogueAppearance();
+                            // Replace with interaction mechanic in the future
+                            hitObj.transform.GetComponent<NPC>().ContinueDialogue();
+                            IsEntityTappedOn = true;
+                            IsInteracting = true;
+                            IsUIOpen = true;
+                            break;
+                        case "Hidden Objects Puzzle":
+                            hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
+                            IsEntityTappedOn = true;
+                            IsInteracting = true;
+                            IsUIOpen = true;
+                            break;
+                        case "Guess Clothes Puzzle":
+                            hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
+                            IsEntityTappedOn = true;
+                            IsInteracting = true;
+                            IsUIOpen = true;
+                            break;
+                        case "Escape Game":
+                            Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
+                            Character.Instance.LastScene = "Escape Game";
+                            Character.Instance.RefreshJsonData();
+                            IsInteracting = true;
+                            IsUIOpen = true;
+                            SceneManager.LoadScene("Escape Game");
+                            break;
+                        case "Item Drop":
+                            Item hitItemDrop = hitObj.transform.GetComponent<Item>();
+                            InterfaceManager.Instance.ItemSelected = hitItemDrop;
+                            InterfaceManager.Instance.DisplayActionsMenu();
+                            break;
+                    }
                 }
             }
         }
     }
+        
 }
