@@ -19,10 +19,9 @@ public class DHManager : MonoBehaviour
         {
             if (seq.Name == name)
             {
-                foreach (GameObject obj in seq.ObjectsToActivate)
+                foreach (GameObject obj in seq.ObjectsToActivateAtTheStart)
                 {
                     obj.SetActive(true);
-                    seq.gameObject.SetActive(true);
                 }
             }
         }

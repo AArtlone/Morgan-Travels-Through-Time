@@ -8,8 +8,15 @@ using System;
 public class DHSequence : MonoBehaviour
 {
     public string Name;
-    public List<GameObject> ObjectsToActivate = new List<GameObject>();
-    public List<GameObject> ObjectsToDeactivate = new List<GameObject>();
+    [Tooltip("This list of objects will be activated at the start of the instructions!")]
+    public List<GameObject> ObjectsToActivateAtTheStart = new List<GameObject>();
+    // This list of objects will be activated at the end of the instructions!
+    private List<GameObject> _objectsToActivateAtTheEnd = new List<GameObject>();
+    [Space(10)]
+    [Tooltip("This list of objects will be DEactivated at the start of the instructions!")]
+    public List<GameObject> ObjectsToDeactivateAtTheStart = new List<GameObject>();
+    // This list of objects will be DEactivated at the end of the instructions!
+    private List<GameObject> _objectsToDeactivateAtTheEnd = new List<GameObject>();
     [TextArea(0, 100)]
     public string[] EnglishInstructions;
     [TextArea(0, 100)]
@@ -25,6 +32,14 @@ public class DHSequence : MonoBehaviour
     private void Start()
     {
         NextHighlight();
+
+        _objectsToActivateAtTheEnd = ObjectsToDeactivateAtTheStart;
+        _objectsToDeactivateAtTheEnd = ObjectsToActivateAtTheStart;
+
+        foreach (GameObject obj in ObjectsToDeactivateAtTheStart)
+        {
+            obj.SetActive(false);
+        }
     }
 
     public void NextLine(TextMeshProUGUI textUI)
@@ -54,7 +69,11 @@ public class DHSequence : MonoBehaviour
             _instructionsText.text = EnglishInstructions[_currentInstructionIndex];
 
             _sortingLayersToRestore.Clear();
-            foreach (GameObject obj in ObjectsToDeactivate)
+            foreach (GameObject obj in _objectsToActivateAtTheEnd)
+            {
+                obj.SetActive(true);
+            }
+            foreach (GameObject obj in _objectsToDeactivateAtTheEnd)
             {
                 obj.SetActive(false);
             }
