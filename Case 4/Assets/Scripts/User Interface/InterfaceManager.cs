@@ -669,6 +669,8 @@ public class InterfaceManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House")
         {
             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
+
+            SceneManager.LoadScene(scene);
         } else
         {
             if (Character.Instance.LastMapArea == "Test Area")

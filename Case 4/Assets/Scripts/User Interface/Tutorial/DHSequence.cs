@@ -109,19 +109,22 @@ public class DHSequence : MonoBehaviour
             {
                 if (i == _currentHighlightIndex)
                 {
-                    if (ObjectsToHighlight[i].GetComponent<SpriteRenderer>())
+                    if (ObjectsToHighlight[i] != null)
                     {
-                        SpriteRenderer spriteRenderer = ObjectsToHighlight[i].GetComponent<SpriteRenderer>();
+                        if (ObjectsToHighlight[i].GetComponent<SpriteRenderer>())
+                        {
+                            SpriteRenderer spriteRenderer = ObjectsToHighlight[i].GetComponent<SpriteRenderer>();
 
-                        _sortingLayersToRestore.Add(spriteRenderer.sortingOrder);
-                        spriteRenderer.sortingOrder = 100;
-                    }
-                    else if (ObjectsToHighlight[i].GetComponent<Image>())
-                    {
-                        Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
+                            _sortingLayersToRestore.Add(spriteRenderer.sortingOrder);
+                            spriteRenderer.sortingOrder = 100;
+                        }
+                        else if (ObjectsToHighlight[i].GetComponent<Image>())
+                        {
+                            Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
 
-                        _sortingLayersToRestore.Add(canvas.sortingOrder);
-                        canvas.sortingOrder = 100;
+                            _sortingLayersToRestore.Add(canvas.sortingOrder);
+                            canvas.sortingOrder = 100;
+                        }
                     }
                 }
             }

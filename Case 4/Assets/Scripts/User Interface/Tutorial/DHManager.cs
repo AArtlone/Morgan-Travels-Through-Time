@@ -15,7 +15,6 @@ public class DHManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Tutorial Map Area" && Character.Instance.HasDiary == true && Character.Instance.AreIconsExplained == true)
         {
-            Debug.Log("AA");
             Character.Instance.AreIconsExplained = false;
             Character.Instance.RefreshJsonData();
             LoadSequence("Teach Diary and Backpack");

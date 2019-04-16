@@ -142,10 +142,10 @@ public class Puzzle : MonoBehaviour
 
                     if (puzzlesData["Puzzles"][i]["Completed"].ToString() == "True")
                     {
-                        puzzleScript.IsItemEarned = true;
+                        puzzleScript.Completed = true;
                     } else if (puzzlesData["Puzzles"][i]["Completed"].ToString() == "False")
                     {
-                        puzzleScript.IsItemEarned = false;
+                        puzzleScript.Completed = false;
                     }
                 }
             }
@@ -166,7 +166,7 @@ public class Puzzle : MonoBehaviour
             newPuzzleData += "{";
             newPuzzleData += "\"Name\":\"" + currentPuzzle.PuzzleName + "\",";
             newPuzzleData += "\"Stars\":" + currentPuzzle.Stars + ",";
-            if (currentPuzzle.IsItemEarned)
+            if (currentPuzzle.Completed)
             {
                 newPuzzleData += "\"Completed\":true";
             } else

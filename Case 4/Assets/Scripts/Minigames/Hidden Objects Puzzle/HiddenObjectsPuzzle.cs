@@ -24,6 +24,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public List<string> ItemsRequiredDutch = new List<string>();
     public List<string> ItemsFound = new List<string>();
     public List<GameObject> EntitiesToActivate = new List<GameObject>();
+    public List<GameObject> EntitiesToDeactivate = new List<GameObject>();
     [Space(15)]
     [Tooltip("Item reward's name")]
     [Header("Item Earned once the puzzle is done is defined here!")]
@@ -256,19 +257,24 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             objToActivate.SetActive(true);
         }
 
+        foreach (GameObject objToDeactivate in EntitiesToDeactivate)
+        {
+            objToDeactivate.SetActive(false);
+        }
+
         if (IsItemEarned == false)
         {
             if (ItemRewardName != string.Empty)
             {
                 // This does not work now since we have the scene
                 // reload as band-aid fix for resetting the HOP.
-                if (ItemRewardName == "Diary")
-                {
-                    if (_DHManager != null)
-                    {
-                        _DHManager.LoadSequence("Teach Main Interface");
-                    }
-                }
+                //if (ItemRewardName == "Diary")
+                //{
+                //    if (_DHManager != null)
+                //    {
+                //        //_DHManager.LoadSequence("Teach Main Interface");
+                //    }
+                //}
 
                 Character.Instance.AddItem(
                 new Item(
@@ -286,7 +292,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         if (Character.Instance.AreIconsExplained == false && Character.Instance.HasDiary == false)
         {
             Character.Instance.AreIconsExplained = true;
-            Character.Instance.RefreshJsonData();
         }
         Character.Instance.HasDiary = true;
         Character.Instance.RefreshJsonData();
