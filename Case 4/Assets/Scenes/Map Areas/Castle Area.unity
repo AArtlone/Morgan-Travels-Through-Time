@@ -425,7 +425,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -788,6 +788,8 @@ GameObject:
   - component: {fileID: 86308473}
   - component: {fileID: 86308472}
   - component: {fileID: 86308471}
+  - component: {fileID: 86308475}
+  - component: {fileID: 86308474}
   m_Layer: 11
   m_Name: Backpack Icon
   m_TagString: Untagged
@@ -812,7 +814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 539, y: -264.3}
+  m_AnchoredPosition: {x: 525, y: -233}
   m_SizeDelta: {x: 136, y: 191.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86308471
@@ -894,6 +896,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86308469}
   m_CullTransparentMesh: 0
+--- !u!114 &86308474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86308469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &86308475
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86308469}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -1
+  m_TargetDisplay: 0
 --- !u!1 &100453691
 GameObject:
   m_ObjectHideFlags: 0
@@ -6442,7 +6482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.799988, y: -291.8}
+  m_AnchoredPosition: {x: 0, y: -268}
   m_SizeDelta: {x: -370.5, y: -583.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &469614633
@@ -6706,9 +6746,11 @@ GameObject:
   m_Component:
   - component: {fileID: 507996670}
   - component: {fileID: 507996671}
+  - component: {fileID: 507996673}
+  - component: {fileID: 507996672}
   m_Layer: 5
   m_Name: Inventory UI
-  m_TagString: Untagged
+  m_TagString: Inventory UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6748,6 +6790,44 @@ MonoBehaviour:
   ItemsPanel: {fileID: 531223737}
   ItemPrefab: {fileID: 699082045241937159, guid: 65e0550b776d8cc4d8c72b22da7f0d4e,
     type: 3}
+--- !u!114 &507996672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507996669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &507996673
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507996669}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -2
+  m_TargetDisplay: 0
 --- !u!1 &512392495
 GameObject:
   m_ObjectHideFlags: 0
@@ -7207,7 +7287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: "Yes\t"
+  English: Yes
   Dutch: Ja
 --- !u!114 &536910782
 MonoBehaviour:
@@ -8303,6 +8383,7 @@ MonoBehaviour:
   _topPart: {fileID: 1899611576}
   _botPart: {fileID: 395302399}
   _shoesPart: {fileID: 1034266101}
+  InventoryUICanvas: {fileID: 507996673}
   CameraBehavior: {fileID: 0}
 --- !u!114 &670761520
 MonoBehaviour:
@@ -8412,8 +8493,8 @@ RectTransform:
   - {fileID: 86308470}
   - {fileID: 247454693}
   - {fileID: 923358307}
-  - {fileID: 1272793426}
   - {fileID: 948875861}
+  - {fileID: 1272793426}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11156,7 +11237,7 @@ RectTransform:
   m_Children:
   - {fileID: 1200925888}
   m_Father: {fileID: 670761524}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12624,7 +12705,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -14590,6 +14671,7 @@ MonoBehaviour:
   _cameraSpeed: 8
   TapPosition: {x: 0, y: 0, z: 0}
   IsInteracting: 0
+  IsEntityTappedOn: 0
   IsInterfaceElementSelected: 0
   IsUIOpen: 0
 --- !u!81 &1300785740
@@ -22744,7 +22826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 36.3, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128087520
@@ -22760,7 +22842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedLanguage: 0
-  English: "Yes\t\t"
+  English: Yes
   Dutch: Ja
 --- !u!114 &2128087521
 MonoBehaviour:

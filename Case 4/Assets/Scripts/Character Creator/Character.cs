@@ -570,7 +570,8 @@ public class Character : MonoBehaviour
                 if (characterData["Blueprint" + i].ToString() == "True")
                 {
                     isBlueprintCollected = true;
-                } else if (characterData["Blueprint" + i].ToString() == "False")
+                }
+                else if (characterData["Blueprint" + i].ToString() == "False")
                 {
                     isBlueprintCollected = false;
                 }
@@ -635,11 +636,13 @@ public class Character : MonoBehaviour
                     {
                         CurrentQuests.Add(questInFile);
                         //Debug.Log("Ongoing " + questInFile.Name);
-                    } else if (questInFile.ProgressStatus == "Available" &&
-                        questInFile.CompletionStatus)
+                    }
+                    else if (questInFile.ProgressStatus == "Available" &&
+                      questInFile.CompletionStatus)
                     {
                         CompletedQuests.Add(questInFile);
-                    } else if (questInFile.ProgressStatus == "Available")
+                    }
+                    else if (questInFile.ProgressStatus == "Available")
                     {
                         AvailableQuests.Add(questInFile);
                         //Debug.Log("Available " + questInFile.Name);
@@ -649,7 +652,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void SetupItems()
+    public void SetupItems()
     {
         string dataToJson = File.ReadAllText(_itemsJsonFilePath);
         JsonData itemData = JsonMapper.ToObject(dataToJson);
@@ -694,7 +697,8 @@ public class Character : MonoBehaviour
                 if (areasData["Areas"][i]["Status"].ToString() == "Locked")
                 {
                     areaType = Area.AreaStatus.Locked;
-                } else if (areasData["Areas"][i]["Status"].ToString() == "Unlocked")
+                }
+                else if (areasData["Areas"][i]["Status"].ToString() == "Unlocked")
                 {
                     areaType = Area.AreaStatus.Unlocked;
                 }
@@ -792,7 +796,8 @@ public class Character : MonoBehaviour
                 if (questsData["Quests"][i]["Completed"].ToString() == "True")
                 {
                     statusOfQuestCompletion = true;
-                } else if (questsData["Quests"][i]["Completed"].ToString() == "False")
+                }
+                else if (questsData["Quests"][i]["Completed"].ToString() == "False")
                 {
                     statusOfQuestCompletion = false;
                 }
@@ -805,7 +810,7 @@ public class Character : MonoBehaviour
                     questsData["Quests"][i]["Description"].ToString(),
                     statusOfQuestCompletion,
                     newQuestObjectives);
-                
+
                 AllQuests.Add(newQuest);
             }
 
@@ -974,7 +979,7 @@ public class Character : MonoBehaviour
     {
         Wearables.Add(clothing);
         WearablesDutch.Add(clothing);
-        
+
         RefreshWearables();
 
         //Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
@@ -1012,7 +1017,8 @@ public class Character : MonoBehaviour
         {
             AvailableQuests.Add(questToMove);
             CurrentQuests.Remove(questToMove);
-        } else if (from == "Available Quests")
+        }
+        else if (from == "Available Quests")
         {
             CurrentQuests.Add(questToMove);
             AvailableQuests.Remove(questToMove);
@@ -1036,10 +1042,12 @@ public class Character : MonoBehaviour
         if (status == "Locked")
         {
             newAreaStatus = Area.AreaStatus.Locked;
-        } else if (status == "Unlocked")
+        }
+        else if (status == "Unlocked")
         {
             newAreaStatus = Area.AreaStatus.Unlocked;
-        } else
+        }
+        else
         {
             newAreaStatus = Area.AreaStatus.Unlocked;
         }
@@ -1060,7 +1068,8 @@ public class Character : MonoBehaviour
         if (blueprint == "Blueprint1")
         {
             Blueprint1 = true;
-        } else if (blueprint == "Blueprint2")
+        }
+        else if (blueprint == "Blueprint2")
         {
             Blueprint2 = true;
         }
@@ -1087,7 +1096,7 @@ public class Character : MonoBehaviour
         int QuestID = 0;
         bool completedStatus = false;
         bool completionStatusOfQuest = false;
-        
+
         switch (SettingsManager.Instance.Language)
         {
             case "English":
@@ -1210,7 +1219,7 @@ public class Character : MonoBehaviour
                 }
                 break;
         }
-        
+
         RefreshAllQuests();
         RefreshJsonData();
     }
@@ -1554,10 +1563,12 @@ public class Character : MonoBehaviour
         // We reset the existing items json list content, so that we can
         // append new one afterwards.
         File.WriteAllText(_itemsJsonFilePath, "");
+        string dataToJson = File.ReadAllText(_itemsJsonFilePath);
+        JsonData itemData = JsonMapper.ToObject(dataToJson);
 
         // This creates the starting wrapper of the json file.
         string newItemsData = "{\"Items\":[";
-        
+
         foreach (Item item in Items)
         {
             newItemsData += "{";
@@ -1568,12 +1579,12 @@ public class Character : MonoBehaviour
             newItemsData += "},";
         }
 
-        if (Items.Count > 0)
-        {
-            // This removes the last comma at the last item in the array, so
-            // that we wont get an error when getting the data later on.
-            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
-        }
+        //if (Items.Count > 0)
+        //{
+        // This removes the last comma at the last item in the array, so
+        // that we wont get an error when getting the data later on.
+        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        //}
         // This closes the wrapper of the json file made from the beginning.
         newItemsData += "]}";
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
@@ -1582,6 +1593,8 @@ public class Character : MonoBehaviour
         // DUTCH VERSION to refresh
         // *************************************
         File.WriteAllText(_itemsDutchJsonFilePath, "");
+        string dataToJsonDutch = File.ReadAllText(_itemsDutchJsonFilePath);
+        JsonData itemDataDutch = JsonMapper.ToObject(dataToJsonDutch);
 
         // This creates the starting wrapper of the json file.
         newItemsData = "{\"Items\":[";
@@ -1596,12 +1609,12 @@ public class Character : MonoBehaviour
             newItemsData += "},";
         }
 
-        if (ItemsDutch.Count > 0)
-        {
-            // This removes the last comma at the last item in the array, so
-            // that we wont get an error when getting the data later on.
-            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
-        }
+        //if (ItemsDutch.Count > 0)
+        //{
+        // This removes the last comma at the last item in the array, so
+        // that we wont get an error when getting the data later on.
+        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        //}
         // This closes the wrapper of the json file made from the beginning.
         newItemsData += "]}";
         File.WriteAllText(_itemsDutchJsonFilePath, newItemsData);
@@ -1668,7 +1681,8 @@ public class Character : MonoBehaviour
             if (cloth.Selected)
             {
                 newItemsData += "\"Selected\":true,";
-            } else
+            }
+            else
             {
                 newItemsData += "\"Selected\":false,";
             }
@@ -1696,12 +1710,16 @@ public class Character : MonoBehaviour
 
     public void ReloadInventory()
     {
-        for (int i = 0; i < GameObject.FindGameObjectWithTag("Items Panel").transform.childCount; i++)
+        GameObject itemsPanel = GameObject.FindGameObjectWithTag("Items Panel");
+        if (itemsPanel != null)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Items Panel").transform.GetChild(i).gameObject);
-        }
+            for (int i = 0; i < itemsPanel.transform.childCount; i++)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Items Panel").transform.GetChild(i).gameObject);
+            }
 
-        LoadInventory();
+            LoadInventory();
+        }
     }
 
     public void RefreshAreas()

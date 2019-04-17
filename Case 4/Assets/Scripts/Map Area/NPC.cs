@@ -46,11 +46,13 @@ public class NPC : MonoBehaviour
     private Animator _animator;
 
     private DHManager _DHManager;
+    private MapEnvironmentManager _mapEnvironmentManager;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _DHManager = FindObjectOfType<DHManager>();
+        _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
 
         DialogueManager.Instance.ToggleDialogue(false);
         if (DialogueProgressionTrigger2D == null)
@@ -76,16 +78,14 @@ public class NPC : MonoBehaviour
             {
                 foreach(Objective objective in quest.Objectives)
                 {
-                    if(objective.ID == 0)
+                    if(objective.ID == 0 && objective.CompletedStatus == true)
                     {
-                        if(objective.CompletedStatus == true)
-                        {
-                            _canWalkToNextPosition = true;
-                        }
+                        _canWalkToNextPosition = true;
                     }
                 }
             }
         }
+
         if(_canWalkToNextPosition && !_isDialogueOngoing && NeedsToMove)
         {
             // Once the npc starts walking, we toggle his animations
@@ -360,6 +360,16 @@ public class NPC : MonoBehaviour
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.NewPageInDiary);
 
+        if (_mapEnvironmentManager != null)
+        {
+            _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = 100;
+
+            if (InterfaceManager.Instance.InventoryUICanvas != null)
+            {
+                InterfaceManager.Instance.InventoryUICanvas.sortingOrder = 99;
+            }
+        }
+
         if (_canInteractWithPlayer)
         {
             int index = 0;
@@ -483,6 +493,17 @@ public class NPC : MonoBehaviour
                         }
                         else
                         {
+                            // TODO: Try to make functions for most of those code blocks.
+                            if (_mapEnvironmentManager != null)
+                            {
+                                _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = -1;
+
+                                if (InterfaceManager.Instance.InventoryUICanvas != null)
+                                {
+                                    InterfaceManager.Instance.InventoryUICanvas.sortingOrder = -2;
+                                }
+                            }
+
                             // This does not work now since we have the scene
                             // reload as band-aid fix for resetting the HOP.
                             foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
@@ -517,6 +538,16 @@ public class NPC : MonoBehaviour
                 }
                 else
                 {
+                    if (_mapEnvironmentManager != null)
+                    {
+                        _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = -1;
+
+                        if (InterfaceManager.Instance.InventoryUICanvas != null)
+                        {
+                            InterfaceManager.Instance.InventoryUICanvas.sortingOrder = -2;
+                        }
+                    }
+
                     foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
                     {
                         if (dialogueItem.Name == "Map")

@@ -38,7 +38,7 @@ public class MapEnvironmentManager : MonoBehaviour
                 HiddenObjectPuzzleNpc.SetActive(true);
             }
         }
-        if(Character.Instance.HasDiary == true)
+        if (Character.Instance.HasDiary == true && Character.Instance.AreIconsExplained == false)
         {
             if (DiaryButton != null)
             {
@@ -46,7 +46,7 @@ public class MapEnvironmentManager : MonoBehaviour
                 BackpackButton.SetActive(true);
             }
         }
-        if(Character.Instance.TutorialCompleted == true)
+        if (Character.Instance.TutorialCompleted == true)
         {
             if (EscapeGameNpc != null)
             {
@@ -54,6 +54,7 @@ public class MapEnvironmentManager : MonoBehaviour
             }
         }
 
+        Character.Instance.SetupItems();
         #region Checks for tutorial completion status and enables/disables corresponding npcs
         //foreach(Quest quest in Character.Instance.AllQuests)
         //{

@@ -262,6 +262,29 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             objToDeactivate.SetActive(false);
         }
 
+        string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+        string dataToJsonDutch = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
+        JsonData data = JsonMapper.ToObject(dataToJson);
+        JsonData dataDutch = JsonMapper.ToObject(dataToJsonDutch);
+
+        for (int j = 0; j < data["Items"].Count; j++)
+        {
+            //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+            if (data["Items"][j]["Name"].ToString() == ItemRewardName)
+            {
+                IsItemEarned = true;
+            }
+        }
+
+        for (int j = 0; j < dataDutch["Items"].Count; j++)
+        {
+            //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+            if (dataDutch["Items"][j]["Name"].ToString() == ItemRewardNameDutch)
+            {
+                IsItemEarned = true;
+            }
+        }
+
         if (IsItemEarned == false)
         {
             if (ItemRewardName != string.Empty)

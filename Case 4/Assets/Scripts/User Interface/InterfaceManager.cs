@@ -82,6 +82,8 @@ public class InterfaceManager : MonoBehaviour
     public Image _shoesPart;
     #endregion
 
+    public Canvas InventoryUICanvas;
+
     public CameraBehavior CameraBehavior;
 
     private void Awake()
@@ -201,53 +203,62 @@ public class InterfaceManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "Escape Game")
         {
-            for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+            if (CurrentQuestsDisplay != null)
             {
-                Destroy(CurrentQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
-            }
-            for (int i = 0; i < AvailableQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
-            {
-                Destroy(AvailableQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
-            }
-            for (int i = 0; i < CompletedQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
-            {
-                Destroy(CompletedQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+                for (int i = 0; i < CurrentQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+                {
+                    Destroy(CurrentQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+                }
+                for (int i = 0; i < AvailableQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+                {
+                    Destroy(AvailableQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+                }
+                for (int i = 0; i < CompletedQuestsDisplay.transform.GetChild(0).transform.childCount; i++)
+                {
+                    Destroy(CompletedQuestsDisplay.transform.GetChild(0).transform.GetChild(i).gameObject);
+                }
             }
 
             List<Quest> questsToLoad = new List<Quest>();
 
-            switch (SettingsManager.Instance.Language)
+            if (SettingsManager.Instance != null)
             {
-                case "English":
-                    questsToLoad = Character.Instance.AllQuests;
-                    break;
-                case "Dutch":
-                    questsToLoad = Character.Instance.AllQuestsDutch;
-                    break;
-            }
-
-            //Character.Instance.AllQuests.Clear();
-            foreach (Quest loadedQuest in questsToLoad)
-            {
-                if (loadedQuest.ProgressStatus == "Ongoing" || loadedQuest.ProgressStatus == "Nog niet gedaan")
+                switch (SettingsManager.Instance.Language)
                 {
-                    GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
-                    newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                    case "English":
+                        questsToLoad = Character.Instance.AllQuests;
+                        break;
+                    case "Dutch":
+                        questsToLoad = Character.Instance.AllQuestsDutch;
+                        break;
                 }
             }
 
-            foreach (Quest loadedQuest in questsToLoad)
+            //Character.Instance.AllQuests.Clear();
+            if (CurrentQuestsDisplay != null)
             {
-                GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
-                newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
-            }
-
-            foreach (Quest loadedQuest in questsToLoad)
-            {
-                if (loadedQuest.ProgressStatus == "Completed" || loadedQuest.ProgressStatus == "Gedaan")
+                foreach (Quest loadedQuest in questsToLoad)
                 {
-                    GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
+                    if (loadedQuest.ProgressStatus == "Ongoing" || loadedQuest.ProgressStatus == "Nog niet gedaan")
+                    {
+                        GameObject newQuestButton = Instantiate(QuestButtonPrefab, CurrentQuestsDisplay.transform.GetChild(0).transform);
+                        newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                    }
+                }
+
+                foreach (Quest loadedQuest in questsToLoad)
+                {
+                    GameObject newQuestButton = Instantiate(QuestButtonPrefab, AvailableQuestsDisplay.transform.GetChild(0).transform);
                     newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                }
+
+                foreach (Quest loadedQuest in questsToLoad)
+                {
+                    if (loadedQuest.ProgressStatus == "Completed" || loadedQuest.ProgressStatus == "Gedaan")
+                    {
+                        GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
+                        newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
+                    }
                 }
             }
         }
@@ -268,7 +279,10 @@ public class InterfaceManager : MonoBehaviour
         {
             if (obj == uiObj && obj.activeSelf == false)
             {
-                CameraBehavior.IsUIOpen = true;
+                if (CameraBehavior != null)
+                {
+                    CameraBehavior.IsUIOpen = true;
+                }
 
                 obj.SetActive(true);
                 
@@ -279,12 +293,15 @@ public class InterfaceManager : MonoBehaviour
             }
             else if (obj == uiObj && obj.activeSelf == true)
             {
-                CameraBehavior.IsUIOpen = false;
-                CameraBehavior.IsInterfaceElementSelected = false;
+                if (CameraBehavior != null)
+                {
+                    CameraBehavior.IsUIOpen = false;
+                    CameraBehavior.IsInterfaceElementSelected = false;
+                    CameraBehavior.TapPosition = Camera.main.transform.position;
+                }
 
-                obj.SetActive(false);
+                    obj.SetActive(false);
 
-                CameraBehavior.TapPosition = Camera.main.transform.position;
             }
             else
             {
@@ -489,56 +506,59 @@ public class InterfaceManager : MonoBehaviour
     public void LoadCharacterAppearance()
     {
         Sprite[] _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
-        foreach (Clothing clothing in Character.Instance.Wearables)
+        if (Character.Instance != null)
         {
-            if (clothing.BodyPart == "Body" && clothing.Selected == true)
+            foreach (Clothing clothing in Character.Instance.Wearables)
             {
-                foreach (Sprite sprite in _spritesFromStorage)
+                if (clothing.BodyPart == "Body" && clothing.Selected == true)
                 {
-                    if (sprite.name == clothing.Name)
+                    foreach (Sprite sprite in _spritesFromStorage)
                     {
-                        if (_bodyIcon != null)
+                        if (sprite.name == clothing.Name)
                         {
-                            _bodyIcon.sprite = sprite;
+                            if (_bodyIcon != null)
+                            {
+                                _bodyIcon.sprite = sprite;
+                            }
                         }
                     }
                 }
-            }
-            if (clothing.BodyPart == "Face" && clothing.Selected == true)
-            {
-                foreach (Sprite sprite in _spritesFromStorage)
+                if (clothing.BodyPart == "Face" && clothing.Selected == true)
                 {
-                    if (sprite.name == clothing.Name)
+                    foreach (Sprite sprite in _spritesFromStorage)
                     {
-                        if (_faceIcon != null)
+                        if (sprite.name == clothing.Name)
                         {
-                            _faceIcon.sprite = sprite;
+                            if (_faceIcon != null)
+                            {
+                                _faceIcon.sprite = sprite;
+                            }
                         }
                     }
                 }
-            }
-            if (clothing.BodyPart == "Hair" && clothing.Selected == true)
-            {
-                foreach (Sprite sprite in _spritesFromStorage)
+                if (clothing.BodyPart == "Hair" && clothing.Selected == true)
                 {
-                    if (sprite.name == clothing.Name)
+                    foreach (Sprite sprite in _spritesFromStorage)
                     {
-                        if (_hairIcon != null)
+                        if (sprite.name == clothing.Name)
                         {
-                            _hairIcon.sprite = sprite;
+                            if (_hairIcon != null)
+                            {
+                                _hairIcon.sprite = sprite;
+                            }
                         }
                     }
                 }
-            }
-            if (clothing.BodyPart == "Top" && clothing.Selected == true)
-            {
-                foreach (Sprite sprite in _spritesFromStorage)
+                if (clothing.BodyPart == "Top" && clothing.Selected == true)
                 {
-                    if (sprite.name == clothing.Name)
+                    foreach (Sprite sprite in _spritesFromStorage)
                     {
-                        if (_topIcon != null)
+                        if (sprite.name == clothing.Name)
                         {
-                            _topIcon.sprite = sprite;
+                            if (_topIcon != null)
+                            {
+                                _topIcon.sprite = sprite;
+                            }
                         }
                     }
                 }
@@ -741,7 +761,7 @@ public class InterfaceManager : MonoBehaviour
             {
                 if (file.Name == fileToRemove.Name)
                 {
-                    Debug.Log(file.Name);
+                    //Debug.Log(file.Name);
                     File.Delete(path + "/" + fileToRemove.Name);
                 }
             }
