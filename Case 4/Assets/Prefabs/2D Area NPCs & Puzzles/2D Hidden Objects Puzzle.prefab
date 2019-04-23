@@ -909,6 +909,7 @@ MonoBehaviour:
   PuzzleName: Test
   Stars: 0
   TimeToComplete: 15
+  Completed: 0
   PuzzleBackground: {fileID: 1875685646179648052}
   ItemsRequired:
   - Hamburger
@@ -923,9 +924,11 @@ MonoBehaviour:
   - Backpack
   - Phone
   - Wallet
+  ItemsRequiredDutch: []
   ItemsFound: []
   EntitiesToActivate:
   - {fileID: 0}
+  EntitiesToDeactivate: []
   ItemRewardName: Diary
   ItemRewardNameDutch: Dagboek
   ItemRewardDescription: The Diary
@@ -1003,6 +1006,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2010536289}
+  - component: {fileID: 4032843602128927409}
+  - component: {fileID: 3065003944311724246}
   m_Layer: 5
   m_Name: 2D Hidden Objects Puzzle
   m_TagString: Untagged
@@ -1031,6 +1036,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &4032843602128927409
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500087120032631221}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 24
+  m_TargetDisplay: 0
+--- !u!114 &3065003944311724246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500087120032631221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &528534029382273207
 GameObject:
   m_ObjectHideFlags: 0
@@ -4512,15 +4555,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2640159027805305985}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5194572103673527854 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7833283038073914031, guid: 82f073f752506a44498c56ea6d70efe6,
-    type: 3}
-  m_PrefabInstance: {fileID: 2640159027805305985}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5194572102098640586 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7833283038441005643, guid: 82f073f752506a44498c56ea6d70efe6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2640159027805305985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5194572103673527854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7833283038073914031, guid: 82f073f752506a44498c56ea6d70efe6,
     type: 3}
   m_PrefabInstance: {fileID: 2640159027805305985}
   m_PrefabAsset: {fileID: 0}
@@ -6091,6 +6134,18 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: English
+      value: It looks like you lost some belongings! Find them so you can get on your
+        way.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: Dutch
+      value: Het lijkt erop dat je wat spullen bent kwijt geraakt! Vind ze zodat je
+        op pad kunt gaan.
+      objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_text
@@ -6106,18 +6161,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: English
-      value: It looks like you lost some belongings! Find them so you can get on your
-        way.
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: Dutch
-      value: Het lijkt erop dat je wat spullen bent kwijt geraakt! Vind ze zodat je
-        op pad kunt gaan.
       objectReference: {fileID: 0}
     - target: {fileID: 7189793189118704345, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}

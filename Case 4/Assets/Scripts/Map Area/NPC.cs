@@ -91,18 +91,24 @@ public class NPC : MonoBehaviour
             // Once the npc starts walking, we toggle his animations
             _animator.SetBool("IsWalking", true);
             _canInteractWithPlayer = false;
-            SpeechBubble.GetComponent<SpriteRenderer>().enabled = false;
+            if (SpeechBubble != null)
+            {
+                SpeechBubble.GetComponent<SpriteRenderer>().enabled = false;
+            }
 
             transform.position = Vector2.MoveTowards(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y), 5f * .5f * Time.deltaTime);
-            transform.localScale = new Vector3(-1f, 1f, 1);
+            transform.localScale = new Vector3(-0.5f, 0.5f, 1);
 
             if(Vector2.Distance(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y)) < 1f)
             {
                 _canInteractWithPlayer = true;
-                SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
+                if (SpeechBubble != null)
+                {
+                    SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
+                }
 
                 _animator.SetBool("IsWalking", false);
-                transform.localScale = new Vector3(1f, 1f, 1);
+                transform.localScale = new Vector3(0.5f, 0.5f, 1);
             }
         }
     }
@@ -692,12 +698,16 @@ public class NPC : MonoBehaviour
             }
         }
 
-        if (branchesForFiltering.Count > 0)
+        if (SpeechBubble != null)
         {
-            SpeechBubble.SetActive(false);
-        } else
-        {
-            SpeechBubble.SetActive(true);
+            if (branchesForFiltering.Count > 0)
+            {
+                SpeechBubble.SetActive(false);
+            }
+            else
+            {
+                SpeechBubble.SetActive(true);
+            }
         }
     }
 }

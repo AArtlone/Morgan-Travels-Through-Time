@@ -106,6 +106,14 @@ public class InterfaceManager : MonoBehaviour
             LoadCharacterAppearance();
         }
 
+        // Once the player enteres a new scene, his previous tap must be halted
+        // from overflowing from the previous scene to this one. Because once you
+        // change a scene, sometimes it takes me back to the previous one because the
+        // button that takes me to one scene is on the same place in the other and
+        // they sort of loop or overflow relative to my tap.
+        Touch touch = Input.GetTouch(0);
+        touch.phase = TouchPhase.Ended;
+
         //if(Character.Instance.TutorialCompleted == false)
         //{
         //    foreach(GameObject mapArea in MapAreas)

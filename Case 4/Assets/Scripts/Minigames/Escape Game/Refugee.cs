@@ -24,7 +24,7 @@ public class Refugee : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _gameInterface = GetComponentInParent<Escape>();
+        _gameInterface = FindObjectOfType<Escape>();
 
         IconOfRefugee = Instantiate(IconPrefab, GameObject.FindGameObjectWithTag("Icons Container").transform).GetComponent<RefugeeIcon>();
         IconOfRefugee.RefugeeForIcon = this;

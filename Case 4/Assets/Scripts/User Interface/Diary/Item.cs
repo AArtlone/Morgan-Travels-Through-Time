@@ -97,7 +97,7 @@ public class Item : MonoBehaviour
     public void DragItem()
     {
         Touch touch = Input.GetTouch(0);
-        transform.SetParent(GameObject.Find("Canvas").transform);
+        transform.SetParent(GameObject.FindGameObjectWithTag("Items Panel").transform);
         transform.position = new Vector2(touch.position.x, touch.position.y);
         // This makes it so that the timer is not increasing if youre holding the
         // item AND dragging it at the same time.

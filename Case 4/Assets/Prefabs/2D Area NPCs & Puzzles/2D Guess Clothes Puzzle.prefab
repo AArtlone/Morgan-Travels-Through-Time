@@ -1537,6 +1537,8 @@ GameObject:
   m_Component:
   - component: {fileID: 590293963454918284}
   - component: {fileID: 2329244192882082895}
+  - component: {fileID: 168875391606095366}
+  - component: {fileID: 6287409494222629723}
   m_Layer: 5
   m_Name: 2D Guess Clothes Puzzle
   m_TagString: Untagged
@@ -1582,8 +1584,9 @@ MonoBehaviour:
   Name: Clothing Puzzle 1
   Customizable: 0
   PuzzleTimeInSeconds: 25
-  ObjectivesToComplete:
-  - Finish the clothing puzzle
+  QuestForObjective: 
+  ObjectiveToCompleteID: 0
+  EntitiesToActivate: []
   HeadList: []
   TorsoList: []
   BottomList: []
@@ -1592,6 +1595,44 @@ MonoBehaviour:
   TotalScore: 0
   PuzzleFinishedWindow: {fileID: 6057481988336674746}
   Timer: {fileID: 1160921581989827982}
+--- !u!223 &168875391606095366
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4909501492237326146}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 24
+  m_TargetDisplay: 0
+--- !u!114 &6287409494222629723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4909501492237326146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &5287507977811916059
 GameObject:
   m_ObjectHideFlags: 0
