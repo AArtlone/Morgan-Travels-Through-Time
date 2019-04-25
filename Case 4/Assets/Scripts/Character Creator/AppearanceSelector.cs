@@ -58,10 +58,37 @@ public class AppearanceSelector : MonoBehaviour
         }
     }
 
+    // Deselect the clothing element for the corresponding bodypart
+    public void DeselectBodyPart()
+    {
+        switch (gameObject.transform.parent.transform.parent.transform.name)
+        {
+            case "Hairs Display":
+                RemoveClothingFromBodypart(_hairBodyPart, "Hair");
+                break;
+            case "Shoes Display":
+                RemoveClothingFromBodypart(_shoesBodyPart, "Shoes");
+                break;
+        }
+    }
+
     public void ToggleIcon(System.Object icon)
     {
         GameObject iconObj = (GameObject)icon;
         _appearanceDisplay.ToggleIconFrame(iconObj);
+    }
+
+    private void RemoveClothingFromBodypart(GameObject Bodypart, string BodypartName)
+    {
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if(clothing.BodyPart == BodypartName && clothing.Selected == true)
+            {
+                clothing.Selected = false;
+                Color color = Bodypart.GetComponent<Image>().color;
+                Bodypart.GetComponent<Image>().color = new Color(color.r, color.g, color.b, 0);
+            }
+        }
     }
 
     /// <summary>

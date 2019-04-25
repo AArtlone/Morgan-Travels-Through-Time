@@ -6,6 +6,7 @@ public class AppearanceDisplay : MonoBehaviour
 {
     public GameObject IconPrefab;
     public GameObject DummieIconPrefab;
+    public GameObject DeselectIconPrefab;
     [Space(10)]
     public List<Clothing> Bodies;
     public GameObject BodiesDisplay;
@@ -225,6 +226,11 @@ public class AppearanceDisplay : MonoBehaviour
             }
         }
 
+        shoesPartLength--;
+        hairPartLength--;
+        GenerateDeselectIcon(ShoesDisplay);
+        GenerateDeselectIcon(HairsDisplay);
+
         // After all the items from the player's inventory have been displayed
         // for selection, we create dummy icons that show more items can be
         // acquired throughout the game.
@@ -253,6 +259,19 @@ public class AppearanceDisplay : MonoBehaviour
             Image imageComponent = newIcon.GetComponent<Image>();
             imageComponent.sprite = sprite;
             imageComponent.color = new Color(0, 0, 0, 0.5f);
+        }
+    }
+
+    // Generates the Deselect body part icon
+    private void GenerateDeselectIcon(GameObject display)
+    {
+        GameObject deselectIcon = Instantiate(DeselectIconPrefab, display.transform.GetChild(0).transform);
+        if(display.name == "Shoes Display")
+        {
+            ShoesIcons.Add(deselectIcon);
+        } else if (display.name == "Hairs Display")
+        {
+            HairIcons.Add(deselectIcon);
         }
     }
 
@@ -290,12 +309,10 @@ public class AppearanceDisplay : MonoBehaviour
             {
                 ShoesIcons.Add(newIcon);
             }
-            
-            
 
-            Sprite selectedFrameSprite = Resources.Load<Sprite>("Icons/" + "selectedFrame");
+            //Sprite selectedFrameSprite = Resources.Load<Sprite>("Icons/" + "selectedFrame");
             GameObject selectedFrame = newIcon.transform.GetChild(0).gameObject;
-            selectedFrame.GetComponent<Image>().sprite = selectedFrameSprite;
+            //selectedFrame.GetComponent<Image>().sprite = selectedFrameSprite;
             selectedFrame.SetActive(false);
             Sprite iconSprite = Resources.Load<Sprite>("Icons/" + item.Icon);
             GameObject clothingIcon = newIcon.transform.GetChild(1).gameObject;

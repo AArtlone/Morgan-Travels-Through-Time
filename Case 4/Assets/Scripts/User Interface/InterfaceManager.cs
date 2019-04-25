@@ -562,7 +562,10 @@ public class InterfaceManager : MonoBehaviour
                     }
                 } else if (clothing.BodyPart == "Hair" && clothing.Selected == false)
                 {
-                    _hairIcon.enabled = false;
+                    if (_hairIcon != null)
+                    {
+                        _hairIcon.enabled = false;
+                    }
                 }
                 if (clothing.BodyPart == "Top" && clothing.Selected == true)
                 {
