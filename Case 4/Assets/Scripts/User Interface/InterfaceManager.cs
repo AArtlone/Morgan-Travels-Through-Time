@@ -549,6 +549,7 @@ public class InterfaceManager : MonoBehaviour
                 }
                 if (clothing.BodyPart == "Hair" && clothing.Selected == true)
                 {
+                    _hairIcon.enabled = true;
                     foreach (Sprite sprite in _spritesFromStorage)
                     {
                         if (sprite.name == clothing.Name)
@@ -559,6 +560,9 @@ public class InterfaceManager : MonoBehaviour
                             }
                         }
                     }
+                } else if (clothing.BodyPart == "Hair" && clothing.Selected == false)
+                {
+                    _hairIcon.enabled = false;
                 }
                 if (clothing.BodyPart == "Top" && clothing.Selected == true)
                 {

@@ -59,19 +59,6 @@ public class CharacterCreatorManager : MonoBehaviour
         }
 
         DefineCurrentWearables();
-
-        //// If the player has already created a character then 
-        //// we just start the main menu instead.
-        //if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
-        //{
-        //    if (Character.Instance.TutorialCompleted)
-        //    {
-        //        SceneManagement.Instance.LoadScene("Main Map");
-        //    } else
-        //    {
-        //        SceneManagement.Instance.LoadScene("Tutorial Map Area");
-        //    }
-        //}
     }
 
     //defining current player's appearances in order to later check if any has changed
@@ -124,7 +111,6 @@ public class CharacterCreatorManager : MonoBehaviour
         CloseWindow(CharacterCreationMenu);
 
         Character.Instance.RefreshWearables();
-        //Debug.Log("Character has been created!");
     }
 
     //function for the Character Customization scene only
@@ -136,57 +122,46 @@ public class CharacterCreatorManager : MonoBehaviour
         DefineCurrentWearables();
     }
 
-    public void CheckForSelectedClothing()
+    // Receives a bodypart and checks whether it is selected or not
+    private bool CheckIfBodypartIsSelected(string Bodypart)
+    {
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.BodyPart == Bodypart &&
+                clothing.Selected)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Receives a bodypart and checks whether it was changed or not based on the initially selected bodypart
+    private bool CheckIfBodypartChanged(string Bodypart, string ClothingToCheck)
+    {
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if(clothing.Selected == true)
+            {
+                if(clothing.BodyPart == Bodypart)
+                {
+                    if(clothing.Name != ClothingToCheck)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // Checks whether the player selected all mandatory to slect clothing elements. If he did then it progresses to the next step. If he did not then it shows the error msg
+    public void CheckForMandatoryClothing()
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
-        bool bodySelected = false;
-        bool hairSelected = false;
-        bool faceSelected = false;
-        bool topSelected = false;
-        bool botSelected = false;
-        bool shoesSelected = false;
-
-        foreach(Clothing clothing in Character.Instance.Wearables)
-        {
-            if (clothing.BodyPart == "Body" &&
-                clothing.Selected)
-            {
-                bodySelected = true;
-            }
-            if (clothing.BodyPart == "Hair" &&
-                clothing.Selected)
-            {
-                hairSelected = true;
-            }
-            if (clothing.BodyPart == "Face" &&
-                clothing.Selected)
-            {
-                faceSelected = true;
-            }
-            if (clothing.BodyPart == "Top" &&
-                clothing.Selected)
-            {
-                topSelected = true;
-            }
-            if (clothing.BodyPart == "Bot" &&
-                clothing.Selected)
-            {
-                botSelected = true;
-            }
-            if (clothing.BodyPart == "Shoes" &&
-                clothing.Selected)
-            {
-                shoesSelected = true;
-            }
-        }
-        
-        if (bodySelected == false ||
-            hairSelected == false ||
-            faceSelected == false ||
-            topSelected == false ||
-            botSelected == false ||
-            shoesSelected == false)
+        if (CheckIfBodypartIsSelected("Top") == false ||
+            CheckIfBodypartIsSelected("Bot") == false)
         {
             LanguageController.Language language = LanguageController.Language.Dutch;
             switch (SettingsManager.Instance.Language)
@@ -198,44 +173,7 @@ public class CharacterCreatorManager : MonoBehaviour
                     language = LanguageController.Language.Dutch;
                     break;
             }
-
-            if(bodySelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "body, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "het lichaam, ";
-                        break;
-                }
-            }
-            if (hairSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "hair, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "het haar, ";
-                        break;
-                }
-            }
-            if (faceSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "face, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "het gezicht, ";
-                        break;
-                }
-            }
-            if (topSelected == false)
+            if (CheckIfBodypartIsSelected("Top") == false)
             {
                 switch (language)
                 {
@@ -247,7 +185,7 @@ public class CharacterCreatorManager : MonoBehaviour
                         break;
                 }
             }
-            if (botSelected == false)
+            if (CheckIfBodypartIsSelected("Bot") == false)
             {
                 switch (language)
                 {
@@ -256,18 +194,6 @@ public class CharacterCreatorManager : MonoBehaviour
                         break;
                     case LanguageController.Language.Dutch:
                         errorString = errorString + "de broek, ";
-                        break;
-                }
-            }
-            if (shoesSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "shoes, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "de schoenen, ";
                         break;
                 }
             }
@@ -289,226 +215,18 @@ public class CharacterCreatorManager : MonoBehaviour
             OpenWindow(CharacterNamePopupWindow);
         }
     }
-    public void ReturnToMainMapAndCheck()
-    {
-        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
-        bool bodySelected = false;
-        bool hairSelected = false;
-        bool faceSelected = false;
-        bool topSelected = false;
-        bool botSelected = false;
-        bool shoesSelected = false;
-
-        foreach (Clothing clothing in Character.Instance.Wearables)
-        {
-            if (clothing.BodyPart == "Body" &&
-                clothing.Selected)
-            {
-                bodySelected = true;
-            }
-            if (clothing.BodyPart == "Hair" &&
-                clothing.Selected)
-            {
-                hairSelected = true;
-            }
-            if (clothing.BodyPart == "Face" &&
-                clothing.Selected)
-            {
-                faceSelected = true;
-            }
-            if (clothing.BodyPart == "Top" &&
-                clothing.Selected)
-            {
-                topSelected = true;
-            }
-            if (clothing.BodyPart == "Bot" &&
-                clothing.Selected)
-            {
-                botSelected = true;
-            }
-            if (clothing.BodyPart == "Shoes" &&
-                clothing.Selected)
-            {
-                shoesSelected = true;
-            }
-        }
-
-        if (bodySelected == false ||
-            hairSelected == false ||
-            faceSelected == false ||
-            topSelected == false ||
-            botSelected == false ||
-            shoesSelected == false)
-        {
-            LanguageController.Language language = LanguageController.Language.Dutch;
-            switch (SettingsManager.Instance.Language)
-            {
-                case "English":
-                    language = LanguageController.Language.English;
-                    break;
-                case "Dutch":
-                    language = LanguageController.Language.Dutch;
-                    break;
-            }
-
-            if (bodySelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "body, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "het lichaam, ";
-                        break;
-                }
-            }
-            if (hairSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "hair, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "het haar, ";
-                        break;
-                }
-            }
-            if (faceSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "face, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "het gezicht, ";
-                        break;
-                }
-            }
-            if (topSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "top, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "de top, ";
-                        break;
-                }
-            }
-            if (botSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "de broek, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "bot, ";
-                        break;
-                }
-            }
-            if (shoesSelected == false)
-            {
-                switch (language)
-                {
-                    case LanguageController.Language.English:
-                        errorString = errorString + "shoes, ";
-                        break;
-                    case LanguageController.Language.Dutch:
-                        errorString = errorString + "de schoenen, ";
-                        break;
-                }
-            }
-
-            switch (language)
-            {
-                case LanguageController.Language.English:
-                    CharacterSelectionErrorMessage.text = "You have not selected " + errorString.Substring(0, errorString.Length - 2) + ".";
-                    break;
-                case LanguageController.Language.Dutch:
-                    CharacterSelectionErrorMessage.text = "Je bent " + errorString.Substring(0, errorString.Length - 2) + " vergeten.";
-                    break;
-            }
-            
-            OpenWindow(CharacterClothesSelectionErrorPopup);
-            errorString = string.Empty;
-        }
-        else
-        {
-            CheckIfClothingChanged();
-        }
-    }
-
-    //function that checks if any of the body parts were changed
+    // Function that checks if any of the body part has changed
     public void CheckIfClothingChanged()
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
-        bool _bodyChanged = false;
-        bool _faceChanged = false;
-        bool _hairChanged = false;
-        bool _topChanged = false;
-        bool _botChanged = false;
-        bool _shoesChanged = false;
-        foreach (Clothing clothing in Character.Instance.Wearables)
-        {
-            if (clothing.Selected == true)
-            {
-                if (clothing.BodyPart == "Body")
-                {
-                    if (clothing.Name != _currentBody)
-                    {
-                        _bodyChanged = true;
-                    }
-                }
-                if (clothing.BodyPart == "Face")
-                {
-                    if(clothing.Name != _currentFace)
-                    {
-                        _faceChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Hair")
-                {
-                    if (clothing.Name != _currentHair)
-                    {
-                        _hairChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Top")
-                {
-                    if (clothing.Name != _currentTop)
-                    {
-                        _topChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Bot")
-                {
-                    if (clothing.Name != _currentBot)
-                    {
-                        _botChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Shoes")
-                {
-                    if (clothing.Name != _currentShoes)
-                    {
-                        _shoesChanged = true;
-                    }
-                }
-            }
-        }
-        if(_bodyChanged == true ||
-            _faceChanged == true ||
-            _hairChanged == true ||
-            _topChanged == true ||
-            _botChanged == true ||
-            _shoesChanged == true)
+        if(CheckIfBodypartChanged("Top", _currentTop) == true ||
+            CheckIfBodypartChanged("Bot", _currentBot) == true ||
+            CheckIfBodypartChanged("Hair", _currentHair) == true ||
+            CheckIfBodypartChanged("Shoes", _currentShoes) == true ||
+            CheckIfBodypartChanged("Body", _currentBody) == true ||
+            CheckIfBodypartChanged("Face", _currentFace) == true)
         {
             OpenWindow(CharacterClothesChangedErrorPopop);
         } else
@@ -587,72 +305,14 @@ public class CharacterCreatorManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
-        bool _bodyChanged = false;
-        bool _faceChanged = false;
-        bool _hairChanged = false;
-        bool _topChanged = false;
-        bool _botChanged = false;
-        bool _shoesChanged = false;
-        foreach (Clothing clothing in Character.Instance.Wearables)
-        {
-            if (clothing.Selected == true)
-            {
-                if (clothing.BodyPart == "Body")
-                {
-                    if (clothing.Name != _currentBody)
-                    {
-                        _bodyChanged = true;
-                    }
-                }
-                if (clothing.BodyPart == "Face")
-                {
-                    if (clothing.Name != _currentFace)
-                    {
-                        _faceChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Hair")
-                {
-                    if (clothing.Name != _currentHair)
-                    {
-                        _faceChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Top")
-                {
-                    if (clothing.Name != _currentTop)
-                    {
-                        _topChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Bot")
-                {
-                    if (clothing.Name != _currentBot)
-                    {
-                        _botChanged = true;
-                    }
-                }
-                else if (clothing.BodyPart == "Shoes")
-                {
-                    if (clothing.Name != _currentShoes)
-                    {
-                        _shoesChanged = true;
-                    }
-                }
-            }
-        }
-        if (_bodyChanged == true ||
-            _faceChanged == true ||
-            _hairChanged == true ||
-            _topChanged == true ||
-            _botChanged == true ||
-            _shoesChanged == true)
+        if (CheckIfBodypartChanged("Top", _currentTop) == true ||
+            CheckIfBodypartChanged("Bot", _currentBot) == true ||
+            CheckIfBodypartChanged("Hair", _currentHair) == true ||
+            CheckIfBodypartChanged("Shoes", _currentShoes) == true ||
+            CheckIfBodypartChanged("Body", _currentBody) == true ||
+            CheckIfBodypartChanged("Face", _currentFace) == true)
         {
             OpenWindow(SaveCharacterPopup);
-        }
-        else
-        {
-            return;
         }
     }
 

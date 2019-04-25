@@ -138,9 +138,9 @@ public class GuessPuzzle : MonoBehaviour
                 {
                     _currentHeadIndex = 0;
                 }
-                else if (_currentHeadIndex >= HeadList.Count - 1)
+                else if (_currentHeadIndex > HeadList.Count - 1)
                 {
-                    _currentHeadIndex = HeadList.Count - 1;
+                    _currentHeadIndex = 0;
                 }
                 LoadNewClothing(bodyPart);
                 break;
@@ -150,9 +150,9 @@ public class GuessPuzzle : MonoBehaviour
                 {
                     _currentTorsoIndex = 0;
                 }
-                else if (_currentTorsoIndex >= TorsoList.Count - 1)
+                else if (_currentTorsoIndex > TorsoList.Count - 1)
                 {
-                    _currentTorsoIndex = TorsoList.Count - 1;
+                    _currentTorsoIndex = 0;
                 }
                 LoadNewClothing(bodyPart);
                 break;
@@ -162,9 +162,9 @@ public class GuessPuzzle : MonoBehaviour
                 {
                     _currentBottomIndex = 0;
                 }
-                else if (_currentBottomIndex >= BottomList.Count - 1)
+                else if (_currentBottomIndex > BottomList.Count - 1)
                 {
-                    _currentBottomIndex = BottomList.Count - 1;
+                    _currentBottomIndex = 0;
                 }
                 LoadNewClothing(bodyPart);
                 break;
@@ -174,9 +174,9 @@ public class GuessPuzzle : MonoBehaviour
                 {
                     _currentShoesIndex = 0;
                 }
-                else if (_currentShoesIndex >= ShoesList.Count - 1)
+                else if (_currentShoesIndex > ShoesList.Count - 1)
                 {
-                    _currentShoesIndex = ShoesList.Count - 1;
+                    _currentShoesIndex = 0;
                 }
                 LoadNewClothing(bodyPart);
                 break;
@@ -191,9 +191,9 @@ public class GuessPuzzle : MonoBehaviour
         {
             case "Hair":
                 _currentHeadIndex--;
-                if (_currentHeadIndex <= 0)
+                if (_currentHeadIndex < 0)
                 {
-                    _currentHeadIndex = 0;
+                    _currentHeadIndex = HeadList.Count - 1;
                 }
                 else if (_currentHeadIndex >= HeadList.Count - 1)
                 {
@@ -203,9 +203,9 @@ public class GuessPuzzle : MonoBehaviour
                 break;
             case "Top":
                 _currentTorsoIndex--;
-                if (_currentTorsoIndex <= 0)
+                if (_currentTorsoIndex < 0)
                 {
-                    _currentTorsoIndex = 0;
+                    _currentTorsoIndex = TorsoList.Count - 1;
                 }
                 else if (_currentTorsoIndex >= TorsoList.Count - 1)
                 {
@@ -215,9 +215,9 @@ public class GuessPuzzle : MonoBehaviour
                 break;
             case "Bot":
                 _currentBottomIndex--;
-                if (_currentBottomIndex <= 0)
+                if (_currentBottomIndex < 0)
                 {
-                    _currentBottomIndex = 0;
+                    _currentBottomIndex = BottomList.Count - 1;
                 }
                 else if (_currentBottomIndex >= BottomList.Count - 1)
                 {
@@ -227,9 +227,9 @@ public class GuessPuzzle : MonoBehaviour
                 break;
             case "Shoes":
                 _currentShoesIndex--;
-                if (_currentShoesIndex <= 0)
+                if (_currentShoesIndex < 0)
                 {
-                    _currentShoesIndex = 0;
+                    _currentShoesIndex = ShoesList.Count - 1;
                 }
                 else if (_currentShoesIndex >= ShoesList.Count - 1)
                 {
@@ -297,7 +297,31 @@ public class GuessPuzzle : MonoBehaviour
                     break;
             }
         }
+        RandomizeClothing();
     }
+
+    
+    private void RandomizeClothing()
+    {
+        RandomizeClothingList(HeadList);
+        RandomizeClothingList(TorsoList);
+        RandomizeClothingList(BottomList);
+        RandomizeClothingList(ShoesList);
+    }
+
+    //The function takes a list of clothing elements and randomizes the order of those elements in a list
+    private void RandomizeClothingList(List<GuessClothing> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            GuessClothing temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
+    }
+
+
 
     public void StartPuzzle(GameObject puzzle)
     {
