@@ -111,8 +111,11 @@ public class InterfaceManager : MonoBehaviour
         // change a scene, sometimes it takes me back to the previous one because the
         // button that takes me to one scene is on the same place in the other and
         // they sort of loop or overflow relative to my tap.
-        Touch touch = Input.GetTouch(0);
-        touch.phase = TouchPhase.Ended;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            touch.phase = TouchPhase.Ended;
+        }
 
         //if(Character.Instance.TutorialCompleted == false)
         //{

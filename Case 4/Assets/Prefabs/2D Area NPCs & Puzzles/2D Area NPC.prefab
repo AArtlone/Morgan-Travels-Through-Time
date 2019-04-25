@@ -157,6 +157,8 @@ MonoBehaviour:
   Name: Jack
   DialogueProgressionTrigger2D: {fileID: 0}
   SpeechBubble: {fileID: 135823330}
+  _TransformToMoveTo: {fileID: 0}
+  NeedsToMove: 0
   DialogueFormats:
   - Language: English
     Dialogue:
@@ -164,9 +166,11 @@ MonoBehaviour:
       PriorityIndex: 0
       LeftCharacterTitle: 
       LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
       RightCharacterTitle: Artem
       RightCharacterPortrait: {fileID: 21300000, guid: adc38591f1e894c44ad079d1f85448ac,
         type: 3}
+      RightPortraitTalking: 0
       DialogueStageBackground: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -182,17 +186,23 @@ MonoBehaviour:
         ItemsEarned: []
         ObjectivesRequired: []
         QuestOfDialogue: 
-        ObjectiveToComplete: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
       ObjectivesToMeet: []
+      RequiredItems: []
   - Language: Dutch
     Dialogue:
     - DialogueTitle: 
       PriorityIndex: 0
       LeftCharacterTitle: 
       LeftCharacterPortrait: {fileID: 0}
+      LeftPortraitTalking: 0
       RightCharacterTitle: Goal
       RightCharacterPortrait: {fileID: 21300000, guid: 8cefdbcdc490b664f907c2b8d274c85c,
         type: 3}
+      RightPortraitTalking: 0
       DialogueStageBackground: {fileID: 21300000, guid: a2ab1b5dbf8770e49afc7070ca3130b5,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 93a3fb03f6e16704ebf9846944137136,
@@ -209,8 +219,12 @@ MonoBehaviour:
         ItemsEarned: []
         ObjectivesRequired: []
         QuestOfDialogue: 
-        ObjectiveToComplete: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate: []
+        EntitiesToDeactive: []
+        SceneToLoad: 
       ObjectivesToMeet: []
+      RequiredItems: []
 --- !u!114 &459318810
 MonoBehaviour:
   m_ObjectHideFlags: 0
