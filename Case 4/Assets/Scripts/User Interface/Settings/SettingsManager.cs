@@ -54,15 +54,25 @@ public class SettingsManager : MonoBehaviour
         {
             ResetSettings();
 
-            string settingsText = "{\"Settings\":{";
-            settingsText += "\"DevelopmentMode\":" + (DevelopmentMode ? "true" : "false") + ",";
-            settingsText += "\"Language\":" + "\"" + Language + "\",";
-            settingsText += "\"ResolutionWidth\":" + ResolutionWidth + ",";
-            settingsText += "\"ResolutionHeight\":" + ResolutionHeight + ","; ;
-            settingsText += "\"MasterVolume\":" + MasterVolume + ","; ;
-            settingsText += "\"SoundEffectsVolume\":" + SoundEffectsVolume + ",";
-            settingsText += "\"BackgroundMusicVolume\":" + BackgroundMusicVolume;
-            settingsText += "}}";
+            string settingsText = "{";
+            settingsText += InsertNewLineTabs(1);
+            settingsText += "\"Settings\": {";
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"DevelopmentMode\": " + (DevelopmentMode ? "true" : "false") + ",";
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"Language\": " + "\"" + Language + "\",";
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"ResolutionWidth\": " + ResolutionWidth + ",";
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"ResolutionHeight\": " + ResolutionHeight + ","; ;
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"MasterVolume\": " + MasterVolume + ","; ;
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"SoundEffectsVolume\": " + SoundEffectsVolume + ",";
+            settingsText += InsertNewLineTabs(2);
+            settingsText += "\"BackgroundMusicVolume\": " + BackgroundMusicVolume;
+            settingsText += InsertNewLineTabs(1);
+            settingsText += "}" + Environment.NewLine + "}";
 
             File.WriteAllText(_pathToSettingsJson, settingsText);
         }
@@ -132,15 +142,25 @@ public class SettingsManager : MonoBehaviour
     /// <returns></returns>
     private string ExtractCurrentSettings()
     {
-        string settingsText = "{\"Settings\":{";
-        settingsText += "\"Language\":" + "\"" + Language + "\",";
-        settingsText += "\"DevelopmentMode\":" + (DevelopmentMode ? "true" : "false") + ",";
-        settingsText += "\"ResolutionWidth\":" + ResolutionWidth + ",";
-        settingsText += "\"ResolutionHeight\":" + ResolutionHeight + ","; ;
-        settingsText += "\"MasterVolume\":" + MasterVolume + ","; ;
-        settingsText += "\"SoundEffectsVolume\":" + SoundEffectsVolume + ",";
-        settingsText += "\"BackgroundMusicVolume\":" + BackgroundMusicVolume;
-        settingsText += "}}";
+        string settingsText = "{";
+        settingsText += InsertNewLineTabs(1);
+        settingsText += "\"Settings\": {";
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"DevelopmentMode\": " + (DevelopmentMode ? "true" : "false") + ",";
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"Language\": " + "\"" + Language + "\",";
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"ResolutionWidth\": " + ResolutionWidth + ",";
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"ResolutionHeight\": " + ResolutionHeight + ","; ;
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"MasterVolume\": " + MasterVolume + ","; ;
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"SoundEffectsVolume\": " + SoundEffectsVolume + ",";
+        settingsText += InsertNewLineTabs(2);
+        settingsText += "\"BackgroundMusicVolume\": " + BackgroundMusicVolume;
+        settingsText += InsertNewLineTabs(1);
+        settingsText += "}" + Environment.NewLine + "}";
 
         return settingsText;
     }
@@ -244,5 +264,16 @@ public class SettingsManager : MonoBehaviour
                 audioSource.volume = BackgroundMusicVolume / 100f;
             }
         }
+    }
+
+    private string InsertNewLineTabs(int numberOfTabs)
+    {
+        string whiteSpace = Environment.NewLine;
+        for (int i = 0; i < numberOfTabs; i++)
+        {
+            whiteSpace += "\t";
+        }
+
+        return whiteSpace;
     }
 }

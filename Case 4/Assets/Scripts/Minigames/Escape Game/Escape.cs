@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using LitJson;
 using System.IO;
+using System;
 
 public class Escape : MonoBehaviour
 {
@@ -73,32 +74,42 @@ public class Escape : MonoBehaviour
 
     public void SaveEscapeGamesData()
     {
-        string newGameData = "{\"EscapeGames\": [";
+        string newGameData = "{";
+        newGameData += InsertNewLineTabs(1);
+        newGameData += "\"EscapeGames\": [";
 
         string dataToJson = File.ReadAllText(_escapeGamesJsonFile);
         JsonData puzzlesJsonData = JsonMapper.ToObject(dataToJson);
 
         for (int i = 0; i < puzzlesJsonData["EscapeGames"].Count; i++)
         {
+            newGameData += InsertNewLineTabs(2);
             newGameData += "{";
+
             if (puzzlesJsonData["EscapeGames"][i]["Name"].ToString() == Name)
             {
-                newGameData +=
-                    "\"Name\":" + "\"" + Name + "\"," +
-                    "\"TotalPoints\":" + TotalPoints + "," +
-                    "\"RefugeesSaved\":" + RefugeesSaved;
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"Name\": " + "\"" + Name + "\",";
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"TotalPoints\": " + TotalPoints + ",";
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"RefugeesSaved\": " + RefugeesSaved;
             }
             else
             {
-                newGameData += "\"Name\":" + "\"" + puzzlesJsonData["EscapeGames"][i]["Name"].ToString() + "\",";
-                newGameData += "\"TotalPoints\":" + int.Parse(puzzlesJsonData["EscapeGames"][i]["TotalPoints"].ToString()) + ",";
-                newGameData += "\"RefugeesSaved\":" + int.Parse(puzzlesJsonData["EscapeGames"][i]["RefugeesSaved"].ToString());
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"Name\": " + "\"" + puzzlesJsonData["EscapeGames"][i]["Name"].ToString() + "\",";
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"TotalPoints\": " + int.Parse(puzzlesJsonData["EscapeGames"][i]["TotalPoints"].ToString()) + ",";
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"RefugeesSaved\": " + int.Parse(puzzlesJsonData["EscapeGames"][i]["RefugeesSaved"].ToString());
             }
+            newGameData += InsertNewLineTabs(2);
             newGameData += "},";
         }
 
         newGameData = newGameData.Substring(0, newGameData.Length - 1);
-        newGameData += "]}";
+        newGameData += InsertNewLineTabs(1) + "]" + Environment.NewLine + "}";
         File.WriteAllText(_escapeGamesJsonFile, newGameData);
 
         if (QuestForObjective != string.Empty)
@@ -133,5 +144,15 @@ public class Escape : MonoBehaviour
                 Stars[i].SetActive(true);
             }
         }
+    }
+    private string InsertNewLineTabs(int numberOfTabs)
+    {
+        string whiteSpace = Environment.NewLine;
+        for (int i = 0; i < numberOfTabs; i++)
+        {
+            whiteSpace += "\t";
+        }
+
+        return whiteSpace;
     }
 }

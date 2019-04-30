@@ -5,6 +5,7 @@ using LitJson;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class Character : MonoBehaviour
     public string DateOfLastCoffee;
 
     #region Json files location reference of player data.
+    private string _newLine = Environment.NewLine;
+    private string _tab = "\t";
     private string _pathToAssetsFolder;
     public string PlayerStatsFilePath;
     private string _areasJsonFilePath;
@@ -1425,115 +1428,145 @@ public class Character : MonoBehaviour
         File.WriteAllText(_questsDutchJsonFilePath, "");
         // Reset the existing quests data string
         _newQuestsData = "{";
-        _newQuestsData += "\"Quests\":[";
+        _newQuestsData += _newLine;
+        _newQuestsData += InsertTabs(1) + "\"Quests\": [";
 
         if (AllQuests.Count == 0)
         {
-            _newQuestsData += "]}";
+            _newQuestsData += "]" + _newLine + "}";
             return;
         }
         else
         {
             for (int i = 0; i < AllQuests.Count; i++)
             {
+                _newQuestsData += InsertNewLineTabs(2);
                 _newQuestsData += "{";
+                _newQuestsData += InsertNewLineTabs(3);
                 // This is one field of the quest object
-                _newQuestsData += "\"ID\":" + AllQuests[i].ID + ",";
-                _newQuestsData += "\"Name\":\"" + AllQuests[i].Name + "\",";
-                _newQuestsData += "\"Area\":\"" + AllQuests[i].Area + "\",";
-                _newQuestsData += "\"ProgressStatus\":\"" + AllQuests[i].ProgressStatus + "\",";
-                _newQuestsData += "\"Description\":\"" + AllQuests[i].Description + "\",";
+                _newQuestsData += "\"ID\": " + AllQuests[i].ID + ",";
+                _newQuestsData += InsertNewLineTabs(3);
+                _newQuestsData += "\"Name\": \"" + AllQuests[i].Name + "\",";
+                _newQuestsData += InsertNewLineTabs(3);
+                _newQuestsData += "\"Area\": \"" + AllQuests[i].Area + "\",";
+                _newQuestsData += InsertNewLineTabs(3);
+                _newQuestsData += "\"ProgressStatus\": \"" + AllQuests[i].ProgressStatus + "\",";
+                _newQuestsData += InsertNewLineTabs(3);
+                _newQuestsData += "\"Description\": \"" + AllQuests[i].Description + "\",";
 
+                _newQuestsData += InsertNewLineTabs(3);
                 if (AllQuests[i].CompletionStatus == true)
                 {
-                    _newQuestsData += "\"Completed\":true,";
+                    _newQuestsData += "\"Completed\": true,";
                 }
                 else if (AllQuests[i].CompletionStatus == false)
                 {
-                    _newQuestsData += "\"Completed\":false,";
+                    _newQuestsData += "\"Completed\": false,";
                 }
 
-                _newQuestsData += "\"Objectives\":" + "[";
+                _newQuestsData += InsertNewLineTabs(3);
+                _newQuestsData += "\"Objectives\": [";
                 foreach (Objective objective in AllQuests[i].Objectives)
                 {
+                    _newQuestsData += InsertNewLineTabs(4);
                     _newQuestsData += "{";
-                    _newQuestsData += "\"ID\":" + objective.ID + ",";
-                    _newQuestsData += "\"Name\":\"" + objective.Name + "\",";
+                    _newQuestsData += InsertNewLineTabs(5);
+                    _newQuestsData += "\"ID\": " + objective.ID + ",";
+                    _newQuestsData += InsertNewLineTabs(5);
+                    _newQuestsData += "\"Name\": \"" + objective.Name + "\",";
+
+                    _newQuestsData += InsertNewLineTabs(5);
                     if (objective.CompletedStatus == true)
                     {
-                        _newQuestsData += "\"CompletedStatus\":true";
+                        _newQuestsData += "\"CompletedStatus\": true";
                     }
                     else if (objective.CompletedStatus == false)
                     {
-                        _newQuestsData += "\"CompletedStatus\":false";
+                        _newQuestsData += "\"CompletedStatus\": false";
                     }
+                    _newQuestsData += InsertNewLineTabs(4);
                     _newQuestsData += "},";
                 }
                 // This closes the x type of quests
-                _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1);
+                _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1) + _newLine;
 
-                _newQuestsData += "]},";
+                _newQuestsData += InsertTabs(3) + "]" + _newLine + InsertTabs(2) + "},";
             }
         }
 
-        _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1);
-        _newQuestsData += "]}";
+        _newQuestsData = _newQuestsData.Substring(0, _newQuestsData.Length - 1) + _newLine;
+        _newQuestsData += InsertTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_questsJsonFilePath, _newQuestsData);
 
         _newQuestsDutchData = "{";
-        _newQuestsDutchData += "\"Quests\":[";
+        _newQuestsDutchData += _newLine;
+        _newQuestsDutchData += InsertTabs(1) + "\"Quests\": [";
 
         if (AllQuestsDutch.Count == 0)
         {
-            _newQuestsDutchData += "]}";
+            _newQuestsDutchData += "]" + _newLine + "}";
             return;
         }
         else
         {
             for (int i = 0; i < AllQuestsDutch.Count; i++)
             {
+                _newQuestsDutchData += InsertNewLineTabs(2);
                 _newQuestsDutchData += "{";
+                _newQuestsDutchData += InsertNewLineTabs(3);
                 // This is one field of the quest object
-                _newQuestsDutchData += "\"ID\":" + AllQuestsDutch[i].ID + ",";
-                _newQuestsDutchData += "\"Name\":\"" + AllQuestsDutch[i].Name + "\",";
-                _newQuestsDutchData += "\"Area\":\"" + AllQuestsDutch[i].Area + "\",";
-                _newQuestsDutchData += "\"ProgressStatus\":\"" + AllQuestsDutch[i].ProgressStatus + "\",";
-                _newQuestsDutchData += "\"Description\":\"" + AllQuestsDutch[i].Description + "\",";
+                _newQuestsDutchData += "\"ID\": " + AllQuestsDutch[i].ID + ",";
+                _newQuestsDutchData += InsertNewLineTabs(3);
+                _newQuestsDutchData += "\"Name\": \"" + AllQuestsDutch[i].Name + "\",";
+                _newQuestsDutchData += InsertNewLineTabs(3);
+                _newQuestsDutchData += "\"Area\": \"" + AllQuestsDutch[i].Area + "\",";
+                _newQuestsDutchData += InsertNewLineTabs(3);
+                _newQuestsDutchData += "\"ProgressStatus\": \"" + AllQuestsDutch[i].ProgressStatus + "\",";
+                _newQuestsDutchData += InsertNewLineTabs(3);
+                _newQuestsDutchData += "\"Description\": \"" + AllQuestsDutch[i].Description + "\",";
 
+                _newQuestsDutchData += InsertNewLineTabs(3);
                 if (AllQuestsDutch[i].CompletionStatus == true)
                 {
-                    _newQuestsDutchData += "\"Completed\":true,";
+                    _newQuestsDutchData += "\"Completed\": true,";
                 }
                 else if (AllQuestsDutch[i].CompletionStatus == false)
                 {
-                    _newQuestsDutchData += "\"Completed\":false,";
+                    _newQuestsDutchData += "\"Completed\": false,";
                 }
 
-                _newQuestsDutchData += "\"Objectives\":" + "[";
+                _newQuestsDutchData += InsertNewLineTabs(3);
+                _newQuestsDutchData += "\"Objectives\": " + "[";
                 foreach (Objective objective in AllQuestsDutch[i].Objectives)
                 {
+                    _newQuestsDutchData += InsertNewLineTabs(4);
                     _newQuestsDutchData += "{";
-                    _newQuestsDutchData += "\"ID\":" + objective.ID + ",";
-                    _newQuestsDutchData += "\"Name\":\"" + objective.Name + "\",";
+                    _newQuestsDutchData += InsertNewLineTabs(5);
+                    _newQuestsDutchData += "\"ID\": " + objective.ID + ",";
+                    _newQuestsDutchData += InsertNewLineTabs(5);
+                    _newQuestsDutchData += "\"Name\": \"" + objective.Name + "\",";
+
+                    _newQuestsDutchData += InsertNewLineTabs(5);
                     if (objective.CompletedStatus == true)
                     {
-                        _newQuestsDutchData += "\"CompletedStatus\":true";
+                        _newQuestsDutchData += "\"CompletedStatus\": true";
                     }
                     else if (objective.CompletedStatus == false)
                     {
-                        _newQuestsDutchData += "\"CompletedStatus\":false";
+                        _newQuestsDutchData += "\"CompletedStatus\": false";
                     }
+                    _newQuestsDutchData += InsertNewLineTabs(4);
                     _newQuestsDutchData += "},";
                 }
                 // This closes the x type of quests
                 _newQuestsDutchData = _newQuestsDutchData.Substring(0, _newQuestsDutchData.Length - 1);
 
-                _newQuestsDutchData += "]},";
+                _newQuestsDutchData += InsertNewLineTabs(3) + "]" + _newLine + InsertTabs(2) + "},";
             }
         }
-        _newQuestsDutchData = _newQuestsDutchData.Substring(0, _newQuestsDutchData.Length - 1);
+        _newQuestsDutchData = _newQuestsDutchData.Substring(0, _newQuestsDutchData.Length - 1) + _newLine;
         // This closes the wrapper of the json file made from the beginning.
-        _newQuestsDutchData += "]}";
+        _newQuestsDutchData += InsertTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_questsDutchJsonFilePath, _newQuestsDutchData);
 
         //Debug.Log("Refreshed all quests json data!");
@@ -1567,15 +1600,23 @@ public class Character : MonoBehaviour
         JsonData itemData = JsonMapper.ToObject(dataToJson);
 
         // This creates the starting wrapper of the json file.
-        string newItemsData = "{\"Items\":[";
+        string newItemsData = "{";
+        newItemsData += _newLine;
+        newItemsData += InsertTabs(1) + "\"Items\": [";
 
         foreach (Item item in Items)
         {
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "{";
-            newItemsData += "\"Name\":\"" + item.Name + "\",";
-            newItemsData += "\"Description\":\"" + item.Description + "\",";
-            newItemsData += "\"Active\":\"" + item.Active + "\",";
-            newItemsData += "\"AssetsImageName\":\"" + item.AssetsImageName + "\"";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Name\": \"" + item.Name + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Description\": \"" + item.Description + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Active\": \"" + item.Active + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"AssetsImageName\": \"" + item.AssetsImageName + "\"";
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "},";
         }
 
@@ -1583,10 +1624,13 @@ public class Character : MonoBehaviour
         //{
         // This removes the last comma at the last item in the array, so
         // that we wont get an error when getting the data later on.
-        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        if (Items.Count > 0)
+        {
+            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1) + _newLine;
+        }
         //}
         // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
+        newItemsData += InsertTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_itemsJsonFilePath, newItemsData);
 
         // *************************************
@@ -1597,15 +1641,23 @@ public class Character : MonoBehaviour
         JsonData itemDataDutch = JsonMapper.ToObject(dataToJsonDutch);
 
         // This creates the starting wrapper of the json file.
-        newItemsData = "{\"Items\":[";
+        newItemsData = "{";
+        newItemsData += _newLine;
+        newItemsData += InsertTabs(1) + "\"Items\": [";
 
         foreach (Item item in ItemsDutch)
         {
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "{";
-            newItemsData += "\"Name\":\"" + item.NameDutch + "\",";
-            newItemsData += "\"Description\":\"" + item.DescriptionDutch + "\",";
-            newItemsData += "\"Active\":\"" + item.ActiveDutch + "\",";
-            newItemsData += "\"AssetsImageName\":\"" + item.AssetsImageName + "\"";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Name\": \"" + item.NameDutch + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Description\": \"" + item.DescriptionDutch + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Active\": \"" + item.ActiveDutch + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"AssetsImageName\": \"" + item.AssetsImageName + "\"";
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "},";
         }
 
@@ -1613,10 +1665,13 @@ public class Character : MonoBehaviour
         //{
         // This removes the last comma at the last item in the array, so
         // that we wont get an error when getting the data later on.
-        newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        if (ItemsDutch.Count > 0)
+        {
+            newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
+        }
         //}
         // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
+        newItemsData += InsertNewLineTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_itemsDutchJsonFilePath, newItemsData);
 
         //Debug.Log("Refreshed items json data!");
@@ -1624,7 +1679,6 @@ public class Character : MonoBehaviour
 
     public void RefreshWearables()
     {
-
         // *************************************
         // ENGLISH VERSION to refresh
         // *************************************
@@ -1633,27 +1687,40 @@ public class Character : MonoBehaviour
         File.WriteAllText(_wearablesJsonFilePath, "");
 
         // This creates the starting wrapper of the json file.
-        string newItemsData = "{\"Wearables\":[";
+        string newItemsData = "{";
+        newItemsData += InsertNewLineTabs(1);
+        newItemsData += "\"Wearables\": [";
 
         foreach (Clothing cloth in Wearables)
         {
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "{";
+            newItemsData += InsertNewLineTabs(3);
             if (cloth.Selected)
             {
-                newItemsData += "\"Selected\":true,";
+                newItemsData += "\"Selected\": true,";
             }
             else
             {
-                newItemsData += "\"Selected\":false,";
+                newItemsData += "\"Selected\": false,";
             }
-            newItemsData += "\"BodyPart\":\"" + cloth.BodyPart + "\",";
-            newItemsData += "\"Name\":\"" + cloth.Name + "\",";
-            newItemsData += "\"Icon\":\"" + cloth.Icon + "\",";
-            newItemsData += "\"PortraitImage\":\"" + cloth.PortraitImage + "\",";
-            newItemsData += "\"Stamina\":" + cloth.Stamina + ",";
-            newItemsData += "\"Knowledge\":" + cloth.Knowledge + ",";
-            newItemsData += "\"Fitness\":" + cloth.Fitness + ",";
-            newItemsData += "\"Charisma\":" + cloth.Charisma;
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"BodyPart\": \"" + cloth.BodyPart + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Name\": \"" + cloth.Name + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Icon\": \"" + cloth.Icon + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"PortraitImage\": \"" + cloth.PortraitImage + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Stamina\": " + cloth.Stamina + ",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Knowledge\": " + cloth.Knowledge + ",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Fitness\": " + cloth.Fitness + ",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Charisma\": " + cloth.Charisma;
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "},";
         }
 
@@ -1664,7 +1731,7 @@ public class Character : MonoBehaviour
             newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
         }
         // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
+        newItemsData += InsertNewLineTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_wearablesJsonFilePath, newItemsData);
 
         // *************************************
@@ -1673,27 +1740,40 @@ public class Character : MonoBehaviour
         File.WriteAllText(_wearablesDutchJsonFilePath, "");
 
         // This creates the starting wrapper of the json file.
-        newItemsData = "{\"Wearables\":[";
+        newItemsData = "{";
+        newItemsData += InsertNewLineTabs(1);
+        newItemsData += "\"Wearables\": [";
 
         foreach (Clothing cloth in WearablesDutch)
         {
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "{";
+            newItemsData += InsertNewLineTabs(3);
             if (cloth.Selected)
             {
-                newItemsData += "\"Selected\":true,";
+                newItemsData += "\"Selected\": true,";
             }
             else
             {
-                newItemsData += "\"Selected\":false,";
+                newItemsData += "\"Selected\": false,";
             }
-            newItemsData += "\"BodyPart\":\"" + cloth.BodyPart + "\",";
-            newItemsData += "\"Name\":\"" + cloth.NameDutch + "\",";
-            newItemsData += "\"Icon\":\"" + cloth.Icon + "\",";
-            newItemsData += "\"PortraitImage\":\"" + cloth.PortraitImage + "\",";
-            newItemsData += "\"Stamina\":" + cloth.Stamina + ",";
-            newItemsData += "\"Knowledge\":" + cloth.Knowledge + ",";
-            newItemsData += "\"Fitness\":" + cloth.Fitness + ",";
-            newItemsData += "\"Charisma\":" + cloth.Charisma;
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"BodyPart\": \"" + cloth.BodyPart + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Name\": \"" + cloth.NameDutch + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Icon\": \"" + cloth.Icon + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"PortraitImage\": \"" + cloth.PortraitImage + "\",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Stamina\": " + cloth.Stamina + ",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Knowledge\": " + cloth.Knowledge + ",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Fitness\": " + cloth.Fitness + ",";
+            newItemsData += InsertNewLineTabs(3);
+            newItemsData += "\"Charisma\": " + cloth.Charisma;
+            newItemsData += InsertNewLineTabs(2);
             newItemsData += "},";
         }
 
@@ -1704,7 +1784,7 @@ public class Character : MonoBehaviour
             newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
         }
         // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
+        newItemsData += InsertNewLineTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_wearablesDutchJsonFilePath, newItemsData);
     }
 
@@ -1727,13 +1807,19 @@ public class Character : MonoBehaviour
         File.WriteAllText(_areasJsonFilePath, "");
 
         // This creates the starting wrapper of the json file.
-        string newAreasData = "{\"Areas\":[";
+        string newAreasData = "{";
+        newAreasData += _newLine;
+        newAreasData += InsertTabs(1) + "\"Areas\": [";
 
         foreach (Area area in Areas)
         {
+            newAreasData += InsertNewLineTabs(2);
             newAreasData += "{";
-            newAreasData += "\"Name\":\"" + area.Name + "\",";
-            newAreasData += "\"Status\":\"" + area.Status.ToString() + "\"";
+            newAreasData += InsertNewLineTabs(3);
+            newAreasData += "\"Name\": \"" + area.Name + "\",";
+            newAreasData += InsertNewLineTabs(3);
+            newAreasData += "\"Status\": \"" + area.Status.ToString() + "\"";
+            newAreasData += InsertNewLineTabs(2);
             newAreasData += "},";
         }
 
@@ -1744,7 +1830,7 @@ public class Character : MonoBehaviour
             newAreasData = newAreasData.Substring(0, newAreasData.Length - 1);
         }
         // This closes the wrapper of the json file made from the beginning.
-        newAreasData += "]}";
+        newAreasData += InsertNewLineTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_areasJsonFilePath, newAreasData);
     }
     #endregion
@@ -1775,5 +1861,26 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         CameraBehavior.IsInterfaceElementSelected = false;
+    }
+
+    private string InsertTabs(int numberOfTabs)
+    {
+        string whiteSpace = string.Empty;
+        for (int i = 0; i < numberOfTabs; i++)
+        {
+            whiteSpace += "\t";
+        }
+
+        return whiteSpace;
+    }
+    private string InsertNewLineTabs(int numberOfTabs)
+    {
+        string whiteSpace = _newLine;
+        for (int i = 0; i < numberOfTabs; i++)
+        {
+            whiteSpace += "\t";
+        }
+
+        return whiteSpace;
     }
 }

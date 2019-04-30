@@ -96,19 +96,22 @@ public class NPC : MonoBehaviour
                 SpeechBubble.GetComponent<SpriteRenderer>().enabled = false;
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y), 5f * .5f * Time.deltaTime);
-            transform.localScale = new Vector3(-0.5f, 0.5f, 1);
-
-            if(Vector2.Distance(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y)) < 1f)
+            if (_TransformToMoveTo != null)
             {
-                _canInteractWithPlayer = true;
-                if (SpeechBubble != null)
-                {
-                    SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
-                }
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y), 5f * .5f * Time.deltaTime);
+                transform.localScale = new Vector3(-0.5f, 0.5f, 1);
 
-                _animator.SetBool("IsWalking", false);
-                transform.localScale = new Vector3(0.5f, 0.5f, 1);
+                if (Vector2.Distance(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y)) < 1f)
+                {
+                    _canInteractWithPlayer = true;
+                    if (SpeechBubble != null)
+                    {
+                        SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
+                    }
+
+                    _animator.SetBool("IsWalking", false);
+                    transform.localScale = new Vector3(0.5f, 0.5f, 1);
+                }
             }
         }
     }

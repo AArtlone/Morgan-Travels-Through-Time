@@ -321,8 +321,6 @@ public class GuessPuzzle : MonoBehaviour
         }
     }
 
-
-
     public void StartPuzzle(GameObject puzzle)
     {
         ResetPuzzle();
@@ -364,29 +362,36 @@ public class GuessPuzzle : MonoBehaviour
 
     private void SavePuzzleScore()
     {
-        string newScoreData = "{\"GuessingPuzzles\": [";
+        string newScoreData = "{";
+        newScoreData += InsertNewLineTabs(1);
+        newScoreData += "\"GuessingPuzzles\": [";
 
         string dataToJson = File.ReadAllText(_guessingPuzzlesPath);
         JsonData puzzlesJsonData = JsonMapper.ToObject(dataToJson);
 
         for (int i = 0; i < puzzlesJsonData["GuessingPuzzles"].Count; i++)
         {
+            newScoreData += InsertNewLineTabs(2);
             newScoreData += "{";
             if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name)
             {
-                newScoreData +=
-                    "\"Name\":" + "\"" + Name + "\"," +
-                    "\"Score\":" + CalculateTotalScore();
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"Name\": " + "\"" + Name + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"Score\": " + CalculateTotalScore();
             } else
             {
-                newScoreData += "\"Name\":" + "\"" + puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() + "\",";
-                newScoreData += "\"Score\":" + int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"Name\": " + "\"" + puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"Score\": " + int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());
             }
+            newScoreData += InsertNewLineTabs(2);
             newScoreData += "},";
         }
 
         newScoreData = newScoreData.Substring(0, newScoreData.Length - 1);
-        newScoreData += "]}";
+        newScoreData += InsertNewLineTabs(1) + "]" + System.Environment.NewLine + "}";
         File.WriteAllText(_guessingPuzzlesPath, newScoreData);
 
         foreach (GameObject objToActivate in EntitiesToActivate)
@@ -470,5 +475,15 @@ public class GuessPuzzle : MonoBehaviour
         }
         
         OpenPopup(PuzzleFinishedWindow);
+    }
+    private string InsertNewLineTabs(int numberOfTabs)
+    {
+        string whiteSpace = System.Environment.NewLine;
+        for (int i = 0; i < numberOfTabs; i++)
+        {
+            whiteSpace += "\t";
+        }
+
+        return whiteSpace;
     }
 }

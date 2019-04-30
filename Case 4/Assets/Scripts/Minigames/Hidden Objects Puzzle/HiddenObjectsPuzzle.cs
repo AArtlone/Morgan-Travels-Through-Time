@@ -170,25 +170,33 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             }
         }
 
-        string newJsonData = "{\"Puzzles\":[";
+        string newJsonData = "{";
+        newJsonData += InsertNewLineTabs(1);
+        newJsonData += "\"Puzzles\": [";
 
         foreach (HiddenObjectsPuzzle HOP in HOPs)
         {
+            newJsonData += InsertNewLineTabs(2);
             newJsonData += "{";
-            newJsonData += "\"Name\":\"" + HOP.PuzzleName + "\",";
-            newJsonData += "\"Stars\":" + HOP.Stars + ",";
+            newJsonData += InsertNewLineTabs(3);
+            newJsonData += "\"Name\": \"" + HOP.PuzzleName + "\",";
+            newJsonData += InsertNewLineTabs(3);
+            newJsonData += "\"Stars\": " + HOP.Stars + ",";
 
+            newJsonData += InsertNewLineTabs(3);
             if (HOP.Completed == true)
             {
-                newJsonData += "\"Completed\":true},";
+                newJsonData += "\"Completed\": true";
             }
             else if (HOP.Completed == false)
             {
-                newJsonData += "\"Completed\":false},";
+                newJsonData += "\"Completed\": false";
             }
+            newJsonData += InsertNewLineTabs(2);
+            newJsonData += "},";
         }
         newJsonData = newJsonData.Substring(0, newJsonData.Length - 1);
-        newJsonData += "]}";
+        newJsonData += InsertNewLineTabs(1) + "]" + Environment.NewLine + "}";
         File.WriteAllText(Application.persistentDataPath + "/Puzzles.json", newJsonData);
     }
 
@@ -629,5 +637,15 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             StarsList[i].SetActive(true);
         }
+    }
+    private string InsertNewLineTabs(int numberOfTabs)
+    {
+        string whiteSpace = Environment.NewLine;
+        for (int i = 0; i < numberOfTabs; i++)
+        {
+            whiteSpace += "\t";
+        }
+
+        return whiteSpace;
     }
 }

@@ -154,35 +154,6 @@ public class Puzzle : MonoBehaviour
         LoadStars();
     }
 
-    public void RefreshHiddenObjectsPuzzle()
-    {
-        string newPuzzleData = string.Empty;
-        newPuzzleData += "{\"Puzzles\":[";
-
-        for (int i = 0; i < Character.Instance.HiddenObjectsPuzzles.Count; i++)
-        {
-            HiddenObjectsPuzzle currentPuzzle = Character.Instance.HiddenObjectsPuzzles[i];
-
-            newPuzzleData += "{";
-            newPuzzleData += "\"Name\":\"" + currentPuzzle.PuzzleName + "\",";
-            newPuzzleData += "\"Stars\":" + currentPuzzle.Stars + ",";
-            if (currentPuzzle.Completed)
-            {
-                newPuzzleData += "\"Completed\":true";
-            } else
-            {
-                newPuzzleData += "\"Completed\":false";
-            }
-            newPuzzleData += "},";
-        }
-        newPuzzleData = newPuzzleData.Substring(0, newPuzzleData.Length - 1);
-        newPuzzleData += "]}";
-
-        File.WriteAllText(_jsonPuzzlesPath, newPuzzleData);
-
-        LoadStars();
-    }
-
     // This part loads the stars on top of the puzzle on the minimap
     public void LoadStars()
     {

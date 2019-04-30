@@ -38,14 +38,15 @@ public class SceneManagement : MonoBehaviour
                 else if (Character.Instance.LastMapArea == "Tutorial Map Area")
                 {
                     LoadScene(Character.Instance.LastMapArea);
+                } else
+                {
+                    LoadScene(Character.Instance.LastMapArea);
                 }
                 Character.Instance.RefreshJsonData();
             }
             else
             {
-                Character.Instance.LastMapArea = "Tutorial Map Area";
-                Character.Instance.RefreshJsonData();
-                LoadScene("Tutorial Map Area");
+                LoadScene(Character.Instance.LastMapArea);
             }
         }
         else if (SceneManager.GetActiveScene().name == "Character Customization")

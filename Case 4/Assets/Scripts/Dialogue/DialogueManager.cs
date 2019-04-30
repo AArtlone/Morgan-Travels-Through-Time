@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -69,6 +70,8 @@ public class DialogueManager : MonoBehaviour
 
         RightPortraitInitialPos = RightCharacterPortrait.rectTransform.position;
         LeftPortraitInitialPos = LeftCharacterPortrait.transform.position;
+
+        RefreshDialogueResponses();
     }
 
     public void DeleteJsonFile()
@@ -98,19 +101,22 @@ public class DialogueManager : MonoBehaviour
         File.WriteAllText(_dialogueResponsesPath, "");
 
         // This creates the starting wrapper of the json file.
-        string newItemsData = "{\"DialogueResponses\":[";
+        string newItemsData = "{";
+        newItemsData += Environment.NewLine + "\t";
+        newItemsData += "\"DialogueResponses\": [";
 
         HashSet<string> uniqueResponses = new HashSet<string>(DialogueResponses);
 
         foreach (string response in uniqueResponses)
         {
+            newItemsData += Environment.NewLine + "\t" + "\t";
             newItemsData += "\"" + response + "\"" + ",";
         }
         // This removes the last comma at the last item in the array, so
         // that we wont get an error when getting the data later on.
         newItemsData = newItemsData.Substring(0, newItemsData.Length - 1);
         // This closes the wrapper of the json file made from the beginning.
-        newItemsData += "]}";
+        newItemsData += Environment.NewLine + "\t" + "]" + Environment.NewLine + "}";
         File.WriteAllText(_dialogueResponsesPath, newItemsData);
     }
 
