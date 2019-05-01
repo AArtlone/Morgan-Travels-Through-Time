@@ -121,243 +121,251 @@ public class NPC : MonoBehaviour
     /// </summary>
     public void NextDialogue()
     {
-        // Loading the new set of dialogue data.
-        CurrentDialogueIndex++;
-
-        //Dialogue[CurrentDialogueIndex].Passed = true;
-
-        // We now change both sides of the dialogue and all of its
-        // elements to match the new dialogue object's data.
-        DialogueManager.Instance.ChangeTitle(
-            "left", Character.Instance.Name);
-        DialogueManager.Instance.ChangeTitle(
-            "right", FinalSequence[CurrentDialogueIndex].RightCharacterTitle);
-
-        DialogueManager.Instance.ChangePortrait("left", FinalSequence[CurrentDialogueIndex].LeftCharacterPortrait);
-        DialogueManager.Instance.ChangePortrait("right", FinalSequence[CurrentDialogueIndex].RightCharacterPortrait);
-        
-        //Offsetting portraits based on who is talking
-        if(FinalSequence[CurrentDialogueIndex].LeftPortraitTalking)
+        if (DialogueManager.Instance.IsDialogueTextLoaded)
         {
-            DialogueManager.Instance.OffSetPortrait("left");
-        } else if (FinalSequence[CurrentDialogueIndex].RightPortraitTalking)
-        {
-            DialogueManager.Instance.OffSetPortrait("right");
-        }
+            // Loading the new set of dialogue data.
+            CurrentDialogueIndex++;
 
-        // Changing the dialogue box background
-        DialogueManager.Instance.ChangeDialogueBoxBackground(FinalSequence[CurrentDialogueIndex].DialogueBoxBackground);
+            //Dialogue[CurrentDialogueIndex].Passed = true;
 
-        DialogueManager.Instance.ChangeDialogueStageBackground(FinalSequence[CurrentDialogueIndex].DialogueStageBackground);
+            // We now change both sides of the dialogue and all of its
+            // elements to match the new dialogue object's data.
+            DialogueManager.Instance.ChangeTitle(
+                "left", Character.Instance.Name);
+            DialogueManager.Instance.ChangeTitle(
+                "right", FinalSequence[CurrentDialogueIndex].RightCharacterTitle);
 
-        // First we clear the previously selected dialogue branch, otherwise they
-        // would add on top of each other and get wrong output to the dialogue sequence.
-        _availableBranches.Clear();
-        FinalDialogueBranch = new DialogueBranch();
+            DialogueManager.Instance.ChangePortrait("left", FinalSequence[CurrentDialogueIndex].LeftCharacterPortrait);
+            DialogueManager.Instance.ChangePortrait("right", FinalSequence[CurrentDialogueIndex].RightCharacterPortrait);
 
-        // Here we loop through every branch of dialogue in the current dialogue
-        // sequence and we filter out the ones that are available so we can pick
-        // the one with the highest priority for displaying.
-        for (int j = 0; j < FinalSequence[CurrentDialogueIndex].DialogueBranches.Count; j++)
-        {
-            // We check if every condition is met by the player before adding this dialogue branch as one for sorting by priority later on.
-            if (
-                Character.Instance.Reputation >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
-                Character.Instance.Stamina >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
-                Character.Instance.Knowledge >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
-                Character.Instance.Fitness >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
-                Character.Instance.Charisma >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
-                Character.Instance.Currency >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
+            //Offsetting portraits based on who is talking
+            if (FinalSequence[CurrentDialogueIndex].LeftPortraitTalking)
             {
-                // AND we check if we have matching previous responses for that
-                // dialogue sequence to be appropriate for use.
-                int elementsThatMatch = 0;
-                foreach (string requiredResponse in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses)
-                {
-                    foreach (string response in DialogueManager.Instance.DialogueResponses)
-                    {
-                        if (requiredResponse == response)
-                        {
-                            //Debug.Log(string.Format("Match between {0} and {1}", response, requiredResponse));
+                DialogueManager.Instance.OffSetPortrait("left");
+            }
+            else if (FinalSequence[CurrentDialogueIndex].RightPortraitTalking)
+            {
+                DialogueManager.Instance.OffSetPortrait("right");
+            }
 
-                            elementsThatMatch++;
-                            break;
-                        }
-                    }
-                }
+            // Changing the dialogue box background
+            DialogueManager.Instance.ChangeDialogueBoxBackground(FinalSequence[CurrentDialogueIndex].DialogueBoxBackground);
 
-                int objectivesThatMatch = 0;
-                foreach (Objective objective in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired)
+            DialogueManager.Instance.ChangeDialogueStageBackground(FinalSequence[CurrentDialogueIndex].DialogueStageBackground);
+
+            // First we clear the previously selected dialogue branch, otherwise they
+            // would add on top of each other and get wrong output to the dialogue sequence.
+            _availableBranches.Clear();
+            FinalDialogueBranch = new DialogueBranch();
+
+            // Here we loop through every branch of dialogue in the current dialogue
+            // sequence and we filter out the ones that are available so we can pick
+            // the one with the highest priority for displaying.
+            for (int j = 0; j < FinalSequence[CurrentDialogueIndex].DialogueBranches.Count; j++)
+            {
+                // We check if every condition is met by the player before adding this dialogue branch as one for sorting by priority later on.
+                if (
+                    Character.Instance.Reputation >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ReputationMinimum &&
+                    Character.Instance.Stamina >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].StaminaMinimum &&
+                    Character.Instance.Knowledge >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].KnowledgeMinimum &&
+                    Character.Instance.Fitness >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].FitnessMinimum &&
+                    Character.Instance.Charisma >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].CharismaMinimum &&
+                    Character.Instance.Currency >= FinalSequence[CurrentDialogueIndex].DialogueBranches[j].CurrencyMinimum)
                 {
-                    foreach (Quest quest in Character.Instance.AllQuests)
+                    // AND we check if we have matching previous responses for that
+                    // dialogue sequence to be appropriate for use.
+                    int elementsThatMatch = 0;
+                    foreach (string requiredResponse in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses)
                     {
-                        foreach (Objective objOfCharacter in quest.Objectives)
+                        foreach (string response in DialogueManager.Instance.DialogueResponses)
                         {
-                            if (objOfCharacter.Name == objective.Name &&
-                                objOfCharacter.CompletedStatus == true)
+                            if (requiredResponse == response)
                             {
-                                objectivesThatMatch++;
+                                //Debug.Log(string.Format("Match between {0} and {1}", response, requiredResponse));
+
+                                elementsThatMatch++;
+                                break;
                             }
                         }
                     }
-                    foreach (Quest quest in Character.Instance.AllQuestsDutch)
+
+                    int objectivesThatMatch = 0;
+                    foreach (Objective objective in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired)
                     {
-                        foreach (Objective objOfCharacter in quest.Objectives)
+                        foreach (Quest quest in Character.Instance.AllQuests)
                         {
-                            if (objOfCharacter.Name == objective.Name &&
-                                objOfCharacter.CompletedStatus == true)
+                            foreach (Objective objOfCharacter in quest.Objectives)
                             {
-                                objectivesThatMatch++;
+                                if (objOfCharacter.Name == objective.Name &&
+                                    objOfCharacter.CompletedStatus == true)
+                                {
+                                    objectivesThatMatch++;
+                                }
+                            }
+                        }
+                        foreach (Quest quest in Character.Instance.AllQuestsDutch)
+                        {
+                            foreach (Objective objOfCharacter in quest.Objectives)
+                            {
+                                if (objOfCharacter.Name == objective.Name &&
+                                    objOfCharacter.CompletedStatus == true)
+                                {
+                                    objectivesThatMatch++;
+                                }
                             }
                         }
                     }
-                }
 
-                int itemsMatching = 0;
-                foreach (string itemRequired in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired)
-                {
-                    //Debug.Log("Required: " + itemRequired);
-                    string itemsEngData = File.ReadAllText(Application.persistentDataPath + "/Items.json");
-                    JsonData data = JsonMapper.ToObject(itemsEngData);
-
-                    for (int l = 0; l < data["Items"].Count; l++)
+                    int itemsMatching = 0;
+                    foreach (string itemRequired in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired)
                     {
-                        //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
-                        if (data["Items"][l]["Name"].ToString() == itemRequired)
+                        //Debug.Log("Required: " + itemRequired);
+                        string itemsEngData = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+                        JsonData data = JsonMapper.ToObject(itemsEngData);
+
+                        for (int l = 0; l < data["Items"].Count; l++)
                         {
-                            itemsMatching++;
-                            //Debug.Log("MATCH");
+                            //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
+                            if (data["Items"][l]["Name"].ToString() == itemRequired)
+                            {
+                                itemsMatching++;
+                                //Debug.Log("MATCH");
+                            }
+                        }
+
+                        string itemsDutchData = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
+                        data = JsonMapper.ToObject(itemsDutchData);
+
+                        for (int k = 0; k < data["Items"].Count; k++)
+                        {
+                            if (data["Items"][k]["Name"].ToString() == itemRequired)
+                            {
+                                itemsMatching++;
+                            }
                         }
                     }
-                    
-                    string itemsDutchData = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
-                    data = JsonMapper.ToObject(itemsDutchData);
 
-                    for (int k = 0; k < data["Items"].Count; k++)
+                    if ((elementsThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired.Count) &&
+                    itemsMatching == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired.Count)
                     {
-                        if (data["Items"][k]["Name"].ToString() == itemRequired)
-                        {
-                            itemsMatching++;
-                        }
+                        _availableBranches.Add(FinalSequence[CurrentDialogueIndex].DialogueBranches[j]);
+
+                        //Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
+                        //Debug.Log("Number of elements match!");
+                    }
+                }
+            }
+
+            // After all the available branches of the new dialogue sequence are stored
+            // we now pick the one with the highest priority.
+            int highestPriority = _availableBranches[0].Priority;
+            FinalDialogueBranch = _availableBranches[0];
+
+            for (int i = 0; i < _availableBranches.Count; i++)
+            {
+                if (_availableBranches[i].Priority > highestPriority)
+                {
+                    highestPriority = _availableBranches[i].Priority;
+                    // We set the branch with the highest priority as our final branch
+                    // for the new dialogue sequence to display.
+                    FinalDialogueBranch = _availableBranches[i];
+                }
+            }
+
+            // And here we display the text of the final selected branch. 
+            DialogueManager.Instance.ChangeDialogueText(FinalDialogueBranch.DialogueText);
+
+            // We also activate all the game objects in this branch once it is visualized.
+            foreach (GameObject entity in FinalDialogueBranch.EntitiesToActivate)
+            {
+                if (entity != null)
+                {
+                    entity.SetActive(true);
+                }
+            }
+            foreach (GameObject entity in FinalDialogueBranch.EntitiesToDeactive)
+            {
+                if (entity != null)
+                {
+                    entity.SetActive(false);
+                }
+            }
+
+            // We clear the options menu before we populate it with data, because if
+            // there is no data, we still want to clear it from its previous dialogue
+            // options menu data
+            DialogueManager.Instance.ClearOptionsMenu();
+            // Changing the dialogue options menu buttons
+            DialogueManager.Instance.ChangeOptionsMenu(FinalDialogueBranch.OptionsMenu);
+
+            bool areItemsEarnedAlready = false;
+
+            string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
+            JsonData itemsJsonData = JsonMapper.ToObject(dataToJson);
+
+            for (int i = 0; i < itemsJsonData["Items"].Count; i++)
+            {
+                foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
+                {
+                    if (itemsJsonData["Items"][i]["Name"].ToString() == dialogueItem.Name)
+                    {
+                        //Debug.Log("Item " + dialogueItem.Name + " is already in possession!");
+                        areItemsEarnedAlready = true;
+                        break;
                     }
                 }
 
-                if ((elementsThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired.Count) &&
-                itemsMatching == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired.Count)
+                if (areItemsEarnedAlready)
                 {
-                    _availableBranches.Add(FinalSequence[CurrentDialogueIndex].DialogueBranches[j]);
-
-                    //Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
-                    //Debug.Log("Number of elements match!");
-                }
-            }
-        }
-
-        // After all the available branches of the new dialogue sequence are stored
-        // we now pick the one with the highest priority.
-        int highestPriority = _availableBranches[0].Priority;
-        FinalDialogueBranch = _availableBranches[0];
-
-        for (int i = 0; i < _availableBranches.Count; i++)
-        {
-            if (_availableBranches[i].Priority > highestPriority)
-            {
-                highestPriority = _availableBranches[i].Priority;
-                // We set the branch with the highest priority as our final branch
-                // for the new dialogue sequence to display.
-                FinalDialogueBranch = _availableBranches[i];
-            }
-        }
-
-        // And here we display the text of the final selected branch. 
-        DialogueManager.Instance.ChangeDialogueText(FinalDialogueBranch.DialogueText);
-
-        // We also activate all the game objects in this branch once it is visualized.
-        foreach (GameObject entity in FinalDialogueBranch.EntitiesToActivate)
-        {
-            if (entity != null)
-            {
-                entity.SetActive(true);
-            }
-        }
-        foreach (GameObject entity in FinalDialogueBranch.EntitiesToDeactive)
-        {
-            if (entity != null)
-            {
-                entity.SetActive(false);
-            }
-        }
-
-        // We clear the options menu before we populate it with data, because if
-        // there is no data, we still want to clear it from its previous dialogue
-        // options menu data
-        DialogueManager.Instance.ClearOptionsMenu();
-        // Changing the dialogue options menu buttons
-        DialogueManager.Instance.ChangeOptionsMenu(FinalDialogueBranch.OptionsMenu);
-        
-        bool areItemsEarnedAlready = false;
-
-        string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
-        JsonData itemsJsonData = JsonMapper.ToObject(dataToJson);
-
-        for (int i = 0; i < itemsJsonData["Items"].Count; i++)
-        {
-            foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
-            {
-                if (itemsJsonData["Items"][i]["Name"].ToString() == dialogueItem.Name)
-                {
-                    //Debug.Log("Item " + dialogueItem.Name + " is already in possession!");
-                    areItemsEarnedAlready = true;
                     break;
                 }
             }
 
-            if (areItemsEarnedAlready)
+            if (areItemsEarnedAlready == false)
             {
-                break;
-            }
-        }
-
-        if (areItemsEarnedAlready == false)
-        {
-            foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
-            {
-                Character.Instance.AddItem(dialogueItem);
-                areItemsEarnedAlready = true;
-                //Debug.Log("Item " + dialogueItem.Name + " received!");
-                if(dialogueItem.Name == "Map")
+                foreach (Item dialogueItem in FinalDialogueBranch.ItemsEarned)
                 {
-                    Character.Instance.HasMap = true;
-                    Character.Instance.RefreshJsonData();
-                    FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
-                }
-                if (dialogueItem.Name == "Diary")
-                {
-                    Character.Instance.HasDiary = true;
-                    Character.Instance.RefreshJsonData();
-                    FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                    Character.Instance.AddItem(dialogueItem);
+                    areItemsEarnedAlready = true;
+                    //Debug.Log("Item " + dialogueItem.Name + " received!");
+                    if (dialogueItem.Name == "Map")
+                    {
+                        Character.Instance.HasMap = true;
+                        Character.Instance.RefreshJsonData();
+                        FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                    }
+                    if (dialogueItem.Name == "Diary")
+                    {
+                        Character.Instance.HasDiary = true;
+                        Character.Instance.RefreshJsonData();
+                        FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                    }
                 }
             }
-        }
 
-        if (FinalDialogueBranch.OptionsMenu.Length > 0)
-        {
-            DialogueProgressionTrigger2D.raycastTarget = false;
-            _dialogueProgressionTrigger.raycastTarget = false;
+            if (FinalDialogueBranch.OptionsMenu.Length > 0)
+            {
+                DialogueProgressionTrigger2D.raycastTarget = false;
+                _dialogueProgressionTrigger.raycastTarget = false;
+            }
+            else
+            {
+                DialogueProgressionTrigger2D.raycastTarget = true;
+                _dialogueProgressionTrigger.raycastTarget = true;
+            }
+
+            Character.Instance.CompleteObjectiveInQuest(FinalDialogueBranch.ObjectiveToComplete, FinalDialogueBranch.QuestOfDialogue);
+
+            if (FinalDialogueBranch.SceneToLoad != string.Empty)
+            {
+                SceneToLoadAfterDialogue = FinalDialogueBranch.SceneToLoad;
+            }
+
+            //Debug.LogWarning("New dialogue is loaded!");
         } else
         {
-            DialogueProgressionTrigger2D.raycastTarget = true;
-            _dialogueProgressionTrigger.raycastTarget = true;
+            DialogueManager.Instance.ChangeDialogueTextRapidly(FinalDialogueBranch.DialogueText);
         }
-        
-        Character.Instance.CompleteObjectiveInQuest(FinalDialogueBranch.ObjectiveToComplete, FinalDialogueBranch.QuestOfDialogue);
-
-        if (FinalDialogueBranch.SceneToLoad != string.Empty)
-        {
-            SceneToLoadAfterDialogue = FinalDialogueBranch.SceneToLoad;
-        }
-        
-        //Debug.LogWarning("New dialogue is loaded!");
     }
 
     /// <summary>
@@ -480,16 +488,16 @@ public class NPC : MonoBehaviour
                 }
             }
 
-            foreach (Dialogue dia in FinalSequence)
-            {
+            //foreach (Dialogue dia in FinalSequence)
+            //{
                 //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
-            }
+            //}
 
             // PRIORITY
 
             // When the player taps on the npc or anywhere on the dialogue box, it
             // will progress the dialogue further.
-            if (_isDialogueOngoing)
+            if (_isDialogueOngoing && DialogueManager.Instance.IsDialogueTextLoaded)
             {
                 if (CurrentDialogueIndex < FinalSequence.Count - 1)
                 {
@@ -522,10 +530,11 @@ public class NPC : MonoBehaviour
                                     _DHManager.LoadSequence("Teach Map Icon");
                                 }
                             }
-                                    // If we reach past the dialogue, then we reset the
-                                    // current dialogue index counter and we hide the dialogue
-                                    // until it is once again triggered to show up.
-                                    CurrentDialogueIndex = -1;
+
+                            // If we reach past the dialogue, then we reset the
+                            // current dialogue index counter and we hide the dialogue
+                            // until it is once again triggered to show up.
+                            CurrentDialogueIndex = -1;
                             DialogueManager.Instance.ToggleDialogue(false);
                             // We only update the player's inventory AFTER he has exited
                             // the dialogue, otherwise if he had used any items in it and
@@ -587,6 +596,10 @@ public class NPC : MonoBehaviour
             // This is meant to initialize the dialogue once the player 
             // has tapped on top of an npc icon.
             {
+                //if (_isDialogueOngoing)
+                //{
+                //    DialogueManager.Instance.ChangeDialogueTextRapidly(FinalDialogueBranch.DialogueText);
+                //}
 
                 if (_imageComponent)
                 {

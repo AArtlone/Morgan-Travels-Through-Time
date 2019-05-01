@@ -7,6 +7,7 @@ public class MapArea : MonoBehaviour
     public string Name;
     public Area.AreaStatus AreaStatus;
     public GameObject AreaEnvironment;
+    public GameObject CurrentLocationPointer;
     public Sprite EnabledMapPoint;
     public Sprite DisabledMapPoint;
 
@@ -26,6 +27,14 @@ public class MapArea : MonoBehaviour
                     GetComponent<Image>().sprite = EnabledMapPoint;
                 }
             }
+        }
+
+        if (Character.Instance.LastMapArea == Name)
+        {
+            CurrentLocationPointer.SetActive(true);
+        } else
+        {
+            CurrentLocationPointer.SetActive(false);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using LitJson;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -32,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     private float _offSet = 100f;
     private Vector3 LeftPortraitInitialPos;
     private Vector3 RightPortraitInitialPos;
+    public bool IsDialogueTextLoaded = true;
 
     private void Awake()
     {
@@ -183,7 +185,28 @@ public class DialogueManager : MonoBehaviour
 
     public void ChangeDialogueText(string newText)
     {
+        StartCoroutine(LoadDialogueText(newText));
+    }
+
+    public void ChangeDialogueTextRapidly(string newText)
+    {
+        StopAllCoroutines();
         DialogueText.text = newText;
+        IsDialogueTextLoaded = true;
+    }
+
+    private IEnumerator LoadDialogueText(string newText)
+    {
+        DialogueText.text = string.Empty;
+        IsDialogueTextLoaded = false;
+
+        for (int i = 0; i < newText.Length; i++)
+        {
+            DialogueText.text += newText[i];
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        IsDialogueTextLoaded = true;
     }
 
     public void ChangeOptionsMenu(string[] newOptions)
