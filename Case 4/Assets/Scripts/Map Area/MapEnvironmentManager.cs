@@ -12,7 +12,6 @@ public class MapEnvironmentManager : MonoBehaviour
     public GameObject CloseButton;
     public GameObject DiaryButton;
     public GameObject BackpackButton;
-    private GameObject _playerIcon; 
 
     private CameraBehavior _cameraBehaviour;
     private FadeScreenController _fadeScreenController;
@@ -175,7 +174,7 @@ public class MapEnvironmentManager : MonoBehaviour
         // to position itself centered at the middle of the area instead of its
         // left corner anchor since that will reveal the previous area or empty
         // space next to it, so we move it half the resolution's width forward.
-        _newCameraPosition = new Vector3(newAreaPosition.x + 6.4f, newAreaPosition.y, -10);
+        _newCameraPosition = new Vector3(newAreaPosition.x + _cameraBehaviour.GetComponent<Camera>().orthographicSize, newAreaPosition.y, -10);
 
         // FADE EFFECT initiates
         //_fadeScreenController.StartTransition();

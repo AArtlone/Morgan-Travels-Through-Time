@@ -37,7 +37,6 @@ public class NPC : MonoBehaviour
     public DialogueBranch FinalDialogueBranch = new DialogueBranch();
     private Image _dialogueProgressionTrigger;
     private Image _imageComponent;
-    private SpriteRenderer _spriteComponent;
     List<Dialogue> dialoguesToPickFrom = new List<Dialogue>();
     List<Dialogue> FinalSequence = new List<Dialogue>();
     private string SceneToLoadAfterDialogue;
@@ -58,13 +57,12 @@ public class NPC : MonoBehaviour
         if (DialogueProgressionTrigger2D == null)
         {
             _dialogueProgressionTrigger = transform.GetChild(0).GetComponent<Image>();
-            _dialogueProgressionTrigger.raycastTarget = false;
+            //_dialogueProgressionTrigger.raycastTarget = false;
         } else
         {
             _dialogueProgressionTrigger = DialogueProgressionTrigger2D;
         }
 
-        _spriteComponent = GetComponent<SpriteRenderer>();
         _imageComponent = GetComponent<Image>();
 
         CheckForNotCompletedObjective();
@@ -141,11 +139,13 @@ public class NPC : MonoBehaviour
             //Offsetting portraits based on who is talking
             if (FinalSequence[CurrentDialogueIndex].LeftPortraitTalking)
             {
-                DialogueManager.Instance.OffSetPortrait("left");
+                //DialogueManager.Instance.OffSetPortrait("left");
+                DialogueManager.Instance.HightlightAndDarkenSpeakers("left");
             }
             else if (FinalSequence[CurrentDialogueIndex].RightPortraitTalking)
             {
-                DialogueManager.Instance.OffSetPortrait("right");
+                //DialogueManager.Instance.OffSetPortrait("right");
+                DialogueManager.Instance.HightlightAndDarkenSpeakers("right");
             }
 
             // Changing the dialogue box background

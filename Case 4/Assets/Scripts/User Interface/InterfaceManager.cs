@@ -75,11 +75,22 @@ public class InterfaceManager : MonoBehaviour
     [Space(10)]
     #region Dialogue body parts display variables
     public Image _bodyPart;
+    public Image _darkBodyPart;
+    [Space(5)]
     public Image _facePart;
+    public Image _darkFacePart;
+    [Space(5)]
     public Image _hairPart;
+    public Image _darkHairPart;
+    [Space(5)]
     public Image _topPart;
+    public Image _darkTopPart;
+    [Space(5)]
     public Image _botPart;
+    public Image _darkBotPart;
+    [Space(5)]
     public Image _shoesPart;
+    public Image _darkShoesPart;
     #endregion
 
     public Canvas InventoryUICanvas;
@@ -327,6 +338,7 @@ public class InterfaceManager : MonoBehaviour
     /// <param name="obj"></param>
     public void ClosePopup(Object obj)
     {
+        Debug.Log(obj.name);
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(false);
 
@@ -549,7 +561,10 @@ public class InterfaceManager : MonoBehaviour
                 }
                 if (clothing.BodyPart == "Hair" && clothing.Selected == true)
                 {
-                    _hairIcon.enabled = true;
+                    if (_hairIcon != null)
+                    {
+                        _hairIcon.enabled = true;
+                    }
                     foreach (Sprite sprite in _spritesFromStorage)
                     {
                         if (sprite.name == clothing.Name)
@@ -596,6 +611,7 @@ public class InterfaceManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _bodyPart.sprite = sprite;
+                        _darkBodyPart.sprite = sprite;
                     }
                 }
             }
@@ -606,6 +622,7 @@ public class InterfaceManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _facePart.sprite = sprite;
+                        _darkFacePart.sprite = sprite;
                     }
                 }
             }
@@ -616,6 +633,7 @@ public class InterfaceManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _hairPart.sprite = sprite;
+                        _darkHairPart.sprite = sprite;
                     }
                 }
             }
@@ -626,6 +644,7 @@ public class InterfaceManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _topPart.sprite = sprite;
+                        _darkTopPart.sprite = sprite;
                     }
                 }
             }
@@ -636,6 +655,7 @@ public class InterfaceManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _botPart.sprite = sprite;
+                        _darkBotPart.sprite = sprite;
                     }
                 }
             }
@@ -646,6 +666,7 @@ public class InterfaceManager : MonoBehaviour
                     if (sprite.name == clothing.Name)
                     {
                         _shoesPart.sprite = sprite;
+                        _darkShoesPart.sprite = sprite;
                     }
                 }
             }

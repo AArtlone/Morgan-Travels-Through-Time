@@ -29,11 +29,28 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI[] OptionsMenu = new TextMeshProUGUI[4];
     public List<string> DialogueResponses;
 
+    [Header("These elements will become visible when someone is waiting to speak!")]
+    [Space(10)]
+    public GameObject DarkLeftCharacterTitleBackground;
+    public GameObject DarkRightCharacterTitleBackground;
+    [Space(10)]
+    public GameObject DarkRightCharacterPortrait;
+    public GameObject DarkLeftCharacterHair;
+    public GameObject DarkLeftCharacterFace;
+    public GameObject DarkLeftCharacterBody;
+    public GameObject DarkLeftCharacterTop;
+    public GameObject DarkLeftCharacterBot;
+    public GameObject DarkLeftCharacterShoes;
+
     private string _dialogueResponsesPath;
     private float _offSet = 100f;
     private Vector3 LeftPortraitInitialPos;
     private Vector3 RightPortraitInitialPos;
     public bool IsDialogueTextLoaded = true;
+
+    [Header("These sound effects will be used randomly when loading text for the dialogue box!")]
+    [Space(10)]
+    public List<AudioClip> soundEffectsForDialogue = new List<AudioClip>();
 
     private void Awake()
     {
@@ -146,6 +163,35 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void HightlightAndDarkenSpeakers(string sideToHighlight)
+    {
+        if (sideToHighlight == "left")
+        {
+            DarkRightCharacterPortrait.SetActive(true);
+            DarkRightCharacterTitleBackground.SetActive(true);
+
+            DarkLeftCharacterBody.SetActive(false);
+            DarkLeftCharacterBot.SetActive(false);
+            DarkLeftCharacterFace.SetActive(false);
+            DarkLeftCharacterHair.SetActive(false);
+            DarkLeftCharacterShoes.SetActive(false);
+            DarkLeftCharacterTop.SetActive(false);
+            DarkLeftCharacterTitleBackground.SetActive(false);
+        } else if (sideToHighlight == "right")
+        {
+            DarkRightCharacterPortrait.SetActive(false);
+            DarkRightCharacterTitleBackground.SetActive(false);
+
+            DarkLeftCharacterBody.SetActive(true);
+            DarkLeftCharacterBot.SetActive(true);
+            DarkLeftCharacterFace.SetActive(true);
+            DarkLeftCharacterHair.SetActive(true);
+            DarkLeftCharacterShoes.SetActive(true);
+            DarkLeftCharacterTop.SetActive(true);
+            DarkLeftCharacterTitleBackground.SetActive(true);
+        }
+    }
+
     #region The following functions serve to display the upcoming dialogues to the screen.
     public void ChangeTitle(string side, string newTitle)
     {
@@ -170,6 +216,7 @@ public class DialogueManager : MonoBehaviour
         else if (side == "right")
         {
             RightCharacterPortrait.sprite = newPortrait;
+            DarkRightCharacterPortrait.GetComponent<Image>().sprite = newPortrait;
         }
     }
 
@@ -203,7 +250,12 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < newText.Length; i++)
         {
             DialogueText.text += newText[i];
+            System.Random rng = new System.Random();
+            AudioManager.Instance.PlaySound(soundEffectsForDialogue[
+                rng.Next(0, soundEffectsForDialogue.Count - 1)]);
             yield return new WaitForSeconds(0.02f);
+
+            AudioManager.Instance.StopPlaying();
         }
 
         IsDialogueTextLoaded = true;

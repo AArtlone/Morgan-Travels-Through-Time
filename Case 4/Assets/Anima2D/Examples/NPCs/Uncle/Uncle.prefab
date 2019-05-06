@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 1159021531717928623}
   - component: {fileID: 1556391230416060165}
   - component: {fileID: 82861258}
+  - component: {fileID: 4299724659574300837}
   m_Layer: 0
   m_Name: Uncle
   m_TagString: NPC
@@ -242,6 +243,27 @@ MonoBehaviour:
         SceneToLoad: Jacob's House
       ObjectivesToMeet: []
       RequiredItems: []
+--- !u!50 &4299724659574300837
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479684960618834812}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &6479684960732854158
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +351,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1259878637
+  m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
   serializedVersion: 2
@@ -706,7 +728,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1259878637
+  m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 11
   serializedVersion: 2
@@ -809,7 +831,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1259878637
+  m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
   serializedVersion: 2
@@ -1222,7 +1244,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1259878637
+  m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 11
   serializedVersion: 2
@@ -1373,7 +1395,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1259878637
+  m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
   serializedVersion: 2

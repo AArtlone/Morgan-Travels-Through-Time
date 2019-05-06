@@ -162,6 +162,9 @@ public class CameraBehavior : MonoBehaviour
                             InterfaceManager.Instance.ItemSelected = hitItemDrop;
                             InterfaceManager.Instance.DisplayActionsMenu();
                             break;
+                        case "Area Interactable":
+                            hitObj.transform.GetComponent<ToggleObject>().Replace();
+                            break;
                     }
                 }
             }

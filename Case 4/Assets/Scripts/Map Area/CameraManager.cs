@@ -18,6 +18,7 @@ public class CameraManager : MonoBehaviour
     private float _swipeLengthWorld;
     #endregion
 
+    private Camera _camera;
     private CameraBehavior _cameraBehaviour;
     private MapEnvironmentManager _mapEnvironmentManager;
     //private int _currentAreaPart;
@@ -28,6 +29,7 @@ public class CameraManager : MonoBehaviour
     {
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
+        _camera = _cameraBehaviour.GetComponent<Camera>();
         //_currentAreaPart = 0;
         //_minBound = _mapEnvironmentManager.MapParts[0].GetComponent<SpriteRenderer>().bounds.min.x;
     }
@@ -79,7 +81,7 @@ public class CameraManager : MonoBehaviour
                 {
                     newCameraPosition.x -= _swipeLengthWorld * 0.15f;
                     _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
-                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + 5, _cameraBehaviour.BackgroundBounds.max.x - 5),
+                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
                         newCameraPosition.y,
                         newCameraPosition.z);
 
@@ -99,7 +101,7 @@ public class CameraManager : MonoBehaviour
                 {
                     newCameraPosition.x += _swipeLengthWorld * 0.15f;
                     _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
-                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + 5, _cameraBehaviour.BackgroundBounds.max.x - 5),
+                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
                         newCameraPosition.y,
                         newCameraPosition.z);
 

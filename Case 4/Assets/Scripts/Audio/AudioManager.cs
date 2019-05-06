@@ -53,4 +53,22 @@ public class AudioManager : MonoBehaviour
         _audioSource.volume = SettingsManager.Instance.SoundEffectsVolume / 100f;
         _audioSource.PlayOneShot(clip);
     }
+    public void StopPlaying()
+    {
+        _audioSource.Stop();
+    }
+    public void StartPlaying()
+    {
+        _audioSource.enabled = true;
+    }
+
+    public void Pause()
+    {
+        _audioSource.Pause();
+    }
+
+    public void Unpause()
+    {
+        _audioSource.UnPause();
+    }
 }
