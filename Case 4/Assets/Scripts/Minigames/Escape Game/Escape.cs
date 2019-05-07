@@ -21,6 +21,7 @@ public class Escape : MonoBehaviour
     public string AreaToUnlock;
     public GameObject EndGamePopUp;
     public GameObject EndGameLosePopUp;
+    public GameObject NewWaveNotification;
     public List<GameObject> Stars;
     public int RefugeesSavedInThisSession;
 
@@ -70,6 +71,7 @@ public class Escape : MonoBehaviour
     public void StartNextWave()
     {
         StartCoroutine(SpawnRefugee());
+        StartCoroutine(PlayNewWaveNotification());
     }
 
     public void SaveEscapeGamesData()
@@ -118,6 +120,17 @@ public class Escape : MonoBehaviour
         }
     }
 
+    public IEnumerator PlayNewWaveNotification()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            NewWaveNotification.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            NewWaveNotification.SetActive(false);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+ 
     public void EndGame()
     {
         EndGamePopUp.SetActive(true);

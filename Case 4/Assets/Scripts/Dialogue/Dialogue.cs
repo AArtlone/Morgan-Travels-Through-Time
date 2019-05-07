@@ -10,6 +10,8 @@ public class Dialogue
     [Space(10)]
     public string LeftCharacterTitle;
     public Sprite LeftCharacterPortrait;
+    public enum Expression { Undefined, Thought, Disgust };
+    public Expression LeftCharacterExpression;
     public bool LeftPortraitTalking;
     [Space(10)]
     public string RightCharacterTitle;

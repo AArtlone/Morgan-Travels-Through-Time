@@ -205,6 +205,18 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void ChangeFaceExpression(string newFace)
+    {
+        if (newFace != "Undefined") {
+            Sprite newFaceExpression = Resources.Load<Sprite>("Faces/" + InterfaceManager.Instance._faceIcon.sprite.name + "/" + InterfaceManager.Instance._faceIcon.sprite.name + newFace);
+            //Debug.Log(InterfaceManager.Instance._faceIcon.sprite.name + newFace);
+            InterfaceManager.Instance._facePart.sprite = newFaceExpression;
+
+            InterfaceManager.Instance._darkFacePart.sprite = newFaceExpression;
+            //InterfaceManager.Instance._darkFacePart.color = new Color(0, 0, 0, 103);
+        }
+    }
+
     public void ChangePortrait(string side, Sprite newPortrait)
     {
         if (side == "left")
