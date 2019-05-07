@@ -59,4 +59,12 @@ public class CameraIntroController : MonoBehaviour
             SceneManager.LoadScene("Beginning Character Creation");
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.transform.parent.tag == "Intro Picture Trigger")
+        {
+            col.transform.parent.GetComponent<FrameController>().InitiateFrameVisualization();
+        }
+    }
 }

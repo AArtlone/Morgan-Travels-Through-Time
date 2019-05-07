@@ -27,6 +27,13 @@ public class GuessPuzzle : MonoBehaviour
     public List<GuessClothing> ShoesList = new List<GuessClothing>();
     private int _currentShoesIndex = 0;
 
+    public Sprite CorrectHairElement;
+    public Sprite CorrectTorsoElement;
+    public Sprite CorrectBottomElement;
+    public Sprite CorrectShoesElement;
+    private float _correctClothes;
+    public Slider ProgressSlider;
+
     private GameObject _bodyPart;
     private GameObject _facePart;
     private GameObject _hairPart;
@@ -242,25 +249,57 @@ public class GuessPuzzle : MonoBehaviour
 
     public void LoadNewClothing(string bodyPart)
     {
+        Sprite newClothingElementSprite;
         switch (bodyPart)
         {
             case "Hair":
-                Sprite headSprite = Resources.Load<Sprite>("Guessing Clothing/" + HeadList[_currentHeadIndex].Sprite);
+                Sprite headSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + HeadList[_currentHeadIndex].Sprite);
                 _hairPart.GetComponent<Image>().sprite = headSprite;
+                newClothingElementSprite = headSprite;
                 break;
             case "Top":
-                Sprite torsoSprite = Resources.Load<Sprite>("Guessing Clothing/" + TorsoList[_currentTorsoIndex].Sprite);
+                Sprite torsoSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + TorsoList[_currentTorsoIndex].Sprite);
                 _topPart.GetComponent<Image>().sprite = torsoSprite;
+                newClothingElementSprite = torsoSprite;
                 break;
             case "Bot":
-                Sprite bottomSprite = Resources.Load<Sprite>("Guessing Clothing/" + BottomList[_currentBottomIndex].Sprite);
+                Sprite bottomSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + BottomList[_currentBottomIndex].Sprite);
                 _botPart.GetComponent<Image>().sprite = bottomSprite;
+                newClothingElementSprite = bottomSprite;
                 break;
             case "Shoes":
-                Sprite shoesSprite = Resources.Load<Sprite>("Guessing Clothing/" + ShoesList[_currentShoesIndex].Sprite);
+                Sprite shoesSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + ShoesList[_currentShoesIndex].Sprite);
                 _shoesPart.GetComponent<Image>().sprite = shoesSprite;
+                newClothingElementSprite = shoesSprite;
                 break;
         }
+
+        CheckIfClothingIsCorrect();
+    }
+
+    /// <summary>
+    /// Checks whether the newly selected clothing element is mathicng the preset/correct clothing element
+    /// </summary>
+    private void CheckIfClothingIsCorrect()
+    {
+        _correctClothes = 0;
+        if (_hairPart.GetComponent<Image>().sprite == CorrectHairElement)
+        {
+            _correctClothes++;
+        }
+        if (_topPart.GetComponent<Image>().sprite == CorrectTorsoElement)
+        {
+            _correctClothes++;
+        }
+        if (_botPart.GetComponent<Image>().sprite == CorrectBottomElement)
+        {
+            _correctClothes++;
+        }
+        if (_shoesPart.GetComponent<Image>().sprite == CorrectShoesElement)
+        {
+            _correctClothes++;
+        }
+        ProgressSlider.value = (_correctClothes * (100 / 4)) / 100;
     }
 
     private void LoadDefaults()

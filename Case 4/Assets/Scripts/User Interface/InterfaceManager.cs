@@ -366,7 +366,7 @@ public class InterfaceManager : MonoBehaviour
         {
             SelectedQuestTitle.text = string.Empty;
             SelectedQuestDescription.text = string.Empty;
-            SelectedQuestStatus.text = string.Empty;
+            //SelectedQuestStatus.text = string.Empty;
 
             for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
             {
@@ -389,7 +389,7 @@ public class InterfaceManager : MonoBehaviour
 
                             SelectedQuestTitle.text = "Title: " + loadedQuest.Name;
                             SelectedQuestDescription.text = "Description: " + loadedQuest.Description;
-                            SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
+                            //SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
 
                             for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
                             {
@@ -425,7 +425,7 @@ public class InterfaceManager : MonoBehaviour
 
                             SelectedQuestTitle.text = "Naam: " + loadedQuest.Name;
                             SelectedQuestDescription.text = "Omschrijving: " + loadedQuest.Description;
-                            SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
+                            //SelectedQuestStatus.text = "Status: " + loadedQuest.ProgressStatus;
 
                             for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
                             {
@@ -513,7 +513,7 @@ public class InterfaceManager : MonoBehaviour
     {
         SelectedQuestTitle.text = string.Empty;
         SelectedQuestDescription.text = string.Empty;
-        SelectedQuestStatus.text = string.Empty;
+        //SelectedQuestStatus.text = string.Empty;
 
         for (int i = 0; i < SelectedQuestObjectivesDisplay.transform.childCount; i++)
         {

@@ -13,7 +13,6 @@ public class ParallaxManager : MonoBehaviour
     private void Start()
     {
         _camera = FindObjectOfType<CameraBehavior>().GetComponent<Camera>();
-        Debug.Log(_camera);
         _previousCameraPosition = _camera.transform.position;
 
         parallaxScales = new float[Backgrounds.Count];
