@@ -13,6 +13,7 @@ public class SettingsManager : MonoBehaviour
     public static SettingsManager Instance;
 
     public string Language;
+    public string Font;
     public bool DevelopmentMode;
     public int ResolutionWidth;
     public int ResolutionHeight;
@@ -32,7 +33,7 @@ public class SettingsManager : MonoBehaviour
 
     public object Scenemanager { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -54,27 +55,7 @@ public class SettingsManager : MonoBehaviour
         {
             ResetSettings();
 
-            string settingsText = "{";
-            settingsText += InsertNewLineTabs(1);
-            settingsText += "\"Settings\": {";
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"DevelopmentMode\": " + (DevelopmentMode ? "true" : "false") + ",";
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"Language\": " + "\"" + Language + "\",";
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"ResolutionWidth\": " + ResolutionWidth + ",";
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"ResolutionHeight\": " + ResolutionHeight + ","; ;
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"MasterVolume\": " + MasterVolume + ","; ;
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"SoundEffectsVolume\": " + SoundEffectsVolume + ",";
-            settingsText += InsertNewLineTabs(2);
-            settingsText += "\"BackgroundMusicVolume\": " + BackgroundMusicVolume;
-            settingsText += InsertNewLineTabs(1);
-            settingsText += "}" + Environment.NewLine + "}";
-
-            File.WriteAllText(_pathToSettingsJson, settingsText);
+            File.WriteAllText(_pathToSettingsJson, ExtractCurrentSettings());
         }
         UpdateHiglightedLanguageIcons();
     }
@@ -121,6 +102,7 @@ public class SettingsManager : MonoBehaviour
         JsonData settingsJson = JsonMapper.ToObject(settingsData);
 
         Language = settingsJson["Settings"]["Language"].ToString();
+        Font = settingsJson["Settings"]["Font"].ToString();
         if (settingsJson["Settings"]["DevelopmentMode"].ToString() == "True")
         {
             DevelopmentMode = true;
@@ -150,6 +132,8 @@ public class SettingsManager : MonoBehaviour
         settingsText += InsertNewLineTabs(2);
         settingsText += "\"Language\": " + "\"" + Language + "\",";
         settingsText += InsertNewLineTabs(2);
+        settingsText += "\"Font\": " + "\"" + Font + "\",";
+        settingsText += InsertNewLineTabs(2);
         settingsText += "\"ResolutionWidth\": " + ResolutionWidth + ",";
         settingsText += InsertNewLineTabs(2);
         settingsText += "\"ResolutionHeight\": " + ResolutionHeight + ","; ;
@@ -175,6 +159,7 @@ public class SettingsManager : MonoBehaviour
 
         // Reading and assigning data from the settings file to this manager class.
         Language = settingsJson["Settings"]["Language"].ToString();
+        Font = settingsJson["Settings"]["Font"].ToString();
         if (settingsJson["Settings"]["DevelopmentMode"].ToString() == "True")
         {
             DevelopmentMode = true;

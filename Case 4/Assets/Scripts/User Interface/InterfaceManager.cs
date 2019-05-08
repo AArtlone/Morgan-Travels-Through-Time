@@ -243,7 +243,7 @@ public class InterfaceManager : MonoBehaviour
 
             List<Quest> questsToLoad = new List<Quest>();
 
-            if (SettingsManager.Instance != null)
+            if (SettingsManager.Instance != null && Character.Instance != null)
             {
                 switch (SettingsManager.Instance.Language)
                 {
@@ -338,7 +338,6 @@ public class InterfaceManager : MonoBehaviour
     /// <param name="obj"></param>
     public void ClosePopup(Object obj)
     {
-        Debug.Log(obj.name);
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(false);
 

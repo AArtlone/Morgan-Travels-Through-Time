@@ -1,12 +1,17 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LanguageController : MonoBehaviour
 {
+    [Header("Tick this when the text must not change, but the font should!")]
+    public bool DisableLanguageToggling;
     public enum Language { English, Dutch };
     [Header("Current language on this text field.")]
     public Language SelectedLanguage;
+
+    public enum Font { HandleeRegular, JosefinSansRegular };
 
     [Header("Fill in the different language variations of this text field here!")]
     [TextArea(0, 100)]
@@ -37,7 +42,11 @@ public class LanguageController : MonoBehaviour
             _settingsManager.LanguageControllers.Add(this);
         }
 
-        UpdateCurrentLanguage();
+        if (DisableLanguageToggling == false)
+        {
+            UpdateCurrentLanguage();
+        }
+        UpdateCurrentFont();
         LoadLanguage(SelectedLanguage);
     }
 
@@ -47,17 +56,31 @@ public class LanguageController : MonoBehaviour
     /// </summary>
     public void UpdateCurrentLanguage()
     {
-        switch (SettingsManager.Instance.Language)
+        if (DisableLanguageToggling == false)
         {
-            case "English":
-                SelectedLanguage = Language.English;
-                break;
-            case "Dutch":
-                SelectedLanguage = Language.Dutch;
-                break;
-        }
+            switch (SettingsManager.Instance.Language)
+            {
+                case "English":
+                    SelectedLanguage = Language.English;
+                    break;
+                case "Dutch":
+                    SelectedLanguage = Language.Dutch;
+                    break;
+            }
 
-        LoadLanguage(SelectedLanguage);
+            LoadLanguage(SelectedLanguage);
+        }
+    }
+
+    public void UpdateCurrentFont()
+    {
+        foreach (Font font in Enum.GetValues(typeof(Font)))
+        {
+            if (font.ToString() == SettingsManager.Instance.Font)
+            {
+                _textField.font = Resources.Load<TMP_FontAsset>("Fonts/" + font.ToString() + " SDF");
+            }
+        }
     }
     
     /// <summary>
@@ -67,29 +90,32 @@ public class LanguageController : MonoBehaviour
     /// <param name="language"></param>
     public void LoadLanguage(Language language)
     {
-        switch (language)
+        if (DisableLanguageToggling == false)
         {
-            case Language.English:
-                LoadTextIntoField(English);
-                if (_textField != null)
-                {
-                    _textField.text = English;
-                }
-                break;
-            case Language.Dutch:
-                LoadTextIntoField(Dutch);
-                if (_textField != null)
-                {
-                    _textField.text = Dutch;
-                }
-                break;
-            default:
-                LoadTextIntoField(Dutch);
-                if (_textField != null)
-                {
-                    _textField.text = Dutch;
-                }
-                break;
+            switch (language)
+            {
+                case Language.English:
+                    LoadTextIntoField(English);
+                    if (_textField != null)
+                    {
+                        _textField.text = English;
+                    }
+                    break;
+                case Language.Dutch:
+                    LoadTextIntoField(Dutch);
+                    if (_textField != null)
+                    {
+                        _textField.text = Dutch;
+                    }
+                    break;
+                default:
+                    LoadTextIntoField(Dutch);
+                    if (_textField != null)
+                    {
+                        _textField.text = Dutch;
+                    }
+                    break;
+            }
         }
     }
 

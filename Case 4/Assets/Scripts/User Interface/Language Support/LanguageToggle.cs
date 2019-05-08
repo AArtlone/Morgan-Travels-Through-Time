@@ -22,9 +22,9 @@ public class LanguageToggle : MonoBehaviour
     /// the icons in the settings window and every text field currently in the scene.
     /// </summary>
     /// <param name="LanguageToToggle"></param>
-    public void ChangeLanguage(string LanguageToToggle)
+    public void ChangeLanguage(string languageToToggle)
     {
-        switch (LanguageToToggle)
+        switch (languageToToggle)
         {
             case "English":
                 _settingsManager.Language = "English";
@@ -50,6 +50,16 @@ public class LanguageToggle : MonoBehaviour
 
         RefreshIconSprites();
         _settingsManager.RefreshSettings();
+    }
+    public void ChangeFont()
+    {
+        foreach (LanguageController textLabel in _settingsManager.LanguageControllers)
+        {
+            if (textLabel != null)
+            {
+                textLabel.UpdateCurrentFont();
+            }
+        }
     }
 
     private void RefreshIconSprites()
