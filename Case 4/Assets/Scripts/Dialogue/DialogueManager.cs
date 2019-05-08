@@ -21,6 +21,9 @@ public class DialogueManager : MonoBehaviour
     [Space(10)]
     public TextMeshProUGUI RightCharacterTitle;
     public Image RightCharacterPortrait;
+    private Dictionary<string, FaceConfiguration> _faceConfigurations = new Dictionary<string, FaceConfiguration>();
+    public Image DarkRightCharacterFace;
+    public Image RightCharacterFace;
     [Space(10)]
     public Image DialogueProgressionBox;
     public Image DialogueStageBackground;
@@ -80,6 +83,20 @@ public class DialogueManager : MonoBehaviour
                 File.WriteAllText(_dialogueResponsesPath, "");
                 RefreshDialogueResponses();
             }
+
+            _faceConfigurations.Add(
+                "Jacob",
+                new FaceConfiguration(
+                    new Vector2(283, 116),
+                    new Vector2(146, 130)
+                    ));
+            _faceConfigurations.Add(
+                "Uncle Ben",
+                new FaceConfiguration(
+                    new Vector2(294, 300),
+                    new Vector2(199, 177)
+                    )
+                );
         }
     }
 
@@ -168,6 +185,7 @@ public class DialogueManager : MonoBehaviour
         if (sideToHighlight == "left")
         {
             DarkRightCharacterPortrait.SetActive(true);
+            DarkRightCharacterFace.gameObject.SetActive(true);
             DarkRightCharacterTitleBackground.SetActive(true);
 
             DarkLeftCharacterBody.SetActive(false);
@@ -180,6 +198,7 @@ public class DialogueManager : MonoBehaviour
         } else if (sideToHighlight == "right")
         {
             DarkRightCharacterPortrait.SetActive(false);
+            DarkRightCharacterFace.gameObject.SetActive(false);
             DarkRightCharacterTitleBackground.SetActive(false);
 
             DarkLeftCharacterBody.SetActive(true);
@@ -214,6 +233,24 @@ public class DialogueManager : MonoBehaviour
 
             InterfaceManager.Instance._darkFacePart.sprite = newFaceExpression;
             //InterfaceManager.Instance._darkFacePart.color = new Color(0, 0, 0, 103);
+        }
+    }
+
+    public void ChangeNPCFaceExpression(string npcName, string newFace)
+    {
+        if (newFace != "Undefined")
+        {
+            Sprite newFaceExpression = Resources.Load<Sprite>("Faces/" + npcName + "/" + npcName + newFace);
+            //Debug.Log(InterfaceManager.Instance._faceIcon.sprite.name + newFace);
+            RightCharacterFace.sprite = newFaceExpression;
+            DarkRightCharacterFace.sprite = newFaceExpression;
+
+            // New position for the NPC face expression
+            RightCharacterFace.rectTransform.localPosition = _faceConfigurations[npcName].Position;
+            RightCharacterFace.rectTransform.sizeDelta = _faceConfigurations[npcName].Size;
+
+            DarkRightCharacterFace.rectTransform.localPosition = _faceConfigurations[npcName].Position;
+            DarkRightCharacterFace.rectTransform.sizeDelta = _faceConfigurations[npcName].Size;
         }
     }
 
