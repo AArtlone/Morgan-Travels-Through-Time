@@ -369,6 +369,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -126
       objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852353, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -814,7 +819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132097512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -656.32, y: -389.567, z: 0}
+  m_LocalPosition: {x: -662.16, y: -389.567, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1456356391}
@@ -1058,7 +1063,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -41.795696, y: -5.8736153}
+  m_Offset: {x: -51.202385, y: -5.8736153}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1069,7 +1074,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.408607, y: 2.652769}
+  m_Size: {x: 35.221985, y: 2.652769}
   m_EdgeRadius: 0
 --- !u!61 &215117911
 BoxCollider2D:
@@ -1271,6 +1276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Well done! You helped the refugees!
   Dutch: Goed gedaan! Je hebt de vluchtelingen geholpen!
@@ -2323,6 +2329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Continue
   Dutch: Ga verder
@@ -2504,6 +2511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: 
   Dutch: 
@@ -4107,6 +4115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: NEW WAVE
   Dutch: NIEUWE GOLF
@@ -4557,6 +4566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: You failed to save the refugees.
   Dutch: Het is je niet gelukt om de mensen te redden.
@@ -4734,6 +4744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Continue
   Dutch: Ga verder
@@ -5130,6 +5141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: 
   Dutch: 
@@ -5722,6 +5734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: to lose
+  NameDutch: 
+  Completed: 0
   CurrentWave: 0
   RefugeesSaved: 0
   DelayBetweenWaves: 2
@@ -5740,6 +5754,12 @@ MonoBehaviour:
     RewardInPoints: 20
     Wave:
     - {fileID: 1349378213363472699, guid: bacec031565ed094ea358ae04c3d89f3, type: 3}
+    - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
+    - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
+    - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
+    - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
+    - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
+    - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
     - {fileID: 5220427493949221663, guid: ab7b125a7fe86d64bb38786ce5d194ba, type: 3}
   - Name: 
     RewardInPoints: 20

@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class QueueElement : MonoBehaviour
 {
     public bool IsAvaialbe;
-    public float OffSet = -10f;
+    [NonSerialized]
+    public float maximumDistance = -3f; //the maximum distance between the first and the last refugee
 }

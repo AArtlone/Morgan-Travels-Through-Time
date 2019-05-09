@@ -13,7 +13,8 @@ public class Checkpoint: MonoBehaviour
         QueueElementInstance.AddComponent<QueueElement>();
         QueueElementInstance.name = "QueueElement";
         QueueElementInstance.transform.parent = transform;
-        Vector3 QueueElementPos = new Vector3(transform.position.x + (QueueElementInstance.GetComponent<QueueElement>().OffSet * QueueElements.Count), transform.position.y, 0f);
+        float randomQueueElementPos = Random.Range(transform.position.x, QueueElementInstance.GetComponent<QueueElement>().maximumDistance);
+        Vector3 QueueElementPos = new Vector3(transform.position.x + randomQueueElementPos, transform.position.y, 0f);
         QueueElementInstance.transform.position = QueueElementPos;
         QueueElements.Add(QueueElementInstance.GetComponent<QueueElement>());
     }
