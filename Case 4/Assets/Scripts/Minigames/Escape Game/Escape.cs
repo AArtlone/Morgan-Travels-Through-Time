@@ -8,6 +8,8 @@ using System;
 public class Escape : MonoBehaviour
 {
     public string Name;
+    public string NameDutch;
+    public bool Completed;
     public int CurrentWave;
     public int RefugeesSaved;
     public int DelayBetweenWaves;
@@ -36,8 +38,16 @@ public class Escape : MonoBehaviour
 
         for (int i = 0; i < puzzlesJsonData["EscapeGames"].Count; i++)
         {
-            if (puzzlesJsonData["EscapeGames"][i]["Name"].ToString() == Name)
+            if (puzzlesJsonData["EscapeGames"][i]["Name"].ToString() == Name || puzzlesJsonData["EscapeGames"][i]["NameDutch"].ToString() == NameDutch)
             {
+                if (puzzlesJsonData["EscapeGames"][i]["Completed"].ToString() == "True")
+                {
+                    Completed = true;
+                }
+                else if (puzzlesJsonData["EscapeGames"][i]["Completed"].ToString() == "False")
+                {
+                    Completed = false;
+                }
                 TotalPoints = int.Parse(puzzlesJsonData["EscapeGames"][i]["TotalPoints"].ToString());
                 RefugeesSaved = int.Parse(puzzlesJsonData["EscapeGames"][i]["RefugeesSaved"].ToString());
             }
@@ -88,10 +98,15 @@ public class Escape : MonoBehaviour
             newGameData += InsertNewLineTabs(2);
             newGameData += "{";
 
-            if (puzzlesJsonData["EscapeGames"][i]["Name"].ToString() == Name)
+            if (puzzlesJsonData["EscapeGames"][i]["Name"].ToString() == Name ||
+                puzzlesJsonData["EscapeGames"][i]["NameDutch"].ToString() == NameDutch)
             {
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"Name\": " + "\"" + Name + "\",";
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"NameDutch\": " + "\"" + NameDutch + "\",";
+                newGameData += InsertNewLineTabs(3);
+                newGameData += "\"Completed\": " + (Completed ? true : false) + ",";
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"TotalPoints\": " + TotalPoints + ",";
                 newGameData += InsertNewLineTabs(3);
@@ -101,6 +116,15 @@ public class Escape : MonoBehaviour
             {
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"Name\": " + "\"" + puzzlesJsonData["EscapeGames"][i]["Name"].ToString() + "\",";
+                newGameData += "\"NameDutch\": " + "\"" + puzzlesJsonData["EscapeGames"][i]["NameDutch"].ToString() + "\",";
+                if (puzzlesJsonData["EscapeGames"][i]["Completed"].ToString() == "True")
+                {
+                    newGameData += "\"Completed\": " + true;
+                }
+                else if (puzzlesJsonData["EscapeGames"][i]["Completed"].ToString() == "False")
+                {
+                    newGameData += "\"Completed\": " + false;
+                }
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"TotalPoints\": " + int.Parse(puzzlesJsonData["EscapeGames"][i]["TotalPoints"].ToString()) + ",";
                 newGameData += InsertNewLineTabs(3);

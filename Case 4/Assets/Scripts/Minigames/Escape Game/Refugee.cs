@@ -66,7 +66,6 @@ public class Refugee : MonoBehaviour
                         _gameInterface.StartNextWave();
                     }
 
-                    _gameInterface.SaveEscapeGamesData();
 
                     foreach (Checkpoint checkpoint in _gameInterface.Checkpoints)
                     {
@@ -74,8 +73,11 @@ public class Refugee : MonoBehaviour
                     }
                     if (_gameInterface.CurrentWave == _gameInterface.RefugeeWaves.Count)
                     {
+                        _gameInterface.Completed = true;
                         _gameInterface.EndGame();
                     }
+
+                    _gameInterface.SaveEscapeGamesData();
                     Destroy(gameObject);
                 }
                 _animator.SetBool("IsWalking", false);

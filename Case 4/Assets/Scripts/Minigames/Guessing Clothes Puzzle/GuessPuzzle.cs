@@ -11,6 +11,8 @@ public class GuessPuzzle : MonoBehaviour
     public Puzzle CanvasElementOfPuzzle;
     [Tooltip("Necessary to seperate the puzzles in storage!")]
     public string Name;
+    public string NameDutch;
+    public bool Completed;
     [Tooltip("This checkbox either allows or disallows loading clothes from the editor by hand instead of loading the default ones.")]
     public bool Customizable;
     public int PuzzleTimeInSeconds;
@@ -68,9 +70,18 @@ public class GuessPuzzle : MonoBehaviour
         
         for (int i = 0; i < puzzlesJsonData["GuessingPuzzles"].Count; i++)
         {
-            if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name)
+            if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name ||
+                puzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
                 TotalScore = int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());
+                if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "True")
+                {
+                    Completed = true;
+                }
+                else if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "False")
+                {
+                    Completed = false;
+                }
             }
         }
         #endregion
@@ -114,6 +125,7 @@ public class GuessPuzzle : MonoBehaviour
                 _timer = 0;
                 SavePuzzleScore();
                 OpenCompletePuzzleWindow();
+                Completed = true;
                 _cameraBehaviour.IsInteracting = false;
                 _isGameStarted = false;
             }
@@ -125,6 +137,7 @@ public class GuessPuzzle : MonoBehaviour
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
+        Completed = true;
         SavePuzzleScore();
         OpenCompletePuzzleWindow();
         _cameraBehaviour.IsInteracting = false;
@@ -412,16 +425,32 @@ public class GuessPuzzle : MonoBehaviour
         {
             newScoreData += InsertNewLineTabs(2);
             newScoreData += "{";
-            if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name)
+            if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name ||
+                puzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Name\": " + "\"" + Name + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"NameDutch\": " + "\"" + NameDutch + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"Completed\": " + (Completed ? true : false) + ",";
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Score\": " + CalculateTotalScore();
             } else
             {
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Name\": " + "\"" + puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"NameDutch\": " + "\"" + puzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString() + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "True")
+                {
+                    newScoreData += "\"Completed\": " + true;
+                }
+                else if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "False")
+                {
+                    newScoreData += "\"Completed\": " + false;
+                }
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Score\": " + int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());
             }

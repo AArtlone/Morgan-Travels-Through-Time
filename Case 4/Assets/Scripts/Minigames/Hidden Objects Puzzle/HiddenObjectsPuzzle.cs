@@ -14,6 +14,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 {
     public Puzzle puzzleNPC;
     public string PuzzleName;
+    public string PuzzleNameDutch;
     public int Stars;
     public int TimeToComplete;
     public bool Completed;
@@ -64,9 +65,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     private CameraBehavior _cameraBehaviour;
     private DHManager _DHManager;
 
-    public HiddenObjectsPuzzle(string name, int stars, bool completed)
+    public HiddenObjectsPuzzle(string name, string nameDutch, int stars, bool completed)
     {
         PuzzleName = name;
+        PuzzleNameDutch = nameDutch;
         Stars = stars;
         Completed = completed;
     }
@@ -124,7 +126,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
         {
-            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName)
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName ||
+                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == PuzzleNameDutch)
             {
                 Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
                 Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
@@ -138,7 +141,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
         {
-            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName)
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName ||
+                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == PuzzleNameDutch)
             {
                 Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
                 Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
@@ -157,13 +161,15 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             HOPs.Add(
                 new HiddenObjectsPuzzle(
                     puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
                     int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
                     (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false)));
         }
 
         foreach (HiddenObjectsPuzzle HOP in HOPs)
         {
-            if (HOP.PuzzleName == PuzzleName)
+            if (HOP.PuzzleName == PuzzleName ||
+                HOP.PuzzleNameDutch == PuzzleNameDutch)
             {
                 HOP.Stars = Stars;
                 HOP.Completed = Completed;
@@ -181,17 +187,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"Name\": \"" + HOP.PuzzleName + "\",";
             newJsonData += InsertNewLineTabs(3);
-            newJsonData += "\"Stars\": " + HOP.Stars + ",";
-
+            newJsonData += "\"NameDutch\": \"" + HOP.PuzzleNameDutch + "\",";
             newJsonData += InsertNewLineTabs(3);
             if (HOP.Completed == true)
             {
-                newJsonData += "\"Completed\": true";
+                newJsonData += "\"Completed\": true" + ",";
             }
             else if (HOP.Completed == false)
             {
-                newJsonData += "\"Completed\": false";
+                newJsonData += "\"Completed\": false" + ",";
             }
+            newJsonData += InsertNewLineTabs(3);
+            newJsonData += "\"Stars\": " + HOP.Stars;
             newJsonData += InsertNewLineTabs(2);
             newJsonData += "},";
         }
@@ -327,6 +334,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Character.Instance.HasDiary = true;
         Character.Instance.RefreshJsonData();
 
+        Completed = true;
         Stars = 3;
 
         StartCoroutine(ShowStars());
