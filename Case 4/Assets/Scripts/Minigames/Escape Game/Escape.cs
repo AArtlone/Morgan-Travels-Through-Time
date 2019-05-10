@@ -107,7 +107,7 @@ public class Escape : MonoBehaviour
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"NameDutch\": " + "\"" + NameDutch + "\",";
                 newGameData += InsertNewLineTabs(3);
-                newGameData += "\"Completed\": " + (Completed ? true : false) + ",";
+                newGameData += "\"Completed\": " + (Completed ? " true" : " false") + ",";
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"TotalPoints\": " + TotalPoints + ",";
                 newGameData += InsertNewLineTabs(3);
@@ -117,14 +117,16 @@ public class Escape : MonoBehaviour
             {
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"Name\": " + "\"" + puzzlesJsonData["EscapeGames"][i]["Name"].ToString() + "\",";
+                newGameData += InsertNewLineTabs(3);
                 newGameData += "\"NameDutch\": " + "\"" + puzzlesJsonData["EscapeGames"][i]["NameDutch"].ToString() + "\",";
+                newGameData += InsertNewLineTabs(3);
                 if (puzzlesJsonData["EscapeGames"][i]["Completed"].ToString() == "True")
                 {
-                    newGameData += "\"Completed\": " + true;
+                    newGameData += "\"Completed\": true,";
                 }
                 else if (puzzlesJsonData["EscapeGames"][i]["Completed"].ToString() == "False")
                 {
-                    newGameData += "\"Completed\": " + false;
+                    newGameData += "\"Completed\": false,";
                 }
                 newGameData += InsertNewLineTabs(3);
                 newGameData += "\"TotalPoints\": " + int.Parse(puzzlesJsonData["EscapeGames"][i]["TotalPoints"].ToString()) + ",";

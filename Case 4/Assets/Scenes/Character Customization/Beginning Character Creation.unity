@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Enter name...
   Dutch: Naam invullen...
@@ -1243,6 +1244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Body
   Dutch: Lichaam
@@ -1494,6 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: "OK\t"
   Dutch: OK
@@ -2196,6 +2199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Done
   Dutch: Klaar
@@ -2483,6 +2487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: No
   Dutch: Nee
@@ -3387,6 +3392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Yes
   Dutch: Ja
@@ -3827,6 +3833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Shoes
   Dutch: Schoenen
@@ -4088,6 +4095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Bot
   Dutch: Broek
@@ -4265,6 +4273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Top
   Dutch: Top
@@ -5002,6 +5011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Create
   Dutch: Maak
@@ -5179,6 +5189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Are you done with your character?
   Dutch: Ben je klaar?
@@ -5402,7 +5413,17 @@ PrefabInstance:
     - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.5882353
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
@@ -5472,12 +5493,12 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7189793187790283593, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+    - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_LocalScale.x
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+    - target: {fileID: 7189793187790283593, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -6539,6 +6560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Face
   Dutch: Gezicht
@@ -7115,6 +7137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: OK
   Dutch: OK
@@ -7825,6 +7848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Hair
   Dutch: Haar
@@ -8113,6 +8137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Create the name for your character
   Dutch: Kies een naam
@@ -8505,6 +8530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: Reset
   Dutch: Reset
@@ -8757,6 +8783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
   SelectedLanguage: 0
   English: A word you used isn't allowed or your name is too short or too long. Please
     change it.
@@ -9519,6 +9546,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492252703154738404, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492252703154738404, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5492252703154738404, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb, type: 3}
