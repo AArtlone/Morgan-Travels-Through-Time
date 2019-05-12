@@ -49,6 +49,7 @@ public class AppearanceDisplay : MonoBehaviour
     public Sprite SelectedButton;
 
     public Animator PanelAnimator;
+    private const int clothingLength = 24;
 
     private void Start()
     {
@@ -176,12 +177,12 @@ public class AppearanceDisplay : MonoBehaviour
     {
         // The length starts from the maximum amount the displays for body part
         // clothings can display at max without overflowing it.
-        int bodyPartLength = 28;
-        int facePartLength = 28;
-        int hairPartLength = 28;
-        int topPartLength = 28;
-        int botPartLength = 28;
-        int shoesPartLength = 28;
+        int bodyPartLength = clothingLength;
+        int facePartLength = clothingLength;
+        int hairPartLength = clothingLength;
+        int topPartLength = clothingLength;
+        int botPartLength = clothingLength;
+        int shoesPartLength = clothingLength;
 
         foreach (Clothing clothing in Character.Instance.Wearables)
         {

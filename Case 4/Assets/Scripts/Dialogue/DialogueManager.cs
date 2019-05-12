@@ -91,7 +91,7 @@ public class DialogueManager : MonoBehaviour
                     new Vector2(146, 130)
                     ));
             _faceConfigurations.Add(
-                "Uncle Ben",
+                "UncleBen",
                 new FaceConfiguration(
                     new Vector2(294, 300),
                     new Vector2(199, 177)
