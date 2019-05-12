@@ -125,8 +125,8 @@ public class DiaryManager : MonoBehaviour
         // Appending new puzzles into the page.
         for (int i = startRange - 1; i < endRange; i++)
         {
-            //if (AllPuzzles[i].Completed == true)
-            //{
+            if (AllPuzzles[i].Completed == true)
+            {
                 GameObject newPuzzleDisplay = null;
                 if (AllPuzzles[i].Type == "Hidden Objects Puzzle")
                 {
@@ -164,7 +164,7 @@ public class DiaryManager : MonoBehaviour
                 languageComponent.English = AllPuzzles[i].Name;
                 languageComponent.Dutch = AllPuzzles[i].NameDutch;
             }
-        //}
+        }
     }
 
     private void GetPuzzlesFromStorage()
