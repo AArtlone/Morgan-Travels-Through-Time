@@ -25,6 +25,7 @@ public class MapArea : MonoBehaviour
                 } else
                 {
                     GetComponent<Image>().sprite = EnabledMapPoint;
+                    GetComponentInParent<Animator>().enabled = true;
                 }
             }
         }

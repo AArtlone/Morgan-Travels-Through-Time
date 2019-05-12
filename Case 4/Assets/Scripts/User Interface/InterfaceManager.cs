@@ -600,11 +600,19 @@ public class InterfaceManager : MonoBehaviour
 
     public void LoadCharacterDialogueAppearance()
     {
+        bool isBodySelected = false;
+        bool isFaceSelected = false;
+        bool isHairSelected = false;
+        bool isTopSelected = false;
+        bool isBotSelected = false;
+        bool isShoesSelected = false;
+
         Sprite[] _spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
             if (clothing.BodyPart == "Body" && clothing.Selected == true)
             {
+                isBodySelected = true;
                 foreach (Sprite sprite in _spritesFromStorage)
                 {
                     if (sprite.name == clothing.Name)
@@ -616,6 +624,7 @@ public class InterfaceManager : MonoBehaviour
             }
             if (clothing.BodyPart == "Face" && clothing.Selected == true)
             {
+                isFaceSelected = true;
                 foreach (Sprite sprite in _spritesFromStorage)
                 {
                     if (sprite.name == clothing.Name)
@@ -627,6 +636,7 @@ public class InterfaceManager : MonoBehaviour
             }
             if (clothing.BodyPart == "Hair" && clothing.Selected == true)
             {
+                isHairSelected = true;
                 foreach (Sprite sprite in _spritesFromStorage)
                 {
                     if (sprite.name == clothing.Name)
@@ -638,6 +648,7 @@ public class InterfaceManager : MonoBehaviour
             }
             if (clothing.BodyPart == "Top" && clothing.Selected == true)
             {
+                isTopSelected = true;
                 foreach (Sprite sprite in _spritesFromStorage)
                 {
                     if (sprite.name == clothing.Name)
@@ -649,6 +660,7 @@ public class InterfaceManager : MonoBehaviour
             }
             if (clothing.BodyPart == "Bot" && clothing.Selected == true)
             {
+                isBotSelected = true;
                 foreach (Sprite sprite in _spritesFromStorage)
                 {
                     if (sprite.name == clothing.Name)
@@ -660,6 +672,7 @@ public class InterfaceManager : MonoBehaviour
             }
             if (clothing.BodyPart == "Shoes" && clothing.Selected == true)
             {
+                isShoesSelected = true;
                 foreach (Sprite sprite in _spritesFromStorage)
                 {
                     if (sprite.name == clothing.Name)
@@ -669,6 +682,37 @@ public class InterfaceManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (isBodySelected == false)
+        {
+            _bodyPart.color = new Color(255, 255, 255, 0);
+            _darkBodyPart.color = new Color(255, 255, 255, 0);
+        }
+        if (isFaceSelected == false)
+        {
+            _facePart.color = new Color(255, 255, 255, 0);
+            _darkFacePart.color = new Color(255, 255, 255, 0);
+        }
+        if (isHairSelected == false)
+        {
+            _hairPart.color = new Color(255, 255, 255, 0);
+            _darkHairPart.color = new Color(255, 255, 255, 0);
+        }
+        if (isTopSelected == false)
+        {
+            _topPart.color = new Color(255, 255, 255, 0);
+            _darkTopPart.color = new Color(255, 255, 255, 0);
+        }
+        if (isBotSelected == false)
+        {
+            _botPart.color = new Color(255, 255, 255, 0);
+            _darkBotPart.color = new Color(255, 255, 255, 0);
+        }
+        if (isShoesSelected == false)
+        {
+            _shoesPart.color = new Color(255, 255, 255, 0);
+            _darkShoesPart.color = new Color(255, 255, 255, 0);
         }
     }
     #endregion
