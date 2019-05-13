@@ -7,6 +7,7 @@ public class Obstacle : MonoBehaviour
     private float _timeHoldingDown = 1;
     private float _currentTimeHoldingDown = 0;
     private bool _holdingDownObstacle;
+    private Escape _gameInterface;
 
     public GameObject Bridge;
     private Animator _animator;
@@ -14,6 +15,7 @@ public class Obstacle : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _gameInterface = FindObjectOfType<Escape>();
     }
 
     private void Update()
@@ -118,8 +120,8 @@ public class Obstacle : MonoBehaviour
                 if (hitObj.transform.name == gameObject.name)
                 {
                     ToggleObstacle();
-                    GetComponent<SpriteRenderer>().sprite = null;
-                    GetComponent<BoxCollider2D>().enabled = false;
+                    gameObject.SetActive(false);
+                    _gameInterface.RespawnObstacle(gameObject);
                 }
             }
         }

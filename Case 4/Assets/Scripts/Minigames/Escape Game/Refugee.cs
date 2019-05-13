@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
+using Random = UnityEngine.Random;
 
 public class Refugee : MonoBehaviour
 {
@@ -7,12 +9,14 @@ public class Refugee : MonoBehaviour
 
     private int _currentCheckpointIndex = 0;
     private Checkpoint _targetCheckpoint;
-    public enum RefugeeStatus { Walking, Wondering };
+    public enum RefugeeStatus { Walking, Wondering, Idle };
     public RefugeeStatus Status;
     private Animator _animator;
     private Rigidbody2D _rb;
     public int RewardInPoints;
     public int RefugeeIndex;
+    [NonSerialized]
+    public int WaveIndex;
     public bool WonderingLeft;
     public bool WonderingRight;
     public bool FacingLeft;
@@ -36,9 +40,9 @@ public class Refugee : MonoBehaviour
         IconOfRefugee.gameObject.SetActive(false);
 
         _targetCheckpoint = _gameInterface.Checkpoints[_currentCheckpointIndex];
-        _animator.SetBool("IsWalking", true);
         WonderingRight = true;
         FacingRight = true;
+        _animator.SetBool("IsWalking", true);
     }
     
     void Update()
@@ -63,18 +67,43 @@ public class Refugee : MonoBehaviour
             ChangeRefugeeStatus(RefugeeStatus.Walking);
         }
 
-        if (Status == RefugeeStatus.Walking)
-        {
-            MoveTowardsCheckpointQueueElement();
-        } else if (Status == RefugeeStatus.Wondering)
+        if (Status == RefugeeStatus.Wondering)
         {
             Wondering();
+        } else if (Status == RefugeeStatus.Walking)
+        {
+            MoveTowardsCheckpointQueueElement();
         }
     }
 
     private void ChangeRefugeeStatus(RefugeeStatus NewRefugeeStatus)
     {
+        if (NewRefugeeStatus == RefugeeStatus.Idle)
+        {
+            _animator.SetBool("IsWalking", false);
+            Status = NewRefugeeStatus;
+            StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Wondering));
+        } else if (NewRefugeeStatus == RefugeeStatus.Wondering)
+        {
+            _animator.SetBool("IsWalking", true);
+            Status = NewRefugeeStatus;
+            StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Idle));
+        } else if (NewRefugeeStatus == RefugeeStatus.Walking)
+        {
+            FlipNPC("Right");
+            _animator.SetBool("IsWalking", true);
+            StopAllCoroutines();
+            Status = NewRefugeeStatus;
+        }
+
         Status = NewRefugeeStatus; 
+    }
+
+    private IEnumerator ChangeRefugeeStatusCO (RefugeeStatus NewRefugeeStatus)
+    {
+        int secondsToWait = Random.Range(1, 4);
+        yield return new WaitForSeconds(secondsToWait);
+        ChangeRefugeeStatus(NewRefugeeStatus);
     }
 
     /// <summary>
@@ -94,20 +123,20 @@ public class Refugee : MonoBehaviour
                 _gameInterface.RefugeesSaved++;
                 _gameInterface.RefugeesSavedInThisSession++;
                 _gameInterface.TotalPoints += RewardInPoints;
-                _gameInterface.CurrentRefugees.Remove(this);
+                _gameInterface.CurrentRefugees[WaveIndex].Remove(this);
 
-                for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
-                {
-                    _gameInterface.CurrentRefugees[i].RefugeeIndex = i;
-                }
+                //for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
+                //{
+                //    _gameInterface.CurrentRefugees[WaveIndex][i].RefugeeIndex = i;
+                //}
 
-                if (_gameInterface.CurrentRefugees.Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
-                {
-                    _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
+                //if (_gameInterface.CurrentRefugees.Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
+                //{
+                //    _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
 
-                    _gameInterface.CurrentWave++;
-                    _gameInterface.StartNextWave();
-                }
+                //    _gameInterface.CurrentWave++;
+                //    _gameInterface.StartNextWave();
+                //}
 
 
                 foreach (Checkpoint checkpoint in _gameInterface.Checkpoints)
@@ -122,8 +151,17 @@ public class Refugee : MonoBehaviour
 
                 _gameInterface.SaveEscapeGamesData();
                 Destroy(gameObject);
+            } else if (_targetCheckpoint.tag == "Inbetween Checkpoint")
+            {
+                if (RefugeeIndex == 0)
+                {
+                    if (_gameInterface.CurrentWave < _gameInterface.RefugeeWaves.Count - 1)
+                    {
+                        _gameInterface.CurrentWave++;
+                        _gameInterface.StartNextWave();
+                    }
+                }
             }
-            //_currentCheckpointIndex++;
             ChangeRefugeeStatus(RefugeeStatus.Wondering);
         }
     }
@@ -175,7 +213,7 @@ public class Refugee : MonoBehaviour
     {
         if (collision.transform.tag == "Water")
         {
-            _gameInterface.CurrentRefugees.Remove(this);
+            _gameInterface.CurrentRefugees[WaveIndex].Remove(this);
             _gameInterface.EndGameLose();
             Destroy(gameObject);
         }
@@ -189,10 +227,26 @@ public class Refugee : MonoBehaviour
             WonderingLeft = false;
             WonderingRight = true;
         }
-        //if (collision.gameObject.tag == "Checkpoint")
+        //if (collision.transform.tag == "Checkpoint")
         //{
-        //    _currentCheckpointIndex++;
-        //    _targetCheckpoint = _gameInterface.Checkpoints[_currentCheckpointIndex];
+        //    Debug.Log("bithc");
+        //    bool IsCheckpointFirst = false;
+        //    foreach (Refugee refugee in _gameInterface.CurrentRefugees)
+        //    {
+        //        if (refugee._targetCheckpoint.name == "Initial Checkpoint")
+        //        {
+        //            IsCheckpointFirst = true;
+        //        }
+        //    }
+        //    if(IsCheckpointFirst == false)
+        //    {
+        //        if (_gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
+        //        {
+        //            _gameInterface.CurrentWave++;
+        //            _gameInterface.StartNextWave();
+        //        }
+                
+        //    }
         //}
     }
 

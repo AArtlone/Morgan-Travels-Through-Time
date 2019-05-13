@@ -433,7 +433,7 @@ public class GuessPuzzle : MonoBehaviour
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"NameDutch\": " + "\"" + NameDutch + "\",";
                 newScoreData += InsertNewLineTabs(3);
-                newScoreData += "\"Completed\": " + (Completed ? true : false) + ",";
+                newScoreData += "\"Completed\": " + (Completed ? "true" : "false") + ",";
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Score\": " + CalculateTotalScore();
             } else
@@ -445,11 +445,11 @@ public class GuessPuzzle : MonoBehaviour
                 newScoreData += InsertNewLineTabs(3);
                 if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "True")
                 {
-                    newScoreData += "\"Completed\": " + true;
+                    newScoreData += "\"Completed\": true,";
                 }
                 else if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "False")
                 {
-                    newScoreData += "\"Completed\": " + false;
+                    newScoreData += "\"Completed\": false,";
                 }
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Score\": " + int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());

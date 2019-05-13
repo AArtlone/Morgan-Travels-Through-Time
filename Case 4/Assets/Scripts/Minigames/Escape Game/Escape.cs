@@ -7,6 +7,7 @@ using System;
 
 public class Escape : MonoBehaviour
 {
+    public bool CustomizeNPC = false;
     public string Name;
     public string NameDutch;
     public bool Completed;
@@ -14,8 +15,8 @@ public class Escape : MonoBehaviour
     public int RefugeesSaved;
     public int DelayBetweenWaves;
     public int TotalPoints;
-    public GameObject RefugeePrefab;
-    public List<Refugee> CurrentRefugees = new List<Refugee>();
+    public GameObject TreeObstaclePrefab;
+    public List<List<Refugee>> CurrentRefugees = new List<List<Refugee>>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
     public string QuestForObjective;
@@ -24,8 +25,10 @@ public class Escape : MonoBehaviour
     public GameObject EndGamePopUp;
     public GameObject EndGameLosePopUp;
     public GameObject NewWaveNotification;
+    public List<GameObject> AllNPCPrefabs = new List<GameObject>();
     public List<GameObject> Stars;
     public int RefugeesSavedInThisSession;
+
 
     private string _escapeGamesJsonFile;
 
@@ -56,6 +59,10 @@ public class Escape : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < RefugeeWaves.Count; i++)
+        {
+            CurrentRefugees.Add(new List<Refugee>());
+        }
         StartNextWave();
     }
 
@@ -71,12 +78,36 @@ public class Escape : MonoBehaviour
             {
                 checkPoint.CreateNewQueueElement();
             }
-            GameObject newRefugee = Instantiate(RefugeeWaves[CurrentWave].Wave[i].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
-            Physics2D.IgnoreLayerCollision(10, 10);
-            newRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees.Count;
-            CurrentRefugees.Add(newRefugee.GetComponent<Refugee>());
+            if (CustomizeNPC)
+            {
+                GameObject newRefugee = Instantiate(RefugeeWaves[CurrentWave].Wave[i].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
+                Physics2D.IgnoreLayerCollision(10, 10);
+                CurrentRefugees[CurrentWave].Add(newRefugee.GetComponent<Refugee>());
+                newRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees[CurrentWave].Count - 1;
+                newRefugee.GetComponent<Refugee>().WaveIndex = CurrentWave;
+            } else
+            {
+                int randomRefugeeIndex = UnityEngine.Random.Range(0, AllNPCPrefabs.Count);
+                GameObject randomRefugee = Instantiate(AllNPCPrefabs[randomRefugeeIndex].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
+                Physics2D.IgnoreLayerCollision(10, 10);
+                CurrentRefugees[CurrentWave].Add(randomRefugee.GetComponent<Refugee>());
+                randomRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees[CurrentWave].Count - 1;
+                randomRefugee.GetComponent<Refugee>().WaveIndex = CurrentWave;
+            }
+            
             yield return new WaitForSeconds(2f);
         }
+    }
+    
+    public void RespawnObstacle(GameObject obstacle)
+    {
+        StartCoroutine(RespawnObstacleCo(obstacle, 5f));
+    } 
+
+    private IEnumerator RespawnObstacleCo(GameObject obstacle, float timeDelay)
+    {
+        yield return new WaitForSeconds(timeDelay);
+        obstacle.SetActive(true);
     }
 
     public void StartNextWave()
