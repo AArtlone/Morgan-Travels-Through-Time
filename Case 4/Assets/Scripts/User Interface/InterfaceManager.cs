@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class InterfaceManager : MonoBehaviour
 {
     public static InterfaceManager Instance;
+    public List<KeyValuePair<int, Item>> Items = new List<KeyValuePair<int, Item>>();
+    public GameObject InventoryPanel;
+    public GameObject ItemPrefab;
 
     [Header("Only populate if current scene requires the diary!")]
     [Space(10)]
@@ -27,7 +30,7 @@ public class InterfaceManager : MonoBehaviour
     private Quest _currentlySelectedQuest;
     #endregion
 
-    [Header("Only populate if current scene requires the diary!")]
+    [Header("Only populate if current scene requires the inventory!")]
     [Space(10)]
     #region Item details for bottom UI inventory
     [Space(10)]

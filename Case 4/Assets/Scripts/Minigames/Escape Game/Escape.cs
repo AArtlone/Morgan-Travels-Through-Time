@@ -7,6 +7,7 @@ using System;
 
 public class Escape : MonoBehaviour
 {
+    public EscapeInventory Inventory;
     public bool CustomizeNPC = false;
     public string Name;
     public string NameDutch;
@@ -19,6 +20,7 @@ public class Escape : MonoBehaviour
     public List<List<Refugee>> CurrentRefugees = new List<List<Refugee>>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
+    public List<GameObject> ItemsOnMap = new List<GameObject>();
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public string AreaToUnlock;
@@ -34,6 +36,7 @@ public class Escape : MonoBehaviour
 
     private void Awake()
     {
+        Inventory = new EscapeInventory();
         _escapeGamesJsonFile = Application.persistentDataPath + "/EscapeGames.json";
 
         string dataToJson = File.ReadAllText(_escapeGamesJsonFile);
@@ -201,6 +204,17 @@ public class Escape : MonoBehaviour
         EndGameLosePopUp.SetActive(true);
 
         StartCoroutine(ShowStars());
+    }
+
+    private IEnumerator ReactivateItemCO(GameObject itemObj)
+    {
+        yield return new WaitForSeconds(1f);
+        itemObj.SetActive(true);
+    }
+
+    public void ReactivateItem(GameObject itemObj)
+    {
+        StartCoroutine(ReactivateItemCO(itemObj));
     }
 
     private IEnumerator ShowStars()

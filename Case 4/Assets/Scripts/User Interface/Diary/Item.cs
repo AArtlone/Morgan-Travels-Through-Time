@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class Item : MonoBehaviour
 {
+    public bool Reactivatable;
     public string Name;
     public string NameDutch;
     [Space(10)]
@@ -23,6 +25,7 @@ public class Item : MonoBehaviour
     public bool ItemFound;
     #endregion
 
+    private CameraBehavior _cameraBehaviour;
     private int _timer;
 
     public Item(
@@ -67,6 +70,11 @@ public class Item : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _cameraBehaviour = FindObjectOfType<CameraBehavior>();
+    }
+
     /// <summary>
     /// This functions shows the item's parameters in this class to the details
     /// window in the game whenever the player holds on an item in the inventory.
@@ -96,6 +104,8 @@ public class Item : MonoBehaviour
 
     public void DragItem()
     {
+        _cameraBehaviour.IsInterfaceElementSelected = true;
+
         Touch touch = Input.GetTouch(0);
         transform.SetParent(GameObject.FindGameObjectWithTag("Items Panel").transform);
         transform.position = new Vector2(touch.position.x, touch.position.y);
@@ -106,6 +116,7 @@ public class Item : MonoBehaviour
     
     public void DropItem()
     {
+        _cameraBehaviour.IsInterfaceElementSelected = false;
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
@@ -197,7 +208,13 @@ public class Item : MonoBehaviour
             }
         }
 
-        transform.SetParent(GameObject.Find("Items").transform);
-        Character.Instance.ReloadInventory();
+        if (SceneManager.GetActiveScene().name == "Escape Game")
+        {
+            FindObjectOfType<EscapeInventory>().RefreshPanel();
+        } else
+        {
+            transform.SetParent(GameObject.Find("Items").transform);
+            Character.Instance.ReloadInventory();
+        }
     }
 }

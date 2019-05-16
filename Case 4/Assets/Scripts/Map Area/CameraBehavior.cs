@@ -25,11 +25,13 @@ public class CameraBehavior : MonoBehaviour
 
     // Camera components
     private MapEnvironmentManager _mapEnvironmentManager;
+    private Escape _gameInterface;
 
     private void Start()
     {
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
+        _gameInterface = FindObjectOfType<Escape>();
         InterfaceManager.Instance.CameraBehavior = this;
         Character.Instance.CameraBehavior = this;
     }
@@ -158,9 +160,17 @@ public class CameraBehavior : MonoBehaviour
                             SceneManager.LoadScene("Escape Game");
                             break;
                         case "Item Drop":
-                            Item hitItemDrop = hitObj.transform.GetComponent<Item>();
-                            InterfaceManager.Instance.ItemSelected = hitItemDrop;
-                            InterfaceManager.Instance.DisplayActionsMenu();
+                            if (SceneManager.GetActiveScene().name == "Escape Game")
+                            {
+                                Item hitItemDrop = hitObj.transform.GetComponent<Item>();
+                                _gameInterface.Inventory.AddItem(hitItemDrop);
+                            }
+                            else
+                            {
+                                Item hitItemDrop = hitObj.transform.GetComponent<Item>();
+                                InterfaceManager.Instance.ItemSelected = hitItemDrop;
+                                InterfaceManager.Instance.DisplayActionsMenu();
+                            }
                             break;
                         case "Area Interactable":
                             hitObj.transform.GetComponent<ToggleObject>().Replace();
@@ -169,6 +179,31 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsUIOpen == false && IsEntityTappedOn == false)
+            {
+                RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
+
+                if (hitObj.transform != null)
+                {
+                    //Debug.Log(hitObj.transform.tag);
+                    switch (hitObj.transform.tag)
+                    {
+                        case "Item Drop":
+                            Item hitItemDrop = hitObj.transform.GetComponent<Item>();
+                            if (_gameInterface.Inventory.AddItem(hitItemDrop) == true) {
+                                hitItemDrop.gameObject.SetActive(false);
+                                if (hitItemDrop.Reactivatable)
+                                {
+                                    _gameInterface.ReactivateItem(hitItemDrop.gameObject);
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+        }
     }
-        
+
 }

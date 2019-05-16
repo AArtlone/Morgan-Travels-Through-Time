@@ -45,7 +45,7 @@ public class CameraManager : MonoBehaviour
             }
         } else
         {
-            if (Input.touchCount > 0)
+            if (_cameraBehaviour.IsInterfaceElementSelected == false  && Input.touchCount > 0)
             {
                 GetSwipe();
             }
