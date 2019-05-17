@@ -2,6 +2,8 @@
 
 public class Obstacle : MonoBehaviour
 {
+    public enum ObstacleType { Fire, EvilPlant, Flag, Bridge, Sheeps};
+    public ObstacleType Type;
     public Checkpoint CheckpointLink;
     public LayerMask ObstacleLayer;
     private float _timeHoldingDown = 1;
@@ -124,6 +126,60 @@ public class Obstacle : MonoBehaviour
                     _gameInterface.RespawnObstacle(gameObject);
                 }
             }
+        }
+    }
+
+    public void PLayFire()
+    {
+        ToggleObstacle();
+        gameObject.SetActive(false);
+        _gameInterface.RespawnObstacle(gameObject);
+    }
+
+    public void PlayFlag()
+    {
+        ToggleObstacle();
+        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Inventory/Groningen Flag");
+        _gameInterface.RespawnFlagObstacle(gameObject);
+        Invoke("ToggleObstacle", 5f);
+    }
+
+    public void CutPlant()
+    {
+        // TODO: Play cutting sound
+        ToggleObstacle();
+        gameObject.SetActive(false);
+        _gameInterface.RespawnObstacle(gameObject);
+        Invoke("ToggleObstacle", 5f);
+    }
+
+    public void SetPlantOnFire()
+    {
+        // TODO: Play burning sound
+        _gameInterface.Fire.SetActive(true);
+    }
+
+    public void ExtinguishPlant()
+    {
+        // TODO: Play extinguish sound
+        ToggleObstacle();
+        gameObject.SetActive(false);
+        _gameInterface.Fire.SetActive(false);
+        _gameInterface.RespawnObstacle(gameObject);
+        Invoke("ToggleObstacle", 5f);
+    }
+
+    public void PlaySheeps(Item.ItemType type)
+    {
+        if (type == Item.ItemType.BommenBerendFlag)
+        {
+            // TODO: Do some anymation, i guess
+            Debug.Log("Tried to distract sheeps");
+        } else if (type == Item.ItemType.BunchOfHay)
+        {
+            // TODO: Do something wiht aninmations
+            ToggleObstacle();
+            Invoke("ToggleObstacle", 5f);
         }
     }
 }

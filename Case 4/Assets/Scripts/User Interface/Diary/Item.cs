@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class Item : MonoBehaviour
 {
     public bool Reactivatable;
+    public enum ItemType { Torch, Sword, EmptyBucket, FullBucket, GroningenFlag, BommenBerendFlag, BunchOfHay };
+    public ItemType Type;
     public string Name;
     public string NameDutch;
     [Space(10)]
@@ -27,6 +29,9 @@ public class Item : MonoBehaviour
 
     private CameraBehavior _cameraBehaviour;
     private int _timer;
+
+    private Vector3 _previousPos;
+    private Escape _gameInterface;
 
     public Item(
         string Name,
@@ -51,6 +56,7 @@ public class Item : MonoBehaviour
 
     public void HoldingDown()
     {
+        _previousPos = transform.position;
         InvokeRepeating("CountTimerUp", 0f, 1f);
     }
 
@@ -64,7 +70,7 @@ public class Item : MonoBehaviour
     {
         _timer++;
 
-        if (_timer == 2)
+        if (_timer == 2 && _previousPos == transform.position)
         {
             DisplayItemDetails();
         }
@@ -72,6 +78,11 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Escape Game")
+        {
+
+            _gameInterface = FindObjectOfType<Escape>();
+        }
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
     }
 
@@ -113,10 +124,82 @@ public class Item : MonoBehaviour
         // item AND dragging it at the same time.
         _timer = 0;
     }
-    
+
     public void DropItem()
     {
         _cameraBehaviour.IsInterfaceElementSelected = false;
+
+        Touch touch = Input.GetTouch(0);
+
+        Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+        RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity);
+
+        if (hitObj.transform != null)
+        {
+            // Checking if the item was dropped on top of the object in the escape
+            // game that can be interacted with the item
+            if (hitObj.transform.tag == "Item Interactable Object")
+            {
+                Obstacle.ObstacleType obstacleType = hitObj.transform.gameObject.GetComponent<Obstacle>().Type;
+                // Check if the dropping item is an empty buccket and if the interactable
+                // object is a well. If yes, then it replaces the empty bucket with a
+                // full bucket
+                if (hitObj.transform.name == "Well" && Type == ItemType.EmptyBucket)
+                {
+                    _gameInterface.Inventory.RemoveItem(this);
+                    _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
+                }
+
+                if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
+                {
+                    _gameInterface.Inventory.RemoveItem(this);
+                    _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
+                    hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
+                }
+
+                if (obstacleType == Obstacle.ObstacleType.Fire && Type == ItemType.FullBucket)
+                {
+                    _gameInterface.Inventory.RemoveItem(this);
+                    _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
+                    hitObj.transform.gameObject.GetComponent<Obstacle>().PLayFire();
+                }
+
+                if (obstacleType == Obstacle.ObstacleType.Sheeps)
+                {
+                    hitObj.transform.gameObject.GetComponent<Obstacle>().PlaySheeps(Type);
+                }
+
+                if (obstacleType == Obstacle.ObstacleType.EvilPlant)
+                {
+                    bool isPLantOnFire = false;
+                    if (hitObj.transform.gameObject.transform.GetChild(0).gameObject.activeSelf == true)
+                    {
+                        isPLantOnFire = true;
+                    }
+                    Debug.Log(isPLantOnFire);
+
+                    if (!isPLantOnFire)
+                    {
+                        if (Type == ItemType.Sword)
+                        {
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().CutPlant();
+                        } else if (Type == ItemType.Torch)
+                        {
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().SetPlantOnFire();
+                        }
+                    } else
+                    {
+                        if (Type == ItemType.FullBucket)
+                        {
+                            _gameInterface.Inventory.RemoveItem(this);
+                            _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().ExtinguishPlant();
+                        }
+                    }
+                }
+            }
+        }
+
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
@@ -152,7 +235,8 @@ public class Item : MonoBehaviour
                     {
                         npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
                         isCorrectItemDropped = true;
-                    } else
+                    }
+                    else
                     {
                         //Debug.Log("Wrong item!");
                     }
@@ -211,7 +295,8 @@ public class Item : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Escape Game")
         {
             FindObjectOfType<EscapeInventory>().RefreshPanel();
-        } else
+        }
+        else
         {
             transform.SetParent(GameObject.Find("Items").transform);
             Character.Instance.ReloadInventory();

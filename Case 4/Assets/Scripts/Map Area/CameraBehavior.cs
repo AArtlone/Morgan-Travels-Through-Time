@@ -193,7 +193,10 @@ public class CameraBehavior : MonoBehaviour
                         case "Item Drop":
                             Item hitItemDrop = hitObj.transform.GetComponent<Item>();
                             if (_gameInterface.Inventory.AddItem(hitItemDrop) == true) {
-                                hitItemDrop.gameObject.SetActive(false);
+                                if (hitItemDrop.Type != Item.ItemType.BunchOfHay)
+                                {
+                                    hitItemDrop.gameObject.SetActive(false);
+                                }
                                 if (hitItemDrop.Reactivatable)
                                 {
                                     _gameInterface.ReactivateItem(hitItemDrop.gameObject);

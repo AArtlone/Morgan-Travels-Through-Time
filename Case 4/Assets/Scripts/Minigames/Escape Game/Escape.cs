@@ -31,6 +31,14 @@ public class Escape : MonoBehaviour
     public List<GameObject> Stars;
     public int RefugeesSavedInThisSession;
 
+    [Header("List of Item Prefabs that player will receive but that are not in the scene.")]
+    public Item FullBucketPrefab;
+    public Item EmptyBucketPrefab;
+    public Item BommenBerendFlagPrefab;
+
+    [Header("Obstacle related objects.")]
+    public GameObject Antagonist;
+    public GameObject Fire;
 
     private string _escapeGamesJsonFile;
 
@@ -102,6 +110,21 @@ public class Escape : MonoBehaviour
         }
     }
     
+    public void RespawnFlagObstacle(GameObject obstacle)
+    {
+        StartCoroutine(RespawnFlagObstacleCo(obstacle, 5f));
+    }
+
+    private IEnumerator RespawnFlagObstacleCo(GameObject obstacle, float timeDelay)
+    {
+        Antagonist.SetActive(true);
+        // TODO: Play evil laugh
+        yield return new WaitForSeconds(2f);
+        Antagonist.SetActive(false);
+        yield return new WaitForSeconds(timeDelay);
+        obstacle.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Inventory/BommenBerend Flag");
+    }
+
     public void RespawnObstacle(GameObject obstacle)
     {
         StartCoroutine(RespawnObstacleCo(obstacle, 5f));

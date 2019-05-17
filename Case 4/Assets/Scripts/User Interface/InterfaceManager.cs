@@ -61,7 +61,7 @@ public class InterfaceManager : MonoBehaviour
     public Image Blueprint4;
     public Image Blueprint5;
     #endregion
-    
+
     [Header("Only populate if current scene has an interface of icons!")]
     [Space(10)]
     #region Icons display variables
@@ -161,7 +161,7 @@ public class InterfaceManager : MonoBehaviour
         Character.Instance.RefreshJsonData();
         string dataToJson = File.ReadAllText(Character.Instance.PlayerStatsFilePath);
         JsonData characterData = JsonMapper.ToObject(dataToJson);
-        
+
         for (int i = 1; i < 6; i++)
         {
             if (characterData["Blueprint" + i].ToString() == "True")
@@ -200,19 +200,23 @@ public class InterfaceManager : MonoBehaviour
                 {
                     Blueprint1.sprite = blueprintSprite;
                     Blueprint1.color = new Color(255, 255, 255, 0);
-                } else if (i == 2)
+                }
+                else if (i == 2)
                 {
                     Blueprint2.sprite = blueprintSprite;
                     Blueprint2.color = new Color(255, 255, 255, 0);
-                } else if (i == 3)
+                }
+                else if (i == 3)
                 {
                     Blueprint3.sprite = blueprintSprite;
                     Blueprint3.color = new Color(255, 255, 255, 0);
-                } else if (i == 4)
+                }
+                else if (i == 4)
                 {
                     Blueprint4.sprite = blueprintSprite;
                     Blueprint4.color = new Color(255, 255, 255, 0);
-                } else if (i == 5)
+                }
+                else if (i == 5)
                 {
                     Blueprint5.sprite = blueprintSprite;
                     Blueprint5.color = new Color(255, 255, 255, 0);
@@ -288,7 +292,7 @@ public class InterfaceManager : MonoBehaviour
             }
         }
     }
-    
+
     /// <summary>
     /// This function hides and shows interfaces in the main menu whenever the
     /// player selects a new interface he wants to display (settings, diary).
@@ -310,7 +314,7 @@ public class InterfaceManager : MonoBehaviour
                 }
 
                 obj.SetActive(true);
-                
+
                 if (uiObj.transform.tag == "Settings UI")
                 {
                     SettingsManager.Instance.UpdateHiglightedLanguageIcons();
@@ -325,7 +329,7 @@ public class InterfaceManager : MonoBehaviour
                     CameraBehavior.TapPosition = Camera.main.transform.position;
                 }
 
-                    obj.SetActive(false);
+                obj.SetActive(false);
 
             }
             else
@@ -360,7 +364,7 @@ public class InterfaceManager : MonoBehaviour
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
     }
-    
+
     #region Quests, diary and character functions
     public void DisplayQuestDetails(Object obj)
     {
@@ -374,7 +378,8 @@ public class InterfaceManager : MonoBehaviour
             {
                 Destroy(SelectedQuestObjectivesDisplay.transform.GetChild(i).gameObject);
             }
-        } else
+        }
+        else
         {
             GameObject button = obj as GameObject;
 
@@ -400,14 +405,15 @@ public class InterfaceManager : MonoBehaviour
 
                             foreach (Objective objective in loadedQuest.Objectives)
                             {
-                                if(objective.CompletedStatus == false)
+                                if (objective.CompletedStatus == false)
                                 {
                                     GameObject newObjective = Instantiate(QuestObjectivePrefab,
                                     SelectedQuestObjectivesDisplay.transform);
                                     newObjective.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = objective.Name;
                                     newObjective.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "Done: No";
                                     break;
-                                } else
+                                }
+                                else
                                 {
                                     GameObject newObjective = Instantiate(QuestObjectivePrefab,
                                     SelectedQuestObjectivesDisplay.transform);
@@ -510,7 +516,7 @@ public class InterfaceManager : MonoBehaviour
             ResetFields();
         }
     }
-    
+
     public void ResetFields()
     {
         SelectedQuestTitle.text = string.Empty;
@@ -577,7 +583,8 @@ public class InterfaceManager : MonoBehaviour
                             }
                         }
                     }
-                } else if (clothing.BodyPart == "Hair" && clothing.Selected == false)
+                }
+                else if (clothing.BodyPart == "Hair" && clothing.Selected == false)
                 {
                     if (_hairIcon != null)
                     {
@@ -728,7 +735,8 @@ public class InterfaceManager : MonoBehaviour
         if (ItemActionsWindow.activeSelf == true)
         {
             ClosePopup(ItemActionsWindow);
-        } else
+        }
+        else
         {
             OpenPopup(ItemActionsWindow);
         }
@@ -776,12 +784,14 @@ public class InterfaceManager : MonoBehaviour
             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
 
             SceneManager.LoadScene(scene);
-        } else
+        }
+        else
         {
             if (Character.Instance.LastMapArea == "Test Area")
             {
                 SceneManager.LoadScene("Test Area");
-            } else
+            }
+            else
             {
                 Character.Instance.LastScene = scene;
                 SceneManager.LoadScene(scene);
@@ -790,7 +800,7 @@ public class InterfaceManager : MonoBehaviour
         Character.Instance.RefreshJsonData();
     }
     #endregion
-    
+
     public void ResetTheGame()
     {
         if (SceneManager.GetActiveScene().name == "Beginning Character Creation")

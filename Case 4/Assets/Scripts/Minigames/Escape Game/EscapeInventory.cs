@@ -80,6 +80,7 @@ public class EscapeInventory : MonoBehaviour
             Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + InterfaceManager.Instance.Items[i].Value.GetComponent<Item>().AssetsImageName);
 
             newItem.GetComponent<Image>().sprite = sprite;
+            newItemScript.Type = InterfaceManager.Instance.Items[i].Value.Type;
             newItemScript.Name = InterfaceManager.Instance.Items[i].Value.Name;
             newItemScript.Description = InterfaceManager.Instance.Items[i].Value.Description;
             newItemScript.Active = InterfaceManager.Instance.Items[i].Value.Active;
