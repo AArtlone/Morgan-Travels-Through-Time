@@ -6,6 +6,7 @@ using System;
 public class DialogueBranch
 {
     public string BranchTitle;
+    public int ID;
     public List<string> PreviousResponses = new List<string>();
     //[Header("Defined below are fields that the character must meet in order to see this dialogue branch.")]
     [Range(0, 10)]

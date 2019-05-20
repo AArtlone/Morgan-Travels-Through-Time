@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ public class NPC : MonoBehaviour
     private bool _canWalkToNextPosition;
     private bool _canInteractWithPlayer = true;
     [SerializeField]
-    public List<DialogueLanguages> DialogueFormats;
+    public List<DialogueLanguages> DialogueFormats = new List<DialogueLanguages>();
 
     // Tracks the current dialogue index in the canvas and whether or not
     // the player is currently in a dialogue or not.
@@ -41,6 +42,10 @@ public class NPC : MonoBehaviour
     List<Dialogue> FinalSequence = new List<Dialogue>();
     private string SceneToLoadAfterDialogue;
 
+    private string _languagedPicked;
+    private int _dialoguePickedIndex;
+    private int _dialogueBranchPickedIndex;
+
     // ANIMATION-related references
     private Animator _animator;
 
@@ -58,7 +63,8 @@ public class NPC : MonoBehaviour
         {
             _dialogueProgressionTrigger = transform.GetChild(0).GetComponent<Image>();
             //_dialogueProgressionTrigger.raycastTarget = false;
-        } else
+        }
+        else
         {
             _dialogueProgressionTrigger = DialogueProgressionTrigger2D;
         }
@@ -70,13 +76,13 @@ public class NPC : MonoBehaviour
 
     private void Update()
     {
-        foreach(Quest quest in Character.Instance.AllQuests)
+        foreach (Quest quest in Character.Instance.AllQuests)
         {
-            if(quest.Name == "1672???")
+            if (quest.Name == "1672???")
             {
-                foreach(Objective objective in quest.Objectives)
+                foreach (Objective objective in quest.Objectives)
                 {
-                    if(objective.ID == 0 && objective.CompletedStatus == true)
+                    if (objective.ID == 0 && objective.CompletedStatus == true)
                     {
                         _canWalkToNextPosition = true;
                     }
@@ -84,7 +90,7 @@ public class NPC : MonoBehaviour
             }
         }
 
-        if(_canWalkToNextPosition && !_isDialogueOngoing && NeedsToMove)
+        if (_canWalkToNextPosition && !_isDialogueOngoing && NeedsToMove)
         {
             // Once the npc starts walking, we toggle his animations
             _animator.SetBool("IsWalking", true);
@@ -273,11 +279,14 @@ public class NPC : MonoBehaviour
                     // We set the branch with the highest priority as our final branch
                     // for the new dialogue sequence to display.
                     FinalDialogueBranch = _availableBranches[i];
+                    _dialogueBranchPickedIndex = i;
                 }
             }
 
             // And here we display the text of the final selected branch. 
             DialogueManager.Instance.ChangeDialogueText(FinalDialogueBranch.DialogueText);
+
+            _dialogueBranchPickedIndex = FinalDialogueBranch.ID;
 
             // We also activate all the game objects in this branch once it is visualized.
             foreach (GameObject entity in FinalDialogueBranch.EntitiesToActivate)
@@ -366,7 +375,8 @@ public class NPC : MonoBehaviour
             }
 
             //Debug.LogWarning("New dialogue is loaded!");
-        } else
+        }
+        else
         {
             DialogueManager.Instance.ChangeDialogueTextRapidly(FinalDialogueBranch.DialogueText);
         }
@@ -399,6 +409,7 @@ public class NPC : MonoBehaviour
                 if (DialogueFormats[i].Language == SettingsManager.Instance.Language)
                 {
                     index = i;
+                    _languagedPicked = SettingsManager.Instance.Language;
                     break;
                 }
             }
@@ -494,10 +505,8 @@ public class NPC : MonoBehaviour
 
             //foreach (Dialogue dia in FinalSequence)
             //{
-                //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
+            //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
             //}
-
-            // PRIORITY
 
             // When the player taps on the npc or anywhere on the dialogue box, it
             // will progress the dialogue further.
@@ -505,11 +514,41 @@ public class NPC : MonoBehaviour
             {
                 if (CurrentDialogueIndex < FinalSequence.Count - 1)
                 {
+                    int countCurrentBranch = 0;
                     foreach (DialogueBranch branch in FinalSequence[CurrentDialogueIndex].DialogueBranches)
                     {
                         if (branch.ItemsRequired.Count == branch.ItemsDropped.Count)
                         {
+                            _dialoguePickedIndex = FinalSequence[CurrentDialogueIndex].ID;
+                            _dialogueBranchPickedIndex = branch.ID;
+
+                            DialogueLogManager.Instance.AddNewDialogue(Name, SettingsManager.Instance.Language, FinalDialogueBranch.DialogueText);
+
+                            foreach (DialogueLanguages format in DialogueFormats)
+                            {
+                                if (format.Language != _languagedPicked)
+                                {
+                                    foreach (Dialogue dialogue in format.Dialogue)
+                                    {
+                                        if (dialogue.ID == _dialoguePickedIndex)
+                                        {
+                                            foreach (DialogueBranch dialogueBranch in dialogue.DialogueBranches)
+                                            {
+                                                if (dialogueBranch.ID == _dialogueBranchPickedIndex)
+                                                {
+                                                    string messageConvertedForJson = JsonConvert.ToString(dialogueBranch.DialogueText);
+                                                    messageConvertedForJson = messageConvertedForJson.Substring(1, messageConvertedForJson.Length - 2);
+
+                                                    DialogueLogManager.Instance.AddNewDialogue(Name, format.Language, messageConvertedForJson);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             NextDialogue();
+
                             return;
                         }
                         else
@@ -553,9 +592,10 @@ public class NPC : MonoBehaviour
                             _isDialogueOngoing = false;
                             DialogueManager.Instance.CurrentNPCDialogue = null;
                             Character.Instance.InitiateInteraction();
-                            
+
                             return;
                         }
+                        countCurrentBranch++;
                     }
                 }
                 else
@@ -729,5 +769,10 @@ public class NPC : MonoBehaviour
                 SpeechBubble.SetActive(true);
             }
         }
+    }
+
+    private void AddCorrespondingDialogueForLanguage(string language)
+    {
+
     }
 }

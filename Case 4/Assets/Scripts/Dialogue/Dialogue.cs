@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class Dialogue
 {
     public string DialogueTitle;
+    public int ID;
     [Range(0, 10)]
     public int PriorityIndex;
     [Space(10)]
