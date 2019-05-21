@@ -4461,6 +4461,8 @@ MonoBehaviour:
     type: 3}
   GuessClothingDiaryDisplay: {fileID: 769684817099738616, guid: e7cd5568460deb14aba8382a3f8684aa,
     type: 3}
+  SpellingPuzzleDiaryDisplay: {fileID: 769684817099738616, guid: 51ad0e680651eae488423adaf24e304a,
+    type: 3}
   _buttonsForPages:
   - {fileID: 2447273985060526859}
   - {fileID: 2447273984934864393}
@@ -7904,6 +7906,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2447273984503216215}
     m_Modifications:
+    - target: {fileID: 3088866604813804966, guid: c4e9ea7edf9191f42a6bdf2028605aec,
+        type: 3}
+      propertyPath: m_Name
+      value: Space to click and remove the opened window
+      objectReference: {fileID: 0}
     - target: {fileID: 3088866604813804965, guid: c4e9ea7edf9191f42a6bdf2028605aec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8008,11 +8015,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3088866604813804966, guid: c4e9ea7edf9191f42a6bdf2028605aec,
-        type: 3}
-      propertyPath: m_Name
-      value: Space to click and remove the opened window
       objectReference: {fileID: 0}
     - target: {fileID: 3088866604813804964, guid: c4e9ea7edf9191f42a6bdf2028605aec,
         type: 3}

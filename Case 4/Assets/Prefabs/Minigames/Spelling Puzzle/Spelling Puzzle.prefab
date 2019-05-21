@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ec32809d74c1a4e8954246c5a2951b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WordExpected: 
+  ExpectedWord: 
 --- !u!114 &5881673568228674353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ec32809d74c1a4e8954246c5a2951b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WordExpected: 
+  ExpectedWord: 
 --- !u!1 &2576200378262390970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ec32809d74c1a4e8954246c5a2951b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WordExpected: 
+  ExpectedWord: 
 --- !u!1 &5781081518736537811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,32 +1679,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ab9773b3427c44c908a518edd57556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: 
+  NameDutch: 
+  Completed: 0
+  Stars: 0
   LetterBackgroud: {fileID: 3448405150554556614}
   LetterText: {fileID: 3448405150687217679}
   LetterFont: {fileID: 11400000, guid: 4d424dcec0f358f459b912f4f5c07a4a, type: 2}
-  InstructionManual: {fileID: 0}
+  InstructionManual: {fileID: 4562107451328981153}
   FieldsOfWords:
   - TextField: {fileID: 2332472189165531624}
     ExpectedWord: 
-    Options:
-    - {fileID: 7078649552735075117}
-    - {fileID: 2301477413899740443}
-    - {fileID: 1978596679376889220}
-    - {fileID: 4650211500064905385}
+    Options: {fileID: 0}
   - TextField: {fileID: 4936447804983646531}
     ExpectedWord: 
-    Options:
-    - {fileID: 4030972237269192361}
-    - {fileID: 4198039111249973065}
-    - {fileID: 5985607556605064311}
-    - {fileID: 90360877221094461}
+    Options: {fileID: 0}
   - TextField: {fileID: 2310940185481449191}
     ExpectedWord: 
-    Options:
-    - {fileID: 6209489128804148526}
-    - {fileID: 3348042349377232414}
-    - {fileID: 2721031763888581021}
-    - {fileID: 6798045366909993186}
+    Options: {fileID: 0}
   OptionsMenu: {fileID: 3448405150351124092}
 --- !u!223 &1229069722771411011
 Canvas:

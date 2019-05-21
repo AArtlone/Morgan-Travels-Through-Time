@@ -149,10 +149,10 @@ public class DialogueLogManager : MonoBehaviour
                         {
                             logObj.Messages.Add(message);
 
-                            Debug.LogWarning("The new message has been added to the log!");
+                            //Debug.LogWarning("The new message has been added to the log!");
                         } else
                         {
-                            Debug.LogWarning("The following message is already in the log: " + message + "!");
+                            //Debug.LogWarning("The following message is already in the log: " + message + "!");
                         }
                     }
                 }

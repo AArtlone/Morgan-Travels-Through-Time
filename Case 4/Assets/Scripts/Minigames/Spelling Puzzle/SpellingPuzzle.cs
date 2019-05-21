@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class SpellingPuzzle : MonoBehaviour
 {
     public string Name;
+    public string NameDutch;
     public bool Completed;
     public int Stars;
     public Image LetterBackgroud;
@@ -160,18 +161,21 @@ public class SpellingPuzzle : MonoBehaviour
         {
             SpellingPuzzleObject puzzle = new SpellingPuzzleObject(
                     puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false,
                     int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString()));
 
             _puzzles.Add(
                 new SpellingPuzzleObject(
                     puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false,
                     int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString())));
 
-            if (Name == puzzlesJsonData["Puzzles"][i]["Name"].ToString())
+            if (Name == puzzlesJsonData["Puzzles"][i]["Name"].ToString() ||
+                NameDutch == puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString())
             {
-                Completed = puzzlesJsonData["Puzzles"][i]["Name"].ToString() == "True" ? true : false;
+                Completed = puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false;
                 Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
             }
         }
@@ -189,6 +193,8 @@ public class SpellingPuzzle : MonoBehaviour
             newJsonData += "{";
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"Name\": \"" + puzzle.Name + "\",";
+            newJsonData += InsertNewLineTabs(3);
+            newJsonData += "\"NameDutch\": \"" + puzzle.NameDutch + "\",";
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"Completed\": " + (puzzle.Completed == true ? "true" : "false") + ",";
             newJsonData += InsertNewLineTabs(3);
