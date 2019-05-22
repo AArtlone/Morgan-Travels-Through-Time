@@ -50,6 +50,34 @@ h2 {
     src: url("/fonts/Josefin_Sans/JosefinSans-Regular.ttf")
 }
 
+/* ******************************* */
+/* This section is the for button used to go back 
+    up to the page if you have scrolled down too much */
+#wrapper>button {
+    z-index: 2;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border: 3px solid black;
+    border-radius: 50%;
+    box-shadow: -3px -3px 0px 0px rgba(220, 0, 0, 0.4);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#wrapper>button:hover {
+    background: black;
+    color: salmon;
+    transition: all 0.2s ease;
+}
+
+#wrapper>button>i {
+    font-size: 61px;
+}
+/* ******************************* */
 
 /* ********************************
 WRAPPER BACKGROUNDS CONFIGURATIONS
@@ -81,7 +109,7 @@ NAVIGATION BAR
     height: inherit;
 }
 
-#wrapper>header>nav>img {
+#wrapper>header>nav>img:first-of-type {
     z-index: -1;
     position: absolute;
     top: -120px;
@@ -89,9 +117,16 @@ NAVIGATION BAR
     min-width: 1920px;
 }
 
-#wrapper>header>nav>a>img {
+#wrapper>header>nav>img:last-of-type {
     margin: 10px 0 10px 20px;
     height: 100px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#wrapper>header>nav>img:last-of-type:hover {
+    opacity: 0.5;
+    transition: all 0.2s ease;
 }
 
 #wrapper>header>nav>ul {
@@ -119,6 +154,12 @@ NAVIGATION BAR
     text-transform: uppercase;
     color: white;
     letter-spacing: 3px;
+    transition: all 0.2s ease;
+}
+
+#wrapper>header>nav>ul>li>a:hover {
+    opacity: 0.5;
+    transition: all 0.2s ease;
 }
 
 #wrapper>header>nav>ul>li>a.active {
@@ -131,12 +172,13 @@ NAVIGATION BAR
 PERSONAS
 ******************************** */
 
-#personas {
+#personas, #campaigns, #content {
+    position: relative;
     margin: 250px auto 0 auto;
     width: 1080px;
 }
 
-#personas>header {
+#personas>header, #campaigns>header, #content>header, #campaigns>.container>header {
     position: relative;
     display: inline-block;
     margin: 0 auto;
@@ -145,7 +187,7 @@ PERSONAS
     text-align: center;
 }
 
-#personas>header>button {
+#personas>header>button, #campaigns>header>button, #campaigns>.container>header>button {
     position: absolute;
     /* Less than 50 because the side of the icon must be
      accounted for as well */
@@ -161,26 +203,27 @@ PERSONAS
     vertical-align: middle;
 }
 
-#personas>header>button>i:hover {
+#personas>header>button>i, #campaigns>header>button>i, #campaigns>.container>header>button>i {
+    color: darkred;
+    opacity: 0.5;
+    font-size: 108px;
+    transition: all 0.2s ease;
+}
+
+#personas>header>button>i:hover, #campaigns>header>button>i:hover, #campaigns>.container>header>button>i:hover {
     color: rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
-#personas>header>button>i {
-    color: darkred;
-    opacity: 0.5;
-    font-size: 108px;
-}
-
-#personas>header>button:first-of-type {
+#personas>header>button:first-of-type, #campaigns>header>button:first-of-type, #campaigns>.container>header>button:first-of-type {
     left: 0;
 }
 
-#personas>header>button:last-of-type {
+#personas>header>button:last-of-type,   #campaigns>header>button:last-of-type, #campaigns>.container>header>button:last-of-type {
     right: 0;
 }
 
-#personas>header>h1 {
+#personas>header>h1, #campaigns>header>h1, #content>header>h1, #campaigns>.container>header>h1, #campaigns>.container>header>h1 {
     z-index: -1;
     position: absolute;
     left: 0;
@@ -195,7 +238,7 @@ PERSONAS
     vertical-align: middle;
 }
 
-#personas>header>h1:last-of-type {
+#personas>header>h1:last-of-type, #campaigns>header>h1:last-of-type, #content>header>h1:last-of-type {
     font-size: 175px;
     color: rgba(0, 0, 0, 0.1);
 }
@@ -222,8 +265,10 @@ PERSONAS > PERSONA > HEADER
 }
 
 #personas>.persona>header>div>img {
-    border-radius: 50%;
     padding: 10px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
     box-shadow: 0px 0px 0px 5px salmon;
 }
 
@@ -262,10 +307,12 @@ PERSONAS > PERSONA > GROUPS
 }
 
 .group {
+    box-shadow: -3px -3px 0px 0px rgba(220, 0, 0, 0.2);
     margin: 10px auto 30px auto;
     padding: 25px 40px;
     /* background: white; */
     border: 2px solid #284555;
+    border-radius: 4px;
     text-align: left;
 }
 
@@ -303,3 +350,393 @@ PERSONAS > PERSONA > GRID AND ITS GROUPS
     height: 265px;
     vertical-align: top;
 }
+
+
+/* ********************************
+FOOTER
+******************************** */
+
+footer {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    color: #4B4134;
+}
+
+footer>img {
+    width: 100%;
+}
+
+
+/* ********************************
+FOOTER CONTAINER WITHOUT HEADER
+******************************** */
+
+footer>.container {
+    margin: -20px auto 0 auto;
+    width: max-content;
+    height: inherit;
+    background-color: #ACAB38;
+}
+
+footer>.background {
+    z-index: -1;
+    position: absolute;
+    margin: -20px auto 0 auto;
+    width: inherit;
+    height: inherit;
+    background-color: #ACAB38;
+}
+
+footer>.container>div {
+    display: inline-block;
+    margin: 60px 30px 0 30px;
+    width: 400px;
+    max-width: max-content;
+    vertical-align: top;
+}
+
+footer>.container>div>h2 {
+    color: #43382D;
+}
+
+footer>.container>div>p {
+    line-height: 23px;
+}
+
+footer>.container>div>img {
+    width: 150px;
+    border-radius: 4px;
+}
+
+footer>.container>div>ul>li {
+    list-style: none;
+}
+
+footer>.container>div>ul>li>i {
+    color: #484543;
+    margin: 10px 15px 0 0;
+}
+
+/* ********************************
+CAMPAIGNS
+******************************** */
+
+#campaigns, #content {
+    margin: 0 auto;
+}
+
+/* ********************************
+CAMPAIGNS > HEADER
+******************************** */
+
+#campaigns>header {
+    margin: 60px 0 0 0;
+    height: 300px;
+}
+
+#campaigns>header>button {
+    top: 30%;
+}
+#campaigns>header>h1 {
+    font-size: 300px;
+}
+
+#campaigns>header>h1:last-of-type {
+    font-size: 375px;
+    color: rgba(0, 0, 0, 0.1);
+}
+
+#campaigns>.container {
+    margin: 0 0 70px 0;
+    background: white;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* ********************************
+CAMPAIGNS > GRID
+******************************** */
+
+#campaigns>.container>.campaign>div {
+    display: inline-block;
+    width: 500px;
+    vertical-align: top;
+}
+
+#campaigns>.container>.campaign>.separator {
+    margin: 60px 50px 0 0;
+    width: 1px;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* ********************************
+CAMPAIGNS > GRID
+******************************** */
+
+#campaigns>.container>.campaign>div>ul>li {
+    display: block;
+    margin: 25px 0;
+    list-style: none;
+}
+
+/* ********************************
+CAMPAIGNS > GRID > SEPARATOR
+******************************** */
+
+#campaigns>.container>.campaign>div>ul>div {
+    margin: 0 auto;
+    width: max-content;
+}
+
+#campaigns>.container>.campaign>div>ul>div>.campaignSeparator {
+    display: inline-block;
+    width: 100px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.3);
+    vertical-align: middle;
+}
+
+#campaigns>.container>.campaign>div>ul>div>h3 {
+    display: inline-block;
+    margin: 0 10px;
+    width: max-content;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul {
+    display: inline-block;
+    margin: 0 0 0 25px;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li {
+    display: inline-block;
+    list-style: none;
+    vertical-align: middle;
+}
+
+/* ********************************
+CAMPAIGNS > CAMPAIGNS HEADER
+******************************** */
+
+#campaigns>.container {
+    padding: 0;
+    width: inherit;
+}
+#campaigns>.container>header {
+    display: block;
+    margin: 0 auto;
+    width: 600px;
+    height: 150px;
+}
+
+#campaigns>.container>header>h1 {
+    z-index: 0;
+    font-size: 48px;
+    text-align: center;
+    width: max-content;
+}
+
+#campaigns>.container>header>button {
+    top: 30%;
+}
+
+#campaigns>.container>header>button>i {
+    font-size: 50px;
+}
+
+/* ********************************
+CAMPAIGNS > ACTIVITY STYLES
+******************************** */
+
+#campaigns>.container>.campaign>div>ul>li>button {
+    width: 50px;
+    height: 50px;
+    color: salmon;
+    background: none;
+    border: 3px solid salmon;
+    border-radius: 50%;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#campaigns>.container>.campaign>div>ul>li>button:hover {
+    background: salmon;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+#campaigns>.container>.campaign>div>ul>li>button.active {
+    background: salmon;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button {
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.1);
+    cursor: default;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button>i {
+    display: block;
+    font-size: 30px;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button:hover {
+    background: white;
+    transition: all 0.3s ease;
+}
+
+/* Activity types */
+/* ********************************** */
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.redActivity {
+    background: salmon;
+    color: white;
+    border: 3px solid salmon;
+    cursor: pointer;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.redActivity:hover {
+    background: white;
+    color: salmon;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.greenActivity {
+    background: #86EAAE;
+    color: white;
+    border: 3px solid #86EAAE;
+    cursor: pointer;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.greenActivity:hover {
+    background: white;
+    color: #86EAAE;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.yellowActivity {
+    background: rgb(255, 178, 36);
+    color: white;
+    border: 3px solid rgb(255, 178, 36);
+    cursor: pointer;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.yellowActivity:hover {
+    background: white;
+    color: rgb(255, 178, 36);
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.blueActivity {
+    background: #A4C2F4;
+    color: white;
+    border: 3px solid #A4C2F4;
+    cursor: pointer;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.blueActivity:hover {
+    background: white;
+    color: #A4C2F4;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.purpleActivity {
+    background: #714796;
+    color: white;
+    border: 3px solid #714796;
+    cursor: pointer;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.purpleActivity:hover {
+    background: white;
+    color: #714796;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.grayActivity {
+    background: gray;
+    color: white;
+    border: 3px solid gray;
+    cursor: pointer;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.grayActivity:hover {
+    background: white;
+    color: gray;
+}
+/* ********************************** */
+
+/* Activity types selected */
+/* ********************************** */
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.activeRedActivity {
+    background: white;
+    color: salmon;
+    border: 3px solid salmon;
+    cursor: default;
+}
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.activeBlueActivity {
+    background: white;
+    color: #A4C2F4;
+    border: 3px solid #A4C2F4;
+    cursor: pointer;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.activeGreenActivity {
+    background: white;
+    color: #86EAAE;
+    border: 3px solid #86EAAE;
+    cursor: default;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.activePurpleActivity {
+    background: white;
+    color: #714796;
+    border: 3px solid #714796;
+    cursor: default;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.activeOrangeActivity {
+    background: white;
+    color: rgb(255, 178, 36);
+    border: 3px solid rgb(255, 178, 36);
+    cursor: default;
+}
+
+#campaigns>.container>.campaign>div>ul>li>ul>li>button.activeGrayActivity {
+    background: white;
+    color: gray;
+    border: 3px solid gray;
+    cursor: default;
+}
+/* ********************************** */
+
+/* ********************************
+CAMPAIGNS > DETAILS
+******************************** */
+
+#campaigns>.container>.campaign>div>h2 {
+    margin: 0;
+    font-size: 48px;
+}
+
+#campaigns>.container>.campaign>div>h3 {
+    margin: 0 0 30px 0;
+    font-size: 24px;
+}
+
+#campaigns>.container>.campaign>div>p {
+    margin: 15px 0;
+}
+
+/* ********************************
+CONTENT
+******************************** */
+
+/* Classes used to enable scrolling
+ navigation through different elements
+ being selected by the use */
+.personasLink {}
+.campaignsLink {}
+.contentLink {}
+.returnTotop {}

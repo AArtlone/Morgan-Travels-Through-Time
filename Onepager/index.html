@@ -8,20 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" type="image/png" href="images/logos/gameicon.png">
 </head>
 
 <body>
     <div id="wrapper">
+        <button class="returnToTop">
+            <i class="fas fa-hand-point-up"></i>
+        </button>
         <header>
             <nav>
                 <img src="/images/backgrounds/Castle_Sorting_1.png" alt="">
-                <a href="#">
-                    <img src="images/logos/Morganlogo3.png" alt="Morgan travels through time logo">
-                </a>
-                <ul>
-                    <li><a href="#" class="active">Personas</a></li>
-                    <li><a href="#">Campaigns</a></li>
-                    <li><a href="#">Content</a></li>
+                <img class="logo" src="images/logos/Morganlogo3.png" alt="Morgan travels through time logo">
+                <ul class="navList">
+                    <li><a href="#" class="active personasLink">Personas</a></li>
+                    <li><a href="#" class="campaignsLink">Campaigns</a></li>
+                    <li><a href="#" class="contentLink">Content</a></li>
                 </ul>
             </nav>
         </header>
@@ -166,8 +168,113 @@
                 </div>
             </div>
         </div>
-        <div id="campaigns"></div>
+        <div id="campaigns">
+            <header>
+                <!-- Arrow to the left -->
+                <button><i class="fas fa-caret-left"></i></button>
+                <h1 class="currentYear">2019</h1>
+                <h1 class="currentYear">2019</h1>
+                <!-- Arrow to the right -->
+                <button><i class="fas fa-caret-right"></i></button>
+            </header>
+            <div class="container">
+                <header>
+                    <!-- Arrow to the left -->
+                    <button><i class="fas fa-caret-left"></i></button>
+                    <h1 class="currentYear">Select Campaign</h1>
+                    <!-- Arrow to the right -->
+                    <button><i class="fas fa-caret-right"></i></button>
+                </header>
+                <div class="campaign">
+                    <div>
+                        <ul>
+                            <li>
+                                <button>Jun</button>
+                                <ul>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button>Jul</button>
+                                <ul>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button class="active">Aug</button>
+                                <ul>
+                                    <li><button class="greenActivity"><i class="fas fa-rocket"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button class="blueActivity"><i class="fas fa-tv"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                    <li><button><i class="fas fa-times"></i></button></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button>Sep</button>
+                                <ul>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button class="blueActivity"><i class="fas fa-tv"></i></button></li>
+                                        <li><button class="yellowActivity"><i class="fas fa-money-bill-alt"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="separator"></div>
+                    <div>
+                        <h2>Selected activity</h2>
+                        <h3><i class="fas fa-star"></i> Type of activity</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, ullam doloremque ducimus aliquid, nihil delectus est error alias soluta nulla voluptate dolorem a architecto et? Reiciendis officia fuga totam molestiae.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, itaque a voluptate adipisci fuga est ipsum ab nulla neque sapiente fugiat, quisquam aspernatur numquam, cumque incidunt dolore ea cum at.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content">
+            <header>
+                <h1>Content</h1>
+                <h1>Content</h1>
+            </header>
+        </div>
+        <footer>
+            <img src="/images/backgrounds/Sorting_Layer_2.png" alt="">
+            <div class="background"></div>
+            <div class="container">
+                <div>
+                    <h2>Contact information</h2>
+                    <ul>
+                        <li><i class="fas fa-paper-plane"></i>laymansterms@hotmail.com</li>
+                        <li><i class="fas fa-globe"></i>http://tinyurl.com/yx98t2t4</li>
+                        <li><i class="fas fa-phone"></i>0623313937</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>About us</h2>
+                    <p>Layman's Terms is a team of Game Design students working together to create fun and educational games for children and schools alike to ensure Dutch national history is not forgotten. Our team is comprised of a balanced mix of designers,
+                        developers and artists who currently work out of Hanzehogeschool.</p>
+                </div>
+                <div>
+                    <h2>QR Code</h2>
+                    <img src="images/qrcode.png" alt="image of a portrait described here">
+                </div>
+            </div>
+        </footer>
     </div>
+    <script src="scripts/jquery-3.4.1.min.js"></script>
     <script src="scripts/main.js" async defer></script>
 </body>
 
