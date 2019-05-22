@@ -52,6 +52,9 @@ $(document).ready(function () {
 
     // Navigation bar references
     var page = $(document);
+    var landingLink = $(".landingLink");
+    var landingSection = $("#landing");
+
     var personasLink = $(".personasLink");
     var personasSection = $("#personas");
 
@@ -64,6 +67,11 @@ $(document).ready(function () {
     var returnToTopButton = $(".returnToTop");
     var logoLink = $(".logo");
     var navList = $(".navList");
+
+    landingLink.on("click", function () {
+        scrollToSectionID("landing");
+        toggleActiveLink(landingLink);
+    });
 
     personasLink.on("click", function () {
         scrollToSectionID("personas");
@@ -82,21 +90,24 @@ $(document).ready(function () {
 
     returnToTopButton.on("click", function () {
         scrollToSectionID("wrapper");
-        toggleActiveLink(personasLink);
+        toggleActiveLink(landingLink);
     });
 
     logoLink.on("click", function () {
         scrollToSectionID("wrapper");
-        toggleActiveLink(personasLink);
+        toggleActiveLink(landingLink);
     });
 
     page.on("scroll", function () {
         var scrollFromTop = page.scrollTop();
-        if (scrollFromTop < campaignsSection.offset().top - 200 &&
+        if (scrollFromTop < personasSection.offset().top &&
             scrollFromTop > 0) {
+            toggleActiveLink(landingLink);
+        } else if (scrollFromTop > landingSection.offset().top &&
+            scrollFromTop < campaignsSection.offset().top) {
             toggleActiveLink(personasLink);
-        } else if (scrollFromTop > personasSection.offset().top - 250 &&
-            scrollFromTop < contentSection.offset().top - 250) {
+        } else if (scrollFromTop > personasSection.offset().top &&
+            scrollFromTop < contentSection.offset().top) {
             toggleActiveLink(campaignsLink);
         } else if (scrollFromTop > campaignsSection.offset().top) {
             toggleActiveLink(contentLink);

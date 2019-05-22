@@ -61,21 +61,21 @@ h2 {
     width: 100px;
     height: 100px;
     background: transparent;
-    border: 3px solid black;
+    border: 3px solid rgba(0, 0, 0, 0.6);
     border-radius: 50%;
-    box-shadow: -3px -3px 0px 0px rgba(220, 0, 0, 0.4);
+    box-shadow: -3px -3px 0px 0px #816b48;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
 #wrapper>button:hover {
     background: black;
-    color: salmon;
     transition: all 0.2s ease;
 }
 
 #wrapper>button>i {
     font-size: 61px;
+    color: #816b48;
 }
 /* ******************************* */
 
@@ -134,7 +134,7 @@ NAVIGATION BAR
     right: 0;
     top: 10px;
     margin: 0 auto;
-    width: 480px;
+    width: 620px;
     height: inherit;
 }
 
@@ -163,10 +163,81 @@ NAVIGATION BAR
 }
 
 #wrapper>header>nav>ul>li>a.active {
-    color: salmon;
+    color: #DEB887;
     font-weight: bold;
 }
 
+/* ********************************
+LANDING
+******************************** */
+
+#landing {
+    position: relative;
+    text-align: center;
+    background: url("/images/backgrounds/stars.png");
+    background-size: cover;
+    background-color: #31333C;
+}
+
+#landing>.container {
+    margin: 250px auto 0 auto;
+    padding: 0 0 100px 0;
+    width: 1080px;
+}
+
+#landing>div>.separator {
+    margin: 30px auto;
+    width: 350px;
+    height: 2px;
+    background: #816b48;
+}
+
+#landing > div > div:first-of-type:not(.separator) {
+    margin: 0 0 100px 0;
+}
+
+
+#landing>div>div:not(.separator) {
+    position: relative;
+    margin: 70px 0;
+    width: inherit;
+}
+
+#landing>div>div>h1 {
+    font-size: 72px;
+    color: #816b48;
+}
+
+#landing>div>div>h1:last-of-type {
+    z-index: 0;
+    position: absolute;
+    top: -82px;
+    opacity: 0.1;
+    font-size: 155px;
+    color: #816b48;
+    line-height: 130px;
+    pointer-events: none;
+}
+
+#landing>div>div>h1>i {
+    padding: 0 25px;
+    font-size: 36px;
+    vertical-align: top;
+    color: gray;
+}
+
+#landing>div>div>p {
+    margin: 20px auto;
+    width: 800px;
+    color: #998D7C;
+    line-height: 30px;
+}
+
+#landing>img {
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
 
 /* ********************************
 PERSONAS
@@ -174,7 +245,7 @@ PERSONAS
 
 #personas, #campaigns, #content {
     position: relative;
-    margin: 250px auto 0 auto;
+    margin: 200px auto 0 auto;
     width: 1080px;
 }
 
@@ -388,12 +459,20 @@ footer>.background {
     background-color: #ACAB38;
 }
 
-footer>.container>div {
+footer>.container>div:not(.separator) {
     display: inline-block;
     margin: 60px 30px 0 30px;
     width: 400px;
     max-width: max-content;
     vertical-align: top;
+}
+
+footer>.container>.separator {
+    display: inline-block;
+    margin: 90px 0 0 0;
+    width: 2px;
+    height: 150px;
+    background: rgba(100, 50, 0, 0.2);
 }
 
 footer>.container>div>h2 {
@@ -508,7 +587,7 @@ CAMPAIGNS > GRID > SEPARATOR
 
 #campaigns>.container>.campaign>div>ul>li>ul {
     display: inline-block;
-    margin: 0 0 0 25px;
+    margin: 0 0 0 0;
 }
 
 #campaigns>.container>.campaign>div>ul>li>ul>li {
@@ -562,6 +641,14 @@ CAMPAIGNS > ACTIVITY STYLES
     transition: all 0.3s ease;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+#campaigns>.container>.campaign>div>ul>li>.link {
+    display: inline-block;
+    width: 30px;
+    height: 5px;
+    background: salmon;
+    border-radius: 5px;
 }
 
 #campaigns>.container>.campaign>div>ul>li>button:hover {
