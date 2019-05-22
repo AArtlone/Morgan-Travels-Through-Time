@@ -171,25 +171,25 @@
         <div id="campaigns">
             <header>
                 <!-- Arrow to the left -->
-                <button><i class="fas fa-caret-left"></i></button>
+                <button><i class="fas fa-caret-left previousYear"></i></button>
                 <h1 class="currentYear">2019</h1>
                 <h1 class="currentYear">2019</h1>
                 <!-- Arrow to the right -->
-                <button><i class="fas fa-caret-right"></i></button>
+                <button><i class="fas fa-caret-right nextYear"></i></button>
             </header>
             <div class="container">
                 <header>
                     <!-- Arrow to the left -->
-                    <button><i class="fas fa-caret-left"></i></button>
-                    <h1 class="currentYear">Select Campaign</h1>
+                    <button><i class="fas fa-caret-left previousCampaign"></i></button>
+                    <h1 class="currentCampaign">Campaign: First Title</h1>
                     <!-- Arrow to the right -->
-                    <button><i class="fas fa-caret-right"></i></button>
+                    <button><i class="fas fa-caret-right nextCampaign"></i></button>
                 </header>
                 <div class="campaign">
-                    <div>
+                    <div name="First Title 1"  class="campaignWrapper" >
                         <ul>
                             <li>
-                                <button>Jun</button>
+                                <button class="active" name="Month Button">Jun</button>
                                 <ul>
                                     <li><button><i class="fas fa-times"></i></button></li>
                                     <li><button><i class="fas fa-times"></i></button></li>
@@ -200,7 +200,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <button>Jul</button>
+                                <button name="Month Button">Jul</button>
                                 <ul>
                                     <li><button><i class="fas fa-times"></i></button></li>
                                     <li><button><i class="fas fa-times"></i></button></li>
@@ -211,35 +211,83 @@
                                 </ul>
                             </li>
                             <li>
-                                <button class="active">Aug</button>
+                                <button  name="Month Button">Aug</button>
                                 <ul>
-                                    <li><button class="greenActivity"><i class="fas fa-rocket"></i></button></li>
+                                    <li><button name="First Title | Launch" class="ActivityButton greenActivity"><i class="fas fa-rocket"></i></button></li>
                                     <li><button><i class="fas fa-times"></i></button></li>
-                                    <li><button class="blueActivity"><i class="fas fa-tv"></i></button></li>
+                                    <li><button class="ActivityButton blueActivity" name="10% Off New Title | Promotion" class="blueActivity"><i class="fas fa-tv"></i></button></li>
                                     <li><button><i class="fas fa-times"></i></button></li>
                                     <li><button><i class="fas fa-times"></i></button></li>
                                     <li><button><i class="fas fa-times"></i></button></li>
                                 </ul>
                             </li>
                             <li>
-                                <button>Sep</button>
+                                <button name="Month Button">Sep</button>
                                 <ul>
                                         <li><button><i class="fas fa-times"></i></button></li>
                                         <li><button><i class="fas fa-times"></i></button></li>
-                                        <li><button class="blueActivity"><i class="fas fa-tv"></i></button></li>
-                                        <li><button class="yellowActivity"><i class="fas fa-money-bill-alt"></i></button></li>
+                                        <li><button class="ActivityButton blueActivity" name="10% Off New Title | Promotion"><i class="fas fa-tv"></i></button></li>
+                                        <li><button class="ActivityButton yellowActivity" name="School Start | Sales"><i class="fas fa-money-bill-alt"></i></button></li>
                                         <li><button><i class="fas fa-times"></i></button></li>
                                         <li><button><i class="fas fa-times"></i></button></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
+                    
+                    <div name="First Title 2" class="campaignWrapper">
+                            <ul>
+                                <li>
+                                    <button name="Month Button">Jun</button>
+                                    <ul>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button name="Month Button">Jul</button>
+                                    <ul>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button name="Month Button">Aug</button>
+                                    <ul>
+                                        <li><button class="ActivityButton greenActivity" name="First Title | Launch"><i class="fas fa-rocket"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button class="ActivityButton blueActivity" name="10% Off New Title | Promotion"><i class="fas fa-tv"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                        <li><button><i class="fas fa-times"></i></button></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <button name="Month Button">Sep</button>
+                                    <ul>
+                                            <li><button><i class="fas fa-times"></i></button></li>
+                                            <li><button><i class="fas fa-times"></i></button></li>
+                                            <li><button class="ActivityButton blueActivity" name="10% Off New Title | Promotion"><i class="fas fa-tv"></i></button></li>
+                                            <li><button class="ActivityButton yellowActivity" name="School Start | Sales"><i class="fas fa-money-bill-alt"></i></button></li>
+                                            <li><button><i class="fas fa-times"></i></button></li>
+                                            <li><button><i class="fas fa-times"></i></button></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     <div class="separator"></div>
                     <div>
-                        <h2>Selected activity</h2>
-                        <h3><i class="fas fa-star"></i> Type of activity</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, ullam doloremque ducimus aliquid, nihil delectus est error alias soluta nulla voluptate dolorem a architecto et? Reiciendis officia fuga totam molestiae.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Alias, itaque a voluptate adipisci fuga est ipsum ab nulla neque sapiente fugiat, quisquam aspernatur numquam, cumque incidunt dolore ea cum at.</p>
+                        <h2 class="titleOfSelectedActivity">Selected activity</h2>
+                        <h3 class="typeOfSelectedActivity"><i class="fas fa-star"></i> Type of activity</h3>
+                        <p class="descriptionOfSelectedActivity">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, ullam doloremque ducimus aliquid, nihil delectus est error alias soluta nulla voluptate dolorem a architecto et? Reiciendis officia fuga totam molestiae.</p>
                     </div>
                 </div>
             </div>

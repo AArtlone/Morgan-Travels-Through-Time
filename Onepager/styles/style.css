@@ -528,7 +528,7 @@ CAMPAIGNS > CAMPAIGNS HEADER
 #campaigns>.container>header {
     display: block;
     margin: 0 auto;
-    width: 600px;
+    width: 750px;
     height: 150px;
 }
 
@@ -586,6 +586,8 @@ CAMPAIGNS > ACTIVITY STYLES
     border: 2px solid rgba(0, 0, 0, 0.2);
     color: rgba(0, 0, 0, 0.1);
     cursor: default;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 #campaigns>.container>.campaign>div>ul>li>ul>li>button>i {
@@ -723,6 +725,11 @@ CAMPAIGNS > DETAILS
 #campaigns>.container>.campaign>div>h3 {
     margin: 0 0 30px 0;
     font-size: 24px;
+}
+
+#campaigns>.container>.campaign>div>h3>i {
+    font-size: 32px;
+    vertical-align: top;
 }
 
 #campaigns>.container>.campaign>div>p {
