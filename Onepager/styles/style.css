@@ -75,7 +75,7 @@ h2 {
 
 #wrapper>button>i {
     font-size: 61px;
-    color: #816b48;
+    color: #685F57;
 }
 /* ******************************* */
 
@@ -180,9 +180,36 @@ LANDING
 }
 
 #landing>.container {
-    margin: 250px auto 0 auto;
+    margin: 300px auto 0px auto;
     padding: 0 0 100px 0;
     width: 1080px;
+}
+
+#landing>.container>div:nth-of-type(2) {
+    width: 1000px;
+    height: 700px;
+}
+
+#landing>.container>div:nth-of-type(2)>div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
+    background: url("/images/video_frames/frame_explosion.png");
+    background-size: cover;
+    width: inherit;
+    height: inherit;
+}
+
+#landing>.container>div:nth-of-type(2)>video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 auto;
 }
 
 #landing>div>.separator {
@@ -193,13 +220,16 @@ LANDING
 }
 
 #landing > div > div:first-of-type:not(.separator) {
-    margin: 0 0 100px 0;
+    margin: 0 0 55px 0;
 }
 
+#landing > div > div:not(.separator):last-of-type {
+    margin: 60px auto 40px auto;
+}
 
 #landing>div>div:not(.separator) {
     position: relative;
-    margin: 70px 0;
+    margin: 120px auto 40px auto;
     width: inherit;
 }
 
@@ -245,7 +275,7 @@ PERSONAS
 
 #personas, #campaigns, #content {
     position: relative;
-    margin: 200px auto 0 auto;
+    margin: 250px auto 0 auto;
     width: 1080px;
 }
 
