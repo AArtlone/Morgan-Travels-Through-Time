@@ -448,6 +448,19 @@ public class NPC : MonoBehaviour
                     }
                 }
 
+                ProgressLog progressLog = ProgressLog.Instance;
+                int progressEntriesMatching = 0;
+                foreach (ProgressEntry progressEntry in DialogueFormats[index].Dialogue[i].RequiredMilestones)
+                {
+                    for (int j = 0; j < progressLog.GetLogLength(); j++)
+                    {
+                        if (progressEntry.Milestone == progressLog.GetEntry(j).Milestone)
+                        {
+                            progressEntriesMatching++;
+                        }
+                    }
+                }
+
                 int itemsMatching = 0;
                 foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
                 {
@@ -479,7 +492,7 @@ public class NPC : MonoBehaviour
 
                 //Debug.Log(objectivesCompleted + " | " + (Dialogue[i].ObjectivesToMeet.Count));
                 if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count &&
-                    itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count)
+                    itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count && progressEntriesMatching == DialogueFormats[index].Dialogue[i].RequiredMilestones.Count)
                 {
                     dialoguesToPickFrom.Add(DialogueFormats[index].Dialogue[i]);
                 }

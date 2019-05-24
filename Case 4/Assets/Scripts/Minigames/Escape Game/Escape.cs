@@ -4,6 +4,7 @@ using System.Collections;
 using LitJson;
 using System.IO;
 using System;
+using Anima2D;
 
 public class Escape : MonoBehaviour
 {
@@ -41,6 +42,11 @@ public class Escape : MonoBehaviour
     public GameObject Fire;
 
     private string _escapeGamesJsonFile;
+
+    // Layer-related references
+    [NonSerialized]
+    public List<LayerAdjuster> LayerAdjusters = new List<LayerAdjuster>();
+    private int LayerMultiplier;
 
     private void Awake()
     {
@@ -89,9 +95,10 @@ public class Escape : MonoBehaviour
             {
                 checkPoint.CreateNewQueueElement();
             }
+            GameObject newRefugee;
             if (CustomizeNPC)
             {
-                GameObject newRefugee = Instantiate(RefugeeWaves[CurrentWave].Wave[i].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
+                newRefugee = Instantiate(RefugeeWaves[CurrentWave].Wave[i].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
                 Physics2D.IgnoreLayerCollision(10, 10);
                 CurrentRefugees[CurrentWave].Add(newRefugee.GetComponent<Refugee>());
                 newRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees[CurrentWave].Count - 1;
@@ -99,12 +106,24 @@ public class Escape : MonoBehaviour
             } else
             {
                 int randomRefugeeIndex = UnityEngine.Random.Range(0, AllNPCPrefabs.Count);
-                GameObject randomRefugee = Instantiate(AllNPCPrefabs[randomRefugeeIndex].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
+                newRefugee = Instantiate(AllNPCPrefabs[randomRefugeeIndex].gameObject, GameObject.FindGameObjectWithTag("Refugees Container").transform);
                 Physics2D.IgnoreLayerCollision(10, 10);
-                CurrentRefugees[CurrentWave].Add(randomRefugee.GetComponent<Refugee>());
-                randomRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees[CurrentWave].Count - 1;
-                randomRefugee.GetComponent<Refugee>().WaveIndex = CurrentWave;
+                CurrentRefugees[CurrentWave].Add(newRefugee.GetComponent<Refugee>());
+                newRefugee.GetComponent<Refugee>().RefugeeIndex = CurrentRefugees[CurrentWave].Count - 1;
+                newRefugee.GetComponent<Refugee>().WaveIndex = CurrentWave;
             }
+
+            foreach (SpriteMeshInstance component in newRefugee.GetComponentsInChildren<SpriteMeshInstance>())
+            {
+                component.sortingOrder = component.sortingOrder + LayerMultiplier;
+            }
+
+            foreach (LayerAdjuster layerAdjuster in LayerAdjusters)
+            {
+                layerAdjuster.UpdateLayer();
+            }
+
+            LayerMultiplier += 4;
             
             yield return new WaitForSeconds(2f);
         }

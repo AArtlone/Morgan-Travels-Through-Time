@@ -27,5 +27,6 @@ public class Dialogue
     [Tooltip("You can list a number of objectives here that the player has to have completed in order for this dialogue to happen.")]
     public List<Objective> ObjectivesToMeet;
     [Tooltip("You can list a number of items here that the player has to have acquired in order for this dialogue to happen.")]
+    public List<ProgressEntry> RequiredMilestones;
     public List<string> RequiredItems;
 }
