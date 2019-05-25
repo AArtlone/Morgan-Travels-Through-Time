@@ -26,6 +26,7 @@ public class DiaryManager : MonoBehaviour
     private int _numberOfPagesOfPuzzles;
     private int _numberOfPuzzles;
     private int _currentIndexInPuzzles;
+    
 
     private void Start()
     {
@@ -72,6 +73,17 @@ public class DiaryManager : MonoBehaviour
                     else if (button.name == "Help Button")
                     {
                         if (page.name == "Help Page")
+                        {
+                            page.SetActive(true);
+                        }
+                        else
+                        {
+                            page.SetActive(false);
+                        }
+                    }
+                    else if (button.name == "Dialogue log Button")
+                    {
+                        if (page.name == "Dialogue log Page")
                         {
                             page.SetActive(true);
                         }

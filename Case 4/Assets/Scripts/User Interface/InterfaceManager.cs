@@ -12,6 +12,7 @@ public class InterfaceManager : MonoBehaviour
     public List<KeyValuePair<int, Item>> Items = new List<KeyValuePair<int, Item>>();
     public GameObject InventoryPanel;
     public GameObject ItemPrefab;
+    public GameObject LogsContainer;
 
     [Header("Only populate if current scene requires the diary!")]
     [Space(10)]
