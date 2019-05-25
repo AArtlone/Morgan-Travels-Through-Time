@@ -209,7 +209,7 @@ public class DiaryManager : MonoBehaviour
         JsonData escapeGamesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/EscapeGames.json"));
         JsonData spellingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/SpellingPuzzles.json"));
 
-        _numberOfPuzzles += HOPPuzzlesJsonData["Puzzles"].Count + guessClothingPuzzlesJsonData["GuessingPuzzles"].Count + escapeGamesJsonData["EscapeGames"].Count + spellingPuzzlesJsonData["Puzzles"].Count;
+        _numberOfPuzzles += HOPPuzzlesJsonData["Puzzles"].Count + guessClothingPuzzlesJsonData["Puzzles"].Count + escapeGamesJsonData["EscapeGames"].Count + spellingPuzzlesJsonData["Puzzles"].Count;
 
         // Put all the puzzles in a list.
         for (int i = 0; i < HOPPuzzlesJsonData["Puzzles"].Count; i++)
@@ -236,14 +236,14 @@ public class DiaryManager : MonoBehaviour
             AllPuzzles.Add(puzzleObj);
         }
 
-        for (int i = 0; i < guessClothingPuzzlesJsonData["GuessingPuzzles"].Count; i++)
+        for (int i = 0; i < guessClothingPuzzlesJsonData["Puzzles"].Count; i++)
         {
             bool isItComplete = false;
-            if (guessClothingPuzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "True")
+            if (guessClothingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
             {
                 isItComplete = true;
             }
-            else if (guessClothingPuzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "False")
+            else if (guessClothingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
             {
                 isItComplete = false;
             }
@@ -251,10 +251,10 @@ public class DiaryManager : MonoBehaviour
             var puzzleObj = new
             {
                 Type = "Guess Clothing Puzzle",
-                Name = guessClothingPuzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString(),
-                NameDutch = guessClothingPuzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString(),
+                Name = guessClothingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                NameDutch = guessClothingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
                 Completed = isItComplete,
-                Score = int.Parse(guessClothingPuzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString())
+                Score = int.Parse(guessClothingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
             };
 
             AllPuzzles.Add(puzzleObj);
