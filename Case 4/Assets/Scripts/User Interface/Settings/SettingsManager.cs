@@ -72,7 +72,7 @@ public class SettingsManager : MonoBehaviour
                 }
             }
 
-            if (NumberOfTaps == 5)
+            if (NumberOfTaps == 1)
             {
                 if (DevelopmentMode == false)
                 {

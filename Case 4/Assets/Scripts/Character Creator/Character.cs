@@ -53,7 +53,6 @@ public class Character : MonoBehaviour
 
     #region Json files location reference of player data.
     private string _newLine = Environment.NewLine;
-    private string _tab = "\t";
     private string _pathToAssetsFolder;
     public string PlayerStatsFilePath;
     private string _areasJsonFilePath;
@@ -65,7 +64,6 @@ public class Character : MonoBehaviour
     private string _wearablesDutchJsonFilePath;
     private string _newQuestsData;
     private string _newQuestsDutchData;
-    private string _defaultsGuessingClothesJsonPath;
     private string _guessingPuzzlesPath;
     private string _escapeGamesJsonFile;
     private string _puzzlesJsonPath;
@@ -107,10 +105,9 @@ public class Character : MonoBehaviour
             _itemsDutchJsonFilePath = _pathToAssetsFolder + "/ItemsDutch.json";
             _wearablesJsonFilePath = _pathToAssetsFolder + "/Wearables.json";
             _wearablesDutchJsonFilePath = _pathToAssetsFolder + "/WearablesDutch.json";
-            _defaultsGuessingClothesJsonPath = _pathToAssetsFolder + "/GuessClothingDefaults.json";
             _guessingPuzzlesPath = _pathToAssetsFolder + "/GuessingPuzzles.json";
             _escapeGamesJsonFile = _pathToAssetsFolder + "/EscapeGames.json";
-            _puzzlesJsonPath = _pathToAssetsFolder + "/Puzzles.json";
+            _puzzlesJsonPath = _pathToAssetsFolder + "/HiddenObjectPuzzles.json";
 
             if (File.Exists(PlayerStatsFilePath))
             {
@@ -440,7 +437,7 @@ public class Character : MonoBehaviour
                     #endregion
 
                     #region Creating the puzzles file
-                    TextAsset puzzlesData = Resources.Load<TextAsset>("Default World Data/Puzzles");
+                    TextAsset puzzlesData = Resources.Load<TextAsset>("Default World Data/HiddenObjectPuzzles");
                     File.WriteAllText(_puzzlesJsonPath, puzzlesData.text);
                     #endregion
                 }
@@ -1160,17 +1157,13 @@ public class Character : MonoBehaviour
                 }
                 break;
             case "Dutch":
-                //Debug.Log("OOOO");
                 foreach (Quest aQuest in AllQuestsDutch)
                 {
-                    //Debug.Log(aQuest.Name + " | " + quest);
                     if (aQuest.Name == quest && aQuest.ProgressStatus == "Nog niet gedaan")
                     {
-                        //Debug.Log(QuestID + " | " + aQuest.ID);
                         QuestID = aQuest.ID;
                         foreach (Objective aObjective in aQuest.Objectives)
                         {
-                            //Debug.Log(aObjective.Name + " | " + objectiveID);
                             if (aObjective.ID == objectiveID &&
                                 aObjective.CompletedStatus == false)
                             {
@@ -1194,11 +1187,14 @@ public class Character : MonoBehaviour
                                     completionStatusOfQuest = true;
                                     if (aQuest.Name == "1672???" || aQuest.Name == "1672???")
                                     {
-                                        //Debug.Log(aQuest.Name);
                                         TutorialCompleted = true;
                                         RefreshJsonData();
                                         CollectBlueprint("Blueprint1");
-                                        FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                                        MapEnvironmentManager mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
+                                        if (mapEnvironmentManager != null)
+                                        {
+                                            mapEnvironmentManager.LoadObjectsFromSequence();
+                                        }
                                     }
                                 }
                             }

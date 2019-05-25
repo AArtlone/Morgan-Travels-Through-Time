@@ -8,17 +8,22 @@ using UnityEngine.SceneManagement;
 
 public class GuessPuzzle : MonoBehaviour
 {
-    public Puzzle CanvasElementOfPuzzle;
     [Tooltip("Necessary to seperate the puzzles in storage!")]
     public string Name;
+    [System.NonSerialized]
     public string NameDutch;
+    [System.NonSerialized]
     public bool Completed;
+    [Space(15)]
+    public GameObject InstructionManual;
     [Tooltip("This checkbox either allows or disallows loading clothes from the editor by hand instead of loading the default ones.")]
     public bool Customizable;
-    public int PuzzleTimeInSeconds;
+    public int TimeToComplete;
+    [Space(15)]
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
-    public List<GameObject> EntitiesToActivate = new List<GameObject>();
+
+    #region Lists of custom clothes for gameplay instead of random ones by default
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
     public List<GuessClothing> HeadList = new List<GuessClothing>();
     private int _currentHeadIndex = 0;
@@ -28,39 +33,44 @@ public class GuessPuzzle : MonoBehaviour
     private int _currentBottomIndex = 0;
     public List<GuessClothing> ShoesList = new List<GuessClothing>();
     private int _currentShoesIndex = 0;
+    #endregion
 
+    #region End-game clothes and completion references
+    [Header("These are the elements needed for the game to be finished successfully.")]
+    [Space(15)]
     public Sprite CorrectHairElement;
     public Sprite CorrectTorsoElement;
     public Sprite CorrectBottomElement;
     public Sprite CorrectShoesElement;
     private float _correctClothes;
+    [Space(15)]
     public Slider ProgressSlider;
+    #endregion
 
+    #region Body parts of the empty canvas body used for the game
     private GameObject _bodyPart;
     private GameObject _facePart;
     private GameObject _hairPart;
     private GameObject _topPart;
     private GameObject _botPart;
     private GameObject _shoesPart;
+    #endregion
 
+    #region Score references
     public TextMeshProUGUI finalScore;
-
-    public int TotalScore;
+    private int _stars;
     private string _defaultsJsonPath;
     private string _guessingPuzzlesPath;
+    #endregion
 
     public GameObject PuzzleFinishedWindow;
     private bool _isGameStarted = false;
     public TextMeshProUGUI Timer;
     private float _timer = 0;
-    private Puzzle _puzzle;
-
-    private CameraBehavior _cameraBehaviour;
 
     void Awake()
     {
-        _cameraBehaviour = FindObjectOfType<CameraBehavior>();
-        _timer = PuzzleTimeInSeconds;
+        _timer = TimeToComplete;
         _defaultsJsonPath = Application.persistentDataPath + "/GuessClothingDefaults.json";
         _guessingPuzzlesPath = Application.persistentDataPath + "/GuessingPuzzles.json";
 
@@ -68,17 +78,17 @@ public class GuessPuzzle : MonoBehaviour
         string dataToJson = File.ReadAllText(_guessingPuzzlesPath);
         JsonData puzzlesJsonData = JsonMapper.ToObject(dataToJson);
         
-        for (int i = 0; i < puzzlesJsonData["GuessingPuzzles"].Count; i++)
+        for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
         {
-            if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name ||
-                puzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString() == NameDutch)
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == Name ||
+                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
-                TotalScore = int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());
-                if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "True")
+                _stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
+                if (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
                 {
                     Completed = true;
                 }
-                else if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "False")
+                else if (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
                 {
                     Completed = false;
                 }
@@ -112,6 +122,16 @@ public class GuessPuzzle : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (Character.Instance.TutorialCompleted == false)
+        {
+            InterfaceManager.Instance.OpenPopup(InstructionManual);
+        }
+
+        StartPuzzle();
+    }
+
     private void Update()
     {
         if (_isGameStarted)
@@ -126,7 +146,6 @@ public class GuessPuzzle : MonoBehaviour
                 SavePuzzleScore();
                 OpenCompletePuzzleWindow();
                 Completed = true;
-                _cameraBehaviour.IsInteracting = false;
                 _isGameStarted = false;
             }
             Timer.text = ((int)_timer).ToString();
@@ -140,7 +159,6 @@ public class GuessPuzzle : MonoBehaviour
         Completed = true;
         SavePuzzleScore();
         OpenCompletePuzzleWindow();
-        _cameraBehaviour.IsInteracting = false;
         _isGameStarted = false;
     }
 
@@ -262,28 +280,23 @@ public class GuessPuzzle : MonoBehaviour
 
     public void LoadNewClothing(string bodyPart)
     {
-        Sprite newClothingElementSprite;
         switch (bodyPart)
         {
             case "Hair":
                 Sprite headSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + HeadList[_currentHeadIndex].Sprite);
                 _hairPart.GetComponent<Image>().sprite = headSprite;
-                newClothingElementSprite = headSprite;
                 break;
             case "Top":
                 Sprite torsoSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + TorsoList[_currentTorsoIndex].Sprite);
                 _topPart.GetComponent<Image>().sprite = torsoSprite;
-                newClothingElementSprite = torsoSprite;
                 break;
             case "Bot":
                 Sprite bottomSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + BottomList[_currentBottomIndex].Sprite);
                 _botPart.GetComponent<Image>().sprite = bottomSprite;
-                newClothingElementSprite = bottomSprite;
                 break;
             case "Shoes":
                 Sprite shoesSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + ShoesList[_currentShoesIndex].Sprite);
                 _shoesPart.GetComponent<Image>().sprite = shoesSprite;
-                newClothingElementSprite = shoesSprite;
                 break;
         }
 
@@ -373,7 +386,7 @@ public class GuessPuzzle : MonoBehaviour
         }
     }
 
-    public void StartPuzzle(GameObject puzzle)
+    public void StartPuzzle()
     {
         ResetPuzzle();
 
@@ -401,8 +414,6 @@ public class GuessPuzzle : MonoBehaviour
                 }
             }
         }
-
-        puzzle.SetActive(true);
     }
 
     public void StartTimer()
@@ -416,17 +427,17 @@ public class GuessPuzzle : MonoBehaviour
     {
         string newScoreData = "{";
         newScoreData += InsertNewLineTabs(1);
-        newScoreData += "\"GuessingPuzzles\": [";
+        newScoreData += "\"Puzzles\": [";
 
         string dataToJson = File.ReadAllText(_guessingPuzzlesPath);
         JsonData puzzlesJsonData = JsonMapper.ToObject(dataToJson);
 
-        for (int i = 0; i < puzzlesJsonData["GuessingPuzzles"].Count; i++)
+        for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
         {
             newScoreData += InsertNewLineTabs(2);
             newScoreData += "{";
-            if (puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() == Name ||
-                puzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString() == NameDutch)
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == Name ||
+                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Name\": " + "\"" + Name + "\",";
@@ -435,24 +446,24 @@ public class GuessPuzzle : MonoBehaviour
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Completed\": " + (Completed ? "true" : "false") + ",";
                 newScoreData += InsertNewLineTabs(3);
-                newScoreData += "\"Score\": " + CalculateTotalScore();
+                newScoreData += "\"Stars\": " + CalculateTotalScore();
             } else
             {
                 newScoreData += InsertNewLineTabs(3);
-                newScoreData += "\"Name\": " + "\"" + puzzlesJsonData["GuessingPuzzles"][i]["Name"].ToString() + "\",";
+                newScoreData += "\"Name\": " + "\"" + puzzlesJsonData["Puzzles"][i]["Name"].ToString() + "\",";
                 newScoreData += InsertNewLineTabs(3);
-                newScoreData += "\"NameDutch\": " + "\"" + puzzlesJsonData["GuessingPuzzles"][i]["NameDutch"].ToString() + "\",";
+                newScoreData += "\"NameDutch\": " + "\"" + puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() + "\",";
                 newScoreData += InsertNewLineTabs(3);
-                if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "True")
+                if (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
                 {
                     newScoreData += "\"Completed\": true,";
                 }
-                else if (puzzlesJsonData["GuessingPuzzles"][i]["Completed"].ToString() == "False")
+                else if (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
                 {
                     newScoreData += "\"Completed\": false,";
                 }
                 newScoreData += InsertNewLineTabs(3);
-                newScoreData += "\"Score\": " + int.Parse(puzzlesJsonData["GuessingPuzzles"][i]["Score"].ToString());
+                newScoreData += "\"Stars\": " + int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
             }
             newScoreData += InsertNewLineTabs(2);
             newScoreData += "},";
@@ -462,29 +473,30 @@ public class GuessPuzzle : MonoBehaviour
         newScoreData += InsertNewLineTabs(1) + "]" + System.Environment.NewLine + "}";
         File.WriteAllText(_guessingPuzzlesPath, newScoreData);
 
-        foreach (GameObject objToActivate in EntitiesToActivate)
-        {
-            if (objToActivate != null)
-            {
-                objToActivate.SetActive(true);
-            }
-        }
+        //TODO: Use the progress log list of entities
+        // to refresh their hierarchy activation status
 
         Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
 
         AudioManager.Instance.PlaySound(AudioManager.Instance.SoundPuzzleCompleted);
-
-        CanvasElementOfPuzzle.LoadScore();
     }
 
     // Returns the score based on the clothing currently on the character.
     private int CalculateTotalScore()
     {
-        return TotalScore =
-            HeadList[_currentHeadIndex].Points +
-            TorsoList[_currentTorsoIndex].Points +
-            BottomList[_currentBottomIndex].Points +
-            ShoesList[_currentShoesIndex].Points;
+        int score =
+               HeadList[_currentHeadIndex].Points +
+               TorsoList[_currentTorsoIndex].Points +
+               BottomList[_currentBottomIndex].Points +
+               ShoesList[_currentShoesIndex].Points;
+
+        if (score > 50)
+        {
+            return 3;
+        } else
+        {
+            return 1;
+        }
     }
 
     public void ResetPuzzle()
@@ -493,7 +505,7 @@ public class GuessPuzzle : MonoBehaviour
         _currentTorsoIndex = 0;
         _currentBottomIndex = 0;
         _currentShoesIndex = 0;
-        _timer = PuzzleTimeInSeconds;
+        _timer = TimeToComplete;
 
         LoadNewClothing("Hair");
         LoadNewClothing("Top");
@@ -506,15 +518,7 @@ public class GuessPuzzle : MonoBehaviour
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         GameObject popupObject = obj as GameObject;
-
-        if (popupObject == gameObject)
-        {
-            Character.Instance.InitiateInteraction();
-        }
-
         popupObject.SetActive(false);
-
-        Character.Instance.InitiateInteraction();
     }
 
     public void OpenPopup(Object obj)
@@ -523,11 +527,6 @@ public class GuessPuzzle : MonoBehaviour
 
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
-    }
-
-    public void ToggleIcons()
-    {
-        CanvasElementOfPuzzle.FinishPuzzleIconToggle();
     }
 
     private void OpenCompletePuzzleWindow()

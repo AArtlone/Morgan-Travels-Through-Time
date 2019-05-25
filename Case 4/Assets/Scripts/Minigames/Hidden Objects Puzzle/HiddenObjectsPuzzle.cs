@@ -12,87 +12,94 @@ using System.IO;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
-    public Puzzle puzzleNPC;
-    public string PuzzleName;
-    public string PuzzleNameDutch;
+    public string Name;
+    [NonSerialized]
+    public string NameDutch;
     public int Stars;
     public int TimeToComplete;
+    [NonSerialized]
     public bool Completed;
-    public Image PuzzleBackground;
+    [Space(15)]
+    public GameObject BottomUI;
+    public GameObject InstructionManual;
+
+    #region Items references
     // Those two lists are used for comparison mid-puzzle and are responsible
     // for deciding whether or not a puzzle is complete succcessfully.
-    public List<string> ItemsRequired = new List<string>();
-    public List<string> ItemsRequiredDutch = new List<string>();
+    private List<Item> _itemsRequired = new List<Item>();
+    [Space(15)]
     public List<string> ItemsFound = new List<string>();
-    public List<GameObject> EntitiesToActivate = new List<GameObject>();
-    public List<GameObject> EntitiesToDeactivate = new List<GameObject>();
-    [Space(15)]
-    [Tooltip("Item reward's name")]
-    [Header("Item Earned once the puzzle is done is defined here!")]
-    public string ItemRewardName;
-    public string ItemRewardNameDutch;
-    [Space(10)]
-    [Tooltip("Item reward's description")]
-    public string ItemRewardDescription;
-    public string ItemRewardDescriptionDutch;
-    [Space(10)]
-    [Tooltip("Item reward's active/s description")]
-    public string ItemRewardActive;
-    public string ItemRewardActiveDutch;
-    [Space(10)]
-    [Tooltip("Item reward's assets image name (without file type)")]
-    public string ItemRewardAssetsImageName;
-    [Space(15)]
-    public string QuestForObjective;
-    public int ObjectiveToCompleteID;
-    [NonSerialized]
-    public int Counter;
-    private int _missclicks;
+    public List<Item> ItemsToBeRewarded = new List<Item>();
+
     // We use this to make it so that if the player completed the puzzle
     // more than once, he will not receive the same reward twice.
-    public bool IsItemEarned;
-    private List<GameObject> _itemsInFindList = new List<GameObject>();
+    private bool _isItemEarned;
+    // This is used for the hint mechanic to later restore its original state after being hinted.
     private GameObject _itemToHighlight;
+    #endregion
 
-    // Object references used for the puzzle canvas.
+    #region Quest references
+    [Space(15)]
+    // The following objective in the quest set in the editor, will be completed after
+    // this puzzle's successful pass.
+    public string QuestForObjective;
+    public int ObjectiveToCompleteID;
+    #endregion
+
+    #region Timer references
+    [Space(15)]
     public TextMeshProUGUI Timer;
+    [NonSerialized]
+    public int Counter;
+    #endregion
+
+    #region Hint mechanic references
+    // This list is used to know which items have been hinted at during the game.
+    private List<GameObject> _itemsInFindList = new List<GameObject>();
+    public Button HintButton;
+    #endregion
+
     public GameObject FoundItemsDisplay;
     public GameObject ItemDisplayPrefab;
-    public Button HintButton;
     public GameObject PuzzleEndPopup;
     public List<GameObject> StarsList;
-
-    private CameraBehavior _cameraBehaviour;
-    private DHManager _DHManager;
+    private bool _isInterfaceToggledOn;
+    private int _missclicks;
 
     public HiddenObjectsPuzzle(string name, string nameDutch, int stars, bool completed)
     {
-        PuzzleName = name;
-        PuzzleNameDutch = nameDutch;
+        Name = name;
+        NameDutch = nameDutch;
         Stars = stars;
         Completed = completed;
     }
 
     private void Start()
     {
-        _cameraBehaviour = FindObjectOfType<CameraBehavior>();
-        _DHManager = FindObjectOfType<DHManager>();
-        // List does not end up being created at the top of the class, so i
-        // make it again here instead.
+        _isInterfaceToggledOn = true;
+
+        // List does not end up being created at the top of the class,
+        // so I make it here instead.
         _itemsInFindList = new List<GameObject>();
+        _itemsRequired = new List<Item>();
 
         // We get all the objects in the Objects To Find List in this hidden objects
         // puzzle from the editor, and we use those objects for the hints mechanic.
         for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
         {
-            //Debug.Log(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject.name);
-
             if (transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject != null)
             {
                 _itemsInFindList.Add(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject);
             }
         }
 
+        // Fills in the list of items required to be found to finish the puzzle.
+        foreach (Item item in GameObject.Find("Objects To Find List").GetComponentsInChildren<Item>())
+        {
+            _itemsRequired.Add(item);
+        }
+
+        // After that the timer of the puzzle and the hints parameter is initiated.
         Counter = TimeToComplete;
         Timer.text = Counter.ToString();
 
@@ -109,40 +116,24 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 break;
         }
 
-        if (Stars == 0)
+        SetupPuzzleData();
+
+        if (Character.Instance.TutorialCompleted == false)
         {
-            SetupPuzzleData();
-        } else if (Stars > 0)
-        {
-            LoadPuzzleData();
+            InstructionManual.SetActive(true);
         }
-        puzzleNPC.LoadStars();
+
+        UpdateFoundItemsDisplay();
     }
 
     private void SetupPuzzleData()
     {
-        TextAsset puzzlesData = Resources.Load<TextAsset>("Default World Data/Puzzles");
-        JsonData puzzlesJsonData = JsonMapper.ToObject(puzzlesData.text);
+        JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/HiddenObjectPuzzles.json"));
 
         for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
         {
-            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName ||
-                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == PuzzleNameDutch)
-            {
-                Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
-                Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
-            }
-        }
-    }
-
-    private void LoadPuzzleData()
-    {
-        JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Puzzles.json"));
-
-        for (int i = 0; i < puzzlesJsonData["Puzzles"].Count; i++)
-        {
-            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == PuzzleName ||
-                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == PuzzleNameDutch)
+            if (puzzlesJsonData["Puzzles"][i]["Name"].ToString() == Name ||
+                puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
                 Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
                 Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
@@ -152,7 +143,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     private void RefreshPuzzleData()
     {
-        JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Puzzles.json").ToString());
+        JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/HiddenObjectPuzzles.json").ToString());
 
         List<HiddenObjectsPuzzle> HOPs = new List<HiddenObjectsPuzzle>();
 
@@ -168,8 +159,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         foreach (HiddenObjectsPuzzle HOP in HOPs)
         {
-            if (HOP.PuzzleName == PuzzleName ||
-                HOP.PuzzleNameDutch == PuzzleNameDutch)
+            if (HOP.Name == Name ||
+                HOP.NameDutch == NameDutch)
             {
                 HOP.Stars = Stars;
                 HOP.Completed = Completed;
@@ -185,9 +176,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             newJsonData += InsertNewLineTabs(2);
             newJsonData += "{";
             newJsonData += InsertNewLineTabs(3);
-            newJsonData += "\"Name\": \"" + HOP.PuzzleName + "\",";
+            newJsonData += "\"Name\": \"" + HOP.Name + "\",";
             newJsonData += InsertNewLineTabs(3);
-            newJsonData += "\"NameDutch\": \"" + HOP.PuzzleNameDutch + "\",";
+            newJsonData += "\"NameDutch\": \"" + HOP.NameDutch + "\",";
             newJsonData += InsertNewLineTabs(3);
             if (HOP.Completed == true)
             {
@@ -204,13 +195,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
         newJsonData = newJsonData.Substring(0, newJsonData.Length - 1);
         newJsonData += InsertNewLineTabs(1) + "]" + Environment.NewLine + "}";
-        File.WriteAllText(Application.persistentDataPath + "/Puzzles.json", newJsonData);
+        File.WriteAllText(Application.persistentDataPath + "/HiddenObjectPuzzles.json", newJsonData);
     }
 
     public void StartTimer()
     {
-        //InterfaceManager.Instance.BottomUIInventory.SetActive(false);
-
         // Here we reset the tapped and hinted at booleans because once the puzzle
         // is over and started again, we need to hint at the right objects instead of.
         // the old ones from the previous play session of that puzzle.
@@ -226,11 +215,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
 
         InvokeRepeating("CountDown", 1f, 1f);
-
-        //for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
-        //{
-        //    FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = string.Empty;
-        //}
     }
     public void ResetPuzzle()
     {
@@ -253,7 +237,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        //_cameraBehaviour.IsInteracting = false;
 
         switch (SettingsManager.Instance.Language)
         {
@@ -267,67 +250,43 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         Character.Instance.CompleteObjectiveInQuest(ObjectiveToCompleteID, QuestForObjective);
 
-        foreach (GameObject objToActivate in EntitiesToActivate)
-        {
-            objToActivate.SetActive(true);
-        }
-
-        foreach (GameObject objToDeactivate in EntitiesToDeactivate)
-        {
-            objToDeactivate.SetActive(false);
-        }
-
+        // The following code block checks if the items to be rewarded to the player for
+        // completing this puzzle are already in his inventory, because if they are, we dont
+        // want them to receive another copy of it.
         string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
         string dataToJsonDutch = File.ReadAllText(Application.persistentDataPath + "/ItemsDutch.json");
         JsonData data = JsonMapper.ToObject(dataToJson);
         JsonData dataDutch = JsonMapper.ToObject(dataToJsonDutch);
 
-        for (int j = 0; j < data["Items"].Count; j++)
+        foreach (Item item in ItemsToBeRewarded)
         {
-            //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
-            if (data["Items"][j]["Name"].ToString() == ItemRewardName)
+            for (int i = 0; i < data["Items"].Count; i++)
             {
-                IsItemEarned = true;
+                if (data["Items"][i]["Name"].ToString() == item.Name ||
+                    dataDutch["Items"][i]["Name"].ToString() == item.NameDutch)
+                {
+                    _isItemEarned = true;
+                }
+            }
+
+            if (_isItemEarned == false &&
+                item.Name != string.Empty)
+            {
+                    Character.Instance.AddItem(
+                    new Item(
+                        item.Name,
+                        item.NameDutch,
+                        item.Description,
+                        item.DescriptionDutch,
+                        item.Active,
+                        item.ActiveDutch,
+                        item.AssetsImageName));
+                    _isItemEarned = true;
             }
         }
 
-        for (int j = 0; j < dataDutch["Items"].Count; j++)
-        {
-            //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
-            if (dataDutch["Items"][j]["Name"].ToString() == ItemRewardNameDutch)
-            {
-                IsItemEarned = true;
-            }
-        }
-
-        if (IsItemEarned == false)
-        {
-            if (ItemRewardName != string.Empty)
-            {
-                // This does not work now since we have the scene
-                // reload as band-aid fix for resetting the HOP.
-                //if (ItemRewardName == "Diary")
-                //{
-                //    if (_DHManager != null)
-                //    {
-                //        //_DHManager.LoadSequence("Teach Main Interface");
-                //    }
-                //}
-
-                Character.Instance.AddItem(
-                new Item(
-                    ItemRewardName,
-                    ItemRewardNameDutch,
-                    ItemRewardDescription,
-                    ItemRewardDescriptionDutch,
-                    ItemRewardActive,
-                    ItemRewardActiveDutch,
-                    ItemRewardAssetsImageName));
-                IsItemEarned = true;
-            }
-        }
-
-        if (Character.Instance.AreIconsExplained == false && Character.Instance.HasDiary == false)
+        if (Character.Instance.AreIconsExplained == false &&
+            Character.Instance.HasDiary == false)
         {
             Character.Instance.AreIconsExplained = true;
         }
@@ -346,9 +305,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
-        _cameraBehaviour.IsInteracting = false;
-
-        PuzzleEndPopup.SetActive(true);
 
         switch (SettingsManager.Instance.Language)
         {
@@ -360,7 +316,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 break;
         }
 
-        if (IsItemEarned == false)
+        if (_isItemEarned == false)
         {
             Stars = 1;
         }
@@ -372,11 +328,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public void ClosePuzzle()
     {
         InterfaceManager.Instance.BottomUIInventory.SetActive(true);
-        //transform.GetComponentInParent<Image>().raycastTarget = true;
-
-        Character.Instance.InitiateInteraction();
-
-        puzzleNPC.FinishPuzzleIconToggle();
 
         if (SceneManager.GetActiveScene().name != "Test Area")
         {
@@ -386,10 +337,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 
-    public void ClosePopUp(Object obj)
+    public void ToggleBottomInterface(GameObject bottomInterface)
     {
-        GameObject objClicked = obj as GameObject;
-        objClicked.SetActive(false);
+        _isInterfaceToggledOn = !_isInterfaceToggledOn;
+        RectTransform rectTransform = bottomInterface.GetComponent<RectTransform>();
+
+        if (_isInterfaceToggledOn == false)
+        {
+            rectTransform.anchoredPosition = new Vector2(0, -500);
+        } else
+        {
+            rectTransform.anchoredPosition = new Vector2(0, -258);
+        }
     }
 
     public void PickItem(Object obj)
@@ -401,10 +360,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         switch (SettingsManager.Instance.Language)
         {
             case "English":
-                NameOfItem = objAsItem.GetComponent<LanguageController>().English;
+                NameOfItem = objAsItem.GetComponent<Item>().Name;
                 break;
             case "Dutch":
-                NameOfItem = objAsItem.GetComponent<LanguageController>().Dutch;
+                NameOfItem = objAsItem.GetComponent<Item>().NameDutch;
                 break;
         }
 
@@ -426,42 +385,26 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             int foundItemsCount = 0;
             foreach (string foundItem in ItemsFound)
             {
-                switch (SettingsManager.Instance.Language)
+                foreach (Item item in _itemsRequired)
                 {
-                    case "English":
-                        if (ItemsRequired.Contains(foundItem))
-                        {
-                            foundItemsCount++;
-                            //Debug.Log(foundItemsCount);
-                        }
-                        break;
-                    case "Dutch":
-                        if (ItemsRequiredDutch.Contains(foundItem))
-                        {
-                            foundItemsCount++;
-                            //Debug.Log(foundItemsCount);
-                        }
-                        break;
+                    if (item.Name == foundItem ||
+                        item.NameDutch == foundItem)
+                    {
+                        foundItemsCount++;
+                    }
                 }
             }
 
             StartCoroutine(FadeAwayItem(itemObjClicked));
 
-            if (foundItemsCount == ItemsRequired.Count)
+            Debug.Log(foundItemsCount + " | " + _itemsRequired.Count);
+            if (foundItemsCount == _itemsRequired.Count)
             {
                 CompletePuzzle();
             }
 
             UpdateFoundItemsDisplay();
         }
-
-        /*
-        Debug.Log("");
-        foreach(string item in _itemsFound)
-        {
-            Debug.Log(item);
-        }
-        */
     }
 
     /// <summary>
@@ -473,18 +416,19 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     {
         for (int i = 0; i < FoundItemsDisplay.transform.childCount; i++)
         {
-            if (i < ItemsRequired.Count)
+            if (i < _itemsRequired.Count)
             {
                 string nameOfItem = string.Empty;
                 string language = string.Empty;
+
                 switch (SettingsManager.Instance.Language)
                 {
                     case "English":
-                        nameOfItem = ItemsRequired[i];
+                        nameOfItem = _itemsRequired[i].Name;
 
                         break;
                     case "Dutch":
-                        nameOfItem = ItemsRequiredDutch[i];
+                        nameOfItem = _itemsRequired[i].NameDutch;
 
                         break;
                 }
@@ -512,10 +456,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                     switch (SettingsManager.Instance.Language)
                     {
                         case "English":
-                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequired[i];
+                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = _itemsRequired[i].Name;
                             break;
                         case "Dutch":
-                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = ItemsRequiredDutch[i];
+                            FoundItemsDisplay.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = _itemsRequired[i].NameDutch;
                             break;
                     }
                 }
@@ -553,7 +497,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 itemsHinted++;
             }
         }
-        //Debug.Log(itemsHinted);
 
         if (itemsHinted == _itemsInFindList.Count)
         {
@@ -634,8 +577,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public void MissedTap()
     {
         _missclicks += 1;
-
-        //Debug.Log(_missclicks);
     }
 
     private IEnumerator ShowStars()

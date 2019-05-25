@@ -964,6 +964,11 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadScene
       objectReference: {fileID: 0}
+    - target: {fileID: 3370708775405651039, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
 --- !u!224 &251266770 stripped
@@ -1586,6 +1591,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e042ea7b0c2694ca14cc6b2c7a848d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InventoryPanel: {fileID: 0}
+  ItemPrefab: {fileID: 0}
   QuestButtonPrefab: {fileID: 774213613324858466, guid: 75f4d1f9c2c849b4c9df36e1ff3a014b,
     type: 3}
   CurrentQuestsDisplay: {fileID: 1038604000}
@@ -2754,6 +2761,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2447273985835397846, guid: 5873b9874fbd1cb4280ebb265477690d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447273985835397846, guid: 5873b9874fbd1cb4280ebb265477690d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2447273984503216215, guid: 5873b9874fbd1cb4280ebb265477690d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2859,6 +2876,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2447273984514527148, guid: 5873b9874fbd1cb4280ebb265477690d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447273984514527148, guid: 5873b9874fbd1cb4280ebb265477690d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447273985072534046, guid: 5873b9874fbd1cb4280ebb265477690d,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447273985072534046, guid: 5873b9874fbd1cb4280ebb265477690d,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2447273984509125461, guid: 5873b9874fbd1cb4280ebb265477690d,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -2929,42 +2966,12 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2447273984514527148, guid: 5873b9874fbd1cb4280ebb265477690d,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447273984514527148, guid: 5873b9874fbd1cb4280ebb265477690d,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447273985072534046, guid: 5873b9874fbd1cb4280ebb265477690d,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447273985072534046, guid: 5873b9874fbd1cb4280ebb265477690d,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2447273985264628126, guid: 5873b9874fbd1cb4280ebb265477690d,
         type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2447273985264628126, guid: 5873b9874fbd1cb4280ebb265477690d,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447273985835397846, guid: 5873b9874fbd1cb4280ebb265477690d,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2447273985835397846, guid: 5873b9874fbd1cb4280ebb265477690d,
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -3525,7 +3532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Background: {fileID: 1991178622}
   MapPart: {fileID: 0}
-  _cameraSpeed: 8
+  _isCameraTravelling: 0
   TapPosition: {x: 0, y: 0, z: 0}
   IsInteracting: 0
   IsEntityTappedOn: 0
@@ -4042,15 +4049,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1330628990}
-    - target: {fileID: 4445012133892622505, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 5492252703154738404, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
         type: 3}
       propertyPath: m_Color.a
       value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445012133892622505, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb, type: 3}

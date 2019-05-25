@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3965661183121720767
@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 5
+  m_fontStyle: 1
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -256,7 +256,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 22
   m_TargetDisplay: 0
 --- !u!114 &3563652331734916908
 MonoBehaviour:
@@ -275,6 +275,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &188396755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991984944710030577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626e775bd36de5048be0249ce9ea10cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisableLanguageToggling: 0
+  SelectedLanguage: 0
+  English: "Try to match an outfit fitting the time period of Jacob by using the arrows
+    to switch clothing pieces.\r"
+  Dutch: Probeer een outfit te maken die past bij de tijd van Jacob. Gebruik de pijltjes
+    om kleren te wisselen.
 --- !u!1 &1139349452809269584
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +651,7 @@ GameObject:
   - component: {fileID: 4559955256353803085}
   - component: {fileID: 2099495104733549697}
   m_Layer: 5
-  m_Name: Return to Main Map Button
+  m_Name: Exit Puzzle Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,8 +674,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -36.600006}
-  m_SizeDelta: {x: 111.9, y: 53.8}
+  m_AnchoredPosition: {x: 0, y: -56}
+  m_SizeDelta: {x: 114.4, y: 59.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &650899863609173977
 CanvasRenderer:
@@ -789,6 +807,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_MethodName: LoadScene
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Jacob's House
+            m_BoolArgument: 0
+          m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
@@ -900,8 +929,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000015258789, y: 4.540001}
+  m_SizeDelta: {x: -29.16, y: 9.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3647260367455979378
 CanvasRenderer:
@@ -974,8 +1003,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030518, y: 31}
-  m_SizeDelta: {x: 308.5, y: 81.4}
+  m_AnchoredPosition: {x: 0.000011444, y: 37.83899}
+  m_SizeDelta: {x: 308.8, y: 75.678}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3300467138506371925
 CanvasRenderer:
@@ -1005,7 +1034,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 
+  m_text: De tijd is om!. Je bent er in geslaagd de puzzel te voltooien!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d424dcec0f358f459b912f4f5c07a4a, type: 2}
   m_sharedMaterial: {fileID: 21032496967733310, guid: 4d424dcec0f358f459b912f4f5c07a4a,
@@ -1015,8 +1044,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1034,8 +1063,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 31.3
+  m_fontSizeBase: 31.3
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1052,7 +1081,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 57
+  m_firstOverflowCharacterIndex: 24
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1075,13 +1104,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2907671428950422011}
-    characterCount: 0
+    characterCount: 62
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 12
+    wordCount: 13
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 3
+    pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1243,8 +1272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1280, y: 720}
+  m_AnchoredPosition: {x: -0.000015259, y: -0.0000076294}
+  m_SizeDelta: {x: 1669.7, y: 939.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2199519017488633950
 CanvasRenderer:
@@ -1302,7 +1331,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 19
   m_TargetDisplay: 0
 --- !u!114 &6327069274747426932
 MonoBehaviour:
@@ -1357,7 +1386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 100}
+  m_AnchoredPosition: {x: 35, y: 88}
   m_SizeDelta: {x: 139, y: 163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &738879271984934935
@@ -1416,7 +1445,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 21
   m_TargetDisplay: 0
 --- !u!114 &2379428913604947861
 MonoBehaviour:
@@ -1599,14 +1628,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.85490197}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bee72920cf7fce8409bfbbad49b18986, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 875137bd07e489247abda45393fbfb99, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1710,7 +1739,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &7219800975070580278
 MonoBehaviour:
@@ -1888,15 +1917,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3534d1b30e5f90f40873d5593b27f6fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasElementOfPuzzle: {fileID: 0}
   Name: Clothing Puzzle 1
-  NameDutch: 
-  Completed: 0
+  InstructionManual: {fileID: 991984945338896650}
   Customizable: 0
-  PuzzleTimeInSeconds: 25
-  QuestForObjective: 
-  ObjectiveToCompleteID: 0
-  EntitiesToActivate: []
+  TimeToComplete: 0
+  QuestForObjective: 1672???
+  ObjectiveToCompleteID: 2
   HeadList: []
   TorsoList: []
   BottomList: []
@@ -1910,7 +1936,6 @@ MonoBehaviour:
     type: 3}
   ProgressSlider: {fileID: 6148741667869810872}
   finalScore: {fileID: 2907671428950422011}
-  TotalScore: 0
   PuzzleFinishedWindow: {fileID: 6057481988336674746}
   Timer: {fileID: 1160921581989827982}
 --- !u!223 &168875391606095366
@@ -2046,7 +2071,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 23
   m_TargetDisplay: 0
 --- !u!114 &6488620131914533709
 MonoBehaviour:
@@ -2160,7 +2185,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 21
   m_TargetDisplay: 0
 --- !u!114 &8057521569093189765
 MonoBehaviour:
@@ -2252,8 +2277,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 504, y: 18}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 513, y: 0}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6267611897775384445
 GameObject:
@@ -3044,7 +3069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.40392157}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3395,7 +3420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -0.000005722046}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.000015259, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7441678133186694318
@@ -3558,7 +3583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.5, y: 138.2}
+  m_AnchoredPosition: {x: 2, y: 140}
   m_SizeDelta: {x: 274, y: 284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5741743825323245952
@@ -3617,7 +3642,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 21
   m_TargetDisplay: 0
 --- !u!114 &5340378410860086131
 MonoBehaviour:
@@ -3753,6 +3778,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8634773348458591445, guid: e95d2dcb051a4e84d8065d535ae48919,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 991984945338896650}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e95d2dcb051a4e84d8065d535ae48919, type: 3}
 --- !u!224 &2376271318343871006 stripped
@@ -3878,21 +3908,150 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852354, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 224
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852354, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -187
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -14.215
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 361.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 102.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2329244192882082895}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartTimer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ClosePopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 991984945338896650}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187790283594, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
-      propertyPath: m_havePropertiesChanged
+      propertyPath: m_text
+      value: Probeer een outfit te maken die past bij de tijd van Jacob. Gebruik de
+        pijltjes om kleren te wisselen.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_margin.y
+      value: -5.0236816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 33.992126
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7189793189118704345, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
-      propertyPath: m_havePropertiesChanged
+      propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 87d4f8fbc042d654488f57fe607fc3a3, type: 3}
+--- !u!1 &991984945338896650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7189793188353844762, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7927315844826101520}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &991984945338896651 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7189793188353844763, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7927315844826101520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &991984944710030577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7189793187992789985, guid: 87d4f8fbc042d654488f57fe607fc3a3,
     type: 3}
   m_PrefabInstance: {fileID: 7927315844826101520}
   m_PrefabAsset: {fileID: 0}

@@ -21,31 +21,39 @@ public class CameraManager : MonoBehaviour
     private Camera _camera;
     private CameraBehavior _cameraBehaviour;
     private MapEnvironmentManager _mapEnvironmentManager;
-    //private int _currentAreaPart;
-    //private float _maxBound;
-    //private float _minBound;
 
     private void Start()
     {
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
         _camera = _cameraBehaviour.GetComponent<Camera>();
-        //_currentAreaPart = 0;
-        //_minBound = _mapEnvironmentManager.MapParts[0].GetComponent<SpriteRenderer>().bounds.min.x;
     }
 
     private void Update()
     {
-        //Debug.Log(DialogueManager.Instance.DialogueTemplate.activeSelf + " " + _cameraBehaviour.IsUIOpen + " " + _cameraBehaviour.IsInteracting);
-        if (SceneManager.GetActiveScene().name != "Escape Game")
+        // The camera should only disable swiping in between dialogue in scenes that
+        // *should* contain a dialogue and a dialogue manager!
+        string currentScene = SceneManager.GetActiveScene().name;
+        if ((currentScene != "Escape Game" || currentScene != "Hidden Objects Puzzle") &&
+            DialogueManager.Instance != null)
         {
-            if (Input.touchCount > 0 && DialogueManager.Instance.DialogueTemplate.activeSelf == false && _cameraBehaviour.IsUIOpen == false && _cameraBehaviour.IsInteracting == false)
+            if (Input.touchCount > 0 &&
+                DialogueManager.Instance.DialogueTemplate.activeSelf == false &&
+                _cameraBehaviour.IsUIOpen == false &&
+                _cameraBehaviour.IsInteracting == false)
             {
                 GetSwipe();
             }
-        } else
+        }
+        else
         {
-            if (_cameraBehaviour.IsInterfaceElementSelected == false  && Input.touchCount > 0)
+            // A scene which allows for camera movement that is not a map area, such as the
+            // escape game will require the mechanic of swiping from the camera behaviour.
+            // Other puzzles such as the HOP do not require swiping, therefore we first
+            // confirm if that behaviour exists in the HOP or not before using it.
+            if (_cameraBehaviour != null &&
+                _cameraBehaviour.IsInterfaceElementSelected == false &&
+                Input.touchCount > 0)
             {
                 GetSwipe();
             }
@@ -84,18 +92,6 @@ public class CameraManager : MonoBehaviour
                         Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
                         newCameraPosition.y,
                         newCameraPosition.z);
-
-                    //if (newCameraPosition.x <= _cameraBehaviour.BackgroundBounds.min.x + 5 &&
-                    //    _mapEnvironmentManager.MapParts[_currentAreaPart - 1].gameObject != null)
-                    //{
-                    //    if (_mapEnvironmentManager.EnterAreaPart(_mapEnvironmentManager.MapParts[_currentAreaPart - 1].gameObject))
-                    //    {
-                    //        _currentAreaPart--;
-                    //        _cameraBehaviour.BackgroundBounds = _mapEnvironmentManager.MapParts[_currentAreaPart].gameObject.GetComponent<SpriteRenderer>().bounds;
-                    //        _maxBound = _cameraBehaviour.BackgroundBounds.max.x;
-                    //        Debug.Log("Entered!");
-                    //    }
-                    //}
                 }
                 else if (_directionOfSwipeNormalized.x < 0)
                 {
@@ -104,27 +100,12 @@ public class CameraManager : MonoBehaviour
                         Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
                         newCameraPosition.y,
                         newCameraPosition.z);
-
-                    //if (newCameraPosition.x >= _cameraBehaviour.BackgroundBounds.min.x + 5 &&
-                    //    _mapEnvironmentManager.MapParts[_currentAreaPart + 1].gameObject != null)
-                    //{
-                    //    if (_mapEnvironmentManager.EnterAreaPart(_mapEnvironmentManager.MapParts[_currentAreaPart + 1].gameObject))
-                    //    {
-                    //        _currentAreaPart++;
-                    //        _cameraBehaviour.BackgroundBounds = _mapEnvironmentManager.MapParts[_currentAreaPart].gameObject.GetComponent<SpriteRenderer>().bounds;
-                    //        _maxBound = _cameraBehaviour.BackgroundBounds.max.x;
-                    //        Debug.Log("Entered!");
-                    //    }
-                    //}
                 }
-
-                //Debug.Log(_tapPositionStartWorld + " | " + tapPositionEndWorld);
             }
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 _endTapPosition = touch.position;
-                //CheckDirection();
             }
         }
     }
@@ -156,7 +137,8 @@ public class CameraManager : MonoBehaviour
                         {
                             _mapEnvironmentManager.CurrentCamera = Cameras[i].gameObject;
                         }
-                    } else
+                    }
+                    else
                     {
                         Cameras[i].SetActive(false);
                     }
@@ -192,7 +174,5 @@ public class CameraManager : MonoBehaviour
                 }
             }
         }
-        //Debug.Log(_currentCameraIndex);
-        //Debug.Log(_swipeDirection);
     }
 }

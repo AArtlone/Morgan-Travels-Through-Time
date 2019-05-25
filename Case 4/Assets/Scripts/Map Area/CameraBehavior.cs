@@ -14,7 +14,6 @@ public class CameraBehavior : MonoBehaviour
     #region Camera screen interaction properties
     [Range(0, 100)]
     [SerializeField]
-    private float _cameraSpeed = 30f;
     private bool _isCameraTravelling = false;
     public Vector3 TapPosition;
     public bool IsInteracting = false;
@@ -24,13 +23,11 @@ public class CameraBehavior : MonoBehaviour
     #endregion
 
     // Camera components
-    private MapEnvironmentManager _mapEnvironmentManager;
     private Escape _gameInterface;
 
     private void Start()
     {
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
-        _mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
         _gameInterface = FindObjectOfType<Escape>();
         InterfaceManager.Instance.CameraBehavior = this;
         Character.Instance.CameraBehavior = this;
@@ -86,34 +83,26 @@ public class CameraBehavior : MonoBehaviour
 
         //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + IsEntityTappedOn + " " + IsUIOpen);
 
-        if (IsInteracting == false && IsInterfaceElementSelected == false && IsEntityTappedOn == false && IsUIOpen == false)
+        if (IsInteracting == false &&
+            IsInterfaceElementSelected == false &&
+            IsEntityTappedOn == false &&
+            IsUIOpen == false)
         {
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended) || _isCameraTravelling == false)
+            if ((Input.touchCount > 0 &&
+                Input.GetTouch(0).phase == TouchPhase.Ended) ||
+                _isCameraTravelling == false)
             {
-                if (Input.touchCount > 0)
+                if (Input.touchCount > 0 &&
+                    IsUIOpen == false)
                 {
-                    if (IsUIOpen == false)
-                    {
-                        TapPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-                    }
+                    TapPosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
                 }
-
-                //GameObject prim = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                //prim.transform.position = _tapPosition;
 
                 _isCameraTravelling = true;
             }
             else
             {
-                if (Vector3.Distance(transform.position, TapPosition) > 1f)
-                {
-                    //transform.position = Vector3.MoveTowards(transform.position, new Vector3(TapPosition.x, transform.position.y, transform.position.z), _cameraSpeed * Time.deltaTime * 0.5f);
-
-                    //Vector3 newPosition = transform.position;
-                    //newPosition.x = Mathf.Clamp(transform.position.x, BackgroundBounds.min.x + 5, BackgroundBounds.max.x - 5);
-                    //transform.position = newPosition;
-                }
-                else
+                if (Vector3.Distance(transform.position, TapPosition) < 1f)
                 {
                     _isCameraTravelling = false;
                 }
@@ -122,13 +111,17 @@ public class CameraBehavior : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "Escape Game")
         {
-            if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsUIOpen == false && IsEntityTappedOn == false && DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
+            if ((Input.touchCount > 0 &&
+                Input.GetTouch(0).phase == TouchPhase.Began) &&
+                IsInteracting == false &&
+                IsUIOpen == false &&
+                IsEntityTappedOn == false &&
+                DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
             {
                 RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
 
                 if (hitObj.transform != null)
                 {
-                    //Debug.Log(hitObj.transform.tag);
                     switch (hitObj.transform.tag)
                     {
                         case "NPC":
@@ -140,13 +133,10 @@ public class CameraBehavior : MonoBehaviour
                             IsUIOpen = true;
                             break;
                         case "Hidden Objects Puzzle":
-                            hitObj.transform.GetComponent<Puzzle>().InitiateHiddenObjectsPuzzle();
-                            IsEntityTappedOn = true;
-                            IsInteracting = true;
-                            IsUIOpen = true;
+                            hitObj.transform.GetComponent<Puzzle>().LoadScene("Hidden Objects Puzzle");
                             break;
                         case "Guess Clothes Puzzle":
-                            hitObj.transform.GetComponent<Puzzle>().InitiateGuessClothesPuzzle();
+                            hitObj.transform.GetComponent<Puzzle>().LoadScene("Guess Clothing Puzzle");
                             IsEntityTappedOn = true;
                             IsInteracting = true;
                             IsUIOpen = true;
@@ -155,8 +145,6 @@ public class CameraBehavior : MonoBehaviour
                             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
                             Character.Instance.LastScene = "Escape Game";
                             Character.Instance.RefreshJsonData();
-                            IsInteracting = true;
-                            IsUIOpen = true;
                             SceneManager.LoadScene("Escape Game");
                             break;
                         case "Item Drop":
@@ -187,12 +175,12 @@ public class CameraBehavior : MonoBehaviour
 
                 if (hitObj.transform != null)
                 {
-                    //Debug.Log(hitObj.transform.tag);
                     switch (hitObj.transform.tag)
                     {
                         case "Item Drop":
                             Item hitItemDrop = hitObj.transform.GetComponent<Item>();
-                            if (_gameInterface.Inventory.AddItem(hitItemDrop) == true) {
+                            if (_gameInterface.Inventory.AddItem(hitItemDrop) == true)
+                            {
                                 if (hitItemDrop.Type != Item.ItemType.BunchOfHay)
                                 {
                                     hitItemDrop.gameObject.SetActive(false);

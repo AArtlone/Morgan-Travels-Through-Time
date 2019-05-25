@@ -527,7 +527,6 @@ public class NPC : MonoBehaviour
             {
                 if (CurrentDialogueIndex < FinalSequence.Count - 1)
                 {
-                    int countCurrentBranch = 0;
                     foreach (DialogueBranch branch in FinalSequence[CurrentDialogueIndex].DialogueBranches)
                     {
                         if (branch.ItemsRequired.Count == branch.ItemsDropped.Count)
@@ -608,7 +607,6 @@ public class NPC : MonoBehaviour
 
                             return;
                         }
-                        countCurrentBranch++;
                     }
                 }
                 else

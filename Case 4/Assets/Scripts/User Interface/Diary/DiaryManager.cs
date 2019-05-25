@@ -192,7 +192,7 @@ public class DiaryManager : MonoBehaviour
 
         AllPuzzles.Clear();
         PagesOfPuzzles.Clear();
-        JsonData HOPPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/Puzzles.json"));
+        JsonData HOPPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/HiddenObjectPuzzles.json"));
         JsonData guessClothingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/GuessingPuzzles.json"));
         JsonData escapeGamesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/EscapeGames.json"));
         JsonData spellingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/SpellingPuzzles.json"));
