@@ -1,18 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 
 public class LogInitializer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private TextMeshProUGUI _textComponent;
+    private DiaryDialogueLogManager _diaryDialogueLogManager;
+
+    private void Start()
     {
-        
+        _textComponent = GetComponentInChildren<TextMeshProUGUI>();
+        _diaryDialogueLogManager = FindObjectOfType<DiaryDialogueLogManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadLogEntry()
     {
-        
+        _diaryDialogueLogManager.SetupLogEntries(_textComponent.text);
     }
 }

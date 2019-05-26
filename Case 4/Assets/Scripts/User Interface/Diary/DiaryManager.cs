@@ -12,6 +12,7 @@ public class DiaryManager : MonoBehaviour
     public GameObject EscapeGameDiaryDisplay;
     public GameObject GuessClothingDiaryDisplay;
     public GameObject SpellingPuzzleDiaryDisplay;
+    public GameObject DialogueLogDisplay;
     [SerializeField]
     private List<GameObject> _buttonsForPages = new List<GameObject>();
     [SerializeField]
@@ -33,6 +34,16 @@ public class DiaryManager : MonoBehaviour
         GetPuzzlesFromStorage();
     }
 
+    public void CloseAllPages()
+    {
+        foreach (GameObject page in _pages)
+        {
+            page.SetActive(false);
+        }
+
+        DialogueLogDisplay.SetActive(true);
+    }
+
     public void SelectPage(Object selectedButton)
     {
         AudioManager.Instance.PlaySound(AudioManager.Instance.NewPageInDiary);
@@ -43,6 +54,8 @@ public class DiaryManager : MonoBehaviour
         {
             if (button == buttonObj)
             {
+                DialogueLogDisplay.SetActive(false);
+
                 button.SetActive(true);
                 button.GetComponentInChildren<Image>().color = new Color(255, 255, 255, 1);
 
@@ -81,10 +94,15 @@ public class DiaryManager : MonoBehaviour
                             page.SetActive(false);
                         }
                     }
-                    else if (button.name == "Dialogue log Button")
+                    else if (button.name == "Dialogue Log Button")
                     {
-                        if (page.name == "Dialogue log Page")
+                        if (page.name == "Dialogue Log Page")
                         {
+                            for (int i = 0; i < page.transform.GetChild(1).transform. childCount; i++)
+                            {
+                                Destroy(page.transform.GetChild(1).transform.GetChild(i));
+                            }
+
                             page.SetActive(true);
                         }
                         else
@@ -305,14 +323,6 @@ public class DiaryManager : MonoBehaviour
                 Stars = int.Parse(spellingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
                 Completed = isItComplete
             };
-
-            //Debug.Log("-------------------------------------");
-            //Debug.Log(puzzleObj.Type);
-            //Debug.Log(puzzleObj.Name);
-            //Debug.Log(puzzleObj.NameDutch);
-            //Debug.Log(puzzleObj.Stars);
-            //Debug.Log(puzzleObj.Completed);
-            //Debug.Log("-------------------------------------");
 
             AllPuzzles.Add(puzzleObj);
         }

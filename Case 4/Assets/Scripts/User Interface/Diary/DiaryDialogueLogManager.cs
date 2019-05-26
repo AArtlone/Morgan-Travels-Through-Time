@@ -6,10 +6,29 @@ using UnityEngine;
 
 public class DiaryDialogueLogManager : MonoBehaviour
 {
+    public GameObject LeftPageSection;
+    private RectTransform _leftPageSectionRect;
+    public GameObject RightPageSection;
+    private RectTransform _rightPageSectionRect;
     public GameObject ButtonPrefab;
+    public GameObject LogEntryPrefab;
+
+    private DiaryManager _diaryManager;
     private List<GameObject> _buttons = new List<GameObject>();
     private int _maxNumberOfButtons = 8;
     private int _currentPage;
+
+    private int _currentLogEntryIndex;
+    private string _currentPageInLogEntries = "Left";
+    private string _selectedNPC;
+    private float _currentPositionOfLatestButton;
+
+    private void Start()
+    {
+        _leftPageSectionRect = LeftPageSection.GetComponent<RectTransform>();
+        _rightPageSectionRect = RightPageSection.GetComponent<RectTransform>();
+        _diaryManager = FindObjectOfType<DiaryManager>();
+    }
 
     void LoadNewPage(int page)
     {
@@ -55,7 +74,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
             }
         }
 
-        Debug.Log(lengthOfPagesForButtons);
         return lengthOfPagesForButtons > 0 ? lengthOfPagesForButtons : 1;
     }
 
@@ -77,6 +95,67 @@ public class DiaryDialogueLogManager : MonoBehaviour
         }
 
         LoadNewPage(_currentPage);
+    }
+
+    public void SetupLogEntries(string NPCName)
+    {
+        _diaryManager.CloseAllPages();
+
+        if (NPCName != _selectedNPC)
+        {
+            _currentLogEntryIndex = 0;
+            _selectedNPC = NPCName;
+        }
+
+        JsonData NPCLogs = JsonMapper.ToObject(
+            File.ReadAllText(Application.persistentDataPath + "/DialogueLog.json"));
+
+        for (int i = 0; i < NPCLogs["NPC"].Count; i++)
+        {
+            if (NPCLogs["NPC"][i]["Name"].ToString() == _selectedNPC)
+            {
+                for (int j = 0; j < NPCLogs["NPC"][i]["Log"].Count; j++)
+                {
+                    if (NPCLogs["NPC"][i]["Log"][j]["Language"].ToString() == SettingsManager.Instance.Language)
+                    {
+                        for (int k = 0; k < NPCLogs["NPC"][i]["Log"][j]["Messages"].Count; k++)
+                        {
+                            if (_currentPageInLogEntries == "Left")
+                            {
+                                GameObject newEntry = Instantiate(LogEntryPrefab);
+                                RectTransform entryRect = newEntry.GetComponent<RectTransform>();
+                                newEntry.GetComponent<TextMeshProUGUI>().text = NPCLogs["NPC"][i]["Log"][j]["Messages"][k].ToString();
+                                newEntry.transform.SetParent(LeftPageSection.transform);
+
+                                _currentPositionOfLatestButton += entryRect.sizeDelta.y;
+
+                                if (_currentPositionOfLatestButton + entryRect.sizeDelta.y > _leftPageSectionRect.sizeDelta.y)
+                                {
+                                    newEntry.transform.SetParent(RightPageSection.transform);
+                                    _currentPageInLogEntries = "Right";
+                                }
+                            } else if (_currentPageInLogEntries == "Right")
+                            {
+                                GameObject newEntry = Instantiate(LogEntryPrefab);
+                                RectTransform entryRect = newEntry.GetComponent<RectTransform>();
+                                newEntry.GetComponent<TextMeshProUGUI>().text = NPCLogs["NPC"][i]["Log"][j]["Messages"][k].ToString();
+                                newEntry.transform.SetParent(RightPageSection.transform);
+
+                                if (_currentPositionOfLatestButton + entryRect.sizeDelta.y > _rightPageSectionRect.sizeDelta.y)
+                                {
+                                    Debug.Log("Done printing.");
+                                    return;
+                                }
+                            }
+
+                            _currentLogEntryIndex++;
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     void ClearPage()

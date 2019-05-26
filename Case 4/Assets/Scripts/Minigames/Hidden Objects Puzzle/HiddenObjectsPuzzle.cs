@@ -397,7 +397,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
             StartCoroutine(FadeAwayItem(itemObjClicked));
 
-            Debug.Log(foundItemsCount + " | " + _itemsRequired.Count);
             if (foundItemsCount == _itemsRequired.Count)
             {
                 CompletePuzzle();
