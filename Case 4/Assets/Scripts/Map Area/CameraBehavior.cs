@@ -193,6 +193,20 @@ public class CameraBehavior : MonoBehaviour
                             break;
                     }
                 }
+            } else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
+
+                if (hitObj.transform != null)
+                {
+                    switch (hitObj.transform.tag)
+                    {
+                        case "Cannon Ball":
+                            FindObjectOfType<CannonBallShooting>().HitCannonBallAway();
+                            break;
+                    }
+                }
+
             }
         }
     }
