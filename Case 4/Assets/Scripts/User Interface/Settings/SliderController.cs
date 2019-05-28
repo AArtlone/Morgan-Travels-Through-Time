@@ -29,7 +29,6 @@ public class SliderController : MonoBehaviour
     public void SetVolume()
     {
         _volume = _slider.value;
-        //Debug.Log(_volume + " | " + (int)(_volume * 100));
         switch (AudioSourceType)
         {
             case "Background":

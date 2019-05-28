@@ -191,8 +191,6 @@ public class NPC : MonoBehaviour
                         {
                             if (requiredResponse == response)
                             {
-                                //Debug.Log(string.Format("Match between {0} and {1}", response, requiredResponse));
-
                                 elementsThatMatch++;
                                 break;
                             }
@@ -229,17 +227,14 @@ public class NPC : MonoBehaviour
                     int itemsMatching = 0;
                     foreach (string itemRequired in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired)
                     {
-                        //Debug.Log("Required: " + itemRequired);
                         string itemsEngData = File.ReadAllText(Application.persistentDataPath + "/Items.json");
                         JsonData data = JsonMapper.ToObject(itemsEngData);
 
                         for (int l = 0; l < data["Items"].Count; l++)
                         {
-                            //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
                             if (data["Items"][l]["Name"].ToString() == itemRequired)
                             {
                                 itemsMatching++;
-                                //Debug.Log("MATCH");
                             }
                         }
 
@@ -259,9 +254,6 @@ public class NPC : MonoBehaviour
                     itemsMatching == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired.Count)
                     {
                         _availableBranches.Add(FinalSequence[CurrentDialogueIndex].DialogueBranches[j]);
-
-                        //Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
-                        //Debug.Log("Number of elements match!");
                     }
                 }
             }
@@ -291,17 +283,11 @@ public class NPC : MonoBehaviour
             // We also activate all the game objects in this branch once it is visualized.
             foreach (GameObject entity in FinalDialogueBranch.EntitiesToActivate)
             {
-                if (entity != null)
-                {
-                    entity.SetActive(true);
-                }
+                entity?.SetActive(true);
             }
             foreach (GameObject entity in FinalDialogueBranch.EntitiesToDeactive)
             {
-                if (entity != null)
-                {
-                    entity.SetActive(false);
-                }
+                entity?.SetActive(false);
             }
 
             // We clear the options menu before we populate it with data, because if
@@ -322,7 +308,6 @@ public class NPC : MonoBehaviour
                 {
                     if (itemsJsonData["Items"][i]["Name"].ToString() == dialogueItem.Name)
                     {
-                        //Debug.Log("Item " + dialogueItem.Name + " is already in possession!");
                         areItemsEarnedAlready = true;
                         break;
                     }
@@ -340,7 +325,7 @@ public class NPC : MonoBehaviour
                 {
                     Character.Instance.AddItem(dialogueItem);
                     areItemsEarnedAlready = true;
-                    //Debug.Log("Item " + dialogueItem.Name + " received!");
+
                     if (dialogueItem.Name == "Map")
                     {
                         Character.Instance.HasMap = true;
@@ -373,8 +358,6 @@ public class NPC : MonoBehaviour
             {
                 SceneToLoadAfterDialogue = FinalDialogueBranch.SceneToLoad;
             }
-
-            //Debug.LogWarning("New dialogue is loaded!");
         }
         else
         {
@@ -414,8 +397,6 @@ public class NPC : MonoBehaviour
                 }
             }
 
-            //Debug.Log(DialogueFormats[index].Language);
-
             dialoguesToPickFrom.Clear();
             for (int i = 0; i < DialogueFormats[index].Dialogue.Count; i++)
             {
@@ -430,7 +411,6 @@ public class NPC : MonoBehaviour
                                 characterObjective.CompletedStatus == true)
                             {
                                 objectivesCompleted++;
-                                //Debug.Log(objective.Name);
                             }
                         }
                     }
@@ -442,7 +422,6 @@ public class NPC : MonoBehaviour
                                 characterObjective.CompletedStatus == true)
                             {
                                 objectivesCompleted++;
-                                //Debug.Log(objective.Name);
                             }
                         }
                     }
@@ -464,17 +443,14 @@ public class NPC : MonoBehaviour
                 int itemsMatching = 0;
                 foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
                 {
-                    //Debug.Log("Required: " + itemRequired);
                     string dataToJson = File.ReadAllText(Application.persistentDataPath + "/Items.json");
                     JsonData data = JsonMapper.ToObject(dataToJson);
 
                     for (int j = 0; j < data["Items"].Count; j++)
                     {
-                        //Debug.Log("Have " + (data["Items"][j]["Name"].ToString()));
                         if (data["Items"][j]["Name"].ToString() == itemRequired)
                         {
                             itemsMatching++;
-                            //Debug.Log("MATCH");
                         }
                     }
 
@@ -490,7 +466,6 @@ public class NPC : MonoBehaviour
                     }
                 }
 
-                //Debug.Log(objectivesCompleted + " | " + (Dialogue[i].ObjectivesToMeet.Count));
                 if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count &&
                     itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count && progressEntriesMatching == DialogueFormats[index].Dialogue[i].RequiredMilestones.Count)
                 {
@@ -515,11 +490,6 @@ public class NPC : MonoBehaviour
                     FinalSequence.Add(dialogue);
                 }
             }
-
-            //foreach (Dialogue dia in FinalSequence)
-            //{
-            //Debug.Log("Dialogue matched: " + dia.DialogueTitle);
-            //}
 
             // When the player taps on the npc or anywhere on the dialogue box, it
             // will progress the dialogue further.
@@ -686,7 +656,6 @@ public class NPC : MonoBehaviour
 
     private IEnumerator LoadSceneCo(string sceneToLoad)
     {
-        //Debug.Log(sceneToLoad);
         yield return new WaitForSeconds(0.2f);
         SceneManager.LoadScene(sceneToLoad);
     }
@@ -734,8 +703,6 @@ public class NPC : MonoBehaviour
                         {
                             if (requiredResponse == response)
                             {
-                                //Debug.Log(string.Format("Match between {0} and {1}", response, requiredResponse));
-
                                 elementsThatMatch++;
                                 break;
                             }
@@ -761,9 +728,6 @@ public class NPC : MonoBehaviour
                     if ((elementsThatMatch == dialogue.DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch != dialogue.DialogueBranches[j].ObjectivesRequired.Count))
                     {
                         branchesForFiltering.Add(dialogue.DialogueBranches[j]);
-
-                        //Debug.Log(FinalSequence[CurrentDialogueIndex].DialogueBranches[j].BranchTitle);
-                        //Debug.Log("Number of elements match!");
                     }
                 }
             }

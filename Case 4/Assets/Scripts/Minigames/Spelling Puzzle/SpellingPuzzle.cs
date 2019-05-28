@@ -62,29 +62,10 @@ public class SpellingPuzzle : MonoBehaviour
         // If it's false then a button was picked to fill in the blank field selected.
         if (openMenu)
         {
-            // If you want to avoid filling in the word unless the user gets it correct
-            // when picking from the options menu, you can use this block of code:
-            #region
-            // We use the text inside the field because we have to randomize the positions
-            // of every button in the options menu otherwise they would be obviously sorted
-            // for the player to fill in immediately.
-            //for (int i = 0; i < FieldsOfWords.Count; i++)
-            //{
-            //    WordToFind field = _selectedField.GetComponentInChildren<WordToFind>();
-            //    //Debug.Log(field.WordExpected + " | " + buttonObj.GetComponentInChildren<TextMeshProUGUI>().text);
-
-            //    if (field.WordExpected == buttonObj.GetComponentInChildren<TextMeshProUGUI>().text)
-            //    {
-            //        _selectedField.GetComponentInChildren<TextMeshProUGUI>().text = field.WordExpected;
-            //    }
-            //}
-            #endregion
-
             _selectedField.GetComponentInChildren<TextMeshProUGUI>().text = buttonObj.GetComponentInChildren<TextMeshProUGUI>().text;
 
             _selectedOptions.SetActive(false);
 
-            //_selectedField = null;
             _selectedOptions = null;
             OptionsMenu.SetActive(false);
         } else
@@ -97,18 +78,8 @@ public class SpellingPuzzle : MonoBehaviour
             _selectedField = buttonObj;
             OptionsMenu.SetActive(true);
 
-            //int numberOfFieldsSelected = 0;
-            //foreach (WordField field in FieldsOfWords)
-            //{
-            //    if (field.TextField.GetComponent<TextMeshProUGUI>().text != string.Empty)
-            //    {
-            //        numberOfFieldsSelected++;
-            //    }
-            //}
-
             for (int i = 0; i < FieldsOfWords.Count; i++)
             {
-                //Debug.Log(_selectedField.GetComponentInChildren<WordToFind>().ExpectedWord + " | " + FieldsOfWords[i].ExpectedWord);
                 if (_selectedField.GetComponentInChildren<WordToFind>().ExpectedWord == FieldsOfWords[i].ExpectedWord)
                 {
                     FieldsOfWords[i].Options.SetActive(true);

@@ -11,30 +11,33 @@ public class ResolutionsController : MonoBehaviour
     public TextMeshProUGUI PurrentResolutionText;
 
     #region The following functions run whenever the player moves forwards and backwards in the resolution settings field.
-    public void NextResolution()
+    public void ChangeResolution(string direction)
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
+
         GetCurrentResolution();
 
-        _currentResolutionIndex++;
-        if (_currentResolutionIndex > Resolutions.Count - 1)
+        if (direction == "Next")
         {
-            _currentResolutionIndex = Resolutions.Count - 1;
-        }
+            _currentResolutionIndex++;
+            if (_currentResolutionIndex > Resolutions.Count - 1)
+            {
+                _currentResolutionIndex = Resolutions.Count - 1;
+            }
 
-        PurrentResolutionText.text = Resolutions[_currentResolutionIndex];
-    }
-
-    public void PreviousResolution()
-    {
-        GetCurrentResolution();
-
-        _currentResolutionIndex--;
-        if (_currentResolutionIndex <= 0)
+            PurrentResolutionText.text = Resolutions[_currentResolutionIndex];
+        } else if (direction == "Previous")
         {
-            _currentResolutionIndex = 0;
-        }
+            GetCurrentResolution();
 
-        PurrentResolutionText.text = Resolutions[_currentResolutionIndex];
+            _currentResolutionIndex--;
+            if (_currentResolutionIndex <= 0)
+            {
+                _currentResolutionIndex = 0;
+            }
+
+            PurrentResolutionText.text = Resolutions[_currentResolutionIndex];
+        }
     }
 
     public void GetCurrentResolution()

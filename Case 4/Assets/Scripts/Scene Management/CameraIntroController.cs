@@ -43,9 +43,6 @@ public class CameraIntroController : MonoBehaviour
     /// </summary>
     public void LoadGame()
     {
-        //AnimatorOfFade.gameObject.SetActive(false);
-
-        //Debug.Log(Character.Instance.LastMapArea);
         if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation)
         {
             SceneManager.LoadScene(Character.Instance.LastMapArea);

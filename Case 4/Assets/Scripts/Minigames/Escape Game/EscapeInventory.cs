@@ -25,7 +25,6 @@ public class EscapeInventory : MonoBehaviour
         {
             if (pair.Value.Name == item.Name)
             {
-                //Debug.Log("Item " + item.Name + " already exists in the inventory!");
                 return false;
             }
         }
@@ -43,7 +42,6 @@ public class EscapeInventory : MonoBehaviour
             if (pair.Value.Name == item.Name)
             {
                 itemToRemove = pair;
-                //Debug.Log("Removed " + pair.Value);
             }
         }
 
@@ -54,7 +52,6 @@ public class EscapeInventory : MonoBehaviour
 
     public void SortInventory()
     {
-        //InterfaceManager.Instance.Items.Sort();
         RefreshPanel();
     }
 
@@ -76,7 +73,6 @@ public class EscapeInventory : MonoBehaviour
             Item newItemScript = newItem.GetComponent<Item>();
             // We use predefined images from the resources folder to load each
             // item's sprites from outside the game and assign it to the new item.
-            // Debug.Log(item.Name);
             Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + InterfaceManager.Instance.Items[i].Value.GetComponent<Item>().AssetsImageName);
 
             newItem.GetComponent<Image>().sprite = sprite;

@@ -33,23 +33,6 @@ public class ParallaxManager : MonoBehaviour
             Vector3 backgroundTargetPosition = new Vector3(backgroundTargetPositionX, Backgrounds[i].position.y, Backgrounds[i].position.z);
 
             Backgrounds[i].position = Vector3.Lerp(Backgrounds[i].position, backgroundTargetPosition, Smoothing * Time.deltaTime);
-
-            #region Inhumane code below
-            //Debug.Log(_camera.transform.position.x - _camera.orthographicSize + " | " + (Backgrounds[i].transform.GetComponent<SpriteRenderer>().sprite.bounds.min.x / 2 - Backgrounds[i].transform.position.x));
-            //if (Backgrounds[i].transform.childCount < 0)
-            //{
-            //    if (_camera.transform.position.x + _camera.orthographicSize > Backgrounds[i].transform.GetComponent<SpriteRenderer>().sprite.bounds.max.x / 2 + Backgrounds[i].transform.position.x)
-            //    {
-            //        Debug.Log("Exited from right");
-            //    }
-            //    else if (_camera.transform.position.x - _camera.orthographicSize < Backgrounds[i].transform.GetComponent<SpriteRenderer>().sprite.bounds.min.x / 2 - Backgrounds[i].transform.position.x)
-            //    {
-            //        GameObject copyOfBackground = Instantiate(Backgrounds[i].gameObject, new Vector3(Backgrounds[i].position.x - Backgrounds[i].transform.GetComponent<SpriteRenderer>().sprite.bounds.min.x, Backgrounds[i].position.y, Backgrounds[i].position.z), Quaternion.identity, Backgrounds[i].gameObject.transform);
-            //        copyOfBackground.transform.localScale = new Vector3(1, 1, 1);
-            //        copyOfBackground.GetComponent<SpriteRenderer>().flipX = true;
-            //    }
-            //}
-            #endregion
         }
 
         _previousCameraPosition = _camera.transform.position;

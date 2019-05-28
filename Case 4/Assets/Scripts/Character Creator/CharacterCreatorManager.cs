@@ -41,10 +41,7 @@ public class CharacterCreatorManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
         {
-            if (_DHManager != null)
-            {
-                _DHManager.LoadSequence("Teach Settings");
-            }
+            _DHManager?.LoadSequence("Teach Settings");
         }
 
         // When the game starts we extract all the bad words that we want to
@@ -55,7 +52,6 @@ public class CharacterCreatorManager : MonoBehaviour
         for (int i = 0; i < filterWordsData["BadWords"].Count; i++)
         {
             _wordsFilter.Add(filterWordsData["BadWords"][i].ToString());
-            //Debug.Log(_wordsFilter[i]);
         }
 
         DefineCurrentWearables();
@@ -263,8 +259,6 @@ public class CharacterCreatorManager : MonoBehaviour
         //    if (match.Success && match.Length > 1)
         //    {
         //        foundMatch = true;
-        //        //Debug.Log(nameInput);
-        //        //Debug.Log(_wordsFilter[i]);
         //    }
 
         if (foundMatch == false && nameInput.Length > 2 && nameInput.Length < 25)

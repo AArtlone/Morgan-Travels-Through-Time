@@ -346,6 +346,8 @@ public class InterfaceManager : MonoBehaviour
     /// <param name="obj"></param>
     public void ClosePopup(Object obj)
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.CloseWindow);
+
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(false);
 
@@ -362,6 +364,8 @@ public class InterfaceManager : MonoBehaviour
     /// <param name="obj"></param>
     public void OpenPopup(Object obj)
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
+
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
     }
@@ -765,7 +769,6 @@ public class InterfaceManager : MonoBehaviour
     public void UseItem()
     {
         // TODO: Create item actives and test them from here.
-        //Debug.Log("Used " + ItemSelected.Name);
     }
 
     /// <summary>
@@ -857,7 +860,6 @@ public class InterfaceManager : MonoBehaviour
             {
                 if (file.Name == fileToRemove.Name)
                 {
-                    //Debug.Log(file.Name);
                     File.Delete(path + "/" + fileToRemove.Name);
                 }
             }

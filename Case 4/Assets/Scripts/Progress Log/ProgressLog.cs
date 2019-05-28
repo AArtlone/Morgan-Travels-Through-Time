@@ -83,8 +83,6 @@ public class ProgressLog : MonoBehaviour
                 return;
             }
         }
-
-        Debug.LogWarning($"The milestone {milestone} was not found in the log!");
     }
 
     public ProgressEntry GetEntry(int index)

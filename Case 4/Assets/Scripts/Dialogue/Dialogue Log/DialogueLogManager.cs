@@ -46,18 +46,15 @@ public class DialogueLogManager : MonoBehaviour
             NPCLog newNPCLog = new NPCLog();
             newNPCLog.Name = logsJsonData["NPC"][i]["Name"].ToString();
 
-            //Debug.Log(logsJsonData["NPC"][i]["Name"]);
             List<DialogueLogObject> listOfOfNewNPCLog = new List<DialogueLogObject>();
 
             for (int j = 0; j < logsJsonData["NPC"][i]["Log"].Count; j++)
             {
                 DialogueLogObject newLogObj = new DialogueLogObject();
                 newLogObj.Language = logsJsonData["NPC"][i]["Log"][j]["Language"].ToString();
-                //Debug.Log("--->---> " + logsJsonData["NPC"][i]["Log"][j]["Language"].ToString());
                 for (int k = 0; k < logsJsonData["NPC"][i]["Log"][j]["Messages"].Count; k++)
                 {
                     newLogObj.Messages.Add(logsJsonData["NPC"][i]["Log"][j]["Messages"][k].ToString());
-                    //Debug.Log("--->---> " + logsJsonData["NPC"][i]["Log"][j]["Messages"][k].ToString());
                 }
 
                 listOfOfNewNPCLog.Add(newLogObj);
@@ -148,11 +145,6 @@ public class DialogueLogManager : MonoBehaviour
                         if (isMessageInLogAlready == false)
                         {
                             logObj.Messages.Add(message);
-
-                            //Debug.LogWarning("The new message has been added to the log!");
-                        } else
-                        {
-                            //Debug.LogWarning("The following message is already in the log: " + message + "!");
                         }
                     }
                 }

@@ -30,20 +30,14 @@ public class LanguageToggle : MonoBehaviour
                 _settingsManager.Language = "English";
                 foreach (LanguageController textLabel in _settingsManager.LanguageControllers)
                 {
-                    if (textLabel != null)
-                    {
-                        textLabel.LoadLanguage(LanguageController.Language.English);
-                    }
+                    textLabel?.LoadLanguage(LanguageController.Language.English);
                 }
                 break;
             case "Dutch":
                 _settingsManager.Language = "Dutch";
                 foreach (LanguageController textLabel in _settingsManager.LanguageControllers)
                 {
-                    if (textLabel != null)
-                    {
-                        textLabel.LoadLanguage(LanguageController.Language.Dutch);
-                    }
+                    textLabel?.LoadLanguage(LanguageController.Language.Dutch);
                 }
                 break;
         }
@@ -55,10 +49,7 @@ public class LanguageToggle : MonoBehaviour
     {
         foreach (LanguageController textLabel in _settingsManager.LanguageControllers)
         {
-            if (textLabel != null)
-            {
-                textLabel.UpdateCurrentFont();
-            }
+            textLabel?.UpdateCurrentFont();
         }
     }
 

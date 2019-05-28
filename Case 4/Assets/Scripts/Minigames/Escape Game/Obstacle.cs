@@ -22,17 +22,6 @@ public class Obstacle : MonoBehaviour
 
     private void Update()
     {
-        //if(Input.GetKeyUp(KeyCode.A))
-        //{
-        //    CheckpointLink.Passable = true;
-        //}
-        //if (Input.GetKeyUp(KeyCode.S))
-        //{
-        //    CheckpointLink.Passable = false;
-        //}
-
-        //Debug.Log(_currentTimeHoldingDown);
-        
         if (gameObject.name == "Bridge Lever")
         {
             PlayBridge();
@@ -48,7 +37,6 @@ public class Obstacle : MonoBehaviour
         {
             return;
         }
-        //Debug.Log("Completed");
         CheckpointLink.Passable = !CheckpointLink.Passable;
     }
 
@@ -76,7 +64,6 @@ public class Obstacle : MonoBehaviour
                     }
                 }
 
-                //Debug.Log("Holding...");
                 if (_currentTimeHoldingDown >= _timeHoldingDown)
                 {
                     ToggleObstacle();
@@ -86,12 +73,10 @@ public class Obstacle : MonoBehaviour
         else
         {
             _holdingDownObstacle = false;
-            //CheckpointLink.Passable = false;
         }
 
         if (_currentTimeHoldingDown > 0 && _holdingDownObstacle == false)
         {
-            //Debug.Log("Falling...");
             Vector3 newBridgePosition = Bridge.transform.localScale;
             newBridgePosition.x -= Time.deltaTime * 0.3f;
             Bridge.transform.localScale = newBridgePosition;

@@ -12,7 +12,6 @@ public class Refugee : MonoBehaviour
     public enum RefugeeStatus { Walking, Wondering, Idle };
     public RefugeeStatus Status;
     private Animator _animator;
-    private Rigidbody2D _rb;
     public int RewardInPoints;
     public int RefugeeIndex;
     [NonSerialized]
@@ -22,22 +21,13 @@ public class Refugee : MonoBehaviour
     public bool FacingLeft;
     public bool FacingRight;
 
-    public GameObject IconPrefab;
-    [NonSerialized]
-    public RefugeeIcon IconOfRefugee;
-
     public int Speed;
     public int WonderingSpeed;
 
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _gameInterface = FindObjectOfType<Escape>();
-
-        IconOfRefugee = Instantiate(IconPrefab, GameObject.FindGameObjectWithTag("Icons Container").transform).GetComponent<RefugeeIcon>();
-        IconOfRefugee.RefugeeForIcon = this;
-        IconOfRefugee.gameObject.SetActive(false);
 
         _targetCheckpoint = _gameInterface.Checkpoints[_currentCheckpointIndex];
         WonderingRight = true;
@@ -111,7 +101,6 @@ public class Refugee : MonoBehaviour
     /// </summary>
     private void MoveTowardsCheckpointQueueElement()
     {
-        IconOfRefugee.Icon = IconOfRefugee.ActiveImage;
         if (Vector2.Distance(transform.position, _targetCheckpoint.QueueElements[RefugeeIndex].transform.position) > 2f)
         {
             transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.QueueElements[RefugeeIndex].transform.position, Speed * .5f * Time.deltaTime);
@@ -119,7 +108,6 @@ public class Refugee : MonoBehaviour
         {
             if (_targetCheckpoint.tag == "Final Checkpoint")
             {
-                Destroy(IconOfRefugee);
                 _gameInterface.RefugeesSaved++;
                 _gameInterface.RefugeesSavedInThisSession++;
                 _gameInterface.TotalPoints += RewardInPoints;
@@ -226,45 +214,6 @@ public class Refugee : MonoBehaviour
         {
             WonderingLeft = false;
             WonderingRight = true;
-        }
-        //if (collision.transform.tag == "Checkpoint")
-        //{
-        //    Debug.Log("bithc");
-        //    bool IsCheckpointFirst = false;
-        //    foreach (Refugee refugee in _gameInterface.CurrentRefugees)
-        //    {
-        //        if (refugee._targetCheckpoint.name == "Initial Checkpoint")
-        //        {
-        //            IsCheckpointFirst = true;
-        //        }
-        //    }
-        //    if(IsCheckpointFirst == false)
-        //    {
-        //        if (_gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
-        //        {
-        //            _gameInterface.CurrentWave++;
-        //            _gameInterface.StartNextWave();
-        //        }
-                
-        //    }
-        //}
-    }
-
-    private void OnBecameInvisible()
-    {
-        if (IconOfRefugee != null)
-        {
-            IconOfRefugee.gameObject.SetActive(true);
-            //Debug.Log("Refugee is now invisible");
-        }
-    }
-
-    private void OnBecameVisible()
-    {
-        if (IconOfRefugee != null)
-        {
-            IconOfRefugee.gameObject.SetActive(false);
-            //Debug.Log("Refugee is now visible");
         }
     }
 }

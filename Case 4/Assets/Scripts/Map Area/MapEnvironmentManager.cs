@@ -28,14 +28,8 @@ public class MapEnvironmentManager : MonoBehaviour
 
         if (Character.Instance.HasMap == true)
         {
-            if (CloseButton != null)
-            {
-                CloseButton.SetActive(true);
-            }
-            if (HiddenObjectPuzzleNpc != null)
-            {
-                HiddenObjectPuzzleNpc.SetActive(true);
-            }
+            CloseButton?.SetActive(true);
+            HiddenObjectPuzzleNpc?.SetActive(true);
         }
         if (Character.Instance.HasDiary == true && Character.Instance.AreIconsExplained == false)
         {
@@ -47,10 +41,7 @@ public class MapEnvironmentManager : MonoBehaviour
         }
         if (Character.Instance.TutorialCompleted == true)
         {
-            if (EscapeGameNpc != null)
-            {
-                EscapeGameNpc.SetActive(true);
-            }
+            EscapeGameNpc?.SetActive(true);
         }
 
         Character.Instance.SetupItems();
@@ -156,10 +147,8 @@ public class MapEnvironmentManager : MonoBehaviour
             }
         }
 
-        //Debug.Log(matchingClothing + " | " + (newAreaPartClothing.Count));
         if (matchingObjectives < newAreaPartObjectives.Count || matchingClothing < newAreaPartClothing.Count)
         {
-            //Debug.Log("You cannot enter!");
             return false;
         }
 

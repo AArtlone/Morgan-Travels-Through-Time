@@ -21,15 +21,5 @@ public class Quest
         this.Description = Description;
         this.CompletionStatus = CompletionStatus;
         this.Objectives = Objectives;
-
-        /*
-        Debug.Log("Quest Name: " + Name);
-        Debug.Log("Quest Description: " + Description);
-
-        foreach (Objective objective in Objectives)
-        {
-            Debug.Log("Objective: " + objective.Name);
-        }
-        */
     }
 }

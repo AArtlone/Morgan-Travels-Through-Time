@@ -48,7 +48,6 @@ public class ItemsLoader : MonoBehaviour
 
             // We use predefined images from the resources folder to load each
             // item's sprites from outside the game and assign it to the new item.
-            // Debug.Log(item.Name);
             Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
 
             newItem.GetComponent<Image>().sprite = sprite;

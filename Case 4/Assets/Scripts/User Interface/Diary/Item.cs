@@ -178,7 +178,6 @@ public class Item : MonoBehaviour
                         {
                             isPLantOnFire = true;
                         }
-                        Debug.Log(isPLantOnFire);
 
                         if (!isPLantOnFire)
                         {
@@ -210,12 +209,6 @@ public class Item : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            // We use the canvas tag for map interactions instead of the dialogue.
-            if (hit.transform.tag == "Canvas")
-            {
-                //Debug.Log("Dropped on top of canvas");
-            }
-
             if (hit.transform.tag == "NPC")
             {
                 // TODO: Based on item throw, show a wrong item drop dialogue or the correct one for the main npc dialogue starting from the point after you drop the item.
@@ -240,10 +233,6 @@ public class Item : MonoBehaviour
                     {
                         npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
                         isCorrectItemDropped = true;
-                    }
-                    else
-                    {
-                        //Debug.Log("Wrong item!");
                     }
                     if (isCorrectItemDropped)
                     {
@@ -281,16 +270,10 @@ public class Item : MonoBehaviour
                         {
                             branch.ItemsDropped.Add(Name);
 
-                            //Debug.Log(string.Format("Item {0} is successfully dropped!", Name));
-
                             if (branch.ItemsDropped.Count == branch.ItemsRequired.Count)
                             {
                                 currentNpc.ContinueDialogue();
                             }
-                        }
-                        else
-                        {
-                            //Debug.Log(string.Format("Item {0} was not dropped!", Name));
                         }
                     }
                 }

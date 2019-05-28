@@ -228,11 +228,9 @@ public class DialogueManager : MonoBehaviour
     {
         if (newFace != "Undefined") {
             Sprite newFaceExpression = Resources.Load<Sprite>("Faces/" + InterfaceManager.Instance._faceIcon.sprite.name + "/" + InterfaceManager.Instance._faceIcon.sprite.name + newFace);
-            //Debug.Log(InterfaceManager.Instance._faceIcon.sprite.name + newFace);
             InterfaceManager.Instance._facePart.sprite = newFaceExpression;
 
             InterfaceManager.Instance._darkFacePart.sprite = newFaceExpression;
-            //InterfaceManager.Instance._darkFacePart.color = new Color(0, 0, 0, 103);
         }
     }
 
@@ -241,7 +239,6 @@ public class DialogueManager : MonoBehaviour
         if (newFace != "Undefined")
         {
             Sprite newFaceExpression = Resources.Load<Sprite>("Faces/" + npcName + "/" + npcName + newFace);
-            //Debug.Log(InterfaceManager.Instance._faceIcon.sprite.name + newFace);
             RightCharacterFace.sprite = newFaceExpression;
             DarkRightCharacterFace.sprite = newFaceExpression;
 

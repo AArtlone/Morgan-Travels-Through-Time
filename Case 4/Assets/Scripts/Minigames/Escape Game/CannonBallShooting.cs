@@ -16,7 +16,6 @@ public class CannonBallShooting : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("shooooot");
         Vector3 Vo = CalculateVelocity(_targetPos.transform.position, transform.position, TimeToFly);
         _cannonBall = Instantiate(CannonBallPrefab, transform.position, Quaternion.identity);
         //obj.AddForce(Vector2.right * 10);
@@ -43,7 +42,6 @@ public class CannonBallShooting : MonoBehaviour
 
     public void HitCannonBallAway()
     {
-        Debug.Log("biutch");
         _cannonBall.velocity *= -5;
     }
 }

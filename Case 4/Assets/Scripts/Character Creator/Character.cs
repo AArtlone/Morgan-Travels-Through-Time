@@ -111,8 +111,6 @@ public class Character : MonoBehaviour
 
             if (File.Exists(PlayerStatsFilePath))
             {
-                //Debug.Log("data is retrieved");
-
                 string dataToJson = File.ReadAllText(PlayerStatsFilePath);
                 JsonData characterData = JsonMapper.ToObject(dataToJson);
 
@@ -126,8 +124,6 @@ public class Character : MonoBehaviour
                 // and so on collections of data for when the game first starts.
                 if (IsDataCreated == false)
                 {
-                    //Debug.Log("data is created");
-
                     #region Creating the player file
                     Name = playerJsonData["Name"].ToString();
                     IsDataCreated = true;
@@ -611,8 +607,6 @@ public class Character : MonoBehaviour
             AvailableHints = int.Parse(characterData["AvailableHints"].ToString());
             DateOfLastCoffee = characterData["DateOfLastCoffee"].ToString();
         }
-
-        //Debug.Log("Loaded character json data!");
     }
 
     public void SetupQuests()
@@ -627,7 +621,6 @@ public class Character : MonoBehaviour
         AvailableQuests.Clear();
         foreach (Area area in Areas)
         {
-            //Debug.Log(area.Name);
             foreach (Quest questInFile in AllQuests)
             {
                 if (questInFile.Area == area.Name && area.Status == Area.AreaStatus.Unlocked)
@@ -635,7 +628,6 @@ public class Character : MonoBehaviour
                     if (questInFile.ProgressStatus == "Ongoing")
                     {
                         CurrentQuests.Add(questInFile);
-                        //Debug.Log("Ongoing " + questInFile.Name);
                     }
                     else if (questInFile.ProgressStatus == "Available" &&
                       questInFile.CompletionStatus)
@@ -645,7 +637,6 @@ public class Character : MonoBehaviour
                     else if (questInFile.ProgressStatus == "Available")
                     {
                         AvailableQuests.Add(questInFile);
-                        //Debug.Log("Available " + questInFile.Name);
                     }
                 }
             }
@@ -680,7 +671,6 @@ public class Character : MonoBehaviour
             }
         }
         //LoadInventory();
-        //Debug.Log("Loaded items json data!");
     }
 
     private void SetupAreas()
@@ -750,7 +740,6 @@ public class Character : MonoBehaviour
                 WearablesDutch.Add(clothing);
             }
         }
-        //Debug.Log("Loaded wearables json data!");
     }
 
     private void LoadQuests()
@@ -865,8 +854,6 @@ public class Character : MonoBehaviour
                 AllQuestsDutch.Add(newQuest);
             }
         }
-
-        //Debug.Log("Loaded " + quests + " json data!");
     }
 
     public void LoadInventory()
@@ -944,13 +931,8 @@ public class Character : MonoBehaviour
         Items.Add(item);
         ItemsDutch.Add(item);
 
-        //UpdateItemIDs(Items);
-        //UpdateItemIDs(ItemsDutch);
-
         RefreshItems();
         LoadInventory();
-
-        //Debug.Log(string.Format("Added {0} to current items!", item.Name));
     }
 
     public void RemoveItem(Item item)
@@ -958,22 +940,9 @@ public class Character : MonoBehaviour
         Items.Remove(item);
         ItemsDutch.Remove(item);
 
-        //UpdateItemIDs(Items);
-        //UpdateItemIDs(ItemsDutch);
-
         RefreshItems();
         LoadInventory();
-
-        //Debug.Log(string.Format("Removed {0} from current items!", item.Name));
     }
-
-    //public void UpdateItemIDs(List<Item> listForItems)
-    //{
-    //    for (int i = 0; i < listForItems.Count; i++)
-    //    {
-    //        listForItems[i].ID = i;
-    //    }
-    //}
 
     public void AddWearable(Clothing clothing)
     {
@@ -981,8 +950,6 @@ public class Character : MonoBehaviour
         WearablesDutch.Add(clothing);
 
         RefreshWearables();
-
-        //Debug.Log(string.Format("Added {0} to current wearables!", clothing.Name));
     }
 
     public void RemoveWearable(Clothing clothing)
@@ -991,24 +958,18 @@ public class Character : MonoBehaviour
         WearablesDutch.Remove(clothing);
 
         RefreshWearables();
-
-        //Debug.Log(string.Format("Removed {0} from current wearables!", clothing.Name));
     }
 
     public void AddAvailableHints(int value)
     {
         AvailableHints += value;
         RefreshJsonData();
-
-        //Debug.Log("Added a hint. Total hints left: " + AvailableHints);
     }
 
     public void RemoveAvailableHints(int value)
     {
         AvailableHints -= value;
         RefreshJsonData();
-
-        //Debug.Log("Removed a hint. Total hints left: " + AvailableHints);
     }
 
     public void MoveQuestStageStatus(Quest questToMove, string from, string to)
@@ -1033,7 +994,6 @@ public class Character : MonoBehaviour
         returnOutput += "!";
 
         RefreshAllQuests();
-        //Debug.Log(returnOutput);
     }
 
     public void UpdateAreaStatus(string areaName, string status)
@@ -1087,8 +1047,6 @@ public class Character : MonoBehaviour
         }
 
         RefreshJsonData();
-
-        //Debug.Log("Collected the blueprint: " + blueprint);
     }
 
     public void CompleteObjectiveInQuest(int objectiveID, string quest)
@@ -1129,7 +1087,6 @@ public class Character : MonoBehaviour
                                     completionStatusOfQuest = true;
                                     if (aQuest.Name == "1672???" || aQuest.Name == "1672???")
                                     {
-                                        //Debug.Log(aQuest.Name);
                                         TutorialCompleted = true;
                                         RefreshJsonData();
                                         CollectBlueprint("Blueprint1");
@@ -1191,10 +1148,7 @@ public class Character : MonoBehaviour
                                         RefreshJsonData();
                                         CollectBlueprint("Blueprint1");
                                         MapEnvironmentManager mapEnvironmentManager = FindObjectOfType<MapEnvironmentManager>();
-                                        if (mapEnvironmentManager != null)
-                                        {
-                                            mapEnvironmentManager.LoadObjectsFromSequence();
-                                        }
+                                        mapEnvironmentManager?.LoadObjectsFromSequence();
                                     }
                                 }
                             }
@@ -1223,139 +1177,6 @@ public class Character : MonoBehaviour
         RefreshJsonData();
     }
 
-    //public void CompleteObjective(string objective)
-    //{
-    //    int QuestID = 0;
-    //    int ObjectiveID = 0;
-    //    bool completedStatus = false;
-    //    bool completionStatusOfQuest = false;
-
-    //    switch (SettingsManager.Instance.Language)
-    //    {
-    //        case "English":
-    //            foreach (Quest aQuest in AllQuests)
-    //            {
-    //                if (aQuest.ProgressStatus == "Ongoing")
-    //                {
-    //                    foreach (Objective aObjective in aQuest.Objectives)
-    //                    {
-    //                        //Debug.Log(aObjective.Name + " | " + objective);
-    //                        if (aObjective.Name == objective &&
-    //                            aObjective.CompletedStatus == false)
-    //                        {
-    //                            aObjective.CompletedStatus = true;
-    //                            completedStatus = true;
-    //                            QuestID = aQuest.ID;
-    //                            ObjectiveID = aObjective.ID;
-
-    //                            bool areAllObjectivesDone = true;
-    //                            foreach (Objective obj in aQuest.Objectives)
-    //                            {
-    //                                if (obj.CompletedStatus == false)
-    //                                {
-    //                                    areAllObjectivesDone = false;
-    //                                }
-    //                            }
-
-    //                            if (areAllObjectivesDone)
-    //                            {
-    //                                aQuest.ProgressStatus = "Completed";
-    //                                aQuest.CompletionStatus = true;
-    //                                aQuest.CompletionStatus = true;
-    //                                if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
-    //                                {
-    //                                    //Debug.Log(aQuest.Name);
-    //                                    TutorialCompleted = true;
-    //                                    RefreshJsonData();
-    //                                    CollectBlueprint("Blueprint1");
-    //                                    FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
-    //                                }
-    //                            }
-    //                            RefreshAllQuests();
-    //                        }
-    //                    }
-    //                }
-    //            }
-
-    //            foreach (Quest aQuest in AllQuestsDutch)
-    //            {
-    //                if (aQuest.ID == QuestID)
-    //                {
-    //                    aQuest.CompletionStatus = completionStatusOfQuest;
-    //                    foreach (Objective aObjective in aQuest.Objectives)
-    //                    {
-    //                        if (aObjective.ID == ObjectiveID)
-    //                        {
-    //                            aObjective.CompletedStatus = completedStatus;
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //            break;
-    //        case "Dutch":
-    //            foreach (Quest aQuest in AllQuestsDutch)
-    //            {
-    //                if (aQuest.ProgressStatus == "Nedovurshen")
-    //                {
-    //                    foreach (Objective aObjective in aQuest.Objectives)
-    //                    {
-    //                        //Debug.Log(aObjective.Name + " | " + objective);
-    //                        if (aObjective.Name == objective &&
-    //                            aObjective.CompletedStatus == false)
-    //                        {
-    //                            aObjective.CompletedStatus = true;
-    //                            completedStatus = true;
-    //                            QuestID = aQuest.ID;
-    //                            ObjectiveID = aObjective.ID;
-
-    //                            bool areAllObjectivesDone = true;
-    //                            foreach (Objective obj in aQuest.Objectives)
-    //                            {
-    //                                if (obj.CompletedStatus == false)
-    //                                {
-    //                                    areAllObjectivesDone = false;
-    //                                }
-    //                            }
-
-    //                            if (areAllObjectivesDone)
-    //                            {
-    //                                aQuest.ProgressStatus = "Zavurshen";
-    //                                aQuest.CompletionStatus = true;
-    //                                aQuest.CompletionStatus = true;
-    //                                if (aQuest.Name == "Tutorial" || aQuest.Name == "Trenirovka")
-    //                                {
-    //                                    //Debug.Log(aQuest.Name);
-    //                                    TutorialCompleted = true;
-    //                                    RefreshJsonData();
-    //                                    CollectBlueprint("Blueprint1");
-    //                                    FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
-    //                                }
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            }
-
-    //            foreach (Quest aQuest in AllQuests)
-    //            {
-    //                if (aQuest.ID == QuestID)
-    //                {
-    //                    aQuest.CompletionStatus = completionStatusOfQuest;
-    //                    foreach (Objective aObjective in aQuest.Objectives)
-    //                    {
-    //                        if (aObjective.ID == ObjectiveID)
-    //                        {
-    //                            aObjective.CompletedStatus = completedStatus;
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //            break;
-    //    }
-
-    //    RefreshAllQuests();
-    //}
-
     /// <summary>
     /// Updates stats starting from left to right using the new stat values in the same order. You can use it the following way: "charisma fitness", new int[] {2, 5}. The charisma value will be incremented by two while the fitness by five. Dont forget to use small letters for the stat strings.
     /// </summary>
@@ -1371,27 +1192,21 @@ public class Character : MonoBehaviour
             {
                 case "reputation":
                     Reputation += statValues[i];
-                    //Debug.Log("Increased reputation by " + statValues[i] + "!");
                     break;
                 case "stamina":
                     Stamina += statValues[i];
-                    //Debug.Log("Increased Stamina by " + statValues[i] + "!");
                     break;
                 case "knowledge":
                     Knowledge += statValues[i];
-                    //Debug.Log("Increased Knowledge by " + statValues[i] + "!");
                     break;
                 case "fitness":
                     Fitness += statValues[i];
-                    //Debug.Log("Increased Fitness by " + statValues[i] + "!");
                     break;
                 case "charisma":
                     Charisma += statValues[i];
-                    //Debug.Log("Increased charisma by " + statValues[i] + "!");
                     break;
                 case "currency":
                     Currency += statValues[i];
-                    //1("Increased currency by " + statValues[i] + "!");
                     break;
             }
         }
@@ -1564,8 +1379,6 @@ public class Character : MonoBehaviour
         // This closes the wrapper of the json file made from the beginning.
         _newQuestsDutchData += InsertTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_questsDutchJsonFilePath, _newQuestsDutchData);
-
-        //Debug.Log("Refreshed all quests json data!");
     }
 
     public void RefreshJsonData()
@@ -1574,8 +1387,6 @@ public class Character : MonoBehaviour
         // the objects in the items and clothing arrays for the json file.
         string newPlayerData = JsonUtility.ToJson(this);
         File.WriteAllText(PlayerStatsFilePath, newPlayerData.ToString());
-
-        //Debug.Log("Refreshed player json data!");
     }
 
     public void RemoveSingletonInstance()
@@ -1669,8 +1480,6 @@ public class Character : MonoBehaviour
         // This closes the wrapper of the json file made from the beginning.
         newItemsData += InsertNewLineTabs(1) + "]" + _newLine + "}";
         File.WriteAllText(_itemsDutchJsonFilePath, newItemsData);
-
-        //Debug.Log("Refreshed items json data!");
     }
 
     public void RefreshWearables()

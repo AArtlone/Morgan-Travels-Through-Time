@@ -117,10 +117,8 @@ public class DiaryDialogueLogManager : MonoBehaviour
             File.ReadAllText(Application.persistentDataPath + "/DialogueLog.json"));
         foreach (List<string> list in _pagesOfEntries)
         {
-            //Debug.Log(Environment.NewLine);
             foreach (string obj in list)
             {
-                //Debug.Log(obj);
             }
         }
 
@@ -132,7 +130,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                 {
                     if (NPCLogs["NPC"][i]["Log"][j]["Language"].ToString() == SettingsManager.Instance.Language)
                     {
-                        //Debug.Log(_currentLogEntryIndex + "|" + NPCLogs["NPC"][i]["Log"][j]["Messages"].Count);
                         if (_currentLogEntryIndex < NPCLogs["NPC"][i]["Log"][j]["Messages"].Count)
                         {
                             _lastEntryInLog = NPCLogs["NPC"][i]["Log"][j]["Messages"][NPCLogs["NPC"][i]["Log"][j]["Messages"].Count - 1].ToString();
@@ -141,7 +138,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                             _currentPositionOfLatestButton = 0;
                             List<string> newListOfEntries = new List<string>();
                             bool isDuplicate = false;
-                            //Debug.Log(_currentLogEntryIndex + " out of " + NPCLogs["NPC"][i]["Log"][j]["Messages"].Count);
                             for (int k = _currentLogEntryIndex; k < NPCLogs["NPC"][i]["Log"][j]["Messages"].Count; k++)
                             {
                                 GameObject newEntry;
@@ -186,8 +182,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                     if (_currentPositionOfLatestButton > _rightPageSectionRect.sizeDelta.y)
                                     {
                                         _currentPageInLogEntries = "Left";
-                                        //Debug.Log("Done printing.");
-                                        //Debug.Log(_currentLogEntriesPage);
 
                                         isDuplicate = false;
                                         foreach (List<string> list in _pagesOfEntries)
@@ -198,7 +192,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                                 {
                                                     if (entry == obj)
                                                     {
-                                                        //Debug.Log("cum");
                                                         isDuplicate = true;
                                                         break;
                                                     }
@@ -209,7 +202,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
 
                                         if (isDuplicate == false)
                                         {
-                                            //Debug.Log("AAAAA");
                                             _pagesOfEntries.Add(newListOfEntries);
                                         }
                                         return;
@@ -218,7 +210,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                     LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
                                 }
 
-                                //Debug.Log(_currentPositionOfLatestButton + " | " + _leftPageSectionRect.sizeDelta.y);
                                 _currentLogEntryIndex++;
                             }
 
@@ -241,7 +232,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
 
                             if (isDuplicate == false)
                             {
-                                //Debug.Log("AAAAA");
                                 _pagesOfEntries.Add(newListOfEntries);
                             }
                             break;
@@ -283,7 +273,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                         _currentLogEntryIndex += _pagesOfEntries[i].Count;
                     }
                 }
-                //Debug.Log("Backward" + _currentLogEntryIndex);
 
                 SetupLogEntries(_selectedNPC);
             }
@@ -293,7 +282,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
             {
                 if (_currentLogEntriesPage == 0)
                 {
-                    //Debug.Log("1111111");
                     _currentLogEntriesPage++;
 
                     _currentLogEntryIndex = 0;
@@ -302,7 +290,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                         _currentLogEntryIndex += _pagesOfEntries[i].Count;
                     }
 
-                    //Debug.Log("Forward" + _currentLogEntryIndex);
                     SetupLogEntries(_selectedNPC);
                 }
                 else
@@ -319,7 +306,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                 _currentLogEntryIndex += _pagesOfEntries[i].Count;
                             }
 
-                            //Debug.Log("Forward" + _currentLogEntryIndex);
                             SetupLogEntries(_selectedNPC);
                         }
 
@@ -327,7 +313,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                     }
                 }
             }
-            //Debug.Log("Current entries page = " + _currentLogEntriesPage + "|" + _pagesOfEntries.Count);
         }
     }
 

@@ -28,6 +28,8 @@ public class FontToggle : MonoBehaviour
 
     public void ChangeFont(string direction)
     {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
+
         if (direction == "Forward" || direction == "Forwards")
         {
             _currentFontIndex++;
@@ -49,10 +51,7 @@ public class FontToggle : MonoBehaviour
 
         foreach (LanguageController font in SettingsManager.Instance.LanguageControllers)
         {
-            if (font != null)
-            {
-                font.UpdateCurrentFont();
-            }
+            font?.UpdateCurrentFont();
         }
 
         SettingsManager.Instance.RefreshSettings();
