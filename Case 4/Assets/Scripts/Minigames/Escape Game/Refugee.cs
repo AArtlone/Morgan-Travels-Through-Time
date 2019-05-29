@@ -37,18 +37,6 @@ public class Refugee : MonoBehaviour
     
     void Update()
     {
-        /*while (_targetCheckpoint.Passable == false)
-        {
-            for(int i = _currentCheckpointIndex; i >= 0; i--)
-            {
-                if (_gameInterface.Checkpoints[i].Passable == true)
-                {
-                    _targetCheckpoint = _gameInterface.Checkpoints[i];
-                    break;
-                } 
-            }
-        }*/
-        
         if(_currentCheckpointIndex < _gameInterface.Checkpoints.Count - 1 &&
             _gameInterface.Checkpoints[_currentCheckpointIndex + 1].Passable == true)
         {
@@ -101,9 +89,9 @@ public class Refugee : MonoBehaviour
     /// </summary>
     private void MoveTowardsCheckpointQueueElement()
     {
-        if (Vector2.Distance(transform.position, _targetCheckpoint.QueueElements[RefugeeIndex].transform.position) > 2f)
+        if (Vector2.Distance(transform.position, _targetCheckpoint.FirstQueueElement.transform.position) > 2f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.QueueElements[RefugeeIndex].transform.position, Speed * .5f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.FirstQueueElement.transform.position, Speed * .5f * Time.deltaTime);
         } else
         {
             if (_targetCheckpoint.tag == "Final Checkpoint")
@@ -126,11 +114,6 @@ public class Refugee : MonoBehaviour
                 //    _gameInterface.StartNextWave();
                 //}
 
-
-                foreach (Checkpoint checkpoint in _gameInterface.Checkpoints)
-                {
-                    checkpoint.RemoveQueueElement(RefugeeIndex);
-                }
                 if (_gameInterface.CurrentWave == _gameInterface.RefugeeWaves.Count)
                 {
                     _gameInterface.Completed = true;

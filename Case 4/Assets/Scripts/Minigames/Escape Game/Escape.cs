@@ -91,10 +91,10 @@ public class Escape : MonoBehaviour
         }
         for (int i = 0; i < RefugeeWaves[CurrentWave].Wave.Count; i++)
         {
-            foreach(Checkpoint checkPoint in Checkpoints)
+            /*foreach(Checkpoint checkPoint in Checkpoints)
             {
                 checkPoint.CreateNewQueueElement();
-            }
+            }*/
             GameObject newRefugee;
             if (CustomizeNPC)
             {

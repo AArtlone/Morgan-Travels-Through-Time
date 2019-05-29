@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CannonBallShooting : MonoBehaviour
 {
-    public GameObject _targetPos;
+    private Vector3 _targetPos;
     public Rigidbody2D CannonBallPrefab;
+    public GameObject CheckpoinToShootAt;
     public float TimeToFly;
     private Rigidbody2D _cannonBall;
 
@@ -16,10 +17,16 @@ public class CannonBallShooting : MonoBehaviour
 
     public void Shoot()
     {
-        Vector3 Vo = CalculateVelocity(_targetPos.transform.position, transform.position, TimeToFly);
+        float FirstQueueElementXPos = CheckpoinToShootAt.GetComponent<Checkpoint>().FirstQueueElement.transform.position.x;
+        float LastQueueElementXPos = CheckpoinToShootAt.GetComponent<Checkpoint>().LastQueueElement.transform.position.x;
+
+        float randomXPos = Random.Range(FirstQueueElementXPos, LastQueueElementXPos);
+        _targetPos = new Vector3(randomXPos, CheckpoinToShootAt.transform.position.y, CheckpoinToShootAt.transform.position.z);
+        Vector3 Vo = CalculateVelocity(_targetPos, transform.position, TimeToFly);
         _cannonBall = Instantiate(CannonBallPrefab, transform.position, Quaternion.identity);
         //obj.AddForce(Vector2.right * 10);
         _cannonBall.velocity = Vo;
+        StartCoroutine(ShootAgainCO());
     }
         
     private Vector3 CalculateVelocity(Vector3 _targetPos, Vector3 shootPos, float timeToFly)
@@ -38,6 +45,12 @@ public class CannonBallShooting : MonoBehaviour
         result *= Vxz;
         result.y = Vy;
         return result;
+    }
+
+    private IEnumerator ShootAgainCO()
+    {
+        yield return new WaitForSeconds(1f);
+        Shoot();
     }
 
     public void HitCannonBallAway()

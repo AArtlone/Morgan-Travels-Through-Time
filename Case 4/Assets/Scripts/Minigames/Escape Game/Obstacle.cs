@@ -33,13 +33,7 @@ public class Obstacle : MonoBehaviour
 
     public void ToggleObstacle()
     {
-        /*if (CheckpointLink.Passable)
-        {
-            return;
-        }*/
-        Debug.Log(CheckpointLink.Passable);
         CheckpointLink.Passable = !CheckpointLink.Passable;
-        Debug.Log(CheckpointLink.Passable);
     }
 
     public void PlayBridge()
