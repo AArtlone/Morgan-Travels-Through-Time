@@ -37,7 +37,7 @@ public class Refugee : MonoBehaviour
     
     void Update()
     {
-        while (_targetCheckpoint.Passable == false)
+        /*while (_targetCheckpoint.Passable == false)
         {
             for(int i = _currentCheckpointIndex; i >= 0; i--)
             {
@@ -47,9 +47,9 @@ public class Refugee : MonoBehaviour
                     break;
                 } 
             }
-        }
+        }*/
         
-        if(_currentCheckpointIndex < _gameInterface.Checkpoints.Count - 1&&
+        if(_currentCheckpointIndex < _gameInterface.Checkpoints.Count - 1 &&
             _gameInterface.Checkpoints[_currentCheckpointIndex + 1].Passable == true)
         {
             _currentCheckpointIndex++;

@@ -6,7 +6,6 @@ public class Checkpoint: MonoBehaviour
     public bool Passable;
     public bool Occupied;
     public List<QueueElement> QueueElements;
-    public Obstacle ObstacleLink;
     public GameObject FirstQueueElement;
     public GameObject LastQueueElement;
 
