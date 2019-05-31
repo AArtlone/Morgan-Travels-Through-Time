@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LitJson;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -54,6 +55,18 @@ public class EscapeInventory : MonoBehaviour
     {
         RefreshPanel();
     }
+
+    /*public void CraftItem()
+    {
+        TextAsset itemCombinations = Resources.Load<TextAsset>("Default World Data/ItemCombinations");
+        JsonData itemCombinationsJson = JsonMapper.ToObject(itemCombinations.text);
+
+        for (int i = 0; i < itemCombinationsJson["Combinations"].Count; i++) 
+        {
+            Debug.Log(itemCombinationsJson["Combinations"][i].ToString())
+        }
+
+    }*/
 
     public void RefreshPanel()
     {
