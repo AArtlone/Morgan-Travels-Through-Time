@@ -234,7 +234,7 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void UpdateAudioVolume()
     {
-        foreach (AudioSource audioSource in BackgroundSources)
+        foreach (AudioSource audioSource in SoundSources)
         {
             if (audioSource != null)
             {

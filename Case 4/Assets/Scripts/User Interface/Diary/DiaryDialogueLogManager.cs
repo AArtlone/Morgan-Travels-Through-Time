@@ -29,6 +29,8 @@ public class DiaryDialogueLogManager : MonoBehaviour
     private string _lastEntryInLog;
     private List<string> _exploredEntries = new List<string>();
 
+    public TextMeshProUGUI SelectedNPCName;
+
     private void Start()
     {
         _leftPageSectionRect = LeftPageSection.GetComponent<RectTransform>();
@@ -40,7 +42,11 @@ public class DiaryDialogueLogManager : MonoBehaviour
     {
         ClearPage();
 
-        for (int i = _currentPage * 6; i < _currentPage * 6 + 6; i++)
+        /*for (int i = _currentPage * 6; i < _currentPage * 6 + 6; i++)
+        {
+            _buttons[i].SetActive(true);
+        }*/
+        for (int i = 0; i < _buttons.Count; i++)
         {
             _buttons[i].SetActive(true);
         }
@@ -85,6 +91,12 @@ public class DiaryDialogueLogManager : MonoBehaviour
 
     public void SetupLog()
     {
+        for (int i = 0; i < _buttons.Count; i++)
+        {
+            Destroy(_buttons[i].gameObject);
+        }
+        _buttons.Clear();
+
         JsonData NPCLogs = JsonMapper.ToObject(
             File.ReadAllText(Application.persistentDataPath + "/DialogueLog.json"));
 
@@ -107,6 +119,10 @@ public class DiaryDialogueLogManager : MonoBehaviour
     {
         _diaryManager.CloseAllPages();
 
+        ClearSection(LeftPageSection);
+        ClearSection(RightPageSection);
+
+
         if (NPCName != _selectedNPC)
         {
             _currentLogEntryIndex = 0;
@@ -122,6 +138,8 @@ public class DiaryDialogueLogManager : MonoBehaviour
             }
         }
 
+        SelectedNPCName.text = _selectedNPC;
+
         for (int i = 0; i < NPCLogs["NPC"].Count; i++)
         {
             if (NPCLogs["NPC"][i]["Name"].ToString() == _selectedNPC)
@@ -133,8 +151,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                         if (_currentLogEntryIndex < NPCLogs["NPC"][i]["Log"][j]["Messages"].Count)
                         {
                             _lastEntryInLog = NPCLogs["NPC"][i]["Log"][j]["Messages"][NPCLogs["NPC"][i]["Log"][j]["Messages"].Count - 1].ToString();
-                            ClearSection(LeftPageSection);
-                            ClearSection(RightPageSection);
                             _currentPositionOfLatestButton = 0;
                             List<string> newListOfEntries = new List<string>();
                             bool isDuplicate = false;
