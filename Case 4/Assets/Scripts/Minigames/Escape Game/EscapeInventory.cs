@@ -64,17 +64,20 @@ public class EscapeInventory : MonoBehaviour
 
     public void CraftItem(Item item1, Item item2)
     {
-        TextAsset itemCombinations = Resources.Load<TextAsset>("Default World Data/ItemCombinations");
+        TextAsset itemCombinations = Resources.Load<TextAsset>("Default World Data/EscapeItemCombinations");
         JsonData itemCombinationsJson = JsonMapper.ToObject(itemCombinations.text);
 
         for (int i = 0; i < itemCombinationsJson["Combinations"].Count; i++)
         {
             for (int j = 0; j < itemCombinationsJson["Combinations"][i]["Recipe"].Count; j++)
             {
-                if ((item1.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem1"].ToString() || item1.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem2"].ToString()) && (item2.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem1"].ToString() || item2.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem2"].ToString()))
+                if ((item1.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem1Type"].ToString() || item1.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem2Type"].ToString()) && (item2.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem1Type"].ToString() || item2.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem2Type"].ToString()))
                 {
-                    JsonData newItemData = itemCombinationsJson["Combinations"][i]["Recipe"][j]["NewItem"];
-                    Item newItem = new Item(newItemData["Name"].ToString(), newItemData["NameDutch"].ToString(), newItemData["Description"].ToString(), newItemData["DescriptionDutch"].ToString(), newItemData["Active"].ToString(), newItemData["ActiveDutch"].ToString(), newItemData["AssetImage"].ToString());
+                    JsonData newItemJsonData = itemCombinationsJson["Combinations"][i]["Recipe"][j]["NewItem"];
+                    Item newItem = new Item(newItemJsonData["Name"].ToString(), newItemJsonData["NameDutch"].ToString(), newItemJsonData["Description"].ToString(), newItemJsonData["DescriptionDutch"].ToString(), newItemJsonData["Active"].ToString(), newItemJsonData["ActiveDutch"].ToString(), newItemJsonData["AssetImage"].ToString());
+                    newItem.Type = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), newItemJsonData["Type"].ToString());
+                    RemoveItem(item1);
+                    RemoveItem(item2);
                     AddItem(newItem);
                 }
             }

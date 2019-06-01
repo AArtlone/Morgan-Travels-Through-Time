@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Item : MonoBehaviour
 {
     public bool Reactivatable;
-    public enum ItemType { Torch, Sword, EmptyBucket, FullBucket, GroningenFlag, BommenBerendFlag, BunchOfHay };
+    public enum ItemType { Torch, Sword, EmptyBucket, FullBucket, GroningenFlag, BommenBerendFlag, BunchOfHay, Cloth, Planks };
     public ItemType Type;
     public string Name;
     public string NameDutch;
@@ -203,6 +203,7 @@ public class Item : MonoBehaviour
                 }
             } else if (hitObj.transform.tag == "Item")
             {
+                Debug.Log("skra");
                 _gameInterface.Inventory.CraftItem(this, hitObj.transform.GetComponent<Item>());
             }
         }
