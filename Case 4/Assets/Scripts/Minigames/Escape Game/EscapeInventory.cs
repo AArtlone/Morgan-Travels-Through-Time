@@ -1,10 +1,16 @@
 ﻿using LitJson;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EscapeInventory : MonoBehaviour
 {
+    /*private void Start()
+    {
+        CraftItem();
+    }*/
+
     private int _currentIDCount;
 
     public void TempFunc1()
@@ -56,17 +62,25 @@ public class EscapeInventory : MonoBehaviour
         RefreshPanel();
     }
 
-    /*public void CraftItem()
+    public void CraftItem(Item item1, Item item2)
     {
         TextAsset itemCombinations = Resources.Load<TextAsset>("Default World Data/ItemCombinations");
         JsonData itemCombinationsJson = JsonMapper.ToObject(itemCombinations.text);
 
-        for (int i = 0; i < itemCombinationsJson["Combinations"].Count; i++) 
+        for (int i = 0; i < itemCombinationsJson["Combinations"].Count; i++)
         {
-            Debug.Log(itemCombinationsJson["Combinations"][i].ToString())
+            for (int j = 0; j < itemCombinationsJson["Combinations"][i]["Recipe"].Count; j++)
+            {
+                if ((item1.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem1"].ToString() || item1.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem2"].ToString()) && (item2.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem1"].ToString() || item2.Name == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequiredItem2"].ToString()))
+                {
+                    JsonData newItemData = itemCombinationsJson["Combinations"][i]["Recipe"][j]["NewItem"];
+                    Item newItem = new Item(newItemData["Name"].ToString(), newItemData["NameDutch"].ToString(), newItemData["Description"].ToString(), newItemData["DescriptionDutch"].ToString(), newItemData["Active"].ToString(), newItemData["ActiveDutch"].ToString(), newItemData["AssetImage"].ToString());
+                    AddItem(newItem);
+                }
+            }
         }
 
-    }*/
+    }
 
     public void RefreshPanel()
     {

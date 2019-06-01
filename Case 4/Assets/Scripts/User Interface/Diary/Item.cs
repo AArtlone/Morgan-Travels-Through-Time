@@ -201,6 +201,9 @@ public class Item : MonoBehaviour
                         }
                     }
                 }
+            } else if (hitObj.transform.tag == "Item")
+            {
+                _gameInterface.Inventory.CraftItem(this, hitObj.transform.GetComponent<Item>());
             }
         }
 
