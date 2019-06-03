@@ -459,9 +459,11 @@ FOOTER
 
 footer {
     position: relative;
+    margin: 20px 0 0 0;
     width: 100%;
     height: 300px;
     color: #4B4134;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 footer>img {
@@ -474,6 +476,8 @@ FOOTER CONTAINER WITHOUT HEADER
 ******************************** */
 
 footer>.container {
+    z-index: 2;
+    position: relative;
     margin: -20px auto 0 auto;
     width: max-content;
     height: inherit;
@@ -481,7 +485,7 @@ footer>.container {
 }
 
 footer>.background {
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     margin: -20px auto 0 auto;
     width: inherit;
@@ -856,10 +860,92 @@ CAMPAIGNS > DETAILS
 /* ********************************
 CONTENT
 ******************************** */
+.contentContainer {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+#content {
+    padding: 0 0 100px 0;
+}
 
-/* Classes used to enable scrolling
- navigation through different elements
- being selected by the use */
+/* ********************************
+CONTENT > HEADER & DESCRIPTION
+******************************** */
+#content>header:first-of-type {
+    margin: 150px 0 20px 0;
+    height: 200px;
+}
+#content>.separator {
+    margin: 0 auto 60px auto;
+    width: 350px;
+    height: 2px;
+    background: #816b48;
+}
+#content>header:last-of-type {
+    margin: 30px auto -30px auto;
+}
+#content>p {
+    margin: 0 auto 20px auto;
+    width: 600px;
+    text-align: center;
+    line-height: 30px;
+}
+/* ********************************
+CONTENT > IFRAMES
+******************************** */
+#content>iframe, #content>div:not(:last-of-type):not(.separator) {
+    width: 1030px;
+    border: 2px solid #284555;
+    border-radius: 4px;
+    background-color: #fff5f5;
+    text-align: left;
+    background-color: #ffffff;
+}
+#content>iframe {
+    display: block;
+    margin: 0 auto;
+    box-shadow: -8px -8px 0px 0px rgba(220, 0, 0, 0.2);
+    padding: 10px 15px;
+}
+#content>div:not(:last-of-type):not(.separator) {
+    box-shadow: -8px -8px 0px 0px rgba(220, 0, 0, 0.2);
+    padding: 10px 0;
+    margin: 0 auto;
+}
+#content>div>iframe {
+    display: block;
+    margin: 0 auto;
+    height: 400px !important;
+    border: none;
+}
+/* ********************************
+CONTENT > MORE DETAILS
+******************************** */
+#content>div:last-of-type {
+    margin: 0 auto;
+    width: 450px;
+    text-align: center;
+}
+.button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    box-shadow: -3px -3px 0px 0px rgba(220, 0, 0, 0.2);
+    background: white;
+    border: 2px solid #284555;
+    border-radius: 4px;
+    text-align: left;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.button:hover {
+    background: #31333C;
+    color: white;
+    transition: all 0.3s ease;
+}
+#content>div>input {
+    display: inline-block;
+}
+
+/* Classes used to enable scrolling navigation through different elements being selected by the use */
 .personasLink {}
 .campaignsLink {}
 .contentLink {}

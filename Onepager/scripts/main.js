@@ -155,7 +155,154 @@ $(document).ready(function () {
     var typeOfSelectedActivity = document.getElementsByClassName("typeOfSelectedActivity")[0];
     var descriptionOfSelectedActivity = document.getElementsByClassName("descriptionOfSelectedActivity")[0];
 
-    var jsonData = {"Years":[{"Name":"2019","Campaigns":[{"Name":"First Title 1","Campaign":[{"Name":"Jun","Description":"The month of June 2019 marks the beginning of the pre-launch period. Starting from this month, the aim is to generate interest in our target audience, schools, via online and offline tools at our disposal. The tools selected for this period will be: social media, fliers, and business cards. This initial tools would require 11 flyers and 18 cards, for a budget of 29€.","Activities":[{"Name":"First Title","Type":"Launch","Description":"First Title description"},{"Name":"10% Off New Title","Type":"Promotion","Description":"10% Off New Title description"}]},{"Name":"Jul","Description":"The month of July 2019 will be the last available before the launch of the first title, and therefore will be dedicated, once again, to generating interest and to the last preparations. The only tool selected for this period is social media, and the budget is 0€.","Activities":[{"Name":"First Title","Type":"Launch","Description":"First Title description"},{"Name":"10% Off New Title","Type":"Promotion","Description":"10% Off New Title description"}]},{"Name":"Aug","Description":"August is the selected month for the launch. The game is to launch during the Bommen Berend event, as it shares the subject with the event. This allows for the product to be promoted alongside the celebration. The tools used in this period will be: television, social media, and promotional material. Tv advertisement, for 25000€, and promotional material (chocolate), for 1197,50€, make up a budget of 26198€.","Activities":[{"Name":"First Title","Type":"Launch","Description":"First Title description"},{"Name":"10% Off New Title","Type":"Promotion","Description":"10% Off New Title description"}]},{"Name":"Sep","Description":"The month following the launch will be dedicated to the promotion of the game. Such promotion will be achieved via discounts with reviews. The tool required for this month is social media, with a budget of 0€.","Activities":[{"Name":"School Start","Type":"Sales","Description":"School Start description"}]}]},{"Name":"First Title 2","Campaign":[{"Name":"Jun","Description":"The month of June 2019 marks the beginning of the pre-launch period. Starting from this month, the aim is to generate interest in our target audience, primary school children. As such, the tools chosen for this month are Youtube, social media and fliers. Youtube ads cost circa 10€ per day, therefore the final estimated budget is 311€, adding the cost of the fliers.","Activities":[{"Name":"First Title","Type":"Launch","Description":"First Title description"},{"Name":"10% Off New Title","Type":"Promotion","Description":"10% Off New Title description"}]},{"Name":"Jul","Description":"The month of July 2019 will be the last available for the pre-launch period. With the aim to generate interest in our target audience, primary school children, the tools chosen for this month are Youtube and social media. The cost of running ads on Youtube for a month amounts to 300€ and constitutes our budget for the month.","Activities":[{"Name":"First Title","Type":"Launch","Description":"First Title description"},{"Name":"10% Off New Title","Type":"Promotion","Description":"10% Off New Title description"}]},{"Name":"Aug","Description":"August is the selected month for the launch. The game is to launch during the Bommen Berend event, as it shares the subject with the event. This allows for the product to be promoted alongside the celebration. The tools used in this period will be: Youtube, television, social media, and promotional material. Youtube ads, for 300€, Tv advertisement, for 25000€, and promotional material (buttons and chocolate), for 1197,50€, make up a budget of 26558€.","Activities":[{"Name":"First Title","Type":"Launch","Description":"First Title description"},{"Name":"10% Off New Title","Type":"Promotion","Description":"10% Off New Title description"}]},{"Name":"Sep","Description":"The month following the launch will be dedicated to the promotion of the game. Such promotion will be achieved via discounts with reviews. The tool required for this month is once again Youtube, with a budget of 300€.","Activities":[{"Name":"School Start","Type":"Sales","Description":"School Start description"}]}]}]}]};
+    var jsonData = {
+
+        "Years": [
+            {
+                "Name": "2019",
+                "Campaigns": [
+                    {
+                        "Name": "First Title 1",
+                        "Campaign": [
+                            {
+                                "Name": "Jun",
+                                "Description": "The month of June 2019 marks the beginning of the pre-launch period. Starting from this month, the aim is to generate interest in our target audience, schools, via online and offline tools at our disposal. The tools selected for this period will be: social media, fliers, business cards and face to face marketing. This initial tools would require flyers and cards, for a budget of €29.",
+                                "Activities": [
+                                    {
+                                        "Name": "Digital Promotion",
+                                        "Type": "Advertisement",
+                                        "Description": "Via social media like Facebook, Twitter, Youtube, Twitch advertisements will be placed in the form of having our own profiles with regular updates, having people try out our game and advertising through the platforms in a way suitable for our target audience."
+                                    },
+                                    {
+                                        "Name": "First Title",
+                                        "Type": "Launch",
+                                        "Description": "First Title description"
+                                    },
+                                    {
+                                        "Name": "10% Off New Title",
+                                        "Type": "Promotion",
+                                        "Description": "10% Off New Title description"
+                                    }
+                                ]
+                            },
+                            {
+                                "Name": "Jul",
+                                "Description": "The month of July 2019 is part of the pre-launch period as well, and therefore will be dedicated, once again, to generating interest and to the last preparations. The only tool selected for this period are social media, face to face marketing and the budget is €300.",
+                                "Activities": [
+                                    {
+                                        "Name": "First Title",
+                                        "Type": "Launch",
+                                        "Description": "First Title description"
+                                    },
+                                    {
+                                        "Name": "10% Off New Title",
+                                        "Type": "Promotion",
+                                        "Description": "10% Off New Title description"
+                                    }
+                                ]
+                            },
+                            {
+                                "Name": "Aug",
+                                "Description": "In August the first title will be launched during the Bommen Berend event, as it shares the subject with the event. This allows for the product to be promoted alongside the celebration. The tools used in this period will be: television, social media, face to face marketing and promotional material. Facebook advertisement for €300, Tv advertisement, for €25000, and promotional material (chocolate), for €1198, make up a budget of €26498.",
+                                "Activities": [
+                                    {
+                                        "Name": "First Title",
+                                        "Type": "Launch",
+                                        "Description": "The launch takes place during the Bommen Berend event. Anyone who is interested will be able to play the game during the launch event at the stand. There will be promotional material present."
+                                    },
+                                    {
+                                        "Name": "10% Off New Title",
+                                        "Type": "Promotion",
+                                        "Description": "To celebrate the launch of the first title, there will be a 10% discount in the week of the launch. This is to motivate potential buyers from getting it while it's cheaper."
+                                    }
+                                ]
+                            },
+                            {
+                                "Name": "Sep",
+                                "Description": "The month following the launch will be dedicated to the promotion of the game. Such promotion will be achieved via discounts with reviews of those who have played it. The tools required for this month are social media like facebook and face to face marketing, with a budget of 300€.",
+                                "Activities": [
+                                    {
+                                        "Name": "School Start",
+                                        "Type": "Sales",
+                                        "Description": "15% off to celebrate the start of the new school year. It's a perfect moment to learn about Bommen Berend at a discounted price!"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "Name": "First Title 2",
+                        "Campaign": [{
+                            "Name": "Jun",
+                            "Description": "The month of June 2019 marks the beginning of the pre-launch period. Starting from this month, the aim is to generate interest in our target audience, primary school children. As such, the tools chosen for this month are Youtube, social media and fliers. Youtube ads cost circa €10 per day, therefore the final estimated budget is €311, adding the cost of the fliers.",
+                            "Activities": [
+                                {
+                                    "Name": "Digital Promotion",
+                                    "Type": "Advertisement",
+                                    "Description": "Via social media like Facebook, Twitter, Youtube, Twitch advertisements will be placed in the form of having our own profiles with regular updates, having people try out our game and advertising through the platforms in a way suitable for our target audience."
+                                },
+                                {
+                                    "Name": "First Title",
+                                    "Type": "Launch",
+                                    "Description": "First Title description"
+                                },
+                                {
+                                    "Name": "10% Off New Title",
+                                    "Type": "Promotion",
+                                    "Description": "10% Off New Title description"
+                                }
+                            ]
+                        },
+                        {
+                            "Name": "Jul",
+                            "Description": "July 2019 is the last pre-launch month. With the aim to generate interest in our target audience, primary school children, the tools chosen for this month are Youtube, social media and face to face advertising by letting youngsters playtest. The cost of running ads on Youtube for a month amounts to €300 and constitutes our budget for the month.",
+                            "Activities": [
+                                {
+                                    "Name": "First Title",
+                                    "Type": "Launch",
+                                    "Description": "First Title description"
+                                },
+                                {
+                                    "Name": "10% Off New Title",
+                                    "Type": "Promotion",
+                                    "Description": "10% Off New Title description"
+                                }
+                            ]
+                        },
+                        {
+                            "Name": "Aug",
+                            "Description": "August is the selected month for the launch. The game is to launch during the Bommen Berend event, as it shares the subject with the event. This allows for the product to be promoted alongside the celebration. The tools used in this period will be: Youtube, television, social media, face to face advertising and promotional material. Youtube ads, for €300, Tv advertisement, for €25000, and promotional material (buttons and chocolate), for €1198, make up a budget of €26558.",
+                            "Activities": [
+                                {
+                                    "Name": "First Title",
+                                    "Type": "Launch",
+                                    "Description": "The launch takes place during the Bommen Berend event. Children present will be invited to play the game during the launch event at the stand. There will be promotional material present to make the experience even more pleasant."
+                                },
+                                {
+                                    "Name": "10% Off New Title",
+                                    "Type": "Promotion",
+                                    "Description": "To celebrate the launch of the first title, there will be a 10% discount in the week of the launch."
+                                }
+                            ]
+                        },
+
+                        {
+                            "Name": "Sep",
+                            "Description": "The month following the launch will be dedicated to the promotion of the game. Such promotion will be achieved via discounts with reviews of children who have played the game. The tools required for this month are once again Youtube, social media and face to face advertising, with a budget of €300.",
+                            "Activities": [
+                                {
+                                    "Name": "School Start",
+                                    "Type": "Sales",
+                                    "Description": "A nice discount of 15% is the best way the celebrate the start of a new school year!"
+                                }
+                            ]
+                        }
+                        ]
+                    }
+                ]
+            }
+        ]
+    };
 
     // ******************
     // Years events
@@ -230,57 +377,61 @@ $(document).ready(function () {
         for (var i = 0; i < campaignWrappers.length; i++) {
             if (campaignWrappers[i].style.display == "inline-block") {
                 $(monthlyButtons[0 + (i * 4)]).addClass("active");
-            }   
+            }
         }
     }
 
     // ******************
-        // Campaign activities
-        for (var i = 0; i < buttonsForActivities.length; i++) {
-            buttonsForActivities[i].addEventListener("click", function () {
-                for (var j = 0; j < jsonData.Years.length; j++) {
-                    if (j == currentYearIndex) {
-                        for (var k = 0; k < jsonData.Years[j].Campaigns.length; k++) {
-                            if (k == currentCampaignIndex) {
-                                for (var l = 0; l < jsonData.Years[j].Campaigns[k].Campaign.length; l++) {
-                                    for (var a = 0; a < jsonData.Years[j].Campaigns[k].Campaign[l].Activities.length; a++) {
-                                        var arrayOfNames = $(this).attr("name").split(" | ");
-                                        var title = arrayOfNames[0];
-                                        var type = arrayOfNames[1];
-                                        
-                                        if (jsonData.Years[j].Campaigns[k].Campaign[l].Activities[a].Name == title) {
-                                            titleOfSelectedActivity.textContent = jsonData.Years[j].Campaigns[k].Campaign[l].Activities[a].Name;
-    
-                                            typeOfSelectedActivity.style.display = "block";
+    // Campaign activities
+    for (var i = 0; i < buttonsForActivities.length; i++) {
+        buttonsForActivities[i].addEventListener("click", function () {
+            for (var j = 0; j < jsonData.Years.length; j++) {
+                if (j == currentYearIndex) {
+                    for (var k = 0; k < jsonData.Years[j].Campaigns.length; k++) {
+                        if (k == currentCampaignIndex) {
+                            for (var l = 0; l < jsonData.Years[j].Campaigns[k].Campaign.length; l++) {
+                                for (var a = 0; a < jsonData.Years[j].Campaigns[k].Campaign[l].Activities.length; a++) {
+                                    var arrayOfNames = $(this).attr("name").split(" | ");
+                                    var title = arrayOfNames[0];
+                                    var type = arrayOfNames[1];
 
-                                            resetActivityClasses();
-                                            
-                                            var newIcon;
-                                            switch (type) {
-                                                case "Launch":
-                                                    $(this).addClass("activeGreenActivity");
-                                                    newIcon = '<i class="fas fa-rocket"></i>';
-                                                    break;
-                                                case "Promotion":
-                                                    $(this).addClass("activeBlueActivity");
-                                                    newIcon = '<i class="fas fa-tv"></i>';
-                                                    break;
-                                                case "Sales":
-                                                    $(this).addClass("activeOrangeActivity");
-                                                    newIcon = '<i class="fas fa-money-bill-alt"></i>';
-                                                    break;
-                                            }
+                                    if (jsonData.Years[j].Campaigns[k].Campaign[l].Activities[a].Name == title) {
+                                        titleOfSelectedActivity.textContent = jsonData.Years[j].Campaigns[k].Campaign[l].Activities[a].Name;
 
-                                            typeOfSelectedActivity.innerHTML = newIcon + " " + type;
-                                        
-                                            descriptionOfSelectedActivity.textContent = jsonData.Years[j].Campaigns[k].Campaign[l].Activities[a].Description;
+                                        typeOfSelectedActivity.style.display = "block";
 
-                                            for (var z = 0; z < monthlyButtons.length; z++) {
-                                                if (monthlyButtons[z].textContent == this.textContent) {
-                                                    $(monthlyButtons[z]).addClass("active");
-                                                } else {
-                                                    $(monthlyButtons[z]).removeClass("active");
-                                                }
+                                        resetActivityClasses();
+
+                                        var newIcon;
+                                        switch (type) {
+                                            case "Launch":
+                                                $(this).addClass("activeGreenActivity");
+                                                newIcon = '<i class="fas fa-rocket"></i>';
+                                                break;
+                                            case "Promotion":
+                                                $(this).addClass("activeOrangeActivity");
+                                                newIcon = '<i class="fas fa-tv"></i>';
+                                                break;
+                                            case "Advertisement":
+                                                $(this).addClass("activeBlueActivity");
+                                                newIcon = '<i class="fas fa-tv"></i>';
+                                                break;
+                                            case "Sales":
+                                                $(this).addClass("activeOrangeActivity");
+                                                newIcon = '<i class="fas fa-money-bill-alt"></i>';
+                                                break;
+
+                                        }
+
+                                        typeOfSelectedActivity.innerHTML = newIcon + " " + type;
+
+                                        descriptionOfSelectedActivity.textContent = jsonData.Years[j].Campaigns[k].Campaign[l].Activities[a].Description;
+
+                                        for (var z = 0; z < monthlyButtons.length; z++) {
+                                            if (monthlyButtons[z].textContent == this.textContent) {
+                                                $(monthlyButtons[z]).addClass("active");
+                                            } else {
+                                                $(monthlyButtons[z]).removeClass("active");
                                             }
                                         }
                                     }
@@ -289,8 +440,9 @@ $(document).ready(function () {
                         }
                     }
                 }
-            });
-        }
+            }
+        });
+    }
 
     // ******************
     // Campaign Monthly events
@@ -306,11 +458,11 @@ $(document).ready(function () {
                                     titleOfSelectedActivity.textContent = jsonData.Years[j].Campaigns[k].Campaign[l].Name;
 
                                     typeOfSelectedActivity.style.display = "none";
-                                    
+
                                     resetActivityClasses();
 
                                     descriptionOfSelectedActivity.textContent = jsonData.Years[j].Campaigns[k].Campaign[l].Description;
-                                    
+
                                     for (var z = 0; z < monthlyButtons.length; z++) {
                                         if (monthlyButtons[z].textContent == this.textContent) {
                                             $(monthlyButtons[z]).addClass("active");
@@ -343,6 +495,6 @@ $(document).ready(function () {
     titleOfSelectedActivity.textContent = jsonData.Years[currentYearIndex].Campaigns[currentCampaignIndex].Campaign[0].Name;
 
     typeOfSelectedActivity.style.display = "none";
-    
+
     descriptionOfSelectedActivity.textContent = jsonData.Years[currentYearIndex].Campaigns[currentCampaignIndex].Campaign[0].Description;
 });
