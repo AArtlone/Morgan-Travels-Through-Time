@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Item : MonoBehaviour
 {
     public bool Reactivatable;
-    public enum ItemType { Torch, Sword, EmptyBucket, FullBucket, GroningenFlag, BommenBerendFlag, BunchOfHay, Cloth, Planks };
+    public enum ItemType { Torch, Sword, EmptyBucket, FullBucket, GroningenFlag, BommenBerendFlag, BunchOfHay, Cloth, Planks, Stretcher };
     public ItemType Type;
     public string Name;
     public string NameDutch;
@@ -125,6 +125,11 @@ public class Item : MonoBehaviour
         _timer = 0;
     }
 
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        Debug.Log(col.transform.name);
+    }
+
     public void DropItem()
     {
         _cameraBehaviour.IsInterfaceElementSelected = false;
@@ -133,6 +138,7 @@ public class Item : MonoBehaviour
 
         Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
         RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity);
+        //Debug.Log(hitObj.transform.name);
 
         if (hitObj.transform != null)
         {
@@ -201,18 +207,22 @@ public class Item : MonoBehaviour
                         }
                     }
                 }
-            } else if (hitObj.transform.tag == "Item")
-            {
-                Debug.Log("skra");
-                _gameInterface.Inventory.CraftItem(this, hitObj.transform.GetComponent<Item>());
             }
         }
 
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.position = ray.origin;
+
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
+            if (hit.transform.tag == "Item")
+            {
+                _gameInterface.Inventory.CraftItem(this, hit.transform.GetComponent<Item>());
+            }
+
             if (hit.transform.tag == "NPC")
             {
                 // TODO: Based on item throw, show a wrong item drop dialogue or the correct one for the main npc dialogue starting from the point after you drop the item.

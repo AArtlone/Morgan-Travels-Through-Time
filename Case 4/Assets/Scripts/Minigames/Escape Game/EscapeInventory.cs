@@ -74,8 +74,12 @@ public class EscapeInventory : MonoBehaviour
                 if ((item1.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem1Type"].ToString() || item1.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem2Type"].ToString()) && (item2.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem1Type"].ToString() || item2.Type.ToString() == itemCombinationsJson["Combinations"][i]["Recipe"][j]["RequieredItem2Type"].ToString()))
                 {
                     JsonData newItemJsonData = itemCombinationsJson["Combinations"][i]["Recipe"][j]["NewItem"];
-                    Item newItem = new Item(newItemJsonData["Name"].ToString(), newItemJsonData["NameDutch"].ToString(), newItemJsonData["Description"].ToString(), newItemJsonData["DescriptionDutch"].ToString(), newItemJsonData["Active"].ToString(), newItemJsonData["ActiveDutch"].ToString(), newItemJsonData["AssetImage"].ToString());
-                    newItem.Type = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), newItemJsonData["Type"].ToString());
+
+                    Item newItem = new Item(newItemJsonData["Name"].ToString(), newItemJsonData["NameDutch"].ToString(), newItemJsonData["Description"].ToString(), newItemJsonData["DescriptionDutch"].ToString(), newItemJsonData["Active"].ToString(), newItemJsonData["ActiveDutch"].ToString(), newItemJsonData["AssetsImageName"].ToString());
+
+                    Item.ItemType newItemType = (Item.ItemType)System.Enum.Parse(typeof(Item.ItemType), newItemJsonData["Type"].ToString());
+                    newItem.Type = newItemType;
+
                     RemoveItem(item1);
                     RemoveItem(item2);
                     AddItem(newItem);
@@ -103,7 +107,7 @@ public class EscapeInventory : MonoBehaviour
             Item newItemScript = newItem.GetComponent<Item>();
             // We use predefined images from the resources folder to load each
             // item's sprites from outside the game and assign it to the new item.
-            Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + InterfaceManager.Instance.Items[i].Value.GetComponent<Item>().AssetsImageName);
+            Sprite sprite = Resources.Load<Sprite>("Items/Inventory/" + InterfaceManager.Instance.Items[i].Value.AssetsImageName);
 
             newItem.GetComponent<Image>().sprite = sprite;
             newItemScript.Type = InterfaceManager.Instance.Items[i].Value.Type;
