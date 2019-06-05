@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class EscapeInventory : MonoBehaviour
 {
-    /*private void Start()
-    {
-        CraftItem();
-    }*/
-
     private int _currentIDCount;
 
     public void TempFunc1()
@@ -86,7 +81,6 @@ public class EscapeInventory : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void RefreshPanel()

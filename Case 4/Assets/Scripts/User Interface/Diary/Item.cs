@@ -157,7 +157,6 @@ public class Item : MonoBehaviour
                     // object is a well. If yes, then it replaces the empty bucket with a
                     // full bucket
 
-
                     if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
                     {
                         _gameInterface.Inventory.RemoveItem(this);

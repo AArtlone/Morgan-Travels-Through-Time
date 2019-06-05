@@ -17,6 +17,7 @@ public class Escape : MonoBehaviour
     public int RefugeesSaved;
     public int DelayBetweenWaves;
     public int TotalPoints;
+    public float ExplosionRadius;
     public GameObject TreeObstaclePrefab;
     public List<List<Refugee>> CurrentRefugees = new List<List<Refugee>>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();

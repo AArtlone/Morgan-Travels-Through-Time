@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonBallShooting : MonoBehaviour
+public class CannonBallShooting: MonoBehaviour
 {
     private Vector3 _targetPos;
     public Rigidbody2D CannonBallPrefab;
     public GameObject CheckpoinToShootAt;
     public float TimeToFly;
+    public int TimeBetweenSalvos;
+    public LayerMask LayerMask;
     private Rigidbody2D _cannonBall;
 
     private void Start()
@@ -49,7 +51,7 @@ public class CannonBallShooting : MonoBehaviour
 
     private IEnumerator ShootAgainCO()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(TimeBetweenSalvos);
         Shoot();
     }
 
