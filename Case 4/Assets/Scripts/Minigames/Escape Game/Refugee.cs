@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Random = UnityEngine.Random;
+using Anima2D;
 
 public class Refugee : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class Refugee : MonoBehaviour
 
     private int _currentCheckpointIndex = 0;
     private Checkpoint _targetCheckpoint;
-    public enum RefugeeStatus { Walking, Wondering, Idle };
+    private RefugeeStatus _previousStatus;
+    public enum RefugeeStatus { Walking, Wondering, Idle, Injured };
     public RefugeeStatus Status;
     private Animator _animator;
     public int RewardInPoints;
@@ -56,24 +58,25 @@ public class Refugee : MonoBehaviour
 
     private void ChangeRefugeeStatus(RefugeeStatus NewRefugeeStatus)
     {
+        _previousStatus = Status;
         if (NewRefugeeStatus == RefugeeStatus.Idle)
         {
             _animator.SetBool("IsWalking", false);
-            Status = NewRefugeeStatus;
             StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Wondering));
         } else if (NewRefugeeStatus == RefugeeStatus.Wondering)
         {
             _animator.SetBool("IsWalking", true);
-            Status = NewRefugeeStatus;
             StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Idle));
         } else if (NewRefugeeStatus == RefugeeStatus.Walking)
         {
             FlipNPC("Right");
             _animator.SetBool("IsWalking", true);
             StopAllCoroutines();
-            Status = NewRefugeeStatus;
+        } else if (NewRefugeeStatus == RefugeeStatus.Injured)
+        {
+            _animator.SetBool("IsWalking", false);
+            StopAllCoroutines();
         }
-
         Status = NewRefugeeStatus; 
     }
 
@@ -133,7 +136,13 @@ public class Refugee : MonoBehaviour
                     }
                 }
             }
-            ChangeRefugeeStatus(RefugeeStatus.Wondering);
+            if (_previousStatus == RefugeeStatus.Injured)
+            {
+                ChangeRefugeeStatus(RefugeeStatus.Injured);
+            } else
+            {
+                ChangeRefugeeStatus(RefugeeStatus.Wondering);
+            }
         }
     }
 
@@ -178,6 +187,24 @@ public class Refugee : MonoBehaviour
             FacingLeft = false;
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
+    }
+
+    public void InjureRefugee()
+    {
+        //TODO: Change animation to injured once roger creates one
+        ChangeRefugeeStatus(RefugeeStatus.Injured);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90f);
+        foreach (SpriteMeshInstance component in GetComponentsInChildren<SpriteMeshInstance>())
+        {
+            component.sortingOrder = component.sortingOrder + _gameInterface.GetLayerMultiplier();
+        }
+    }
+
+    public void CureRefugee()
+    {
+        GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, transform.position, Quaternion.identity);
+        stretcher.transform.parent = transform;
+        transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

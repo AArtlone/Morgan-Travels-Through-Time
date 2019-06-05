@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
-    private Escape _gameInterface;
     private CannonBallShooting _canonInterface;
-    private List<Collider2D> _objectsHit = new List<Collider2D>();
 
     private void Start()
     {
-        _gameInterface = FindObjectOfType<Escape>();
         _canonInterface = FindObjectOfType<CannonBallShooting>();
     }
     private void OnTriggerEnter2D(Collider2D col)
@@ -18,15 +15,24 @@ public class CannonBall : MonoBehaviour
         if (col.transform.tag == "Escape Ground")
         {
             GetComponent<SpriteRenderer>().sprite = null;
-            Collider2D[] objHit = Physics2D.OverlapCircleAll(col.transform.position, _gameInterface.ExplosionRadius, _canonInterface.LayerMask);
+            _canonInterface.TempList.Clear();
+            Collider2D[] objectsHit = Physics2D.OverlapCircleAll(col.transform.position, _canonInterface.ExplosionRadius, _canonInterface.LayerMask);
 
-            for (int i = 0; i < objHit.Length; i++)
+            for (int i = 0; i < objectsHit.Length; i++)
             {
-                float distanceToTheCenterOfExplosion;
-                distanceToTheCenterOfExplosion = Vector2.Distance(objHit[i].transform.position, col.transform.position);
+                _canonInterface.TempList.Add(objectsHit[i].transform.gameObject);
             }
+            if (objectsHit.Length > 0)
+            {
+                objectsHit[0].GetComponent<Refugee>().InjureRefugee();
+                _canonInterface.CanShoot = false;
+                //_canonInterface.gameObject.SetActive(false);
+            } else
+            {
+                _canonInterface.CanShoot = true;
+            }
+            Invoke("DestroyCannonBall", 1f);
         }
-        Invoke("DestroyCannonBall", 1f);
     }
 
     private void DestroyCannonBall()

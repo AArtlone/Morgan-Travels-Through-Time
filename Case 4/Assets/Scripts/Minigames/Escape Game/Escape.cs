@@ -9,6 +9,7 @@ using Anima2D;
 public class Escape : MonoBehaviour
 {
     public EscapeInventory Inventory;
+    public CannonBallShooting _cannonInterface;
     public bool CustomizeNPC = false;
     public string Name;
     public string NameDutch;
@@ -17,7 +18,6 @@ public class Escape : MonoBehaviour
     public int RefugeesSaved;
     public int DelayBetweenWaves;
     public int TotalPoints;
-    public float ExplosionRadius;
     public GameObject TreeObstaclePrefab;
     public List<List<Refugee>> CurrentRefugees = new List<List<Refugee>>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
@@ -41,6 +41,9 @@ public class Escape : MonoBehaviour
     [Header("Obstacle related objects.")]
     public GameObject Antagonist;
     public GameObject Fire;
+
+    [Header("Other prefabs.")]
+    public GameObject StretcherPrefab;
 
     private string _escapeGamesJsonFile;
 
@@ -126,7 +129,7 @@ public class Escape : MonoBehaviour
 
             LayerMultiplier += 4;
             
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(.5f);
         }
     }
     
@@ -158,6 +161,7 @@ public class Escape : MonoBehaviour
 
     public void StartNextWave()
     {
+        ResetCanonForNewWave();
         StartCoroutine(SpawnRefugee());
         StartCoroutine(PlayNewWaveNotification());
     }
@@ -282,5 +286,16 @@ public class Escape : MonoBehaviour
         }
 
         return whiteSpace;
+    }
+    
+    private void ResetCanonForNewWave()
+    {
+        _cannonInterface.CurrentNumberOfsalvosShot = 0;
+        _cannonInterface.CanShoot = true;
+    }
+
+    public int GetLayerMultiplier()
+    {
+        return LayerMultiplier;
     }
 }

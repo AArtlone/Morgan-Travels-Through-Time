@@ -9,26 +9,36 @@ public class CannonBallShooting: MonoBehaviour
     public GameObject CheckpoinToShootAt;
     public float TimeToFly;
     public int TimeBetweenSalvos;
+    public int NumberOfSalvos; // The number of times that the cannon will shoot before making the obstacle passable 
+    [System.NonSerialized]
+    public int CurrentNumberOfsalvosShot = 0; // Current number of salvos shot for current wave
+    public float ExplosionRadius;
+    public bool CanShoot = true;
     public LayerMask LayerMask;
     private Rigidbody2D _cannonBall;
+    public List<GameObject> TempList = new List<GameObject>();
 
     private void Start()
     {
-        Shoot();
+        Invoke("Shoot", 3f);
     }
 
     public void Shoot()
     {
-        float FirstQueueElementXPos = CheckpoinToShootAt.GetComponent<Checkpoint>().FirstQueueElement.transform.position.x;
-        float LastQueueElementXPos = CheckpoinToShootAt.GetComponent<Checkpoint>().LastQueueElement.transform.position.x;
+        if (CanShoot == true && CurrentNumberOfsalvosShot < NumberOfSalvos)
+        {
+            float FirstQueueElementXPos = CheckpoinToShootAt.GetComponent<Checkpoint>().FirstQueueElement.transform.position.x;
+            float LastQueueElementXPos = CheckpoinToShootAt.GetComponent<Checkpoint>().LastQueueElement.transform.position.x;
 
-        float randomXPos = Random.Range(FirstQueueElementXPos, LastQueueElementXPos);
-        _targetPos = new Vector3(randomXPos, CheckpoinToShootAt.transform.position.y, CheckpoinToShootAt.transform.position.z);
-        Vector3 Vo = CalculateVelocity(_targetPos, transform.position, TimeToFly);
-        _cannonBall = Instantiate(CannonBallPrefab, transform.position, Quaternion.identity);
-        //obj.AddForce(Vector2.right * 10);
-        _cannonBall.velocity = Vo;
-        StartCoroutine(ShootAgainCO());
+            float randomXPos = Random.Range(FirstQueueElementXPos, LastQueueElementXPos + 1f);
+            _targetPos = new Vector3(randomXPos, CheckpoinToShootAt.transform.position.y, CheckpoinToShootAt.transform.position.z);
+            Vector3 Vo = CalculateVelocity(_targetPos, transform.position, TimeToFly);
+            _cannonBall = Instantiate(CannonBallPrefab, transform.position, Quaternion.identity);
+            _cannonBall.velocity = Vo;
+            CurrentNumberOfsalvosShot++;
+            CanShoot = false;
+            StartCoroutine(ShootAgainCO());
+        }
     }
         
     private Vector3 CalculateVelocity(Vector3 _targetPos, Vector3 shootPos, float timeToFly)
@@ -58,5 +68,6 @@ public class CannonBallShooting: MonoBehaviour
     public void HitCannonBallAway()
     {
         _cannonBall.velocity *= -5;
+        CanShoot = true;
     }
 }

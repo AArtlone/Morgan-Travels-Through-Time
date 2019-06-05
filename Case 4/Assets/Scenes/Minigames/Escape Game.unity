@@ -551,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 6773612594324243356, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6773612594324243345, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
@@ -1120,7 +1120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132097512}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -726.18, y: -389.567, z: 0}
+  m_LocalPosition: {x: -732.78, y: -389.567, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1456356391}
@@ -2502,9 +2502,13 @@ MonoBehaviour:
   CheckpoinToShootAt: {fileID: 1258399018}
   TimeToFly: 2
   TimeBetweenSalvos: 2
+  NumberOfSalvos: 5
+  ExplosionRadius: 35
+  CanShoot: 1
   LayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  TempList: []
 --- !u!212 &318266558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3133,7 +3137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445348050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -75.91, y: -2.43, z: -10}
+  m_LocalPosition: {x: -84.11, y: -2.43, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3958,7 +3962,7 @@ PrefabInstance:
     - target: {fileID: 5278695433165830978, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5278695433165830979, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
@@ -6229,7 +6233,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07555008, y: 0}
+  m_Offset: {x: 1.9549522, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -6240,7 +6244,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17.426567, y: 5.12}
+  m_Size: {x: 13.365562, y: 5.12}
   m_EdgeRadius: 0
 --- !u!212 &1007945074
 SpriteRenderer:
@@ -7644,7 +7648,7 @@ PrefabInstance:
     - target: {fileID: 6773612594324243356, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6773612594324243345, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
@@ -10331,6 +10335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Inventory: {fileID: 0}
+  _cannonInterface: {fileID: 318266557}
   CustomizeNPC: 0
   Name: to lose
   NameDutch: da zaguba
@@ -10339,7 +10344,6 @@ MonoBehaviour:
   RefugeesSaved: 0
   DelayBetweenWaves: 2
   TotalPoints: 0
-  ExplosionRadius: 1000
   TreeObstaclePrefab: {fileID: 834900314292854156, guid: 8ef4c64717c2d664fa38bce182acba63,
     type: 3}
   Checkpoints:
@@ -10397,6 +10401,8 @@ MonoBehaviour:
     type: 3}
   Antagonist: {fileID: 202262803}
   Fire: {fileID: 1788203778}
+  StretcherPrefab: {fileID: 7531322992088621313, guid: b1468e69b56a5e843a41d44ae4e2f741,
+    type: 3}
 --- !u!114 &2104291419
 MonoBehaviour:
   m_ObjectHideFlags: 0

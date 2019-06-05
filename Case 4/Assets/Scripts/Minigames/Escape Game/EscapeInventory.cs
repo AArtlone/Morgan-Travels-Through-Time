@@ -8,18 +8,6 @@ public class EscapeInventory : MonoBehaviour
 {
     private int _currentIDCount;
 
-    public void TempFunc1()
-    {
-        RemoveItem(InterfaceManager.Instance.Items[0].Value);
-    }
-    public void TempFunc2()
-    {
-        RemoveItem(InterfaceManager.Instance.Items[1].Value);
-    }
-    public void TempFunc3()
-    {
-        RemoveItem(InterfaceManager.Instance.Items[2].Value);
-    }
 
     public bool AddItem(Item item)
     {

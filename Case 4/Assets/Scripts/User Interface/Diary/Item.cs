@@ -142,6 +142,10 @@ public class Item : MonoBehaviour
 
         if (hitObj.transform != null)
         {
+            if (Type == ItemType.Stretcher && hitObj.transform.gameObject.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+            {
+                hitObj.transform.gameObject.GetComponent<Refugee>().CureRefugee();
+            }
             // Checking if the item was dropped on top of the object in the escape
             // game that can be interacted with the item
             if (hitObj.transform.tag == "Item Interactable Object")
@@ -150,6 +154,9 @@ public class Item : MonoBehaviour
                 {
                     _gameInterface.Inventory.RemoveItem(this);
                     _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
+                } else if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
+                {
+                    hitObj.transform.GetComponent<Refugee>().CureRefugee();
                 } else
                 {
                     Obstacle.ObstacleType obstacleType = hitObj.transform.gameObject.GetComponent<Obstacle>().Type;
@@ -211,9 +218,6 @@ public class Item : MonoBehaviour
 
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
-
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = ray.origin;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
