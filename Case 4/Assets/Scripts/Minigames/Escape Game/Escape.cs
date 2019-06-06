@@ -162,7 +162,7 @@ public class Escape : MonoBehaviour
 
     public void StartNextWave()
     {
-        ResetCanonForNewWave();
+        ResetObstacleValuesForNextWave();
         StartCoroutine(SpawnRefugee());
         StartCoroutine(PlayNewWaveNotification());
     }
@@ -289,11 +289,13 @@ public class Escape : MonoBehaviour
         return whiteSpace;
     }
     
-    private void ResetCanonForNewWave()
+    private void ResetObstacleValuesForNextWave()
     {
         _cannonInterface.CurrentNumberOfsalvosShot = 0;
         _cannonInterface.CanShoot = true;
+        ObstacleIntercationElement.ResetValuesForNextWave();
     }
+
 
     public int GetLayerMultiplier()
     {

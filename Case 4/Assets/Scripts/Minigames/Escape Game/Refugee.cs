@@ -183,7 +183,7 @@ public class Refugee : MonoBehaviour
 
     private void MoveTowardsObsIntElement()
     {
-        if (Vector2.Distance(transform.position, _obstIntElement.transform.position) > 2f)
+        if (Vector2.Distance(transform.position, _obstIntElement.transform.position) > .1f)
         {
             transform.position = Vector2.MoveTowards(transform.position, _obstIntElement.transform.position, Speed * .5f * Time.deltaTime);
         } else

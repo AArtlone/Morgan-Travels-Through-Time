@@ -7,6 +7,7 @@ public class ObstacleIntercationElement : MonoBehaviour
     public Obstacle ObstacleLink;
     public bool IsOccupied = false;
     private bool _isAssigned = false;
+    private static int _refugeesAtObsIntElement;
     private Escape _gameInterface;
     private Refugee _refuggeToAssign;
     private List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>> _obsIntElementsOfThisType = new List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>>();
@@ -18,11 +19,18 @@ public class ObstacleIntercationElement : MonoBehaviour
 
         foreach (KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement> pair in _gameInterface.AllObsIntElements)
         {
-            if (pair.Value == this)
+            if (pair.Key == ObstacleLink.Type)
             {
                 _obsIntElementsOfThisType.Add(pair);
             }
         }
+
+        Debug.Log(_obsIntElementsOfThisType.Count + "|" + _gameInterface.AllObsIntElements.Count);
+    }
+
+    public static void ResetValuesForNextWave()
+    {
+        _refugeesAtObsIntElement = 0;
     }
 
     public void AssignRefugee()
@@ -36,24 +44,35 @@ public class ObstacleIntercationElement : MonoBehaviour
 
     public void RefugeeReachedObsIntElement()
     {
-        if (IsOccupied == false)
+        /*if (IsOccupied == false)
         {
             IsOccupied = true;
+        }*/
+
+        if (_refuggeToAssign.Status == Refugee.RefugeeStatus.AtObsIntElement)
+        {
+            _refugeesAtObsIntElement++;
+        }
+        Debug.Log(_refugeesAtObsIntElement);
+        if (_refugeesAtObsIntElement == 3)
+        {
+            ObstacleLink.PlayTree();
         }
 
-        bool areAllOccupied = false;
+        /*int occupiedCounter = 0;
         foreach (KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement> pair in _obsIntElementsOfThisType)
         {
             if (pair.Value.IsOccupied == true)
             {
-                areAllOccupied = true;
+                occupiedCounter++;
             }
         }
+        Debug.Log(occupiedCounter);
 
-        if (areAllOccupied == true)
+        if (occupiedCounter == 3)
         {
             ObstacleLink.PlayTree();
-        }
+        }*/
     }
 
     private Refugee ChooseRefugee()
