@@ -2,7 +2,7 @@
 
 public class Obstacle : MonoBehaviour
 {
-    public enum ObstacleType { Fire, EvilPlant, Flag, Bridge, Sheeps};
+    public enum ObstacleType { Fire, EvilPlant, Flag, Bridge, Sheeps, Tree};
     public ObstacleType Type;
     public Checkpoint CheckpointLink;
     public LayerMask ObstacleLayer;
@@ -25,10 +25,11 @@ public class Obstacle : MonoBehaviour
         if (gameObject.name == "Bridge Lever")
         {
             PlayBridge();
-        } else if (gameObject.name == "Tree Obstacle")
+        }
+        /*else if (gameObject.name == "Tree Obstacle")
         {
             PlayTree();
-        }
+        }*/
     }
 
     public void ToggleObstacle()
@@ -91,7 +92,10 @@ public class Obstacle : MonoBehaviour
 
     public void PlayTree()
     {
-        if (Input.touchCount > 0)
+        ToggleObstacle();
+        gameObject.SetActive(false);
+        _gameInterface.RespawnObstacle(gameObject);
+        /*if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
 
@@ -107,7 +111,7 @@ public class Obstacle : MonoBehaviour
                     _gameInterface.RespawnObstacle(gameObject);
                 }
             }
-        }
+        }*/
     }
 
     public void PLayFire()

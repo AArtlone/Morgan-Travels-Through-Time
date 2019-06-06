@@ -11,7 +11,7 @@ public class Refugee : MonoBehaviour
     private int _currentCheckpointIndex = 0;
     private Checkpoint _targetCheckpoint;
     private RefugeeStatus _previousStatus;
-    public enum RefugeeStatus { Walking, Wondering, Idle, Injured };
+    public enum RefugeeStatus { Walking, Wondering, Idle, Injured, WalkingToObsIntElement, AtObsIntElement };
     public RefugeeStatus Status;
     private Animator _animator;
     public int RewardInPoints;
@@ -25,6 +25,8 @@ public class Refugee : MonoBehaviour
 
     public int Speed;
     public int WonderingSpeed;
+
+    private GameObject _obstIntElement;
 
     void Start()
     {
@@ -53,13 +55,46 @@ public class Refugee : MonoBehaviour
         } else if (Status == RefugeeStatus.Walking)
         {
             MoveTowardsCheckpointQueueElement();
+        } else if (Status == RefugeeStatus.WalkingToObsIntElement)
+        {
+            MoveTowardsObsIntElement();
         }
     }
 
     private void ChangeRefugeeStatus(RefugeeStatus NewRefugeeStatus)
     {
         _previousStatus = Status;
-        if (NewRefugeeStatus == RefugeeStatus.Idle)
+
+        switch (NewRefugeeStatus)
+        {
+            case RefugeeStatus.Idle:
+                _animator.SetBool("IsWalking", false);
+                StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Wondering));
+                break;
+            case RefugeeStatus.Wondering:
+                _animator.SetBool("IsWalking", true);
+                StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Idle));
+                break;
+            case RefugeeStatus.Walking:
+                FlipNPC("Right");
+                _animator.SetBool("IsWalking", true);
+                StopAllCoroutines();
+                break;
+            case RefugeeStatus.Injured:
+                _animator.SetBool("IsWalking", false);
+                StopAllCoroutines();
+                break;
+            case RefugeeStatus.WalkingToObsIntElement:
+                FlipNPC("Right");
+                _animator.SetBool("IsWalking", true);
+                StopAllCoroutines();
+                break;
+            case RefugeeStatus.AtObsIntElement:
+                _animator.SetBool("IsWalking", false);
+                StopAllCoroutines();
+                break;
+        }
+        /*if (NewRefugeeStatus == RefugeeStatus.Idle)
         {
             _animator.SetBool("IsWalking", false);
             StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Wondering));
@@ -76,7 +111,7 @@ public class Refugee : MonoBehaviour
         {
             _animator.SetBool("IsWalking", false);
             StopAllCoroutines();
-        }
+        }*/
         Status = NewRefugeeStatus; 
     }
 
@@ -146,6 +181,18 @@ public class Refugee : MonoBehaviour
         }
     }
 
+    private void MoveTowardsObsIntElement()
+    {
+        if (Vector2.Distance(transform.position, _obstIntElement.transform.position) > 2f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, _obstIntElement.transform.position, Speed * .5f * Time.deltaTime);
+        } else
+        {
+            ChangeRefugeeStatus(RefugeeStatus.AtObsIntElement);
+            _obstIntElement.GetComponent<ObstacleIntercationElement>().RefugeeReachedObsIntElement();
+        }
+    }
+
     /// <summary>
     /// NPC's movement while it is standing at the checkpoint in fron of the obstacle
     /// </summary>
@@ -205,6 +252,12 @@ public class Refugee : MonoBehaviour
         GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, transform.position, Quaternion.identity);
         stretcher.transform.parent = transform;
         transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+    }
+
+    public void AssignRefugeeToObsIntElement(GameObject obj)
+    {
+        ChangeRefugeeStatus(RefugeeStatus.WalkingToObsIntElement);
+        _obstIntElement = obj;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -21,6 +21,7 @@ public class Escape : MonoBehaviour
     public GameObject TreeObstaclePrefab;
     public List<List<Refugee>> CurrentRefugees = new List<List<Refugee>>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
+    public List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>> AllObsIntElements = new List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
     public List<GameObject> ItemsOnMap = new List<GameObject>();
     public string QuestForObjective;

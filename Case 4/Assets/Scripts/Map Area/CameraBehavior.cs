@@ -188,6 +188,9 @@ public class CameraBehavior : MonoBehaviour
                                 }
                             }
                             break;
+                        case "ObsIntElement":
+                            hitObj.transform.GetComponent<ObstacleIntercationElement>().AssignRefugee();
+                            break;
                     }
                 }
             } else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
