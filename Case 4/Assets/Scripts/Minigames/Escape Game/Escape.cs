@@ -24,7 +24,8 @@ public class Escape : MonoBehaviour
     public List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>> AllObsIntElements = new List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
     public List<GameObject> ObsContainers = new List<GameObject>();
-    public List<GameObject> ObsPrefabs= new List<GameObject>();
+    public List<GameObject> ObsPrefabs = new List<GameObject>();
+    private List<Obstacle> _currentObstacles = new List<Obstacle>();
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public string AreaToUnlock;
@@ -111,6 +112,8 @@ public class Escape : MonoBehaviour
             newObs.transform.parent = container.transform;
 
             newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;
+
+            _currentObstacles.Add(newObs.GetComponent<Obstacle>());
         }
     }
 
@@ -326,5 +329,40 @@ public class Escape : MonoBehaviour
     public int GetLayerMultiplier()
     {
         return LayerMultiplier;
+    }
+
+    private void SpawnNewObstacle(Transform container)
+    {
+        int rndIndex = UnityEngine.Random.Range(1, 6);
+
+        foreach (Obstacle obs in _currentObstacles)
+        {
+            while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obs.Type)
+            {
+                rndIndex = UnityEngine.Random.Range(1, 6);
+            }
+        }
+
+        GameObject newObs = Instantiate(ObsPrefabs[rndIndex - 1], container.transform.position, Quaternion.identity);
+        newObs.transform.parent = container.transform;
+
+        newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;
+
+        _currentObstacles.Add(newObs.GetComponent<Obstacle>());
+    }
+
+    private IEnumerator ToggleObstacleCo(Obstacle obstacle, Checkpoint checkpoint, GameObject obj, Transform container)
+    {
+        checkpoint.Passable = !checkpoint.Passable;
+        yield return new WaitForSeconds(3f);
+        checkpoint.Passable = !checkpoint.Passable;
+        _currentObstacles.Remove(obstacle);
+        Destroy(obj);
+        SpawnNewObstacle(container);
+    }
+
+    public void ToggleObstacle(Obstacle obstacle, Checkpoint checkpoint, GameObject obj, Transform container)
+    {
+        StartCoroutine(ToggleObstacleCo(obstacle, checkpoint, obj, container));
     }
 }

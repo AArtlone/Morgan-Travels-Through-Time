@@ -24,8 +24,6 @@ public class ObstacleIntercationElement : MonoBehaviour
                 _obsIntElementsOfThisType.Add(pair);
             }
         }
-
-        Debug.Log(_obsIntElementsOfThisType.Count + "|" + _gameInterface.AllObsIntElements.Count);
     }
 
     public static void ResetValuesForNextWave()

@@ -94,24 +94,6 @@ public class Refugee : MonoBehaviour
                 StopAllCoroutines();
                 break;
         }
-        /*if (NewRefugeeStatus == RefugeeStatus.Idle)
-        {
-            _animator.SetBool("IsWalking", false);
-            StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Wondering));
-        } else if (NewRefugeeStatus == RefugeeStatus.Wondering)
-        {
-            _animator.SetBool("IsWalking", true);
-            StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Idle));
-        } else if (NewRefugeeStatus == RefugeeStatus.Walking)
-        {
-            FlipNPC("Right");
-            _animator.SetBool("IsWalking", true);
-            StopAllCoroutines();
-        } else if (NewRefugeeStatus == RefugeeStatus.Injured)
-        {
-            _animator.SetBool("IsWalking", false);
-            StopAllCoroutines();
-        }*/
         Status = NewRefugeeStatus; 
     }
 

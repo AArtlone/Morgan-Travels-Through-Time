@@ -26,7 +26,6 @@ public class CannonBall : MonoBehaviour
             {
                 objectsHit[0].GetComponent<Refugee>().InjureRefugee();
                 _canonInterface.CanShoot = false;
-                //_canonInterface.gameObject.SetActive(false);
             } else
             {
                 _canonInterface.CanShoot = true;

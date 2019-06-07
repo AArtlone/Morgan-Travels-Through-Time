@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
@@ -26,15 +27,6 @@ public class Obstacle : MonoBehaviour
         {
             PlayBridge();
         }
-        /*else if (gameObject.name == "Tree Obstacle")
-        {
-            PlayTree();
-        }*/
-    }
-
-    public void ToggleObstacle()
-    {
-        CheckpointLink.Passable = !CheckpointLink.Passable;
     }
 
     public void PlayBridge()
@@ -63,7 +55,7 @@ public class Obstacle : MonoBehaviour
 
                 if (_currentTimeHoldingDown >= _timeHoldingDown)
                 {
-                    ToggleObstacle();
+                    _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
                 }
             }
         }
@@ -92,55 +84,36 @@ public class Obstacle : MonoBehaviour
 
     public void PlayTree()
     {
-        ToggleObstacle();
+        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         gameObject.SetActive(false);
         _gameInterface.RespawnObstacle(gameObject);
-        /*if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-            RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, ObstacleLayer);
-            
-            if (hitObj.transform != null)
-            {
-                if (hitObj.transform.name == gameObject.name)
-                {
-                    ToggleObstacle();
-                    gameObject.SetActive(false);
-                    _gameInterface.RespawnObstacle(gameObject);
-                }
-            }
-        }*/
     }
 
     public void PLayFire()
     {
-        ToggleObstacle();
+        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         gameObject.SetActive(false);
         _gameInterface.RespawnObstacle(gameObject);
     }
 
     public void PlayFlag()
     {
-        ToggleObstacle();
+        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Inventory/Groningen Flag");
         _gameInterface.RespawnFlagObstacle(gameObject);
-        Invoke("ToggleObstacle", 5f);
     }
 
     public void PlayCanon()
     {
-        ToggleObstacle();
+        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
     }
 
     public void CutPlant()
     {
         // TODO: Play cutting sound
-        ToggleObstacle();
+        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         gameObject.SetActive(false);
         _gameInterface.RespawnObstacle(gameObject);
-        Invoke("ToggleObstacle", 5f);
     }
 
     public void SetPlantOnFire()
@@ -152,11 +125,10 @@ public class Obstacle : MonoBehaviour
     public void ExtinguishPlant()
     {
         // TODO: Play extinguish sound
-        ToggleObstacle();
+        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         gameObject.SetActive(false);
         _gameInterface.Fire.SetActive(false);
         _gameInterface.RespawnObstacle(gameObject);
-        Invoke("ToggleObstacle", 5f);
     }
 
     public void PlaySheeps(Item.ItemType type)
@@ -168,8 +140,7 @@ public class Obstacle : MonoBehaviour
         } else if (type == Item.ItemType.BunchOfHay)
         {
             // TODO: Do something wiht aninmations
-            ToggleObstacle();
-            Invoke("ToggleObstacle", 5f);
+            _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         }
     }
 }
