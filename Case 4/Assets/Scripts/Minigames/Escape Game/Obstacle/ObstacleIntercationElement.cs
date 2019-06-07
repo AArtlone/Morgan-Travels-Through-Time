@@ -44,35 +44,15 @@ public class ObstacleIntercationElement : MonoBehaviour
 
     public void RefugeeReachedObsIntElement()
     {
-        /*if (IsOccupied == false)
-        {
-            IsOccupied = true;
-        }*/
-
         if (_refuggeToAssign.Status == Refugee.RefugeeStatus.AtObsIntElement)
         {
             _refugeesAtObsIntElement++;
         }
-        Debug.Log(_refugeesAtObsIntElement);
+
         if (_refugeesAtObsIntElement == 3)
         {
             ObstacleLink.PlayTree();
         }
-
-        /*int occupiedCounter = 0;
-        foreach (KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement> pair in _obsIntElementsOfThisType)
-        {
-            if (pair.Value.IsOccupied == true)
-            {
-                occupiedCounter++;
-            }
-        }
-        Debug.Log(occupiedCounter);
-
-        if (occupiedCounter == 3)
-        {
-            ObstacleLink.PlayTree();
-        }*/
     }
 
     private Refugee ChooseRefugee()

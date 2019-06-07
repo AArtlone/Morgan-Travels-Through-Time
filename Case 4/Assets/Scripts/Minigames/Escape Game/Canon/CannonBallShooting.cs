@@ -18,10 +18,10 @@ public class CannonBallShooting: MonoBehaviour
     private Rigidbody2D _cannonBall;
     public List<GameObject> TempList = new List<GameObject>();
 
-    private void Start()
+    /*private void Start()
     {
         Invoke("Shoot", 3f);
-    }
+    }*/
 
     public void Shoot()
     {

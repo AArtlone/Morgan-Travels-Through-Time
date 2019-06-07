@@ -2,7 +2,7 @@
 
 public class Obstacle : MonoBehaviour
 {
-    public enum ObstacleType { Fire, EvilPlant, Flag, Bridge, Sheeps, Tree};
+    public enum ObstacleType { Fire, EvilPlant, Flag, Bridge, Sheeps, Tree, Cannon };
     public ObstacleType Type;
     public Checkpoint CheckpointLink;
     public LayerMask ObstacleLayer;
@@ -127,6 +127,11 @@ public class Obstacle : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Inventory/Groningen Flag");
         _gameInterface.RespawnFlagObstacle(gameObject);
         Invoke("ToggleObstacle", 5f);
+    }
+
+    public void PlayCanon()
+    {
+        ToggleObstacle();
     }
 
     public void CutPlant()

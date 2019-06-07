@@ -252,6 +252,7 @@ public class Refugee : MonoBehaviour
         GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, transform.position, Quaternion.identity);
         stretcher.transform.parent = transform;
         transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+        _gameInterface._cannonInterface.GetComponentInParent<Obstacle>().PlayCanon();
     }
 
     public void AssignRefugeeToObsIntElement(GameObject obj)
@@ -277,6 +278,13 @@ public class Refugee : MonoBehaviour
         {
             WonderingLeft = false;
             WonderingRight = true;
+        }
+        if (collision.transform.tag == "Initial Checkpoint")
+        {
+            if (this ==  _gameInterface.CurrentRefugees[_gameInterface.CurrentWave][_gameInterface.CurrentRefugees[_gameInterface.CurrentWave].Count - 1])
+            {
+                FindObjectOfType<CannonBallShooting>().Shoot();
+            }
         }
     }
 }

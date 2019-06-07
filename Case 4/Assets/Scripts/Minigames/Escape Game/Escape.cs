@@ -23,7 +23,8 @@ public class Escape : MonoBehaviour
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>> AllObsIntElements = new List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>>();
     public List<RefugeeWaves> RefugeeWaves = new List<RefugeeWaves>();
-    public List<GameObject> ItemsOnMap = new List<GameObject>();
+    public List<GameObject> ObsContainers = new List<GameObject>();
+    public List<GameObject> ObsPrefabs= new List<GameObject>();
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public string AreaToUnlock;
@@ -47,6 +48,7 @@ public class Escape : MonoBehaviour
     public GameObject StretcherPrefab;
 
     private string _escapeGamesJsonFile;
+    private List<Obstacle.ObstacleType> _previousObsTypes = new List<Obstacle.ObstacleType>();
 
     // Layer-related references
     [NonSerialized]
@@ -81,11 +83,35 @@ public class Escape : MonoBehaviour
 
     private void Start()
     {
+        GenerateRandomObstacles();
         for (int i = 0; i < RefugeeWaves.Count; i++)
         {
             CurrentRefugees.Add(new List<Refugee>());
         }
         StartNextWave();
+    }
+
+    private void GenerateRandomObstacles()
+    {
+        foreach (GameObject container in ObsContainers)
+        {
+            int rndIndex = UnityEngine.Random.Range(1, 6);
+
+            foreach (Obstacle.ObstacleType obsType in _previousObsTypes)
+            {
+                while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obsType)
+                {
+                    rndIndex = UnityEngine.Random.Range(1, 6);
+                }
+            }
+
+            _previousObsTypes.Add(ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type);
+
+            GameObject newObs = Instantiate(ObsPrefabs[rndIndex - 1], container.transform.position, Quaternion.identity);
+            newObs.transform.parent = container.transform;
+
+            newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;
+        }
     }
 
     private IEnumerator SpawnRefugee()

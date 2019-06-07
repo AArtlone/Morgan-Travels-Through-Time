@@ -125,11 +125,6 @@ public class Item : MonoBehaviour
         _timer = 0;
     }
 
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        Debug.Log(col.transform.name);
-    }
-
     public void DropItem()
     {
         _cameraBehaviour.IsInterfaceElementSelected = false;
