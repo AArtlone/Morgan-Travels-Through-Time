@@ -43,7 +43,7 @@ public class Escape : MonoBehaviour
 
     [Header("Obstacle related objects.")]
     public GameObject Antagonist;
-    public GameObject Fire;
+    //public GameObject Fire;
 
     [Header("Other prefabs.")]
     public GameObject StretcherPrefab;
@@ -353,12 +353,21 @@ public class Escape : MonoBehaviour
 
     private IEnumerator ToggleObstacleCo(Obstacle obstacle, Checkpoint checkpoint, GameObject obj, Transform container)
     {
-        checkpoint.Passable = !checkpoint.Passable;
-        yield return new WaitForSeconds(3f);
-        checkpoint.Passable = !checkpoint.Passable;
-        _currentObstacles.Remove(obstacle);
-        Destroy(obj);
-        SpawnNewObstacle(container);
+        if (obstacle.Type != Obstacle.ObstacleType.Cannon)
+        {
+            yield return new WaitForSeconds(3f);
+            checkpoint.Passable = !checkpoint.Passable;
+            _currentObstacles.Remove(obstacle);
+            Destroy(obj);
+            SpawnNewObstacle(container);
+            yield return new WaitForSeconds(3f);
+            checkpoint.Passable = !checkpoint.Passable;
+        } else
+        {
+            checkpoint.Passable = !checkpoint.Passable;
+            yield return new WaitForSeconds(3f);
+            checkpoint.Passable = !checkpoint.Passable;
+        }
     }
 
     public void ToggleObstacle(Obstacle obstacle, Checkpoint checkpoint, GameObject obj, Transform container)
