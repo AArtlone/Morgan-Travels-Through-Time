@@ -85,22 +85,17 @@ public class Obstacle : MonoBehaviour
     public void PlayTree()
     {
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        gameObject.SetActive(false);
-        _gameInterface.RespawnObstacle(gameObject);
     }
 
     public void PLayFire()
     {
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        gameObject.SetActive(false);
-        _gameInterface.RespawnObstacle(gameObject);
     }
 
     public void PlayFlag()
     {
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Inventory/Groningen Flag");
-        _gameInterface.RespawnFlagObstacle(gameObject);
     }
 
     public void PlayCanon()
@@ -112,23 +107,25 @@ public class Obstacle : MonoBehaviour
     {
         // TODO: Play cutting sound
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        gameObject.SetActive(false);
-        _gameInterface.RespawnObstacle(gameObject);
     }
 
     public void SetPlantOnFire()
     {
         // TODO: Play burning sound
-        _gameInterface.Fire.SetActive(true);
+        if (transform.GetChild(0).gameObject.tag == "Escape Fire Under Plant")
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 
     public void ExtinguishPlant()
     {
         // TODO: Play extinguish sound
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        gameObject.SetActive(false);
-        _gameInterface.Fire.SetActive(false);
-        _gameInterface.RespawnObstacle(gameObject);
+        if (transform.GetChild(0).gameObject.tag == "Escape Fire Under Plant")
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 
     public void PlaySheeps(Item.ItemType type)
