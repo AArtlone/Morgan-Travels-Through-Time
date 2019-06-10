@@ -131,12 +131,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
 
         JsonData NPCLogs = JsonMapper.ToObject(
             File.ReadAllText(Application.persistentDataPath + "/DialogueLog.json"));
-        foreach (List<string> list in _pagesOfEntries)
-        {
-            foreach (string obj in list)
-            {
-            }
-        }
 
         SelectedNPCName.text = _selectedNPC;
 

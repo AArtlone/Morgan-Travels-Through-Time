@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using LitJson;
 using System;
-using Random = UnityEngine.Random;
-using Object = UnityEngine.Object;
-using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections;
-using LitJson;
+using System.Collections.Generic;
 using System.IO;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
 {
@@ -59,6 +59,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public Button HintButton;
     #endregion
 
+    public GameObject ItemsToFindList;
     public GameObject FoundItemsDisplay;
     public GameObject ItemDisplayPrefab;
     public GameObject PuzzleEndPopup;
@@ -85,11 +86,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         // We get all the objects in the Objects To Find List in this hidden objects
         // puzzle from the editor, and we use those objects for the hints mechanic.
-        for (int i = 0; i < transform.GetChild(0).transform.GetChild(1).transform.childCount; i++)
+        for (int i = 0; i < ItemsToFindList.transform.childCount; i++)
         {
-            if (transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject != null)
+            if (ItemsToFindList.transform.GetChild(i).gameObject != null)
             {
-                _itemsInFindList.Add(transform.GetChild(0).transform.GetChild(1).transform.GetChild(i).gameObject);
+                _itemsInFindList.Add(ItemsToFindList.transform.GetChild(i).gameObject);
             }
         }
 
@@ -231,7 +232,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void CompletePuzzle()
     {
-        AudioManager.Instance.PlaySound(AudioManager.Instance.SoundPuzzleCompleted);
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound(AudioManager.Instance.SoundPuzzleCompleted);
+        }
 
         // TODO: Change the stars values of this puzzle using different formulas.
         CancelInvoke();
@@ -351,10 +355,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
     }
 
-    public void PickItem(Object obj)
+    public void PickItem(GameObject obj)
     {
-        GameObject itemObjClicked = obj as GameObject;
-        Item objAsItem = itemObjClicked.GetComponent<Item>();
+        Item objAsItem = obj.GetComponent<Item>();
 
         string NameOfItem = string.Empty;
         switch (SettingsManager.Instance.Language)
@@ -369,7 +372,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (!ItemsFound.Contains(NameOfItem))
         {
-            AudioManager.Instance.PlaySound(AudioManager.Instance.ItemFoundUsed);
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySound(AudioManager.Instance.ItemFoundUsed);
+            }
 
             switch (SettingsManager.Instance.Language)
             {
@@ -395,7 +401,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 }
             }
 
-            StartCoroutine(FadeAwayItem(itemObjClicked));
+            StartCoroutine(FadeAwayItem(obj));
 
             if (foundItemsCount == _itemsRequired.Count)
             {
@@ -533,7 +539,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     private IEnumerator FadeAwayItem(GameObject obj)
     {
-        Image imageComponent = obj.GetComponent<Image>();
+        SpriteRenderer imageComponent = obj.GetComponent<SpriteRenderer>();
         Color newColor = imageComponent.color;
         for (int i = 0; i < 100; i++)
         {

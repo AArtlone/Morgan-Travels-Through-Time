@@ -37,9 +37,12 @@ public class LanguageController : MonoBehaviour
 
         _settingsManager = FindObjectOfType<SettingsManager>();
         
-        if (!_settingsManager.LanguageControllers.Contains(this))
+        if (_settingsManager != null)
         {
-            _settingsManager.LanguageControllers.Add(this);
+            if (!_settingsManager.LanguageControllers.Contains(this))
+            {
+                _settingsManager.LanguageControllers.Add(this);
+            }
         }
 
         if (DisableLanguageToggling == false)
@@ -56,7 +59,7 @@ public class LanguageController : MonoBehaviour
     /// </summary>
     public void UpdateCurrentLanguage()
     {
-        if (DisableLanguageToggling == false)
+        if (DisableLanguageToggling == false && SettingsManager.Instance != null)
         {
             switch (SettingsManager.Instance.Language)
             {

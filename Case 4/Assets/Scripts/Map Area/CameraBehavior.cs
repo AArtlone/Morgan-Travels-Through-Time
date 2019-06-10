@@ -24,9 +24,11 @@ public class CameraBehavior : MonoBehaviour
 
     // Camera components
     private Escape _gameInterface;
+    private HiddenObjectsPuzzle _hiddenObjectPuzzleScript;
 
     private void Start()
     {
+        _hiddenObjectPuzzleScript = FindObjectOfType<HiddenObjectsPuzzle>();
         BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
         _gameInterface = FindObjectOfType<Escape>();
         InterfaceManager.Instance.CameraBehavior = this;
@@ -35,16 +37,42 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
+
+        if (SceneManager.GetActiveScene().name != "Escape Game")
+        {
+            if (Input.touchCount > 0 &&
+                Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
+
+                if (hitObj.transform != null)
+                {
+                    switch (hitObj.transform.tag)
+                    {
+                        case "HOP Item":
+                            _hiddenObjectPuzzleScript.PickItem(hitObj.transform.gameObject);
+                            break;
+                    }
+                }
+            }
+        }
+
         //IsEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            AudioManager.Instance.PlaySound(AudioManager.Instance.HitScreen);
-
-            if (InterfaceManager.Instance.ItemActionsWindow != null)
+            if (AudioManager.Instance != null)
             {
-                if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
+                AudioManager.Instance.PlaySound(AudioManager.Instance.HitScreen);
+            }
+
+            if (InterfaceManager.Instance != null)
+            {
+                if (InterfaceManager.Instance.ItemActionsWindow != null)
                 {
-                    InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
+                    if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
+                    {
+                        InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
+                    }
                 }
             }
 
@@ -106,7 +134,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-        if (SceneManager.GetActiveScene().name != "Escape Game")
+                if (SceneManager.GetActiveScene().name != "Escape Game")
         {
             if ((Input.touchCount > 0 &&
                 Input.GetTouch(0).phase == TouchPhase.Began) &&
@@ -159,6 +187,10 @@ public class CameraBehavior : MonoBehaviour
                             break;
                         case "Area Interactable":
                             hitObj.transform.GetComponent<ToggleObject>().Replace();
+                            break;
+                        case "HOP Item":
+                            Debug.Log("Ass");
+                            _hiddenObjectPuzzleScript.PickItem(hitObj.transform.gameObject);
                             break;
                     }
                 }
