@@ -353,14 +353,14 @@ public class Escape : MonoBehaviour
 
     private IEnumerator ToggleObstacleCo(Obstacle obstacle, Checkpoint checkpoint, GameObject obj, Transform container)
     {
-        if (obstacle.Type != Obstacle.ObstacleType.Cannon)
+        if (obstacle.Type != Obstacle.ObstacleType.Cannon && obstacle.Type != Obstacle.ObstacleType.Bridge)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             checkpoint.Passable = !checkpoint.Passable;
             _currentObstacles.Remove(obstacle);
             Destroy(obj);
-            SpawnNewObstacle(container);
             yield return new WaitForSeconds(3f);
+            SpawnNewObstacle(container);
             checkpoint.Passable = !checkpoint.Passable;
         } else
         {
