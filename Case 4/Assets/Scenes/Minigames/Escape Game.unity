@@ -1646,7 +1646,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -51.202385, y: -5.8736153}
+  m_Offset: {x: -45.786568, y: -5.8736153}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1657,7 +1657,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 35.221985, y: 2.652769}
+  m_Size: {x: 46.053616, y: 2.652769}
   m_EdgeRadius: 0
 --- !u!61 &215117911
 BoxCollider2D:
@@ -1812,6 +1812,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -1826,11 +1831,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6400768389091313114, guid: 7fff2af8495f87041aadd67c6a519be7, type: 3}
@@ -2801,7 +2801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445348050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -78.09, y: -2.43, z: -10}
+  m_LocalPosition: {x: -45.62, y: -2.43, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3462,7 +3462,7 @@ PrefabInstance:
     - target: {fileID: 5278695433165830978, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5278695433165830979, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
@@ -5427,12 +5427,12 @@ PrefabInstance:
     - target: {fileID: 6773612594324243356, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6773612594324243345, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -652.27
+      value: -646.924
       objectReference: {fileID: 0}
     - target: {fileID: 6773612594324243345, guid: 1f28e36804a096f48b1b8fbb4500735d,
         type: 3}
@@ -5574,7 +5574,7 @@ PrefabInstance:
     - target: {fileID: 5278695433165830978, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5278695433165830979, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
@@ -8549,7 +8549,7 @@ PrefabInstance:
     - target: {fileID: 5278695433165830978, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5278695433165830979, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
@@ -9402,7 +9402,7 @@ PrefabInstance:
     - target: {fileID: 5318885977314305247, guid: 553a60032e4951647b010bf0bd78c203,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5318885977314305246, guid: 553a60032e4951647b010bf0bd78c203,
         type: 3}
@@ -10007,6 +10007,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Evil Plant Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5417170416790352033, guid: af4385db59322c34dace1a279031380a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5417170416790352034, guid: af4385db59322c34dace1a279031380a,
         type: 3}

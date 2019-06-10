@@ -283,11 +283,17 @@ public class NPC : MonoBehaviour
             // We also activate all the game objects in this branch once it is visualized.
             foreach (GameObject entity in FinalDialogueBranch.EntitiesToActivate)
             {
-                entity?.SetActive(true);
+                if (entity != null)
+                {
+                    entity.SetActive(true);
+                }
             }
             foreach (GameObject entity in FinalDialogueBranch.EntitiesToDeactive)
             {
-                entity?.SetActive(false);
+                if (entity != null)
+                {
+                    entity.SetActive(false);
+                }
             }
 
             // We clear the options menu before we populate it with data, because if
