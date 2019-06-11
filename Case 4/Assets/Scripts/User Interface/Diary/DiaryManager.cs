@@ -83,6 +83,17 @@ public class DiaryManager : MonoBehaviour
                             page.SetActive(false);
                         }
                     }
+                    else if (button.name == "Achievements Button")
+                    {
+                        if (page.name == "Achievements Log Page")
+                        {
+                            page.SetActive(true);
+                        }
+                        else
+                        {
+                            page.SetActive(false);
+                        }
+                    }
                     else if (button.name == "Help Button")
                     {
                         if (page.name == "Help Page")
@@ -100,7 +111,7 @@ public class DiaryManager : MonoBehaviour
                         {
                             for (int i = 0; i < page.transform.GetChild(1).transform. childCount; i++)
                             {
-                                Destroy(page.transform.GetChild(1).transform.GetChild(i));
+                                Destroy(page.transform.GetChild(1).transform.GetChild(i).gameObject);
                             }
 
                             page.SetActive(true);
@@ -222,109 +233,160 @@ public class DiaryManager : MonoBehaviour
 
         AllPuzzles.Clear();
         PagesOfPuzzles.Clear();
-        JsonData HOPPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/HiddenObjectPuzzles.json"));
-        JsonData guessClothingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/GuessingPuzzles.json"));
-        JsonData escapeGamesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/EscapeGames.json"));
-        JsonData spellingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/SpellingPuzzles.json"));
+        JsonData HOPPuzzlesJsonData = null;
+        string HOPPuzzlesJsonDataPath = Application.persistentDataPath + "/HiddenObjectPuzzles.json";
 
-        _numberOfPuzzles += HOPPuzzlesJsonData["Puzzles"].Count + guessClothingPuzzlesJsonData["Puzzles"].Count + escapeGamesJsonData["EscapeGames"].Count + spellingPuzzlesJsonData["Puzzles"].Count;
+        JsonData guessClothingPuzzlesJsonData = null;
+        string guessClothingPuzzlesJsonDataPath = Application.persistentDataPath + "/GuessingPuzzles.json";
+
+        JsonData escapeGamesJsonData = null;
+        string escapeGamesJsonDataPath = Application.persistentDataPath + "/EscapeGames.json";
+
+        JsonData spellingPuzzlesJsonData = null;
+        string spellingPuzzlesPath = Application.persistentDataPath + "/SpellingPuzzles.json";
+        if (File.Exists(HOPPuzzlesJsonDataPath))
+        {
+            HOPPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(HOPPuzzlesJsonDataPath));
+        } else
+        {
+            Debug.LogWarning($"File {HOPPuzzlesJsonDataPath} was not valid or found!");
+        }
+        if (File.Exists(guessClothingPuzzlesJsonDataPath))
+        {
+            guessClothingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(guessClothingPuzzlesJsonDataPath));
+        } else
+        {
+            Debug.LogWarning($"File {guessClothingPuzzlesJsonDataPath} was not valid or found!");
+        }
+        if (File.Exists(escapeGamesJsonDataPath))
+        {
+            escapeGamesJsonData = JsonMapper.ToObject(File.ReadAllText(escapeGamesJsonDataPath));
+        } else
+        {
+            Debug.LogWarning($"File {escapeGamesJsonDataPath} was not valid or found!");
+        }
+        if (File.Exists(spellingPuzzlesPath))
+        {
+            spellingPuzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(spellingPuzzlesPath));
+        } else
+        {
+            Debug.LogWarning($"File {spellingPuzzlesPath} was not valid or found!");
+        }
+
+        _numberOfPuzzles += 
+            (HOPPuzzlesJsonData != null ? HOPPuzzlesJsonData["Puzzles"].Count : 0) +
+            (guessClothingPuzzlesJsonData != null ? guessClothingPuzzlesJsonData["Puzzles"].Count : 0) +
+            (escapeGamesJsonData != null ? escapeGamesJsonData["EscapeGames"].Count : 0) + 
+            (spellingPuzzlesJsonData != null ? spellingPuzzlesJsonData["Puzzles"].Count : 0);
 
         // Put all the puzzles in a list.
-        for (int i = 0; i < HOPPuzzlesJsonData["Puzzles"].Count; i++)
+        if (File.Exists(HOPPuzzlesJsonDataPath))
         {
-            bool isItComplete = false;
-            if (HOPPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
+            for (int i = 0; i < HOPPuzzlesJsonData["Puzzles"].Count; i++)
             {
-                isItComplete = true;
-            }
-            else if (HOPPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
-            {
-                isItComplete = false;
-            }
+                bool isItComplete = false;
+                if (HOPPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
+                {
+                    isItComplete = true;
+                }
+                else if (HOPPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
+                {
+                    isItComplete = false;
+                }
 
-            var puzzleObj = new
-            {
-                Type = "Hidden Objects Puzzle",
-                Name = HOPPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
-                NameDutch = HOPPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
-                Completed = isItComplete,
-                Stars = int.Parse(HOPPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
-            };
+                var puzzleObj = new
+                {
+                    Type = "Hidden Objects Puzzle",
+                    Name = HOPPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    NameDutch = HOPPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    Completed = isItComplete,
+                    Stars = int.Parse(HOPPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
+                };
 
-            AllPuzzles.Add(puzzleObj);
+                AllPuzzles.Add(puzzleObj);
+            }
         }
 
-        for (int i = 0; i < guessClothingPuzzlesJsonData["Puzzles"].Count; i++)
+        if (File.Exists(guessClothingPuzzlesJsonDataPath))
         {
-            bool isItComplete = false;
-            if (guessClothingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
+            for (int i = 0; i < guessClothingPuzzlesJsonData["Puzzles"].Count; i++)
             {
-                isItComplete = true;
-            }
-            else if (guessClothingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
-            {
-                isItComplete = false;
-            }
+                bool isItComplete = false;
+                if (guessClothingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
+                {
+                    isItComplete = true;
+                }
+                else if (guessClothingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
+                {
+                    isItComplete = false;
+                }
 
-            var puzzleObj = new
-            {
-                Type = "Guess Clothing Puzzle",
-                Name = guessClothingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
-                NameDutch = guessClothingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
-                Completed = isItComplete,
-                Score = int.Parse(guessClothingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
-            };
+                var puzzleObj = new
+                {
+                    Type = "Guess Clothing Puzzle",
+                    Name = guessClothingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    NameDutch = guessClothingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    Completed = isItComplete,
+                    Score = int.Parse(guessClothingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
+                };
 
-            AllPuzzles.Add(puzzleObj);
+                AllPuzzles.Add(puzzleObj);
+            }
         }
 
-        for (int i = 0; i < escapeGamesJsonData["EscapeGames"].Count; i++)
+        if (File.Exists(escapeGamesJsonDataPath))
         {
-            bool isItComplete = false;
-            if (escapeGamesJsonData["EscapeGames"][i]["Completed"].ToString() == "True")
+            for (int i = 0; i < escapeGamesJsonData["EscapeGames"].Count; i++)
             {
-                isItComplete = true;
-            }
-            else if (escapeGamesJsonData["EscapeGames"][i]["Completed"].ToString() == "False")
-            {
-                isItComplete = false;
-            }
+                bool isItComplete = false;
+                if (escapeGamesJsonData["EscapeGames"][i]["Completed"].ToString() == "True")
+                {
+                    isItComplete = true;
+                }
+                else if (escapeGamesJsonData["EscapeGames"][i]["Completed"].ToString() == "False")
+                {
+                    isItComplete = false;
+                }
 
-            var puzzleObj = new
-            {
-                Type = "Escape Game",
-                Name = escapeGamesJsonData["EscapeGames"][i]["Name"].ToString(),
-                NameDutch = escapeGamesJsonData["EscapeGames"][i]["NameDutch"].ToString(),
-                Score = int.Parse(escapeGamesJsonData["EscapeGames"][i]["TotalPoints"].ToString()),
-                Completed = isItComplete,
-                RefugeesSaved = int.Parse(escapeGamesJsonData["EscapeGames"][i]["RefugeesSaved"].ToString())
-            };
+                var puzzleObj = new
+                {
+                    Type = "Escape Game",
+                    Name = escapeGamesJsonData["EscapeGames"][i]["Name"].ToString(),
+                    NameDutch = escapeGamesJsonData["EscapeGames"][i]["NameDutch"].ToString(),
+                    Score = int.Parse(escapeGamesJsonData["EscapeGames"][i]["TotalPoints"].ToString()),
+                    Completed = isItComplete,
+                    RefugeesSaved = int.Parse(escapeGamesJsonData["EscapeGames"][i]["RefugeesSaved"].ToString())
+                };
 
-            AllPuzzles.Add(puzzleObj);
+                AllPuzzles.Add(puzzleObj);
+            }
         }
 
-        for (int i = 0; i < spellingPuzzlesJsonData["Puzzles"].Count; i++)
+        if (File.Exists(spellingPuzzlesPath))
         {
-            bool isItComplete = false;
-            if (spellingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
+            for (int i = 0; i < spellingPuzzlesJsonData["Puzzles"].Count; i++)
             {
-                isItComplete = true;
-            }
-            else if (spellingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
-            {
-                isItComplete = false;
-            }
+                bool isItComplete = false;
+                if (spellingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
+                {
+                    isItComplete = true;
+                }
+                else if (spellingPuzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "False")
+                {
+                    isItComplete = false;
+                }
 
-            var puzzleObj = new
-            {
-                Type = "Spelling Puzzle",
-                Name = spellingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
-                NameDutch = spellingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
-                Stars = int.Parse(spellingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
-                Completed = isItComplete
-            };
+                var puzzleObj = new
+                {
+                    Type = "Spelling Puzzle",
+                    Name = spellingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
+                    NameDutch = spellingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    Stars = int.Parse(spellingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
+                    Completed = isItComplete
+                };
 
-            AllPuzzles.Add(puzzleObj);
+                AllPuzzles.Add(puzzleObj);
+            }
         }
     }
 }

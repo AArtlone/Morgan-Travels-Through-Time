@@ -1,6 +1,4 @@
-﻿using LitJson;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,17 +14,16 @@ public class AchievementDiaryLogManager : MonoBehaviour
     private int _currentPage;
     private int _currentLogEntryIndex;
     private float _currentPositionOfLatestButton;
+    private int _currentLogEntriesPage;
+    private string _lastEntryInLog;
     private string _currentPageInLogEntries = "Left";
     private List<string> _exploredEntries = new List<string>();
     private List<List<string>> _pagesOfEntries = new List<List<string>>();
 
-
-    private void Start()
+    private void Awake()
     {
         _leftPageSectionRect = LeftPageSection.GetComponent<RectTransform>();
         _rightPageSectionRect = RightPageSection.GetComponent<RectTransform>();
-        Debug.Log(AchievementManager.Instance.AllAchievements.Count);
-        SetupLog();
     }
 
     public void LoadPage(string direction)
@@ -41,78 +38,122 @@ public class AchievementDiaryLogManager : MonoBehaviour
         {
             _currentPage++;
         }
-
-        //if (_currentPage < 0)
-        //{
-        //    _currentPage = GetLengthOfButtonPages() - 1;
-        //}
-        //if (_currentPage > GetLengthOfButtonPages() - 1)
-        //{
-        //    _currentPage = 0;
-        //}
-
-        //LoadNewPage(_currentPage);
     }
 
-    private void SetupLog()
+    public void SetupLog()
     {
         ClearSection(LeftPageSection);
         ClearSection(RightPageSection);
 
-        Debug.Log(AchievementManager.Instance.AllAchievements.Count);
-        foreach (Achievement achievement in AchievementManager.Instance.AllAchievements)
-        {
-            List<string> newListOfEntries = new List<string>();
-            bool isDuplicate = false;
-            _currentPositionOfLatestButton = 0;
-            GameObject achievementLogEntry;
-            if (_currentPageInLogEntries == "Left")
-            {
-                achievementLogEntry = Instantiate(LogEntryPrefab);
-                RectTransform entryRect = achievementLogEntry.GetComponent<RectTransform>();
-                if (SettingsManager.Instance.Language == "English")
-                {
-                    achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = achievement.Name;
-                }
-                else if (SettingsManager.Instance.Language == "Dutch")
-                {
-                    achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = achievement.NameDutch;
-                }
-                achievementLogEntry.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Achievements/" + achievement.Icon);
-                achievementLogEntry.transform.SetParent(LeftPageSection.transform);
-                _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
-                if(_currentPositionOfLatestButton > _leftPageSectionRect.sizeDelta.y)
-                                {
-                    achievementLogEntry.transform.SetParent(RightPageSection.transform);
-                    _currentPageInLogEntries = "Right";
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
+        _currentPageInLogEntries = "Left";
+        _currentPositionOfLatestButton = 0f;
 
-                    _currentPositionOfLatestButton = entryRect.sizeDelta.y;
-                    newListOfEntries.Add(achievementLogEntry.name);
-                    _exploredEntries.Add(achievementLogEntry.GetComponent<TextMeshProUGUI>().text);
+        List<string> newListOfEntries = new List<string>();
+        bool isDuplicate = false;
+        if (_currentLogEntryIndex < AchievementManager.Instance.AllAchievements.Count)
+        {
+            for (int i = _currentLogEntryIndex; i < AchievementManager.Instance.AllAchievements.Count; i++)
+            {
+                if (newListOfEntries.Contains(AchievementManager.Instance.AllAchievements[i].Name) == false)
+                {
+                    newListOfEntries.Add(AchievementManager.Instance.AllAchievements[i].Name);
+                }
+
+                switch (SettingsManager.Instance.Language)
+                {
+                    case "English":
+                        _lastEntryInLog = AchievementManager.Instance.AllAchievements[AchievementManager.Instance.AllAchievements.Count - 1].Name;
+                        break;
+                    case "Dutch":
+                        _lastEntryInLog = AchievementManager.Instance.AllAchievements[AchievementManager.Instance.AllAchievements.Count - 1].NameDutch;
+                        break;
+                }
+                GameObject achievementLogEntry;
+                if (_currentPageInLogEntries == "Left")
+                {
+                    achievementLogEntry = Instantiate(LogEntryPrefab);
+                    RectTransform entryParent = achievementLogEntry.GetComponent<RectTransform>();
+                    RectTransform entryRect = achievementLogEntry.GetComponentsInChildren<RectTransform>()[1];
+                    if (SettingsManager.Instance.Language == "English")
+                    {
+                        achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = AchievementManager.Instance.AllAchievements[i].Name;
+                    }
+                    else if (SettingsManager.Instance.Language == "Dutch")
+                    {
+                        achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = AchievementManager.Instance.AllAchievements[i].NameDutch;
+                    }
+                    achievementLogEntry.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Achievements/" + AchievementManager.Instance.AllAchievements[i].Icon);
+                    achievementLogEntry.transform.SetParent(LeftPageSection.transform);
+                    _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
+                    if (AchievementManager.Instance.AllAchievements[0] != AchievementManager.Instance.AllAchievements[i])
+                    {
+                        entryParent.sizeDelta = new Vector2(entryRect.sizeDelta.x, entryRect.sizeDelta.y + 15);
+                    }
+                    else
+                    {
+                        entryParent.sizeDelta = new Vector2(entryRect.sizeDelta.x, entryRect.sizeDelta.y);
+                    }
+                    if (_currentPositionOfLatestButton > _leftPageSectionRect.sizeDelta.y)
+                    {
+                        achievementLogEntry.transform.SetParent(RightPageSection.transform);
+                        _currentPageInLogEntries = "Right";
+                        LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
+
+                        _currentPositionOfLatestButton = entryRect.sizeDelta.y;
+                    }
+                    _exploredEntries.Add(achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text);
 
                     LayoutRebuilder.ForceRebuildLayoutImmediate(_leftPageSectionRect);
                 }
-            } else if (_currentPageInLogEntries == "Right")
-            {
-                achievementLogEntry = Instantiate(LogEntryPrefab);
-                RectTransform entryRect = achievementLogEntry.GetComponent<RectTransform>();
-                if (SettingsManager.Instance.Language == "English")
+                else if (_currentPageInLogEntries == "Right")
                 {
-                    achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = achievement.Name;
-                }
-                else if (SettingsManager.Instance.Language == "Dutch")
-                {
-                    achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = achievement.NameDutch;
-                }
-                achievementLogEntry.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Achievements/" + achievement.Icon);
-                achievementLogEntry.transform.SetParent(RightPageSection.transform);
-                _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
+                    achievementLogEntry = Instantiate(LogEntryPrefab);
+                    RectTransform entryRect = achievementLogEntry.GetComponentsInChildren<RectTransform>()[1];
+                    RectTransform entryParent = achievementLogEntry.GetComponent<RectTransform>();
+                    if (SettingsManager.Instance.Language == "English")
+                    {
+                        achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = AchievementManager.Instance.AllAchievements[i].Name;
+                    }
+                    else if (SettingsManager.Instance.Language == "Dutch")
+                    {
+                        achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text = AchievementManager.Instance.AllAchievements[i].NameDutch;
+                    }
+                    achievementLogEntry.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Achievements/" + AchievementManager.Instance.AllAchievements[i].Icon);
+                    achievementLogEntry.transform.SetParent(RightPageSection.transform);
+                    _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
+                    entryParent.sizeDelta = new Vector2(entryRect.sizeDelta.x, entryRect.sizeDelta.y + 15);
+                    if ( _currentPositionOfLatestButton > _rightPageSectionRect.sizeDelta.y)
+                    {
+                        isDuplicate = false;
+                        foreach (List<string> list in _pagesOfEntries)
+                        {
+                            foreach (string obj in list)
+                            {
+                                foreach (string entry in newListOfEntries)
+                                {
+                                    if (entry == obj)
+                                    {
+                                        isDuplicate = true;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
 
-                if (_currentPositionOfLatestButton > _rightPageSectionRect.sizeDelta.y)
-                {
-                    _currentPageInLogEntries = "Left";
+                        if (isDuplicate == false)
+                        {
+                            _pagesOfEntries.Add(newListOfEntries);
+                        }
 
+                        _currentPageInLogEntries = "Left";
+                        return;
+                    }
+
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
+                }
+                if (AchievementManager.Instance.AllAchievements[i].Name == AchievementManager.Instance.AllAchievements[AchievementManager.Instance.AllAchievements.Count - 1].Name)
+                {
                     isDuplicate = false;
                     foreach (List<string> list in _pagesOfEntries)
                     {
@@ -134,37 +175,56 @@ public class AchievementDiaryLogManager : MonoBehaviour
                     {
                         _pagesOfEntries.Add(newListOfEntries);
                     }
+
+                    _currentPageInLogEntries = "Left";
                     return;
                 }
-
-                LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
-            }
-            _currentLogEntryIndex++;
-
-            isDuplicate = false;
-            foreach (List<string> list in _pagesOfEntries)
-            {
-                foreach (string obj in list)
-                {
-                    foreach (string entry in newListOfEntries)
-                    {
-                        if (entry == obj)
-                        {
-                            isDuplicate = true;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-
-            if (isDuplicate == false)
-            {
-                _pagesOfEntries.Add(newListOfEntries);
+                _currentLogEntryIndex++;
             }
         }
     }
 
+    public void LoadNewLogEntriesPage(string direction)
+    {
+        _currentPageInLogEntries = "Left";
+        if (direction == "Backwards" || direction == "Backward")
+        {
+            if (_currentLogEntriesPage > 0)
+            {
+                _currentLogEntriesPage--;
+
+                _currentLogEntryIndex = 0;
+                if (_currentLogEntriesPage > 0)
+                {
+                    for (int i = 0; i < _currentLogEntriesPage; i++)
+                    {
+                        _currentLogEntryIndex += _pagesOfEntries[i].Count;
+                    }
+                }
+
+                SetupLog();
+            }
+        }
+        else if (direction == "Forwards" || direction == "Forward")
+        {
+            if (_currentLogEntryIndex < AchievementManager.Instance.AllAchievements.Count - 1)
+            {
+                _currentLogEntriesPage++;
+                _currentLogEntryIndex++;
+                SetupLog();
+            }
+        }
+
+        int page = 0;
+        foreach (List<string> list in _pagesOfEntries)
+        {
+            foreach (string item in list)
+            {
+                Debug.Log(page + " - " + item);
+            }
+            page++;
+        }
+    }
     void ClearPage()
     {
         for (int i = 0; i < InterfaceManager.Instance.LogsContainer.transform.childCount; i++)
