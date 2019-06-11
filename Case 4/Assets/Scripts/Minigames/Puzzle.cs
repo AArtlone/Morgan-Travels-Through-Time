@@ -9,7 +9,7 @@ public class Puzzle : MonoBehaviour
     private int _stars;
     public GameObject StarsDisplay;
 
-    public enum PuzzleType { HiddenObjects, SpellingPuzzle, GuessClothes };
+    public enum PuzzleType { HiddenObjects, SpellingPuzzle, GuessClothes, EscapeGame };
     public PuzzleType TypeOfPuzzle;
 
     private void Start()
@@ -39,15 +39,31 @@ public class Puzzle : MonoBehaviour
             case PuzzleType.SpellingPuzzle:
                 puzzleData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/SpellingPuzzles.json"));
                 break;
+            case PuzzleType.EscapeGame:
+                puzzleData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/EscapeGames.json"));
+                break;
         }
 
-        // Here we retrieve the stars from the puzzle that matches this one's name in storage.
-        for (int i = 0; i < puzzleData["Puzzles"].Count; i++)
+        if (TypeOfPuzzle != PuzzleType.EscapeGame)
         {
-            if (puzzleData["Puzzles"][i]["Name"].ToString() == Name)
+            // Here we retrieve the stars from the puzzle that matches this one's name in storage.
+            for (int i = 0; i < puzzleData["Puzzles"].Count; i++)
             {
-                _stars = int.Parse(puzzleData["Puzzles"][i]["Stars"].ToString());
-                break;
+                if (puzzleData["Puzzles"][i]["Name"].ToString() == Name)
+                {
+                    _stars = int.Parse(puzzleData["Puzzles"][i]["Stars"].ToString());
+                    break;
+                }
+            }
+        } else
+        {
+            for (int i = 0; i < puzzleData["EscapeGames"].Count; i++)
+            {
+                if (puzzleData["EscapeGames"][i]["Name"].ToString() == Name)
+                {
+                    _stars = int.Parse(puzzleData["EscapeGames"][i]["Stars"].ToString());
+                    break;
+                }
             }
         }
 

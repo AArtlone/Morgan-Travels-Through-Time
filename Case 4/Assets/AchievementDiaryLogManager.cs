@@ -214,16 +214,6 @@ public class AchievementDiaryLogManager : MonoBehaviour
                 SetupLog();
             }
         }
-
-        int page = 0;
-        foreach (List<string> list in _pagesOfEntries)
-        {
-            foreach (string item in list)
-            {
-                Debug.Log(page + " - " + item);
-            }
-            page++;
-        }
     }
     void ClearPage()
     {

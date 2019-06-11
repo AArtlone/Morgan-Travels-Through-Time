@@ -17,6 +17,13 @@ public class AchievementManager : MonoBehaviour
 
     private void Start()
     {
+        _achievementPrefabAnimator = AchievementPrefab.GetComponent<Animator>();
+        _achievementsJsonFilePath = Application.persistentDataPath + "/Achievements.json";
+        if (File.Exists(_achievementsJsonFilePath))
+            Setup(true);
+        else
+            Setup(false);
+
         if (Instance != null && Instance != this)
         {
             Destroy(Instance);
@@ -25,16 +32,6 @@ public class AchievementManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-    }
-
-    private void Awake()
-    {
-        _achievementPrefabAnimator = AchievementPrefab.GetComponent<Animator>();
-        _achievementsJsonFilePath = Application.persistentDataPath + "/Achievements.json";
-        if (File.Exists(_achievementsJsonFilePath))
-            Setup(true);
-        else
-            Setup(false);
     }
 
     private void Setup(bool exists)
@@ -80,7 +77,7 @@ public class AchievementManager : MonoBehaviour
             newAchievements += InsertNewLineTabs(3);
             newAchievements += "\"Icon\": " + "\"" + achievement.Icon + "\" ,";
             newAchievements += InsertNewLineTabs(3);
-            newAchievements += "\"Status\": " + "\"" + achievement.Status +"\" ";
+            newAchievements += "\"Status\": " + (achievement.Status.ToString() == "True" ? "true" : "false");
             newAchievements += InsertNewLineTabs(2);
             newAchievements += "},";
         }
@@ -131,6 +128,5 @@ public class AchievementManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         _achievementPrefabAnimator.SetBool("Toggle", false);
-
     }
 }

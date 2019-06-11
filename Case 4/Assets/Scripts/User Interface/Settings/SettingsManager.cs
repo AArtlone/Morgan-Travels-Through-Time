@@ -72,14 +72,14 @@ public class SettingsManager : MonoBehaviour
                 }
             }
 
-            if (NumberOfTaps == 1)
+            if (NumberOfTaps == 2)
             {
                 if (DevelopmentMode == false)
                 {
                     DevelopmentMode = true;
                     RefreshSettings();
                 }
-                SceneManager.LoadScene("Test Area");
+                SceneManager.LoadScene("Tutorial Complete");
                 _isDevModeEnabled = true;
             }
         }
