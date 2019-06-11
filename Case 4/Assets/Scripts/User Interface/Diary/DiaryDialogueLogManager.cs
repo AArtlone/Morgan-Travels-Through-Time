@@ -210,7 +210,7 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                             }
                                         }
 
-                                        if (isDuplicate == false)
+                                        if (isDuplicate == false && _exploredEntries.Contains(_lastEntryInLog) == false)
                                         {
                                             _pagesOfEntries.Add(newListOfEntries);
                                         }
@@ -223,28 +223,29 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                 _currentLogEntryIndex++;
                             }
 
-                            isDuplicate = false;
-                            foreach (List<string> list in _pagesOfEntries)
-                            {
-                                foreach (string obj in list)
-                                {
-                                    foreach (string entry in newListOfEntries)
-                                    {
-                                        if (entry == obj)
-                                        {
-                                            isDuplicate = true;
-                                            break;
-                                        }
-                                    }
-                                    break;
-                                }
-                            }
+                            //isDuplicate = false;
+                            //foreach (List<string> list in _pagesOfEntries)
+                            //{
+                            //    foreach (string obj in list)
+                            //    {
+                            //        foreach (string entry in newListOfEntries)
+                            //        {
+                            //            if (entry == obj)
+                            //            {
+                            //                isDuplicate = true;
+                            //                break;
+                            //            }
+                            //        }
+                            //        break;
+                            //    }
+                            //}
 
-                            if (isDuplicate == false)
-                            {
-                                _pagesOfEntries.Add(newListOfEntries);
-                            }
-                            break;
+                            //if (isDuplicate == false && _exploredEntries.Contains(_lastEntryInLog) == false)
+                            //{
+                            //    _pagesOfEntries.Add(newListOfEntries);
+                            //    Debug.Log("aaaaaaaaa");
+                            //}
+                            //break;
                         }
                     }
                 }
@@ -288,6 +289,7 @@ public class DiaryDialogueLogManager : MonoBehaviour
             }
         } else if (direction == "Forwards" || direction == "Forward")
         {
+            Debug.Log(_pagesOfEntries.Count);
             if (_pagesOfEntries.Count > 0)
             {
                 if (_currentLogEntriesPage == 0)
@@ -299,7 +301,7 @@ public class DiaryDialogueLogManager : MonoBehaviour
                     {
                         _currentLogEntryIndex += _pagesOfEntries[i].Count;
                     }
-
+                    Debug.Log(_currentLogEntryIndex);
                     SetupLogEntries(_selectedNPC);
                 }
                 else
