@@ -82,6 +82,7 @@ public class Refugee : MonoBehaviour
                 break;
             case RefugeeStatus.Injured:
                 _animator.SetBool("IsWalking", false);
+                _animator.SetBool("IsInjured", true);
                 StopAllCoroutines();
                 break;
             case RefugeeStatus.WalkingToObsIntElement:
