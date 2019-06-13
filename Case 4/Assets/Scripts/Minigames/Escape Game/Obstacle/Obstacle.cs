@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -11,6 +12,7 @@ public class Obstacle : MonoBehaviour
     private float _currentTimeHoldingDown = 0;
     private bool _holdingDownObstacle;
     private Escape _gameInterface;
+
 
     public GameObject Bridge;
     private Animator _animator;
@@ -95,7 +97,8 @@ public class Obstacle : MonoBehaviour
     public void PlayFlag()
     {
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Inventory/Groningen Flag");
+        transform.GetChild(0).transform.gameObject.SetActive(false);
+        transform.GetChild(1).transform.gameObject.SetActive(true);
     }
 
     public void PlayCanon()
@@ -112,9 +115,12 @@ public class Obstacle : MonoBehaviour
     public void SetPlantOnFire()
     {
         // TODO: Play burning sound
-        if (transform.GetChild(0).gameObject.tag == "Escape Fire Under Plant")
+        for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            if (transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 
@@ -122,9 +128,13 @@ public class Obstacle : MonoBehaviour
     {
         // TODO: Play extinguish sound
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        if (transform.GetChild(0).gameObject.tag == "Escape Fire Under Plant")
+
+        for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(0).gameObject.SetActive(true);
+            if (transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
 
@@ -136,7 +146,10 @@ public class Obstacle : MonoBehaviour
             Debug.Log("Tried to distract sheeps");
         } else if (type == Item.ItemType.BunchOfHay)
         {
-            // TODO: Do something wiht aninmations
+            foreach (Animator animator in _gameInterface.SheepsAnimators)
+            {
+                animator.SetBool("IsEating", true);
+            }
             _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
         }
     }

@@ -10,6 +10,7 @@ public class Escape : MonoBehaviour
 {
     public EscapeInventory Inventory;
     public CannonBallShooting _cannonInterface;
+    public GameObject InventoryPanel;
     public bool CustomizeNPC = false;
     public string Name;
     public string NameDutch;
@@ -26,6 +27,7 @@ public class Escape : MonoBehaviour
     public List<GameObject> ObsContainers = new List<GameObject>();
     public List<GameObject> ObsPrefabs = new List<GameObject>();
     private List<Obstacle> _currentObstacles = new List<Obstacle>();
+    public List<Animator> SheepsAnimators = new List<Animator>();
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public string AreaToUnlock;
@@ -94,15 +96,16 @@ public class Escape : MonoBehaviour
 
     private void GenerateRandomObstacles()
     {
+        _previousObsTypes.Clear();
         foreach (GameObject container in ObsContainers)
         {
-            int rndIndex = UnityEngine.Random.Range(1, 6);
+            int rndIndex = UnityEngine.Random.Range(1, 5);
 
             foreach (Obstacle.ObstacleType obsType in _previousObsTypes)
             {
                 while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obsType)
                 {
-                    rndIndex = UnityEngine.Random.Range(1, 6);
+                    rndIndex = UnityEngine.Random.Range(1, 5);
                 }
             }
 
@@ -114,6 +117,18 @@ public class Escape : MonoBehaviour
             newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;
 
             _currentObstacles.Add(newObs.GetComponent<Obstacle>());
+
+            if (newObs.GetComponent<Obstacle>().Type == Obstacle.ObstacleType.Sheeps)
+            {
+                for (int i = 0; i < newObs.transform.childCount; i++)
+                {
+                    GameObject obj = newObs.transform.GetChild(i).gameObject;
+                    if (obj.transform.tag == "Escape Sheep")
+                    {
+                        SheepsAnimators.Add(obj.GetComponent<Animator>());
+                    }
+                }
+            }
         }
     }
 
@@ -272,6 +287,7 @@ public class Escape : MonoBehaviour
     public void EndGame()
     {
         EndGamePopUp.SetActive(true);
+        InventoryPanel.SetActive(false);
 
         StartCoroutine(ShowStars());
     }
@@ -333,13 +349,13 @@ public class Escape : MonoBehaviour
 
     private void SpawnNewObstacle(Transform container)
     {
-        int rndIndex = UnityEngine.Random.Range(1, 6);
+        int rndIndex = UnityEngine.Random.Range(1, 5);
 
         foreach (Obstacle obs in _currentObstacles)
         {
             while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obs.Type)
             {
-                rndIndex = UnityEngine.Random.Range(1, 6);
+                rndIndex = UnityEngine.Random.Range(1, 5);
             }
         }
 
@@ -349,6 +365,18 @@ public class Escape : MonoBehaviour
         newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;
 
         _currentObstacles.Add(newObs.GetComponent<Obstacle>());
+
+        if (newObs.GetComponent<Obstacle>().Type == Obstacle.ObstacleType.Sheeps)
+        {
+            SheepsAnimators.Clear();
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (transform.GetChild(i).transform.name == "Sheep")
+                {
+                    SheepsAnimators.Add(GetComponentInChildren<Animator>());
+                }
+            }
+        }
     }
 
     private IEnumerator ToggleObstacleCo(Obstacle obstacle, Checkpoint checkpoint, GameObject obj, Transform container)
@@ -364,9 +392,9 @@ public class Escape : MonoBehaviour
             checkpoint.Passable = !checkpoint.Passable;
         } else
         {
-            checkpoint.Passable = !checkpoint.Passable;
+            checkpoint.Passable = true;
             yield return new WaitForSeconds(3f);
-            checkpoint.Passable = !checkpoint.Passable;
+            checkpoint.Passable = false;
         }
     }
 

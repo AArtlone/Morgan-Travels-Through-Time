@@ -81,8 +81,8 @@ public class Refugee : MonoBehaviour
                 StopAllCoroutines();
                 break;
             case RefugeeStatus.Injured:
-                _animator.SetBool("IsWalking", false);
                 _animator.SetBool("IsInjured", true);
+                _animator.SetBool("IsWalking", false);
                 StopAllCoroutines();
                 break;
             case RefugeeStatus.WalkingToObsIntElement:
@@ -121,19 +121,24 @@ public class Refugee : MonoBehaviour
                 _gameInterface.RefugeesSavedInThisSession++;
                 _gameInterface.TotalPoints += RewardInPoints;
                 _gameInterface.CurrentRefugees[WaveIndex].Remove(this);
+                //Debug.Log(_gameInterface.CurrentRefugees[WaveIndex].Count);
 
-                //for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
-                //{
-                //    _gameInterface.CurrentRefugees[WaveIndex][i].RefugeeIndex = i;
-                //}
+                /*Debug.Log(_gameInterface.CurrentRefugees.Count);
+                for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
+                {
+                    _gameInterface.CurrentRefugees[WaveIndex][i].RefugeeIndex = i;
+                }*/
 
-                //if (_gameInterface.CurrentRefugees.Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
-                //{
-                //    _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
+                if (_gameInterface.CurrentRefugees[WaveIndex].Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
+                {
+                    _gameInterface.TotalPoints += _gameInterface.RefugeeWaves[_gameInterface.CurrentWave].RewardInPoints;
 
-                //    _gameInterface.CurrentWave++;
-                //    _gameInterface.StartNextWave();
-                //}
+                    _gameInterface.CurrentWave++;
+                    if (_gameInterface.CurrentWave != _gameInterface.RefugeeWaves.Count)
+                    {
+                        _gameInterface.StartNextWave();
+                    }
+                }
 
                 if (_gameInterface.CurrentWave == _gameInterface.RefugeeWaves.Count)
                 {
@@ -143,16 +148,6 @@ public class Refugee : MonoBehaviour
 
                 _gameInterface.SaveEscapeGamesData();
                 Destroy(gameObject);
-            } else if (_targetCheckpoint.tag == "Inbetween Checkpoint")
-            {
-                if (RefugeeIndex == 0)
-                {
-                    if (_gameInterface.CurrentWave < _gameInterface.RefugeeWaves.Count - 1)
-                    {
-                        _gameInterface.CurrentWave++;
-                        _gameInterface.StartNextWave();
-                    }
-                }
             }
             if (_previousStatus == RefugeeStatus.Injured)
             {
@@ -221,9 +216,7 @@ public class Refugee : MonoBehaviour
 
     public void InjureRefugee()
     {
-        //TODO: Change animation to injured once roger creates one
         ChangeRefugeeStatus(RefugeeStatus.Injured);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90f);
         foreach (SpriteMeshInstance component in GetComponentsInChildren<SpriteMeshInstance>())
         {
             component.sortingOrder = component.sortingOrder + _gameInterface.GetLayerMultiplier();
@@ -232,7 +225,8 @@ public class Refugee : MonoBehaviour
 
     public void CureRefugee()
     {
-        GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, transform.position, Quaternion.identity);
+        Vector3 posForStretcher = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+        GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, posForStretcher, Quaternion.identity);
         stretcher.transform.parent = transform;
         transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
         _gameInterface._cannonInterface.GetComponentInParent<Obstacle>().PlayCanon();

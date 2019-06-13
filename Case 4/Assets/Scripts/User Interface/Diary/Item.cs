@@ -132,14 +132,29 @@ public class Item : MonoBehaviour
         Touch touch = Input.GetTouch(0);
 
         Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+        RaycastHit2D[] hitObjs = Physics2D.RaycastAll(origin, Vector3.forward, Mathf.Infinity);
         RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity);
-        //Debug.Log(hitObj.transform.name);
-
+        for (int i = 0; i < hitObjs.Length; i++)
+        {
+            if (hitObjs[i].transform != null)
+            {
+                if (hitObjs[i].transform.GetComponent<Refugee>() != null && hitObjs[i].transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                {
+                    if (Type == ItemType.Stretcher && hitObjs[i].transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                    {
+                        hitObjs[i].transform.gameObject.GetComponent<Refugee>().CureRefugee();
+                    }
+                }
+            }
+        }
         if (hitObj.transform != null)
         {
-            if (Type == ItemType.Stretcher && hitObj.transform.gameObject.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+            if (hitObj.transform.GetComponent<Refugee>() != null)
             {
-                hitObj.transform.gameObject.GetComponent<Refugee>().CureRefugee();
+                if (Type == ItemType.Stretcher && hitObj.transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                {
+                    hitObj.transform.gameObject.GetComponent<Refugee>().CureRefugee();
+                }
             }
             // Checking if the item was dropped on top of the object in the escape
             // game that can be interacted with the item
@@ -161,7 +176,7 @@ public class Item : MonoBehaviour
 
                     if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
                     {
-                        _gameInterface.Inventory.RemoveItem(this);
+                        //_gameInterface.Inventory.RemoveItem(this);
                         _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
                         hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
                     }
@@ -181,7 +196,15 @@ public class Item : MonoBehaviour
                     if (obstacleType == Obstacle.ObstacleType.EvilPlant)
                     {
                         bool isPLantOnFire = false;
-                        if (hitObj.transform.gameObject.transform.GetChild(0).gameObject.activeSelf == true)
+                        GameObject plantFire = null;
+                        for (int i = 0; i < hitObj.transform.childCount; i++)
+                        {
+                            if (hitObj.transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
+                            {
+                                plantFire = hitObj.transform.GetChild(i).gameObject;
+                            }
+                        }
+                        if (plantFire.activeSelf == true)
                         {
                             isPLantOnFire = true;
                         }
