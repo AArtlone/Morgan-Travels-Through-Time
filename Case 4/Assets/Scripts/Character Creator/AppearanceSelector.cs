@@ -119,7 +119,7 @@ public class AppearanceSelector : MonoBehaviour
         {
             if (sprite.name == PortraitImage)
             {
-                bodyPart.GetComponent<Image>().sprite = sprite;
+                bodyPart.GetComponent<Image>().overrideSprite = sprite;
             }
         }
 
