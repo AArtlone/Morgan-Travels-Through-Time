@@ -28,8 +28,14 @@ public class MapEnvironmentManager : MonoBehaviour
 
         if (Character.Instance.HasMap == true)
         {
-            CloseButton?.SetActive(true);
-            HiddenObjectPuzzleNpc?.SetActive(true);
+            if (CloseButton != null)
+            {
+                CloseButton.SetActive(true);
+            }
+            if (CloseButton != null)
+            {
+                HiddenObjectPuzzleNpc.SetActive(true);
+            }
         }
         if (Character.Instance.HasDiary == true && Character.Instance.AreIconsExplained == false)
         {

@@ -29,7 +29,10 @@ public class CameraBehavior : MonoBehaviour
     private void Start()
     {
         _hiddenObjectPuzzleScript = FindObjectOfType<HiddenObjectsPuzzle>();
-        BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+        if (Background != null)
+        {
+            BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+        }
         _gameInterface = FindObjectOfType<Escape>();
         InterfaceManager.Instance.CameraBehavior = this;
         Character.Instance.CameraBehavior = this;
@@ -134,7 +137,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
-                if (SceneManager.GetActiveScene().name != "Escape Game")
+                if (SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Hidden Objects Puzzle")
         {
             if ((Input.touchCount > 0 &&
                 Input.GetTouch(0).phase == TouchPhase.Began) &&
@@ -187,10 +190,6 @@ public class CameraBehavior : MonoBehaviour
                             break;
                         case "Area Interactable":
                             hitObj.transform.GetComponent<ToggleObject>().Replace();
-                            break;
-                        case "HOP Item":
-                            Debug.Log("Ass");
-                            _hiddenObjectPuzzleScript.PickItem(hitObj.transform.gameObject);
                             break;
                     }
                 }

@@ -26,7 +26,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     #region Items references
     // Those two lists are used for comparison mid-puzzle and are responsible
     // for deciding whether or not a puzzle is complete succcessfully.
-    private List<Item> _itemsRequired = new List<Item>();
+    public List<Item> _itemsRequired = new List<Item>();
     [Space(15)]
     public List<string> ItemsFound = new List<string>();
     public List<Item> ItemsToBeRewarded = new List<Item>();
@@ -100,9 +100,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             _itemsRequired.Add(item);
         }
 
-        // After that the timer of the puzzle and the hints parameter is initiated.
+        /*// After that the timer of the puzzle and the hints parameter is initiated.
         Counter = TimeToComplete;
-        Timer.text = Counter.ToString();
+        Timer.text = Counter.ToString();*/
 
         TextMeshProUGUI hintButton = HintButton.GetComponentInChildren<TextMeshProUGUI>();
         hintButton.text = Character.Instance.AvailableHints + Environment.NewLine;
@@ -210,12 +210,12 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             item.GetComponent<Item>().ItemFound = false;
         }
 
-        if (IsInvoking("CountDown"))
+        /*if (IsInvoking("CountDown"))
         {
             CancelInvoke();
         }
 
-        InvokeRepeating("CountDown", 1f, 1f);
+        InvokeRepeating("CountDown", 1f, 1f);*/
     }
     public void ResetPuzzle()
     {
@@ -300,6 +300,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Completed = true;
         Stars = 3;
 
+        Debug.Log("bbbbbbbbbbbbb");
         StartCoroutine(ShowStars());
         RefreshPuzzleData();
     }
@@ -381,6 +382,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             {
                 case "English":
                     ItemsFound.Add(objAsItem.GetComponent<LanguageController>().English);
+                    Debug.Log(objAsItem.GetComponent<LanguageController>().English);
                     break;
                 case "Dutch":
                     ItemsFound.Add(objAsItem.GetComponent<LanguageController>().Dutch);
@@ -498,8 +500,12 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         int itemsHinted = 0;
         foreach (GameObject item in _itemsInFindList)
         {
-            if (item.GetComponent<Item>().IsItemHintedAt) {
-                itemsHinted++;
+            if (item != null)
+            {
+                if (item.GetComponent<Item>().IsItemHintedAt)
+                {
+                    itemsHinted++;
+                }
             }
         }
 
@@ -521,8 +527,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
         _itemToHighlight = objectsForHinting[Random.Range(0, objectsForHinting.Count - 1)];
 
-        _itemToHighlight.GetComponent<Image>().color = Color.red;
-        _itemToHighlight.GetComponent<Item>().IsItemHintedAt = true;
+        if (_itemToHighlight != null)
+        {
+            _itemToHighlight.GetComponent<Image>().color = Color.red;
+            _itemToHighlight.GetComponent<Item>().IsItemHintedAt = true;
+        }
         Invoke("ReturnItemColors", 1f);
 
         // The player can only use the button after the hint duration has passed.
@@ -566,7 +575,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
     }
 
-    public void CountDown()
+    /*public void CountDown()
     {
         if (Counter <= 0)
         {
@@ -577,7 +586,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             Counter--;
             Timer.text = Counter.ToString();
         }
-    }
+    }*/
 
     public void MissedTap()
     {
@@ -590,6 +599,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             StarsList[i].SetActive(true);
+            Debug.Log("aaaa");
         }
     }
     private string InsertNewLineTabs(int numberOfTabs)
