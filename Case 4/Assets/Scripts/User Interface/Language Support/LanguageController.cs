@@ -123,9 +123,14 @@ public class LanguageController : MonoBehaviour
     }
 
     private void LoadTextIntoField(string text) {
-        if (GetComponent<Text>())
+        if (_textInputField != null)
         {
             _textInputField.text = text;
+        }
+
+        if (_textField != null)
+        {
+            _textField.text = text;
         }
     }
 }
