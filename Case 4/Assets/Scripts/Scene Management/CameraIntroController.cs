@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CameraIntroController : MonoBehaviour
@@ -37,24 +38,38 @@ public class CameraIntroController : MonoBehaviour
         }
     }
 
+    public IEnumerator LoadGameCo()
+    {
+        string sceneToLoad = string.Empty;
+        if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation)
+        {
+            sceneToLoad = Character.Instance.LastMapArea;
+        }
+        else if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation == false)
+        {
+            sceneToLoad = "Beginning Character Creation";
+        }
+        else
+        {
+            Character.Instance.IsCutscenePassed = true;
+            Character.Instance.RefreshJsonData();
+            sceneToLoad = "Beginning Character Creation";
+        }
+
+        InterfaceManager.Instance.LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneToLoad);
+
+        yield return new WaitForEndOfFrame();
+    }
+
     /// <summary>
     /// This function, at the beginning of the game, initiates a scene based on the
     /// current progress and last destinations of the player in the game.
     /// </summary>
     public void LoadGame()
     {
-        if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation)
-        {
-            SceneManager.LoadScene(Character.Instance.LastMapArea);
-        } else if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation == false)
-        {
-            SceneManager.LoadScene("Beginning Character Creation");
-        } else
-        {
-            Character.Instance.IsCutscenePassed = true;
-            Character.Instance.RefreshJsonData();
-            SceneManager.LoadScene("Beginning Character Creation");
-        }
+        StartCoroutine(LoadGameCo());
     }
 
     private void OnTriggerEnter2D(Collider2D col)

@@ -12,6 +12,7 @@ public class SpellingPuzzle : MonoBehaviour
     public string NameDutch;
     public bool Completed;
     public int Stars;
+    public string SceneName;
     public Image LetterBackgroud;
     public TextMeshProUGUI LetterText;
     public TMP_FontAsset LetterFont;
@@ -133,6 +134,7 @@ public class SpellingPuzzle : MonoBehaviour
             SpellingPuzzleObject puzzle = new SpellingPuzzleObject(
                     puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    puzzlesJsonData["Puzzles"][i]["SceneName"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false,
                     int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString()));
 
@@ -140,6 +142,7 @@ public class SpellingPuzzle : MonoBehaviour
                 new SpellingPuzzleObject(
                     puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    puzzlesJsonData["Puzzles"][i]["SceneName"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false,
                     int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString())));
 
@@ -166,6 +169,8 @@ public class SpellingPuzzle : MonoBehaviour
             newJsonData += "\"Name\": \"" + puzzle.Name + "\",";
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"NameDutch\": \"" + puzzle.NameDutch + "\",";
+            newJsonData += InsertNewLineTabs(3);
+            newJsonData += "\"SceneName\": \"" + puzzle.SceneName + "\",";
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"Completed\": " + (puzzle.Completed == true ? "true" : "false") + ",";
             newJsonData += InsertNewLineTabs(3);

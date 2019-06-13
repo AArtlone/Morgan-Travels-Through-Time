@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.IO;
+using System.Collections;
 
 public class CharacterCreatorManager : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class CharacterCreatorManager : MonoBehaviour
     private List<string> _wordsFilter = new List<string>();
     #endregion
 
+    [Space(10)]
+    public GameObject LoadingScreen;
     private DHManager _DHManager;
     
     void Start()
@@ -41,7 +44,10 @@ public class CharacterCreatorManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
         {
-            _DHManager?.LoadSequence("Teach Settings");
+            if (_DHManager != null)
+            {
+                _DHManager.LoadSequence("Teach Settings");
+            }
         }
 
         // When the game starts we extract all the bad words that we want to
@@ -227,20 +233,25 @@ public class CharacterCreatorManager : MonoBehaviour
             OpenWindow(CharacterClothesChangedErrorPopop);
         } else
         {
-            ReturnToMainMap();
+            StartCoroutine(ReturnToMainMap());
         }
     }
 
     //simply return to main map without any additional checks
-    public void ReturnToMainMap()
+    public IEnumerator ReturnToMainMap()
     {
         Character.Instance.CharacterCreation = true;
         Character.Instance.LastScene = Character.Instance.LastMapArea;
         Character.Instance.RefreshJsonData();
-        SceneManager.LoadScene(Character.Instance.LastMapArea);
+
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(Character.Instance.LastMapArea);
+
+        yield return new WaitForEndOfFrame();
     }
 
-    public void ConfirmCharacterName(Object obj)
+    public IEnumerator ConfirmCharacterNameCo(Object obj)
     {
         GameObject inputField = obj as GameObject;
         string nameInput = inputField.GetComponent<InputField>().text;
@@ -277,8 +288,12 @@ public class CharacterCreatorManager : MonoBehaviour
             {
                 Character.Instance.LastScene = "Tutorial Map Area";
                 Character.Instance.RefreshJsonData();
-                SceneManagement.Instance.LoadScene("Tutorial Map Area");
-            } else
+
+                LoadingScreen.SetActive(true);
+
+                AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync("Tutorial Map Area");
+            }
+            else
             {
                 GameObject.Find("Character Name Menu").SetActive(false);
             }
@@ -287,6 +302,13 @@ public class CharacterCreatorManager : MonoBehaviour
         {
             OpenWindow(CharacterNameErrorPopupWindow);
         }
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    public void ConfirmCharacterName(Object obj)
+    {
+        StartCoroutine(ConfirmCharacterNameCo(obj));
     }
 
     public void ShowKeyboard()
@@ -329,22 +351,31 @@ public class CharacterCreatorManager : MonoBehaviour
 
     public void ResetTheGame()
     {
+        StartCoroutine(ResetTheGameCo());
+    }
+
+    public IEnumerator ResetTheGameCo()
+    {
         if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
         {
             SettingsManager.Instance.RemoveSingletonInstance();
-            SceneManagement.Instance.RemoveSingletonInstance();
             Character.Instance.RemoveSingletonInstance();
+            SceneManagement.Instance.RemoveSingletonInstance();
             DeleteJsonDataFromStorage();
-            SceneManager.LoadScene("Logo Introduction");
         }
         else
         {
             SettingsManager.Instance.RemoveSingletonInstance();
-            SceneManagement.Instance.RemoveSingletonInstance();
             Character.Instance.RemoveSingletonInstance();
+            SceneManagement.Instance.RemoveSingletonInstance();
             DeleteJsonDataFromStorage();
-            SceneManager.LoadScene("Logo Introduction");
         }
+
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync("Logo Introduction");
+
+        yield return new WaitForEndOfFrame();
     }
 
     public void DeleteJsonDataFromStorage()

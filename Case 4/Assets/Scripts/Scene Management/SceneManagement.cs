@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
+    public GameObject LoadingScreen;
 
     private void Start()
     {
@@ -19,12 +21,19 @@ public class SceneManagement : MonoBehaviour
         }
     }
 
+    public void ResumeGameFromProgress()
+    {
+        StartCoroutine(ResumeGame());
+    }
+
     /// <summary>
     /// This function makes sure the player's last game session is restored (last
     /// location or scenes he was at) when he restarts the game and enters it.
     /// </summary>
-    public void ResumeGame()
+    public IEnumerator ResumeGame()
     {
+        string sceneToLoad = string.Empty;
+
         // If the player has already created a character then 
         // we just start the main menu instead.
         if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
@@ -33,45 +42,65 @@ public class SceneManagement : MonoBehaviour
             {
                 if (Character.Instance.LastScene != "Tutorial Map Area" && Character.Instance.LastMapArea != "Tutorial Map Area")
                 {
-                    LoadScene(Character.Instance.LastScene);
+                    sceneToLoad = Character.Instance.LastScene;
                 }
                 else if (Character.Instance.LastMapArea == "Tutorial Map Area")
                 {
-                    LoadScene(Character.Instance.LastMapArea);
+                    sceneToLoad = Character.Instance.LastMapArea;
                 } else
                 {
-                    LoadScene(Character.Instance.LastMapArea);
+                    sceneToLoad = Character.Instance.LastMapArea;
                 }
                 Character.Instance.RefreshJsonData();
             }
             else
             {
-                LoadScene(Character.Instance.LastMapArea);
+                sceneToLoad = Character.Instance.LastMapArea;
             }
         }
         else if (SceneManager.GetActiveScene().name == "Character Customization")
         {
-            LoadScene(Character.Instance.LastMapArea);
+            sceneToLoad = Character.Instance.LastMapArea;
         }
         else if (SceneManager.GetActiveScene().name == "Main Map")
         {
-            LoadScene(Character.Instance.LastScene);
+            sceneToLoad = Character.Instance.LastScene;
         } else if (SceneManager.GetActiveScene().name == "Logo Introduction" && Character.Instance.CharacterCreation)
         {
             SceneManager.LoadScene(Character.Instance.LastMapArea);
         } else if (SceneManager.GetActiveScene().name == "Logo Introduction" && Character.Instance.CharacterCreation == false)
         {
-            SceneManager.LoadScene("Introduction");
+            sceneToLoad = "Introduction";
         }
+
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneToLoad);
+
+        yield return new WaitForEndOfFrame();
     }
 
     public void LoadCharacterCustomization()
+    {
+        StartCoroutine(LoadCharacterCustomizationCo());
+    }
+
+    public IEnumerator LoadCharacterCustomizationCo()
     {
         //Character.Instance.CharacterCreation = false;
         Character.Instance.LastScene = "Character Customization";
         Character.Instance.RefreshJsonData();
 
-        SceneManager.LoadScene("Character Customization");
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(Character.Instance.LastScene);
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    public void LoadScene(string newScene)
+    {
+        StartCoroutine(LoadSceneCo(newScene));
     }
 
     /// <summary>
@@ -80,8 +109,9 @@ public class SceneManagement : MonoBehaviour
     /// start of the game.
     /// </summary>
     /// <param name="newScene"></param>
-    public void LoadScene(string newScene)
+    public IEnumerator LoadSceneCo(string newScene)
     {
+        string sceneToLoad = string.Empty;
         if (newScene == "Logo Introduction")
         {
             SceneManager.LoadScene(newScene);
@@ -91,15 +121,23 @@ public class SceneManagement : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House")
             {
                 Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
+                sceneToLoad = Character.Instance.LastMapArea;
             }
             else
             {
                 Character.Instance.LastScene = newScene;
+                sceneToLoad = newScene;
             }
 
             Character.Instance.RefreshJsonData();
-            SceneManager.LoadScene(newScene);
+            sceneToLoad = newScene;
         }
+
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneToLoad);
+
+        yield return new WaitForEndOfFrame();
     }
 
     public void RemoveSingletonInstance()

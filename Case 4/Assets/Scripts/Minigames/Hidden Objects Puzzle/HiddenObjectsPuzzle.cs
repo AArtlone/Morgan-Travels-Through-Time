@@ -7,7 +7,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 public class HiddenObjectsPuzzle : MonoBehaviour
@@ -19,6 +18,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public int TimeToComplete;
     [NonSerialized]
     public bool Completed;
+    public string SceneName;
     [Space(15)]
     public GameObject BottomUI;
     public GameObject InstructionManual;
@@ -67,10 +67,11 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     private bool _isInterfaceToggledOn;
     private int _missclicks;
 
-    public HiddenObjectsPuzzle(string name, string nameDutch, int stars, bool completed)
+    public HiddenObjectsPuzzle(string name, string nameDutch, string sceneName, int stars, bool completed)
     {
         Name = name;
         NameDutch = nameDutch;
+        SceneName = sceneName;
         Stars = stars;
         Completed = completed;
     }
@@ -137,6 +138,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
                 Stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
+                SceneName = puzzlesJsonData["Puzzles"][i]["SceneName"].ToString();
                 Completed = (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false);
             }
         }
@@ -154,6 +156,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                 new HiddenObjectsPuzzle(
                     puzzlesJsonData["Puzzles"][i]["Name"].ToString(),
                     puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    puzzlesJsonData["Puzzles"][i]["SceneName"].ToString(),
                     int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
                     (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True" ? true : false)));
         }
@@ -180,6 +183,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             newJsonData += "\"Name\": \"" + HOP.Name + "\",";
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"NameDutch\": \"" + HOP.NameDutch + "\",";
+            newJsonData += InsertNewLineTabs(3);
+            newJsonData += "\"SceneName\": \"" + HOP.SceneName + "\",";
             newJsonData += InsertNewLineTabs(3);
             if (HOP.Completed == true)
             {
@@ -300,7 +305,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         Completed = true;
         Stars = 3;
 
-        Debug.Log("bbbbbbbbbbbbb");
         StartCoroutine(ShowStars());
         RefreshPuzzleData();
     }

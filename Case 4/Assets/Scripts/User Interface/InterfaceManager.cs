@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -101,6 +102,7 @@ public class InterfaceManager : MonoBehaviour
     public Canvas InventoryUICanvas;
     public Animator AnimatorOfFade;
     public CameraBehavior CameraBehavior;
+    public GameObject LoadingScreen;
 
     private void Awake()
     {
@@ -775,34 +777,54 @@ public class InterfaceManager : MonoBehaviour
     public void LoadLastMapAreaScene()
     {
         Character.Instance.LastScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(Character.Instance.LastMapArea);
+        StartCoroutine(LoadLastMapAreaSceneCo());
+    }
+
+    public IEnumerator LoadLastMapAreaSceneCo()
+    {
+        Character.Instance.LastScene = SceneManager.GetActiveScene().name;
+
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(Character.Instance.LastMapArea);
+
+        yield return new WaitForEndOfFrame();
     }
 
     public void LoadScene(string scene)
     {
+        StartCoroutine(LoadSceneCo(scene));
+    }
+
+    public IEnumerator LoadSceneCo(string scene)
+    {
+        LoadingScreen.SetActive(true);
+
         if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House")
         {
             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
 
-            SceneManager.LoadScene(scene);
+            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
         }
         else
         {
             if (Character.Instance.LastMapArea == "Test Area")
             {
-                SceneManager.LoadScene("Test Area");
+                AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync("Test Area");
             }
             else
             {
                 Character.Instance.LastScene = scene;
-                SceneManager.LoadScene(scene);
+                AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
             }
         }
         Character.Instance.RefreshJsonData();
+
+        yield return new WaitForEndOfFrame();
     }
     #endregion
 
-    public void ResetTheGame()
+    public IEnumerator ResetTheGameCo()
     {
         if (SceneManager.GetActiveScene().name == "Beginning Character Creation")
         {
@@ -810,7 +832,6 @@ public class InterfaceManager : MonoBehaviour
             Character.Instance.RemoveSingletonInstance();
             SceneManagement.Instance.RemoveSingletonInstance();
             DeleteJsonDataFromStorage();
-            SceneManager.LoadScene("Logo Introduction");
         }
         else
         {
@@ -818,8 +839,18 @@ public class InterfaceManager : MonoBehaviour
             Character.Instance.RemoveSingletonInstance();
             SceneManagement.Instance.RemoveSingletonInstance();
             DeleteJsonDataFromStorage();
-            SceneManager.LoadScene("Logo Introduction");
         }
+
+        LoadingScreen.SetActive(true);
+
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync("Logo Introduction");
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    public void ResetTheGame()
+    {
+        StartCoroutine(ResetTheGameCo());
     }
 
     public void DeleteJsonDataFromStorage()

@@ -931,6 +931,7 @@ public class Character : MonoBehaviour
         Items.Add(item);
         ItemsDutch.Add(item);
 
+        ItemNotificationManager.Instance.GetItem(item);
         RefreshItems();
         LoadInventory();
     }
@@ -949,6 +950,7 @@ public class Character : MonoBehaviour
         Wearables.Add(clothing);
         WearablesDutch.Add(clothing);
 
+        ItemNotificationManager.Instance.GetItem(clothing);
         RefreshWearables();
     }
 

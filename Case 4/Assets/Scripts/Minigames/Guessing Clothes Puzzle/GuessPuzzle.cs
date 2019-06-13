@@ -22,6 +22,7 @@ public class GuessPuzzle : MonoBehaviour
     [Space(15)]
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
+    public string SceneName;
 
     #region Lists of custom clothes for gameplay instead of random ones by default
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
@@ -84,6 +85,7 @@ public class GuessPuzzle : MonoBehaviour
                 puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() == NameDutch)
             {
                 _stars = int.Parse(puzzlesJsonData["Puzzles"][i]["Stars"].ToString());
+                SceneName = puzzlesJsonData["Puzzles"][i]["SceneName"].ToString();
                 if (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
                 {
                     Completed = true;
@@ -444,6 +446,8 @@ public class GuessPuzzle : MonoBehaviour
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"NameDutch\": " + "\"" + NameDutch + "\",";
                 newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"SceneName\": " + "\"" + SceneName + "\",";
+                newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Completed\": " + (Completed ? "true" : "false") + ",";
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"Stars\": " + CalculateTotalScore();
@@ -453,6 +457,8 @@ public class GuessPuzzle : MonoBehaviour
                 newScoreData += "\"Name\": " + "\"" + puzzlesJsonData["Puzzles"][i]["Name"].ToString() + "\",";
                 newScoreData += InsertNewLineTabs(3);
                 newScoreData += "\"NameDutch\": " + "\"" + puzzlesJsonData["Puzzles"][i]["NameDutch"].ToString() + "\",";
+                newScoreData += InsertNewLineTabs(3);
+                newScoreData += "\"SceneName\": " + "\"" + SceneName + "\",";
                 newScoreData += InsertNewLineTabs(3);
                 if (puzzlesJsonData["Puzzles"][i]["Completed"].ToString() == "True")
                 {

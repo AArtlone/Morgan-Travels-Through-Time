@@ -30,7 +30,6 @@ public class AchievementManager : MonoBehaviour
         } else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -107,7 +106,6 @@ public class AchievementManager : MonoBehaviour
             if (achievement.Name == name)
             {
                 achievement.Status = true;
-                // TODO: create animation
                 AchievementPrefab.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("Achievements/" + achievement.Icon);
                 if (SettingsManager.Instance.Language == "English")
                 {

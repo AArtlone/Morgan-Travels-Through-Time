@@ -205,6 +205,8 @@ public class DiaryManager : MonoBehaviour
                     }
                 }
 
+                newPuzzleDisplay.GetComponent<PuzzleInit>().SceneToLoad = AllPuzzles[i].SceneName;
+
                 LanguageController languageComponent = newPuzzleDisplay.transform.GetChild(1).GetComponent<LanguageController>();
 
                 switch (SettingsManager.Instance.Language)
@@ -299,6 +301,7 @@ public class DiaryManager : MonoBehaviour
                     Type = "Hidden Objects Puzzle",
                     Name = HOPPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
                     NameDutch = HOPPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    SceneName = HOPPuzzlesJsonData["Puzzles"][i]["SceneName"].ToString(),
                     Completed = isItComplete,
                     Stars = int.Parse(HOPPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
                 };
@@ -326,6 +329,7 @@ public class DiaryManager : MonoBehaviour
                     Type = "Guess Clothing Puzzle",
                     Name = guessClothingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
                     NameDutch = guessClothingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    SceneName = guessClothingPuzzlesJsonData["Puzzles"][i]["SceneName"].ToString(),
                     Completed = isItComplete,
                     Score = int.Parse(guessClothingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString())
                 };
@@ -353,6 +357,7 @@ public class DiaryManager : MonoBehaviour
                     Type = "Escape Game",
                     Name = escapeGamesJsonData["EscapeGames"][i]["Name"].ToString(),
                     NameDutch = escapeGamesJsonData["EscapeGames"][i]["NameDutch"].ToString(),
+                    SceneName = escapeGamesJsonData["EscapeGames"][i]["SceneName"].ToString(),
                     Score = int.Parse(escapeGamesJsonData["EscapeGames"][i]["TotalPoints"].ToString()),
                     Completed = isItComplete,
                     RefugeesSaved = int.Parse(escapeGamesJsonData["EscapeGames"][i]["RefugeesSaved"].ToString())
@@ -381,6 +386,7 @@ public class DiaryManager : MonoBehaviour
                     Type = "Spelling Puzzle",
                     Name = spellingPuzzlesJsonData["Puzzles"][i]["Name"].ToString(),
                     NameDutch = spellingPuzzlesJsonData["Puzzles"][i]["NameDutch"].ToString(),
+                    SceneName = spellingPuzzlesJsonData["Puzzles"][i]["SceneName"].ToString(),
                     Stars = int.Parse(spellingPuzzlesJsonData["Puzzles"][i]["Stars"].ToString()),
                     Completed = isItComplete
                 };
