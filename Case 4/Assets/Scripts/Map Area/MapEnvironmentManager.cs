@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapEnvironmentManager : MonoBehaviour
 {
@@ -31,10 +32,10 @@ public class MapEnvironmentManager : MonoBehaviour
             if (CloseButton != null)
             {
                 CloseButton.SetActive(true);
-            }
-            if (CloseButton != null)
-            {
-                HiddenObjectPuzzleNpc.SetActive(true);
+                if (SceneManager.GetActiveScene().name == "Tutorial Map Area")
+                {
+                    HiddenObjectPuzzleNpc.SetActive(true);
+                }
             }
         }
         if (Character.Instance.HasDiary == true && Character.Instance.AreIconsExplained == false)

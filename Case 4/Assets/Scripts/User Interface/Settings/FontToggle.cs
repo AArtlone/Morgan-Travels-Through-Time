@@ -7,14 +7,22 @@ public class FontToggle : MonoBehaviour
 {
     private List<string> _fontsList = new List<string>();
     public TextMeshProUGUI CurrentFontInSettings;
+    public TextMeshProUGUI FontLabel;
     private int _currentFontIndex;
 
     private void Start()
     {
         InitializeFontsList();
+
         if (CurrentFontInSettings != null)
         {
-            CurrentFontInSettings.text = SettingsManager.Instance.Font.Substring(0, 8) + "..";
+            if (SettingsManager.Instance.Font.Length > 8)
+            {
+                CurrentFontInSettings.text = SettingsManager.Instance.Font.Substring(0, 8) + "..";
+            } else
+            {
+                CurrentFontInSettings.text = SettingsManager.Instance.Font;
+            }
         }
     }
 
@@ -51,7 +59,10 @@ public class FontToggle : MonoBehaviour
 
         foreach (LanguageController font in SettingsManager.Instance.LanguageControllers)
         {
-            font?.UpdateCurrentFont();
+            if (font != null)
+            {
+                font.UpdateCurrentFont();
+            }
         }
 
         SettingsManager.Instance.RefreshSettings();

@@ -97,8 +97,9 @@ public class InterfaceManager : MonoBehaviour
     public Image _darkShoesPart;
     #endregion
 
+    [Space(10)]
     public Canvas InventoryUICanvas;
-
+    public Animator AnimatorOfFade;
     public CameraBehavior CameraBehavior;
 
     private void Awake()
@@ -111,6 +112,13 @@ public class InterfaceManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public void FadeEndTutorial()
+    {
+        AnimatorOfFade.gameObject.SetActive(true);
+        AnimatorOfFade.SetBool("IsTransitionBlack", true);
+        Debug.Log(AnimatorOfFade.GetBool("IsTransitionBlack"));
     }
 
     private void Start()
@@ -131,17 +139,6 @@ public class InterfaceManager : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             touch.phase = TouchPhase.Ended;
         }
-
-        //if(Character.Instance.TutorialCompleted == false)
-        //{
-        //    foreach(GameObject mapArea in MapAreas)
-        //    {
-        //        if(mapArea.name != "Map Area 1")
-        //        {
-        //            mapArea.SetActive(false);
-        //        }
-        //    }
-        //}
     }
 
     /// <summary>

@@ -662,7 +662,11 @@ public class NPC : MonoBehaviour
 
     private IEnumerator LoadSceneCo(string sceneToLoad)
     {
-        yield return new WaitForSeconds(0.2f);
+        if (SceneToLoadAfterDialogue == "Tutorial Complete")
+        {
+            InterfaceManager.Instance.FadeEndTutorial();
+        }
+        yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene(sceneToLoad);
     }
 
