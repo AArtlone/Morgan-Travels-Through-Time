@@ -495,7 +495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 82861258, guid: 78a8fb476cf7cfc41a9812cb3234eaf4, type: 3}
       propertyPath: DialogueFormats.Array.data[1].Dialogue.Array.data[0].RightCharacterExpression
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 82861258, guid: 78a8fb476cf7cfc41a9812cb3234eaf4, type: 3}
       propertyPath: Name
@@ -3699,7 +3699,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Background: {fileID: 1991178622}
+  BackgroundLeft: {fileID: 0}
+  BackgroundRight: {fileID: 0}
   MapPart: {fileID: 0}
+  BackgroundBoundsLeft:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  BackgroundBoundsRight:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   _isCameraTravelling: 0
   TapPosition: {x: 0, y: 0, z: 0}
   IsInteracting: 0
