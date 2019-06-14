@@ -50,7 +50,6 @@ public class LanguageController : MonoBehaviour
             UpdateCurrentLanguage();
         }
         UpdateCurrentFont();
-        LoadLanguage(SelectedLanguage);
     }
 
     /// <summary>
@@ -81,7 +80,8 @@ public class LanguageController : MonoBehaviour
         {
             if (font.ToString() == SettingsManager.Instance.Font)
             {
-                _textField.font = Resources.Load<TMP_FontAsset>("Fonts/" + font.ToString() + " SDF");
+                if (_textField != null)
+                    _textField.font = Resources.Load<TMP_FontAsset>("Fonts/" + font.ToString() + " SDF");
             }
         }
     }

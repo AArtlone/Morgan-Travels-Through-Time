@@ -117,212 +117,220 @@ public class Item : MonoBehaviour
     {
         _cameraBehaviour.IsInterfaceElementSelected = true;
 
-        Touch touch = Input.GetTouch(0);
-        transform.SetParent(GameObject.FindGameObjectWithTag("Items Panel").transform);
-        transform.position = new Vector2(touch.position.x, touch.position.y);
-        // This makes it so that the timer is not increasing if youre holding the
-        // item AND dragging it at the same time.
-        _timer = 0;
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            transform.SetParent(GameObject.FindGameObjectWithTag("Items Panel").transform);
+            transform.position = new Vector2(touch.position.x, touch.position.y);
+            // This makes it so that the timer is not increasing if youre holding the
+            // item AND dragging it at the same time.
+            _timer = 0;
+        }
     }
 
     public void DropItem()
     {
         _cameraBehaviour.IsInterfaceElementSelected = false;
 
-        Touch touch = Input.GetTouch(0);
-
-        Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-        RaycastHit2D[] hitObjs = Physics2D.RaycastAll(origin, Vector3.forward, Mathf.Infinity);
-        RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity);
-        for (int i = 0; i < hitObjs.Length; i++)
+        if (Input.touchCount > 0)
         {
-            if (hitObjs[i].transform != null)
+            Touch touch = Input.GetTouch(0);
+
+            Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            RaycastHit2D[] hitObjs = Physics2D.RaycastAll(origin, Vector3.forward, Mathf.Infinity);
+            RaycastHit2D hitObj = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity);
+            for (int i = 0; i < hitObjs.Length; i++)
             {
-                if (hitObjs[i].transform.GetComponent<Refugee>() != null && hitObjs[i].transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                if (hitObjs[i].transform != null)
                 {
-                    if (Type == ItemType.Stretcher && hitObjs[i].transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                    if (hitObjs[i].transform.GetComponent<Refugee>() != null && hitObjs[i].transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
                     {
-                        hitObjs[i].transform.gameObject.GetComponent<Refugee>().CureRefugee();
+                        if (Type == ItemType.Stretcher && hitObjs[i].transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                        {
+                            hitObjs[i].transform.gameObject.GetComponent<Refugee>().CureRefugee();
+                        }
                     }
                 }
             }
-        }
-        if (hitObj.transform != null)
-        {
-            if (hitObj.transform.GetComponent<Refugee>() != null)
+            if (hitObj.transform != null)
             {
-                if (Type == ItemType.Stretcher && hitObj.transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
+                if (hitObj.transform.GetComponent<Refugee>() != null)
                 {
-                    hitObj.transform.gameObject.GetComponent<Refugee>().CureRefugee();
-                }
-            }
-            // Checking if the item was dropped on top of the object in the escape
-            // game that can be interacted with the item
-            if (hitObj.transform.tag == "Item Interactable Object")
-            {
-                if (hitObj.transform.name == "Well" && Type == ItemType.EmptyBucket)
-                {
-                    _gameInterface.Inventory.RemoveItem(this);
-                    _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
-                } else if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
-                {
-                    hitObj.transform.GetComponent<Refugee>().CureRefugee();
-                } else
-                {
-                    Obstacle.ObstacleType obstacleType = hitObj.transform.gameObject.GetComponent<Obstacle>().Type;
-                    // Check if the dropping item is an empty buccket and if the interactable
-                    // object is a well. If yes, then it replaces the empty bucket with a
-                    // full bucket
-
-                    if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
+                    if (Type == ItemType.Stretcher && hitObj.transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
                     {
-                        //_gameInterface.Inventory.RemoveItem(this);
-                        _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
-                        hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
+                        hitObj.transform.gameObject.GetComponent<Refugee>().CureRefugee();
                     }
-
-                    if (obstacleType == Obstacle.ObstacleType.Fire && Type == ItemType.FullBucket)
+                }
+                // Checking if the item was dropped on top of the object in the escape
+                // game that can be interacted with the item
+                if (hitObj.transform.tag == "Item Interactable Object")
+                {
+                    if (hitObj.transform.name == "Well" && Type == ItemType.EmptyBucket)
                     {
                         _gameInterface.Inventory.RemoveItem(this);
-                        _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
-                        hitObj.transform.gameObject.GetComponent<Obstacle>().PLayFire();
+                        _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
                     }
-
-                    if (obstacleType == Obstacle.ObstacleType.Sheeps)
+                    else if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
                     {
-                        hitObj.transform.gameObject.GetComponent<Obstacle>().PlaySheeps(Type);
+                        hitObj.transform.GetComponent<Refugee>().CureRefugee();
                     }
-
-                    if (obstacleType == Obstacle.ObstacleType.EvilPlant)
+                    else
                     {
-                        bool isPLantOnFire = false;
-                        GameObject plantFire = null;
-                        for (int i = 0; i < hitObj.transform.childCount; i++)
+                        Obstacle.ObstacleType obstacleType = hitObj.transform.gameObject.GetComponent<Obstacle>().Type;
+                        // Check if the dropping item is an empty buccket and if the interactable
+                        // object is a well. If yes, then it replaces the empty bucket with a
+                        // full bucket
+
+                        if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
                         {
-                            if (hitObj.transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
-                            {
-                                plantFire = hitObj.transform.GetChild(i).gameObject;
-                            }
-                        }
-                        if (plantFire.activeSelf == true)
-                        {
-                            isPLantOnFire = true;
+                            //_gameInterface.Inventory.RemoveItem(this);
+                            _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
                         }
 
-                        if (!isPLantOnFire)
+                        if (obstacleType == Obstacle.ObstacleType.Fire && Type == ItemType.FullBucket)
                         {
-                            if (Type == ItemType.Sword)
-                            {
-                                hitObj.transform.gameObject.GetComponent<Obstacle>().CutPlant();
-                            }
-                            else if (Type == ItemType.Torch)
-                            {
-                                hitObj.transform.gameObject.GetComponent<Obstacle>().SetPlantOnFire();
-                            }
+                            _gameInterface.Inventory.RemoveItem(this);
+                            _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().PLayFire();
                         }
-                        else
+
+                        if (obstacleType == Obstacle.ObstacleType.Sheeps)
                         {
-                            if (Type == ItemType.FullBucket)
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().PlaySheeps(Type);
+                        }
+
+                        if (obstacleType == Obstacle.ObstacleType.EvilPlant)
+                        {
+                            bool isPLantOnFire = false;
+                            GameObject plantFire = null;
+                            for (int i = 0; i < hitObj.transform.childCount; i++)
                             {
-                                _gameInterface.Inventory.RemoveItem(this);
-                                _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
-                                hitObj.transform.gameObject.GetComponent<Obstacle>().ExtinguishPlant();
+                                if (hitObj.transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
+                                {
+                                    plantFire = hitObj.transform.GetChild(i).gameObject;
+                                }
+                            }
+                            if (plantFire.activeSelf == true)
+                            {
+                                isPLantOnFire = true;
+                            }
+
+                            if (!isPLantOnFire)
+                            {
+                                if (Type == ItemType.Sword)
+                                {
+                                    hitObj.transform.gameObject.GetComponent<Obstacle>().CutPlant();
+                                }
+                                else if (Type == ItemType.Torch)
+                                {
+                                    hitObj.transform.gameObject.GetComponent<Obstacle>().SetPlantOnFire();
+                                }
+                            }
+                            else
+                            {
+                                if (Type == ItemType.FullBucket)
+                                {
+                                    _gameInterface.Inventory.RemoveItem(this);
+                                    _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
+                                    hitObj.transform.gameObject.GetComponent<Obstacle>().ExtinguishPlant();
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
+            Ray ray = new Ray(transform.position, transform.forward);
+            RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            if (hit.transform.tag == "Item")
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                _gameInterface.Inventory.CraftItem(this, hit.transform.GetComponent<Item>());
-            }
-
-            if (hit.transform.tag == "NPC")
-            {
-                // TODO: Based on item throw, show a wrong item drop dialogue or the correct one for the main npc dialogue starting from the point after you drop the item.
-                if (DialogueManager.Instance.CurrentNPCDialogue == null)
+                if (hit.transform.tag == "Item")
                 {
-                    bool isCorrectItemDropped = false;
-                    NPC npc = hit.transform.gameObject.GetComponent<NPC>();
+                    _gameInterface.Inventory.CraftItem(this, hit.transform.GetComponent<Item>());
+                }
+
+                if (hit.transform.tag == "NPC")
+                {
+                    // TODO: Based on item throw, show a wrong item drop dialogue or the correct one for the main npc dialogue starting from the point after you drop the item.
+                    if (DialogueManager.Instance.CurrentNPCDialogue == null)
+                    {
+                        bool isCorrectItemDropped = false;
+                        NPC npc = hit.transform.gameObject.GetComponent<NPC>();
+
+                        int index = 0;
+                        for (int i = 0; i < npc.DialogueFormats.Count; i++)
+                        {
+                            if (npc.DialogueFormats[i].Language == SettingsManager.Instance.Language)
+                            {
+                                index = i;
+                                break;
+                            }
+                        }
+
+                        if (npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Count == 0 &&
+                            npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsRequired[0] ==
+                            Name)
+                        {
+                            npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
+                            isCorrectItemDropped = true;
+                        }
+                        if (isCorrectItemDropped)
+                        {
+                            npc.ContinueDialogue();
+                        }
+                    }
+                }
+
+                // Here we check if the item was dragged and dropped on top of the
+                // dialogue box and if so, then we populate the dropped items list in
+                // that dialogue branch's array of dropped items and check whether or
+                // not all the required items have been dropped in order to progress
+                // further in the dialogue
+                if (hit.transform.tag == "Dialogue Box")
+                {
+                    NPC currentNpc = DialogueManager.Instance.CurrentNPCDialogue;
 
                     int index = 0;
-                    for (int i = 0; i < npc.DialogueFormats.Count; i++)
+                    for (int i = 0; i < currentNpc.DialogueFormats.Count; i++)
                     {
-                        if (npc.DialogueFormats[i].Language == SettingsManager.Instance.Language)
+                        if (currentNpc.DialogueFormats[i].Language == SettingsManager.Instance.Language)
                         {
                             index = i;
                             break;
                         }
                     }
 
-                    if (npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Count == 0 &&
-                        npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsRequired[0] ==
-                        Name)
+                    foreach (DialogueBranch branch in currentNpc.DialogueFormats[index].Dialogue[currentNpc.CurrentDialogueIndex].DialogueBranches)
                     {
-                        npc.DialogueFormats[index].Dialogue[0].DialogueBranches[0].ItemsDropped.Add(Name);
-                        isCorrectItemDropped = true;
-                    }
-                    if (isCorrectItemDropped)
-                    {
-                        npc.ContinueDialogue();
-                    }
-                }
-            }
-
-            // Here we check if the item was dragged and dropped on top of the
-            // dialogue box and if so, then we populate the dropped items list in
-            // that dialogue branch's array of dropped items and check whether or
-            // not all the required items have been dropped in order to progress
-            // further in the dialogue
-            if (hit.transform.tag == "Dialogue Box")
-            {
-                NPC currentNpc = DialogueManager.Instance.CurrentNPCDialogue;
-
-                int index = 0;
-                for (int i = 0; i < currentNpc.DialogueFormats.Count; i++)
-                {
-                    if (currentNpc.DialogueFormats[i].Language == SettingsManager.Instance.Language)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-
-                foreach (DialogueBranch branch in currentNpc.DialogueFormats[index].Dialogue[currentNpc.CurrentDialogueIndex].DialogueBranches)
-                {
-                    foreach (string requiredItem in branch.ItemsRequired)
-                    {
-                        // If the item's name matches one of the required ones, then we
-                        // give feedback to the player the item has been dropped.
-                        if (Name == requiredItem)
+                        foreach (string requiredItem in branch.ItemsRequired)
                         {
-                            branch.ItemsDropped.Add(Name);
-
-                            if (branch.ItemsDropped.Count == branch.ItemsRequired.Count)
+                            // If the item's name matches one of the required ones, then we
+                            // give feedback to the player the item has been dropped.
+                            if (Name == requiredItem)
                             {
-                                currentNpc.ContinueDialogue();
+                                branch.ItemsDropped.Add(Name);
+
+                                if (branch.ItemsDropped.Count == branch.ItemsRequired.Count)
+                                {
+                                    currentNpc.ContinueDialogue();
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
-        if (SceneManager.GetActiveScene().name == "Escape Game")
-        {
-            FindObjectOfType<EscapeInventory>().RefreshPanel();
-        }
-        else
-        {
-            transform.SetParent(GameObject.Find("Items").transform);
-            Character.Instance.ReloadInventory();
+            if (SceneManager.GetActiveScene().name == "Escape Game")
+            {
+                FindObjectOfType<EscapeInventory>().RefreshPanel();
+            }
+            else
+            {
+                transform.SetParent(GameObject.Find("Items").transform);
+                Character.Instance.ReloadInventory();
+            }
         }
     }
 }

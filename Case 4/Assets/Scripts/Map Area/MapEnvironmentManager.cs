@@ -48,7 +48,8 @@ public class MapEnvironmentManager : MonoBehaviour
         }
         if (Character.Instance.TutorialCompleted == true)
         {
-            EscapeGameNpc?.SetActive(true);
+            if (EscapeGameNpc != null) 
+                EscapeGameNpc.SetActive(true);
         }
 
         Character.Instance.SetupItems();

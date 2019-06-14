@@ -105,7 +105,7 @@ public class NPC : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y), 5f * .5f * Time.deltaTime);
                 transform.localScale = new Vector3(-0.5f, 0.5f, 1);
 
-                if (Vector2.Distance(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y)) < 1f)
+                if (Vector2.Distance(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y)) < 0.1f)
                 {
                     _canInteractWithPlayer = true;
                     if (SpeechBubble != null)
@@ -250,8 +250,21 @@ public class NPC : MonoBehaviour
                         }
                     }
 
+                    int milestonesThatMatch = 0;
+                    foreach (string milestoneRequired in FinalSequence[CurrentDialogueIndex].DialogueBranches[j].MilestonesRequired)
+                    {
+                        foreach (ProgressEntry log in ProgressLog.Instance.Log)
+                        {
+                            if (milestoneRequired == log.Milestone && log.Completed == true)
+                            {
+                                milestonesThatMatch++;
+                            }
+                        }
+                    }
+
                     if ((elementsThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ObjectivesRequired.Count) &&
-                    itemsMatching == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired.Count)
+                    (itemsMatching == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].ItemsRequired.Count) &&
+                    (milestonesThatMatch == FinalSequence[CurrentDialogueIndex].DialogueBranches[j].MilestonesRequired.Count))
                     {
                         _availableBranches.Add(FinalSequence[CurrentDialogueIndex].DialogueBranches[j]);
                     }
@@ -358,6 +371,17 @@ public class NPC : MonoBehaviour
                 _dialogueProgressionTrigger.raycastTarget = true;
             }
 
+            foreach (string milestoneToComplete in FinalDialogueBranch.MilestonesToComplete)
+            {
+                foreach (ProgressEntry milestone in ProgressLog.Instance.Log)
+                {
+                    if (milestoneToComplete == milestone.Milestone)
+                    {
+                        ProgressLog.Instance.SetEntry(milestone.Milestone, true);
+                    }
+                }
+            }
+
             Character.Instance.CompleteObjectiveInQuest(FinalDialogueBranch.ObjectiveToComplete, FinalDialogueBranch.QuestOfDialogue);
 
             if (FinalDialogueBranch.SceneToLoad != string.Empty)
@@ -433,19 +457,6 @@ public class NPC : MonoBehaviour
                     }
                 }
 
-                ProgressLog progressLog = ProgressLog.Instance;
-                int progressEntriesMatching = 0;
-                foreach (ProgressEntry progressEntry in DialogueFormats[index].Dialogue[i].RequiredMilestones)
-                {
-                    for (int j = 0; j < progressLog.GetLogLength(); j++)
-                    {
-                        if (progressEntry.Milestone == progressLog.GetEntry(j).Milestone)
-                        {
-                            progressEntriesMatching++;
-                        }
-                    }
-                }
-
                 int itemsMatching = 0;
                 foreach (string itemRequired in DialogueFormats[index].Dialogue[i].RequiredItems)
                 {
@@ -472,8 +483,21 @@ public class NPC : MonoBehaviour
                     }
                 }
 
+                int milestonesThatMatch = 0;
+                foreach (ProgressEntry milestoneRequired in DialogueFormats[index].Dialogue[i].RequiredMilestones)
+                {
+                    foreach (ProgressEntry log in ProgressLog.Instance.Log)
+                    {
+                        if (milestoneRequired.Milestone == log.Milestone && log.Completed == true)
+                        {
+                            milestonesThatMatch++;
+                        }
+                    }
+                }
+
                 if (objectivesCompleted == DialogueFormats[index].Dialogue[i].ObjectivesToMeet.Count &&
-                    itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count && progressEntriesMatching == DialogueFormats[index].Dialogue[i].RequiredMilestones.Count)
+                    itemsMatching == DialogueFormats[index].Dialogue[i].RequiredItems.Count &&
+                    milestonesThatMatch == DialogueFormats[index].Dialogue[i].RequiredMilestones.Count)
                 {
                     dialoguesToPickFrom.Add(DialogueFormats[index].Dialogue[i]);
                 }
@@ -737,7 +761,21 @@ public class NPC : MonoBehaviour
                         }
                     }
 
-                    if ((elementsThatMatch == dialogue.DialogueBranches[j].PreviousResponses.Count) && (objectivesThatMatch != dialogue.DialogueBranches[j].ObjectivesRequired.Count))
+                    int milestonesThatMatch = 0;
+                    foreach (string milestoneRequired in dialogue.DialogueBranches[j].MilestonesRequired)
+                    {
+                        foreach (ProgressEntry log in ProgressLog.Instance.Log)
+                        {
+                            if (milestoneRequired == log.Milestone && log.Completed == true)
+                            {
+                                milestonesThatMatch++;
+                            }
+                        }
+                    }
+
+                    if ((elementsThatMatch == dialogue.DialogueBranches[j].PreviousResponses.Count) &&
+                        (objectivesThatMatch != dialogue.DialogueBranches[j].ObjectivesRequired.Count) &&
+                        (milestonesThatMatch != dialogue.DialogueBranches[j].MilestonesRequired.Count))
                     {
                         branchesForFiltering.Add(dialogue.DialogueBranches[j]);
                     }
@@ -758,8 +796,8 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void AddCorrespondingDialogueForLanguage(string language)
-    {
+    //private void AddCorrespondingDialogueForLanguage(string language)
+    //{
 
-    }
+    //}
 }

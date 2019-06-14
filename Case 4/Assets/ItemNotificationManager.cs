@@ -37,7 +37,7 @@ public class ItemNotificationManager : MonoBehaviour
         }
         ItemNotificationPrefab.GetComponentInChildren<TextMeshProUGUI>().text = name;
 
-        ItemNotificationPrefab.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("Items/" + item.AssetsImageName);
+        ItemNotificationPrefab.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("Items/Inventory/" + item.AssetsImageName);
 
         _itemNotificationPrefabAnimator.SetBool("Toggle", true);
         StartCoroutine(ReturnAchievement());
@@ -58,7 +58,7 @@ public class ItemNotificationManager : MonoBehaviour
         }
         ItemNotificationPrefab.GetComponentInChildren<TextMeshProUGUI>().text = name;
 
-        ItemNotificationPrefab.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("Items/" + item.Icon);
+        ItemNotificationPrefab.GetComponentsInChildren<Image>()[1].sprite = Resources.Load<Sprite>("Items/Inventory/" + item.Icon);
 
         _itemNotificationPrefabAnimator.SetBool("Toggle", true);
         StartCoroutine(ReturnAchievement());

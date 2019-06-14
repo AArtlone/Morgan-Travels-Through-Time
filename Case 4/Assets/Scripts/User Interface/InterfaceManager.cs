@@ -120,7 +120,6 @@ public class InterfaceManager : MonoBehaviour
     {
         AnimatorOfFade.gameObject.SetActive(true);
         AnimatorOfFade.SetBool("IsTransitionBlack", true);
-        Debug.Log(AnimatorOfFade.GetBool("IsTransitionBlack"));
     }
 
     private void Start()

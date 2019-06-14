@@ -6,6 +6,7 @@ public class Toggle_Candle : MonoBehaviour
 {
     private GameObject _glow;
     private GameObject _flame;
+    public ParticleSystem _smokeParticle;
 
     public AudioClip[] Clip;
     private AudioSource _candleAudio;
@@ -22,6 +23,7 @@ public class Toggle_Candle : MonoBehaviour
     {
         if (_glow.activeSelf == true)
         {
+            _smokeParticle.Play();
             _glow.SetActive(false);
             _flame.SetActive(false);
             _candleAudio.clip = Clip[0];

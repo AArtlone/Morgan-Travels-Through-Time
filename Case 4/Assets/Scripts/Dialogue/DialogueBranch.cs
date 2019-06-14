@@ -57,4 +57,6 @@ public class DialogueBranch
     public List<GameObject> EntitiesToDeactive;
     [Tooltip("A name of the scene that needs to be loaded after this dialogue branch.")]
     public string SceneToLoad;
+    public List<string> MilestonesRequired = new List<string>();
+    public List<string> MilestonesToComplete = new List<string>();
 }

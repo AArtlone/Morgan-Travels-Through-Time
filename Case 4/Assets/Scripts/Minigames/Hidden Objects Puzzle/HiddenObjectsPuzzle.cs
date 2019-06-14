@@ -64,7 +64,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     public GameObject ItemDisplayPrefab;
     public GameObject PuzzleEndPopup;
     public List<GameObject> StarsList;
-    private bool _isInterfaceToggledOn;
+    [NonSerialized]
+    public bool _isInterfaceToggledOn;
+    [NonSerialized]
+    public bool _isEndPopupOn;
     private int _missclicks;
 
     public HiddenObjectsPuzzle(string name, string nameDutch, string sceneName, int stars, bool completed)
@@ -246,6 +249,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         CancelInvoke();
 
         PuzzleEndPopup.SetActive(true);
+        _isEndPopupOn = true;
 
         switch (SettingsManager.Instance.Language)
         {
@@ -346,10 +350,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         gameObject.transform.parent.gameObject.SetActive(false);
     }
 
-    public void ToggleBottomInterface(GameObject bottomInterface)
+    public void ToggleBottomInterface()
     {
         _isInterfaceToggledOn = !_isInterfaceToggledOn;
-        RectTransform rectTransform = bottomInterface.GetComponent<RectTransform>();
+        RectTransform rectTransform = BottomUI.GetComponent<RectTransform>();
 
         if (_isInterfaceToggledOn == false)
         {
@@ -386,7 +390,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             {
                 case "English":
                     ItemsFound.Add(objAsItem.GetComponent<LanguageController>().English);
-                    Debug.Log(objAsItem.GetComponent<LanguageController>().English);
                     break;
                 case "Dutch":
                     ItemsFound.Add(objAsItem.GetComponent<LanguageController>().Dutch);
@@ -480,6 +483,8 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void UseHint()
     {
+        ToggleBottomInterface();
+        Invoke("ToggleBottomInterface", 2f);
         Character.Instance.RemoveAvailableHints(1);
 
         TextMeshProUGUI hintButton = HintButton.GetComponentInChildren<TextMeshProUGUI>();
@@ -533,10 +538,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (_itemToHighlight != null)
         {
-            _itemToHighlight.GetComponent<Image>().color = Color.red;
+            _itemToHighlight.GetComponent<SpriteRenderer>().color = Color.red;
             _itemToHighlight.GetComponent<Item>().IsItemHintedAt = true;
         }
-        Invoke("ReturnItemColors", 1f);
+        Invoke("ReturnItemColors", 2f);
 
         // The player can only use the button after the hint duration has passed.
         HintButton.interactable = false;
@@ -544,7 +549,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     private void ReturnItemColors()
     {
-        _itemToHighlight.GetComponent<Image>().color = Color.white;
+        _itemToHighlight.GetComponent<SpriteRenderer>().color = Color.white;
 
         // The player can only use the button after the hint duration has passed.
         HintButton.interactable = true;

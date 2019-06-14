@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProgressLog : MonoBehaviour
 {
     public static ProgressLog Instance;
-    private List<ProgressEntry> _log = new List<ProgressEntry>();
+    public List<ProgressEntry> Log = new List<ProgressEntry>();
     private string _pathToLog;
 
     private void Awake()
@@ -40,15 +40,17 @@ public class ProgressLog : MonoBehaviour
     {
         JsonData logsJsonData = JsonMapper.ToObject(File.ReadAllText(_pathToLog));
 
-        _log.Clear();
+        Log.Clear();
         for (int i = 0; i < logsJsonData["Log"].Count; i++)
         {
-            _log.Add(
+            Log.Add(
                 new ProgressEntry(
                     logsJsonData["Log"][i]["Milestone"].ToString(),
                     logsJsonData["Log"][i]["Completed"].ToString() == "True" ? true : false
                     ));
         }
+
+        RefreshLog();
     }
 
     private void RefreshLog()
@@ -57,24 +59,27 @@ public class ProgressLog : MonoBehaviour
         newJsonData += InsertNewLineTabs(1);
         newJsonData += "\"Log\": [";
 
-        foreach (ProgressEntry entry in _log)
+        foreach (ProgressEntry entry in Log)
         {
             newJsonData += InsertNewLineTabs(2);
             newJsonData += "{";
             newJsonData += InsertNewLineTabs(3);
             newJsonData += "\"Milestone\": \"" + entry.Milestone + "\",";
             newJsonData += InsertNewLineTabs(3);
-            newJsonData += "\"Completed\": " + entry.Completed;
+            newJsonData += "\"Completed\": " + (entry.Completed == true ? "true" : "false");
             newJsonData += InsertNewLineTabs(2);
             newJsonData += "},";
         }
+        newJsonData = newJsonData.Substring(0, newJsonData.Length - 1);
         newJsonData += InsertNewLineTabs(1);
         newJsonData += "]" + Environment.NewLine + "}";
+
+        File.WriteAllText(_pathToLog, newJsonData);
     }
 
     public void SetEntry(string milestone, bool newStatus)
     {
-        foreach (ProgressEntry entry in _log)
+        foreach (ProgressEntry entry in Log)
         {
             if (entry.Milestone == milestone)
             {
@@ -87,12 +92,12 @@ public class ProgressLog : MonoBehaviour
 
     public ProgressEntry GetEntry(int index)
     {
-        return _log[index];
+        return Log[index];
     }
 
     public bool IsMilestoneReached(string milestone)
     {
-        foreach (ProgressEntry entry in _log)
+        foreach (ProgressEntry entry in Log)
         {
             if (entry.Milestone == milestone)
             {
@@ -108,7 +113,7 @@ public class ProgressLog : MonoBehaviour
 
     public int GetLogLength()
     {
-        return _log.Count;
+        return Log.Count;
     }
 
     private string InsertNewLineTabs(int numberOfTabs)
