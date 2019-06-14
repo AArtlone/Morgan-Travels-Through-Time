@@ -65,14 +65,18 @@ public class Puzzle : MonoBehaviour
 
         // Once the stars from the data file have been loaded into this script, we
         // enable the stars visible in the area for as many as this script now has.
-        for (int i = 0; i < StarsDisplay.transform.childCount; i++)
+        if (StarsDisplay != null)
         {
-            if (i < _stars)
+            for (int i = 0; i < StarsDisplay.transform.childCount; i++)
             {
-                StarsDisplay.transform.GetChild(i).gameObject.SetActive(true);
-            } else
-            {
-                StarsDisplay.transform.GetChild(i).gameObject.SetActive(false);
+                if (i < _stars)
+                {
+                    StarsDisplay.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                else
+                {
+                    StarsDisplay.transform.GetChild(i).gameObject.SetActive(false);
+                }
             }
         }
     }

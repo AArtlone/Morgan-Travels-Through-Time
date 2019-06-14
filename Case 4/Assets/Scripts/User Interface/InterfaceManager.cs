@@ -804,6 +804,9 @@ public class InterfaceManager : MonoBehaviour
             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
+        } else if (SceneManager.GetActiveScene().name == "Test Area")
+        {
+            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
         }
         else
         {
