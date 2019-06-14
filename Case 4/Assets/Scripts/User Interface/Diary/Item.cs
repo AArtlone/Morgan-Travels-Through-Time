@@ -32,6 +32,7 @@ public class Item : MonoBehaviour
 
     private Vector3 _previousPos;
     private Escape _gameInterface;
+    private Canvas _canvas;
 
     public Item(
         string Name,
@@ -84,6 +85,7 @@ public class Item : MonoBehaviour
             _gameInterface = FindObjectOfType<Escape>();
         }
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
+        _canvas = GetComponent<Canvas>();
     }
 
     /// <summary>
@@ -125,12 +127,15 @@ public class Item : MonoBehaviour
             // This makes it so that the timer is not increasing if youre holding the
             // item AND dragging it at the same time.
             _timer = 0;
+            _canvas.sortingOrder += 50;
         }
     }
 
     public void DropItem()
     {
         _cameraBehaviour.IsInterfaceElementSelected = false;
+
+        _canvas.sortingOrder -= 50;
 
         if (Input.touchCount > 0)
         {
