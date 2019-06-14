@@ -85,21 +85,42 @@ public class CameraManager : MonoBehaviour
                 _swipeLengthWorld = Mathf.Abs(tapPositionEndWorld.x - _tapPositionStartWorld.x);
 
                 Vector3 newCameraPosition = _mapEnvironmentManager.CurrentCamera.transform.position;
-                if (_directionOfSwipeNormalized.x > 0)
+                if (SceneManager.GetActiveScene().name == "Escape Game")
                 {
-                    newCameraPosition.x -= _swipeLengthWorld * 0.15f;
-                    _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
-                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
-                        newCameraPosition.y,
-                        newCameraPosition.z);
-                }
-                else if (_directionOfSwipeNormalized.x < 0)
+                    if (_directionOfSwipeNormalized.x > 0)
+                    {
+                        newCameraPosition.x -= _swipeLengthWorld * 0.15f;
+                        _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
+                            Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBoundsLeft.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBoundsRight.max.x - _camera.orthographicSize - 4),
+                            newCameraPosition.y,
+                            newCameraPosition.z);
+                    }
+                    else if (_directionOfSwipeNormalized.x < 0)
+                    {
+                        newCameraPosition.x += _swipeLengthWorld * 0.15f;
+                        _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
+                            Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBoundsLeft.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBoundsRight.max.x - _camera.orthographicSize - 4),
+                            newCameraPosition.y,
+                            newCameraPosition.z);
+                    }
+                } else
                 {
-                    newCameraPosition.x += _swipeLengthWorld * 0.15f;
-                    _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
-                        Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
-                        newCameraPosition.y,
-                        newCameraPosition.z);
+                    if (_directionOfSwipeNormalized.x > 0)
+                    {
+                        newCameraPosition.x -= _swipeLengthWorld * 0.15f;
+                        _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
+                            Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
+                            newCameraPosition.y,
+                            newCameraPosition.z);
+                    }
+                    else if (_directionOfSwipeNormalized.x < 0)
+                    {
+                        newCameraPosition.x += _swipeLengthWorld * 0.15f;
+                        _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
+                            Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
+                            newCameraPosition.y,
+                            newCameraPosition.z);
+                    }
                 }
             }
 

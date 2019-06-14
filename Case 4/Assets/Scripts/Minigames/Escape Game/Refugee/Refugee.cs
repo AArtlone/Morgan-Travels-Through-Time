@@ -76,7 +76,8 @@ public class Refugee : MonoBehaviour
                 StartCoroutine(ChangeRefugeeStatusCO(RefugeeStatus.Idle));
                 break;
             case RefugeeStatus.Walking:
-                FlipNPC("Right");
+                if (Status != RefugeeStatus.Injured)
+                    FlipNPC("Right");
                 _animator.SetBool("IsWalking", true);
                 StopAllCoroutines();
                 break;
@@ -86,7 +87,8 @@ public class Refugee : MonoBehaviour
                 StopAllCoroutines();
                 break;
             case RefugeeStatus.WalkingToObsIntElement:
-                FlipNPC("Right");
+                if (Status != RefugeeStatus.Injured)
+                    FlipNPC("Right");
                 _animator.SetBool("IsWalking", true);
                 StopAllCoroutines();
                 break;
@@ -217,6 +219,13 @@ public class Refugee : MonoBehaviour
     public void InjureRefugee()
     {
         ChangeRefugeeStatus(RefugeeStatus.Injured);
+        if (FacingLeft)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 90f);
+        } else
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90f);
+        }
         foreach (SpriteMeshInstance component in GetComponentsInChildren<SpriteMeshInstance>())
         {
             component.sortingOrder = component.sortingOrder + _gameInterface.GetLayerMultiplier();
@@ -228,7 +237,11 @@ public class Refugee : MonoBehaviour
         Vector3 posForStretcher = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
         GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, posForStretcher, Quaternion.identity);
         stretcher.transform.parent = transform;
-        transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+        /*transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);*/
+        /*if (FacingLeft)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 180f);
+        }*/
         _gameInterface._cannonInterface.GetComponentInParent<Obstacle>().PlayCanon();
     }
 

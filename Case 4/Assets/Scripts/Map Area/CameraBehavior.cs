@@ -6,9 +6,13 @@ public class CameraBehavior : MonoBehaviour
 {
     #region Camera screen movement variables
     public GameObject Background;
+    public GameObject BackgroundLeft;
+    public GameObject BackgroundRight;
     public MapPart MapPart;
     [NonSerialized]
     public Bounds BackgroundBounds;
+    public Bounds BackgroundBoundsLeft;
+    public Bounds BackgroundBoundsRight;
     #endregion
 
     #region Camera screen interaction properties
@@ -29,9 +33,19 @@ public class CameraBehavior : MonoBehaviour
     private void Start()
     {
         _hiddenObjectPuzzleScript = FindObjectOfType<HiddenObjectsPuzzle>();
-        if (Background != null)
+        if (SceneManager.GetActiveScene().name == "Escape Game")
         {
-            BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+            if (BackgroundLeft != null && BackgroundRight != null)
+            {
+                BackgroundBoundsLeft = BackgroundLeft.GetComponent<SpriteRenderer>().bounds;
+                BackgroundBoundsRight = BackgroundRight.GetComponent<SpriteRenderer>().bounds;
+            }
+        } else
+        {
+            if (Background != null)
+            {
+                BackgroundBounds = Background.GetComponent<SpriteRenderer>().bounds;
+            }
         }
         _gameInterface = FindObjectOfType<Escape>();
         InterfaceManager.Instance.CameraBehavior = this;
