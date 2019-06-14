@@ -666,8 +666,10 @@ public class NPC : MonoBehaviour
         {
             InterfaceManager.Instance.FadeEndTutorial();
         }
+        InterfaceManager.Instance.LoadingScreen.SetActive(true);
+
+        AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
         yield return new WaitForSeconds(1.2f);
-        SceneManager.LoadScene(sceneToLoad);
     }
 
     /// <summary>

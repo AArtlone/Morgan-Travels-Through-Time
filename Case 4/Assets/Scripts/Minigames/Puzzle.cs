@@ -1,4 +1,5 @@
 ﻿using LitJson;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,11 +16,6 @@ public class Puzzle : MonoBehaviour
     private void Start()
     {
         LoadStars();
-    }
-
-    public void LoadScene(string newScene)
-    {
-        SceneManager.LoadScene(newScene);
     }
 
     public void LoadStars()

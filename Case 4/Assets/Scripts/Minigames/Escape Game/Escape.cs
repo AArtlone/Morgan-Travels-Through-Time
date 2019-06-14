@@ -101,13 +101,13 @@ public class Escape : MonoBehaviour
         _previousObsTypes.Clear();
         foreach (GameObject container in ObsContainers)
         {
-            int rndIndex = UnityEngine.Random.Range(1, 5);
+            int rndIndex = UnityEngine.Random.Range(1, ObsPrefabs.Count);
 
             foreach (Obstacle.ObstacleType obsType in _previousObsTypes)
             {
                 while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obsType)
                 {
-                    rndIndex = UnityEngine.Random.Range(1, 5);
+                    rndIndex = UnityEngine.Random.Range(1, ObsPrefabs.Count);
                 }
             }
 
@@ -355,13 +355,13 @@ public class Escape : MonoBehaviour
 
     private void SpawnNewObstacle(Transform container)
     {
-        int rndIndex = UnityEngine.Random.Range(1, 5);
+        int rndIndex = UnityEngine.Random.Range(1, ObsPrefabs.Count);
 
         foreach (Obstacle obs in _currentObstacles)
         {
             while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obs.Type)
             {
-                rndIndex = UnityEngine.Random.Range(1, 5);
+                rndIndex = UnityEngine.Random.Range(1, ObsPrefabs.Count);
             }
         }
 

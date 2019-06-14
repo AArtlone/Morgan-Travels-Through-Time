@@ -161,10 +161,10 @@ public class CameraBehavior : MonoBehaviour
                             IsUIOpen = true;
                             break;
                         case "Hidden Objects Puzzle":
-                            hitObj.transform.GetComponent<Puzzle>().LoadScene("Hidden Objects Puzzle");
+                            InterfaceManager.Instance.LoadScene("Hidden Objects Puzzle");
                             break;
                         case "Guess Clothes Puzzle":
-                            hitObj.transform.GetComponent<Puzzle>().LoadScene("Guess Clothing Puzzle");
+                            InterfaceManager.Instance.LoadScene("Guess Clothing Puzzle");
                             IsEntityTappedOn = true;
                             IsInteracting = true;
                             IsUIOpen = true;
@@ -173,7 +173,7 @@ public class CameraBehavior : MonoBehaviour
                             Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
                             Character.Instance.LastScene = "Escape Game";
                             Character.Instance.RefreshJsonData();
-                            SceneManager.LoadScene("Escape Game");
+                            InterfaceManager.Instance.LoadScene("Escape Game");
                             break;
                         case "Item Drop":
                             if (SceneManager.GetActiveScene().name == "Escape Game")
