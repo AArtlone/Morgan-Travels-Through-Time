@@ -38,6 +38,11 @@ public class Escape : MonoBehaviour
     public List<GameObject> AllNPCPrefabs = new List<GameObject>();
     public List<GameObject> Stars;
     public int RefugeesSavedInThisSession;
+    [NonSerialized]
+    public bool RefugeesCanProceed = true;
+    public GameObject Stretcher;
+    public GameObject FronPosAtStrether;
+    public GameObject BackPosAtStrether;
 
     [Header("List of Item Prefabs that player will receive but that are not in the scene.")]
     public Item FullBucketPrefab;

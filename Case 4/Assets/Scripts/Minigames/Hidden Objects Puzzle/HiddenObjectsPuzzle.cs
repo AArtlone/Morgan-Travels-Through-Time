@@ -285,16 +285,18 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             if (_isItemEarned == false &&
                 item.Name != string.Empty)
             {
-                    Character.Instance.AddItem(
-                    new Item(
-                        item.Name,
-                        item.NameDutch,
-                        item.Description,
-                        item.DescriptionDutch,
-                        item.Active,
-                        item.ActiveDutch,
-                        item.AssetsImageName));
-                    _isItemEarned = true;
+                Character.Instance.AddItem(item);
+
+                /*Character.Instance.AddItem(
+                new Item(
+                    item.Name,
+                    item.NameDutch,
+                    item.Description,
+                    item.DescriptionDutch,
+                    item.Active,
+                    item.ActiveDutch,
+                    item.AssetsImageName));*/
+                _isItemEarned = true;
             }
         }
 

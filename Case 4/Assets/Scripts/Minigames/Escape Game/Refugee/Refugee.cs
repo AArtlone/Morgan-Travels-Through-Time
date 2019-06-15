@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using Random = UnityEngine.Random;
 using Anima2D;
+using System.Collections.Generic;
 
 public class Refugee : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Refugee : MonoBehaviour
     private int _currentCheckpointIndex = 0;
     public Checkpoint _targetCheckpoint;
     private RefugeeStatus _previousStatus;
-    public enum RefugeeStatus { Walking, Wondering, Idle, Injured, WalkingToObsIntElement, AtObsIntElement };
+    public enum RefugeeStatus { Walking, Wondering, Idle, Injured, WalkingToObsIntElement, AtObsIntElement, CarryingInjured, WalkingWithStretcher };
     public RefugeeStatus Status;
     private Animator _animator;
     public int RewardInPoints;
@@ -28,6 +29,12 @@ public class Refugee : MonoBehaviour
 
     private GameObject _obstIntElement;
     private Vector3 _posToMoveTo; //used by injured refugee
+    private List<GameObject> _carryingRefugees = new List<GameObject>();
+    public static GameObject FirstCarryingRefugee;
+    public static GameObject SecondCarryingRefugee;
+    //public static GameObject Stretcher;
+    private float _initialYPos;
+    //private KeyValuePair<float, GameObject> _carryingRefugees = new KeyValuePair<float, GameObject>;
 
     void Start()
     {
@@ -48,7 +55,10 @@ public class Refugee : MonoBehaviour
             _currentCheckpointIndex++;
             _targetCheckpoint = _gameInterface.Checkpoints[_currentCheckpointIndex];
             _posToMoveTo = new Vector3(_targetCheckpoint.FirstQueueElement.transform.position.x, transform.position.y, _targetCheckpoint.FirstQueueElement.transform.position.z);
-            ChangeRefugeeStatus(RefugeeStatus.Walking);
+            if (Status != RefugeeStatus.CarryingInjured)
+            {
+                ChangeRefugeeStatus(RefugeeStatus.Walking);
+            }
         }
 
         if (Status == RefugeeStatus.Wondering)
@@ -56,7 +66,8 @@ public class Refugee : MonoBehaviour
             Wondering();
         } else if (Status == RefugeeStatus.Walking)
         {
-            MoveTowardsCheckpointQueueElement();
+            if (_gameInterface.RefugeesCanProceed)
+                MoveTowardsCheckpointQueueElement();
         } else if (Status == RefugeeStatus.WalkingToObsIntElement)
         {
             MoveTowardsObsIntElement();
@@ -84,7 +95,7 @@ public class Refugee : MonoBehaviour
                 StopAllCoroutines();
                 break;
             case RefugeeStatus.Injured:
-                _animator.SetBool("IsInjured", true);
+                //_animator.SetBool("IsInjured", true);
                 _animator.SetBool("IsWalking", false);
                 StopAllCoroutines();
                 break;
@@ -95,6 +106,10 @@ public class Refugee : MonoBehaviour
                 StopAllCoroutines();
                 break;
             case RefugeeStatus.AtObsIntElement:
+                _animator.SetBool("IsWalking", false);
+                StopAllCoroutines();
+                break;
+            case RefugeeStatus.CarryingInjured:
                 _animator.SetBool("IsWalking", false);
                 StopAllCoroutines();
                 break;
@@ -116,22 +131,19 @@ public class Refugee : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, _targetCheckpoint.FirstQueueElement.transform.position) > 2f)
         {
+            if (FirstCarryingRefugee != null)
+                FirstCarryingRefugee.GetComponent<Animator>().SetBool("IsWalking", true);
+            if (SecondCarryingRefugee != null)
+                SecondCarryingRefugee.GetComponent<Animator>().SetBool("IsWalking", true);
             transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, Speed * .5f * Time.deltaTime);
         } else
         {
             if (_targetCheckpoint.tag == "Final Checkpoint")
-            {
+            {   
                 _gameInterface.RefugeesSaved++;
                 _gameInterface.RefugeesSavedInThisSession++;
                 _gameInterface.TotalPoints += RewardInPoints;
                 _gameInterface.CurrentRefugees[WaveIndex].Remove(this);
-                //Debug.Log(_gameInterface.CurrentRefugees[WaveIndex].Count);
-
-                /*Debug.Log(_gameInterface.CurrentRefugees.Count);
-                for (int i = 0; i < _gameInterface.CurrentRefugees.Count; i++)
-                {
-                    _gameInterface.CurrentRefugees[WaveIndex][i].RefugeeIndex = i;
-                }*/
 
                 if (_gameInterface.CurrentRefugees[WaveIndex].Count <= 0 && _gameInterface.CurrentWave <= _gameInterface.RefugeeWaves.Count - 1)
                 {
@@ -155,6 +167,11 @@ public class Refugee : MonoBehaviour
             }
             if (_previousStatus == RefugeeStatus.Injured)
             {
+                Debug.Log("aaaaaaaaa");
+                FirstCarryingRefugee.GetComponent<Animator>().SetBool("IsWalking", false);
+                SecondCarryingRefugee.GetComponent<Animator>().SetBool("IsWalking", false);
+                FirstCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
+                SecondCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
                 ChangeRefugeeStatus(RefugeeStatus.Injured);
             } else
             {
@@ -162,6 +179,17 @@ public class Refugee : MonoBehaviour
             }
         }
     }
+
+    /*private void MoveTowardsCheckpointQueueElementWithStretcher()
+    {
+        if (Vector2.Distance(transform.position, _targetCheckpoint.FirstQueueElement.transform.position) > 2f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, Speed * .5f * Time.deltaTime);
+        } else
+        {
+            ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
+        }
+    }*/
 
     private void MoveTowardsObsIntElement()
     {
@@ -203,12 +231,12 @@ public class Refugee : MonoBehaviour
     /// Flips the NPC by changing it's scale on the X axis
     /// </summary>
     /// <param name="Side"></param>
-    private void FlipNPC(string Side)
+    public void FlipNPC(string Side)
     {
-        if (Status == RefugeeStatus.Injured)
+        /*if (Status == RefugeeStatus.Injured)
         {
             return;
-        }
+        }*/
         if (Side == "Left")
         {
             FacingLeft = true;
@@ -224,14 +252,18 @@ public class Refugee : MonoBehaviour
 
     public void InjureRefugee()
     {
+        _initialYPos = transform.position.y;
         ChangeRefugeeStatus(RefugeeStatus.Injured);
-        if (FacingLeft)
+        FlipNPC("Right");
+        /*if (FacingLeft)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 90f);
-        } else
+        }
+        else
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90f);
-        }
+        }*/
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 90f);
         foreach (SpriteMeshInstance component in GetComponentsInChildren<SpriteMeshInstance>())
         {
             component.sortingOrder = component.sortingOrder + _gameInterface.GetLayerMultiplier();
@@ -240,22 +272,64 @@ public class Refugee : MonoBehaviour
 
     public void CureRefugee()
     {
-        Vector3 posForStretcher = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+        Vector3 posForStretcher = new Vector3(transform.position.x, _initialYPos, transform.position.z);
         GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, posForStretcher, Quaternion.identity);
+        _gameInterface.Stretcher = stretcher;
         stretcher.transform.parent = transform;
+        stretcher.transform.position = posForStretcher;
+        _gameInterface.FronPosAtStrether = _gameInterface.Stretcher.transform.GetChild(0).gameObject;
+        _gameInterface.BackPosAtStrether = _gameInterface.Stretcher.transform.GetChild(1).gameObject;
+        for (int i = 0; i < _gameInterface.CurrentRefugees[WaveIndex].Count; i++)
+        {
+            if (_gameInterface.CurrentRefugees[WaveIndex][i] != this)
+            {
+                if (_carryingRefugees.Count < 2)
+                {
+                    if (_carryingRefugees.Count == 0)
+                    {
+                        GameObject carryingRefugee = _gameInterface.CurrentRefugees[WaveIndex][i].gameObject;
+                        _carryingRefugees.Add(carryingRefugee);
+                        FirstCarryingRefugee = carryingRefugee;
+                        FirstCarryingRefugee.transform.parent = transform;
+                        if (carryingRefugee.GetComponent<Refugee>().FacingLeft)
+                        {
+                            carryingRefugee.GetComponent<Refugee>().FlipNPC("Right");
+                        }
+                        carryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
+                    } else if (_carryingRefugees.Count == 1)
+                    {
+                        GameObject carryingRefugee = _gameInterface.CurrentRefugees[WaveIndex][i].gameObject;
+                        _carryingRefugees.Add(carryingRefugee);
+                        SecondCarryingRefugee = carryingRefugee;
+                        SecondCarryingRefugee.transform.parent = transform;
+                        if (carryingRefugee.GetComponent<Refugee>().FacingLeft)
+                        {
+                            carryingRefugee.GetComponent<Refugee>().FlipNPC("Right");
+                        }
+                        carryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
+                    }
+                } else
+                {
+                    break;
+                }
+            }
+        }
+        FirstCarryingRefugee.transform.position = _gameInterface.BackPosAtStrether.transform.position;
+        SecondCarryingRefugee.transform.position = _gameInterface.FronPosAtStrether.transform.position;
+
         foreach (Refugee refugee in _gameInterface.CurrentRefugees[WaveIndex])
         {
             if (refugee != this)
             {
-                Physics2D.IgnoreCollision(refugee.GetComponent<CapsuleCollider2D>(), stretcher.GetComponent<BoxCollider2D>());
+                Physics2D.IgnoreCollision(refugee.GetComponent<CapsuleCollider2D>(), _gameInterface.Stretcher.GetComponent<BoxCollider2D>());
             }
         }
-        /*transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);*/
         /*if (FacingLeft)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 180f);
         }*/
-        _gameInterface._cannonInterface.GetComponentInParent<Obstacle>().PlayCanon();
+        //_gameInterface._cannonInterface.GetComponentInParent<Obstacle>().PlayCanon();
     }
 
     public void AssignRefugeeToObsIntElement(GameObject obj)
