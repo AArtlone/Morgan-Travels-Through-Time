@@ -289,7 +289,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
             }
         } else if (direction == "Forwards" || direction == "Forward")
         {
-            Debug.Log(_pagesOfEntries.Count);
             if (_pagesOfEntries.Count > 0)
             {
                 if (_currentLogEntriesPage == 0)
@@ -301,7 +300,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
                     {
                         _currentLogEntryIndex += _pagesOfEntries[i].Count;
                     }
-                    Debug.Log(_currentLogEntryIndex);
                     SetupLogEntries(_selectedNPC);
                 }
                 else

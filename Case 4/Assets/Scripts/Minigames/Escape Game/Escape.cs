@@ -394,8 +394,8 @@ public class Escape : MonoBehaviour
             _currentObstacles.Remove(obstacle);
             Destroy(obj);
             yield return new WaitForSeconds(3f);
-            SpawnNewObstacle(container);
-            checkpoint.Passable = !checkpoint.Passable;
+            //SpawnNewObstacle(container);
+            //checkpoint.Passable = !checkpoint.Passable;
         } else
         {
             checkpoint.Passable = true;

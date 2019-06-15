@@ -188,7 +188,7 @@ public class Item : MonoBehaviour
 
                         if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
                         {
-                            //_gameInterface.Inventory.RemoveItem(this);
+                            _gameInterface.Inventory.RemoveItem(this);
                             _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
                             hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
                         }

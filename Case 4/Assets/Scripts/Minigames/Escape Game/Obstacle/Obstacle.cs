@@ -97,7 +97,7 @@ public class Obstacle : MonoBehaviour
     public void PlayFlag()
     {
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
-        transform.GetChild(0).transform.gameObject.SetActive(false);
+        transform.GetChild(2).transform.gameObject.SetActive(false);
         transform.GetChild(1).transform.gameObject.SetActive(true);
     }
 
@@ -143,7 +143,6 @@ public class Obstacle : MonoBehaviour
         if (type == Item.ItemType.BommenBerendFlag)
         {
             // TODO: Do some anymation, i guess
-            Debug.Log("Tried to distract sheeps");
         } else if (type == Item.ItemType.BunchOfHay)
         {
             foreach (Animator animator in _gameInterface.SheepsAnimators)

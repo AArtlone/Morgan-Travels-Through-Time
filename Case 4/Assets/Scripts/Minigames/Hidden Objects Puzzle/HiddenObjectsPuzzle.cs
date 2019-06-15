@@ -608,7 +608,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             StarsList[i].SetActive(true);
-            Debug.Log("aaaa");
         }
     }
     private string InsertNewLineTabs(int numberOfTabs)

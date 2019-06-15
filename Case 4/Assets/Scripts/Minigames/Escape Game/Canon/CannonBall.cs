@@ -24,8 +24,11 @@ public class CannonBall : MonoBehaviour
             }
             if (objectsHit.Length > 0)
             {
-                objectsHit[0].GetComponent<Refugee>().InjureRefugee();
-                _canonInterface.CanShoot = false;
+                if (objectsHit[0].GetComponent<Refugee>().Status != Refugee.RefugeeStatus.Injured)
+                {
+                    objectsHit[0].GetComponent<Refugee>().InjureRefugee();
+                    _canonInterface.CanShoot = false;
+                }
             } else
             {
                 _canonInterface.CanShoot = true;

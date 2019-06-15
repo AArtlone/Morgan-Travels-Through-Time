@@ -150,7 +150,6 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
         }
-
                 if (SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Hidden Objects Puzzle")
         {
             if ((Input.touchCount > 0 &&
@@ -214,6 +213,15 @@ public class CameraBehavior : MonoBehaviour
             if ((Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) && IsInteracting == false && IsUIOpen == false && IsEntityTappedOn == false)
             {
                 RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
+                Vector2 origin = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                RaycastHit2D[] hitObjs = Physics2D.RaycastAll(origin, Vector3.forward, Mathf.Infinity);
+                for (int i = 0; i < hitObjs.Length; i++)
+                {
+                    if (hitObjs[i].transform.tag == "ObsIntElement")
+                    {
+                        hitObj.transform.GetComponent<ObstacleIntercationElement>().AssignRefugee();
+                    }
+                }
 
                 if (hitObj.transform != null)
                 {
@@ -232,9 +240,6 @@ public class CameraBehavior : MonoBehaviour
                                     _gameInterface.ReactivateItem(hitItemDrop.gameObject);
                                 }
                             }
-                            break;
-                        case "ObsIntElement":
-                            hitObj.transform.GetComponent<ObstacleIntercationElement>().AssignRefugee();
                             break;
                     }
                 }

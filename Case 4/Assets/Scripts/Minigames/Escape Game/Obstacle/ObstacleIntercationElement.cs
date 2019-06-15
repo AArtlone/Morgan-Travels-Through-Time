@@ -35,8 +35,11 @@ public class ObstacleIntercationElement : MonoBehaviour
     {
         if (!_isAssigned)
         {
-            ChooseRefugee().AssignRefugeeToObsIntElement(gameObject);
-            _isAssigned = true;
+            if (ChooseRefugee() != null)
+            {
+                ChooseRefugee().AssignRefugeeToObsIntElement(gameObject);
+                _isAssigned = true;
+            }
         }
     }
 
@@ -57,7 +60,8 @@ public class ObstacleIntercationElement : MonoBehaviour
     {
         foreach (Refugee refugee in _gameInterface.CurrentRefugees[_gameInterface.CurrentWave])
         {
-            if (refugee.Status != Refugee.RefugeeStatus.Injured && refugee.Status != Refugee.RefugeeStatus.AtObsIntElement && refugee.Status != Refugee.RefugeeStatus.WalkingToObsIntElement)
+            if (refugee.Status != Refugee.RefugeeStatus.Injured && refugee.Status != Refugee.RefugeeStatus.AtObsIntElement && refugee.Status != Refugee.RefugeeStatus.WalkingToObsIntElement && 
+                refugee._targetCheckpoint.Index + 1 == ObstacleLink.CheckpointLink.Index)
             {
                 _refuggeToAssign = refugee;
                 break;

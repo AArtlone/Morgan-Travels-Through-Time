@@ -9,7 +9,7 @@ public class Refugee : MonoBehaviour
     private Escape _gameInterface;
 
     private int _currentCheckpointIndex = 0;
-    private Checkpoint _targetCheckpoint;
+    public Checkpoint _targetCheckpoint;
     private RefugeeStatus _previousStatus;
     public enum RefugeeStatus { Walking, Wondering, Idle, Injured, WalkingToObsIntElement, AtObsIntElement };
     public RefugeeStatus Status;
@@ -203,6 +203,10 @@ public class Refugee : MonoBehaviour
     /// <param name="Side"></param>
     private void FlipNPC(string Side)
     {
+        if (Status == RefugeeStatus.Injured)
+        {
+            return;
+        }
         if (Side == "Left")
         {
             FacingLeft = true;
