@@ -27,6 +27,7 @@ public class Refugee : MonoBehaviour
     public int WonderingSpeed;
 
     private GameObject _obstIntElement;
+    private Vector3 _posToMoveTo; //used by injured refugee
 
     void Start()
     {
@@ -46,6 +47,7 @@ public class Refugee : MonoBehaviour
         {
             _currentCheckpointIndex++;
             _targetCheckpoint = _gameInterface.Checkpoints[_currentCheckpointIndex];
+            _posToMoveTo = new Vector3(_targetCheckpoint.FirstQueueElement.transform.position.x, transform.position.y, _targetCheckpoint.FirstQueueElement.transform.position.z);
             ChangeRefugeeStatus(RefugeeStatus.Walking);
         }
 
@@ -114,7 +116,7 @@ public class Refugee : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, _targetCheckpoint.FirstQueueElement.transform.position) > 2f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, _targetCheckpoint.FirstQueueElement.transform.position, Speed * .5f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, Speed * .5f * Time.deltaTime);
         } else
         {
             if (_targetCheckpoint.tag == "Final Checkpoint")
@@ -241,6 +243,13 @@ public class Refugee : MonoBehaviour
         Vector3 posForStretcher = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
         GameObject stretcher = Instantiate(_gameInterface.StretcherPrefab, posForStretcher, Quaternion.identity);
         stretcher.transform.parent = transform;
+        foreach (Refugee refugee in _gameInterface.CurrentRefugees[WaveIndex])
+        {
+            if (refugee != this)
+            {
+                Physics2D.IgnoreCollision(refugee.GetComponent<CapsuleCollider2D>(), stretcher.GetComponent<BoxCollider2D>());
+            }
+        }
         /*transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);*/
         /*if (FacingLeft)
         {

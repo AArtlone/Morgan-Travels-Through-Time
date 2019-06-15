@@ -174,6 +174,13 @@ public class Escape : MonoBehaviour
                 layerAdjuster.UpdateLayer();
             }
 
+            int index = 0;
+            foreach (Refugee refugee in CurrentRefugees[CurrentWave])
+            {
+                refugee.transform.name = index.ToString();
+                index++;
+            }
+
             LayerMultiplier += 4;
             
             yield return new WaitForSeconds(.5f);
@@ -389,13 +396,22 @@ public class Escape : MonoBehaviour
     {
         if (obstacle.Type != Obstacle.ObstacleType.Cannon && obstacle.Type != Obstacle.ObstacleType.Bridge)
         {
-            yield return new WaitForSeconds(2f);
-            checkpoint.Passable = !checkpoint.Passable;
-            _currentObstacles.Remove(obstacle);
-            Destroy(obj);
-            yield return new WaitForSeconds(3f);
-            //SpawnNewObstacle(container);
-            //checkpoint.Passable = !checkpoint.Passable;
+
+            if (obstacle.Type == Obstacle.ObstacleType.Flag || obstacle.Type == Obstacle.ObstacleType.Sheeps)
+            {
+                yield return new WaitForSeconds(2f);
+                checkpoint.Passable = !checkpoint.Passable;
+                _currentObstacles.Remove(obstacle);
+                Destroy(obj);
+                //yield return new WaitForSeconds(3f);
+                //SpawnNewObstacle(container);
+                //checkpoint.Passable = !checkpoint.Passable;
+            } else
+            {
+                checkpoint.Passable = !checkpoint.Passable;
+                _currentObstacles.Remove(obstacle);
+                Destroy(obj);
+            }
         } else
         {
             checkpoint.Passable = true;

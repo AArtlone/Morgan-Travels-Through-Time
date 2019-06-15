@@ -156,26 +156,34 @@ public class Item : MonoBehaviour
                         }
                     }
                 }
+                if (hitObjs[i].transform.tag == "Item Interactable Object")
+                {
+                    if (hitObjs[i].transform.name == "Well" && Type == ItemType.EmptyBucket)
+                    {
+                        _gameInterface.Inventory.RemoveItem(this);
+                        _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
+                    }
+                }
             }
             if (hitObj.transform != null)
             {
-                if (hitObj.transform.GetComponent<Refugee>() != null)
+                /*if (hitObj.transform.GetComponent<Refugee>() != null)
                 {
                     if (Type == ItemType.Stretcher && hitObj.transform.GetComponent<Refugee>().Status == Refugee.RefugeeStatus.Injured)
                     {
                         hitObj.transform.gameObject.GetComponent<Refugee>().CureRefugee();
                     }
-                }
+                }*/
                 // Checking if the item was dropped on top of the object in the escape
                 // game that can be interacted with the item
                 if (hitObj.transform.tag == "Item Interactable Object")
                 {
-                    if (hitObj.transform.name == "Well" && Type == ItemType.EmptyBucket)
+                    /*if (hitObj.transform.name == "Well" && Type == ItemType.EmptyBucket)
                     {
                         _gameInterface.Inventory.RemoveItem(this);
                         _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
-                    }
-                    else if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
+                    }*/
+                    if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
                     {
                         hitObj.transform.GetComponent<Refugee>().CureRefugee();
                     }

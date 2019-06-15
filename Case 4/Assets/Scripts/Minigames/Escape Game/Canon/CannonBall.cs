@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
     private CannonBallShooting _canonInterface;
+    private Refugee _refugeeToInjure;
+    private Vector3 _placeOfExplosion; // Position where the cannonball hit the ground
 
     private void Start()
     {
@@ -14,9 +14,28 @@ public class CannonBall : MonoBehaviour
     {
         if (col.transform.tag == "Escape Ground")
         {
+            _placeOfExplosion = transform.position;
             GetComponent<SpriteRenderer>().sprite = null;
             _canonInterface.TempList.Clear();
             Collider2D[] objectsHit = Physics2D.OverlapCircleAll(col.transform.position, _canonInterface.ExplosionRadius, _canonInterface.LayerMask);
+
+            float smallestDistance = 200f;
+            for (int i = 0; i < objectsHit.Length; i++)
+            {
+                float distance = Vector3.Distance(_placeOfExplosion, objectsHit[i].transform.position);
+                if (i == 0)
+                {
+                    smallestDistance = distance;
+                    _refugeeToInjure = objectsHit[i].transform.gameObject.GetComponent<Refugee>();
+                } else
+                {
+                    if (distance < smallestDistance)
+                    {
+                        smallestDistance = distance;
+                        _refugeeToInjure = objectsHit[i].transform.gameObject.GetComponent<Refugee>();
+                    }
+                }
+            }
 
             for (int i = 0; i < objectsHit.Length; i++)
             {
@@ -24,11 +43,16 @@ public class CannonBall : MonoBehaviour
             }
             if (objectsHit.Length > 0)
             {
-                if (objectsHit[0].GetComponent<Refugee>().Status != Refugee.RefugeeStatus.Injured)
+                if (_refugeeToInjure != null && _refugeeToInjure.Status != Refugee.RefugeeStatus.Injured)
+                {
+                    _refugeeToInjure.InjureRefugee();
+                    _canonInterface.CanShoot = false;
+                }
+                /*if (objectsHit[0].GetComponent<Refugee>().Status != Refugee.RefugeeStatus.Injured)
                 {
                     objectsHit[0].GetComponent<Refugee>().InjureRefugee();
                     _canonInterface.CanShoot = false;
-                }
+                }*/
             } else
             {
                 _canonInterface.CanShoot = true;

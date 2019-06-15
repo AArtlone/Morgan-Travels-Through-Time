@@ -134,6 +134,7 @@ public class Obstacle : MonoBehaviour
             if (transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
             {
                 transform.GetChild(i).gameObject.SetActive(false);
+                _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
             }
         }
     }
