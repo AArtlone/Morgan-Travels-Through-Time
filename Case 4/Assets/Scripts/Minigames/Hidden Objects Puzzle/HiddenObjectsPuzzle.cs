@@ -344,7 +344,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "Test Area")
         {
-            SceneManager.LoadScene("Tutorial Map Area");
+            InterfaceManager.Instance.LoadScene("Tutorial Map Area");
         }
 
         gameObject.transform.parent.gameObject.SetActive(false);

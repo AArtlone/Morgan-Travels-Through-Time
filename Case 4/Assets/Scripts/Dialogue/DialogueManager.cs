@@ -236,19 +236,16 @@ public class DialogueManager : MonoBehaviour
 
     public void ChangeNPCFaceExpression(string npcName, string newFace)
     {
-        if (newFace != "Undefined")
-        {
-            Sprite newFaceExpression = Resources.Load<Sprite>("Faces/" + npcName + "/" + npcName + newFace);
-            RightCharacterFace.sprite = newFaceExpression;
-            DarkRightCharacterFace.sprite = newFaceExpression;
+        Sprite newFaceExpression = Resources.Load<Sprite>("Faces/" + npcName + "/" + npcName + newFace);
+        RightCharacterFace.sprite = newFaceExpression;
+        DarkRightCharacterFace.sprite = newFaceExpression;
 
-            // New position for the NPC face expression
-            RightCharacterFace.rectTransform.localPosition = _faceConfigurations[npcName].Position;
-            RightCharacterFace.rectTransform.sizeDelta = _faceConfigurations[npcName].Size;
+        // New position for the NPC face expression
+        RightCharacterFace.rectTransform.localPosition = _faceConfigurations[npcName].Position;
+        RightCharacterFace.rectTransform.sizeDelta = _faceConfigurations[npcName].Size;
 
-            DarkRightCharacterFace.rectTransform.localPosition = _faceConfigurations[npcName].Position;
-            DarkRightCharacterFace.rectTransform.sizeDelta = _faceConfigurations[npcName].Size;
-        }
+        DarkRightCharacterFace.rectTransform.localPosition = _faceConfigurations[npcName].Position;
+        DarkRightCharacterFace.rectTransform.sizeDelta = _faceConfigurations[npcName].Size;
     }
 
     public void ChangePortrait(string side, Sprite newPortrait)

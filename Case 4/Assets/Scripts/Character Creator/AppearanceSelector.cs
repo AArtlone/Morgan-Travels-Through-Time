@@ -82,7 +82,22 @@ public class AppearanceSelector : MonoBehaviour
     {
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
-            if(clothing.BodyPart == BodypartName && clothing.Selected == true)
+            switch (BodypartName)
+            {
+                case "Hair":
+                    if (clothing.PortraitImage == "hair000")
+                    {
+                        clothing.Selected = true;
+                    }
+                    break;
+                case "Shoes":
+                    if (clothing.PortraitImage == "shoes000")
+                    {
+                        clothing.Selected = true;
+                    }
+                    break;
+            }
+            if (clothing.BodyPart == BodypartName && clothing.Selected == true)
             {
                 clothing.Selected = false;
                 Color color = Bodypart.GetComponent<Image>().color;
@@ -117,6 +132,7 @@ public class AppearanceSelector : MonoBehaviour
 
         foreach (Sprite sprite in _spritesFromStorage)
         {
+            Debug.Log(sprite.name + " | " + PortraitImage);
             if (sprite.name == PortraitImage)
             {
                 bodyPart.GetComponent<Image>().overrideSprite = sprite;

@@ -926,12 +926,12 @@ PrefabInstance:
     - target: {fileID: 7858723634356141146, guid: 925add3117f5d454cb8d9308c9ff09d0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.5300293
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858723634356141146, guid: 925add3117f5d454cb8d9308c9ff09d0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.46698
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858723634356141146, guid: 925add3117f5d454cb8d9308c9ff09d0,
         type: 3}
@@ -3651,7 +3651,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Background: {fileID: 0}
+  BackgroundLeft: {fileID: 0}
+  BackgroundRight: {fileID: 0}
   MapPart: {fileID: 0}
+  BackgroundBoundsLeft:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  BackgroundBoundsRight:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   _isCameraTravelling: 0
   TapPosition: {x: 0, y: 0, z: 0}
   IsInteracting: 0

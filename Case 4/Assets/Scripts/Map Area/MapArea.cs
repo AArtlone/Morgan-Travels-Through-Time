@@ -50,7 +50,7 @@ public class MapArea : MonoBehaviour
         {
             Character.Instance.LastMapArea = SceneToLoad;
             Character.Instance.RefreshJsonData();
-            SceneManager.LoadScene(SceneToLoad);
+            InterfaceManager.Instance.LoadScene(SceneToLoad);
             //AreaEnvironment.SetActive(true);
             //Icons.SetActive(false);
         }

@@ -229,8 +229,8 @@ public class AppearanceDisplay : MonoBehaviour
 
         shoesPartLength--;
         hairPartLength--;
-        GenerateDeselectIcon(ShoesDisplay);
-        GenerateDeselectIcon(HairsDisplay);
+        //GenerateDeselectIcon(ShoesDisplay);
+        //GenerateDeselectIcon(HairsDisplay);
 
         // After all the items from the player's inventory have been displayed
         // for selection, we create dummy icons that show more items can be
@@ -264,17 +264,17 @@ public class AppearanceDisplay : MonoBehaviour
     }
 
     // Generates the Deselect body part icon
-    private void GenerateDeselectIcon(GameObject display)
-    {
-        GameObject deselectIcon = Instantiate(DeselectIconPrefab, display.transform.GetChild(0).transform);
-        if(display.name == "Shoes Display")
-        {
-            ShoesIcons.Add(deselectIcon);
-        } else if (display.name == "Hairs Display")
-        {
-            HairIcons.Add(deselectIcon);
-        }
-    }
+    //private void GenerateDeselectIcon(GameObject display)
+    //{
+    //    GameObject deselectIcon = Instantiate(DeselectIconPrefab, display.transform.GetChild(0).transform);
+    //    if(display.name == "Shoes Display")
+    //    {
+    //        ShoesIcons.Add(deselectIcon);
+    //    } else if (display.name == "Hairs Display")
+    //    {
+    //        HairIcons.Add(deselectIcon);
+    //    }
+    //}
 
     /// <summary>
     /// This retrieves the icons from the storage and assigns them to buttons in the

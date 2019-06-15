@@ -71,26 +71,26 @@ public class SettingsManager : MonoBehaviour
                     NumberOfTaps++;
                 }
             }
-            if (NumberOfTaps == 2)
-            {
-                if (DevelopmentMode == false)
-                {
-                    DevelopmentMode = true;
-                    RefreshSettings();
-                }
-                SceneManager.LoadScene("Test Area");
-                _isDevModeEnabled = true;
-            }
-            if (NumberOfTaps == 4)
-            {
-                if (DevelopmentMode == false)
-                {
-                    DevelopmentMode = true;
-                    RefreshSettings();
-                }
-                SceneManager.LoadScene("Tutorial Complete");
-                _isDevModeEnabled = true;
-            }
+            //if (NumberOfTaps == 10)
+            //{
+            //    if (DevelopmentMode == false)
+            //    {
+            //        DevelopmentMode = true;
+            //        RefreshSettings();
+            //    }
+            //    SceneManager.LoadScene("Test Area");
+            //    _isDevModeEnabled = true;
+            //}
+            //if (NumberOfTaps == 10)
+            //{
+            //    if (DevelopmentMode == false)
+            //    {
+            //        DevelopmentMode = true;
+            //        RefreshSettings();
+            //    }
+            //    SceneManager.LoadScene("Tutorial Complete");
+            //    _isDevModeEnabled = true;
+            //}
         }
     }
 

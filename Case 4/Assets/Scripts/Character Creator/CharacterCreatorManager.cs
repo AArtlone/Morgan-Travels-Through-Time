@@ -22,7 +22,6 @@ public class CharacterCreatorManager : MonoBehaviour
     public TextMeshProUGUI CharacterSelectionErrorMessage;
     private string errorString;
 
-
     private string _currentBody;
     private string _currentFace;
     private string _currentHair;

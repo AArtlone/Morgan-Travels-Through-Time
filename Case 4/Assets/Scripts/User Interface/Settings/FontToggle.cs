@@ -7,7 +7,6 @@ public class FontToggle : MonoBehaviour
 {
     private List<string> _fontsList = new List<string>();
     public TextMeshProUGUI CurrentFontInSettings;
-    public TextMeshProUGUI FontLabel;
     private int _currentFontIndex;
 
     private void Start()
@@ -23,6 +22,8 @@ public class FontToggle : MonoBehaviour
             {
                 CurrentFontInSettings.text = SettingsManager.Instance.Font;
             }
+
+            CurrentFontInSettings.font = Resources.Load<TMP_FontAsset>("Fonts/" + SettingsManager.Instance.Font + " SDF");
         }
     }
 
@@ -64,6 +65,8 @@ public class FontToggle : MonoBehaviour
                 font.UpdateCurrentFont();
             }
         }
+
+        CurrentFontInSettings.font = Resources.Load<TMP_FontAsset>("Fonts/" + SettingsManager.Instance.Font + " SDF");
 
         SettingsManager.Instance.RefreshSettings();
     }
