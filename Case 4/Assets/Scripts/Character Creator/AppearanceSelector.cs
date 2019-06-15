@@ -132,7 +132,6 @@ public class AppearanceSelector : MonoBehaviour
 
         foreach (Sprite sprite in _spritesFromStorage)
         {
-            Debug.Log(sprite.name + " | " + PortraitImage);
             if (sprite.name == PortraitImage)
             {
                 bodyPart.GetComponent<Image>().overrideSprite = sprite;
@@ -162,30 +161,45 @@ public class AppearanceSelector : MonoBehaviour
             {
                 Sprite sprite = Resources.Load<Sprite>("Clothing/New Clothing/" + wearablesJsonData["Wearables"][i]["PortraitImage"].ToString());
                 if (wearablesJsonData["Wearables"][i]["BodyPart"].ToString() == "Body") {
-                    _bodyBodyPart.GetComponent<Image>().sprite = sprite;
+                    _bodyBodyPart.GetComponent<Image>().overrideSprite = sprite;
                 }
                 else if (wearablesJsonData["Wearables"][i]["BodyPart"].ToString() == "Face")
                 {
-                    _faceBodyPart.GetComponent<Image>().sprite = sprite;
+                    _faceBodyPart.GetComponent<Image>().overrideSprite = sprite;
+                }
+                else if (wearablesJsonData["Wearables"][i]["BodyPart"].ToString() == "Hair")
+                {
+                    _hairBodyPart.GetComponent<Image>().overrideSprite = sprite;
+                }
+                else if (wearablesJsonData["Wearables"][i]["BodyPart"].ToString() == "Top")
+                {
+                    _topBodyPart.GetComponent<Image>().overrideSprite = sprite;
+                }
+                else if (wearablesJsonData["Wearables"][i]["BodyPart"].ToString() == "Bot")
+                {
+                    _botBodyPart.GetComponent<Image>().overrideSprite = sprite;
+                }
+                else if (wearablesJsonData["Wearables"][i]["BodyPart"].ToString() == "Shoes")
+                {
+                    _shoesBodyPart.GetComponent<Image>().overrideSprite = sprite;
                 }
             }
         }
-        _hairBodyPart.GetComponent<Image>().sprite = null;
-        _topBodyPart.GetComponent<Image>().sprite = null;
-        _botBodyPart.GetComponent<Image>().sprite = null;
-        _shoesBodyPart.GetComponent<Image>().sprite = null;
+        //_hairBodyPart.GetComponent<Image>().sprite = null;
+        //_topBodyPart.GetComponent<Image>().sprite = null;
+        //_botBodyPart.GetComponent<Image>().sprite = null;
+        //_shoesBodyPart.GetComponent<Image>().sprite = null;
 
-        Color hairColor = _hairBodyPart.GetComponent<Image>().color;
-        _hairBodyPart.GetComponent<Image>().color = new Color(hairColor.r, hairColor.g, hairColor.b, 0);
-        Color topColor = _topBodyPart.GetComponent<Image>().color;
-        _topBodyPart.GetComponent<Image>().color = new Color(topColor.r, topColor.g, topColor.b, 0);
-        Color botColor = _botBodyPart.GetComponent<Image>().color;
-        _botBodyPart.GetComponent<Image>().color = new Color(botColor.r, botColor.g, botColor.b, 0);
-        Color shoesColor = _shoesBodyPart.GetComponent<Image>().color;
-        _shoesBodyPart.GetComponent<Image>().color = new Color(shoesColor.r, shoesColor.g, shoesColor.b, 0);
+        //Color hairColor = _hairBodyPart.GetComponent<Image>().color;
+        //_hairBodyPart.GetComponent<Image>().color = new Color(hairColor.r, hairColor.g, hairColor.b, 0);
+        //Color topColor = _topBodyPart.GetComponent<Image>().color;
+        //_topBodyPart.GetComponent<Image>().color = new Color(topColor.r, topColor.g, topColor.b, 0);
+        //Color botColor = _botBodyPart.GetComponent<Image>().color;
+        //_botBodyPart.GetComponent<Image>().color = new Color(botColor.r, botColor.g, botColor.b, 0);
+        //Color shoesColor = _shoesBodyPart.GetComponent<Image>().color;
+        //_shoesBodyPart.GetComponent<Image>().color = new Color(shoesColor.r, shoesColor.g, shoesColor.b, 0);
 
-        Character.Instance.RefreshWearables();
-        foreach (Clothing clothing in Character.Instance.Wearables)
+        foreach (Clothing clothing in Character.Instance.WearablesDutch)
         {
             if (clothing.BodyPart == "Body" && clothing.Selected == true)
             {
@@ -195,8 +209,28 @@ public class AppearanceSelector : MonoBehaviour
             {
                 continue;
             }
-            clothing.Selected = false;
+
+            if ((clothing.BodyPart == "Hair" || clothing.BodyPart == "Shoes" &&
+                (clothing.PortraitImage == "hair000" || clothing.PortraitImage == "shoes000")))
+            {
+                clothing.Selected = true;
+            }
+            else
+            {
+                clothing.Selected = false;
+            }
         }
+
+        foreach (Clothing clothing in Character.Instance.Wearables)
+        {
+            if (clothing.PortraitImage == "hair000" || clothing.PortraitImage == "shoes000" || clothing.PortraitImage == "body001" || clothing.PortraitImage == "face001" || clothing.PortraitImage == "top000" || clothing.PortraitImage == "bot000") {
+                clothing.Selected = true;
+            } else
+            {
+                clothing.Selected = false;
+            }
+        }
+        Character.Instance.RefreshWearables();
 
         SelectAppearance();
     }

@@ -227,8 +227,8 @@ public class AppearanceDisplay : MonoBehaviour
             }
         }
 
-        shoesPartLength--;
-        hairPartLength--;
+        //shoesPartLength--;
+        //hairPartLength--;
         //GenerateDeselectIcon(ShoesDisplay);
         //GenerateDeselectIcon(HairsDisplay);
 
