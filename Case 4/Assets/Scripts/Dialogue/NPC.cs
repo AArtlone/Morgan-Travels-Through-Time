@@ -512,7 +512,7 @@ public class NPC : MonoBehaviour
                     highestPriorityOutOfDialogues = dialogue.PriorityIndex;
                 }
             }
-            Debug.Log(highestPriorityOutOfDialogues);
+
             foreach (Dialogue dialogue in dialoguesToPickFrom)
             {
                 if (dialogue.PriorityIndex == highestPriorityOutOfDialogues)

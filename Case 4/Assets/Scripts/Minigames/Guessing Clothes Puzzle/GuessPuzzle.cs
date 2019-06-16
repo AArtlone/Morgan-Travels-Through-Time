@@ -23,6 +23,7 @@ public class GuessPuzzle : MonoBehaviour
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public string SceneName;
+    public GameObject LoadingScreen;
     public List<string> MilestonesToComplete = new List<string>();
 
     #region Lists of custom clothes for gameplay instead of random ones by default
@@ -50,16 +51,17 @@ public class GuessPuzzle : MonoBehaviour
     #endregion
 
     #region Body parts of the empty canvas body used for the game
-    private GameObject _bodyPart;
-    private GameObject _facePart;
-    private GameObject _hairPart;
-    private GameObject _topPart;
-    private GameObject _botPart;
-    private GameObject _shoesPart;
+    public GameObject _bodyPart;
+    public GameObject _facePart;
+    public GameObject _hairPart;
+    public GameObject _topPart;
+    public GameObject _botPart;
+    public GameObject _shoesPart;
     #endregion
 
     #region Score references
     public TextMeshProUGUI finalScore;
+    public TextMeshProUGUI ManualFinalScore;
     private int _stars;
     private string _defaultsJsonPath;
     private string _guessingPuzzlesPath;
@@ -70,6 +72,11 @@ public class GuessPuzzle : MonoBehaviour
     private bool _isGameStarted = false;
     public TextMeshProUGUI Timer;
     private float _timer = 0;
+
+    private Sprite _tempHairPart;
+    private Sprite _tempTopPart;
+    private Sprite _tempBotPart;
+    private Sprite _tempShoesPart;
 
     void Awake()
     {
@@ -101,7 +108,7 @@ public class GuessPuzzle : MonoBehaviour
         #endregion
 
         #region Assigning body parts to the game objects
-        if (SceneManager.GetActiveScene().name == "Main Map")
+        /*if (SceneManager.GetActiveScene().name == "Main Map")
         {
             _bodyPart = gameObject.transform.GetChild(1).transform.GetChild(1).gameObject;
             _facePart = gameObject.transform.GetChild(1).transform.GetChild(2).gameObject;
@@ -117,7 +124,7 @@ public class GuessPuzzle : MonoBehaviour
             _topPart = gameObject.transform.GetChild(0).transform.GetChild(4).gameObject;
             _botPart = gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
             _shoesPart = gameObject.transform.GetChild(0).transform.GetChild(6).gameObject;
-        }
+        }*/
         #endregion
 
         if (Customizable == false)
@@ -132,7 +139,7 @@ public class GuessPuzzle : MonoBehaviour
         {
             InterfaceManager.Instance.OpenPopup(InstructionManual);
         }
-
+        _isGameStarted = true;
         StartPuzzle();
     }
 
@@ -307,19 +314,23 @@ public class GuessPuzzle : MonoBehaviour
         {
             case "Hair":
                 Sprite headSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + HeadList[_currentHeadIndex].Sprite);
-                _hairPart.GetComponent<Image>().sprite = headSprite;
+                _hairPart.GetComponent<Image>().overrideSprite = headSprite;
+                _tempHairPart = headSprite;
                 break;
             case "Top":
                 Sprite torsoSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + TorsoList[_currentTorsoIndex].Sprite);
-                _topPart.GetComponent<Image>().sprite = torsoSprite;
+                _topPart.GetComponent<Image>().overrideSprite = torsoSprite;
+                _tempTopPart = torsoSprite;
                 break;
             case "Bot":
                 Sprite bottomSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + BottomList[_currentBottomIndex].Sprite);
-                _botPart.GetComponent<Image>().sprite = bottomSprite;
+                _botPart.GetComponent<Image>().overrideSprite = bottomSprite;
+                _tempBotPart = bottomSprite;
                 break;
             case "Shoes":
                 Sprite shoesSprite = Resources.Load<Sprite>("Clothing/New Clothing/" + ShoesList[_currentShoesIndex].Sprite);
-                _shoesPart.GetComponent<Image>().sprite = shoesSprite;
+                _shoesPart.GetComponent<Image>().overrideSprite = shoesSprite;
+                _tempShoesPart = shoesSprite;
                 break;
         }
 
@@ -332,19 +343,19 @@ public class GuessPuzzle : MonoBehaviour
     private void CheckIfClothingIsCorrect()
     {
         _correctClothes = 0;
-        if (_hairPart.GetComponent<Image>().sprite == CorrectHairElement)
+        if (_tempHairPart == CorrectHairElement)
         {
             _correctClothes++;
         }
-        if (_topPart.GetComponent<Image>().sprite == CorrectTorsoElement)
+        if (_tempTopPart == CorrectTorsoElement)
         {
             _correctClothes++;
         }
-        if (_botPart.GetComponent<Image>().sprite == CorrectBottomElement)
+        if (_tempBotPart == CorrectBottomElement)
         {
             _correctClothes++;
         }
-        if (_shoesPart.GetComponent<Image>().sprite == CorrectShoesElement)
+        if (_tempShoesPart == CorrectShoesElement)
         {
             _correctClothes++;
         }
@@ -409,10 +420,19 @@ public class GuessPuzzle : MonoBehaviour
         }
     }
 
+    private void ToggleLoadingScreen()
+    {
+        LoadingScreen.SetActive(!LoadingScreen.activeSelf);
+    }
+
     public void StartPuzzle()
     {
         ResetPuzzle();
+        ToggleLoadingScreen();
+        Invoke("ToggleLoadingScreen", 1f);
 
+
+        _bodyPart.GetComponent<Canvas>().sortingOrder = 1;
         Sprite[]  spritesFromStorage = Resources.LoadAll<Sprite>("Clothing/New Clothing");
         foreach (Clothing clothing in Character.Instance.Wearables)
         {
@@ -422,7 +442,7 @@ public class GuessPuzzle : MonoBehaviour
                 {
                     if (sprite.name == clothing.Name)
                     {
-                        _bodyPart.GetComponent<Image>().sprite = sprite;
+                        _bodyPart.GetComponent<Image>().overrideSprite = sprite;
                     }
                 }
             }
@@ -432,7 +452,7 @@ public class GuessPuzzle : MonoBehaviour
                 {
                     if (sprite.name == clothing.Name)
                     {
-                        _facePart.GetComponent<Image>().sprite = sprite;
+                        _facePart.GetComponent<Image>().overrideSprite = sprite;
                     }
                 }
             }
@@ -575,10 +595,10 @@ public class GuessPuzzle : MonoBehaviour
         switch (SettingsManager.Instance.Language)
         {
             case "English":
-                finalScore.text = "You have successfully completed this puzzle!";
+                ManualFinalScore.text = "You have successfully completed this puzzle!";
                 break;
             case "Dutch":
-                finalScore.text = "Je bent er in geslaagd de puzzel te voltooien!";
+                ManualFinalScore.text = "Je bent er in geslaagd de puzzel te voltooien!";
                 break;
         }
 

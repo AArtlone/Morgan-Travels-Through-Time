@@ -40,8 +40,9 @@ public class SceneManagement : MonoBehaviour
         {
             if (Character.Instance.TutorialCompleted)
             {
-                if (Character.Instance.LastScene != "Tutorial Map Area" && Character.Instance.LastMapArea != "Tutorial Map Area")
+                if (Character.Instance.LastScene != "Tutorial Map Area" && Character.Instance.LastMapArea != "Tutorial Map Area" && Character.Instance.LastScene != "Guess Clothing Puzzle" && Character.Instance.LastScene != "Spelling Puzzle" && Character.Instance.LastScene != "Hidden Objects Puzzle" && Character.Instance.LastScene != "Escape Game")
                 {
+                    Debug.Log("aaaaaaaaa");
                     sceneToLoad = Character.Instance.LastScene;
                 }
                 else if (Character.Instance.LastMapArea == "Tutorial Map Area")
@@ -74,7 +75,9 @@ public class SceneManagement : MonoBehaviour
         }
 
         LoadingScreen.SetActive(true);
-
+        Debug.Log(Character.Instance.LastMapArea);
+        Debug.Log(Character.Instance.LastScene);
+        Debug.Log(sceneToLoad);
         AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneToLoad);
 
         yield return new WaitForEndOfFrame();

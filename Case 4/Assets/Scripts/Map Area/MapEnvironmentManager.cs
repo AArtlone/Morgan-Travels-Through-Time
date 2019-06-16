@@ -13,6 +13,7 @@ public class MapEnvironmentManager : MonoBehaviour
     public GameObject CloseButton;
     public GameObject DiaryButton;
     public GameObject BackpackButton;
+    public GameObject MotherNPC;
 
     private CameraBehavior _cameraBehaviour;
     private FadeScreenController _fadeScreenController;
@@ -26,6 +27,17 @@ public class MapEnvironmentManager : MonoBehaviour
     {
         _cameraBehaviour = FindObjectOfType<CameraBehavior>();
         _fadeScreenController = FindObjectOfType<FadeScreenController>();
+
+        if (SceneManager.GetActiveScene().name == "Jacob's House")
+        {
+            foreach (ProgressEntry log in ProgressLog.Instance.Log)
+            {
+                if ("Talked to Jacob before the Clothing Puzzle" == log.Milestone && log.Completed == true)
+                {
+                    MotherNPC.SetActive(true);
+                } 
+            }
+        }
 
         if (Character.Instance.HasMap == true)
         {
