@@ -457,8 +457,59 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: MilestonesToComplete.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: TimeToComplete
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: ManuallyPuzzleFinishedWindow
+      value: 
+      objectReference: {fileID: 188396750}
+    - target: {fileID: 2329244192882082895, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: MilestonesToComplete.Array.data[0]
+      value: Completed the Spelling Puzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057481988336674746, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701143178444438429, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4737696373757852078, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3627215959859059874, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1515026241}
+    - target: {fileID: 3627215959859059874, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 786dd7175382ca94f854a58e26b0577c, type: 3}
+--- !u!1 &188396750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6701143178444438429, guid: 786dd7175382ca94f854a58e26b0577c,
+    type: 3}
+  m_PrefabInstance: {fileID: 188396749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &504184851
 PrefabInstance:
   m_ObjectHideFlags: 0

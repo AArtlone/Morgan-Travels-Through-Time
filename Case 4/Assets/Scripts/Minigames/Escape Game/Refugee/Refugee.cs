@@ -11,7 +11,7 @@ public class Refugee : MonoBehaviour
 
     private int _currentCheckpointIndex = 0;
     public Checkpoint _targetCheckpoint;
-    private RefugeeStatus _previousStatus;
+    public RefugeeStatus PreviousStatus;
     public enum RefugeeStatus { Walking, Wondering, Idle, Injured, WalkingToObsIntElement, AtObsIntElement, CarryingInjured, WalkingWithStretcher };
     public RefugeeStatus Status;
     private Animator _animator;
@@ -77,7 +77,7 @@ public class Refugee : MonoBehaviour
 
     private void ChangeRefugeeStatus(RefugeeStatus NewRefugeeStatus)
     {
-        _previousStatus = Status;
+        PreviousStatus = Status;
 
         switch (NewRefugeeStatus)
         {
@@ -141,7 +141,7 @@ public class Refugee : MonoBehaviour
                 FirstCarryingRefugee.GetComponentInChildren<Animator>().SetBool("IsWalking", true);
             if (SecondCarryingRefugee != null)
                 SecondCarryingRefugee.GetComponentInChildren<Animator>().SetBool("IsWalking", true);*/
-            if (_previousStatus != RefugeeStatus.CarryingInjured)
+            if (PreviousStatus != RefugeeStatus.CarryingInjured)
             {
                 transform.position = Vector2.MoveTowards(transform.position, _posToMoveTo, Speed * .5f * Time.deltaTime);
             }
@@ -174,7 +174,7 @@ public class Refugee : MonoBehaviour
                 _gameInterface.SaveEscapeGamesData();
                 Destroy(gameObject);
             }
-            if (_previousStatus == RefugeeStatus.Injured)
+            if (PreviousStatus == RefugeeStatus.Injured)
             {
                 //Debug.Log(FirstCarryingRefugee.name);
                 //Debug.Log(SecondCarryingRefugee.name);
@@ -182,8 +182,10 @@ public class Refugee : MonoBehaviour
                 SecondCarryingRefugee.GetComponentInChildren<Animator>().SetBool("IsWalking", false);*/
                 //Debug.Log(FirstCarryingRefugee.GetComponentInChildren<Animator>().GetBool("IsWalking"));
                 //Debug.Log(SecondCarryingRefugee.GetComponentInChildren<Animator>().GetBool("IsWalking"));
-                FirstCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
-                SecondCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
+                if (FirstCarryingRefugee != null)
+                    FirstCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
+                if (SecondCarryingRefugee != null)
+                    SecondCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
                 ChangeRefugeeStatus(RefugeeStatus.Injured);
             }
             else
@@ -343,6 +345,8 @@ public class Refugee : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z - 180f);
         }*/
+        _gameInterface.CurrentRefugees[WaveIndex].Remove(FirstCarryingRefugee.GetComponent<Refugee>());
+        _gameInterface.CurrentRefugees[WaveIndex].Remove(SecondCarryingRefugee.GetComponent<Refugee>());
         _gameInterface._cannonInterface.GetComponentInParent<Obstacle>().PlayCanon();
     }
 

@@ -23,6 +23,7 @@ public class GuessPuzzle : MonoBehaviour
     public string QuestForObjective;
     public int ObjectiveToCompleteID;
     public string SceneName;
+    public List<string> MilestonesToComplete = new List<string>();
 
     #region Lists of custom clothes for gameplay instead of random ones by default
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
@@ -65,6 +66,7 @@ public class GuessPuzzle : MonoBehaviour
     #endregion
 
     public GameObject PuzzleFinishedWindow;
+    public GameObject ManuallyPuzzleFinishedWindow;
     private bool _isGameStarted = false;
     public TextMeshProUGUI Timer;
     private float _timer = 0;
@@ -146,11 +148,26 @@ public class GuessPuzzle : MonoBehaviour
             {
                 _timer = 0;
                 SavePuzzleScore();
+                SetMilestones();
                 OpenCompletePuzzleWindow();
                 Completed = true;
                 _isGameStarted = false;
             }
             Timer.text = ((int)_timer).ToString();
+        }
+    }
+
+    private void SetMilestones()
+    {
+        foreach (string milestoneToComplete in MilestonesToComplete)
+        {
+            foreach (ProgressEntry milestone in ProgressLog.Instance.Log)
+            {
+                if (milestoneToComplete == milestone.Milestone)
+                {
+                    ProgressLog.Instance.SetEntry(milestone.Milestone, true);
+                }
+            }
         }
     }
 
@@ -160,7 +177,8 @@ public class GuessPuzzle : MonoBehaviour
 
         Completed = true;
         SavePuzzleScore();
-        OpenCompletePuzzleWindow();
+        SetMilestones();
+        OpenManuallyCompletePuzzleWindow();
         _isGameStarted = false;
     }
 
@@ -548,6 +566,20 @@ public class GuessPuzzle : MonoBehaviour
         }
         
         OpenPopup(PuzzleFinishedWindow);
+    }
+    private void OpenManuallyCompletePuzzleWindow()
+    {
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                finalScore.text = "You have successfully completed this puzzle!";
+                break;
+            case "Dutch":
+                finalScore.text = "Je bent er in geslaagd de puzzel te voltooien!";
+                break;
+        }
+
+        OpenPopup(ManuallyPuzzleFinishedWindow);
     }
     private string InsertNewLineTabs(int numberOfTabs)
     {

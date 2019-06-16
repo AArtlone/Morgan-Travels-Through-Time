@@ -118,9 +118,9 @@ public class SceneManagement : MonoBehaviour
         }
         else
         {
-            if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House")
+            if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House" || SceneManager.GetActiveScene().name == "Escape Game")
             {
-                Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
+                Character.Instance.LastMapArea = newScene;
                 sceneToLoad = Character.Instance.LastMapArea;
             }
             else

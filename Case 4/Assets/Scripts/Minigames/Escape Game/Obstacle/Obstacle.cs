@@ -127,7 +127,6 @@ public class Obstacle : MonoBehaviour
     public void ExtinguishPlant()
     {
         // TODO: Play extinguish sound
-        _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
 
         for (int i = 0; i < transform.childCount; i++)
         {

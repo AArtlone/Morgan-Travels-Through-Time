@@ -1092,7 +1092,7 @@ public class Character : MonoBehaviour
                                         TutorialCompleted = true;
                                         RefreshJsonData();
                                         CollectBlueprint("Blueprint1");
-                                        FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
+                                        //FindObjectOfType<MapEnvironmentManager>().LoadObjectsFromSequence();
                                     }
                                 }
                             }
