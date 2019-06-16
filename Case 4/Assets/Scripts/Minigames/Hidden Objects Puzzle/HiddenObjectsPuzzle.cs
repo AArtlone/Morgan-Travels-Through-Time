@@ -612,6 +612,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
             StarsList[i].SetActive(true);
         }
     }
+
     private string InsertNewLineTabs(int numberOfTabs)
     {
         string whiteSpace = Environment.NewLine;

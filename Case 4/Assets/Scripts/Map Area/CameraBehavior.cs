@@ -150,7 +150,8 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
         }
-                if (SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Hidden Objects Puzzle")
+                if (SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Hidden Objects Puzzle" &&
+            SceneManager.GetActiveScene().name != "Spelling Puzzle")
         {
             if ((Input.touchCount > 0 &&
                 Input.GetTouch(0).phase == TouchPhase.Began) &&

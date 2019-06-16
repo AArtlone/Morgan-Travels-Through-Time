@@ -1,5 +1,6 @@
 ﻿using LitJson;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -13,13 +14,21 @@ public class SpellingPuzzle : MonoBehaviour
     public bool Completed;
     public int Stars;
     public string SceneName;
+    [Space(15)]
     public Image LetterBackgroud;
-    public TextMeshProUGUI LetterText;
+    public GameObject LetterFieldsEnglish;
+    public GameObject LetterFieldsDutch;
+    public TextMeshProUGUI LetterTextEnglish;
+    public TextMeshProUGUI LetterTextDutch;
     public TMP_FontAsset LetterFont;
+    [Space(15)]
     public GameObject InstructionManual;
     [Header("Drag & Drop the fields in the letter, here, that will be used for the puzzle!")]
     public List<WordField> FieldsOfWords = new List<WordField>();
+    [Space(15)]
     public GameObject OptionsMenu;
+    public GameObject PuzzleEndWindow;
+    public List<GameObject> StarsList;
     // Counts how many times the user has selected
     // the wrong word for the corresponding field.
     private int _numberOfMistakes;
@@ -45,12 +54,34 @@ public class SpellingPuzzle : MonoBehaviour
     {
         SetupData();
 
-        LetterText.font = Resources.Load<TMP_FontAsset>("Fonts/" + LetterFont.ToString() + " SDF");
+        // Changing the font proves to be very annoying as we will need fields
+        // that compensate not just for different text languages, but font as
+        // well, so I am leaving it at one font only for now.
+        //LetterTextEnglish.font = Resources.Load<TMP_FontAsset>("Fonts/" + LetterFont.ToString() + " SDF");
+        //LetterTextDutch.font = Resources.Load<TMP_FontAsset>("Fonts/" + LetterFont.ToString() + " SDF");
 
-        for (int i = 0; i < FieldsOfWords.Count; i++)
+        switch (SettingsManager.Instance.Language)
         {
-            OptionsMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = FieldsOfWords[i].ExpectedWord;
-            FieldsOfWords[i].TextField.GetComponentInChildren<WordToFind>().ExpectedWord = FieldsOfWords[i].ExpectedWord;
+            case "English":
+                LetterTextEnglish.gameObject.SetActive(true);
+                LetterFieldsEnglish.SetActive(true);
+
+                for (int i = 0; i < FieldsOfWords.Count; i++)
+                {
+                    OptionsMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = FieldsOfWords[i].ExpectedWordEnglish;
+                    //FieldsOfWords[i].TextFieldEnglish.GetComponentInChildren<WordToFind>().ExpectedWord = FieldsOfWords[i].ExpectedWordEnglish;
+                }
+                break;
+            case "Dutch":
+                LetterTextDutch.gameObject.SetActive(true);
+                LetterFieldsDutch.SetActive(true);
+
+                for (int i = 0; i < FieldsOfWords.Count; i++)
+                {
+                    OptionsMenu.transform.GetChild(i).GetComponentInChildren<TextMeshProUGUI>().text = FieldsOfWords[i].ExpectedWordDutch;
+                    //FieldsOfWords[i].TextFieldDutch.GetComponentInChildren<WordToFind>().ExpectedWord = FieldsOfWords[i].ExpectedWordDutch;
+                }
+                break;
         }
     }
 
@@ -63,7 +94,9 @@ public class SpellingPuzzle : MonoBehaviour
         // If it's false then a button was picked to fill in the blank field selected.
         if (openMenu)
         {
-            _selectedField.GetComponentInChildren<TextMeshProUGUI>().text = buttonObj.GetComponentInChildren<TextMeshProUGUI>().text;
+            _selectedField.GetComponentInChildren<WordToFind>().SelectedWord = buttonObj.GetComponentInChildren<TextMeshProUGUI>().text;
+
+            _selectedField.GetComponentInChildren<TextMeshProUGUI>().text = buttonObj.GetComponentInChildren<TextMeshProUGUI>().text.Substring(0, buttonObj.GetComponentInChildren<TextMeshProUGUI>().text.Length > 10 ? 11 : buttonObj.GetComponentInChildren<TextMeshProUGUI>().text.Length);
 
             _selectedOptions.SetActive(false);
 
@@ -81,7 +114,7 @@ public class SpellingPuzzle : MonoBehaviour
 
             for (int i = 0; i < FieldsOfWords.Count; i++)
             {
-                if (_selectedField.GetComponentInChildren<WordToFind>().ExpectedWord == FieldsOfWords[i].ExpectedWord)
+                if (_selectedField.GetComponentInChildren<WordToFind>().ExpectedWord == FieldsOfWords[i].ExpectedWordEnglish || _selectedField.GetComponentInChildren<WordToFind>().ExpectedWord == FieldsOfWords[i].ExpectedWordDutch)
                 {
                     FieldsOfWords[i].Options.SetActive(true);
                     _selectedOptions = FieldsOfWords[i].Options;
@@ -95,7 +128,7 @@ public class SpellingPuzzle : MonoBehaviour
         bool isPuzzleCompleted = true;
         for (int i = 0; i < FieldsOfWords.Count; i++)
         {
-            if (FieldsOfWords[i].TextField.GetComponentInChildren<TextMeshProUGUI>().text != FieldsOfWords[i].ExpectedWord)
+            if (FieldsOfWords[i].TextFieldEnglish.GetComponentInChildren<WordToFind>().SelectedWord != FieldsOfWords[i].ExpectedWordEnglish && FieldsOfWords[i].TextFieldDutch.GetComponentInChildren<WordToFind>().SelectedWord != FieldsOfWords[i].ExpectedWordDutch)
             {
                 isPuzzleCompleted = false;
             }
@@ -120,6 +153,8 @@ public class SpellingPuzzle : MonoBehaviour
                 }
             }
 
+            PuzzleEndWindow.SetActive(true);
+            StartCoroutine(ShowStars());
             RefreshData();
         }
     }
@@ -195,5 +230,14 @@ public class SpellingPuzzle : MonoBehaviour
         }
 
         return whiteSpace;
+    }
+
+    private IEnumerator ShowStars()
+    {
+        for (int i = 0; i < StarsList.Count; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            StarsList[i].SetActive(true);
+        }
     }
 }
