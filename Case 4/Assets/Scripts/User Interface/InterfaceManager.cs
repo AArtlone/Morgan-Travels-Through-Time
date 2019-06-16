@@ -799,9 +799,9 @@ public class InterfaceManager : MonoBehaviour
     {
         LoadingScreen.SetActive(true);
 
-        if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House")
+        if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House" || SceneManager.GetActiveScene().name == "Escape Game")
         {
-            Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
+            Character.Instance.LastMapArea = scene;
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
         } else if (SceneManager.GetActiveScene().name == "Test Area")

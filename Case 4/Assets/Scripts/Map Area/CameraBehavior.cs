@@ -219,7 +219,7 @@ public class CameraBehavior : MonoBehaviour
                 {
                     if (hitObjs[i].transform.tag == "ObsIntElement")
                     {
-                        hitObj.transform.GetComponent<ObstacleIntercationElement>().AssignRefugee();
+                        hitObjs[i].transform.GetComponent<ObstacleIntercationElement>().AssignRefugee();
                     }
                 }
 
