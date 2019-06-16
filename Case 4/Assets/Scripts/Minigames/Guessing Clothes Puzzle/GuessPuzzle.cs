@@ -165,6 +165,9 @@ public class GuessPuzzle : MonoBehaviour
             {
                 if (milestoneToComplete == milestone.Milestone)
                 {
+/*                    Debug.Log(milestoneToComplete);
+                    Debug.Log(milestone.Milestone);
+                    Debug.Log(milestone.Completed);*/
                     ProgressLog.Instance.SetEntry(milestone.Milestone, true);
                 }
             }

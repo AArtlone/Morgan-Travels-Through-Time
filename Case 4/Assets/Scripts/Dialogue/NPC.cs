@@ -512,7 +512,7 @@ public class NPC : MonoBehaviour
                     highestPriorityOutOfDialogues = dialogue.PriorityIndex;
                 }
             }
-
+            Debug.Log(highestPriorityOutOfDialogues);
             foreach (Dialogue dialogue in dialoguesToPickFrom)
             {
                 if (dialogue.PriorityIndex == highestPriorityOutOfDialogues)
@@ -690,10 +690,17 @@ public class NPC : MonoBehaviour
         {
             InterfaceManager.Instance.FadeEndTutorial();
         }
+        if (SceneManager.GetActiveScene().name == "Castle Area")
+        {
+            Debug.Log(sceneToLoad);
+            Character.Instance.LastMapArea = sceneToLoad;
+        }
         InterfaceManager.Instance.LoadingScreen.SetActive(true);
 
-        AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
-        yield return new WaitForSeconds(1.2f);
+        InterfaceManager.Instance.LoadScene(sceneToLoad);
+        yield return new WaitForEndOfFrame();
+        /*AsyncOperation async = SceneManager.LoadSceneAsync(sceneToLoad);
+        yield return new WaitForSeconds(1.2f);*/
     }
 
     /// <summary>
