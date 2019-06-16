@@ -31,7 +31,7 @@ Transform:
   - {fileID: 1349378211800278383}
   - {fileID: 1349378212429381729}
   - {fileID: 1349378213082400185}
-  m_Father: {fileID: 1349378213363472698}
+  m_Father: {fileID: 1733014126112412644}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349378211608960133
@@ -885,7 +885,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1349378213048755534}
-  m_Father: {fileID: 1349378213363472698}
+  m_Father: {fileID: 1733014126112412644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349378212429381731
@@ -1499,7 +1499,7 @@ Transform:
   - {fileID: 1349378212553307458}
   - {fileID: 1349378212078152467}
   - {fileID: 1349378211792300998}
-  m_Father: {fileID: 1349378213363472698}
+  m_Father: {fileID: 1733014126112412644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1349378213336160565
@@ -1623,10 +1623,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1349378213363472698}
-  - component: {fileID: 1349378213363472697}
   - component: {fileID: 957332151739704414}
-  - component: {fileID: 9126875092235647004}
-  - component: {fileID: 1079022228025567479}
+  - component: {fileID: 2141231865581358690}
+  - component: {fileID: 7555099539104111731}
   m_Layer: 10
   m_Name: PuzzleNPC1
   m_TagString: Escape NPC
@@ -1645,32 +1644,10 @@ Transform:
   m_LocalPosition: {x: 0.76, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 1349378213197979121}
-  - {fileID: 1349378212413505060}
-  - {fileID: 1349378211477280863}
   - {fileID: 1733014126112412644}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1349378213363472697
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1349378213363472699}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 327fdd208e3456a4983f634ce34be526, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &957332151739704414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1693,7 +1670,7 @@ MonoBehaviour:
   FacingRight: 0
   Speed: 9
   WonderingSpeed: 4
---- !u!50 &9126875092235647004
+--- !u!50 &2141231865581358690
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -1714,7 +1691,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &1079022228025567479
+--- !u!70 &7555099539104111731
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2039,6 +2016,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1733014126112412644}
+  - component: {fileID: 217405384626389239}
+  - component: {fileID: 7856091381324541636}
   m_Layer: 10
   m_Name: GameObject
   m_TagString: Untagged
@@ -2056,7 +2035,45 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1349378213197979121}
+  - {fileID: 1349378212413505060}
+  - {fileID: 1349378211477280863}
   m_Father: {fileID: 1349378213363472698}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &217405384626389239
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4156438054236234874}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 327fdd208e3456a4983f634ce34be526, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &7856091381324541636
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4156438054236234874}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.75, y: 0}
+  m_Size: {x: 2.39, y: 4.65}
+  m_Direction: 0

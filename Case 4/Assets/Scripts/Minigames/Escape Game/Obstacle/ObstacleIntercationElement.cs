@@ -60,7 +60,7 @@ public class ObstacleIntercationElement : MonoBehaviour
     {
         foreach (Refugee refugee in _gameInterface.CurrentRefugees[_gameInterface.CurrentWave])
         {
-            if (refugee.Status != Refugee.RefugeeStatus.Injured && refugee.Status != Refugee.RefugeeStatus.AtObsIntElement && refugee.Status != Refugee.RefugeeStatus.WalkingToObsIntElement && 
+            if (refugee.Status != Refugee.RefugeeStatus.Injured && refugee.Status != Refugee.RefugeeStatus.AtObsIntElement && refugee.Status != Refugee.RefugeeStatus.WalkingToObsIntElement && refugee.Status != Refugee.RefugeeStatus.CarryingInjured &&
                 refugee._targetCheckpoint.Index + 1 == ObstacleLink.CheckpointLink.Index)
             {
                 _refuggeToAssign = refugee;
