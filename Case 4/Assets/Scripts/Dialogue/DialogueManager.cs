@@ -87,13 +87,13 @@ public class DialogueManager : MonoBehaviour
             _faceConfigurations.Add(
                 "Jacob",
                 new FaceConfiguration(
-                    new Vector2(283, 116),
+                    new Vector2(-55, -24),
                     new Vector2(146, 130)
                     ));
             _faceConfigurations.Add(
                 "UncleBen",
                 new FaceConfiguration(
-                    new Vector2(294, 300),
+                    new Vector2(-42, 154),
                     new Vector2(199, 177)
                     )
                 );

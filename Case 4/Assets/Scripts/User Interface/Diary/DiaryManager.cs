@@ -18,7 +18,6 @@ public class DiaryManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> _pages = new List<GameObject>();
 
-    // Risky, but I want to try it
     private List<dynamic> AllPuzzles = new List<dynamic>();
     private List<KeyValuePair<int, List<dynamic>>> PagesOfPuzzles = new List<KeyValuePair<int, List<dynamic>>>();
     public GameObject GridOfPuzzles;

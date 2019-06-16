@@ -53,7 +53,7 @@ public class CameraIntroController : MonoBehaviour
         {
             Character.Instance.IsCutscenePassed = true;
             Character.Instance.RefreshJsonData();
-            sceneToLoad = "Beginning Character Creation";
+            sceneToLoad = "Language Selection";
         }
 
         InterfaceManager.Instance.LoadingScreen.SetActive(true);
