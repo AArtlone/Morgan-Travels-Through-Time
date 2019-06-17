@@ -667,7 +667,6 @@ public class Character : MonoBehaviour
                 newItem.ActiveDutch = itemDataDutch["Items"][i]["Active"].ToString();
                 newItem.AssetsImageName = itemData["Items"][i]["AssetsImageName"].ToString();
 
-
                 Items.Add(newItem);
                 ItemsDutch.Add(newItem);
             }

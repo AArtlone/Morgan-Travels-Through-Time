@@ -283,6 +283,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6400768388233337880, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00012207031
+      objectReference: {fileID: 0}
     - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -805,11 +810,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1112833553}
-    - target: {fileID: 3370708775786976165, guid: 32d836cf0a0772146a6554c1c0e0ace2,
-        type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1166190286}
     - target: {fileID: 94918417, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadLastMapAreaScene
@@ -862,7 +862,7 @@ PrefabInstance:
     - target: {fileID: 3370708775306293163, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 111.880005
+      value: 111.87988
       objectReference: {fileID: 0}
     - target: {fileID: 3370708775306293163, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
@@ -896,6 +896,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3370708775786976165, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1166190286}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
 --- !u!224 &366664972 stripped
@@ -1534,6 +1539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563481084}
+  - component: {fileID: 563481085}
   m_Layer: 5
   m_Name: Area Locked Error Popup
   m_TagString: Untagged
@@ -1564,6 +1570,27 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0000076293945, y: 0}
   m_SizeDelta: {x: 306.05, y: 151.22}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &563481085
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563481083}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 10
+  m_TargetDisplay: 0
 --- !u!1001 &592344356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3918,6 +3945,7 @@ MonoBehaviour:
   CloseButton: {fileID: 366664978}
   DiaryButton: {fileID: 366664979}
   BackpackButton: {fileID: 366664977}
+  MotherNPC: {fileID: 0}
   SequencesOfTutorial: []
   CurrentCamera: {fileID: 0}
 --- !u!4 &2136077232
