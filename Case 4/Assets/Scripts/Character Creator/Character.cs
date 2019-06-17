@@ -671,16 +671,6 @@ public class Character : MonoBehaviour
                 ItemsDutch.Add(newItem);
             }
         }
-
-        //foreach (Item item in Items)
-        //{
-        //    Debug.Log(item.Name + " | " + item.NameDutch);
-        //    Debug.Log(item.Description + " | " + item.DescriptionDutch);
-        //    Debug.Log(item.Active + " | " + item.ActiveDutch);
-        //    Debug.Log(item.AssetsImageName);
-        //    Debug.Log("-----------------------------------------------");
-        //}
-        //LoadInventory();
     }
 
     private void SetupAreas()

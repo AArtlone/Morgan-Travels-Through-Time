@@ -282,7 +282,7 @@ public class InterfaceManager : MonoBehaviour
 
                 foreach (Quest loadedQuest in questsToLoad)
                 {
-                    if (loadedQuest.ProgressStatus == "Completed" || loadedQuest.ProgressStatus == "Gedaan")
+                    if (loadedQuest.ProgressStatus == "Complete" || loadedQuest.ProgressStatus == "Gedaan")
                     {
                         GameObject newQuestButton = Instantiate(QuestButtonPrefab, CompletedQuestsDisplay.transform.GetChild(0).transform);
                         newQuestButton.GetComponentInChildren<TextMeshProUGUI>().text = loadedQuest.Name;
