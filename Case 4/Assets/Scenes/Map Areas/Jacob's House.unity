@@ -575,11 +575,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8868626163166982404, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_Color.a
@@ -599,6 +594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868626163166982404, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5706246549367827548, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
@@ -1668,11 +1668,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8868626163166982404, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_Color.a
@@ -1692,6 +1687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8868626163166982404, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5706246549367827548, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
@@ -6678,7 +6678,7 @@ MonoBehaviour:
       RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
         type: 3}
       RightCharacterExpression: 5
-      RightPortraitTalking: 1
+      RightPortraitTalking: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6972,7 +6972,8 @@ MonoBehaviour:
         EntitiesToDeactive: []
         SceneToLoad: 
         MilestonesRequired: []
-        MilestonesToComplete: []
+        MilestonesToComplete:
+        - Talked to Jacob before the Clothing Puzzle
       ObjectivesToMeet: []
       RequiredMilestones: []
       RequiredItems: []
@@ -6999,7 +7000,7 @@ MonoBehaviour:
         Priority: 0
         ItemsRequired: []
         ItemsDropped: []
-        DialogueText: Hey.. Jij komt uit de toekomst, he? Hoe is de toekomst?
+        DialogueText: Kijk wat moeder heeft!
         OptionsMenu: []
         ItemsEarned: []
         ObjectivesRequired: []
@@ -7014,11 +7015,195 @@ MonoBehaviour:
       - ID: 2
         Name: Ga naar het huis van Jacob zijn oom
         CompletedStatus: 1
-      RequiredMilestones: []
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
       RequiredItems: []
-    - DialogueTitle: Dialogue2R1
+    - DialogueTitle: Dialogue3Q1
       ID: 0
-      PriorityIndex: 1
+      PriorityIndex: 2
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftCharacterExpression: 0
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightCharacterExpression: 3
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        ID: 0
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Dat was leuk, he?
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 0}
+        EntitiesToDeactive: []
+        SceneToLoad: 
+        MilestonesRequired: []
+        MilestonesToComplete: []
+      ObjectivesToMeet:
+      - ID: 2
+        Name: Ga naar het huis van Jacob zijn oom
+        CompletedStatus: 1
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      RequiredItems: []
+    - DialogueTitle: Dialogue3R1
+      ID: 0
+      PriorityIndex: 2
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftCharacterExpression: 3
+      LeftPortraitTalking: 1
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightCharacterExpression: 5
+      RightPortraitTalking: 0
+      DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        ID: 0
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Ja!
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 0}
+        EntitiesToDeactive: []
+        SceneToLoad: 
+        MilestonesRequired: []
+        MilestonesToComplete: []
+      ObjectivesToMeet:
+      - ID: 2
+        Name: Ga naar het huis van Jacob zijn oom
+        CompletedStatus: 1
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      RequiredItems: []
+    - DialogueTitle: Dialogue3Q2
+      ID: 0
+      PriorityIndex: 2
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftCharacterExpression: 0
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightCharacterExpression: 1
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        ID: 0
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: Oh, kijk, ik heb een brief gekregen!
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 0}
+        EntitiesToDeactive: []
+        SceneToLoad: Spelling Puzzle
+        MilestonesRequired: []
+        MilestonesToComplete: []
+      ObjectivesToMeet:
+      - ID: 2
+        Name: Ga naar het huis van Jacob zijn oom
+        CompletedStatus: 1
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      RequiredItems: []
+    - DialogueTitle: Dialogue4Q1
+      ID: 0
+      PriorityIndex: 3
+      LeftCharacterTitle: 
+      LeftCharacterPortrait: {fileID: 0}
+      LeftCharacterExpression: 0
+      LeftPortraitTalking: 0
+      RightCharacterTitle: Jacob
+      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
+        type: 3}
+      RightCharacterExpression: 5
+      RightPortraitTalking: 1
+      DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
+        type: 3}
+      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
+        type: 3}
+      DialogueBranches:
+      - BranchTitle: 
+        ID: 0
+        PreviousResponses: []
+        Priority: 0
+        ItemsRequired: []
+        ItemsDropped: []
+        DialogueText: "Hey.. Jij komt uit de toekomst, he? Hoe is de toekomst?\r\n"
+        OptionsMenu: []
+        ItemsEarned: []
+        ObjectivesRequired: []
+        QuestOfDialogue: 
+        ObjectiveToComplete: 0
+        EntitiesToActivate:
+        - {fileID: 0}
+        EntitiesToDeactive: []
+        SceneToLoad: 
+        MilestonesRequired: []
+        MilestonesToComplete: []
+      ObjectivesToMeet:
+      - ID: 2
+        Name: Ga naar het huis van Jacob zijn oom
+        CompletedStatus: 1
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Spelling Puzzle
+        Completed: 1
+      RequiredItems: []
+    - DialogueTitle: Dialogue4R1
+      ID: 0
+      PriorityIndex: 3
       LeftCharacterTitle: 
       LeftCharacterPortrait: {fileID: 0}
       LeftCharacterExpression: 0
@@ -7039,7 +7224,7 @@ MonoBehaviour:
         Priority: 0
         ItemsRequired: []
         ItemsDropped: []
-        DialogueText: 'Het is erg anders. Ik weet niet hoe ik terug kan. '
+        DialogueText: 'Het is erg anders. Ik weet niet hoe ik terug kan '
         OptionsMenu: []
         ItemsEarned: []
         ObjectivesRequired: []
@@ -7055,11 +7240,17 @@ MonoBehaviour:
       - ID: 2
         Name: Ga naar het huis van Jacob zijn oom
         CompletedStatus: 1
-      RequiredMilestones: []
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Spelling Puzzle
+        Completed: 1
       RequiredItems: []
-    - DialogueTitle: Dialogue2Q2
+    - DialogueTitle: Dialogue4Q2
       ID: 0
-      PriorityIndex: 1
+      PriorityIndex: 3
       LeftCharacterTitle: 
       LeftCharacterPortrait: {fileID: 0}
       LeftCharacterExpression: 0
@@ -7067,7 +7258,7 @@ MonoBehaviour:
       RightCharacterTitle: Jacob
       RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
         type: 3}
-      RightCharacterExpression: 5
+      RightCharacterExpression: 3
       RightPortraitTalking: 1
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
@@ -7097,14 +7288,20 @@ MonoBehaviour:
       - ID: 2
         Name: Ga naar het huis van Jacob zijn oom
         CompletedStatus: 1
-      RequiredMilestones: []
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Spelling Puzzle
+        Completed: 1
       RequiredItems: []
-    - DialogueTitle: Dialogue2R2
+    - DialogueTitle: Dialogue4R2
       ID: 0
-      PriorityIndex: 1
+      PriorityIndex: 3
       LeftCharacterTitle: 
       LeftCharacterPortrait: {fileID: 0}
-      LeftCharacterExpression: 0
+      LeftCharacterExpression: 3
       LeftPortraitTalking: 1
       RightCharacterTitle: Jacob
       RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
@@ -7138,48 +7335,13 @@ MonoBehaviour:
       - ID: 2
         Name: Ga naar het huis van Jacob zijn oom
         CompletedStatus: 1
-      RequiredMilestones: []
-      RequiredItems: []
-    - DialogueTitle: Dialogue2R2
-      ID: 0
-      PriorityIndex: 1
-      LeftCharacterTitle: 
-      LeftCharacterPortrait: {fileID: 0}
-      LeftCharacterExpression: 0
-      LeftPortraitTalking: 1
-      RightCharacterTitle: Jacob
-      RightCharacterPortrait: {fileID: 21300000, guid: 4455e0c3c62a8814cad785fef13bc5de,
-        type: 3}
-      RightCharacterExpression: 5
-      RightPortraitTalking: 0
-      DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
-        type: 3}
-      DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
-        type: 3}
-      DialogueBranches:
-      - BranchTitle: 
-        ID: 0
-        PreviousResponses: []
-        Priority: 0
-        ItemsRequired: []
-        ItemsDropped: []
-        DialogueText: Ja!
-        OptionsMenu: []
-        ItemsEarned: []
-        ObjectivesRequired: []
-        QuestOfDialogue: 
-        ObjectiveToComplete: 0
-        EntitiesToActivate:
-        - {fileID: 0}
-        EntitiesToDeactive: []
-        SceneToLoad: Tutorial Complete
-        MilestonesRequired: []
-        MilestonesToComplete: []
-      ObjectivesToMeet:
-      - ID: 2
-        Name: Ga naar het huis van Jacob zijn oom
-        CompletedStatus: 1
-      RequiredMilestones: []
+      RequiredMilestones:
+      - Milestone: Talked to Jacob before the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Clothing Puzzle
+        Completed: 1
+      - Milestone: Completed the Spelling Puzzle
+        Completed: 1
       RequiredItems: []
 --- !u!50 &6333786813308922849
 Rigidbody2D:

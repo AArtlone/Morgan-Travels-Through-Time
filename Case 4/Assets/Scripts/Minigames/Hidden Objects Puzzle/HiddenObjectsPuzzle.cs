@@ -88,6 +88,9 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         _itemsInFindList = new List<GameObject>();
         _itemsRequired = new List<Item>();
 
+        Character.Instance.AvailableHints = 5;
+        Character.Instance.RefreshJsonData();
+
         // We get all the objects in the Objects To Find List in this hidden objects
         // puzzle from the editor, and we use those objects for the hints mechanic.
         for (int i = 0; i < ItemsToFindList.transform.childCount; i++)
@@ -354,7 +357,6 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void ToggleBottomInterface()
     {
-        _isInterfaceToggledOn = !_isInterfaceToggledOn;
         RectTransform rectTransform = BottomUI.GetComponent<RectTransform>();
 
         if (_isInterfaceToggledOn == false)
@@ -364,6 +366,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         {
             rectTransform.anchoredPosition = new Vector2(0, -135);
         }
+        _isInterfaceToggledOn = !_isInterfaceToggledOn;
     }
 
     public void PickItem(GameObject obj)
@@ -397,6 +400,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
                     ItemsFound.Add(objAsItem.GetComponent<LanguageController>().Dutch);
                     break;
             }
+            _itemsInFindList.Remove(obj);
 
             objAsItem.ItemFound = true;
             int foundItemsCount = 0;
@@ -485,6 +489,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
     public void UseHint()
     {
+        if (Character.Instance.AvailableHints <= 0)
+        {
+            return;
+        }
         ToggleBottomInterface();
         Invoke("ToggleBottomInterface", 2f);
         Character.Instance.RemoveAvailableHints(1);

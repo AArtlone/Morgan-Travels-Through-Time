@@ -71,7 +71,7 @@ public class SettingsManager : MonoBehaviour
                     NumberOfTaps++;
                 }
             }
-            if (NumberOfTaps == 2)
+            if (NumberOfTaps == 10)
             {
                 if (DevelopmentMode == false)
                 {

@@ -29,6 +29,7 @@ public class SpellingPuzzle : MonoBehaviour
     public GameObject OptionsMenu;
     public GameObject PuzzleEndWindow;
     public List<GameObject> StarsList;
+    public List<string> MilestonesToComplete = new List<string>();
     // Counts how many times the user has selected
     // the wrong word for the corresponding field.
     private int _numberOfMistakes;
@@ -123,6 +124,20 @@ public class SpellingPuzzle : MonoBehaviour
         }
     }
 
+    private void SetMilestones()
+    {
+        foreach (string milestoneToComplete in MilestonesToComplete)
+        {
+            foreach (ProgressEntry milestone in ProgressLog.Instance.Log)
+            {
+                if (milestoneToComplete == milestone.Milestone)
+                {
+                    ProgressLog.Instance.SetEntry(milestone.Milestone, true);
+                }
+            }
+        }
+    }
+
     public void CheckForCompletion()
     {
         bool isPuzzleCompleted = true;
@@ -155,6 +170,7 @@ public class SpellingPuzzle : MonoBehaviour
 
             PuzzleEndWindow.SetActive(true);
             StartCoroutine(ShowStars());
+            SetMilestones();
             RefreshData();
         }
     }

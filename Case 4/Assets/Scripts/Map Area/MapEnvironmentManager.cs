@@ -7,6 +7,7 @@ public class MapEnvironmentManager : MonoBehaviour
 {
     //public List<MapPart> MapParts;
     public GameObject HiddenObjectPuzzleNpc;
+    public GameObject HiddenObjectPuzzleNpcParticlese;
     public GameObject ClothingPuzzleNpc;
     public GameObject EscapeGameNpc;
     public GameObject JacobNearHouse;
@@ -47,6 +48,7 @@ public class MapEnvironmentManager : MonoBehaviour
                 if (SceneManager.GetActiveScene().name == "Tutorial Map Area")
                 {
                     HiddenObjectPuzzleNpc.SetActive(true);
+                    HiddenObjectPuzzleNpcParticlese.SetActive(true);
                 }
             }
         }

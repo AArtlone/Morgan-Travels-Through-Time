@@ -40,7 +40,7 @@ public class SceneManagement : MonoBehaviour
         {
             if (Character.Instance.TutorialCompleted)
             {
-                if (Character.Instance.LastScene != "Tutorial Map Area" && Character.Instance.LastMapArea != "Tutorial Map Area" && Character.Instance.LastScene != "Guess Clothing Puzzle" && Character.Instance.LastScene != "Spelling Puzzle" && Character.Instance.LastScene != "Hidden Objects Puzzle" && Character.Instance.LastScene != "Escape Game")
+                if (Character.Instance.LastScene != "Tutorial Map Area" && Character.Instance.LastMapArea != "Tutorial Map Area" && Character.Instance.LastScene != "Guess Clothing Puzzle" && Character.Instance.LastScene != "Spelling Puzzle" && Character.Instance.LastScene != "Hidden Objects Puzzle" && Character.Instance.LastScene != "Escape Game" && Character.Instance.LastScene != "Tutorial Complete")
                 {
                     Debug.Log("aaaaaaaaa");
                     sceneToLoad = Character.Instance.LastScene;
