@@ -22,6 +22,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
     [Space(15)]
     public GameObject BottomUI;
     public GameObject InstructionManual;
+    public List<string> MilestonesToComplete = new List<string>();
 
     #region Items references
     // Those two lists are used for comparison mid-puzzle and are responsible
@@ -150,6 +151,20 @@ public class HiddenObjectsPuzzle : MonoBehaviour
         }
     }
 
+    private void SetMilestones()
+    {
+        foreach (string milestoneToComplete in MilestonesToComplete)
+        {
+            foreach (ProgressEntry milestone in ProgressLog.Instance.Log)
+            {
+                if (milestoneToComplete == milestone.Milestone)
+                {
+                    ProgressLog.Instance.SetEntry(milestone.Milestone, true);
+                }
+            }
+        }
+    }
+
     private void RefreshPuzzleData()
     {
         JsonData puzzlesJsonData = JsonMapper.ToObject(File.ReadAllText(Application.persistentDataPath + "/HiddenObjectPuzzles.json").ToString());
@@ -250,7 +265,7 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         // TODO: Change the stars values of this puzzle using different formulas.
         CancelInvoke();
-
+        SetMilestones();
         PuzzleEndPopup.SetActive(true);
         _isEndPopupOn = true;
 

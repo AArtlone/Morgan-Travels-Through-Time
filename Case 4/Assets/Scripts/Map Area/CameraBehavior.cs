@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CameraBehavior : MonoBehaviour
@@ -24,6 +24,7 @@ public class CameraBehavior : MonoBehaviour
     public bool IsEntityTappedOn = false;
     public bool IsInterfaceElementSelected = false;
     public bool IsUIOpen = false;
+    public bool IsIntructionManualOn = true;
     #endregion
 
     // Camera components
@@ -55,7 +56,9 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "Escape Game")
+
+
+        if (SceneManager.GetActiveScene().name == "Hidden Objects Puzzle")
         {
             if (Input.touchCount > 0 &&
                 Input.GetTouch(0).phase == TouchPhase.Began)
@@ -77,21 +80,21 @@ public class CameraBehavior : MonoBehaviour
         //IsEntityTappedOn = false;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            if (AudioManager.Instance != null)
-            {
-                AudioManager.Instance.PlaySound(AudioManager.Instance.HitScreen);
-            }
+            //if (AudioManager.Instance != null)
+            //{
+            //    AudioManager.Instance.PlaySound(AudioManager.Instance.HitScreen);
+            //}
 
-            if (InterfaceManager.Instance != null)
-            {
-                if (InterfaceManager.Instance.ItemActionsWindow != null)
-                {
-                    if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
-                    {
-                        InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
-                    }
-                }
-            }
+            //if (InterfaceManager.Instance != null)
+            //{
+            //    if (InterfaceManager.Instance.ItemActionsWindow != null)
+            //    {
+            //        if (InterfaceManager.Instance.ItemActionsWindow.activeSelf == true)
+            //        {
+            //            InterfaceManager.Instance.ClosePopup(InterfaceManager.Instance.ItemActionsWindow);
+            //        }
+            //    }
+            //}
 
             RaycastHit2D hitCanvas = Physics2D.Raycast(Camera.main.ScreenToViewportPoint(Input.GetTouch(0).position), Vector2.down, 1000);
 
@@ -186,8 +189,7 @@ public class CameraBehavior : MonoBehaviour
                             IsUIOpen = true;
                             break;
                         case "Escape Game":
-                            Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
-                            Character.Instance.LastScene = "Escape Game";
+                            Character.Instance.LastScene = SceneManager.GetActiveScene().name;
                             Character.Instance.RefreshJsonData();
                             InterfaceManager.Instance.LoadScene("Escape Game");
                             break;

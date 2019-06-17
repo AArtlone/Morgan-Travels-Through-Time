@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InstructionsLoader : MonoBehaviour
 {
@@ -11,9 +12,14 @@ public class InstructionsLoader : MonoBehaviour
 
     private int _currentLineIndex;
     private TextMeshProUGUI _instructionsText;
-    
+    private CameraBehavior _camera;
+
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Escape Game")
+        {
+            _camera = FindObjectOfType<CameraBehavior>();
+        }
         if (Character.Instance.TutorialCompleted == false)
         {
             gameObject.SetActive(true);
@@ -47,6 +53,7 @@ public class InstructionsLoader : MonoBehaviour
         {
             _currentLineIndex = 0;
             _instructionsText.text = EnglishLines[_currentLineIndex];
+            _camera.IsIntructionManualOn = false;
             gameObject.SetActive(false);
         }
     }

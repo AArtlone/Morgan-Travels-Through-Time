@@ -322,6 +322,16 @@ PrefabInstance:
       propertyPath: MilestonesToComplete.Array.data[0]
       value: Completed the Spelling Puzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 6519014163432462881, guid: 70d051e9e91d26e458a9e98f363e95bc,
+        type: 3}
+      propertyPath: Name
+      value: Letter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519014163432462881, guid: 70d051e9e91d26e458a9e98f363e95bc,
+        type: 3}
+      propertyPath: NameDutch
+      value: Brief
+      objectReference: {fileID: 0}
     - target: {fileID: 3448405150554556615, guid: 70d051e9e91d26e458a9e98f363e95bc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2939,6 +2949,7 @@ MonoBehaviour:
   IsEntityTappedOn: 0
   IsInterfaceElementSelected: 0
   IsUIOpen: 0
+  IsIntructionManualOn: 1
 --- !u!1 &555783279
 GameObject:
   m_ObjectHideFlags: 0
@@ -3281,7 +3292,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Dont want you to get it on with nobody else
+  m_text: You have successfully completed this puzzle!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d424dcec0f358f459b912f4f5c07a4a, type: 2}
   m_sharedMaterial: {fileID: 21032496967733310, guid: 4d424dcec0f358f459b912f4f5c07a4a,
@@ -3396,8 +3407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisableLanguageToggling: 0
   SelectedLanguage: 0
-  English: Dont want you to get it on with nobody else
-  Dutch: Tu du tu tu du tu turu turu tu du tururu
+  English: You have successfully completed this puzzle!
+  Dutch: Je bent er in geslaagd de puzzel te voltooien!
 --- !u!1 &845586444
 GameObject:
   m_ObjectHideFlags: 0
@@ -3571,14 +3582,14 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 206386806}
-          m_MethodName: LoadLastMapAreaScene
-          m_Mode: 1
+          m_MethodName: LoadScene
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Jacob's House
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,

@@ -133,7 +133,6 @@ public class DHSequence : MonoBehaviour
 
     public void NextHighlight()
     {
-        Debug.Log(_currentHighlightIndex);
         // Restores the layers after they were modified to highlight those items.
         if (_currentHighlightIndex < ObjectsToHighlight.Count)
         {

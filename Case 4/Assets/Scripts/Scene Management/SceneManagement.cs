@@ -33,46 +33,7 @@ public class SceneManagement : MonoBehaviour
     public IEnumerator ResumeGame()
     {
         string sceneToLoad = string.Empty;
-
-        // If the player has already created a character then 
-        // we just start the main menu instead.
-        if (Character.Instance.CharacterCreation && SceneManager.GetActiveScene().name != "Character Customization")
-        {
-            if (Character.Instance.TutorialCompleted)
-            {
-                if (Character.Instance.LastScene != "Tutorial Map Area" && Character.Instance.LastMapArea != "Tutorial Map Area" && Character.Instance.LastScene != "Guess Clothing Puzzle" && Character.Instance.LastScene != "Spelling Puzzle" && Character.Instance.LastScene != "Hidden Objects Puzzle" && Character.Instance.LastScene != "Escape Game" && Character.Instance.LastScene != "Tutorial Complete")
-                {
-                    Debug.Log("aaaaaaaaa");
-                    sceneToLoad = Character.Instance.LastScene;
-                }
-                else if (Character.Instance.LastMapArea == "Tutorial Map Area")
-                {
-                    sceneToLoad = Character.Instance.LastMapArea;
-                } else
-                {
-                    sceneToLoad = Character.Instance.LastMapArea;
-                }
-                Character.Instance.RefreshJsonData();
-            }
-            else
-            {
-                sceneToLoad = Character.Instance.LastMapArea;
-            }
-        }
-        else if (SceneManager.GetActiveScene().name == "Character Customization")
-        {
-            sceneToLoad = Character.Instance.LastMapArea;
-        }
-        else if (SceneManager.GetActiveScene().name == "Main Map")
-        {
-            sceneToLoad = Character.Instance.LastScene;
-        } else if (SceneManager.GetActiveScene().name == "Logo Introduction" && Character.Instance.CharacterCreation)
-        {
-            SceneManager.LoadScene(Character.Instance.LastMapArea);
-        } else if (SceneManager.GetActiveScene().name == "Logo Introduction" && Character.Instance.CharacterCreation == false)
-        {
-            sceneToLoad = "Introduction";
-        }
+        sceneToLoad = Character.Instance.LastScene;
 
         LoadingScreen.SetActive(true);
         //Debug.Log(Character.Instance.LastMapArea);
@@ -114,31 +75,9 @@ public class SceneManagement : MonoBehaviour
     /// <param name="newScene"></param>
     public IEnumerator LoadSceneCo(string newScene)
     {
-        string sceneToLoad = string.Empty;
-        if (newScene == "Logo Introduction")
-        {
-            SceneManager.LoadScene(newScene);
-        }
-        else
-        {
-            if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" || SceneManager.GetActiveScene().name == "Jacob's House" || SceneManager.GetActiveScene().name == "Escape Game")
-            {
-                Character.Instance.LastMapArea = newScene;
-                sceneToLoad = Character.Instance.LastMapArea;
-            }
-            else
-            {
-                Character.Instance.LastScene = newScene;
-                sceneToLoad = newScene;
-            }
-
-            Character.Instance.RefreshJsonData();
-            sceneToLoad = newScene;
-        }
-
         LoadingScreen.SetActive(true);
 
-        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneToLoad);
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(newScene);
 
         yield return new WaitForEndOfFrame();
     }

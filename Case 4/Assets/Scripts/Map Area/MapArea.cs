@@ -30,7 +30,7 @@ public class MapArea : MonoBehaviour
             }
         }
 
-        if (Character.Instance.LastMapArea == Name)
+        if (Character.Instance.LastScene == Name)
         {
             CurrentLocationPointer.SetActive(true);
         } else
@@ -48,7 +48,7 @@ public class MapArea : MonoBehaviour
     {
         if (AreaStatus == Area.AreaStatus.Unlocked)
         {
-            Character.Instance.LastMapArea = SceneToLoad;
+            Character.Instance.LastScene = SceneToLoad;
             Character.Instance.RefreshJsonData();
             InterfaceManager.Instance.LoadScene(SceneToLoad);
             //AreaEnvironment.SetActive(true);

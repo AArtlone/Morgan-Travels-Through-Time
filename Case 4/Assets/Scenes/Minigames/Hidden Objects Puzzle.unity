@@ -3825,6 +3825,7 @@ MonoBehaviour:
   IsEntityTappedOn: 0
   IsInterfaceElementSelected: 0
   IsUIOpen: 0
+  IsIntructionManualOn: 1
 --- !u!81 &2128529965
 AudioListener:
   m_ObjectHideFlags: 0
@@ -11013,12 +11014,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1168e3ebb9fd95a4088023478a4ab832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Tutorial HOP
+  Name: Hidden Objects
   Stars: 0
   TimeToComplete: 30
   SceneName: 
   BottomUI: {fileID: 514279734}
   InstructionManual: {fileID: 600179807}
+  MilestonesToComplete:
+  - Completed Hidden Objects Puzzle
   _itemsRequired: []
   ItemsFound: []
   ItemsToBeRewarded:

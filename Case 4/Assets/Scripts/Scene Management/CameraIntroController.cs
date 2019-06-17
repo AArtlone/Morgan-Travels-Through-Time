@@ -43,7 +43,7 @@ public class CameraIntroController : MonoBehaviour
         string sceneToLoad = string.Empty;
         if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation)
         {
-            sceneToLoad = Character.Instance.LastMapArea;
+            sceneToLoad = Character.Instance.LastScene;
         }
         else if (Character.Instance.IsCutscenePassed && Character.Instance.CharacterCreation == false)
         {

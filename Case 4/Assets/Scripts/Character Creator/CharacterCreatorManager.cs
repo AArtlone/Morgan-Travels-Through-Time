@@ -327,16 +327,15 @@ public class CharacterCreatorManager : MonoBehaviour
         StartCoroutine(ReturnToMainMapCo());
     }
 
-    //simply return to main map without any additional checks
+    // Simply return to main map without any additional checks
     public IEnumerator ReturnToMainMapCo()
     {
         Character.Instance.CharacterCreation = true;
-        Character.Instance.LastScene = Character.Instance.LastMapArea;
         Character.Instance.RefreshJsonData();
 
         LoadingScreen.SetActive(true);
 
-        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(Character.Instance.LastMapArea);
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(Character.Instance.LastScene);
 
         yield return new WaitForEndOfFrame();
     }

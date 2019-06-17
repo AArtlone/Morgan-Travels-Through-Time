@@ -694,10 +694,7 @@ public class NPC : MonoBehaviour
         {
             InterfaceManager.Instance.FadeEndTutorial();
         }
-        if (SceneManager.GetActiveScene().name == "Castle Area")
-        {
-            Character.Instance.LastMapArea = sceneToLoad;
-        }
+        Character.Instance.LastScene = SceneManager.GetActiveScene().name;
         InterfaceManager.Instance.LoadingScreen.SetActive(true);
 
         InterfaceManager.Instance.LoadScene(sceneToLoad);

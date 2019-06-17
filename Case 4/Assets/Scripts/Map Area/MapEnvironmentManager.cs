@@ -49,6 +49,14 @@ public class MapEnvironmentManager : MonoBehaviour
                 {
                     HiddenObjectPuzzleNpc.SetActive(true);
                     HiddenObjectPuzzleNpcParticlese.SetActive(true);
+                    foreach (ProgressEntry log in ProgressLog.Instance.Log)
+                    {
+                        if ("Completed Hidden Objects Puzzle" == log.Milestone && log.Completed == true)
+                        {
+                            HiddenObjectPuzzleNpc.SetActive(false);
+                            HiddenObjectPuzzleNpcParticlese.SetActive(false);
+                        }
+                    }
                 }
             }
         }

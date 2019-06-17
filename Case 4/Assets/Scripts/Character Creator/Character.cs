@@ -18,7 +18,6 @@ public class Character : MonoBehaviour
     public bool HasDiary;
     public bool AreIconsExplained;
     public bool IsCutscenePassed;
-    public string LastMapArea;
     public string LastScene;
     [Space(10)]
     #region Stats
@@ -218,7 +217,6 @@ public class Character : MonoBehaviour
                     }
                     #endregion
 
-                    LastMapArea = playerJsonData["LastMapArea"].ToString();
                     LastScene = playerJsonData["LastScene"].ToString();
                     Reputation = int.Parse(playerJsonData["Reputation"].ToString());
                     Stamina = int.Parse(playerJsonData["Stamina"].ToString());
@@ -596,7 +594,6 @@ public class Character : MonoBehaviour
             }
             #endregion
 
-            LastMapArea = characterData["LastMapArea"].ToString();
             LastScene = characterData["LastScene"].ToString();
             Reputation = int.Parse(characterData["Reputation"].ToString());
             Stamina = int.Parse(characterData["Stamina"].ToString());

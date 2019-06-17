@@ -371,6 +371,7 @@ public class InterfaceManager : MonoBehaviour
 
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
+        CameraBehavior.IsIntructionManualOn = true;
     }
 
     #region Quests, diary and character functions
@@ -758,32 +759,6 @@ public class InterfaceManager : MonoBehaviour
         ItemSelected.DisplayItemDetails();
     }
 
-    public void UseItem()
-    {
-        // TODO: Create item actives and test them from here.
-    }
-
-    /// <summary>
-    /// Map area =/= from main map. This function will load the last scene that is
-    /// also considered a map area type.
-    /// </summary>
-    public void LoadLastMapAreaScene()
-    {
-        Character.Instance.LastScene = SceneManager.GetActiveScene().name;
-        StartCoroutine(LoadLastMapAreaSceneCo());
-    }
-
-    public IEnumerator LoadLastMapAreaSceneCo()
-    {
-        Character.Instance.LastScene = SceneManager.GetActiveScene().name;
-
-        LoadingScreen.SetActive(true);
-
-        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(Character.Instance.LastMapArea);
-
-        yield return new WaitForEndOfFrame();
-    }
-
     public void LoadScene(string scene)
     {
         StartCoroutine(LoadSceneCo(scene));
@@ -793,28 +768,13 @@ public class InterfaceManager : MonoBehaviour
     {
         LoadingScreen.SetActive(true);
 
-        if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" ||SceneManager.GetActiveScene().name == "Escape Game")
+        if (SceneManager.GetActiveScene().name != "Hidden Objects Puzzle" && SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Guess Clothing Puzzle" && SceneManager.GetActiveScene().name != "Spelling Puzzle" && SceneManager.GetActiveScene().name != "Tutorial Complete" && SceneManager.GetActiveScene().name != "Beginning Character Creation" && SceneManager.GetActiveScene().name != "Character Customization" && SceneManager.GetActiveScene().name != "Main Map")
         {
-            Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
-
-            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
-        } else if (SceneManager.GetActiveScene().name == "Test Area")
-        {
-            AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
+            Debug.Log("aaaaaaaaaaaaa");
+            Character.Instance.LastScene = SceneManager.GetActiveScene().name;
+            Character.Instance.RefreshJsonData();
         }
-        else
-        {
-            if (Character.Instance.LastMapArea == "Test Area")
-            {
-                AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync("Test Area");
-            }
-            else
-            {
-                Character.Instance.LastScene = scene;
-                AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
-            }
-        }
-        Character.Instance.RefreshJsonData();
+        AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
 
         yield return new WaitForEndOfFrame();
     }
