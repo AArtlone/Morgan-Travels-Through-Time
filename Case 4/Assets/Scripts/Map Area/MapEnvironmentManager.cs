@@ -57,7 +57,9 @@ public class MapEnvironmentManager : MonoBehaviour
             if (DiaryButton != null)
             {
                 DiaryButton.SetActive(true);
+                DiaryButton.GetComponentInChildren<LanguageController>().UpdateCurrentLanguage();
                 BackpackButton.SetActive(true);
+                BackpackButton.GetComponentInChildren<LanguageController>().UpdateCurrentLanguage();
             }
         }
         if (Character.Instance.TutorialCompleted == true)

@@ -18,8 +18,6 @@ public class OpenCloset : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(_gameInteface._isInterfaceToggledOn);
-        Debug.Log(_gameInteface._isEndPopupOn);
         if (_gameInteface._isInterfaceToggledOn == false && _gameInteface._isEndPopupOn == false)
         {
             if (_myAnimator.GetBool("Door_IsOpen"))

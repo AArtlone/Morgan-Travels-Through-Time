@@ -513,7 +513,7 @@ public class NPC : MonoBehaviour
                 {
                     foreach (ProgressEntry log in ProgressLog.Instance.Log)
                     {
-                        if (milestoneRequired.Milestone == log.Milestone && log.Completed == true)
+                        if (milestoneRequired.Milestone == log.Milestone && log.Completed == milestoneRequired.Completed)
                         {
                             milestonesThatMatch++;
                         }
@@ -692,7 +692,6 @@ public class NPC : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name == "Castle Area")
         {
-            Debug.Log(sceneToLoad);
             Character.Instance.LastMapArea = sceneToLoad;
         }
         InterfaceManager.Instance.LoadingScreen.SetActive(true);

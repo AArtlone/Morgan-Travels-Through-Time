@@ -37,6 +37,7 @@ public class SettingsManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            Debug.Log(SceneManager.GetActiveScene().name);
             Destroy(Instance);
         }
         else
