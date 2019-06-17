@@ -118,7 +118,7 @@ public class Refugee : MonoBehaviour
                 break;
             case RefugeeStatus.CarryingInjured:
                 _animator.SetBool("IsWalking", false);
-                FlipNPC("Right");
+                //FlipNPC("Right");
                 StopAllCoroutines();
                 break;
         }
@@ -176,14 +176,8 @@ public class Refugee : MonoBehaviour
                 _gameInterface.SaveEscapeGamesData();
                 Destroy(gameObject);
             }
-            if (PreviousStatus == RefugeeStatus.Injured)
+            if (HasBeenInjured)
             {
-                //Debug.Log(FirstCarryingRefugee.name);
-                //Debug.Log(SecondCarryingRefugee.name);
-                /*FirstCarryingRefugee.GetComponentInChildren<Animator>().SetBool("IsWalking", false);
-                SecondCarryingRefugee.GetComponentInChildren<Animator>().SetBool("IsWalking", false);*/
-                //Debug.Log(FirstCarryingRefugee.GetComponentInChildren<Animator>().GetBool("IsWalking"));
-                //Debug.Log(SecondCarryingRefugee.GetComponentInChildren<Animator>().GetBool("IsWalking"));
                 if (FirstCarryingRefugee != null)
                     FirstCarryingRefugee.GetComponent<Refugee>().ChangeRefugeeStatus(RefugeeStatus.CarryingInjured);
                 if (SecondCarryingRefugee != null)
@@ -192,7 +186,10 @@ public class Refugee : MonoBehaviour
             }
             else
             {
-                ChangeRefugeeStatus(RefugeeStatus.Wondering);
+                if (!HasBeenCarrying)
+                {
+                    ChangeRefugeeStatus(RefugeeStatus.Wondering);
+                }
             }
         }
     }

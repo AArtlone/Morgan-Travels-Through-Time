@@ -101,24 +101,40 @@ public class Escape : MonoBehaviour
         StartNextWave();
     }
 
+    /*public void CureRefuge()
+    {
+        foreach(Refugee refugee in CurrentRefugees[CurrentWave])
+        {
+            if (refugee.Status == Refugee.RefugeeStatus.Injured)
+            {
+                refugee.CureRefugee();
+            }
+        }
+    }*/
+
     private void GenerateRandomObstacles()
     {
         _previousObsTypes.Clear();
         foreach (GameObject container in ObsContainers)
         {
-            int rndIndex = UnityEngine.Random.Range(1, ObsPrefabs.Count + 1);
+            int rndIndex = UnityEngine.Random.Range(0, ObsPrefabs.Count);
 
-            foreach (Obstacle.ObstacleType obsType in _previousObsTypes)
+            while (_previousObsTypes.Contains(ObsPrefabs[rndIndex].GetComponent<Obstacle>().Type))
             {
-                while (ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type == obsType)
-                {
-                    rndIndex = UnityEngine.Random.Range(1, ObsPrefabs.Count + 1);
-                }
+                rndIndex = UnityEngine.Random.Range(0, ObsPrefabs.Count);
             }
+            /*foreach (Obstacle.ObstacleType obsType in _previousObsTypes)
+            {
+                while (ObsPrefabs[rndIndex].GetComponent<Obstacle>().Type == obsType)
+                {
+                    Debug.Log("aaaaaaaa");
+                    rndIndex = UnityEngine.Random.Range(0, ObsPrefabs.Count );
+                }
+            }*/
 
-            _previousObsTypes.Add(ObsPrefabs[rndIndex - 1].GetComponent<Obstacle>().Type);
+            _previousObsTypes.Add(ObsPrefabs[rndIndex].GetComponent<Obstacle>().Type);
 
-            GameObject newObs = Instantiate(ObsPrefabs[rndIndex - 1], container.transform.position, Quaternion.identity);
+            GameObject newObs = Instantiate(ObsPrefabs[rndIndex], container.transform.position, Quaternion.identity);
             newObs.transform.parent = container.transform;
 
             newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;

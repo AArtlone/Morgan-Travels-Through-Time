@@ -191,73 +191,71 @@ public class Item : MonoBehaviour
                         _gameInterface.Inventory.RemoveItem(this);
                         _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
                     }*/
-                    if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
+                    /*if (hitObj.transform.tag == "Escape NPC" && Type == ItemType.Stretcher)
                     {
                         hitObj.transform.GetComponent<Refugee>().CureRefugee();
-                    }
-                    else
+                    }*/
+                    
+                    if (hitObj.transform.gameObject.GetComponent<Obstacle>() != null)
                     {
-                        if (hitObj.transform.gameObject.GetComponent<Obstacle>() != null)
+                        Obstacle.ObstacleType obstacleType = hitObj.transform.gameObject.GetComponent<Obstacle>().Type;
+                        // Check if the dropping item is an empty buccket and if the interactable
+                        // object is a well. If yes, then it replaces the empty bucket with a
+                        // full bucket
+
+                        if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
                         {
-                            Obstacle.ObstacleType obstacleType = hitObj.transform.gameObject.GetComponent<Obstacle>().Type;
-                            // Check if the dropping item is an empty buccket and if the interactable
-                            // object is a well. If yes, then it replaces the empty bucket with a
-                            // full bucket
+                            _gameInterface.Inventory.RemoveItem(this);
+                            _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
+                        }
 
-                            if (obstacleType == Obstacle.ObstacleType.Flag && Type == ItemType.GroningenFlag)
+                        if (obstacleType == Obstacle.ObstacleType.Fire && Type == ItemType.FullBucket)
+                        {
+                            _gameInterface.Inventory.RemoveItem(this);
+                            _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().PLayFire();
+                        }
+
+                        if (obstacleType == Obstacle.ObstacleType.Sheeps)
+                        {
+                            hitObj.transform.gameObject.GetComponent<Obstacle>().PlaySheeps(Type);
+                        }
+
+                        if (obstacleType == Obstacle.ObstacleType.EvilPlant)
+                        {
+                            bool isPLantOnFire = false;
+                            GameObject plantFire = null;
+                            for (int i = 0; i < hitObj.transform.childCount; i++)
                             {
-                                _gameInterface.Inventory.RemoveItem(this);
-                                _gameInterface.Inventory.AddItem(_gameInterface.BommenBerendFlagPrefab);
-                                hitObj.transform.gameObject.GetComponent<Obstacle>().PlayFlag();
+                                if (hitObj.transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
+                                {
+                                    plantFire = hitObj.transform.GetChild(i).gameObject;
+                                }
+                            }
+                            if (plantFire.activeSelf == true)
+                            {
+                                isPLantOnFire = true;
                             }
 
-                            if (obstacleType == Obstacle.ObstacleType.Fire && Type == ItemType.FullBucket)
+                            if (!isPLantOnFire)
                             {
-                                _gameInterface.Inventory.RemoveItem(this);
-                                _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
-                                hitObj.transform.gameObject.GetComponent<Obstacle>().PLayFire();
+                                if (Type == ItemType.Sword)
+                                {
+                                    hitObj.transform.gameObject.GetComponent<Obstacle>().CutPlant();
+                                }
+                                else if (Type == ItemType.Torch)
+                                {
+                                    hitObj.transform.gameObject.GetComponent<Obstacle>().SetPlantOnFire();
+                                }
                             }
-
-                            if (obstacleType == Obstacle.ObstacleType.Sheeps)
+                            else
                             {
-                                hitObj.transform.gameObject.GetComponent<Obstacle>().PlaySheeps(Type);
-                            }
-
-                            if (obstacleType == Obstacle.ObstacleType.EvilPlant)
-                            {
-                                bool isPLantOnFire = false;
-                                GameObject plantFire = null;
-                                for (int i = 0; i < hitObj.transform.childCount; i++)
+                                if (Type == ItemType.FullBucket)
                                 {
-                                    if (hitObj.transform.GetChild(i).transform.tag == "Escape Fire Under Plant")
-                                    {
-                                        plantFire = hitObj.transform.GetChild(i).gameObject;
-                                    }
-                                }
-                                if (plantFire.activeSelf == true)
-                                {
-                                    isPLantOnFire = true;
-                                }
-
-                                if (!isPLantOnFire)
-                                {
-                                    if (Type == ItemType.Sword)
-                                    {
-                                        hitObj.transform.gameObject.GetComponent<Obstacle>().CutPlant();
-                                    }
-                                    else if (Type == ItemType.Torch)
-                                    {
-                                        hitObj.transform.gameObject.GetComponent<Obstacle>().SetPlantOnFire();
-                                    }
-                                }
-                                else
-                                {
-                                    if (Type == ItemType.FullBucket)
-                                    {
-                                        _gameInterface.Inventory.RemoveItem(this);
-                                        _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
-                                        hitObj.transform.gameObject.GetComponent<Obstacle>().ExtinguishPlant();
-                                    }
+                                    _gameInterface.Inventory.RemoveItem(this);
+                                    _gameInterface.Inventory.AddItem(_gameInterface.EmptyBucketPrefab);
+                                    hitObj.transform.gameObject.GetComponent<Obstacle>().ExtinguishPlant();
                                 }
                             }
                         }
