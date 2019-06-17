@@ -572,10 +572,6 @@ public class InterfaceManager : MonoBehaviour
                 }
                 if (clothing.BodyPart == "Hair" && clothing.Selected == true)
                 {
-                    if (_hairIcon != null)
-                    {
-                        _hairIcon.enabled = true;
-                    }
                     foreach (Sprite sprite in _spritesFromStorage)
                     {
                         if (sprite.name == clothing.Name)
@@ -585,13 +581,6 @@ public class InterfaceManager : MonoBehaviour
                                 _hairIcon.sprite = sprite;
                             }
                         }
-                    }
-                }
-                else if (clothing.BodyPart == "Hair" && clothing.Selected == false)
-                {
-                    if (_hairIcon != null)
-                    {
-                        _hairIcon.enabled = false;
                     }
                 }
                 if (clothing.BodyPart == "Top" && clothing.Selected == true)
@@ -801,7 +790,7 @@ public class InterfaceManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Tutorial Map Area" || SceneManager.GetActiveScene().name == "Castle Area" ||SceneManager.GetActiveScene().name == "Escape Game")
         {
-            Character.Instance.LastMapArea = scene;
+            Character.Instance.LastMapArea = SceneManager.GetActiveScene().name;
 
             AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
         } else if (SceneManager.GetActiveScene().name == "Test Area")

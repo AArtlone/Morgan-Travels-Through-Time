@@ -75,9 +75,9 @@ public class SceneManagement : MonoBehaviour
         }
 
         LoadingScreen.SetActive(true);
-        Debug.Log(Character.Instance.LastMapArea);
-        Debug.Log(Character.Instance.LastScene);
-        Debug.Log(sceneToLoad);
+        //Debug.Log(Character.Instance.LastMapArea);
+        //Debug.Log(Character.Instance.LastScene);
+        //Debug.Log(sceneToLoad);
         AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(sceneToLoad);
 
         yield return new WaitForEndOfFrame();

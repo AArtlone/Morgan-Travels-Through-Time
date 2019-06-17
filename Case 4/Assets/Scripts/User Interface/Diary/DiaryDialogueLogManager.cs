@@ -102,14 +102,27 @@ public class DiaryDialogueLogManager : MonoBehaviour
 
         for (int i = 0; i < NPCLogs["NPC"].Count; i++)
         {
-            GameObject button = Instantiate(
-                ButtonPrefab,
-                InterfaceManager.Instance.LogsContainer.transform);
+            bool isNPCUnlocked = false;
+            for (int j = 0; j < NPCLogs["NPC"][i]["Log"].Count; j++)
+            {
+                if (NPCLogs["NPC"][i]["Log"][j]["Messages"].Count > 0)
+                {
+                    isNPCUnlocked = true;
+                    break;
+                }
+            }
 
-            button.GetComponentInChildren<TextMeshProUGUI>().text = NPCLogs["NPC"][i]["Name"].ToString();
-            button.SetActive(false);
+            if (isNPCUnlocked)
+            {
+                GameObject button = Instantiate(
+                    ButtonPrefab,
+                    InterfaceManager.Instance.LogsContainer.transform);
 
-            _buttons.Add(button);
+                button.GetComponentInChildren<TextMeshProUGUI>().text = NPCLogs["NPC"][i]["Name"].ToString();
+                button.SetActive(false);
+
+                _buttons.Add(button);
+            }
         }
 
         LoadNewPage(_currentPage);
@@ -159,6 +172,7 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                     newEntry.GetComponent<TextMeshProUGUI>().text = NPCLogs["NPC"][i]["Log"][j]["Messages"][k].ToString();
                                     newEntry.transform.SetParent(LeftPageSection.transform);
 
+                                    entryRect.transform.localScale = new Vector3(1, 1, 1);
                                     _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
 
                                     if (_currentPositionOfLatestButton > _leftPageSectionRect.sizeDelta.y)
@@ -170,7 +184,6 @@ public class DiaryDialogueLogManager : MonoBehaviour
 
                                         _currentPositionOfLatestButton = entryRect.sizeDelta.y;
                                     }
-
                                     newListOfEntries.Add(newEntry.name);
                                     _exploredEntries.Add(newEntry.GetComponent<TextMeshProUGUI>().text);
 
@@ -184,8 +197,9 @@ public class DiaryDialogueLogManager : MonoBehaviour
                                     newEntry.GetComponent<TextMeshProUGUI>().text = NPCLogs["NPC"][i]["Log"][j]["Messages"][k].ToString();
                                     newEntry.transform.SetParent(RightPageSection.transform);
 
-                                    _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
+                                    entryRect.transform.localScale = new Vector3(1, 1, 1);
 
+                                    _currentPositionOfLatestButton += entryRect.sizeDelta.y + Mathf.Abs(entryRect.rect.y);
                                     newListOfEntries.Add(newEntry.name);
                                     _exploredEntries.Add(newEntry.GetComponent<TextMeshProUGUI>().text);
 

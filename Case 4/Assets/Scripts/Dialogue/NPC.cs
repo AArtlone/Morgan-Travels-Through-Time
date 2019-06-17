@@ -388,6 +388,31 @@ public class NPC : MonoBehaviour
             {
                 SceneToLoadAfterDialogue = FinalDialogueBranch.SceneToLoad;
             }
+
+            DialogueLogManager.Instance.AddNewDialogue(Name, SettingsManager.Instance.Language, FinalDialogueBranch.DialogueText);
+
+            foreach (DialogueLanguages format in DialogueFormats)
+            {
+                if (format.Language != SettingsManager.Instance.Language)
+                {
+                    foreach (Dialogue dialogue in format.Dialogue)
+                    {
+                        if (dialogue.ID == FinalSequence[CurrentDialogueIndex].ID)
+                        {
+                            foreach (DialogueBranch dialogueBranch in dialogue.DialogueBranches)
+                            {
+                                if (dialogueBranch.ID == FinalDialogueBranch.ID)
+                                {
+                                    string messageConvertedForJson = JsonConvert.ToString(dialogueBranch.DialogueText);
+                                    messageConvertedForJson = messageConvertedForJson.Substring(1, messageConvertedForJson.Length - 2);
+
+                                    DialogueLogManager.Instance.AddNewDialogue(Name, format.Language, messageConvertedForJson);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         else
         {
@@ -533,31 +558,6 @@ public class NPC : MonoBehaviour
                         {
                             _dialoguePickedIndex = FinalSequence[CurrentDialogueIndex].ID;
                             _dialogueBranchPickedIndex = branch.ID;
-
-                            DialogueLogManager.Instance.AddNewDialogue(Name, SettingsManager.Instance.Language, FinalDialogueBranch.DialogueText);
-
-                            foreach (DialogueLanguages format in DialogueFormats)
-                            {
-                                if (format.Language != _languagedPicked)
-                                {
-                                    foreach (Dialogue dialogue in format.Dialogue)
-                                    {
-                                        if (dialogue.ID == _dialoguePickedIndex)
-                                        {
-                                            foreach (DialogueBranch dialogueBranch in dialogue.DialogueBranches)
-                                            {
-                                                if (dialogueBranch.ID == _dialogueBranchPickedIndex)
-                                                {
-                                                    string messageConvertedForJson = JsonConvert.ToString(dialogueBranch.DialogueText);
-                                                    messageConvertedForJson = messageConvertedForJson.Substring(1, messageConvertedForJson.Length - 2);
-
-                                                    DialogueLogManager.Instance.AddNewDialogue(Name, format.Language, messageConvertedForJson);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
 
                             NextDialogue();
 

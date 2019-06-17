@@ -27,10 +27,21 @@ public class DHSequence : MonoBehaviour
     private List<int> _sortingLayersToRestore = new List<int>();
 
     private int _currentInstructionIndex;
-    private TextMeshProUGUI _instructionsText;
+    public TextMeshProUGUI InstructionsText;
 
     private void Start()
     {
+        switch (SettingsManager.Instance.Language)
+        {
+            case "English":
+                CheckLengthOfLines(EnglishInstructions);
+                InstructionsText.text = EnglishInstructions[_currentInstructionIndex];
+                break;
+            case "Dutch":
+                CheckLengthOfLines(DutchInstructions);
+                InstructionsText.text = DutchInstructions[_currentInstructionIndex];
+                break;
+        }
         NextHighlight();
 
         _objectsToActivateAtTheEnd = ObjectsToDeactivateAtTheStart;
@@ -42,9 +53,8 @@ public class DHSequence : MonoBehaviour
         }
     }
 
-    public void NextLine(TextMeshProUGUI textUI)
+    public void NextLine()
     {
-        _instructionsText = textUI;
         _currentInstructionIndex++;
 
         NextHighlight();
@@ -53,11 +63,11 @@ public class DHSequence : MonoBehaviour
         {
             case "English":
                 CheckLengthOfLines(EnglishInstructions);
-                textUI.text = EnglishInstructions[_currentInstructionIndex];
+                InstructionsText.text = EnglishInstructions[_currentInstructionIndex];
                 break;
             case "Dutch":
                 CheckLengthOfLines(DutchInstructions);
-                textUI.text = DutchInstructions[_currentInstructionIndex];
+                InstructionsText.text = DutchInstructions[_currentInstructionIndex];
                 break;
         }
     }
@@ -67,7 +77,7 @@ public class DHSequence : MonoBehaviour
         if (_currentInstructionIndex > lines.Length - 1)
         {
             _currentInstructionIndex = 0;
-            _instructionsText.text = EnglishInstructions[_currentInstructionIndex];
+            InstructionsText.text = EnglishInstructions[_currentInstructionIndex];
 
             _sortingLayersToRestore.Clear();
             foreach (GameObject obj in _objectsToActivateAtTheEnd)
@@ -82,7 +92,7 @@ public class DHSequence : MonoBehaviour
         }
     }
 
-    private void NextHighlight()
+    public void NextHighlight()
     {
         // Restores the layers after they were modified to highlight those items.
         if (_sortingLayersToRestore.Count > 0)

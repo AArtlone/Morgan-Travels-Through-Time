@@ -439,6 +439,7 @@ public class Character : MonoBehaviour
                 }
             }
         }
+        RefreshItems();
     }
 
     #region Setup data from storage functionality
@@ -466,14 +467,14 @@ public class Character : MonoBehaviour
         ItemsDutch.Clear();
         for (int i = 0; i < itemsJsonData["Items"].Count; i++)
         {
-            Item newItem = new Item(
-                itemsJsonData["Items"][i]["Name"].ToString(),
-                itemsJsonDataDutch["Items"][i]["Name"].ToString(),
-                itemsJsonData["Items"][i]["Description"].ToString(),
-                itemsJsonDataDutch["Items"][i]["Description"].ToString(),
-                itemsJsonData["Items"][i]["Active"].ToString(),
-                itemsJsonDataDutch["Items"][i]["Active"].ToString(),
-                itemsJsonData["Items"][i]["AssetsImageName"].ToString());
+            Item newItem = new GameObject().AddComponent<Item>();
+            newItem.Name = itemsJsonData["Items"][i]["Name"].ToString();
+            newItem.Name = itemsJsonDataDutch["Items"][i]["Name"].ToString();
+            newItem.Description = itemsJsonData["Items"][i]["Description"].ToString();
+            newItem.Description = itemsJsonDataDutch["Items"][i]["Description"].ToString();
+            newItem.Active = itemsJsonData["Items"][i]["Active"].ToString();
+            newItem.Active = itemsJsonDataDutch["Items"][i]["Active"].ToString();
+            newItem.AssetsImageName = itemsJsonData["Items"][i]["AssetsImageName"].ToString();
 
             Items.Add(newItem);
             ItemsDutch.Add(newItem);
@@ -657,19 +658,29 @@ public class Character : MonoBehaviour
             ItemsDutch.Clear();
             for (int i = 0; i < itemData["Items"].Count; i++)
             {
-                Item newItem = new Item(
-                    itemData["Items"][i]["Name"].ToString(),
-                    itemDataDutch["Items"][i]["Name"].ToString(),
-                    itemData["Items"][i]["Description"].ToString(),
-                    itemDataDutch["Items"][i]["Description"].ToString(),
-                    itemData["Items"][i]["Active"].ToString(),
-                    itemDataDutch["Items"][i]["Active"].ToString(),
-                    itemData["Items"][i]["AssetsImageName"].ToString());
+                Item newItem = new GameObject().AddComponent<Item>();
+                newItem.Name = itemData["Items"][i]["Name"].ToString();
+                newItem.NameDutch = itemDataDutch["Items"][i]["Name"].ToString();
+                newItem.Description = itemData["Items"][i]["Description"].ToString();
+                newItem.DescriptionDutch = itemDataDutch["Items"][i]["Description"].ToString();
+                newItem.Active = itemData["Items"][i]["Active"].ToString();
+                newItem.ActiveDutch = itemDataDutch["Items"][i]["Active"].ToString();
+                newItem.AssetsImageName = itemData["Items"][i]["AssetsImageName"].ToString();
+
 
                 Items.Add(newItem);
                 ItemsDutch.Add(newItem);
             }
         }
+
+        //foreach (Item item in Items)
+        //{
+        //    Debug.Log(item.Name + " | " + item.NameDutch);
+        //    Debug.Log(item.Description + " | " + item.DescriptionDutch);
+        //    Debug.Log(item.Active + " | " + item.ActiveDutch);
+        //    Debug.Log(item.AssetsImageName);
+        //    Debug.Log("-----------------------------------------------");
+        //}
         //LoadInventory();
     }
 

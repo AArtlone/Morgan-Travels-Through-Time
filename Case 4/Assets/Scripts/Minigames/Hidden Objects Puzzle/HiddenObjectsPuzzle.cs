@@ -359,10 +359,10 @@ public class HiddenObjectsPuzzle : MonoBehaviour
 
         if (_isInterfaceToggledOn == false)
         {
-            rectTransform.anchoredPosition = new Vector2(0, -500);
+            rectTransform.anchoredPosition = new Vector2(0, 101);
         } else
         {
-            rectTransform.anchoredPosition = new Vector2(0, -258);
+            rectTransform.anchoredPosition = new Vector2(0, -135);
         }
     }
 
