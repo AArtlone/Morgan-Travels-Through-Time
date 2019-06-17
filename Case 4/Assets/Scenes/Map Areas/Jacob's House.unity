@@ -652,8 +652,7 @@ MonoBehaviour:
   ObjectsToActivateAtTheStart:
   - {fileID: 41246196}
   - {fileID: 1006324740}
-  ObjectsToDeactivateAtTheStart:
-  - {fileID: 355033481}
+  ObjectsToDeactivateAtTheStart: []
   EnglishInstructions:
   - Tapping this icon can change your current look.
   DutchInstructions:
@@ -1319,10 +1318,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 90.6499
       objectReference: {fileID: 0}
+    - target: {fileID: 3370708775405651032, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -76.299805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370708775405651032, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -77.30005
+      objectReference: {fileID: 0}
     - target: {fileID: 6218567481121643839, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 91.30005
+      value: 91.299805
       objectReference: {fileID: 0}
     - target: {fileID: 6218567481121643839, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
@@ -1331,7 +1340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94918416, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -231.80005
+      value: -231.7998
       objectReference: {fileID: 0}
     - target: {fileID: 94918416, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1736,8 +1745,7 @@ MonoBehaviour:
   ObjectsToActivateAtTheStart:
   - {fileID: 367909641}
   - {fileID: 232068736}
-  ObjectsToDeactivateAtTheStart:
-  - {fileID: 355033480}
+  ObjectsToDeactivateAtTheStart: []
   EnglishInstructions:
   - Tap the backpack to open up your inventory.
   - In your inventory you can keep useful items you find.
@@ -2175,6 +2183,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 554883718}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &554883721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5492252702168661856, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
+    type: 3}
+  m_PrefabInstance: {fileID: 554883718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &554883722
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554883721}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 18
+  m_TargetDisplay: 0
 --- !u!1 &565162479
 GameObject:
   m_ObjectHideFlags: 0

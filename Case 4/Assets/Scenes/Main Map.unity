@@ -288,6 +288,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.00012207031
       objectReference: {fileID: 0}
+    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 196.8252
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -68.19995
+      objectReference: {fileID: 0}
     - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -869,10 +879,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 90.6499
       objectReference: {fileID: 0}
+    - target: {fileID: 3370708775405651032, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -76.299805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370708775405651032, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -77.30005
+      objectReference: {fileID: 0}
     - target: {fileID: 6218567481121643839, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 91.29999
+      value: 91.299805
       objectReference: {fileID: 0}
     - target: {fileID: 6218567481121643839, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
@@ -881,7 +901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94918416, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -231.79999
+      value: -231.7998
       objectReference: {fileID: 0}
     - target: {fileID: 94918416, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2622,6 +2642,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1112833551}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1112833554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5492252702168661856, guid: 2475be15b6633fe4d8e1b3aa2e9d2bcb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1112833551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1112833555
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112833554}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 18
+  m_TargetDisplay: 0
 --- !u!1 &1166190281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3204,6 +3251,8 @@ GameObject:
   - component: {fileID: 1691388503}
   - component: {fileID: 1691388502}
   - component: {fileID: 1691388501}
+  - component: {fileID: 1691388506}
+  - component: {fileID: 1691388505}
   m_Layer: 5
   m_Name: Ok Button
   m_TagString: Untagged
@@ -3343,6 +3392,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691388499}
   m_CullTransparentMesh: 0
+--- !u!114 &1691388505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691388499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1691388506
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691388499}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1708024001
 GameObject:
   m_ObjectHideFlags: 0
