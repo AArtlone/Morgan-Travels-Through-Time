@@ -1646,6 +1646,7 @@ public class Character : MonoBehaviour
     {
         StartCoroutine(EnablePlayerInteraction());
         StartCoroutine(EnableEntityTapping());
+        StartCoroutine(EnableCameraInteraction());
     }
 
     public IEnumerator EnablePlayerInteraction()

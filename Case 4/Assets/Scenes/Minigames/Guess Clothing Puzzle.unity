@@ -903,7 +903,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 24
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 991984945338896650, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991984944710030579, guid: 786dd7175382ca94f854a58e26b0577c,
+        type: 3}
+      propertyPath: m_text
+      value: "Try to match an outfit fitting the time period of Jacob by using the
+        arrows to switch clothing pieces.\r"
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 991984944726593112, guid: 786dd7175382ca94f854a58e26b0577c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 786dd7175382ca94f854a58e26b0577c, type: 3}
 --- !u!224 &822629292 stripped
 RectTransform:
@@ -959,6 +971,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &822629300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2376271318343871007, guid: 786dd7175382ca94f854a58e26b0577c,
+    type: 3}
+  m_PrefabInstance: {fileID: 822629291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &822629301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822629300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &822629302
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822629300}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 100
+  m_TargetDisplay: 0
 --- !u!1 &1389634369
 GameObject:
   m_ObjectHideFlags: 0

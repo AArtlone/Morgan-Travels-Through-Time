@@ -299,6 +299,7 @@ public class InterfaceManager : MonoBehaviour
     /// <param name="ui"></param>
     public void ToggleUI(Object ui)
     {
+        CameraBehavior.IsInterfaceElementSelected = true;
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         GameObject uiObj = (GameObject)ui;
