@@ -56,8 +56,6 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-
-
         if (SceneManager.GetActiveScene().name == "Hidden Objects Puzzle")
         {
             if (Input.touchCount > 0 &&
