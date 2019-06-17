@@ -164,7 +164,7 @@ public class Item : MonoBehaviour
                         _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
                     }
                 }
-                if (hitObjs[i].transform.tag == "Water")
+                if (hitObjs[i].transform.tag == "Escape Water For Bucket")
                 {
                     if (Type == ItemType.EmptyBucket)
                     {

@@ -482,11 +482,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -602,6 +597,11 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: m_IsActive
@@ -694,8 +694,7 @@ PrefabInstance:
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_text
-      value: Tap op dingen die in de weg zitten om ze aan de kant te krijgen. De soldaten
-        proberen om de mensen te pakken, stop ze!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
@@ -710,26 +709,54 @@ PrefabInstance:
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 118
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: English
+      value: Oh no, the soldiers are coming!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: Dutch
+      value: 'Oh nee, de soldaten komen! Snel, help deze mensen veilig naar Groningen
+        te komen!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793189118704345, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7189793187992789986, guid: 87d4f8fbc042d654488f57fe607fc3a3,
@@ -747,6 +774,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8868626163166982404, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -757,42 +794,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
-    - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793187933852355, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: English
-      value: Oh no, the soldiers are coming! Quick, let's help get these people in
-        Groningen so the bridge can be raised!
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: Dutch
-      value: Oh nee! De soldaten komen! Snel, help mee om deze mensen naar binnen
-        te krijgen, zodat de brug omhoog kan!
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793188043405640, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5706246549367827548, guid: 87d4f8fbc042d654488f57fe607fc3a3,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7189793189118704345, guid: 87d4f8fbc042d654488f57fe607fc3a3,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87d4f8fbc042d654488f57fe607fc3a3, type: 3}
@@ -815,19 +820,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnglishLines:
-  - Oh no, the soldiers are coming! Quick, let's help get these people in Groningen
-    so the bridge can be raised!
-  - Swipe and drag over the screen to move the screen and try to get as many people
-    through the bridge as you can.
-  - Tap on obstacles in the way to clear them. Try to keep the people safe from the
-    soldiers.
+  - Oh no, the soldiers are coming!
+  - Quick, help these people get past the obstacles so they can safely go into Groningen!
+  - Pick items up from the ground and use these to get the obstacles out of the way.
+  - Some items can be combined by dragging them on top of eachother.
+  - Don't know what an item does? Just hold it.
   DutchLines:
-  - Oh nee! De soldaten komen! Snel, help mee om deze mensen naar binnen te krijgen,
-    zodat de brug omhoog kan!
-  - Swipe en sleep over het scherm om te veranderen wat je ziet. Probeer zo veel mogelijk
-    mensen de stad in te krijgen.
-  - Tap op dingen die in de weg zitten om ze aan de kant te krijgen. De soldaten proberen
-    om de mensen te pakken, stop ze!
+  - 'Oh nee, de soldaten komen! Snel, help deze mensen veilig naar Groningen te komen!
+
+'
+  - Pak items op van de grond en gebruik ze om obstakels uit de weg te krijgen.
+  - Sommige items kunnen gecombineerd worden door ze opelkaar te slepen.
+  - Weet je niet wat een voorwerp doet? Hou je vinger erop gedrukt.
 --- !u!114 &45837691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7189793187992789987, guid: 87d4f8fbc042d654488f57fe607fc3a3,
@@ -3902,10 +3906,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
+    - target: {fileID: 2570068924935912383, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
+      propertyPath: m_LocalPosition.x
+      value: -0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570068924935912383, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
@@ -4022,15 +4031,10 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068924935912383, guid: f47635f33eb98d4449e2ee66a6e232a5,
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570068924935912383, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.62
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
@@ -4057,7 +4061,7 @@ GameObject:
   - component: {fileID: 684437841}
   m_Layer: 0
   m_Name: Water Collider for Bucket
-  m_TagString: Water
+  m_TagString: Escape Water For Bucket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4419,11 +4423,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -4542,6 +4541,11 @@ PrefabInstance:
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
@@ -5223,6 +5227,8 @@ GameObject:
   - component: {fileID: 815934701}
   - component: {fileID: 815934700}
   - component: {fileID: 815934699}
+  - component: {fileID: 815934706}
+  - component: {fileID: 815934705}
   m_Layer: 5
   m_Name: Return To World Scene
   m_TagString: Untagged
@@ -5291,7 +5297,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Castle Area
+            m_StringArgument: Escape Game
             m_BoolArgument: 0
           m_CallState: 2
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -5390,6 +5396,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 815934697}
   m_CullTransparentMesh: 0
+--- !u!114 &815934705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815934697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &815934706
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815934697}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 26
+  m_TargetDisplay: 0
 --- !u!4 &821478505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 834900314292854157, guid: 8ef4c64717c2d664fa38bce182acba63,
@@ -6416,11 +6460,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -6530,6 +6569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
@@ -7630,11 +7674,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -7744,6 +7783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.0627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
@@ -7952,11 +7996,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 93
-      objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: ColorModule.enabled
@@ -8072,15 +8111,20 @@ PrefabInstance:
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068924935912369, guid: f47635f33eb98d4449e2ee66a6e232a5,
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 6
+      value: 93
       objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570068924935912369, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f47635f33eb98d4449e2ee66a6e232a5, type: 3}
@@ -8314,11 +8358,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2570068926342367297, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -8433,6 +8472,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.0627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2570068926342367298, guid: f47635f33eb98d4449e2ee66a6e232a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2570068924935912370, guid: f47635f33eb98d4449e2ee66a6e232a5,
         type: 3}
@@ -10548,6 +10592,8 @@ GameObject:
   - component: {fileID: 1667751580}
   - component: {fileID: 1667751579}
   - component: {fileID: 1667751578}
+  - component: {fileID: 1667751585}
+  - component: {fileID: 1667751584}
   m_Layer: 5
   m_Name: Return To World Scene
   m_TagString: Untagged
@@ -10715,6 +10761,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667751576}
   m_CullTransparentMesh: 0
+--- !u!114 &1667751584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667751576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &1667751585
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667751576}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 26
+  m_TargetDisplay: 0
 --- !u!1 &1670679282
 GameObject:
   m_ObjectHideFlags: 0
@@ -14060,7 +14144,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -50.6382, y: 0.4}
+  m_Offset: {x: -71.5265, y: 0.39999998}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -14071,7 +14155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 139.4696, y: 2}
+  m_Size: {x: 97.69301, y: 2}
   m_EdgeRadius: 0
 --- !u!4 &5796841520237925583 stripped
 Transform:

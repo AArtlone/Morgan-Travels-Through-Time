@@ -141,6 +141,10 @@ public class NPC : MonoBehaviour
 
             DialogueManager.Instance.ChangePortrait("left", FinalSequence[CurrentDialogueIndex].LeftCharacterPortrait);
             DialogueManager.Instance.ChangePortrait("right", FinalSequence[CurrentDialogueIndex].RightCharacterPortrait);
+            if (FinalSequence[CurrentDialogueIndex].MoveRightPortraitDown)
+            {
+                DialogueManager.Instance.OffSetPortrait("right");
+            }
 
             DialogueManager.Instance.ChangeFaceExpression(FinalSequence[CurrentDialogueIndex].LeftCharacterExpression.ToString());
 

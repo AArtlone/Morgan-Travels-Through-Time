@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour
     [Space(10)]
     public TextMeshProUGUI RightCharacterTitle;
     public Image RightCharacterPortrait;
+    [Tooltip("Drag the Right Character GameObject here")]
+    public GameObject RightCharacter;
     private Dictionary<string, FaceConfiguration> _faceConfigurations = new Dictionary<string, FaceConfiguration>();
     public Image DarkRightCharacterFace;
     public Image RightCharacterFace;
@@ -169,13 +171,10 @@ public class DialogueManager : MonoBehaviour
             LeftCharacterPortrait.transform.position = new Vector3(LeftCharacterPortrait.transform.position.x, LeftCharacterPortrait.transform.position.y + _offSet, 0f);
         } else if(side == "right")
         {
-            LeftCharacterPortrait.transform.position = LeftPortraitInitialPos;
-            if (RightCharacterPortrait.sprite.name != "UncleBen001")
+            //LeftCharacterPortrait.transform.position = LeftPortraitInitialPos;
+            if (RightCharacterPortrait.rectTransform.position == RightPortraitInitialPos)
             {
-                if (RightCharacterPortrait.rectTransform.position == RightPortraitInitialPos)
-                {
-                    RightCharacterPortrait.rectTransform.position = new Vector3(RightCharacterPortrait.rectTransform.position.x, RightCharacterPortrait.rectTransform.position.y + _offSet, 0f);
-                }
+                RightCharacter.transform.position = new Vector3(RightCharacter.transform.position.x, RightCharacter.transform.position.y - _offSet, 0f);
             }
         }
     }

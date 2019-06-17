@@ -288,16 +288,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.00012207031
       objectReference: {fileID: 0}
-    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 196.8252
-      objectReference: {fileID: 0}
-    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -68.19995
-      objectReference: {fileID: 0}
     - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -312,6 +302,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 196.8252
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400768387377173845, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -68.19995
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fff2af8495f87041aadd67c6a519be7, type: 3}
@@ -781,6 +781,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 94918415, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 545233280, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -921,6 +925,38 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1166190286}
+    - target: {fileID: 1513839376, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839378, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839378, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839378, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839378, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839378, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839377, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: English
+      value: "Back\t"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1513839377, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
+      propertyPath: Dutch
+      value: Terug
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
 --- !u!224 &366664972 stripped
@@ -4026,6 +4062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HiddenObjectPuzzleNpc: {fileID: 0}
+  HiddenObjectPuzzleNpcParticlese: {fileID: 0}
   ClothingPuzzleNpc: {fileID: 0}
   EscapeGameNpc: {fileID: 0}
   JacobNearHouse: {fileID: 0}

@@ -20,6 +20,8 @@ public class Dialogue
     public Sprite RightCharacterPortrait;
     public Expression RightCharacterExpression;
     public bool RightPortraitTalking;
+    [Tooltip("Tick this if the right character portrait is big thus needs to be moved down")]
+    public bool MoveRightPortraitDown;
     [Space(10)]
     public Sprite DialogueStageBackground;
     public Sprite DialogueBoxBackground;
