@@ -164,6 +164,14 @@ public class Item : MonoBehaviour
                         _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
                     }
                 }
+                if (hitObjs[i].transform.tag == "Water")
+                {
+                    if (Type == ItemType.EmptyBucket)
+                    {
+                        _gameInterface.Inventory.RemoveItem(this);
+                        _gameInterface.Inventory.AddItem(_gameInterface.FullBucketPrefab);
+                    }
+                }
             }
             if (hitObj.transform != null)
             {

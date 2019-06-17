@@ -17,7 +17,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 5278695433165830982, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
       propertyPath: DescriptionDutch
-      value: Dutch blablabla
+      value: 'Het is de vlag van Bommen Berend! '
       objectReference: {fileID: 0}
     - target: {fileID: 5278695433165830982, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
@@ -167,7 +167,7 @@ PrefabInstance:
     - target: {fileID: 5278695433165830982, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
       propertyPath: Description
-      value: blablabla
+      value: "It\u2019s the flag of Bommen Berend! "
       objectReference: {fileID: 0}
     - target: {fileID: 5278695433165830982, guid: c9ee971654501464c9762643222f3f4f,
         type: 3}
@@ -178,6 +178,22 @@ PrefabInstance:
         type: 3}
       propertyPath: Type
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113296786, guid: c9ee971654501464c9762643222f3f4f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113296786, guid: c9ee971654501464c9762643222f3f4f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113296786, guid: c9ee971654501464c9762643222f3f4f, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1113296786, guid: c9ee971654501464c9762643222f3f4f, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.16
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5278695433165830980, guid: c9ee971654501464c9762643222f3f4f, type: 3}
