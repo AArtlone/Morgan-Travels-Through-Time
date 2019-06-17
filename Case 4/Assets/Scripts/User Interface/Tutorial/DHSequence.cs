@@ -24,12 +24,12 @@ public class DHSequence : MonoBehaviour
 
     private int _currentHighlightIndex;
     public List<GameObject> ObjectsToHighlight = new List<GameObject>();
-    private List<int> _sortingLayersToRestore = new List<int>();
+    private List<dynamic> _sortingLayersToRestore = new List<dynamic>();
 
     private int _currentInstructionIndex;
     public TextMeshProUGUI InstructionsText;
 
-    private void Start()
+    public void InitiateSequence()
     {
         switch (SettingsManager.Instance.Language)
         {
@@ -42,6 +42,31 @@ public class DHSequence : MonoBehaviour
                 InstructionsText.text = DutchInstructions[_currentInstructionIndex];
                 break;
         }
+
+        foreach (GameObject obj in ObjectsToHighlight)
+        {
+            if (obj.GetComponent<SpriteRenderer>())
+            {
+                SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+
+                _sortingLayersToRestore.Add(new
+                {
+                    Name = obj.name,
+                    SortingOrder = spriteRenderer.sortingOrder,
+                });
+            }
+            else if (obj.GetComponent<Image>())
+            {
+                Canvas canvas = obj.GetComponent<Canvas>();
+
+                _sortingLayersToRestore.Add(new
+                {
+                    Name = obj.name,
+                    SortingOrder = canvas.sortingOrder,
+                });
+            }
+        }
+
         NextHighlight();
 
         _objectsToActivateAtTheEnd = ObjectsToDeactivateAtTheStart;
@@ -56,8 +81,7 @@ public class DHSequence : MonoBehaviour
     public void NextLine()
     {
         _currentInstructionIndex++;
-
-        NextHighlight();
+        _currentHighlightIndex++;
 
         switch (SettingsManager.Instance.Language)
         {
@@ -70,6 +94,7 @@ public class DHSequence : MonoBehaviour
                 InstructionsText.text = DutchInstructions[_currentInstructionIndex];
                 break;
         }
+        NextHighlight();
     }
 
     private void CheckLengthOfLines(string[] lines)
@@ -77,9 +102,28 @@ public class DHSequence : MonoBehaviour
         if (_currentInstructionIndex > lines.Length - 1)
         {
             _currentInstructionIndex = 0;
-            InstructionsText.text = EnglishInstructions[_currentInstructionIndex];
+            _currentHighlightIndex = 0;
 
-            _sortingLayersToRestore.Clear();
+            for (int i = 0; i < ObjectsToHighlight.Count; i++)
+            {
+                if (ObjectsToHighlight[i].name == _sortingLayersToRestore[i].Name)
+                {
+                    if (ObjectsToHighlight[i].GetComponent<SpriteRenderer>())
+                    {
+                        SpriteRenderer spriteRenderer = ObjectsToHighlight[i].GetComponent<SpriteRenderer>();
+
+                        spriteRenderer.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
+                    }
+                    else if (ObjectsToHighlight[i].GetComponent<Image>())
+                    {
+                        Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
+
+                        canvas.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
+                    }
+                }
+            }
+
+
             foreach (GameObject obj in _objectsToActivateAtTheEnd)
             {
                 obj.SetActive(true);
@@ -95,50 +139,43 @@ public class DHSequence : MonoBehaviour
     public void NextHighlight()
     {
         // Restores the layers after they were modified to highlight those items.
-        if (_sortingLayersToRestore.Count > 0)
+        if (_currentHighlightIndex < ObjectsToHighlight.Count)
         {
             for (int i = 0; i < _sortingLayersToRestore.Count; i++)
             {
-                if (ObjectsToHighlight[i].GetComponent<SpriteRenderer>())
+                if (ObjectsToHighlight[_currentHighlightIndex].name == _sortingLayersToRestore[i].Name)
                 {
-                    ObjectsToHighlight[i].GetComponent<SpriteRenderer>().sortingOrder = _sortingLayersToRestore[i];
-                }
-                else if (ObjectsToHighlight[i].GetComponent<Image>())
-                {
-                    Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
+                    if (ObjectsToHighlight[_currentHighlightIndex].GetComponent<SpriteRenderer>())
+                    {
+                        SpriteRenderer spriteRenderer = ObjectsToHighlight[_currentHighlightIndex].GetComponent<SpriteRenderer>();
 
-                    ObjectsToHighlight[i].GetComponent<Canvas>().sortingOrder = _sortingLayersToRestore[i];
-                }
-            }
-        }
+                        spriteRenderer.sortingOrder = 100;
+                    }
+                    else if (ObjectsToHighlight[_currentHighlightIndex].GetComponent<Image>())
+                    {
+                        Canvas canvas = ObjectsToHighlight[_currentHighlightIndex].GetComponent<Canvas>();
 
-        if (_currentHighlightIndex < ObjectsToHighlight.Count)
-        {
-            // Highlights and hides the objects in the next sequence of instructions.
-            for (int i = 0; i < ObjectsToHighlight.Count; i++)
-            {
-                if (i == _currentHighlightIndex)
+                        canvas.sortingOrder = 100;
+                    }
+                } else
                 {
-                    if (ObjectsToHighlight[i] != null)
+                    if (i < ObjectsToHighlight.Count - 1)
                     {
                         if (ObjectsToHighlight[i].GetComponent<SpriteRenderer>())
                         {
                             SpriteRenderer spriteRenderer = ObjectsToHighlight[i].GetComponent<SpriteRenderer>();
 
-                            _sortingLayersToRestore.Add(spriteRenderer.sortingOrder);
-                            spriteRenderer.sortingOrder = 100;
+                            spriteRenderer.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
                         }
                         else if (ObjectsToHighlight[i].GetComponent<Image>())
                         {
                             Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
 
-                            _sortingLayersToRestore.Add(canvas.sortingOrder);
-                            canvas.sortingOrder = 100;
+                            canvas.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
                         }
                     }
                 }
             }
-            _currentHighlightIndex++;
         }
     }
 }
