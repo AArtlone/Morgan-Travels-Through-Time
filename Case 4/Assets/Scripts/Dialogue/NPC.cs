@@ -20,7 +20,7 @@ public class NPC : MonoBehaviour
     public Transform _TransformToMoveTo;
     public bool NeedsToMove;
     private bool _canWalkToNextPosition;
-    private bool _canInteractWithPlayer = true;
+    public bool CanInteractWithPlayer = true;
     [SerializeField]
     public List<DialogueLanguages> DialogueFormats = new List<DialogueLanguages>();
 
@@ -94,7 +94,7 @@ public class NPC : MonoBehaviour
         {
             // Once the npc starts walking, we toggle his animations
             _animator.SetBool("IsWalking", true);
-            _canInteractWithPlayer = false;
+            CanInteractWithPlayer = false;
             if (SpeechBubble != null)
             {
                 SpeechBubble.GetComponent<SpriteRenderer>().enabled = false;
@@ -107,7 +107,7 @@ public class NPC : MonoBehaviour
 
                 if (Vector2.Distance(transform.position, new Vector2(_TransformToMoveTo.position.x, transform.position.y)) < 0.1f)
                 {
-                    _canInteractWithPlayer = true;
+                    CanInteractWithPlayer = true;
                     if (SpeechBubble != null)
                     {
                         SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
@@ -443,7 +443,7 @@ public class NPC : MonoBehaviour
             }
         }
 
-        if (_canInteractWithPlayer)
+        if (CanInteractWithPlayer)
         {
             int index = 0;
             for (int i = 0; i < DialogueFormats.Count; i++)

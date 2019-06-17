@@ -770,7 +770,6 @@ public class InterfaceManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "Hidden Objects Puzzle" && SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Guess Clothing Puzzle" && SceneManager.GetActiveScene().name != "Spelling Puzzle" && SceneManager.GetActiveScene().name != "Tutorial Complete" && SceneManager.GetActiveScene().name != "Beginning Character Creation" && SceneManager.GetActiveScene().name != "Character Customization" && SceneManager.GetActiveScene().name != "Main Map")
         {
-            Debug.Log("aaaaaaaaaaaaa");
             Character.Instance.LastScene = SceneManager.GetActiveScene().name;
             Character.Instance.RefreshJsonData();
         }

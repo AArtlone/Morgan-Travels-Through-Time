@@ -172,12 +172,15 @@ public class CameraBehavior : MonoBehaviour
                     switch (hitObj.transform.tag)
                     {
                         case "NPC":
-                            InterfaceManager.Instance.LoadCharacterDialogueAppearance();
-                            // Replace with interaction mechanic in the future
-                            hitObj.transform.GetComponent<NPC>().ContinueDialogue();
-                            IsEntityTappedOn = true;
-                            IsInteracting = true;
-                            IsUIOpen = true;
+                            if (hitObj.transform.GetComponent<NPC>().CanInteractWithPlayer)
+                            {
+                                InterfaceManager.Instance.LoadCharacterDialogueAppearance();
+                                // Replace with interaction mechanic in the future
+                                hitObj.transform.GetComponent<NPC>().ContinueDialogue();
+                                IsEntityTappedOn = true;
+                                IsInteracting = true;
+                                IsUIOpen = true;
+                            }
                             break;
                         case "Hidden Objects Puzzle":
                             InterfaceManager.Instance.LoadScene("Hidden Objects Puzzle");

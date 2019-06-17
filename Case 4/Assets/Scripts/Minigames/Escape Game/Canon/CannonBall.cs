@@ -15,6 +15,10 @@ public class CannonBall : MonoBehaviour
         if (col.transform.tag == "Escape Ground")
         {
             _placeOfExplosion = transform.position;
+            _canonInterface.ExplosionParticlePrefab = Instantiate(_canonInterface.ExplosionParticlePrefab, _placeOfExplosion, Quaternion.identity);
+            _canonInterface.ExplosionParticlePrefab.GetComponent<ParticleSystem>().Play();
+            _canonInterface.DestroyExplosion();
+
             GetComponent<SpriteRenderer>().sprite = null;
             _canonInterface.TempList.Clear();
             Collider2D[] objectsHit = Physics2D.OverlapCircleAll(col.transform.position, _canonInterface.ExplosionRadius, _canonInterface.LayerMask);

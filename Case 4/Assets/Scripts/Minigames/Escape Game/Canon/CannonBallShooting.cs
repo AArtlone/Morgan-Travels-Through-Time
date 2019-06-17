@@ -7,6 +7,9 @@ public class CannonBallShooting: MonoBehaviour
     private Vector3 _targetPos;
     public Rigidbody2D CannonBallPrefab;
     public GameObject CheckpoinToShootAt;
+    public GameObject ExplosionParticlePrefab;
+    [System.NonSerialized]
+    public GameObject ExplosionParticle;
     public float TimeToFly;
     public int TimeBetweenSalvos;
     public int NumberOfSalvos; // The number of times that the cannon will shoot before making the obstacle passable 
@@ -57,6 +60,12 @@ public class CannonBallShooting: MonoBehaviour
         result *= Vxz;
         result.y = Vy;
         return result;
+    }
+
+    public void DestroyExplosion()
+    {
+        if (ExplosionParticle != null)
+            Destroy(ExplosionParticle);
     }
 
     private IEnumerator ShootAgainCO()
