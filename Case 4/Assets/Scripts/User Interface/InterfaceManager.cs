@@ -124,6 +124,7 @@ public class InterfaceManager : MonoBehaviour
 
     private void Start()
     {
+        CameraBehavior = FindObjectOfType<CameraBehavior>();
         if (SceneManager.GetActiveScene().name != "Escape Game")
         {
             SetupQuestsInDiary();
@@ -299,7 +300,10 @@ public class InterfaceManager : MonoBehaviour
     /// <param name="ui"></param>
     public void ToggleUI(Object ui)
     {
-        CameraBehavior.IsInterfaceElementSelected = true;
+        if (CameraBehavior != null)
+        {
+            CameraBehavior.IsInterfaceElementSelected = true;
+        }
         AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
 
         GameObject uiObj = (GameObject)ui;

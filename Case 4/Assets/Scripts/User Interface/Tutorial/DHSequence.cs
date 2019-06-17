@@ -24,13 +24,14 @@ public class DHSequence : MonoBehaviour
 
     private int _currentHighlightIndex;
     public List<GameObject> ObjectsToHighlight = new List<GameObject>();
-    private List<dynamic> _sortingLayersToRestore = new List<dynamic>();
+    private List<KeyValuePair<string, int>> _sortingLayersToRestore = new List<KeyValuePair<string, int>>();
 
     private int _currentInstructionIndex;
     public TextMeshProUGUI InstructionsText;
 
     public void InitiateSequence()
     {
+        _sortingLayersToRestore.Clear();
         switch (SettingsManager.Instance.Language)
         {
             case "English":
@@ -49,21 +50,13 @@ public class DHSequence : MonoBehaviour
             {
                 SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
 
-                _sortingLayersToRestore.Add(new
-                {
-                    Name = obj.name,
-                    SortingOrder = spriteRenderer.sortingOrder,
-                });
+                _sortingLayersToRestore.Add(new KeyValuePair<string, int>(obj.name, spriteRenderer.sortingOrder));
             }
             else if (obj.GetComponent<Image>())
             {
                 Canvas canvas = obj.GetComponent<Canvas>();
 
-                _sortingLayersToRestore.Add(new
-                {
-                    Name = obj.name,
-                    SortingOrder = canvas.sortingOrder,
-                });
+                _sortingLayersToRestore.Add(new KeyValuePair<string, int>(obj.name, canvas.sortingOrder));
             }
         }
 
@@ -83,6 +76,7 @@ public class DHSequence : MonoBehaviour
         _currentInstructionIndex++;
         _currentHighlightIndex++;
 
+        NextHighlight();
         switch (SettingsManager.Instance.Language)
         {
             case "English":
@@ -94,7 +88,6 @@ public class DHSequence : MonoBehaviour
                 InstructionsText.text = DutchInstructions[_currentInstructionIndex];
                 break;
         }
-        NextHighlight();
     }
 
     private void CheckLengthOfLines(string[] lines)
@@ -104,25 +97,27 @@ public class DHSequence : MonoBehaviour
             _currentInstructionIndex = 0;
             _currentHighlightIndex = 0;
 
-            for (int i = 0; i < ObjectsToHighlight.Count; i++)
+            foreach (GameObject obj in ObjectsToHighlight)
             {
-                if (ObjectsToHighlight[i].name == _sortingLayersToRestore[i].Name)
+                foreach (KeyValuePair<string, int> pair in _sortingLayersToRestore)
                 {
-                    if (ObjectsToHighlight[i].GetComponent<SpriteRenderer>())
+                    if (obj.name == pair.Key)
                     {
-                        SpriteRenderer spriteRenderer = ObjectsToHighlight[i].GetComponent<SpriteRenderer>();
+                        if (obj.GetComponent<SpriteRenderer>())
+                        {
+                            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
 
-                        spriteRenderer.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
-                    }
-                    else if (ObjectsToHighlight[i].GetComponent<Image>())
-                    {
-                        Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
+                            spriteRenderer.sortingOrder = pair.Value;
+                        }
+                        else if (obj.GetComponent<Image>())
+                        {
+                            Canvas canvas = obj.GetComponent<Canvas>();
 
-                        canvas.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
+                            canvas.sortingOrder = pair.Value;
+                        }
                     }
                 }
             }
-
 
             foreach (GameObject obj in _objectsToActivateAtTheEnd)
             {
@@ -138,12 +133,14 @@ public class DHSequence : MonoBehaviour
 
     public void NextHighlight()
     {
+        Debug.Log(_currentHighlightIndex);
         // Restores the layers after they were modified to highlight those items.
         if (_currentHighlightIndex < ObjectsToHighlight.Count)
         {
-            for (int i = 0; i < _sortingLayersToRestore.Count; i++)
+            int i = 0;
+            foreach (KeyValuePair<string, int> pair in _sortingLayersToRestore)
             {
-                if (ObjectsToHighlight[_currentHighlightIndex].name == _sortingLayersToRestore[i].Name)
+                if (ObjectsToHighlight[_currentHighlightIndex].name == pair.Key)
                 {
                     if (ObjectsToHighlight[_currentHighlightIndex].GetComponent<SpriteRenderer>())
                     {
@@ -157,7 +154,8 @@ public class DHSequence : MonoBehaviour
 
                         canvas.sortingOrder = 100;
                     }
-                } else
+                }
+                else
                 {
                     if (i < ObjectsToHighlight.Count - 1)
                     {
@@ -165,13 +163,38 @@ public class DHSequence : MonoBehaviour
                         {
                             SpriteRenderer spriteRenderer = ObjectsToHighlight[i].GetComponent<SpriteRenderer>();
 
-                            spriteRenderer.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
+                            spriteRenderer.sortingOrder = pair.Value;
                         }
                         else if (ObjectsToHighlight[i].GetComponent<Image>())
                         {
                             Canvas canvas = ObjectsToHighlight[i].GetComponent<Canvas>();
 
-                            canvas.sortingOrder = _sortingLayersToRestore[i].SortingOrder;
+                            canvas.sortingOrder = pair.Value;
+                        }
+                    }
+                }
+                i++;
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<string, int> pair in _sortingLayersToRestore)
+            {
+                foreach (GameObject obj in ObjectsToHighlight)
+                {
+                    if (obj.name == pair.Key)
+                    {
+                        if (obj.GetComponent<SpriteRenderer>())
+                        {
+                            SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+
+                            spriteRenderer.sortingOrder = pair.Value;
+                        }
+                        else if (obj.GetComponent<Image>())
+                        {
+                            Canvas canvas = obj.GetComponent<Canvas>();
+
+                            canvas.sortingOrder = pair.Value;
                         }
                     }
                 }

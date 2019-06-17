@@ -40,7 +40,8 @@ public class CameraBehavior : MonoBehaviour
                 BackgroundBoundsLeft = BackgroundLeft.GetComponent<SpriteRenderer>().bounds;
                 BackgroundBoundsRight = BackgroundRight.GetComponent<SpriteRenderer>().bounds;
             }
-        } else
+        }
+        else
         {
             if (Background != null)
             {
@@ -54,7 +55,6 @@ public class CameraBehavior : MonoBehaviour
 
     private void Update()
     {
-
         if (SceneManager.GetActiveScene().name != "Escape Game")
         {
             if (Input.touchCount > 0 &&
@@ -93,7 +93,7 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
 
-            RaycastHit2D hitCanvas = Physics2D.Raycast(Input.GetTouch(0).position, Vector2.down, 1000);
+            RaycastHit2D hitCanvas = Physics2D.Raycast(Camera.main.ScreenToViewportPoint(Input.GetTouch(0).position), Vector2.down, 1000);
 
             RaycastHit2D hit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.down, 1000);
 
@@ -125,6 +125,7 @@ public class CameraBehavior : MonoBehaviour
             }
         }
 
+        //Debug.Log(IsInteracting + " " + IsInterfaceElementSelected + " " + IsEntityTappedOn + " " + IsUIOpen);
         if (IsInteracting == false &&
             IsInterfaceElementSelected == false &&
             IsEntityTappedOn == false &&
@@ -150,12 +151,13 @@ public class CameraBehavior : MonoBehaviour
                 }
             }
         }
-                if (SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Hidden Objects Puzzle" &&
-            SceneManager.GetActiveScene().name != "Spelling Puzzle")
+        if (SceneManager.GetActiveScene().name != "Escape Game" && SceneManager.GetActiveScene().name != "Hidden Objects Puzzle" &&
+    SceneManager.GetActiveScene().name != "Spelling Puzzle")
         {
             if ((Input.touchCount > 0 &&
                 Input.GetTouch(0).phase == TouchPhase.Began) &&
                 IsInteracting == false &&
+                IsInterfaceElementSelected == false &&
                 IsUIOpen == false &&
                 IsEntityTappedOn == false &&
                 DialogueManager.Instance.DialogueTemplate.gameObject.activeSelf == false)
@@ -244,7 +246,8 @@ public class CameraBehavior : MonoBehaviour
                             break;
                     }
                 }
-            } else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            }
+            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 RaycastHit2D hitObj = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector3.forward, 1000);
 

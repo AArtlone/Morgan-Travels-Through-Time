@@ -13,7 +13,6 @@ public class CameraManager : MonoBehaviour
     private Vector3 _tapPositionStartWorld;
     private Vector3 _endTapPosition;
     private Vector3 _directionOfSwipeNormalized;
-    private string _swipeDirection;
     private float _swipeLength;
     private float _swipeLengthWorld;
     #endregion
@@ -139,8 +138,6 @@ public class CameraManager : MonoBehaviour
     {
         if (_directionOfSwipeNormalized.x > 0)
         {
-            _swipeDirection = "Right";
-
             if (_swipeLength >= 200)
             {
                 _currentCameraIndex--;
@@ -168,8 +165,6 @@ public class CameraManager : MonoBehaviour
         }
         else if (_directionOfSwipeNormalized.x < 0)
         {
-            _swipeDirection = "Left";
-
             if (_swipeLength <= -200)
             {
                 _currentCameraIndex++;

@@ -14,7 +14,7 @@ public class LanguageToggle : MonoBehaviour
             _settingsManager.LanguageIcons.Add(GetComponent<Image>());
         }
 
-        SettingsManager.Instance.UpdateHiglightedLanguageIcons();
+        _settingsManager.UpdateHiglightedLanguageIcons();
     }
 
     /// <summary>

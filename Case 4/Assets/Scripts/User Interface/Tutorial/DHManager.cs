@@ -30,8 +30,9 @@ public class DHManager : MonoBehaviour
                 foreach (GameObject obj in seq.ObjectsToActivateAtTheStart)
                 {
                     obj.SetActive(true);
-                    seq.InitiateSequence();
                 }
+
+                seq.InitiateSequence();
             }
         }
     }

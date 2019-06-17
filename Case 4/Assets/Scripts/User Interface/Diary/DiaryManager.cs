@@ -23,10 +23,8 @@ public class DiaryManager : MonoBehaviour
     public GameObject GridOfPuzzles;
     private int _currentPage;
     private const int _maxNumberOfPuzzlesAPage = 6;
-    private int _numberOfPagesOfPuzzles;
     private int _numberOfPuzzles;
     private int _currentIndexInPuzzles;
-    
 
     private void Start()
     {
@@ -154,15 +152,6 @@ public class DiaryManager : MonoBehaviour
         else if (direction == "Forward" || direction == "Forwards")
         {
             _currentPage++;
-        }
-
-        if (_currentPage > _numberOfPagesOfPuzzles)
-        {
-            _currentPage = 0;
-        }
-        else if (_currentPage < 0)
-        {
-            _currentPage = _numberOfPagesOfPuzzles;
         }
 
         int startRange = ((_currentPage + 1) * 6) - 5;
