@@ -11,7 +11,6 @@ public class MilestoneController : MonoBehaviour
         AchievementManager.Instance.GetAchievement("Tutorial Complete");
         foreach (Clothing cloth in ClothingToGive)
         {
-            Debug.Log(cloth.Name);
             Character.Instance.AddWearable(cloth);
         }
     }

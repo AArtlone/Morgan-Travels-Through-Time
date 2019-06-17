@@ -371,7 +371,8 @@ public class InterfaceManager : MonoBehaviour
 
         GameObject popupObject = obj as GameObject;
         popupObject.SetActive(true);
-        CameraBehavior.IsIntructionManualOn = true;
+        if (CameraBehavior != null)
+            CameraBehavior.IsIntructionManualOn = true;
     }
 
     #region Quests, diary and character functions

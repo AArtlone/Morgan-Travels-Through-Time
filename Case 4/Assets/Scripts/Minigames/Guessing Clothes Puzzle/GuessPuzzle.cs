@@ -528,18 +528,25 @@ public class GuessPuzzle : MonoBehaviour
     // Returns the score based on the clothing currently on the character.
     private int CalculateTotalScore()
     {
-        int score =
+        /*int score =
                HeadList[_currentHeadIndex].Points +
                TorsoList[_currentTorsoIndex].Points +
                BottomList[_currentBottomIndex].Points +
-               ShoesList[_currentShoesIndex].Points;
+               ShoesList[_currentShoesIndex].Points;*/
 
-        if (score > 50)
-        {
-            return 3;
-        } else
+        if (_correctClothes <= 1)
         {
             return 1;
+        } else if (_correctClothes > 1 && _correctClothes <= 3)
+        {
+            return 2;
+        } else if (_correctClothes == 4)
+        {
+            return 3;
+        }
+        else
+        {
+            return 3;
         }
     }
 

@@ -36,7 +36,10 @@ public class MapEnvironmentManager : MonoBehaviour
                 if ("Talked to Jacob before the Clothing Puzzle" == log.Milestone && log.Completed == true)
                 {
                     MotherNPC.SetActive(true);
-                } 
+                } else if ("Completed the Clothing Puzzle" == log.Milestone && log.Completed == true)
+                {
+                    MotherNPC.SetActive(false);
+                }
             }
         }
 

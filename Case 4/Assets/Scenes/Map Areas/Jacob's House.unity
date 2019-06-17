@@ -1166,16 +1166,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94918415, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 545233280, guid: 32d836cf0a0772146a6554c1c0e0ace2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3370708775306293159, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3370708775306293158, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
@@ -2258,6 +2258,7 @@ MonoBehaviour:
   IsEntityTappedOn: 0
   IsInterfaceElementSelected: 0
   IsUIOpen: 0
+  IsIntructionManualOn: 1
 --- !u!81 &565162481
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4323,6 +4324,7 @@ MonoBehaviour:
   LeftCharacterPortrait: {fileID: 1120830830}
   RightCharacterTitle: {fileID: 1120830826}
   RightCharacterPortrait: {fileID: 1120830825}
+  RightCharacter: {fileID: 0}
   DarkRightCharacterFace: {fileID: 1120830853}
   RightCharacterFace: {fileID: 1120830852}
   DialogueProgressionBox: {fileID: 1120830824}
@@ -4534,6 +4536,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6400768389423459492, guid: 7fff2af8495f87041aadd67c6a519be7,
         type: 3}
       propertyPath: m_AnchorMin.x
@@ -4563,21 +4580,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 144.30002
-      objectReference: {fileID: 0}
-    - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6400768389431499053, guid: 7fff2af8495f87041aadd67c6a519be7,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fff2af8495f87041aadd67c6a519be7, type: 3}
@@ -6087,6 +6089,7 @@ MonoBehaviour:
   SpeechBubble: {fileID: 1180229092}
   _TransformToMoveTo: {fileID: 0}
   NeedsToMove: 0
+  CanInteractWithPlayer: 1
   DialogueFormats:
   - Language: English
     Dialogue:
@@ -6102,6 +6105,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6141,6 +6145,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6180,6 +6185,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 1
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6220,6 +6226,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6259,6 +6266,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6298,6 +6306,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6337,6 +6346,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 3
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6378,6 +6388,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6417,6 +6428,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 3
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6461,6 +6473,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6505,6 +6518,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 1
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6549,6 +6563,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6596,6 +6611,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6643,6 +6659,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 3
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6691,6 +6708,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6740,6 +6758,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6777,6 +6796,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6814,6 +6834,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6851,6 +6872,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6888,6 +6910,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6925,6 +6948,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -6962,6 +6986,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7001,6 +7026,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7040,6 +7066,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 3
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7085,6 +7112,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7130,6 +7158,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 1
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7175,6 +7204,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7222,6 +7252,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7269,6 +7300,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 3
       RightPortraitTalking: 1
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
@@ -7317,6 +7349,7 @@ MonoBehaviour:
         type: 3}
       RightCharacterExpression: 5
       RightPortraitTalking: 0
+      MoveRightPortraitDown: 0
       DialogueStageBackground: {fileID: 21300000, guid: cd0f7fff0b95bd640901bffc91b36148,
         type: 3}
       DialogueBoxBackground: {fileID: 21300000, guid: 3a5d271da0b7b9c4695a01e8ba90e2f8,
