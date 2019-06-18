@@ -96,17 +96,22 @@ public class AchievementDiaryLogManager : MonoBehaviour
                         {
                             entryParent.sizeDelta = new Vector2(entryRect.sizeDelta.x, entryRect.sizeDelta.y);
                         }
-                        if (_currentPositionOfLatestButton > _leftPageSectionRect.sizeDelta.y)
+                        if (_leftPageSectionRect != null)
                         {
-                            achievementLogEntry.transform.SetParent(RightPageSection.transform);
-                            _currentPageInLogEntries = "Right";
-                            LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
+                            if (_currentPositionOfLatestButton > _leftPageSectionRect.sizeDelta.y)
+                            {
+                                achievementLogEntry.transform.SetParent(RightPageSection.transform);
+                                _currentPageInLogEntries = "Right";
+                                LayoutRebuilder.ForceRebuildLayoutImmediate(_rightPageSectionRect);
 
-                            _currentPositionOfLatestButton = entryRect.sizeDelta.y;
+                                _currentPositionOfLatestButton = entryRect.sizeDelta.y;
+                            }
                         }
                         _exploredEntries.Add(achievementLogEntry.GetComponentInChildren<TextMeshProUGUI>().text);
-
-                        LayoutRebuilder.ForceRebuildLayoutImmediate(_leftPageSectionRect);
+                        if (_leftPageSectionRect != null)
+                        {
+                            LayoutRebuilder.ForceRebuildLayoutImmediate(_leftPageSectionRect);
+                        }
                     }
                     else if (_currentPageInLogEntries == "Right")
                     {

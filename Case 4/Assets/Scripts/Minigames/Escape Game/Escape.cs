@@ -329,6 +329,7 @@ public class Escape : MonoBehaviour
         EndGamePopUp.SetActive(true);
         InventoryPanel.SetActive(false);
 
+        AudioManager.Instance.PlaySound(AudioManager.Instance.SoundPuzzleCompleted);
         StartCoroutine(ShowStars());
     }
 

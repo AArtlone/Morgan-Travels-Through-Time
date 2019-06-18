@@ -169,6 +169,7 @@ public class SpellingPuzzle : MonoBehaviour
             }
 
             PuzzleEndWindow.SetActive(true);
+            AudioManager.Instance.PlaySound(AudioManager.Instance.SoundPuzzleCompleted);
             StartCoroutine(ShowStars());
             SetMilestones();
             RefreshData();
