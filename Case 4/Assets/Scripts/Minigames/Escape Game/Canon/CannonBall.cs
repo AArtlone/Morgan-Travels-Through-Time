@@ -17,6 +17,7 @@ public class CannonBall : MonoBehaviour
             _placeOfExplosion = transform.position;
             _canonInterface.ExplosionParticlePrefab = Instantiate(_canonInterface.ExplosionParticlePrefab, _placeOfExplosion, Quaternion.identity);
             _canonInterface.ExplosionParticlePrefab.GetComponent<ParticleSystem>().Play();
+            AudioManager.Instance.PlaySound(AudioManager.Instance.Explosion);
             _canonInterface.DestroyExplosion();
 
             GetComponent<SpriteRenderer>().sprite = null;

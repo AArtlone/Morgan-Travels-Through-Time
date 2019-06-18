@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip Drum;
     public AudioClip Cutting;
     public AudioClip Burning;
+    public AudioClip Explosion;
 
     [Header("These clips are only for camera interaction")]
     [Space(10)]
