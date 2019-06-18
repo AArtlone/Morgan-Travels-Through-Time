@@ -572,7 +572,7 @@ public class NPC : MonoBehaviour
                             // TODO: Try to make functions for most of those code blocks.
                             if (_mapEnvironmentManager != null)
                             {
-                                _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = -1;
+                                _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = 21;
 
                                 if (InterfaceManager.Instance.InventoryUICanvas != null)
                                 {
@@ -617,7 +617,7 @@ public class NPC : MonoBehaviour
                 {
                     if (_mapEnvironmentManager != null)
                     {
-                        _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = -1;
+                        _mapEnvironmentManager.BackpackButton.GetComponent<Canvas>().sortingOrder = 21;
 
                         if (InterfaceManager.Instance.InventoryUICanvas != null)
                         {
