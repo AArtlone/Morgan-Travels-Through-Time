@@ -344,6 +344,18 @@ public class InterfaceManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Used for toggling windows that are not specifically related to the Icons UI.
+    /// </summary>
+    /// <param name="window"></param>
+    public void ToggleGenericWindoow(Object window)
+    {
+        AudioManager.Instance.PlaySound(AudioManager.Instance.ButtonPress);
+
+        GameObject uiObj = (GameObject)window;
+        uiObj.SetActive(!uiObj.activeSelf);
+    }
+
+    /// <summary>
     /// Opens a window or pop-up (game object) by activating it.
     /// </summary>
     /// <param name="obj"></param>

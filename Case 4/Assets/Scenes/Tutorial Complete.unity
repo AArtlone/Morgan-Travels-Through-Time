@@ -1260,6 +1260,80 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 799979610}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &833198926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833198927}
+  - component: {fileID: 833198929}
+  - component: {fileID: 833198928}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [Handlee-Regular SDF Material + LiberationSans SDF Atlas]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &833198927
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833198926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2109209532}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &833198928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833198926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 1.25
+  m_canvasRenderer: {fileID: 833198929}
+  m_TextComponent: {fileID: 2109209534}
+  m_materialReferenceIndex: 1
+--- !u!222 &833198929
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833198926}
+  m_CullTransparentMesh: 0
 --- !u!1001 &918490202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1477,7 +1551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -274.87, y: 0}
+  m_AnchoredPosition: {x: -322.8, y: -33.1}
   m_SizeDelta: {x: 478.7, y: 595.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1631169329
@@ -1537,7 +1611,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 17f5cc3480c89784683d6167a2a6cbc7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 04c5287bfd9971548b3248baa967acaa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1623,15 +1697,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: -61
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 300, y: 200}
-  m_Spacing: {x: 20, y: 135.2}
+  m_CellSize: {x: 270, y: 190}
+  m_Spacing: {x: 32.53, y: 135.2}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!222 &1706862368
@@ -1887,13 +1961,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 833198927}
   m_Father: {fileID: 1584960250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -145.9}
+  m_AnchoredPosition: {x: 0, y: -157.37}
   m_SizeDelta: {x: 439.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2109209533
@@ -1930,8 +2005,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Congratulations! You have completed the tutorial. You get one outfit for
-    completing the tutorial, a pirate outfit!
+  m_text: You have completed the tutorial. You get one outfit for completing the tutorial,
+    a pirate outfit! Now bring your phone to the teacher.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4d424dcec0f358f459b912f4f5c07a4a, type: 2}
   m_sharedMaterial: {fileID: 21032496967733310, guid: 4d424dcec0f358f459b912f4f5c07a4a,
@@ -1960,8 +2035,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 39.3
-  m_fontSizeBase: 39.3
+  m_fontSize: 35.6
+  m_fontSizeBase: 35.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2001,10 +2076,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2109209534}
-    characterCount: 114
+    characterCount: 134
     spriteCount: 0
-    spaceCount: 16
-    wordCount: 17
+    spaceCount: 22
+    wordCount: 23
     linkCount: 0
     lineCount: 5
     pageCount: 1
@@ -2015,7 +2090,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 833198928}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2046,10 +2121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisableLanguageToggling: 0
   SelectedLanguage: 0
-  English: Congratulations! You have completed the tutorial. You get one outfit for
-    completing the tutorial, a pirate outfit!
-  Dutch: "Gefeliciteerd! Je hebt de tutorial succesvol afgerond. Je krijgt \xE9\xE9n
-    pak voor het uitspelen van de tutorial, een piraten pak."
+  English: You have completed the tutorial. You get one outfit for completing the
+    tutorial, a pirate outfit! Now bring your phone to the teacher.
+  Dutch: Gefeliciteerd! Je hebt de tutorial succesvol afgerond. Je krijgt een pak
+    voor het uitspelen van de tutorial, een piraten pak. Breng je telefoon nu naar
+    de leraar
 --- !u!1 &2134845977
 GameObject:
   m_ObjectHideFlags: 0
