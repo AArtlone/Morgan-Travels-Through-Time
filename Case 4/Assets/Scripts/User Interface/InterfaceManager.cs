@@ -772,6 +772,11 @@ public class InterfaceManager : MonoBehaviour
         ItemSelected.DisplayItemDetails();
     }
 
+    public void LoadLastScene()
+    {
+        StartCoroutine(LoadSceneCo(Character.Instance.LastScene));
+    }
+
     public void LoadScene(string scene)
     {
         StartCoroutine(LoadSceneCo(scene));
