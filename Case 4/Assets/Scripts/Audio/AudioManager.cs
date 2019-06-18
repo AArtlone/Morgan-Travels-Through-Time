@@ -8,19 +8,28 @@ public class AudioManager : MonoBehaviour
     public AudioClip SoundPuzzleCompleted;
 
     [Header("These clips are only for hidden objects puzzles")]
+    [Space(10)]
     public AudioClip HintUsed;
     public AudioClip ItemFoundUsed;
 
     [Header("These clips are only for the refugee game")]
+    [Space(10)]
     public AudioClip RefugeeSaved;
+    public AudioClip CanonShot;
+    public AudioClip Drum;
+    public AudioClip Cutting;
+    public AudioClip Burning;
 
     [Header("These clips are only for camera interaction")]
+    [Space(10)]
     public AudioClip HitScreen;
 
     [Header("These clips are only for the diary")]
+    [Space(10)]
     public AudioClip NewPageInDiary;
 
     [Header("UI/Interface related sound clips here only")]
+    [Space(10)]
     public AudioClip CloseWindow;
     public AudioClip ButtonPress;
     #endregion

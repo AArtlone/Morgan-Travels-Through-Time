@@ -21,6 +21,7 @@ public class Escape : MonoBehaviour
     public int DelayBetweenWaves;
     public int TotalPoints;
     public GameObject TreeObstaclePrefab;
+    public GameObject HayParticle;
     public List<List<Refugee>> CurrentRefugees = new List<List<Refugee>>();
     public List<Checkpoint> Checkpoints = new List<Checkpoint>();
     public List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>> AllObsIntElements = new List<KeyValuePair<Obstacle.ObstacleType, ObstacleIntercationElement>>();
@@ -140,6 +141,11 @@ public class Escape : MonoBehaviour
             newObs.GetComponent<Obstacle>().CheckpointLink = container.GetComponent<ObstacleContainer>().CheckpointLink;
 
             _currentObstacles.Add(newObs.GetComponent<Obstacle>());
+
+            /*if (newObs.GetComponent<Obstacle>().Type == Obstacle.ObstacleType.Fire)
+            {
+                AudioManager.Instance.PlaySound(AudioManager.Instance.Burning);
+            }*/
 
             if (newObs.GetComponent<Obstacle>().Type == Obstacle.ObstacleType.Sheeps)
             {

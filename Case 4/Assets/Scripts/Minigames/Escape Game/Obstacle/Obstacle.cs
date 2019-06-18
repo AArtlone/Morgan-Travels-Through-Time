@@ -108,7 +108,7 @@ public class Obstacle : MonoBehaviour
 
     public void CutPlant()
     {
-        // TODO: Play cutting sound
+        AudioManager.Instance.PlaySound(AudioManager.Instance.Cutting);
         _gameInterface.ToggleObstacle(this, CheckpointLink, gameObject, transform.parent);
     }
 

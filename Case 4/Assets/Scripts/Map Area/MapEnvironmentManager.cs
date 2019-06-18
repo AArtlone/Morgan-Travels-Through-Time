@@ -50,8 +50,14 @@ public class MapEnvironmentManager : MonoBehaviour
                 CloseButton.SetActive(true);
                 if (SceneManager.GetActiveScene().name == "Tutorial Map Area")
                 {
-                    HiddenObjectPuzzleNpc.SetActive(true);
-                    HiddenObjectPuzzleNpcParticlese.SetActive(true);
+                    foreach (ProgressEntry log in ProgressLog.Instance.Log)
+                    {
+                        if ("Jacob asked about clothes" == log.Milestone && log.Completed == true)
+                        {
+                            HiddenObjectPuzzleNpc.SetActive(true);
+                            HiddenObjectPuzzleNpcParticlese.SetActive(true);
+                        }
+                    }
                     foreach (ProgressEntry log in ProgressLog.Instance.Log)
                     {
                         if ("Completed Hidden Objects Puzzle" == log.Milestone && log.Completed == true)

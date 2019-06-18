@@ -120,7 +120,7 @@ public class CameraManager : MonoBehaviour
                 {
                     if (_directionOfSwipeNormalized.x > 0)
                     {
-                        newCameraPosition.x -= _swipeLengthWorld * 0.15f;
+                        newCameraPosition.x -= _swipeLengthWorld * 0.5f;
                         _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
                             Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBoundsLeft.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBoundsRight.max.x - _camera.orthographicSize - 4),
                             newCameraPosition.y,
@@ -128,7 +128,7 @@ public class CameraManager : MonoBehaviour
                     }
                     else if (_directionOfSwipeNormalized.x < 0)
                     {
-                        newCameraPosition.x += _swipeLengthWorld * 0.15f;
+                        newCameraPosition.x += _swipeLengthWorld * 0.5f;
                         _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
                             Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBoundsLeft.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBoundsRight.max.x - _camera.orthographicSize - 4),
                             newCameraPosition.y,
@@ -147,7 +147,7 @@ public class CameraManager : MonoBehaviour
                     }
                     else if (_directionOfSwipeNormalized.x < 0)
                     {
-                        newCameraPosition.x += _swipeLengthWorld * 0.3f;
+                        newCameraPosition.x += _swipeLengthWorld * 0.5f;
                         _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
                             Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
                             newCameraPosition.y,

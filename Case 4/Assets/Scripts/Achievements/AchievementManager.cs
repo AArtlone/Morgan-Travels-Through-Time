@@ -124,7 +124,7 @@ public class AchievementManager : MonoBehaviour
 
     private IEnumerator ReturnAchievement()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
         _achievementPrefabAnimator.SetBool("Toggle", false);
     }
 }

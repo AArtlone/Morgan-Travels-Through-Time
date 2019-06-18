@@ -240,12 +240,18 @@ public class CameraBehavior : MonoBehaviour
                                 if (hitItemDrop.Type != Item.ItemType.BunchOfHay)
                                 {
                                     hitItemDrop.gameObject.SetActive(false);
+                                } else if (hitItemDrop.Type == Item.ItemType.BunchOfHay)
+                                {
+                                    FindObjectOfType<Escape>().HayParticle.SetActive(false);
                                 }
                                 if (hitItemDrop.Reactivatable)
                                 {
                                     _gameInterface.ReactivateItem(hitItemDrop.gameObject);
                                 }
                             }
+                            break;
+                        case "Escape Drum":
+                            AudioManager.Instance.PlaySound(AudioManager.Instance.Drum);
                             break;
                     }
                 }

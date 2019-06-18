@@ -37,6 +37,7 @@ public class CannonBallShooting: MonoBehaviour
             _targetPos = new Vector3(randomXPos, CheckpoinToShootAt.transform.position.y, CheckpoinToShootAt.transform.position.z);
             Vector3 Vo = CalculateVelocity(_targetPos, transform.position, TimeToFly);
             _cannonBall = Instantiate(CannonBallPrefab, transform.position, Quaternion.identity);
+            AudioManager.Instance.PlaySound(AudioManager.Instance.CanonShot);
             _cannonBall.velocity = Vo;
             CurrentNumberOfsalvosShot++;
             CanShoot = false;
