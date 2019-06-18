@@ -226,6 +226,9 @@ public class CameraBehavior : MonoBehaviour
                     if (hitObjs[i].transform.tag == "ObsIntElement")
                     {
                         hitObjs[i].transform.GetComponent<ObstacleIntercationElement>().AssignRefugee();
+                    } else if (hitObjs[i].transform.tag == "Escape Drum")
+                    {
+                        AudioManager.Instance.PlaySound(AudioManager.Instance.Drum);
                     }
                 }
 
@@ -249,9 +252,6 @@ public class CameraBehavior : MonoBehaviour
                                     _gameInterface.ReactivateItem(hitItemDrop.gameObject);
                                 }
                             }
-                            break;
-                        case "Escape Drum":
-                            AudioManager.Instance.PlaySound(AudioManager.Instance.Drum);
                             break;
                     }
                 }
