@@ -15,7 +15,7 @@ public class AchievementManager : MonoBehaviour
     public GameObject AchievementPrefab;
     private Animator _achievementPrefabAnimator;
 
-    private void Start()
+    private void Awake()
     {
         _achievementPrefabAnimator = AchievementPrefab.GetComponent<Animator>();
         _achievementsJsonFilePath = Application.persistentDataPath + "/Achievements.json";
