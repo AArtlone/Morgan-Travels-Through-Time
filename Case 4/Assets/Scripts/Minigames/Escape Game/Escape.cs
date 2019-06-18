@@ -309,7 +309,7 @@ public class Escape : MonoBehaviour
 
     public IEnumerator PlayNewWaveNotification()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
             NewWaveNotification.SetActive(true);
             yield return new WaitForSeconds(1f);

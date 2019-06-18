@@ -5,6 +5,7 @@ using LitJson;
 using System.IO;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GuessPuzzle : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GuessPuzzle : MonoBehaviour
     public string SceneName;
     public GameObject LoadingScreen;
     public List<string> MilestonesToComplete = new List<string>();
+    public List<GameObject> Stars;
 
     #region Lists of custom clothes for gameplay instead of random ones by default
     [Header("If puzzle is customizable, use these lists of clothing instead.")]
@@ -72,6 +74,7 @@ public class GuessPuzzle : MonoBehaviour
     private bool _isGameStarted = false;
     public TextMeshProUGUI Timer;
     private float _timer = 0;
+    private int _starsToShow;
 
     private Sprite _tempHairPart;
     private Sprite _tempTopPart;
@@ -156,7 +159,8 @@ public class GuessPuzzle : MonoBehaviour
                 _timer = 0;
                 SavePuzzleScore();
                 SetMilestones();
-                OpenCompletePuzzleWindow();
+                OpenManuallyCompletePuzzleWindow();
+                StartCoroutine(ShowStars());
                 Completed = true;
                 _isGameStarted = false;
             }
@@ -186,6 +190,7 @@ public class GuessPuzzle : MonoBehaviour
         SavePuzzleScore();
         SetMilestones();
         OpenManuallyCompletePuzzleWindow();
+        StartCoroutine(ShowStars());
         _isGameStarted = false;
     }
 
@@ -536,18 +541,32 @@ public class GuessPuzzle : MonoBehaviour
 
         if (_correctClothes <= 1)
         {
+            _starsToShow = 1;
             return 1;
         } else if (_correctClothes > 1 && _correctClothes <= 3)
         {
+            _starsToShow = 2;
             return 2;
         } else if (_correctClothes == 4)
         {
+            _starsToShow = 3;
             return 3;
         }
         else
         {
+            _starsToShow = 3;
             return 3;
         }
+    }
+
+    private IEnumerator ShowStars()
+    {
+        for (int i = 0; i < _starsToShow; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            Stars[i].SetActive(true);
+        }
+        
     }
 
     public void ResetPuzzle()
