@@ -12,15 +12,17 @@ public class CameraManager : MonoBehaviour
     private Vector3 _startTapPosition;
     private Vector3 _tapPositionStartWorld;
     private Vector3 _endTapPosition;
+    private Vector3 _previousEndTapPos;
     private Vector3 _directionOfSwipeNormalized;
+    private Vector3 _changeOfSwipeNOrmalized;
     private float _swipeLength;
     private float _swipeLengthWorld;
+    private string _direction;
     #endregion
 
     private Camera _camera;
     private CameraBehavior _cameraBehaviour;
     private MapEnvironmentManager _mapEnvironmentManager;
-    private string _direction;
 
     private void Start()
     {
@@ -65,12 +67,10 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void GetSwipe()
     {
-        //Debug.Log(_direction);
         foreach (Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
             {
-                _direction = string.Empty;
                 _startTapPosition = touch.position;
                 _endTapPosition = touch.position;
                 _tapPositionStartWorld = Camera.main.ScreenToWorldPoint(_startTapPosition);
@@ -78,8 +78,37 @@ public class CameraManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Moved)
             {
+                _previousEndTapPos = _endTapPosition;
                 _endTapPosition = touch.position;
+
                 _directionOfSwipeNormalized = (_endTapPosition - _startTapPosition).normalized;
+
+                if (_directionOfSwipeNormalized.x > 0)
+                {
+                    _direction = "left";
+                } else if (_directionOfSwipeNormalized.x < 0)
+                {
+                    _direction = "right";
+                }
+
+                if (_direction == "left")
+                {
+                    _changeOfSwipeNOrmalized = (_previousEndTapPos - _endTapPosition).normalized;
+                    if (_changeOfSwipeNOrmalized.x > 0)
+                    {
+                        _direction = "right";
+                        _startTapPosition = _previousEndTapPos;
+                    }
+                }
+                else if (_direction == "right")
+                {
+                    _changeOfSwipeNOrmalized = (_previousEndTapPos - _endTapPosition).normalized;
+                    if (_changeOfSwipeNOrmalized.x < 0)
+                    {
+                        _direction = "left";
+                        _startTapPosition = _previousEndTapPos;
+                    }
+                }
 
                 Vector3 tapPositionEndWorld = Camera.main.ScreenToWorldPoint(_endTapPosition);
 
@@ -105,20 +134,19 @@ public class CameraManager : MonoBehaviour
                             newCameraPosition.y,
                             newCameraPosition.z);
                     }
-                } else
+                }
+                else
                 {
-                    if (_directionOfSwipeNormalized.x > 0 && _direction == string.Empty)
+                    if (_directionOfSwipeNormalized.x > 0)
                     {
-                        _direction = "Right";
                         newCameraPosition.x -= _swipeLengthWorld * 0.15f;
                         _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
                             Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
                             newCameraPosition.y,
                             newCameraPosition.z);
                     }
-                    else if (_directionOfSwipeNormalized.x < 0 && _direction == string.Empty)
+                    else if (_directionOfSwipeNormalized.x < 0)
                     {
-                        _direction = "Left";
                         newCameraPosition.x += _swipeLengthWorld * 0.15f;
                         _mapEnvironmentManager.CurrentCamera.transform.position = new Vector3(
                             Mathf.Clamp(newCameraPosition.x, _cameraBehaviour.BackgroundBounds.min.x + _camera.orthographicSize + 4, _cameraBehaviour.BackgroundBounds.max.x - _camera.orthographicSize - 4),
@@ -130,7 +158,6 @@ public class CameraManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
-                _direction = string.Empty;
                 _endTapPosition = touch.position;
             }
         }
