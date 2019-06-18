@@ -112,7 +112,13 @@ public class NPC : MonoBehaviour
                     {
                         SpeechBubble.GetComponent<SpriteRenderer>().enabled = true;
                     }
-
+                    if (SceneManager.GetActiveScene().name == "Tutorial Map Area")
+                    {
+                        ProgressLog.Instance.SetEntry("Jacob reached gate", true);
+                    } else if (SceneManager.GetActiveScene().name == "Castle Area")
+                    {
+                        ProgressLog.Instance.SetEntry("Jacob reached house", true);
+                    }
                     _animator.SetBool("IsWalking", false);
                     transform.localScale = new Vector3(0.5f, 0.5f, 1);
                 }

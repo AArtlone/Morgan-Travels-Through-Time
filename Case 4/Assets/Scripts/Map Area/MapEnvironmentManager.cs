@@ -15,6 +15,7 @@ public class MapEnvironmentManager : MonoBehaviour
     public GameObject DiaryButton;
     public GameObject BackpackButton;
     public GameObject MotherNPC;
+    public GameObject JacobNPC;
 
     private CameraBehavior _cameraBehaviour;
     private FadeScreenController _fadeScreenController;
@@ -39,6 +40,26 @@ public class MapEnvironmentManager : MonoBehaviour
                 } else if ("Completed the Clothing Puzzle" == log.Milestone && log.Completed == true)
                 {
                     MotherNPC.SetActive(false);
+                }
+            }
+        } else if (SceneManager.GetActiveScene().name == "Tutorial Map Area")
+        {
+            foreach (ProgressEntry log in ProgressLog.Instance.Log)
+            {
+                if ("Jacob reached gate" == log.Milestone && log.Completed == true)
+                {
+                    JacobNPC.GetComponent<NPC>().NeedsToMove = false;
+                    JacobNPC.transform.position = JacobNPC.GetComponent<NPC>()._TransformToMoveTo.position;
+                }
+            }
+        } else if (SceneManager.GetActiveScene().name == "Castle Area")
+        {
+            foreach (ProgressEntry log in ProgressLog.Instance.Log)
+            {
+                if ("Jacob reached house" == log.Milestone && log.Completed == true)
+                {
+                    JacobNPC.GetComponent<NPC>().NeedsToMove = false;
+                    JacobNPC.transform.position = JacobNPC.GetComponent<NPC>()._TransformToMoveTo.position;
                 }
             }
         }

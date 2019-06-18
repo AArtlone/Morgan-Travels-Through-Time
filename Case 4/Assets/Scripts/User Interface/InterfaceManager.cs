@@ -790,6 +790,10 @@ public class InterfaceManager : MonoBehaviour
         {
             Character.Instance.LastScene = SceneManager.GetActiveScene().name;
             Character.Instance.RefreshJsonData();
+        } else if (SceneManager.GetActiveScene().name == "Escape Game")
+        {
+            Character.Instance.LastScene = scene;
+            Character.Instance.RefreshJsonData();
         }
         AsyncOperation loadSceneAsync = SceneManager.LoadSceneAsync(scene);
 
