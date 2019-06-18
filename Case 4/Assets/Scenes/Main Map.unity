@@ -947,7 +947,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1166190286}
+      objectReference: {fileID: 592344372}
+    - target: {fileID: 3370708775306293158, guid: 32d836cf0a0772146a6554c1c0e0ace2,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: SetupLog
+      objectReference: {fileID: 0}
     - target: {fileID: 3370708775405651035, guid: 32d836cf0a0772146a6554c1c0e0ace2,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2197,6 +2202,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 592344356}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &592344372 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7530140013586401853, guid: 5873b9874fbd1cb4280ebb265477690d,
+    type: 3}
+  m_PrefabInstance: {fileID: 592344356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021a415ea1f079f4fa74d33e4e48238e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &647989876
 GameObject:
   m_ObjectHideFlags: 0
