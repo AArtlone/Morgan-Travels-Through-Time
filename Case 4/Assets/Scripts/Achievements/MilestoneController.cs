@@ -8,10 +8,22 @@ public class MilestoneController : MonoBehaviour
 
     void Start()
     {
-        AchievementManager.Instance.GetAchievement("Tutorial Complete");
-        foreach (Clothing cloth in ClothingToGive)
+        bool exists = false;
+        foreach (Achievement achievement in AchievementManager.Instance.AllAchievements)
         {
-            Character.Instance.AddWearable(cloth);
+            if (achievement.Name == AchievementToComplete && achievement.Status == true)
+            {
+                exists = true;
+                break;
+            }
+        }
+        if (exists == false)
+        {
+            AchievementManager.Instance.GetAchievement(AchievementToComplete);
+            foreach (Clothing cloth in ClothingToGive)
+            {
+                Character.Instance.AddWearable(cloth);
+            }
         }
     }
 }

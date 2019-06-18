@@ -49,13 +49,14 @@ public class Puzzle : MonoBehaviour
                     break;
                 }
             }
-        } else
+        }
+        else
         {
             for (int i = 0; i < puzzleData["EscapeGames"].Count; i++)
             {
                 if (puzzleData["EscapeGames"][i]["Name"].ToString() == Name)
                 {
-                    _stars = int.Parse(puzzleData["EscapeGames"][i]["Stars"].ToString());
+                    _stars = 3;
                     break;
                 }
             }
