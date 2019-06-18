@@ -20,7 +20,7 @@ public class AchievementDiaryLogManager : MonoBehaviour
     private List<string> _exploredEntries = new List<string>();
     private List<List<string>> _pagesOfEntries = new List<List<string>>();
 
-    private void Awake()
+    private void Start()
     {
         _leftPageSectionRect = LeftPageSection.GetComponent<RectTransform>();
         _rightPageSectionRect = RightPageSection.GetComponent<RectTransform>();
